@@ -12,6 +12,7 @@ const {
 } = NavigationExperimental
 
 import Photos  from '../containers/PhotosContainer'
+import Selected from './Selected'
 import Caption from './Caption'
 
 export default class Library extends Component {
@@ -34,17 +35,22 @@ export default class Library extends Component {
   _renderScene (props) {
     const prefix = 'scene_'
     const { scene } = props
-    if (scene.key === prefix + 'all photos') {
+    if (scene.key === prefix + 'photos') {
       return <Photos
         _handleNavigate={this._handleNavigate.bind(this)}
-        _selectPhoto={(action) => this.props.selectPhoto(action)}
-        />
+        _selectPhoto={(action) => this.props.selectPhoto(action)}/>
+    }
+    if (scene.key === prefix + 'selected') {
+      return <Selected
+        _selectedPhoto={this.props.library.selected}
+        _handleNavigate={this._handleNavigate.bind(this)}/>
     }
     if (scene.key === prefix + 'caption') {
       return <Caption
         _transmit={this._handleCaptionAction.bind(this)}
         _selectedPhoto={this.props.library.selected}
-        _storeCaption={(action) => this.props.storeLibraryCaption(action)}/>
+        _storeCaption={(action) => this.props.storeLibraryCaption(action)}
+        _handleBackAction={this._handleBackAction.bind(this)}/>
     }
   }
   _renderOverlay(props) {
@@ -59,7 +65,7 @@ export default class Library extends Component {
   _renderTitleComponent(props) {
     return (
       <NavigationHeader.Title>
-        {props.scene.route.key.toUpperCase()}
+        {props.scene.route.title}
       </NavigationHeader.Title>
     );
   }
@@ -71,8 +77,13 @@ export default class Library extends Component {
     return true
   }
   _handleCaptionAction () {
+    if (this.props.library.caption === '') {
+      alert ('Please enter a caption')
+      return false
+    }
     this.props.sendAWSInitLibrary()
     this._handleBackAction()
+    this.props.changeTab(2)
     return true
   }
   _handleNavigate (action) {

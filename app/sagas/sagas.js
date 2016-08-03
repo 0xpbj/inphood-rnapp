@@ -16,13 +16,14 @@ import {
   SELECT_PHOTO,
   LOAD_PHOTOS_INIT,
   LOAD_CAMERAMEDIA_SUCCESS,
+  APPEND_CAMERAMEDIA_SUCCESS,
   LOAD_CAMERAMEDIA_ERROR
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 
-import { RNS3 } from 'react-native-aws3';
-import CameraRoll from 'rn-camera-roll';
+import { RNS3 } from 'react-native-aws3'
+import { CameraRoll } from "react-native"
 
 const FBSDK = require('react-native-fbsdk');
 const {
@@ -116,7 +117,7 @@ export function* watchAWSLibraryCall() {
 
 const cameraData = (cameraMedia) => {
   return CameraRoll.getPhotos({
-    first: 15,
+    first: 12,
     assetType: 'Photos',
   }).then((data) => {
     return data.edges.forEach(d => cameraMedia.push({
@@ -132,7 +133,45 @@ function* cameraDataFlow() {
     yield put ({type: LOAD_CAMERAMEDIA_SUCCESS, cameraMedia})
   }
   catch(error) {
+    console.log(error)
     yield put ({type: LOAD_CAMERAMEDIA_ERROR, error})
+  }
+}
+
+export function* watchCameraData() {
+  while (true) {
+    yield take(LOAD_PHOTOS_INIT)
+    yield call(cameraDataFlow)
+  }
+}
+
+const appendCameraData = (appendMedia) => {
+  return CameraRoll.getPhotos({
+    first: 1,
+    assetType: 'Photos',
+  }).then((data) => {
+    return data.edges.forEach(d => appendMedia.push({
+      photo: d.node.image.uri,
+    }));
+  }).catch(error => console.log(error));
+}
+
+function* appendCameraDataFlow() {
+  try {
+    var appendMedia = []
+    yield call(appendCameraData, appendMedia)
+    yield put ({type: APPEND_CAMERAMEDIA_SUCCESS, appendMedia})
+  }
+  catch(error) {
+    console.log(error)
+    yield put ({type: LOAD_CAMERAMEDIA_ERROR, error})
+  }
+}
+
+export function* watchAppendCameraData() {
+  while (true) {
+    yield take(TAKE_PHOTO)
+    yield call(appendCameraDataFlow)
   }
 }
 
@@ -167,6 +206,7 @@ function* loginFlow() {
     yield put ({type: LOGIN_SUCCESS})
   }
   catch(error) {
+    console.log(error)
     yield put ({type: LOGIN_ERROR, error})
   }
 }
@@ -192,6 +232,7 @@ function* logoutFlow() {
     yield put ({type: LOGOUT_SUCCESS})
   }
   catch(error) {
+    console.log(error)
     yield put ({type: LOGOUT_ERROR, error})
   }
 }
@@ -203,15 +244,7 @@ export function* watchLogoutFlow() {
   }
 }
 
-
-export function* watchCameraData() {
-  while (true) {
-    yield take(LOAD_PHOTOS_INIT)
-    yield call(cameraDataFlow)
-  }
-}
-
-export const fetchFirebaseData = (photos) => {
+export const fetchFirebaseData = (appendPhotos) => {
   let user = firebase.auth().currentUser
   return firebase.database().ref('/global/' + user.uid + '/userdata').orderByKey().limitToLast(1).once('value')
   .then (function(snapshot){
@@ -222,7 +255,7 @@ export const fetchFirebaseData = (photos) => {
       let photo = urlHead+childSnapshot.val().file_name
       let caption = childSnapshot.val().caption
       let obj = {photo,caption,false}
-      photos.unshift(obj)
+      appendPhotos.push(obj)
     })
   }, function(error) {
     console.log("Value Added Error", error);
@@ -231,13 +264,12 @@ export const fetchFirebaseData = (photos) => {
 
 export function* firebaseData() {
   try {
-    const state = yield select()
-    var photos = state.galReducer.photos
-    yield call(fetchFirebaseData, photos)
-    yield put ({type: APPEND_PHOTOS_SUCCESS})
+    var appendPhotos = []
+    yield call(fetchFirebaseData, appendPhotos)
+    yield put ({type: APPEND_PHOTOS_SUCCESS, appendPhotos})
   }
   catch(error) {
-    console.log('In firebasedata error')
+    console.log(error)
     yield put ({type: APPEND_PHOTOS_FAILURE, error})
   }
 }

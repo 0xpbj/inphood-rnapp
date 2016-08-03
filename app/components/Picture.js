@@ -6,8 +6,8 @@ import Camera from 'react-native-camera'
 const route = {
   type: 'push',
   route: {
-    key: 'caption',
-    title: 'Caption'
+    key: 'selected',
+    title: 'Confirm Photo'
   }
 }
 
@@ -26,9 +26,9 @@ export default class Picture extends Component {
       }
       else {
         this.props._takePhoto(data)
+        this.props._handleNavigate(route)
       }
     })
-    this.props._handleNavigate(route)
   }
   render () {
     return (

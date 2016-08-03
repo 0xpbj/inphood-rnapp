@@ -1,56 +1,100 @@
 import React, { Component } from "react";
-import {StyleSheet, Text, TextInput, TouchableHighlight, View, Image} from "react-native";
+import {ActivityIndicator, StyleSheet, Text, TextInput, TouchableHighlight, View, Image, ListView, Animated, Dimensions} from "react-native";
 
 import PhotoBrowser from '../../photoBrowser/lib';
+import GridContainer from '../../photoBrowser/lib/GridContainer';
 
 const route = {
   type: 'push',
   route: {
-    key: 'caption',
-    title: 'Caption'
+    key: 'selected',
+    title: 'Confirm Photo'
   }
 }
+
+const TOOLBAR_HEIGHT = 70;
 
 export default class Photos extends Component {
   constructor(props) {
     super(props)
-    this._onSelectionChanged = this._onSelectionChanged.bind(this)
-  }
-  _onSelectionChanged(media, index, selected) {
-    if (selected) {
-      this.props._selectPhoto(media.photo)
-      this.props._handleNavigate(route)
+    this._onMediaSelection = this._onMediaSelection.bind(this)
+    const mediaList = this.props.media.cameraMedia
+    this.state = {
+      dataSource: this._createDataSource(mediaList),
+      mediaList: mediaList,
+      fullScreenAnim: new Animated.Value(0),
     }
   }
-  componentWillReceiveProps(nextProps) {}
-  shouldComponentUpdate(nextProps, nextState) {
-    let flag = nextProps.media.cameraMedia.length !== this.props.media.cameraMedia.length
-    return flag
+  componentWillReceiveProps(nextProps) {
+    const mediaList = nextProps.media.cameraMedia
+    this.setState({
+      dataSource: this._createDataSource(mediaList),
+      mediaList: mediaList
+    })
+  }
+  _onMediaSelection(index) {
+    this.props._selectPhoto(this.state.mediaList[index].photo)
+    this.props._handleNavigate(route)
+  }
+  _createDataSource(list) {
+    const dataSource = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => true,
+    });
+    return dataSource.cloneWithRows(list);
   }
   render() {
-    return (
-      <PhotoBrowser
-        mediaList={this.props.media.cameraMedia}
-        initialIndex={0}
-        displayNavArrows={true}
-        displaySelectionButtons={true}
-        displayActionButton={false}
-        startOnGrid={true}
-        enableGrid={true}
-        useCircleProgress
-        onSelectionChanged={this._onSelectionChanged}
-      />
-    );
+    if (this.props.media.cameraMedia.length === 0) {
+      return (
+        <ActivityIndicator
+          size="large"
+          color="black"
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 8,
+            paddingTop: 250,
+          }}
+        />
+      )
+    }
+    else {
+      const {
+        dataSource,
+        mediaList,
+        fullScreenAnim
+      } = this.state
+      const screenHeight = Dimensions.get('window').height;
+      return (
+        <View style={styles.container}>
+          <Animated.View
+            style={{
+              height: screenHeight,
+              marginTop: fullScreenAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, screenHeight * -1 - TOOLBAR_HEIGHT],
+              }),
+            }}
+          >
+            <GridContainer
+              dataSource={dataSource}
+              displaySelectionButtons={false}
+              // onPhotoTap={this._onGridPhotoTap}
+              onPhotoTap={this._onMediaSelection}
+            />
+          </Animated.View>
+        </View>
+      )
+    }
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 64,
   },
   list: {
     flex: 1,
-    paddingTop: 54,
     paddingLeft: 16,
   },
   row: {

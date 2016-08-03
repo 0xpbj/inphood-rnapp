@@ -12,11 +12,12 @@ const {
 } = NavigationExperimental
 
 import Picture from './Picture'
+import Selected from './Selected'
 import Caption from './Caption'
 
 export default class Camera extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       photo: this.props.camera.photo
     }
@@ -34,7 +35,7 @@ export default class Camera extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       photo: nextProps.camera.photo
-    });
+    })
   }
   shouldComponentUpdate(nextProps, nextState) {
     let flag1 = nextProps.camera.photo !== this.props.camera.photo
@@ -49,11 +50,17 @@ export default class Camera extends Component {
         _handleNavigate={this._handleNavigate.bind(this)}
         _takePhoto={(action) => this.props.takePhoto(action)}/>
     }
+    if (scene.key === prefix + 'selected') {
+      return <Selected
+        _selectedPhoto={this.state.photo}
+        _handleNavigate={this._handleNavigate.bind(this)}/>
+    }
     if (scene.key === prefix + 'caption') {
       return <Caption
         _transmit={this._handleCaptionAction.bind(this)}
         _selectedPhoto={this.state.photo}
-        _storeCaption={(action) => this.props.storeCameraCaption(action)}/>
+        _storeCaption={(action) => this.props.storeCameraCaption(action)}
+        _handleBackAction={this._handleBackAction.bind(this)}/>
     }
   }
   _renderOverlay(props) {
@@ -68,7 +75,7 @@ export default class Camera extends Component {
   _renderTitleComponent(props) {
     return (
       <NavigationHeader.Title>
-        {props.scene.route.key.toUpperCase()}
+        {props.scene.route.title}
       </NavigationHeader.Title>
     );
   }
@@ -80,8 +87,13 @@ export default class Camera extends Component {
     return true
   }
   _handleCaptionAction () {
+    if (this.props.camera.caption === '') {
+      alert ('Please enter a caption')
+      return false
+    }
     this.props.sendAWSInitCamera()
     this._handleBackAction()
+    this.props.changeTab(2)
     return true
   }
   _handleNavigate (action) {

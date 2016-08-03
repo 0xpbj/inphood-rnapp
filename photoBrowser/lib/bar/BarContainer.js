@@ -73,15 +73,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-    borderBottomWidth: 1,
-    backgroundColor: 'black',
+    // borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+    // borderBottomWidth: 1,
   },
   topBar: {
     top: 0,
+    backgroundColor: 'white',
   },
   bottomBar: {
     bottom: 0,
+    backgroundColor: 'black'
   },
 });
 

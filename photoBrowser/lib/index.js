@@ -190,6 +190,7 @@ export default class PhotoBrowser extends React.Component {
       useCircleProgress,
       onActionButton,
       onBack,
+      titleName
     } = this.props;
     const {
       dataSource,
@@ -257,7 +258,7 @@ export default class PhotoBrowser extends React.Component {
         <TopBar
           height={TOOLBAR_HEIGHT}
           displayed={displayTopBar}
-          title={isFullScreen ? title : `${mediaList.length} photos`}
+          title={isFullScreen ? title : `${titleName}'s InPhood`}
           onBack={onBack}
         />
       </View>
@@ -269,6 +270,6 @@ export default class PhotoBrowser extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
   },
 });

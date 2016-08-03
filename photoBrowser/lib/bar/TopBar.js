@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    color: 'white',
+    fontWeight: '500',
+    color: 'black',
   },
   backContainer: {
     position: 'absolute',

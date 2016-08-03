@@ -127,25 +127,43 @@ export default class BottomBar extends React.Component {
 
   render() {
     const { displayed, caption, height } = this.props;
+    let captionFlag = caption !== '' ? 1 : 0
+    if (captionFlag) {
+      return (
+        <BarContainer
+          position={BAR_POSITIONS.BOTTOM}
+          displayed={displayed}
+          height={height}
+          style={styles.container}
+        >
+          <View style={styles.captionContainer}>
+            <Text style={styles.caption} numberOfLines={1}>{caption}</Text>
+          </View>
 
-    return (
-      <BarContainer
-        position={BAR_POSITIONS.BOTTOM}
-        displayed={displayed}
-        height={height}
-        style={styles.container}
-      >
-        <View style={styles.captionContainer}>
-          <Text style={styles.caption} numberOfLines={1}>{caption}</Text>
-        </View>
-
-        <View style={styles.buttonContainer}>
-          {this._renderGridButton()}
-          {this._renderNavArrows()}
-          {this._renderActionSheet()}
-        </View>
-      </BarContainer>
-    );
+          <View style={styles.buttonContainer}>
+            {this._renderGridButton()}
+            {this._renderNavArrows()}
+            {this._renderActionSheet()}
+          </View>
+        </BarContainer>
+      )
+    }
+    else {
+      return (
+        <BarContainer
+          position={BAR_POSITIONS.BOTTOM}
+          displayed={displayed}
+          height={height}
+          style={styles.containerNoCaption}
+        >
+          <View style={styles.buttonContainer}>
+            {this._renderGridButton()}
+            {this._renderNavArrows()}
+            {this._renderActionSheet()}
+          </View>
+        </BarContainer>
+      )
+    }
   }
 }
 
@@ -154,6 +172,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     paddingBottom: 120,
+  },
+  containerNoCaption: {
+    flex: 1,
+    flexDirection: 'column',
+    paddingBottom: 70,
   },
   captionContainer: {
     flex: 1,

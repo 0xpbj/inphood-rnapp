@@ -196,7 +196,7 @@ export default class Photo extends Component {
         />
       );
     } else {
-      let icon = require('../../Assets/selected-off.png');
+      let icon = require('../../Assets/selected-on.png');
       if (selected) {
         icon = require('../../Assets/selected-on.png');
       }
@@ -221,12 +221,14 @@ export default class Photo extends Component {
     const screen = Dimensions.get('window');
     const { uri, error } = this.state;
 
-    let source;
+    let source = '';
     if (uri) {
       // create source objects for http/asset strings
       // or directly pass uri number for local files
       source = typeof uri === 'string' ? { uri } : uri;
     }
+    // console.log('\nImage: ')
+    // console.log(source)
 
     // i had to get window size and set photo size here
     // to be able to respond device orientation changes in full screen mode

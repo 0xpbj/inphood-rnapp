@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DE00B9425743C07A7E871AB71087E5FDA250B799",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "E82D2285FA0AFCD40A6DF3FD50D07B727F936E61" : 0,
+    "DE00B9425743C07A7E871AB71087E5FDA250B799" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "504454EF-D68C-48A7-96A2-B44165DB7653",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "E82D2285FA0AFCD40A6DF3FD50D07B727F936E61" : "reactNativeDevelopment\/",
+    "DE00B9425743C07A7E871AB71087E5FDA250B799" : "betaApp\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "InPhood",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ios\/InPhood.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "gitlab.com:inphood\/betaApp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DE00B9425743C07A7E871AB71087E5FDA250B799"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "gitlab.com:inphood\/reactNativeDevelopment.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E82D2285FA0AFCD40A6DF3FD50D07B727F936E61"
+    }
+  ]
+}

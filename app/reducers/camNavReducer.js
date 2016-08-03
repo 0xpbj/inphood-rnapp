@@ -10,7 +10,7 @@ const initialState = {
   routes: [
     {
       key: 'picture',
-      title: 'Picture Tab'
+      title: 'Take a Picture'
     }
   ]
 }

@@ -9,8 +9,8 @@ const initialState = {
   key: 'root',
   routes: [
     {
-      key: 'all photos',
-      title: 'Photos Tab'
+      key: 'photos',
+      title: 'Select a Photo'
     }
   ]
 }

@@ -6,16 +6,20 @@ import Library from '../containers/LibraryContainer'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 export default class Media extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <ScrollableTabView
         tabBarUnderlineColor="black"
         tabBarActiveTextColor="black"
         tabBarPosition="bottom"
-        style={{paddingBottom: 48}}
+        style={{paddingBottom: 50}}
+        locked={true}
       >
-        <Camera tabLabel="Camera" />
-        <Library tabLabel="Library" />
+        <Library tabLabel="Library" changeTab={this.props.changeTab}/>
+        <Camera tabLabel="Camera" changeTab={this.props.changeTab}/>
       </ScrollableTabView>
     )
   }

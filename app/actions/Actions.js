@@ -64,6 +64,7 @@ export function loadPhotosInit() {
     type: LOAD_PHOTOS_INIT,
   }
 }
+
 export function loadPhotosSuccess(photos) {
   return {
     type: LOAD_PHOTOS_SUCCESS,

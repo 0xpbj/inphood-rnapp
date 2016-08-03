@@ -18,13 +18,16 @@ export default class HomeNavigationTabs extends Component {
                  logoutRequest={()=>this.props.logoutRequest()}
                  storeToken={(action)=>this.props.storeToken(action)}
                  storeResult={(action)=>this.props.storeResult(action)}
-                 loadPhotosInit={()=>this.props.loadPhotosInit()}
                  auth={this.props.auth}
                 />
       case 'media':
-        return <Media />
+        return <Media
+                 changeTab={(index) => this.props.changeTab(index)}
+               />
       case 'home':
-        return <Home  />
+        return <Home
+                 result={this.props.auth.result}
+               />
       default:
         return <View />
     }
@@ -44,7 +47,9 @@ export default class HomeNavigationTabs extends Component {
     })
     return (
       <TabBarIOS
-        tintColor='black'
+        unselectedTintColor="black"
+        tintColor="#22a3ed"
+        barTintColor="white"
       >
         {tabs}
       </TabBarIOS>

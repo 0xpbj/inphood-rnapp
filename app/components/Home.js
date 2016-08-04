@@ -3,7 +3,7 @@ import { View, NavigationExperimental, TabBarIOS } from 'react-native'
 const { Reducer: NavigationReducer } = NavigationExperimental
 
 import Login from './Login'
-import Media from './Media'
+import Media from '../containers/MediaContainer'
 import Home  from '../containers/GalleryContainer'
 
 export default class HomeNavigationTabs extends Component {

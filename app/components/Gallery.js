@@ -16,28 +16,18 @@ import {
   Platform,
   ActivityIndicator
 } from 'react-native';
-const TimerMixin = require('react-timer-mixin');
 
 import PhotoBrowser from '../../photoBrowser/lib'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default class Gallery extends Component {
   constructor(props) {
     super(props)
     this.state = {
       result: this.props.result,
-      animating: true,
-      mixins: [TimerMixin]
+      size: this.props.gallery.photos.length
     }
-    this._onSelectionChanged = this._onSelectionChanged.bind(this)
     this._onActionButton = this._onActionButton.bind(this)
-  }
-  setToggleTimeout() {
-    this.state.mixins[0].setTimeout(() => {
-      this.setState({animating: !this.state.animating})
-    }, 1000);
-  }
-  _onSelectionChanged(media, index, selected) {
-    alert(`${media.photo} selection status: ${selected}`);
   }
   _onActionButton(media, index) {
     if (Platform.OS === 'ios') {
@@ -48,12 +38,13 @@ export default class Gallery extends Component {
       () => {},
       () => {});
     } else {
-      alert(`handle sharing on android for ${media.photo}, index: ${index}`);
+      // alert(`handle sharing on android for ${media.photo}, index: ${index}`);
     }
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
-      result: nextProps.result
+      result: nextProps.result,
+      size: nextProps.gallery.photos.length
     })
   }
   render() {
@@ -61,34 +52,29 @@ export default class Gallery extends Component {
       alert ('Please Login')
       return (<View />)
     }
-    else if (this.state.animating) {
-      this.setToggleTimeout()
-      return (
-        <View style={{backgroundColor: 'black'}}>
-          <ActivityIndicator
-            animating={this.state.animating}
-            style={[styles.centering, {height: 80}]}
-            size="large"
-          />
-        </View>
-      )
-    }
     else {
       return (
-        <PhotoBrowser
-          onBack={navigator.pop}
-          mediaList={this.props.gallery.photos}
-          initialIndex={0}
-          displayNavArrows={true}
-          displaySelectionButtons={false}
-          displayActionButton={false}
-          startOnGrid={true}
-          enableGrid={true}
-          useCircleProgress={true}
-          onSelectionChanged={this._onSelectionChanged}
-          onActionButton={this._onActionButton}
-          titleName={this.state.result.first_name}
-        />
+        <View>
+          <PhotoBrowser
+            onBack={navigator.pop}
+            mediaList={this.props.gallery.photos}
+            initialIndex={0}
+            displayNavArrows={true}
+            displaySelectionButtons={false}
+            displayActionButton={false}
+            startOnGrid={true}
+            enableGrid={true}
+            useCircleProgress={true}
+            onActionButton={this._onActionButton}
+            titleName={this.state.result.first_name}
+          />
+          <View style={{ flex: this.state.size === 0 ? 1 : 0 }}>
+            <Spinner
+              visible={this.state.size === 0}
+              color='black'
+            />
+          </View>
+        </View>
       )
     }
   }

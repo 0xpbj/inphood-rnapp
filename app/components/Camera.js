@@ -13,7 +13,7 @@ const {
 
 import Picture from './Picture'
 import Selected from './Selected'
-import Caption from './Caption'
+import Caption from '../containers/CaptionContainer'
 
 export default class Camera extends Component {
   constructor(props) {
@@ -60,7 +60,8 @@ export default class Camera extends Component {
         _transmit={this._handleCaptionAction.bind(this)}
         _selectedPhoto={this.state.photo}
         _storeCaption={(action) => this.props.storeCameraCaption(action)}
-        _handleBackAction={this._handleBackAction.bind(this)}/>
+        _handleBackAction={this._handleBackAction.bind(this)}
+        _library={false}/>
     }
   }
   _renderOverlay(props) {
@@ -91,7 +92,8 @@ export default class Camera extends Component {
       alert ('Please enter a caption')
       return false
     }
-    this.props.sendAWSInitCamera()
+    this.props.takePhoto('')
+    this._handleBackAction()
     this._handleBackAction()
     this.props.changeTab(2)
     return true

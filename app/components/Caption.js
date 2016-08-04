@@ -1,41 +1,77 @@
-import React from 'react'
+import React, { Component } from "react";
 import {
+  ActivityIndicator,
   View,
   Text,
   Image,
   StyleSheet,
   TextInput,
   Picker,
+  Dimensions,
   TouchableHighlight
 } from 'react-native'
-import Button from './Button'
 
-const Caption = ({_transmit, _selectedPhoto, _storeCaption, _handleBackAction}) => (
-  <View style={styles.container}>
-    <View style={{flexDirection: 'row'}}>
-      <TextInput
-        autoCapitalize="none"
-        placeholder="Describe your meal..."
-        returnKeyType="done"
-        onSubmitEditing={(event) => _storeCaption(event.nativeEvent.text)}
-        style={styles.default}
-      />
-      <TouchableHighlight onPress={_handleBackAction}>
-        <Image
-          style={styles.gif}
-          source={{uri: _selectedPhoto}}
-        />
-      </TouchableHighlight>
-    </View>
-    <Picker style={{paddingBottom: 40}} >
-      <Picker.Item label="Breakfast" value="Breakfast" />
-      <Picker.Item label="Lunch" value="Lunch" />
-      <Picker.Item label="Snack" value="Snack" />
-      <Picker.Item label="Dinner" value="Dinner" />
-    </Picker>
-    <Button onPress={_transmit} label='Send'/>
-  </View>
-)
+import Button from './Button'
+import Spinner from 'react-native-loading-spinner-overlay';
+
+var { width, height } = Dimensions.get('window');
+
+export default class Caption extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      animating: false,
+      size: this.props.gallery.photos.length
+    }
+  }
+  _workBeforeTransition() {
+    this.setState({
+      animating: true
+    })
+    if (this.props._library) {
+      this.props.sendAWSInitLibrary()
+    }
+    else {
+      this.props.sendAWSInitCamera()
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.gallery.photos.length > this.state.size) {
+      this.props._transmit()
+    }
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={{flexDirection: 'row'}}>
+          <TextInput
+            autoCapitalize="none"
+            placeholder="Describe your meal..."
+            returnKeyType="done"
+            onSubmitEditing={(event) => this.props._storeCaption(event.nativeEvent.text)}
+            style={styles.default}
+          />
+          <TouchableHighlight onPress={this.props._handleBackAction}>
+            <Image
+              style={styles.gif}
+              source={{uri: this.props._selectedPhoto}}
+            />
+          </TouchableHighlight>
+        </View>
+        <View style={{ flex: 1 }}>
+          <Spinner color='black' visible={this.state.animating} />
+        </View>
+        <Picker style={{paddingBottom: 40}} >
+          <Picker.Item label="Breakfast" value="Breakfast" />
+          <Picker.Item label="Lunch" value="Lunch" />
+          <Picker.Item label="Snack" value="Snack" />
+          <Picker.Item label="Dinner" value="Dinner" />
+        </Picker>
+        <Button onPress={this._workBeforeTransition.bind(this)} label='Send'/>
+      </View>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   title: {
@@ -60,5 +96,3 @@ const styles = StyleSheet.create({
     padding: 4,
   },
 })
-
-export default Caption

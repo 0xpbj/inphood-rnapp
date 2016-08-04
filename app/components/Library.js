@@ -13,7 +13,7 @@ const {
 
 import Photos  from '../containers/PhotosContainer'
 import Selected from './Selected'
-import Caption from './Caption'
+import Caption from '../containers/CaptionContainer'
 
 export default class Library extends Component {
   constructor(props) {
@@ -50,7 +50,8 @@ export default class Library extends Component {
         _transmit={this._handleCaptionAction.bind(this)}
         _selectedPhoto={this.props.library.selected}
         _storeCaption={(action) => this.props.storeLibraryCaption(action)}
-        _handleBackAction={this._handleBackAction.bind(this)}/>
+        _handleBackAction={this._handleBackAction.bind(this)}
+        _library={true}/>
     }
   }
   _renderOverlay(props) {
@@ -81,7 +82,8 @@ export default class Library extends Component {
       alert ('Please enter a caption')
       return false
     }
-    this.props.sendAWSInitLibrary()
+    this.props.selectPhoto('')
+    this._handleBackAction()
     this._handleBackAction()
     this.props.changeTab(2)
     return true

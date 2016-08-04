@@ -1,6 +1,8 @@
 import {
-  POP_ROUTE,
-  PUSH_ROUTE,
+  POP_CAM_ROUTE,
+  PUSH_CAM_ROUTE,
+  POP_LIB_ROUTE,
+  PUSH_LIB_ROUTE,
   CHANGE_TAB,
   TAKE_PHOTO,
   SELECT_PHOTO,
@@ -25,16 +27,29 @@ import {
   LOGOUT_ERRROR
 } from '../constants/ActionTypes'
 
-export function push (route) {
+export function pushCam (route) {
   return {
-    type: PUSH_ROUTE,
+    type: PUSH_CAM_ROUTE,
     route,
   }
 }
 
-export function pop () {
+export function popCam () {
   return {
-    type: POP_ROUTE
+    type: POP_CAM_ROUTE
+  }
+}
+
+export function pushLib (route) {
+  return {
+    type: PUSH_LIB_ROUTE,
+    route,
+  }
+}
+
+export function popLib () {
+  return {
+    type: POP_LIB_ROUTE
   }
 }
 

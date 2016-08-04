@@ -1,4 +1,4 @@
-import { PUSH_ROUTE, POP_ROUTE } from '../constants/ActionTypes'
+import { PUSH_LIB_ROUTE, POP_LIB_ROUTE } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -17,14 +17,14 @@ const initialState = {
 
 function libraryNavigationState (state = initialState, action) {
   switch (action.type) {
-    case PUSH_ROUTE:
+    case PUSH_LIB_ROUTE:
       if (state.routes[state.index].key === (action.route && action.route.key)) {
         return state
       }
       else {
         return NavigationStateUtils.push(state, action.route)
       }
-    case POP_ROUTE:
+    case POP_LIB_ROUTE:
       if (state.index === 0 || state.routes.length === 1) {
         return state
       }

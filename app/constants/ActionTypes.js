@@ -1,5 +1,7 @@
-export const PUSH_ROUTE = 'PUSH_ROUTE'
-export const POP_ROUTE = 'POP_ROUTE'
+export const PUSH_CAM_ROUTE = 'PUSH_CAM_ROUTE'
+export const POP_CAM_ROUTE = 'POP_CAM_ROUTE'
+export const PUSH_LIB_ROUTE = 'PUSH_LIB_ROUTE'
+export const POP_LIB_ROUTE = 'POP_LIB_ROUTE'
 export const CHANGE_TAB = 'CHANGE_TAB'
 
 export const TAKE_PHOTO = 'TAKE_PHOTO'

@@ -27,7 +27,7 @@ const {
 import Picture from './Picture'
 import Selected from './Selected'
 import Caption from '../containers/CaptionContainer'
-import {homeIcon} from '../data/icons'
+import {homeIcon} from './Icons'
 
 export default class Camera extends Component {
   constructor(props) {

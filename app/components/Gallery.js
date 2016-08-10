@@ -28,7 +28,7 @@ import GalleryView  from '../containers/GalleryViewContainer'
 // import GalleryView from './GalleryListView'
 import ChatView from '../containers/ChatContainer'
 import Selected from './Selected'
-import {homeIcon} from '../data/icons'
+import {homeIcon} from './Icons'
 
 export default class Gallery extends Component {
   constructor(props) {

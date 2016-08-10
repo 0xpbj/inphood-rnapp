@@ -23,7 +23,6 @@ const route = {
 
 import TimerMixin from 'react-timer-mixin'
 import Spinner from 'react-native-loading-spinner-overlay'
-import PrettyDate from 'pretty-date'
 
 export default class GalleryListView extends Component{
   constructor(props) {

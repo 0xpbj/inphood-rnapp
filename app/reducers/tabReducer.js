@@ -1,5 +1,5 @@
 import { CHANGE_TAB, CHANGE_CAM_TAB } from '../constants/ActionTypes'
-import {userIcon, sampleIcon, homeIcon} from '../data/icons'
+import {userIcon, sampleIcon, homeIcon} from '../components/Icons'
 const tabs = [
   { key: 'home', icon: homeIcon, title: 'Home' },
   { key: 'media', icon: sampleIcon, title: 'Media' },

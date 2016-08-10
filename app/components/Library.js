@@ -29,7 +29,7 @@ import Photos  from '../containers/PhotosContainer'
 import Selected from './Selected'
 import Caption from '../containers/CaptionContainer'
 import Icon from 'react-native-vector-icons/Ionicons'
-import {homeIcon} from '../data/icons'
+import {homeIcon} from './Icons'
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 export default class Library extends Component {

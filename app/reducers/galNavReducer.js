@@ -1,48 +1,36 @@
-import { TAKE_PHOTO, STORE_CAMERA_CAPTION, ADD_CAMERA_MEAL_DATA, PUSH_CAM_ROUTE, POP_CAM_ROUTE } from '../constants/ActionTypes'
+import { FEEDBACK_PHOTO, PUSH_GAL_ROUTE, POP_GAL_ROUTE } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
 } = NavigationExperimental
 
-const initialState = {
-  photo: '',
-  caption: '',
-  mealData: {},
+const defaultState = {
   index: 0,
+  selected: '',
   key: 'root',
   routes: [
     {
-      key: 'picture',
+      key: 'gallery',
       title: ''
     }
   ]
 }
 
-export default function camera (state = initialState, action) {
-  switch (action.type) {
-    case TAKE_PHOTO:
+export default function galleryNav(state = defaultState, action) {
+  switch(action.type) {
+    case FEEDBACK_PHOTO:
       return {
         ...state,
-        photo: action.photo
+        selected: action.selected
       }
-    case STORE_CAMERA_CAPTION:
-      return {
-        ...state,
-        caption: action.caption
-      }
-    case ADD_CAMERA_MEAL_DATA:
-      return {
-        ...state,
-        mealData: action.mealData
-      }
-    case PUSH_CAM_ROUTE:
+    case PUSH_GAL_ROUTE:
       if (state.routes[state.index].key === (action.route && action.route.key)) {
         return state
       }
       else {
         return NavigationStateUtils.push(state, action.route)
       }
-    case POP_CAM_ROUTE:
+    case POP_GAL_ROUTE:
       if (state.index === 0 || state.routes.length === 1) {
         return state
       }

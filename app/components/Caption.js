@@ -4,6 +4,8 @@ import {
   View,
   Text,
   Image,
+  Switch,
+  Platform,
   StyleSheet,
   TextInput,
   Picker,
@@ -21,18 +23,49 @@ export default class Caption extends Component {
     super(props);
     this.state = {
       animating: false,
-      size: this.props.gallery.photos.length
+      size: this.props.gallery.photos.length,
+      meal: false,
+      recipe: false,
+      breakfast: false,
+      lunch: false,
+      dinner: false,
+      snack: false,
+      caption: '',
     }
   }
   _workBeforeTransition() {
-    this.setState({
-      animating: true
-    })
-    if (this.props._library) {
-      this.props.sendAWSInitLibrary()
+    const {meal, recipe, breakfast, lunch, dinner, snack} = this.state
+    // if (!meal && !recipe) {
+    //   alert ('Please pick meal category')
+    //   return
+    // }
+    let whiteSpace = new RegExp(/^\s+$/)
+    if (this.state.caption === '') {
+      alert ('Please enter a caption')
+      return
+    }
+    else if (whiteSpace.test(this.state.caption)) {
+      alert ('Please enter a valid caption')
+      return
+    }
+    this.props._storeCaption(this.state.caption)
+    if (!breakfast && !lunch && !dinner && !snack) {
+      alert ('Please pick meal type')
+      return
     }
     else {
-      this.props.sendAWSInitCamera()
+      this.setState({
+        animating: true
+      })
+      const mealData = {meal, recipe, breakfast, lunch, dinner, snack}
+      if (this.props._library) {
+        this.props.addLibraryMealData(mealData)
+        this.props.sendAWSInitLibrary()
+      }
+      else {
+        this.props.addCameraMealData(mealData)
+        this.props.sendAWSInitCamera()
+      }
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -41,14 +74,28 @@ export default class Caption extends Component {
     }
   }
   render() {
+    let whiteSpace = new RegExp(/^\s+$/)
     return (
       <View style={styles.container}>
         <View style={{flexDirection: 'row'}}>
           <TextInput
             autoCapitalize="none"
-            placeholder="Describe your meal..."
+            placeholder="Write a Caption..."
             returnKeyType="done"
-            onSubmitEditing={(event) => this.props._storeCaption(event.nativeEvent.text)}
+            onEndEditing={
+              (event) => {
+                let text = event.nativeEvent.text
+                if (text === '') {
+                  alert ('Please enter a caption')
+                }
+                else if (whiteSpace.test(text)) {
+                  alert ('Please enter a valid caption')
+                }
+                else {
+                  this.setState({caption: text})
+                }
+              }
+            }
             style={styles.default}
           />
           <TouchableHighlight onPress={this.props._handleBackAction}>
@@ -58,15 +105,111 @@ export default class Caption extends Component {
             />
           </TouchableHighlight>
         </View>
-        <View style={{ flex: 1 }}>
+        <View>
           <Spinner color='black' visible={this.state.animating} />
         </View>
-        <Picker style={{paddingBottom: 40}} >
-          <Picker.Item label="Breakfast" value="Breakfast" />
-          <Picker.Item label="Lunch" value="Lunch" />
-          <Picker.Item label="Snack" value="Snack" />
-          <Picker.Item label="Dinner" value="Dinner" />
-        </Picker>
+        {/* <View style={{flexDirection: 'row', marginTop: 30}}>
+          <View style={{flexDirection: 'row', marginLeft: 40}}>
+            <Switch
+              onValueChange={(value) => {
+                if (value) {
+                  this.setState({meal: value, recipe: !value})
+                }
+                else {
+                  this.setState({meal: value})
+                }
+              }}
+              value={this.state.meal} />
+            <Text style={{fontSize: 18, marginLeft: 10}}>Meal</Text>
+          </View>
+          <View style={{flexDirection: 'row', marginLeft: 40}}>
+            <Switch
+            onValueChange={(value) => {
+              if (value) {
+                this.setState({recipe: value, meal: !value})
+              }
+              else {
+                this.setState({recipe: value})
+              }
+            }}
+            value={this.state.recipe} />
+            <Text style={{fontSize: 18, marginLeft: 10}}>Recipe</Text>
+          </View>
+        </View> */}
+        <View style={{flexDirection: 'column', marginTop: 30}}>
+          <View style={{flexDirection: 'row', marginLeft: 40, marginTop: 20}}>
+            <Switch
+              onValueChange={(value) => {
+                if (value) {
+                  this.setState({
+                    breakfast: value,
+                    lunch: !value,
+                    dinner: !value,
+                    snack: !value,
+                  })
+                }
+                else {
+                  this.setState({breakfast: value})
+                }
+              }}
+              value={this.state.breakfast} />
+            <Text style={{fontSize: 18, marginLeft: 10}}>Breakfast</Text>
+          </View>
+          <View style={{flexDirection: 'row', marginLeft: 40, marginTop: 30}}>
+            <Switch
+            onValueChange={(value) => {
+              if (value) {
+                this.setState({
+                  breakfast: !value,
+                  lunch: value,
+                  dinner: !value,
+                  snack: !value,
+                })
+              }
+              else {
+                this.setState({lunch: value})
+              }
+            }}
+            value={this.state.lunch} />
+            <Text style={{fontSize: 18, marginLeft: 10}}>Lunch</Text>
+          </View>
+          <View style={{flexDirection: 'row', marginLeft: 40, marginTop: 30}}>
+            <Switch
+            onValueChange={(value) => {
+              if (value) {
+                this.setState({
+                  breakfast: !value,
+                  lunch: !value,
+                  dinner: value,
+                  snack: !value,
+                })
+              }
+              else {
+                this.setState({dinner: value})
+              }
+            }}
+            value={this.state.dinner} />
+            <Text style={{fontSize: 18, marginLeft: 10}}>Dinner</Text>
+          </View>
+          <View style={{flexDirection: 'row', marginLeft: 40, marginTop: 30}}>
+            <Switch
+            onValueChange={(value) => {
+              if (value) {
+                this.setState({
+                  breakfast: !value,
+                  lunch: !value,
+                  dinner: !value,
+                  snack: value,
+                })
+              }
+              else {
+                this.setState({snack: value})
+              }
+            }}
+            value={this.state.snack} />
+            <Text style={{fontSize: 18, marginLeft: 10, marginBottom: 50}}>Snack</Text>
+          </View>
+        </View>
         <Button onPress={this._workBeforeTransition.bind(this)} label='Send'/>
       </View>
     )
@@ -80,8 +223,10 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   container: {
-    paddingTop: 65,
-    flexDirection: 'column',
+    flex: 1,
+    paddingTop: 64,
+    zIndex: 3,
+    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
   },
   gif: {
     width: 80,

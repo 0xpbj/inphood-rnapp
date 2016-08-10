@@ -1,8 +1,21 @@
 import React, { Component } from "react";
 import {
+  View,
+  Image,
+  Platform,
   BackAndroid,
+  TouchableOpacity,
+  StyleSheet,
   NavigationExperimental
 } from 'react-native'
+
+const route = {
+  type: 'push',
+  route: {
+    key: 'caption',
+    title: 'Describe your meal'
+  }
+}
 
 const {
   Reducer: NavigationTabsReducer,
@@ -14,6 +27,7 @@ const {
 import Picture from './Picture'
 import Selected from './Selected'
 import Caption from '../containers/CaptionContainer'
+import {homeIcon} from '../data/icons'
 
 export default class Camera extends Component {
   constructor(props) {
@@ -37,31 +51,34 @@ export default class Camera extends Component {
       photo: nextProps.camera.photo
     })
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    let flag1 = nextProps.camera.photo !== this.props.camera.photo
-    let flag2 = nextProps.navigation.routes.length !== this.props.navigation.routes.length
-    return flag1 || flag2
-  }
   _renderScene (props) {
     const prefix = 'scene_'
     const { scene } = props
     if (scene.key === prefix + 'picture') {
-      return <Picture
-        _handleNavigate={this._handleNavigate.bind(this)}
-        _takePhoto={(action) => this.props.takePhoto(action)}/>
+      return (
+        <Picture
+          _handleNavigate={this._handleNavigate.bind(this)}
+          _takePhoto={(action) => this.props.takePhoto(action)}/>
+      )
     }
-    if (scene.key === prefix + 'selected') {
-      return <Selected
-        _selectedPhoto={this.state.photo}
-        _handleNavigate={this._handleNavigate.bind(this)}/>
+    else if (scene.key === prefix + 'selected') {
+      return (
+        <Selected
+          _buttonName="Next"
+          _nextRoute={route}
+          _selectedPhoto={this.state.photo}
+          _handleNavigate={this._handleNavigate.bind(this)}/>
+      )
     }
-    if (scene.key === prefix + 'caption') {
-      return <Caption
-        _transmit={this._handleCaptionAction.bind(this)}
-        _selectedPhoto={this.state.photo}
-        _storeCaption={(action) => this.props.storeCameraCaption(action)}
-        _handleBackAction={this._handleBackAction.bind(this)}
-        _library={false}/>
+    else if (scene.key === prefix + 'caption') {
+      return (
+        <Caption
+          _transmit={this._handleCaptionAction.bind(this)}
+          _selectedPhoto={this.state.photo}
+          _storeCaption={(action) => this.props.storeCameraCaption(action)}
+          _handleBackAction={this._handleBackAction.bind(this)}
+          _library={false}/>
+      )
     }
   }
   _renderOverlay(props) {
@@ -70,6 +87,26 @@ export default class Camera extends Component {
         {...props}
         onNavigateBack={this._handleBackAction}
         renderTitleComponent={this._renderTitleComponent}
+        renderLeftComponent={this._renderLeftComponent.bind(this)}
+      />
+    )
+  }
+  _renderLeftComponent(props) {
+    if (this.props.camera.index === 0) {
+      return (
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={this.props.baseHandleBackAction}>
+          <Image
+            style={styles.button}
+            source={{uri: homeIcon.uri, scale: homeIcon.scale}}
+          />
+        </TouchableOpacity>
+      )
+    }
+    return (
+      <NavigationHeader.BackButton
+        onPress={props.onNavigateBack}
       />
     );
   }
@@ -78,30 +115,25 @@ export default class Camera extends Component {
       <NavigationHeader.Title>
         {props.scene.route.title}
       </NavigationHeader.Title>
-    );
+    )
   }
   _handleBackAction () {
-    if (this.props.navigation.index === 0) {
+    if (this.props.camera.index === 0) {
       return false
     }
-    this.props.pop()
+    this.props.popCam()
     return true
   }
   _handleCaptionAction () {
-    if (this.props.camera.caption === '') {
-      alert ('Please enter a caption')
-      return false
-    }
     this.props.takePhoto('')
     this._handleBackAction()
     this._handleBackAction()
-    this.props.changeTab(2)
     return true
   }
   _handleNavigate (action) {
     switch (action && action.type) {
       case 'push':
-        this.props.push(action.route)
+        this.props.pushCam(action.route)
         return true
       case 'back':
       case 'pop':
@@ -113,8 +145,7 @@ export default class Camera extends Component {
   render () {
     return (
       <NavigationCardStack
-        style={{flex: 1}}
-        navigationState={this.props.navigation}
+        navigationState={this.props.camera}
         onNavigate={this._handleNavigate.bind(this)}
         renderScene={this._renderScene.bind(this)}
         renderOverlay={this._renderOverlay.bind(this)}
@@ -122,3 +153,24 @@ export default class Camera extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  base64: {
+    flex: 1,
+    height: 32,
+    resizeMode: 'contain',
+  },
+  buttonContainer: {
+    flex: 1,
+    marginLeft: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    height: 28,
+    width: 28,
+    margin: Platform.OS === 'ios' ? 10 : 16,
+    resizeMode: 'contain'
+  }
+})

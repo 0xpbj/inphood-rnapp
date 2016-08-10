@@ -1,5 +1,12 @@
-import React, { Component } from "react";
-import {StyleSheet, Text, TextInput, TouchableHighlight, View, Image} from "react-native";
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View
+} from 'react-native';
 
 import Camera from 'react-native-camera'
 
@@ -14,13 +21,9 @@ const route = {
 export default class Picture extends Component {
   constructor(props) {
     super(props);
-    this._takePicture = this._takePicture.bind(this);
-    this.state = {
-      cameraType: Camera.constants.Type.back,
-    };
   }
-  _takePicture() {
-    this.refs.cam.capture((err, data) => {
+  takePicture() {
+    this.camera.capture((err, data) => {
       if (err) {
         console.log ('Camera Error')
       }
@@ -32,48 +35,42 @@ export default class Picture extends Component {
   }
   render () {
     return (
-      <Camera
-        ref="cam"
-        style={styles.container}
-        type={this.state.cameraType}>
-        <View style={styles.quarterHeightContainer}/>
-        <View style={styles.quarterHeightContainer}/>
-        <View style={styles.quarterHeightContainer}>
-          {/*Placeholder to match buttonbar height in start/login page.*/}
-          <View style={{height:60}}/>
-          <View style={styles.buttonRowStyle}>
-            {/* Outer view is  circular shutter outline that is not animated as per Apple, by TouchableHighlight. */}
-            <View style={styles.shutterOuterViewStyle}>
-              {/*// return <ImageCaption _goBack={this._handleBackAction.bind(this)} _captureText={this._captureText.bind(this)} />*/}
-              <TouchableHighlight style={styles.shutterInnerViewStyle} onPress={this._takePicture.bind(this)}>
-                {/*Empty view needed as child for TouchableHighlight ...*/}
-                <View/>
-              </TouchableHighlight>
-            </View>
+      <View style={styles.container}>
+        <Camera
+          ref={(cam) => {
+            this.camera = cam;
+          }}
+          style={styles.preview}
+          aspect={Camera.constants.Aspect.fill}>
+          <View style={styles.shutterOuterViewStyle}>
+            <TouchableHighlight style={styles.shutterInnerViewStyle} onPress={this.takePicture.bind(this)}>
+              <View/>
+            </TouchableHighlight>
           </View>
-        </View>
-      </Camera>
-    )
+        </Camera>
+      </View>
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.75,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "transparent",
+    flex: 1
   },
-  quarterHeightContainer: {
-    flex: 0.25,
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
     alignItems: 'center',
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width
   },
-  buttonRowStyle: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  marginStyle: {
-    margin: 5,
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
+    padding: 10,
+    margin: 40
   },
   shutterInnerViewStyle: {
     marginTop: 5,
@@ -86,7 +83,7 @@ const styles = StyleSheet.create({
   },
   shutterOuterViewStyle: {
     marginTop: 5,
-    marginBottom: 5,
+    marginBottom: 65,
     marginRight: 35,
     marginLeft: 35,
     width: 60,

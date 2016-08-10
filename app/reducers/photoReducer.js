@@ -1,23 +1,15 @@
-import { LOAD_CAMERAMEDIA_SUCCESS, APPEND_CAMERAMEDIA_SUCCESS } from '../constants/ActionTypes'
+import { TAKE_PHOTO } from '../constants/ActionTypes'
 
 const initialState = {
-  cameraMedia: [],
-  appendMedia: []
+  count: 0
 }
 
 export default function library (state = initialState, action) {
   switch (action.type) {
-    case LOAD_CAMERAMEDIA_SUCCESS:
+    case TAKE_PHOTO:
       return {
         ...state,
-        cameraMedia: action.cameraMedia
-      }
-    case APPEND_CAMERAMEDIA_SUCCESS:
-      let array = state.cameraMedia
-      array.push.apply(array, action.appendMedia)
-      return {
-        ...state,
-        cameraMedia: array
+        count: state.count + 1
       }
     default:
       return state

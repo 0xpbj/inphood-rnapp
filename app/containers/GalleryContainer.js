@@ -5,7 +5,7 @@ import * as actionCreators from '../actions/Actions';
 
 function mapStateToProps (state) {
   return {
-    gallery: state.galReducer
+    gallery: state.galNavReducer
   }
 }
 

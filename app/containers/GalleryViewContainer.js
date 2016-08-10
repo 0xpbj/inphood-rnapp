@@ -1,12 +1,11 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Base from '../components/Base'
-import * as actionCreators from '../actions/Actions'
+import GalleryView from '../components/GalleryListView'
+import * as actionCreators from '../actions/Actions';
 
 function mapStateToProps (state) {
   return {
-    navigation: state.navReducer,
-    auth: state.authReducer,
+    galleryView: state.galReducer
   }
 }
 
@@ -17,4 +16,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Base)
+)(GalleryView)

@@ -1,18 +1,39 @@
 import React, { Component } from 'react'
-import { View, NavigationExperimental, TabBarIOS } from 'react-native'
-const { Reducer: NavigationReducer } = NavigationExperimental
+import { View, NavigationExperimental, BackAndroid, TabBarIOS } from 'react-native'
+
+const {
+  Reducer: NavigationTabsReducer,
+  CardStack: NavigationCardStack,
+  AnimatedView: NavigationAnimatedView,
+  Header: NavigationHeader,
+} = NavigationExperimental
 
 import Login from './Login'
-import Media from '../containers/MediaContainer'
-import Home  from '../containers/GalleryContainer'
+import Gallery from '../containers/GalleryContainer'
 
-export default class HomeNavigationTabs extends Component {
+const route1 = {
+  type: 'push',
+  route: {
+    key: 'media',
+    title: ''
+  }
+}
+
+const route2 = {
+  type: 'push',
+  route: {
+    key: 'gallery',
+    title: ''
+  }
+}
+
+export default class HomeTabs extends Component {
   constructor(props) {
     super(props);
   }
   _renderTabContent (key) {
     switch (key) {
-      case 'login':
+      case 'home':
         return <Login
                  loginRequest={()=>this.props.loginRequest()}
                  logoutRequest={()=>this.props.logoutRequest()}
@@ -20,14 +41,9 @@ export default class HomeNavigationTabs extends Component {
                  storeResult={(action)=>this.props.storeResult(action)}
                  auth={this.props.auth}
                 />
-      case 'media':
-        return <Media
-                 changeTab={(index) => this.props.changeTab(index)}
-               />
-      case 'home':
-        return <Home
-                 result={this.props.auth.result}
-               />
+      // case 'home':
+        // return <Gallery
+        //         result={this.props.auth.result}/>
       default:
         return <View />
     }
@@ -39,7 +55,17 @@ export default class HomeNavigationTabs extends Component {
           icon={tab.icon}
           selectedIcon={tab.selectedIcon}
           title={tab.title}
-          onPress={() => this.props.changeTab(i)}
+          onPress={() => {
+            if (i === 1) {
+              this.props._handleNavigate(route1)
+            }
+            else if (i === 2) {
+              this.props._handleNavigate(route2)
+            }
+            else {
+              this.props.changeTab(i)
+            }
+          }}
           selected={this.props.tabs.index === i}>
           {this._renderTabContent(tab.key)}
         </TabBarIOS.Item>

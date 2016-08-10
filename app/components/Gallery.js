@@ -1,110 +1,161 @@
-/* @flow */
-
-'use strict';
-
-import React, { Component } from 'react';
-
+import React, { Component } from "react";
 import {
-  ActionSheetIOS,
-  CameraRoll,
-  ListView,
-  StyleSheet,
-  Navigator,
-  Text,
-  TouchableOpacity,
+  Image,
   View,
   Platform,
-  ActivityIndicator
-} from 'react-native';
+  StyleSheet,
+  BackAndroid,
+  TouchableOpacity,
+  NavigationExperimental
+} from 'react-native'
 
-import PhotoBrowser from '../../photoBrowser/lib'
-import Spinner from 'react-native-loading-spinner-overlay';
+const {
+  Reducer: NavigationTabsReducer,
+  CardStack: NavigationCardStack,
+  AnimatedView: NavigationAnimatedView,
+  Header: NavigationHeader,
+} = NavigationExperimental
+
+const route = {
+  type: 'push',
+  route: {
+    key: 'chat',
+    title: 'Feedback'
+  }
+}
+
+import GalleryView  from '../containers/GalleryViewContainer'
+// import GalleryView from './GalleryListView'
+import ChatView from '../containers/ChatContainer'
+import Selected from './Selected'
+import {homeIcon} from '../data/icons'
 
 export default class Gallery extends Component {
   constructor(props) {
-    super(props)
-    this.state = {
-      result: this.props.result,
-      size: this.props.gallery.photos.length
-    }
-    this._onActionButton = this._onActionButton.bind(this)
+    super(props);
+    this._renderScene = this._renderScene.bind(this)
+    this._handleBackAction = this._handleBackAction.bind(this)
+    this._handleNavigate = this._handleNavigate.bind(this)
   }
-  _onActionButton(media, index) {
-    if (Platform.OS === 'ios') {
-      ActionSheetIOS.showShareActionSheetWithOptions({
-        url: media.photo,
-        message: media.caption,
-      },
-      () => {},
-      () => {});
-    } else {
-      // alert(`handle sharing on android for ${media.photo}, index: ${index}`);
-    }
+  componentDidMount () {
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
   }
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      result: nextProps.result,
-      size: nextProps.gallery.photos.length
-    })
+  componentWillUnmount () {
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
   }
-  render() {
-    if (this.state.result === null) {
-      alert ('Please Login')
-      return (<View />)
-    }
-    else {
+  _renderScene (props) {
+    const prefix = 'scene_'
+    const { scene } = props
+    if (scene.key === prefix + 'gallery') {
       return (
-        <View>
-          <PhotoBrowser
-            onBack={navigator.pop}
-            mediaList={this.props.gallery.photos}
-            initialIndex={0}
-            displayNavArrows={true}
-            displaySelectionButtons={false}
-            displayActionButton={false}
-            startOnGrid={true}
-            enableGrid={true}
-            useCircleProgress={true}
-            onActionButton={this._onActionButton}
-            titleName={this.state.result.first_name}
-          />
-          <View style={{ flex: this.state.size === 0 ? 1 : 0 }}>
-            <Spinner
-              visible={this.state.size === 0}
-              color='black'
-            />
-          </View>
-        </View>
+        <GalleryView
+         result={this.props.result}
+        _handleNavigate={this._handleNavigate.bind(this)}
+        _setFeedback={(action) => this.props.feedbackPhoto(action)}/>
       )
     }
+    else if (scene.key === prefix + 'selected') {
+      return (
+        <Selected
+          _buttonName="Feedback"
+          _nextRoute={route}
+          _selectedPhoto={this.props.gallery.selected}
+          _handleNavigate={this._handleNavigate.bind(this)}/>
+      )
+    }
+    else if (scene.key === prefix + 'chat') {
+      return (
+        <ChatView
+          result={this.props.result}
+          feedback={this.props.gallery.selected}
+         _handleNavigate={this._handleNavigate.bind(this)}/>
+      )
+    }
+  }
+  _renderOverlay(props) {
+    return (
+      <NavigationHeader
+        {...props}
+        onNavigateBack={this._handleBackAction}
+        renderTitleComponent={this._renderTitleComponent}
+        renderLeftComponent={this._renderLeftComponent.bind(this)}
+      />
+    )
+  }
+  _renderLeftComponent(props) {
+    if (this.props.gallery.index === 0) {
+      return (
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={this.props.baseHandleBackAction}>
+          <Image
+            style={styles.button}
+            source={{uri: homeIcon.uri, scale: homeIcon.scale}}
+          />
+        </TouchableOpacity>
+      )
+    }
+    return (
+      <NavigationHeader.BackButton
+        onPress={props.onNavigateBack}
+      />
+    )
+  }
+  _renderTitleComponent(props) {
+    return (
+      <NavigationHeader.Title>
+        {props.scene.route.title}
+      </NavigationHeader.Title>
+    )
+  }
+  _handleBackAction () {
+    if (this.props.gallery.index === 0) {
+      return false
+    }
+    this.props.popGal()
+    return true
+  }
+  _handleNavigate (action) {
+    switch (action && action.type) {
+      case 'push':
+        this.props.pushGal(action.route)
+        return true
+      case 'back':
+      case 'pop':
+        return this._handleBackAction()
+      default:
+        return false
+    }
+  }
+  render () {
+    return (
+      <NavigationCardStack
+        navigationState={this.props.gallery}
+        onNavigate={this._handleNavigate.bind(this)}
+        renderScene={this._renderScene.bind(this)}
+        renderOverlay={this._renderOverlay.bind(this)}
+      />
+    )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  base64: {
     flex: 1,
+    height: 32,
+    resizeMode: 'contain',
   },
-  list: {
+  buttonContainer: {
     flex: 1,
-    paddingTop: 54,
-    paddingLeft: 16,
-  },
-  centering: {
-    flex: 1,
+    marginLeft: 5,
+    flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'center',
-    padding: 260,
+    justifyContent: 'center',
   },
-  row: {
-    flex: 1,
-    padding: 8,
-    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-    borderBottomWidth: 1,
-  },
-  rowTitle: {
-    fontSize: 14,
-  },
-  rowDescription: {
-    fontSize: 12,
-  },
-});
+  button: {
+    height: 28,
+    width: 28,
+    margin: Platform.OS === 'ios' ? 10 : 16,
+    resizeMode: 'contain'
+  }
+})

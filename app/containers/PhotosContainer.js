@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Photos from '../components/Photos'
+import CameraRollPicker from '../components/CameraRollPicker'
 import * as actionCreators from '../actions/Actions';
 
 function mapStateToProps (state) {
@@ -16,4 +16,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Photos)
+)(CameraRollPicker)

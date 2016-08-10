@@ -1,4 +1,6 @@
-import React from 'react'
+'use strict'
+
+import React, {Component} from 'react'
 import {
   View,
   Text,
@@ -10,23 +12,22 @@ import {
 } from 'react-native'
 import Button from './Button'
 
-const route = {
-  type: 'push',
-  route: {
-    key: 'caption',
-    title: 'Write a Caption'
+export default class Selected extends Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Image
+            style={{height: (this.props._buttonName === 'Next') ? 396 : 446}}
+            source={{uri: this.props._selectedPhoto}}
+          />
+        <Button onPress={()=>this.props._handleNavigate(this.props._nextRoute)} label={this.props._buttonName}/>
+      </View>
+    )
   }
 }
-
-const Selected = ({_selectedPhoto, _handleNavigate}) => (
-  <View style={styles.container}>
-    <Image
-        style={styles.gif}
-        source={{uri: _selectedPhoto}}
-      />
-    <Button onPress={()=>_handleNavigate(route)} label='Next'/>
-  </View>
-)
 
 const styles = StyleSheet.create({
   title: {
@@ -35,10 +36,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   container: {
-    paddingTop: 65,
-  },
-  gif: {
-    height: 335,
+    paddingTop: 54,
   },
   default: {
     height: 80,
@@ -49,5 +47,3 @@ const styles = StyleSheet.create({
     padding: 4,
   },
 })
-
-export default Selected

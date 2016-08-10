@@ -14,6 +14,9 @@ import {
   SEND_AWS_ERROR,
   TAKE_PHOTO,
   SELECT_PHOTO,
+  STORE_USER_MESSAGES,
+  STORE_TRAINER_MESSAGES,
+  STORE_IMAGE_DATA,
   LOAD_PHOTOS_INIT,
   LOAD_CAMERAMEDIA_SUCCESS,
   APPEND_CAMERAMEDIA_SUCCESS,
@@ -29,8 +32,6 @@ const FBSDK = require('react-native-fbsdk');
 const {
   AccessToken,
 } = FBSDK;
-
-const getRouteKey = state => state.routes.key
 
 let options = {
   keyPrefix: "data/",
@@ -58,15 +59,21 @@ const sendToAWS = (state, flag) => {
   let key = firebase.database().ref('/global/' + uid + '/userdata').push()
   let file_name = uid + '/' + key.path.o[3] + '.jpg';
   let caption = ''
+  let mealData = {}
+  let messages = []
   if (flag) {
     caption = state.camReducer.caption
+    mealData = state.camReducer.mealData
   }
   else {
     caption = state.libReducer.caption
+    mealData = state.libReducer.mealData
   }
+  messages = state.chatReducer.messages
   key.set({
     file_name,
     caption,
+    mealData,
     time
   });
   let image = ''
@@ -115,65 +122,65 @@ export function* watchAWSLibraryCall() {
   }
 }
 
-const cameraData = (cameraMedia) => {
-  return CameraRoll.getPhotos({
-    first: 12,
-    assetType: 'Photos',
-  }).then((data) => {
-    return data.edges.forEach(d => cameraMedia.push({
-      photo: d.node.image.uri,
-    }));
-  }).catch(error => console.log(error));
-}
-
-function* cameraDataFlow() {
-  try {
-    var cameraMedia = []
-    yield call(cameraData, cameraMedia)
-    yield put ({type: LOAD_CAMERAMEDIA_SUCCESS, cameraMedia})
-  }
-  catch(error) {
-    console.log(error)
-    yield put ({type: LOAD_CAMERAMEDIA_ERROR, error})
-  }
-}
-
-export function* watchCameraData() {
-  while (true) {
-    yield take(LOAD_PHOTOS_INIT)
-    yield call(cameraDataFlow)
-  }
-}
-
-const appendCameraData = (appendMedia) => {
-  return CameraRoll.getPhotos({
-    first: 1,
-    assetType: 'Photos',
-  }).then((data) => {
-    return data.edges.forEach(d => appendMedia.push({
-      photo: d.node.image.uri,
-    }));
-  }).catch(error => console.log(error));
-}
-
-function* appendCameraDataFlow() {
-  try {
-    var appendMedia = []
-    yield call(appendCameraData, appendMedia)
-    yield put ({type: APPEND_CAMERAMEDIA_SUCCESS, appendMedia})
-  }
-  catch(error) {
-    console.log(error)
-    yield put ({type: LOAD_CAMERAMEDIA_ERROR, error})
-  }
-}
-
-export function* watchAppendCameraData() {
-  while (true) {
-    yield take(TAKE_PHOTO)
-    yield call(appendCameraDataFlow)
-  }
-}
+// const cameraData = (cameraMedia) => {
+//   return CameraRoll.getPhotos({
+//     first: 15,
+//     assetType: 'Photos',
+//   }).then((data) => {
+//     return data.edges.forEach(d => cameraMedia.push({
+//       photo: d.node.image.uri,
+//     }));
+//   }).catch(error => console.log(error));
+// }
+//
+// function* cameraDataFlow() {
+//   try {
+//     var cameraMedia = []
+//     yield call(cameraData, cameraMedia)
+//     yield put ({type: LOAD_CAMERAMEDIA_SUCCESS, cameraMedia})
+//   }
+//   catch(error) {
+//     console.log(error)
+//     yield put ({type: LOAD_CAMERAMEDIA_ERROR, error})
+//   }
+// }
+//
+// export function* watchCameraData() {
+//   while (true) {
+//     yield take(LOAD_PHOTOS_INIT)
+//     yield call(cameraDataFlow)
+//   }
+// }
+//
+// const appendCameraData = (appendMedia) => {
+//   return CameraRoll.getPhotos({
+//     first: 1,
+//     assetType: 'Photos',
+//   }).then((data) => {
+//     return data.edges.forEach(d => appendMedia.push({
+//       photo: d.node.image.uri,
+//     }));
+//   }).catch(error => console.log(error));
+// }
+//
+// function* appendCameraDataFlow() {
+//   try {
+//     var appendMedia = []
+//     yield call(appendCameraData, appendMedia)
+//     yield put ({type: APPEND_CAMERAMEDIA_SUCCESS, appendMedia})
+//   }
+//   catch(error) {
+//     console.log(error)
+//     yield put ({type: LOAD_CAMERAMEDIA_ERROR, error})
+//   }
+// }
+//
+// export function* watchAppendCameraData() {
+//   while (true) {
+//     yield take(TAKE_PHOTO)
+//     yield call(appendCameraDataFlow)
+//   }
+// }
 
 const firebaseLogin = (photos) => {
   return AccessToken.getCurrentAccessToken().then(function (token) {
@@ -187,7 +194,9 @@ const firebaseLogin = (photos) => {
           let thumb = turlHead+childSnapshot.val().file_name
           let photo = urlHead+childSnapshot.val().file_name
           let caption = childSnapshot.val().caption
-          let obj = {photo,caption,false}
+          let mealData = childSnapshot.val().mealData
+          let time = childSnapshot.val().time
+          let obj = {photo,caption,caption, mealData, time}
           photos.unshift(obj)
         })
       })
@@ -244,7 +253,7 @@ export function* watchLogoutFlow() {
   }
 }
 
-export const fetchFirebaseData = (appendPhotos) => {
+export const fetchFirebaseData = (appendPhotos, messages, trainerMessages) => {
   let user = firebase.auth().currentUser
   return firebase.database().ref('/global/' + user.uid + '/userdata').orderByKey().limitToLast(1).once('value')
   .then (function(snapshot){
@@ -254,8 +263,12 @@ export const fetchFirebaseData = (appendPhotos) => {
       let thumb = turlHead+childSnapshot.val().file_name
       let photo = urlHead+childSnapshot.val().file_name
       let caption = childSnapshot.val().caption
-      let obj = {photo,caption,false}
+      let mealData = childSnapshot.val().mealData
+      let time = childSnapshot.val().time
+      let obj = {photo,caption,caption, mealData, time}
       appendPhotos.push(obj)
+      messages.push(childSnapshot.val().messages)
+      trainerMessages.push(childSnapshot.val().trainerMessages)
     })
   }, function(error) {
     console.log("Value Added Error", error);
@@ -264,9 +277,13 @@ export const fetchFirebaseData = (appendPhotos) => {
 
 export function* firebaseData() {
   try {
-    var appendPhotos = []
-    yield call(fetchFirebaseData, appendPhotos)
+    let appendPhotos = []
+    let messages = []
+    let trainerMessages = []
+    yield call(fetchFirebaseData, appendPhotos, messages, trainerMessages)
     yield put ({type: APPEND_PHOTOS_SUCCESS, appendPhotos})
+    yield put ({type: STORE_USER_MESSAGES, messages})
+    yield put ({type: STORE_TRAINER_MESSAGES, trainerMessages})
   }
   catch(error) {
     console.log(error)

@@ -1,4 +1,8 @@
 import {
+  PUSH_ROUTE,
+  POP_ROUTE,
+  POP_GAL_ROUTE,
+  PUSH_GAL_ROUTE,
   POP_CAM_ROUTE,
   PUSH_CAM_ROUTE,
   POP_LIB_ROUTE,
@@ -6,6 +10,7 @@ import {
   CHANGE_TAB,
   TAKE_PHOTO,
   SELECT_PHOTO,
+  FEEDBACK_PHOTO,
   LOAD_PHOTOS_INIT,
   LOAD_PHOTOS_SUCCESS,
   LOAD_PHOTOS_FAILURE,
@@ -19,13 +24,44 @@ import {
   STORE_RESULT,
   STORE_CAMERA_CAPTION,
   STORE_LIBRARY_CAPTION,
+  ADD_CAMERA_MEAL_DATA,
+  ADD_LIBRARY_MEAL_DATA,
+  STORE_USER_MESSAGES,
+  STORE_TRAINER_MESSAGES,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOGOUT_ERRROR
+  LOGOUT_ERRROR,
+  IS_NEW_USER
 } from '../constants/ActionTypes'
+
+export function push (route) {
+  return {
+    type: PUSH_ROUTE,
+    route,
+  }
+}
+
+export function pop () {
+  return {
+    type: POP_ROUTE
+  }
+}
+
+export function pushGal (route) {
+  return {
+    type: PUSH_GAL_ROUTE,
+    route,
+  }
+}
+
+export function popGal () {
+  return {
+    type: POP_GAL_ROUTE
+  }
+}
 
 export function pushCam (route) {
   return {
@@ -74,6 +110,13 @@ export function selectPhoto (selected) {
   }
 }
 
+export function feedbackPhoto (selected) {
+  return {
+    type: FEEDBACK_PHOTO,
+    selected
+  }
+}
+
 export function loadPhotosInit() {
   return {
     type: LOAD_PHOTOS_INIT,
@@ -118,6 +161,35 @@ export function storeLibraryCaption(caption) {
   return {
     type: STORE_LIBRARY_CAPTION,
     caption
+  }
+}
+
+export function addCameraMealData(mealData) {
+  return {
+    type: ADD_CAMERA_MEAL_DATA,
+    mealData
+  }
+}
+
+export function addLibraryMealData(mealData) {
+  return {
+    type: ADD_LIBRARY_MEAL_DATA,
+    mealData
+  }
+}
+
+export function storeMessages(messages) {
+  return {
+    type: STORE_USER_MESSAGES,
+    messages
+  }
+}
+
+
+export function storeTrainerMessages(trainerMessages) {
+  return {
+    type: STORE_TRAINER_MESSAGES,
+    trainerMessages
   }
 }
 
@@ -171,5 +243,12 @@ export function logoutError(error){
   return {
     type: LOGOUT_ERROR,
     error: error
+  }
+}
+
+export function isNewUser(flag){
+  return {
+    type: IS_NEW_USER,
+    flag: flag
   }
 }

@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Base from '../components/Base'
+import Home from '../components/Home'
 import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps (state) {
   return {
-    navigation: state.navReducer,
+    tabs: state.tabReducer,
     auth: state.authReducer,
+    galleryNav: state.galNavReducer,
   }
 }
 
@@ -17,4 +18,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Base)
+)(Home)

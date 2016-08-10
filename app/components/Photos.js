@@ -12,7 +12,7 @@ const route = {
   }
 }
 
-const TOOLBAR_HEIGHT = 70;
+const TOOLBAR_HEIGHT = 54;
 
 export default class Photos extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ export default class Photos extends Component {
         <View style={styles.container}>
           <Animated.View
             style={{
-              height: screenHeight,
+              height: screenHeight - 85,
               marginTop: fullScreenAnim.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0, screenHeight * -1 - TOOLBAR_HEIGHT],
@@ -91,7 +91,7 @@ export default class Photos extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 64,
+    paddingTop: 64
   },
   list: {
     flex: 1,

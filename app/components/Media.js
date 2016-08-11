@@ -19,11 +19,11 @@ export default class Media extends Component {
       >
         <Library
           tabLabel="Library"
-          baseHandleBackAction={this.props.baseHandleBackAction}
+          changeTab={this.props.changeTab}
         />
         <Camera
           tabLabel="Camera"
-          baseHandleBackAction={this.props.baseHandleBackAction}
+          changeTab={this.props.changeTab}
         />
       </ScrollableTabView>
     )

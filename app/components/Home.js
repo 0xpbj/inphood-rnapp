@@ -9,31 +9,26 @@ const {
 } = NavigationExperimental
 
 import Login from './Login'
+import Media from './Media'
 import Gallery from '../containers/GalleryContainer'
-
-const route1 = {
-  type: 'push',
-  route: {
-    key: 'media',
-    title: ''
-  }
-}
-
-const route2 = {
-  type: 'push',
-  route: {
-    key: 'gallery',
-    title: ''
-  }
-}
 
 export default class HomeTabs extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      cvisible: false,
+      mvisible: false,
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      cvisible: nextProps.tabs.cvisible,
+      mvisible: nextProps.tabs.mvisible,
+    })
   }
   _renderTabContent (key) {
     switch (key) {
-      case 'home':
+      case 'Login':
         return <Login
                  loginRequest={()=>this.props.loginRequest()}
                  logoutRequest={()=>this.props.logoutRequest()}
@@ -41,14 +36,39 @@ export default class HomeTabs extends Component {
                  storeResult={(action)=>this.props.storeResult(action)}
                  auth={this.props.auth}
                 />
-      // case 'home':
-        // return <Gallery
-        //         result={this.props.auth.result}/>
+      case 'Media':
+        return (
+          <Media
+            changeTab={(i)=>this.props.changeTab(i)}
+          />
+        )
+      case 'Home':
+        return (
+          <Gallery
+            result={this.props.auth.result}
+          />
+        )
       default:
         return <View />
     }
   }
   render () {
+    const {cvisible, mvisible} = this.state
+    if (cvisible) {
+      return (
+        <Gallery
+          result={this.props.auth.result}
+        />
+      )
+    }
+    else if (mvisible) {
+      return (
+        <Media
+          baseHandleBackAction={this.props._handleBackAction}
+          changeTab={(i)=>this.props.changeTab(i)}
+        />
+      )
+    }
     const tabs = this.props.tabs.routes.map((tab, i) => {
       return (
         <TabBarIOS.Item key={tab.key}
@@ -56,15 +76,7 @@ export default class HomeTabs extends Component {
           selectedIcon={tab.selectedIcon}
           title={tab.title}
           onPress={() => {
-            if (i === 1) {
-              this.props._handleNavigate(route1)
-            }
-            else if (i === 2) {
-              this.props._handleNavigate(route2)
-            }
-            else {
               this.props.changeTab(i)
-            }
           }}
           selected={this.props.tabs.index === i}>
           {this._renderTabContent(tab.key)}
@@ -76,6 +88,7 @@ export default class HomeTabs extends Component {
         unselectedTintColor="black"
         tintColor="#22a3ed"
         barTintColor="white"
+        translucent={true}
       >
         {tabs}
       </TabBarIOS>

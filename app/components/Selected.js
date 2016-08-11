@@ -74,7 +74,7 @@ export default class Selected extends Component {
       return (
         <View style={styles.container}>
           <Image
-              style={{height: 436}}
+              style={{height: 386}}
               source={{uri: this.props._selectedPhoto}}
             />
           <Button onPress={this._workBeforeTransition.bind(this)} label={this.props._buttonName}/>

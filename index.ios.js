@@ -12,7 +12,7 @@ import {AppRegistry} from "react-native";
 import configureStore from './app/store/configureStore'
 const store = configureStore()
 
-import BaseContainer from './app/containers/BaseContainer'
+import HomeContainer from './app/containers/HomeContainer'
 import { Provider } from 'react-redux'
 
 import firebase from 'firebase'
@@ -29,7 +29,7 @@ firebase.initializeApp({
 
 const App = () => (
   <Provider store={store}>
-    <BaseContainer />
+    <HomeContainer />
   </Provider>
 )
 

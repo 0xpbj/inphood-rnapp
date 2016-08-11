@@ -27,7 +27,7 @@ const {
 import Picture from './Picture'
 import Selected from './Selected'
 import Caption from '../containers/CaptionContainer'
-import {homeIcon} from './Icons'
+import {homeIcon, userIcon} from './Icons'
 
 export default class Camera extends Component {
   constructor(props) {
@@ -54,6 +54,7 @@ export default class Camera extends Component {
   _renderScene (props) {
     const prefix = 'scene_'
     const { scene } = props
+    this.props.mediaVisible(true)
     if (scene.key === prefix + 'picture') {
       return (
         <Picture
@@ -89,6 +90,7 @@ export default class Camera extends Component {
         onNavigateBack={this._handleBackAction}
         renderTitleComponent={this._renderTitleComponent}
         renderLeftComponent={this._renderLeftComponent.bind(this)}
+        renderRightComponent={this._renderRightComponent.bind(this)}
       />
     )
   }
@@ -97,10 +99,10 @@ export default class Camera extends Component {
       return (
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={this.props.baseHandleBackAction}>
+          onPress={()=>this._goToLogin()}>
           <Image
             style={styles.button}
-            source={{uri: homeIcon.uri, scale: homeIcon.scale}}
+            source={{uri: userIcon.uri, scale: userIcon.scale}}
           />
         </TouchableOpacity>
       )
@@ -109,7 +111,21 @@ export default class Camera extends Component {
       <NavigationHeader.BackButton
         onPress={props.onNavigateBack}
       />
-    );
+    )
+  }
+  _renderRightComponent(props) {
+    if (this.props.camera.index === 0) {
+      return (
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={()=>this._goToHome()}>
+          <Image
+            style={styles.button}
+            source={{uri: homeIcon.uri, scale: homeIcon.scale}}
+          />
+        </TouchableOpacity>
+      )
+    }
   }
   _renderTitleComponent(props) {
     return (
@@ -117,6 +133,16 @@ export default class Camera extends Component {
         {props.scene.route.title}
       </NavigationHeader.Title>
     )
+  }
+  _goToLogin() {
+    this.props.mediaVisible(false)
+    this.props.chatVisible(false)
+    this.props.changeTab(0)
+  }
+  _goToHome() {
+    this.props.mediaVisible(false)
+    this.props.chatVisible(false)
+    this.props.changeTab(2)
   }
   _handleBackAction () {
     if (this.props.camera.index === 0) {
@@ -129,6 +155,9 @@ export default class Camera extends Component {
     this.props.takePhoto('')
     this._handleBackAction()
     this._handleBackAction()
+    this.props.mediaVisible(false)
+    this.props.chatVisible(false)
+    this.props.changeTab(2)
     return true
   }
   _handleNavigate (action) {

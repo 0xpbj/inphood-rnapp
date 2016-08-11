@@ -17,13 +17,14 @@ import {
 const route = {
   type: 'push',
   route: {
-    key: 'selected',
-    title: 'Confirm Photo'
+    key: 'chat',
+    title: 'Feedback'
   }
 }
 
 import TimerMixin from 'react-timer-mixin'
 import Spinner from 'react-native-loading-spinner-overlay'
+import {sampleIcon} from './Icons'
 import RNFS from 'react-native-fs'
 
 export default class GalleryListView extends Component{
@@ -135,8 +136,13 @@ export default class GalleryListView extends Component{
               />
               <Text style={styles.profileName}>{this.state.result.first_name}'s InPhood</Text>
             </View>
-            <View style={{justifyContent: 'center', marginLeft: 50, marginTop: 150}}>
-              <Text>Go to media page to add photos...</Text>
+            <View style={{justifyContent: 'center', marginLeft: 20, marginTop: 150, flexDirection: 'row'}}>
+              <Text>Go to </Text>
+              <Image
+                style={styles.button}
+                source={{uri: sampleIcon.uri, scale: sampleIcon.scale}}
+              />
+              <Text> tab to add photos...</Text>
             </View>
           </View>
         )
@@ -171,12 +177,12 @@ export default class GalleryListView extends Component{
     let imgSource = rowData.localFile
     RNFS.exists(imgSource)
     .then((result) => {
-      console.log('result')
-      console.log(result)
+      // console.log('result')
+      // console.log(result)
     })
     .catch((err) => {
-      console.log('err')
-      console.log(err)
+      // console.log('err')
+      // console.log(err)
     })
     if (!RNFS.exists(imgSource)) {
       imgSource = rowData.photo
@@ -225,7 +231,7 @@ export default class GalleryListView extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 64,
+    marginTop: 20,
     backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
   },
   profileImage: {
@@ -261,4 +267,9 @@ const styles = StyleSheet.create({
   picker: {
     width: 100,
   },
+  button: {
+    height: 28,
+    width: 28,
+    resizeMode: 'contain'
+  }
 })

@@ -7,6 +7,8 @@ export const POP_LIB_ROUTE = 'POP_LIB_ROUTE'
 export const PUSH_GAL_ROUTE = 'PUSH_GAL_ROUTE'
 export const POP_GAL_ROUTE = 'POP_GAL_ROUTE'
 export const CHANGE_TAB = 'CHANGE_TAB'
+export const MEDIA_TAB_VISIBLE = 'MEDIA_TAB_VISIBLE'
+export const CHAT_TAB_VISIBLE = 'CHAT_TAB_VISIBLE'
 export const HOLD_CHANGE_TAB = 'HOLD_CHANGE_TAB'
 
 export const TAKE_PHOTO = 'TAKE_PHOTO'

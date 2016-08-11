@@ -36,15 +36,6 @@ export default class Base extends Component {
       return <Home
         _handleNavigate={this._handleNavigate.bind(this)}/>
     }
-    else if (scene.key === prefix + 'media') {
-      return <Media
-        baseHandleBackAction={this._handleBackAction.bind(this)}/>
-    }
-    else if (scene.key === prefix + 'gallery') {
-      return <Gallery
-        result={this.props.auth.result}
-        baseHandleBackAction={this._handleBackAction.bind(this)}/>
-    }
   }
   _handleBackAction () {
     if (this.props.navigation.index === 0) {

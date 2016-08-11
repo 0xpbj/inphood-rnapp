@@ -8,6 +8,8 @@ import {
   POP_LIB_ROUTE,
   PUSH_LIB_ROUTE,
   CHANGE_TAB,
+  MEDIA_TAB_VISIBLE,
+  CHAT_TAB_VISIBLE,
   TAKE_PHOTO,
   SELECT_PHOTO,
   FEEDBACK_PHOTO,
@@ -99,6 +101,20 @@ export function changeTab (index) {
   return {
     type: CHANGE_TAB,
     index
+  }
+}
+
+export function chatVisible (visible) {
+  return {
+    type: CHAT_TAB_VISIBLE,
+    visible
+  }
+}
+
+export function mediaVisible (visible) {
+  return {
+    type: MEDIA_TAB_VISIBLE,
+    visible
   }
 }
 

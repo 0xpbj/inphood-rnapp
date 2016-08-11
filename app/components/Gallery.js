@@ -17,16 +17,7 @@ const {
   Header: NavigationHeader,
 } = NavigationExperimental
 
-const route = {
-  type: 'push',
-  route: {
-    key: 'chat',
-    title: 'Feedback'
-  }
-}
-
 import GalleryView  from '../containers/GalleryViewContainer'
-// import GalleryView from './GalleryListView'
 import ChatView from '../containers/ChatContainer'
 import Selected from './Selected'
 import {homeIcon} from './Icons'
@@ -38,6 +29,10 @@ export default class Gallery extends Component {
     this._renderScene = this._renderScene.bind(this)
     this._handleBackAction = this._handleBackAction.bind(this)
     this._handleNavigate = this._handleNavigate.bind(this)
+    //hack to refresh until feedback is connected
+    this.state = {
+      hack: false,
+    }
   }
   componentDidMount () {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
@@ -57,84 +52,33 @@ export default class Gallery extends Component {
         />
       )
     }
-    else if (scene.key === prefix + 'selected') {
-      return (
-        <Selected
-          _buttonName="Feedback"
-          _nextRoute={route}
-          _selectedPhoto={this.props.gallery.selected}
-          _handleNavigate={this._handleNavigate.bind(this)}
-        />
-      )
-    }
     else if (scene.key === prefix + 'chat') {
       return (
         <ChatView
           result={this.props.result}
-          feedback={this.props.gallery.selected}
          _handleNavigate={this._handleNavigate.bind(this)}
         />
       )
     }
   }
   _renderOverlay(props) {
-    return (
-      <NavigationHeader
-        {...props}
-        onNavigateBack={this._handleBackAction}
-        renderTitleComponent={this._renderTitleComponent}
-        renderLeftComponent={this._renderLeftComponent.bind(this)}
-        // renderRightComponent={this._renderRightComponent.bind(this)}
-      />
-    )
-  }
-  _renderLeftComponent(props) {
-    if (this.props.gallery.index === 0) {
+    if (this.props.gallery.index !== 0) {
       return (
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          onPress={this.props.baseHandleBackAction}>
-          <Image
-            style={styles.button}
-            source={{uri: homeIcon.uri, scale: homeIcon.scale}}
-          />
-        </TouchableOpacity>
+        <NavigationHeader
+          {...props}
+          onNavigateBack={this._handleBackAction}
+          renderTitleComponent={this._renderTitleComponent}
+          renderLeftComponent={this._renderLeftComponent.bind(this)}
+        />
       )
     }
+  }
+  _renderLeftComponent(props) {
     return (
       <NavigationHeader.BackButton
         onPress={props.onNavigateBack}
       />
     )
-  }
-  _renderRightComponent(props) {
-    if (this.props.gallery.index === 0) {
-      return (
-        <MenuContext style={{ flex: 1, zIndex: 1 }}>
-          <View style={styles.topbar}>
-            <Menu onSelect={(value) => this.props.filterPhotos(value)}>
-              <MenuTrigger>
-                <Text style={{ fontSize: 20 }}>&#8942;</Text>
-              </MenuTrigger>
-              <MenuOptions>
-                <MenuOption value={'Breakfast'}>
-                  <Text>Breakfast</Text>
-                </MenuOption>
-                <MenuOption value={'Lunch'}>
-                  <Text>Lunch</Text>
-                </MenuOption>
-                <MenuOption value={'Dinner'}>
-                  <Text>Dinner</Text>
-                </MenuOption>
-                <MenuOption value={'Snack'}>
-                  <Text>Snack</Text>
-                </MenuOption>
-              </MenuOptions>
-            </Menu>
-          </View>
-        </MenuContext>
-      )
-    }
   }
   _renderTitleComponent(props) {
     return (
@@ -144,6 +88,8 @@ export default class Gallery extends Component {
     )
   }
   _handleBackAction () {
+    this.props.chatVisible(false)
+    this.setState({hack: true})
     if (this.props.gallery.index === 0) {
       return false
     }

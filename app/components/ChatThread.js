@@ -23,6 +23,9 @@ export default class ChatThread extends Component {
     this.onLoadEarlier = this.onLoadEarlier.bind(this);
     this._isAlright = null;
   }
+  componentDidMount() {
+    this.props.chatVisible(true)
+  }
   onLoadEarlier() {
     this.setState((previousState) => {
       return {

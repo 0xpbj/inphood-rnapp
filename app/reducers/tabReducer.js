@@ -1,14 +1,17 @@
-import { CHANGE_TAB, CHANGE_CAM_TAB } from '../constants/ActionTypes'
+import { CHANGE_TAB, MEDIA_TAB_VISIBLE, CHAT_TAB_VISIBLE } from '../constants/ActionTypes'
 import {userIcon, sampleIcon, homeIcon} from '../components/Icons'
+
 const tabs = [
-  { key: 'home', icon: homeIcon, title: 'Home' },
-  { key: 'media', icon: sampleIcon, title: 'Media' },
-  { key: 'gallery', icon: userIcon, title: 'Profile' },
+  { key: 'Login', icon: userIcon, title: 'Login' },
+  { key: 'Media', icon: sampleIcon, title: 'Media' },
+  { key: 'Home', icon: homeIcon, title: 'Home' },
 ]
 
 const initialState = {
   index: 0,
-  routes: tabs
+  routes: tabs,
+  mvisible: false,
+  cvisible: false,
 }
 
 function tabsNav (state = initialState, action) {
@@ -18,6 +21,16 @@ function tabsNav (state = initialState, action) {
       return {
         ...state,
         index: action.index
+      }
+    case MEDIA_TAB_VISIBLE:
+      return {
+        ...state,
+        mvisible: action.visible
+      }
+    case CHAT_TAB_VISIBLE:
+      return {
+        ...state,
+        cvisible: action.visible
       }
     default:
       return state

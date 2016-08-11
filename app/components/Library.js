@@ -28,8 +28,7 @@ const route = {
 import Photos  from '../containers/PhotosContainer'
 import Selected from './Selected'
 import Caption from '../containers/CaptionContainer'
-import Icon from 'react-native-vector-icons/Ionicons'
-import {homeIcon} from './Icons'
+import {homeIcon, userIcon} from './Icons'
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 export default class Library extends Component {
@@ -50,6 +49,7 @@ export default class Library extends Component {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
   }
   _renderScene (props) {
+    this.props.mediaVisible(true)
     const prefix = 'scene_'
     const { scene } = props
     if (scene.key === prefix + 'photos') {
@@ -87,6 +87,7 @@ export default class Library extends Component {
         onNavigateBack={this._handleBackAction}
         renderTitleComponent={this._renderTitleComponent}
         renderLeftComponent={this._renderLeftComponent.bind(this)}
+        renderRightComponent={this._renderRightComponent.bind(this)}
       />
     )
   }
@@ -95,11 +96,10 @@ export default class Library extends Component {
       return (
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={this.props.baseHandleBackAction}>
-          {/* onPress={()=>this.props.changeTab(2)}> */}
+          onPress={()=>this._goToLogin()}>
           <Image
             style={styles.button}
-            source={{uri: homeIcon.uri, scale: homeIcon.scale}}
+            source={{uri: userIcon.uri, scale: userIcon.scale}}
           />
         </TouchableOpacity>
       )
@@ -108,7 +108,21 @@ export default class Library extends Component {
       <NavigationHeader.BackButton
         onPress={props.onNavigateBack}
       />
-    );
+    )
+  }
+  _renderRightComponent(props) {
+    if (this.props.library.index === 0) {
+      return (
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={()=>this._goToHome()}>
+          <Image
+            style={styles.button}
+            source={{uri: homeIcon.uri, scale: homeIcon.scale}}
+          />
+        </TouchableOpacity>
+      )
+    }
   }
   _renderTitleComponent(props) {
     return (
@@ -116,6 +130,16 @@ export default class Library extends Component {
         {props.scene.route.title}
       </NavigationHeader.Title>
     )
+  }
+  _goToLogin() {
+    this.props.mediaVisible(false)
+    this.props.chatVisible(false)
+    this.props.changeTab(0)
+  }
+  _goToHome() {
+    this.props.mediaVisible(false)
+    this.props.chatVisible(false)
+    this.props.changeTab(2)
   }
   _handleBackAction () {
     if (this.props.library.index === 0) {
@@ -128,6 +152,9 @@ export default class Library extends Component {
     this.props.selectPhoto('')
     this._handleBackAction()
     this._handleBackAction()
+    this.props.mediaVisible(false)
+    this.props.chatVisible(false)
+    this.props.changeTab(2)
     return true
   }
   _handleNavigate (action) {

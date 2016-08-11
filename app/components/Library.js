@@ -21,7 +21,7 @@ const route = {
   type: 'push',
   route: {
     key: 'caption',
-    title: 'Describe your meal'
+    title: 'Meal ingredients'
   }
 }
 
@@ -65,6 +65,7 @@ export default class Library extends Component {
           _buttonName="Next"
           _nextRoute={route}
           _selectedPhoto={this.props.library.selected}
+          _storeTitle={(action) => this.props.storeLibraryTitle(action)}
           _handleNavigate={this._handleNavigate.bind(this)}/>
       )
     }

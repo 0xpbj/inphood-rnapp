@@ -1,4 +1,4 @@
-import { LOAD_CAMERAMEDIA_SUCCESS, SELECT_PHOTO, STORE_LIBRARY_CAPTION, ADD_LIBRARY_MEAL_DATA, PUSH_LIB_ROUTE, POP_LIB_ROUTE  } from '../constants/ActionTypes'
+import { LOAD_CAMERAMEDIA_SUCCESS, SELECT_PHOTO, STORE_LIBRARY_CAPTION, STORE_LIBRARY_TITLE, ADD_LIBRARY_MEAL_DATA, PUSH_LIB_ROUTE, POP_LIB_ROUTE  } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -7,8 +7,9 @@ const {
 const initialState = {
   selected: '',
   caption: '',
+  title: '',
   count: 0,
-  mealData: {},
+  mealType: '',
   index: 0,
   key: 'root',
   routes: [
@@ -31,10 +32,15 @@ export default function library (state = initialState, action) {
         ...state,
         caption: action.caption
       }
+    case STORE_LIBRARY_TITLE:
+      return {
+        ...state,
+        title: action.title
+      }
     case ADD_LIBRARY_MEAL_DATA:
       return {
         ...state,
-        mealData: action.mealData
+        mealType: action.mealType
       }
     case PUSH_LIB_ROUTE:
       if (state.routes[state.index].key === (action.route && action.route.key)) {

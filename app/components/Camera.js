@@ -13,7 +13,7 @@ const route = {
   type: 'push',
   route: {
     key: 'caption',
-    title: 'Describe your meal'
+    title: 'Meal ingredients'
   }
 }
 
@@ -67,6 +67,7 @@ export default class Camera extends Component {
           _buttonName="Next"
           _nextRoute={route}
           _selectedPhoto={this.state.photo}
+          _storeTitle={(action) => this.props.storeCameraTitle(action)}
           _handleNavigate={this._handleNavigate.bind(this)}/>
       )
     }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
   Image,
   View,
+  Text,
   Platform,
   StyleSheet,
   BackAndroid,
@@ -29,6 +30,7 @@ import GalleryView  from '../containers/GalleryViewContainer'
 import ChatView from '../containers/ChatContainer'
 import Selected from './Selected'
 import {homeIcon} from './Icons'
+import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu'
 
 export default class Gallery extends Component {
   constructor(props) {
@@ -49,9 +51,10 @@ export default class Gallery extends Component {
     if (scene.key === prefix + 'gallery') {
       return (
         <GalleryView
-         result={this.props.result}
-        _handleNavigate={this._handleNavigate.bind(this)}
-        _setFeedback={(action) => this.props.feedbackPhoto(action)}/>
+           result={this.props.result}
+          _handleNavigate={this._handleNavigate.bind(this)}
+          _setFeedback={(action) => this.props.feedbackPhoto(action)}
+        />
       )
     }
     else if (scene.key === prefix + 'selected') {
@@ -60,7 +63,8 @@ export default class Gallery extends Component {
           _buttonName="Feedback"
           _nextRoute={route}
           _selectedPhoto={this.props.gallery.selected}
-          _handleNavigate={this._handleNavigate.bind(this)}/>
+          _handleNavigate={this._handleNavigate.bind(this)}
+        />
       )
     }
     else if (scene.key === prefix + 'chat') {
@@ -68,7 +72,8 @@ export default class Gallery extends Component {
         <ChatView
           result={this.props.result}
           feedback={this.props.gallery.selected}
-         _handleNavigate={this._handleNavigate.bind(this)}/>
+         _handleNavigate={this._handleNavigate.bind(this)}
+        />
       )
     }
   }
@@ -79,6 +84,7 @@ export default class Gallery extends Component {
         onNavigateBack={this._handleBackAction}
         renderTitleComponent={this._renderTitleComponent}
         renderLeftComponent={this._renderLeftComponent.bind(this)}
+        // renderRightComponent={this._renderRightComponent.bind(this)}
       />
     )
   }
@@ -100,6 +106,35 @@ export default class Gallery extends Component {
         onPress={props.onNavigateBack}
       />
     )
+  }
+  _renderRightComponent(props) {
+    if (this.props.gallery.index === 0) {
+      return (
+        <MenuContext style={{ flex: 1, zIndex: 1 }}>
+          <View style={styles.topbar}>
+            <Menu onSelect={(value) => this.props.filterPhotos(value)}>
+              <MenuTrigger>
+                <Text style={{ fontSize: 20 }}>&#8942;</Text>
+              </MenuTrigger>
+              <MenuOptions>
+                <MenuOption value={'Breakfast'}>
+                  <Text>Breakfast</Text>
+                </MenuOption>
+                <MenuOption value={'Lunch'}>
+                  <Text>Lunch</Text>
+                </MenuOption>
+                <MenuOption value={'Dinner'}>
+                  <Text>Dinner</Text>
+                </MenuOption>
+                <MenuOption value={'Snack'}>
+                  <Text>Snack</Text>
+                </MenuOption>
+              </MenuOptions>
+            </Menu>
+          </View>
+        </MenuContext>
+      )
+    }
   }
   _renderTitleComponent(props) {
     return (
@@ -157,5 +192,11 @@ const styles = StyleSheet.create({
     width: 28,
     margin: Platform.OS === 'ios' ? 10 : 16,
     resizeMode: 'contain'
+  },
+  topbar: {
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF'
   }
 })

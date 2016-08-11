@@ -14,13 +14,13 @@ import {
 } from 'react-native'
 
 import Button from './Button'
-import Spinner from 'react-native-loading-spinner-overlay';
+import Spinner from 'react-native-loading-spinner-overlay'
 
 var { width, height } = Dimensions.get('window');
 
 export default class Caption extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       animating: false,
       size: this.props.gallery.photos.length,
@@ -39,13 +39,26 @@ export default class Caption extends Component {
     //   alert ('Please pick meal category')
     //   return
     // }
+    let mealType = ''
+    if (breakfast) {
+      mealType = 'Breakfast'
+    }
+    else if (lunch) {
+      mealType = 'Lunch'
+    }
+    else if (dinner) {
+      mealType = 'Dinner'
+    }
+    else if (snack){
+      mealType = 'Snack'
+    }
     let whiteSpace = new RegExp(/^\s+$/)
     if (this.state.caption === '') {
-      alert ('Please enter a caption')
+      alert ('Please enter ingredients')
       return
     }
     else if (whiteSpace.test(this.state.caption)) {
-      alert ('Please enter a valid caption')
+      alert ('Please enter ingredients')
       return
     }
     this.props._storeCaption(this.state.caption)
@@ -54,24 +67,22 @@ export default class Caption extends Component {
       return
     }
     else {
-      this.setState({
-        animating: true
-      })
-      const mealData = {meal, recipe, breakfast, lunch, dinner, snack}
       if (this.props._library) {
-        this.props.addLibraryMealData(mealData)
-        this.props.sendAWSInitLibrary()
+        this.props.addLibraryMealData(mealType)
+        this.props.sendFirebaseInitLibrary()
+        this.props._transmit()
       }
       else {
-        this.props.addCameraMealData(mealData)
-        this.props.sendAWSInitCamera()
+        this.props.addCameraMealData(mealType)
+        this.props.sendFirebaseInitCamera()
+        this.props._transmit()
       }
     }
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.gallery.photos.length > this.state.size) {
-      this.props._transmit()
-    }
+    // if (nextProps.gallery.photos.length > this.state.size) {
+    //   this.props._transmit()
+    // }
   }
   render() {
     let whiteSpace = new RegExp(/^\s+$/)
@@ -80,16 +91,16 @@ export default class Caption extends Component {
         <View style={{flexDirection: 'row'}}>
           <TextInput
             autoCapitalize="none"
-            placeholder="Write a Caption..."
+            placeholder="Enter ingredients..."
             returnKeyType="done"
             onEndEditing={
               (event) => {
                 let text = event.nativeEvent.text
                 if (text === '') {
-                  alert ('Please enter a caption')
+                  alert ('Please enter ingredients')
                 }
                 else if (whiteSpace.test(text)) {
-                  alert ('Please enter a valid caption')
+                  alert ('Please enter ingredients')
                 }
                 else {
                   this.setState({caption: text})

@@ -4,9 +4,9 @@ import createSagaMiddleware from 'redux-saga'
 import {
   watchLoginFlow,
   watchLogoutFlow,
-  watchAWSCameraCall,
-  watchAWSLibraryCall,
-  watchFirebaseDataFlow
+  watchFirebaseCameraCall,
+  watchFirebaseLibraryCall,
+  watchFirebaseDataFlow,
   // watchCameraData,
   // watchAppendCameraData
 } from '../sagas/sagas'
@@ -23,8 +23,8 @@ export default function configureStore () {
   // then run the saga
   sagaMiddleware.run(watchLoginFlow)
   sagaMiddleware.run(watchLogoutFlow)
-  sagaMiddleware.run(watchAWSCameraCall)
-  sagaMiddleware.run(watchAWSLibraryCall)
+  sagaMiddleware.run(watchFirebaseCameraCall)
+  sagaMiddleware.run(watchFirebaseLibraryCall)
   sagaMiddleware.run(watchFirebaseDataFlow)
   // sagaMiddleware.run(watchCameraData)
   // sagaMiddleware.run(watchAppendCameraData)

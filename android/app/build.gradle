@@ -120,6 +120,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fs')
     compile project(':react-native-lock')
     compile project(':react-native-fbsdk')
     compile project(':react-native-vector-icons')

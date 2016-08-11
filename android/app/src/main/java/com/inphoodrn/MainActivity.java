@@ -1,6 +1,7 @@
 package com.inphoodrn;
 
 import com.facebook.react.ReactActivity;
+import com.rnfs.RNFSPackage;
 import com.auth0.lock.react.LockReactPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -40,6 +41,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNFSPackage(),
             new LockReactPackage(),
             new FBSDKPackage(),
             new VectorIconsPackage(),

@@ -11,6 +11,7 @@ import {
   RecyclerViewBackedScrollView,
   Text,
   View,
+  Picker,
 } from 'react-native'
 
 const route = {
@@ -23,16 +24,29 @@ const route = {
 
 import TimerMixin from 'react-timer-mixin'
 import Spinner from 'react-native-loading-spinner-overlay'
+import RNFS from 'react-native-fs'
 
 export default class GalleryListView extends Component{
   constructor(props) {
     super(props)
-    const mediaList = props.galleryView.photos
+    let mediaList = props.galleryView.photos
+    let filter = this.props.galleryView.filter
+    let filteredList = []
+    if (filter === '') {
+      let length = mediaList.length
+      for (var i = 0; i < length; i++) {
+        if (mediaList[i].mealType === filter) {
+          filteredList.push(mediaList[i])
+        }
+      }
+    }
     this.state = {
+      mediaList: (filter === '') ? mediaList : filteredList,
       result: this.props.result,
-      size: this.props.galleryView.photos.length,
-      dataSource: this._createDataSource(mediaList),
+      size: mediaList.length,
+      dataSource: (filter === '') ? this._createDataSource(mediaList) : this._createDataSource(filteredList),
       newUser: false,
+      filter: filter,
     }
   }
   mixins: [TimerMixin]
@@ -56,13 +70,35 @@ export default class GalleryListView extends Component{
     )
   }
   componentWillReceiveProps(nextProps) {
-    const mediaList = nextProps.galleryView.photos
-    this.setState({
-      result: nextProps.result,
-      size: nextProps.galleryView.photos.length,
-      dataSource: this._createDataSource(mediaList),
-      newUser: nextProps.galleryView.photos.length === 0 ? true : false
-    })
+    let filter = nextProps.galleryView.filter
+    if (filter === '') {
+      this.setState({
+        mediaList: nextProps.galleryView.photos,
+        result: nextProps.result,
+        size: nextProps.galleryView.photos.length,
+        dataSource: this._createDataSource(nextProps.galleryView.photos),
+        newUser: nextProps.galleryView.photos.length === 0 ? true : false,
+        filter: filter
+      })
+    }
+    else {
+      let mediaList = nextProps.galleryView.photos
+      let length = mediaList.length
+      let filteredList = []
+      for (var i = 0; i < length; i++) {
+        if (mediaList[i].mealType === filter) {
+          filteredList.push(mediaList[i])
+        }
+      }
+      this.setState({
+        mediaList: filteredList,
+        result: nextProps.result,
+        size: nextProps.galleryView.photos.length,
+        dataSource: this._createDataSource(filteredList),
+        newUser: nextProps.galleryView.photos.length === 0 ? true : false,
+        filter: filter
+      })
+    }
   }
   render() {
     if (this.state.result === null) {
@@ -71,45 +107,81 @@ export default class GalleryListView extends Component{
     }
     else {
       let uri = this.state.result ? this.state.result.picture.data.url : ' '
-      return (
-        <View style={styles.container}>
-          <Spinner
-            visible={this.state.size === 0 && (!this.props.galleryView.newUser || !this.state.newUser)}
-            color='black'
-          />
-          <View style={{flexDirection: 'row', marginBottom: 20}}>
-            <Image
-              source={{uri: uri}}
-              style={styles.profileImage}
+      let flag = this.state.size === 0 && (!this.props.galleryView.newUser || !this.state.newUser)
+      if (flag) {
+        return (
+          <View style={styles.container}>
+            <Spinner
+              visible={flag}
+              color='black'
             />
-            <Text style={styles.profileName}>{this.state.result.first_name}'s InPhood</Text>
+            <View style={{flexDirection: 'row', marginBottom: 10}}>
+              <Image
+                source={{uri: uri}}
+                style={styles.profileImage}
+              />
+              <Text style={styles.profileName}>{this.state.result.first_name}'s InPhood</Text>
+            </View>
           </View>
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={this._renderRow.bind(this)}
-            renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-            renderSeparator={this._renderSeparator}
-          />
-        </View>
-      )
+        )
+      }
+      else if (this.state.size === 0) {
+        return (
+          <View style={styles.container}>
+            <View style={{flexDirection: 'row', marginBottom: 10}}>
+              <Image
+                source={{uri: uri}}
+                style={styles.profileImage}
+              />
+              <Text style={styles.profileName}>{this.state.result.first_name}'s InPhood</Text>
+            </View>
+            <View style={{justifyContent: 'center', marginLeft: 50, marginTop: 150}}>
+              <Text>Go to media page to add photos...</Text>
+            </View>
+          </View>
+        )
+      }
+      else {
+        return (
+          <View style={styles.container}>
+            <Spinner
+              visible={flag}
+              color='black'
+            />
+            <View style={{flexDirection: 'row', marginBottom: 10}}>
+              <Image
+                source={{uri: uri}}
+                style={styles.profileImage}
+              />
+              <Text style={styles.profileName}>{this.state.result.first_name}'s InPhood</Text>
+            </View>
+            <ListView
+              dataSource={this.state.dataSource}
+              renderRow={this._renderRow.bind(this)}
+              renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+              renderSeparator={this._renderSeparator}
+            />
+          </View>
+        )
+      }
     }
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    const imgSource = rowData.photo
-    const mealData = rowData.mealData
-    let mealType = ''
-    if (mealData.breakfast) {
-      mealType = 'Breakfast'
+    // let imgSource = rowData.photo
+    let imgSource = rowData.localFile
+    RNFS.exists(imgSource)
+    .then((result) => {
+      console.log('result')
+      console.log(result)
+    })
+    .catch((err) => {
+      console.log('err')
+      console.log(err)
+    })
+    if (!RNFS.exists(imgSource)) {
+      imgSource = rowData.photo
     }
-    else if (mealData.lunch) {
-      mealType = 'Lunch'
-    }
-    else if (mealData.dinner) {
-      mealType = 'Dinner'
-    }
-    else if (mealData.snack){
-      mealType = 'Snack'
-    }
+    const mealType = rowData.mealType
     const mealTime = new Date(rowData.time).toDateString()
     return (
       <TouchableHighlight onPress={() => {
@@ -120,7 +192,7 @@ export default class GalleryListView extends Component{
           <Image style={styles.thumb} source={{uri: imgSource}} />
           <View  style={styles.text}>
             <Text style={{fontWeight: '600', fontSize: 18}}>
-              {rowData.caption}
+              {rowData.title}: {rowData.caption}
             </Text>
             <Text>
               {mealType}
@@ -185,5 +257,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     borderColor: 'black',
     borderStyle: 'solid'
+  },
+  picker: {
+    width: 100,
   },
 })

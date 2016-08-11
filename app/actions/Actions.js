@@ -18,12 +18,17 @@ import {
   LOAD_PICTURE,
   LOAD_CAMERAMEDIA_SUCCESS,
   LOAD_CAMERAMEDIA_ERROR,
-  SEND_AWS_INIT_CAMERA,
-  SEND_AWS_INIT_LIBRARY,
+  SEND_FIREBASE_LIBRARY_SUCCESS,
+  SEND_FIREBASE_CAMERA_SUCCESS,
+  SEND_FIREBASE_ERROR,
+  SEND_FIREBASE_INIT_CAMERA,
+  SEND_FIREBASE_INIT_LIBRARY,
   STORE_TOKEN,
   STORE_RESULT,
   STORE_CAMERA_CAPTION,
   STORE_LIBRARY_CAPTION,
+  STORE_CAMERA_TITLE,
+  STORE_LIBRARY_TITLE,
   ADD_CAMERA_MEAL_DATA,
   ADD_LIBRARY_MEAL_DATA,
   STORE_USER_MESSAGES,
@@ -34,7 +39,8 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_ERRROR,
-  IS_NEW_USER
+  IS_NEW_USER,
+  FILTER_PHOTOS
 } from '../constants/ActionTypes'
 
 export function push (route) {
@@ -137,15 +143,15 @@ export function loadPhotosFailure(error) {
   }
 }
 
-export function sendAWSInitCamera() {
+export function sendFirebaseInitCamera() {
   return {
-    type: SEND_AWS_INIT_CAMERA,
+    type: SEND_FIREBASE_INIT_CAMERA,
   }
 }
 
-export function sendAWSInitLibrary() {
+export function sendFirebaseInitLibrary() {
   return {
-    type: SEND_AWS_INIT_LIBRARY,
+    type: SEND_FIREBASE_INIT_LIBRARY,
   }
 }
 
@@ -164,17 +170,32 @@ export function storeLibraryCaption(caption) {
   }
 }
 
-export function addCameraMealData(mealData) {
+export function storeCameraTitle(title) {
   return {
-    type: ADD_CAMERA_MEAL_DATA,
-    mealData
+    type: STORE_CAMERA_TITLE,
+    title
   }
 }
 
-export function addLibraryMealData(mealData) {
+
+export function storeLibraryTitle(title) {
+  return {
+    type: STORE_LIBRARY_TITLE,
+    title
+  }
+}
+
+export function addCameraMealData(mealType) {
+  return {
+    type: ADD_CAMERA_MEAL_DATA,
+    mealType
+  }
+}
+
+export function addLibraryMealData(mealType) {
   return {
     type: ADD_LIBRARY_MEAL_DATA,
-    mealData
+    mealType
   }
 }
 
@@ -250,5 +271,12 @@ export function isNewUser(flag){
   return {
     type: IS_NEW_USER,
     flag: flag
+  }
+}
+
+export function filterPhotos(filter){
+  return {
+    type: FILTER_PHOTOS,
+    filter: filter
   }
 }

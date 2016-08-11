@@ -225,6 +225,6 @@ CameraRollPicker.defaultProps = {
   assetType: 'Photos',
   backgroundColor: 'white',
   callback: function(currentImage) {
-    console.log(currentImage)
+    //console.log(currentImage)
   },
 }

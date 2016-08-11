@@ -1,4 +1,4 @@
-import { TAKE_PHOTO, STORE_CAMERA_CAPTION, ADD_CAMERA_MEAL_DATA, PUSH_CAM_ROUTE, POP_CAM_ROUTE } from '../constants/ActionTypes'
+import { TAKE_PHOTO, STORE_CAMERA_CAPTION, STORE_CAMERA_TITLE, ADD_CAMERA_MEAL_DATA, PUSH_CAM_ROUTE, POP_CAM_ROUTE } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -7,7 +7,8 @@ const {
 const initialState = {
   photo: '',
   caption: '',
-  mealData: {},
+  title: '',
+  mealType: '',
   index: 0,
   key: 'root',
   routes: [
@@ -30,10 +31,15 @@ export default function camera (state = initialState, action) {
         ...state,
         caption: action.caption
       }
+    case STORE_CAMERA_TITLE:
+      return {
+        ...state,
+        title: action.title
+      }
     case ADD_CAMERA_MEAL_DATA:
       return {
         ...state,
-        mealData: action.mealData
+        mealType: action.mealType
       }
     case PUSH_CAM_ROUTE:
       if (state.routes[state.index].key === (action.route && action.route.key)) {

@@ -31,6 +31,7 @@ export default class Caption extends Component {
       dinner: false,
       snack: false,
       caption: '',
+      color: 'grey',
     }
   }
   _workBeforeTransition() {
@@ -52,15 +53,6 @@ export default class Caption extends Component {
     else if (snack){
       mealType = 'Snack'
     }
-    let whiteSpace = new RegExp(/^\s+$/)
-    if (this.state.caption === '') {
-      alert ('Please enter ingredients')
-      return
-    }
-    else if (whiteSpace.test(this.state.caption)) {
-      alert ('Please enter ingredients')
-      return
-    }
     this.props._storeCaption(this.state.caption)
     if (!breakfast && !lunch && !dinner && !snack) {
       alert ('Please pick meal type')
@@ -78,6 +70,18 @@ export default class Caption extends Component {
         this.props._transmit()
       }
     }
+  }
+  _pauseBeforeTransition() {
+    let whiteSpace = new RegExp(/^\s+$/)
+    if (this.state.caption === '') {
+      alert ('Please enter ingredients')
+      return
+    }
+    else if (whiteSpace.test(this.state.caption)) {
+      alert ('Please enter ingredients')
+      return
+    }
+    this._workBeforeTransition()
   }
   componentWillReceiveProps(nextProps) {
     // if (nextProps.gallery.photos.length > this.state.size) {
@@ -97,13 +101,15 @@ export default class Caption extends Component {
               (event) => {
                 let text = event.nativeEvent.text
                 if (text === '') {
+                  this.setState({caption: '', color: 'grey'})
                   alert ('Please enter ingredients')
                 }
                 else if (whiteSpace.test(text)) {
-                  alert ('Please enter ingredients')
+                  this.setState({caption: '', color: 'grey'})
+                  alert ('Please enter proper ingredients')
                 }
                 else {
-                  this.setState({caption: text})
+                  this.setState({caption: text, color: '#22a3ed'})
                 }
               }
             }
@@ -221,7 +227,11 @@ export default class Caption extends Component {
             <Text style={{fontSize: 18, marginLeft: 10, marginBottom: 50}}>Snack</Text>
           </View>
         </View>
-        <Button onPress={this._workBeforeTransition.bind(this)} label='Send'/>
+        <Button
+          onPress={this._pauseBeforeTransition.bind(this)}
+          label='Send'
+          color={this.state.color}
+        />
       </View>
     )
   }

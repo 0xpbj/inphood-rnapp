@@ -16,7 +16,7 @@ const route = {
   type: 'push',
   route: {
     key: 'selected',
-    title: 'Confirm Photo'
+    title: 'Meal Title'
   }
 }
 

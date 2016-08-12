@@ -120,6 +120,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-mail')
     compile project(':react-native-fs')
     compile project(':react-native-lock')
     compile project(':react-native-fbsdk')

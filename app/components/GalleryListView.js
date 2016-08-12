@@ -22,10 +22,14 @@ const route = {
   }
 }
 
+import NetworkImage from './NetworkImage'
 import TimerMixin from 'react-timer-mixin'
 import Spinner from 'react-native-loading-spinner-overlay'
 import {sampleIcon} from './Icons'
 import RNFS from 'react-native-fs'
+
+const IMAGE_PREFETCH_URL = 'http://facebook.github.io/origami/public/images/blog-hero.jpg?r=1&t=' + Date.now();
+// var prefetchTask = Image.prefetch(IMAGE_PREFETCH_URL);
 
 export default class GalleryListView extends Component{
   constructor(props) {
@@ -67,7 +71,7 @@ export default class GalleryListView extends Component{
           this.props.isNewUser(this.state.newUser)
         })
       },
-      1000
+      3000
     )
   }
   componentWillReceiveProps(nextProps) {
@@ -102,6 +106,9 @@ export default class GalleryListView extends Component{
     }
   }
   render() {
+    // return (
+    //   <NetworkImage source={{uri: 'https://dqh688v4tjben.cloudfront.net/data/LGd7ZFE3FQfCakZX5miQfYyyIA52/-KOvre7unzL2l9SCwbS6.jpg'}}/>
+    // )
     if (this.state.result === null) {
       alert ('Please Login')
       return (<View />)
@@ -174,6 +181,7 @@ export default class GalleryListView extends Component{
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     // let imgSource = rowData.photo
+    // console.log(imgSource)
     let imgSource = rowData.localFile
     RNFS.exists(imgSource)
     .then((result) => {
@@ -196,6 +204,7 @@ export default class GalleryListView extends Component{
         }}>
         <View style={styles.row}>
           <Image style={styles.thumb} source={{uri: imgSource}} />
+          {/* <NetworkImage source={{uri: imgSource}}/> */}
           <View  style={styles.text}>
             <Text style={{fontWeight: '600', fontSize: 18}}>
               {rowData.title}: {rowData.caption}

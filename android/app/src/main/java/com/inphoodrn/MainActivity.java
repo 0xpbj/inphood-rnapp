@@ -1,6 +1,7 @@
 package com.inphoodrn;
 
 import com.facebook.react.ReactActivity;
+import com.chirag.RNMail.RNMail;
 import com.rnfs.RNFSPackage;
 import com.auth0.lock.react.LockReactPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -41,6 +42,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNMail(),
             new RNFSPackage(),
             new LockReactPackage(),
             new FBSDKPackage(),

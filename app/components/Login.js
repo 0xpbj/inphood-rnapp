@@ -3,7 +3,7 @@
 'use strict';
 
 import React, { Component } from "react";
-import {AppRegistry, StyleSheet, Text, TouchableHighlight, View, Image} from "react-native";
+import {AppRegistry, StyleSheet, Text, TouchableOpacity, View, Image, NativeModules} from "react-native";
 
 const FBSDK = require('react-native-fbsdk');
 const {
@@ -14,6 +14,10 @@ const {
   AccessToken,
   Profile,
 } = FBSDK;
+
+import Icon from 'react-native-vector-icons/Ionicons'
+import Device from 'react-native-device'
+var Mailer = require('NativeModules').RNMail
 
 export default class Login extends Component {
   constructor(props) {
@@ -55,6 +59,19 @@ export default class Login extends Component {
       );
     }
   }
+  sendEmail() {
+    let deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
+    Mailer.mail({
+      subject: 'Need Help',
+      recipients: ['support@inphood.com'],
+      body: deviceInfo,
+      // isHTML: true, // iOS only, exclude if false
+    }, (error, event) => {
+        if(error) {
+          alert('Could not send mail. Please send a mail to support@inphood.com');
+        }
+    })
+  }
   render() {
     console.disableYellowBox = true;
     let uri = this.props.auth.result ? this.props.auth.result.picture.data.url : ' '
@@ -69,6 +86,7 @@ export default class Login extends Component {
             style={styles.profileImage}
           />
           <View style={styles.buttonRowStyle}>
+            <Icon name="ios-person-outline" size={40} color="white" style={{marginRight: 17}}/>
             <View style={styles.marginStyle}>
               <LoginButton
                onLoginFinished={(error, result) => {
@@ -104,6 +122,10 @@ export default class Login extends Component {
                publishPermissions={['publish_actions']}
              />
             </View>
+            <TouchableOpacity
+              onPress={this.sendEmail.bind(this)}>
+              <Icon name="ios-mail" size={40} color="#3b5998" style={{marginLeft: 17}}/>
+            </TouchableOpacity>
           </View>
         </View>
       </Image>
@@ -139,8 +161,8 @@ const styles = StyleSheet.create({
   },
   buttonRowStyle: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
+    // justifyContent: 'space-around',
+    // alignItems: 'center'
   },
   buttonColumnStyle: {
     flex: 1,

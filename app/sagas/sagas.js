@@ -29,7 +29,8 @@ import {
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 
 import { RNS3 } from 'react-native-aws3'
-import { CameraRoll } from "react-native"
+import { CameraRoll, Image } from "react-native"
+import Config from 'react-native-config'
 
 const FBSDK = require('react-native-fbsdk');
 const {
@@ -44,6 +45,8 @@ let options = {
   secretKey: "v5m0WbHnJVkpN4RB9fzgofrbcc4n4MNT05nGp7nf",
   successActionStatus: 201
 }
+let turlHead = 'http://d2sb22kvjaot7x.cloudfront.net/resized-data/'
+let urlHead = 'http://dqh688v4tjben.cloudfront.net/data/'
 
 const sendToAWS = (image, file_name) => {
   let imgfile = {
@@ -155,72 +158,10 @@ export function* watchFirebaseLibraryCall() {
   }
 }
 
-// const cameraData = (cameraMedia) => {
-//   return CameraRoll.getPhotos({
-//     first: 15,
-//     assetType: 'Photos',
-//   }).then((data) => {
-//     return data.edges.forEach(d => cameraMedia.push({
-//       photo: d.node.image.uri,
-//     }));
-//   }).catch(error => console.log(error));
-// }
-//
-// function* cameraDataFlow() {
-//   try {
-//     var cameraMedia = []
-//     yield call(cameraData, cameraMedia)
-//     yield put ({type: LOAD_CAMERAMEDIA_SUCCESS, cameraMedia})
-//   }
-//   catch(error) {
-//     console.log(error)
-//     yield put ({type: LOAD_CAMERAMEDIA_ERROR, error})
-//   }
-// }
-//
-// export function* watchCameraData() {
-//   while (true) {
-//     yield take(LOAD_PHOTOS_INIT)
-//     yield call(cameraDataFlow)
-//   }
-// }
-//
-// const appendCameraData = (appendMedia) => {
-//   return CameraRoll.getPhotos({
-//     first: 1,
-//     assetType: 'Photos',
-//   }).then((data) => {
-//     return data.edges.forEach(d => appendMedia.push({
-//       photo: d.node.image.uri,
-//     }));
-//   }).catch(error => console.log(error));
-// }
-//
-// function* appendCameraDataFlow() {
-//   try {
-//     var appendMedia = []
-//     yield call(appendCameraData, appendMedia)
-//     yield put ({type: APPEND_CAMERAMEDIA_SUCCESS, appendMedia})
-//   }
-//   catch(error) {
-//     console.log(error)
-//     yield put ({type: LOAD_CAMERAMEDIA_ERROR, error})
-//   }
-// }
-//
-// export function* watchAppendCameraData() {
-//   while (true) {
-//     yield take(TAKE_PHOTO)
-//     yield call(appendCameraDataFlow)
-//   }
-// }
-
 const firebaseLogin = (photos) => {
   return AccessToken.getCurrentAccessToken().then(function (token) {
     let credential = firebase.auth.FacebookAuthProvider.credential(token)
     return firebase.auth().signInWithCredential(credential).then(function(user) {
-      let turlHead = 'https://d2sb22kvjaot7x.cloudfront.net/resized-data/'
-      let urlHead = 'https://dqh688v4tjben.cloudfront.net/data/'
       let imageRef = firebase.database().ref('/global/' + user.uid + '/userdata').orderByKey()
       return imageRef.once('value').then(function (snapshot) {
         return snapshot.forEach(function(childSnapshot) {
@@ -231,8 +172,16 @@ const firebaseLogin = (photos) => {
           let mealType = childSnapshot.val().mealType
           let time = childSnapshot.val().time
           let localFile = childSnapshot.val().localFile
-          let obj = {photo,caption,caption,mealType,time,title,localFile}
-          photos.unshift(obj)
+          var prefetchTask = Image.prefetch(photo)
+          prefetchTask.then(() => {
+            let prefetch = true
+            let obj = {photo,caption,mealType,time,title,localFile,prefetch}
+            photos.unshift(obj)
+          }, error => {
+            let prefetch = false
+            let obj = {photo,caption,mealType,time,title,localFile,prefetch}
+            photos.unshift(obj)
+          })
         })
       })
       }, function(error) {
@@ -293,8 +242,6 @@ export const fetchFirebaseData = (appendPhotos, messages, trainerMessages) => {
   return firebase.database().ref('/global/' + user.uid + '/userdata').orderByKey().limitToLast(1).once('value')
   .then (function(snapshot){
     return snapshot.forEach(function(childSnapshot) {
-      let turlHead = 'https://d2sb22kvjaot7x.cloudfront.net/resized-data/'
-      let urlHead = 'https://dqh688v4tjben.cloudfront.net/data/'
       let thumb = turlHead+childSnapshot.val().file_name
       let photo = urlHead+childSnapshot.val().file_name
       let caption = childSnapshot.val().caption
@@ -302,7 +249,7 @@ export const fetchFirebaseData = (appendPhotos, messages, trainerMessages) => {
       let mealType = childSnapshot.val().mealType
       let time = childSnapshot.val().time
       let localFile = childSnapshot.val().localFile
-      let obj = {photo,caption,caption,mealType,time,title,localFile}
+      let obj = {photo,caption,mealType,time,title,localFile}
       appendPhotos.push(obj)
       messages.push(childSnapshot.val().messages)
       trainerMessages.push(childSnapshot.val().trainerMessages)

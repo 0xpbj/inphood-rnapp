@@ -14,6 +14,7 @@ const store = configureStore()
 
 import HomeContainer from './app/containers/HomeContainer'
 import { Provider } from 'react-redux'
+import Config from 'react-native-config'
 
 import firebase from 'firebase'
   require("firebase/app");

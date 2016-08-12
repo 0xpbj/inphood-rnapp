@@ -71,7 +71,7 @@ export default class GalleryListView extends Component{
           this.props.isNewUser(this.state.newUser)
         })
       },
-      3000
+      5000
     )
   }
   componentWillReceiveProps(nextProps) {
@@ -180,21 +180,15 @@ export default class GalleryListView extends Component{
     }
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    // let imgSource = rowData.photo
-    // console.log(imgSource)
-    let imgSource = rowData.localFile
-    RNFS.exists(imgSource)
-    .then((result) => {
-      // console.log('result')
-      // console.log(result)
-    })
-    .catch((err) => {
-      // console.log('err')
-      // console.log(err)
-    })
-    if (!RNFS.exists(imgSource)) {
-      imgSource = rowData.photo
-    }
+    let imgSource = rowData.photo
+    // let imgSource = ''
+    // RNFS.exists(rowData.localFile)
+    // .then((result) => {
+      // imgSource = rowData.localFile
+    // })
+    // .catch((err) => {
+      // imgSource = rowData.photo
+    // })
     const mealType = rowData.mealType
     const mealTime = new Date(rowData.time).toDateString()
     return (
@@ -203,8 +197,8 @@ export default class GalleryListView extends Component{
           highlightRow(sectionID, rowID)
         }}>
         <View style={styles.row}>
-          <Image style={styles.thumb} source={{uri: imgSource}} />
-          {/* <NetworkImage source={{uri: imgSource}}/> */}
+          {/* <Image style={styles.thumb} source={{uri: imgSource}} /> */}
+          <NetworkImage source={{uri: imgSource}}/>
           <View  style={styles.text}>
             <Text style={{fontWeight: '600', fontSize: 18}}>
               {rowData.title}: {rowData.caption}

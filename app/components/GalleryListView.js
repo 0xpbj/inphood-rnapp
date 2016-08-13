@@ -180,7 +180,7 @@ export default class GalleryListView extends Component{
     }
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    let imgSource = rowData.photo
+    let imgSource = rowData.localFile
     // let imgSource = ''
     // RNFS.exists(rowData.localFile)
     // .then((result) => {

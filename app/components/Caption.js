@@ -109,7 +109,7 @@ export default class Caption extends Component {
                   alert ('Please enter proper ingredients')
                 }
                 else {
-                  this.setState({caption: text, color: '#22a3ed'})
+                  this.setState({caption: text, color: '#006400'})
                 }
               }
             }

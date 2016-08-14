@@ -1,8 +1,16 @@
-import React, { Component } from "react";
-import {ActivityIndicator, StyleSheet, Text, TextInput, TouchableHighlight, View, Image, ListView, Animated, Dimensions} from "react-native";
-
-import PhotoBrowser from '../../photoBrowser/lib';
-import GridContainer from '../../photoBrowser/lib/GridContainer';
+import React, {Component} from 'react'
+import {
+  CameraRoll,
+  Image,
+  Platform,
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  TouchableOpacity,
+  ListView,
+  ActivityIndicator,
+} from 'react-native'
 
 const route = {
   type: 'push',
@@ -12,101 +20,211 @@ const route = {
   }
 }
 
-const TOOLBAR_HEIGHT = 54;
+import Spinner from 'react-native-loading-spinner-overlay';
 
-export default class Photos extends Component {
+export default class CameraRollPicker extends Component {
   constructor(props) {
     super(props)
-    this._onMediaSelection = this._onMediaSelection.bind(this)
-    const mediaList = this.props.media.cameraMedia
     this.state = {
-      dataSource: this._createDataSource(mediaList),
-      mediaList: mediaList,
-      fullScreenAnim: new Animated.Value(0),
+      images: [],
+      lastCursor: null,
+      loadingMore: false,
+      noMore: false,
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      count: this.props.media.count
     }
+  }
+  componentWillMount() {
+    var {width} = Dimensions.get('window')
+    var {imageMargin, imagesPerRow, containerWidth} = this.props
+    if(typeof containerWidth != "undefined") {
+      width = containerWidth
+    }
+    this._imageSize = (width - (imagesPerRow + 1) * imageMargin) / imagesPerRow
+    this.fetch()
   }
   componentWillReceiveProps(nextProps) {
-    const mediaList = nextProps.media.cameraMedia
-    this.setState({
-      dataSource: this._createDataSource(mediaList),
-      mediaList: mediaList
-    })
+    if (nextProps.media.count > this.state.count) {
+      this.setState ({
+        images: [],
+        lastCursor: null,
+        loadingMore: false,
+        noMore: false,
+        dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+        count: nextProps.media.count
+      })
+      this.fetch()
+    }
   }
-  _onMediaSelection(index) {
-    this.props._selectPhoto(this.state.mediaList[index].photo)
-    this.props._handleNavigate(route)
+  fetch() {
+    if (!this.state.loadingMore) {
+      this.setState({loadingMore: true}, () => { this._fetch() })
+    }
   }
-  _createDataSource(list) {
-    const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => true,
-    });
-    return dataSource.cloneWithRows(list);
+  _fetch() {
+    var {groupTypes, assetType} = this.props
+    var fetchParams = {
+      first: 20,
+      groupTypes: groupTypes,
+      assetType: assetType,
+    }
+    if (Platform.OS === "android") {
+      // not supported in android
+      delete fetchParams.groupTypes
+    }
+    if (this.state.lastCursor) {
+      fetchParams.after = this.state.lastCursor
+    }
+    CameraRoll.getPhotos(fetchParams)
+      .then((data) => this._appendImages(data), (e) => console.log(e))
+  }
+  _appendImages(data) {
+    var assets = data.edges
+    var newState = {
+      loadingMore: false,
+    }
+    if (!data.page_info.has_next_page) {
+      newState.noMore = true
+    }
+    if (assets.length > 0) {
+      newState.lastCursor = data.page_info.end_cursor
+      newState.images = this.state.images.concat(assets)
+      newState.dataSource = this.state.dataSource.cloneWithRows(
+        this._nEveryRow(newState.images, this.props.imagesPerRow)
+      )
+    }
+    this.setState(newState)
   }
   render() {
-    if (this.props.media.cameraMedia.length === 0) {
-      return (
-        <ActivityIndicator
-          size="large"
-          color="black"
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 8,
-            paddingTop: 250,
-          }}
+    var {imageMargin, backgroundColor} = this.props
+    return (
+      <View
+        style={[styles.wrapper, {padding: imageMargin, paddingRight: 0, backgroundColor: backgroundColor},]}>
+        <Spinner
+          visible={this.state.images === 0}
+          color='black'
         />
-      )
+        <ListView
+          renderFooter={this._renderFooterSpinner.bind(this)}
+          onEndReached={this._onEndReached.bind(this)}
+          dataSource={this.state.dataSource}
+          renderRow={rowData => this._renderRow(rowData)} />
+      </View>
+    )
+  }
+  _renderImage(item) {
+    var {imageMargin} = this.props
+    return (
+      <TouchableOpacity
+        key={item.node.image.uri}
+        style={{marginBottom: imageMargin, marginRight: imageMargin}}
+        onPress={event => this._selectImage(item.node.image)}>
+        <Image
+          source={{uri: item.node.image.uri}}
+          style={{height: this._imageSize, width: this._imageSize}} >
+        </Image>
+      </TouchableOpacity>
+    )
+  }
+  _renderRow(rowData) {
+    var items = rowData.map((item) => {
+      if (item === null) {
+        return null
+      }
+      return this._renderImage(item)
+    })
+    return (
+      <View style={styles.row}>
+        {items}
+      </View>
+    )
+  }
+  _renderFooterSpinner() {
+    if (!this.state.noMore) {
+      return <ActivityIndicator style={styles.spinner} />
     }
-    else {
-      const {
-        dataSource,
-        mediaList,
-        fullScreenAnim
-      } = this.state
-      const screenHeight = Dimensions.get('window').height;
-      return (
-        <View style={styles.container}>
-          <Animated.View
-            style={{
-              height: screenHeight - 85,
-              marginTop: fullScreenAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0, screenHeight * -1 - TOOLBAR_HEIGHT],
-              }),
-            }}
-          >
-            <GridContainer
-              dataSource={dataSource}
-              displaySelectionButtons={false}
-              // onPhotoTap={this._onGridPhotoTap}
-              onPhotoTap={this._onMediaSelection}
-            />
-          </Animated.View>
-        </View>
-      )
+    return null
+  }
+  _onEndReached() {
+    if (!this.state.noMore) {
+      this.fetch()
     }
+  }
+  _selectImage(image) {
+    this.props.callback(image.uri)
+    this.props._handleNavigate(route)
+  }
+  _nEveryRow(data, n) {
+    var result = [],
+        temp = [];
+    for (var i = 0; i < data.length; ++i) {
+      if (i > 0 && i % n === 0) {
+        result.push(temp)
+        temp = []
+      }
+      temp.push(data[i])
+    }
+    if (temp.length > 0) {
+      while (temp.length !== n) {
+        temp.push(null)
+      }
+      result.push(temp)
+    }
+    return result
+  }
+  _arrayObjectIndexOf(array, property, value) {
+    return array.map((o) => { return o[property]; }).indexOf(value)
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper:{
     flex: 1,
-    paddingTop: 64
+    marginTop: 64,
   },
-  list: {
+  row:{
+    flexDirection: 'row',
     flex: 1,
-    paddingLeft: 16,
   },
-  row: {
-    flex: 1,
-    padding: 8,
-    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-    borderBottomWidth: 1,
+  marker: {
+    position: 'absolute',
+    top: 5,
+    backgroundColor: 'transparent',
   },
-  rowTitle: {
-    fontSize: 14,
+})
+
+CameraRollPicker.propTypes = {
+  groupTypes: React.PropTypes.oneOf([
+    'Album',
+    'All',
+    'Event',
+    'Faces',
+    'Library',
+    'PhotoStream',
+    'SavedPhotos',
+  ]),
+  maximum: React.PropTypes.number,
+  assetType: React.PropTypes.oneOf([
+    'Photos',
+    'Videos',
+    'All',
+  ]),
+  imagesPerRow: React.PropTypes.number,
+  imageMargin: React.PropTypes.number,
+  containerWidth: React.PropTypes.number,
+  callback: React.PropTypes.func,
+  selectedMarker: React.PropTypes.element,
+  backgroundColor: React.PropTypes.string,
+}
+
+CameraRollPicker.defaultProps = {
+  groupTypes: 'SavedPhotos',
+  maximum: 15,
+  imagesPerRow: 3,
+  imageMargin: 5,
+  assetType: 'Photos',
+  backgroundColor: 'white',
+  callback: function(currentImage) {
+    //console.log(currentImage)
   },
-  rowDescription: {
-    fontSize: 12,
-  },
-});
+}

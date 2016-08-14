@@ -12,8 +12,8 @@ export default class Media extends Component {
   render() {
     return (
       <ScrollableTabView
-        tabBarUnderlineColor="black"
-        tabBarActiveTextColor="black"
+        tabBarUnderlineColor="#006400"
+        tabBarActiveTextColor="#006400"
         tabBarPosition="bottom"
         locked={true}
       >

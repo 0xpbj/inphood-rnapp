@@ -28,7 +28,7 @@ const route = {
 import Photos  from '../containers/PhotosContainer'
 import Selected from './Selected'
 import Caption from '../containers/CaptionContainer'
-import {homeIcon, userIcon} from './Icons'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 export default class Library extends Component {
@@ -95,12 +95,9 @@ export default class Library extends Component {
     if (this.props.library.index === 0) {
       return (
         <TouchableOpacity
-          style={styles.buttonContainer}
+          style={styles.lbuttonContainer}
           onPress={()=>this._goToLogin()}>
-          <Image
-            style={styles.button}
-            source={{uri: userIcon.uri, scale: userIcon.scale}}
-          />
+          <Icon name="ios-person-outline" size={30} color='#006400'/>
         </TouchableOpacity>
       )
     }
@@ -114,12 +111,9 @@ export default class Library extends Component {
     if (this.props.library.index === 0) {
       return (
         <TouchableOpacity
-          style={styles.buttonContainer}
+          style={styles.rbuttonContainer}
           onPress={()=>this._goToHome()}>
-          <Image
-            style={styles.button}
-            source={{uri: homeIcon.uri, scale: homeIcon.scale}}
-          />
+          <Icon name="ios-home-outline" size={30} color='#006400'/>
         </TouchableOpacity>
       )
     }
@@ -187,9 +181,16 @@ const styles = StyleSheet.create({
     height: 32,
     resizeMode: 'contain',
   },
-  buttonContainer: {
+  lbuttonContainer: {
     flex: 1,
-    marginLeft: 5,
+    marginLeft: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rbuttonContainer: {
+    flex: 1,
+    marginRight: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -198,6 +199,7 @@ const styles = StyleSheet.create({
     height: 28,
     width: 28,
     margin: Platform.OS === 'ios' ? 10 : 16,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    tintColor: '#006400'
   }
 })

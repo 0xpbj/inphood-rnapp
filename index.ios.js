@@ -22,10 +22,10 @@ import firebase from 'firebase'
   require("firebase/database");
 
 firebase.initializeApp({
-  apiKey: "AIzaSyCDzrz6xKXMUqsirFLVyzXKQDR7zOlkZTA",
-  authDomain: "shining-torch-3197.firebaseapp.com",
-  databaseURL: "https://shining-torch-3197.firebaseio.com",
-  storageBucket: "shining-torch-3197.appspot.com",
+  apiKey: Config.FIREBASE_API_KEY,
+  authDomain: Config.FIREBASE_AUTH_DOMAIN,
+  databaseURL: Config.FIREBASE_DATABASE_URL,
+  storageBucket: Config.FIREBASE_STORAGE_BUCKET,
 });
 
 const App = () => (

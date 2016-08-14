@@ -30,7 +30,7 @@ import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 
 import { RNS3 } from 'react-native-aws3'
 import { CameraRoll, Image } from "react-native"
-// import Config from 'react-native-config'
+import Config from 'react-native-config'
 
 const FBSDK = require('react-native-fbsdk');
 const {
@@ -39,14 +39,15 @@ const {
 
 let options = {
   keyPrefix: "data/",
-  bucket: 'inphoodimagescdn',
-  region: 'us-west-2',
-  accessKey: "AKIAI25XHNISG4KDDM3Q",
-  secretKey: "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",
+  bucket: Config.AWS_BUCKET,
+  region: Config.AWS_BUCKET_REGION,
+  accessKey: Config.AWS_CONFIG_KEY,
+  secretKey: Config.AWS_SECRET_KEY,
   successActionStatus: 201
 }
-let turlHead = 'http://d2sb22kvjaot7x.cloudfront.net/resized-data/'
-let urlHead = 'http://dqh688v4tjben.cloudfront.net/data/'
+
+let turlHead = Config.AWS_CDN_THU_URL
+let urlHead = Config.AWS_CDN_IMG_URL
 
 const sendToAWS = (image, file_name) => {
   let imgfile = {

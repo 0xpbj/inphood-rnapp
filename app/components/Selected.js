@@ -57,7 +57,7 @@ export default class Selected extends Component {
                 alert ('Please enter a proper meal title')
               }
               else {
-                this.setState({title: text, color: '#22a3ed'})
+                this.setState({title: text, color: '#006400'})
               }
             }
           }

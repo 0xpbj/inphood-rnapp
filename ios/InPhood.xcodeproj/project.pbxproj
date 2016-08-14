@@ -37,11 +37,11 @@
 		75A9F1B61D19821200E1AE17 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A9F1A81D1981FB00E1AE17 /* libRCTFBSDK.a */; };
 		75AC858E1D43B6FD00343DA8 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75AC858D1D43B6F300343DA8 /* libART.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		86C716BD98664D5EAB906D3A /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 647291E1B81A4F7ABF41DB29 /* libReactNativeConfig.a */; };
 		895223FA91584065ADF4D9D2 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D49B063EAC4415E964E5EAF /* Foundation.ttf */; };
 		96C4CCE2B958490687C186EF /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBCEB82D4979486EAB4DEB83 /* Ionicons.ttf */; };
 		9B82A864F0004CE3B8F61260 /* libRNMail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDB2BA862E494EB581E9B5BA /* libRNMail.a */; };
 		A0AE0E2861414F33A00559D0 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CAD52C3DE514835972AA696 /* Octicons.ttf */; };
-		B218A3F47C714B6F85F860F7 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6477608B28704E35B596521D /* libReactNativeConfig.a */; };
 		DB82C22C748A4E1AB74EE0B4 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3450F66AC5B84AF79EA7B870 /* EvilIcons.ttf */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +116,13 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		752F469B1D60E758000F8EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F1C6D1BC2774E4F854841AA /* ReactNativeConfig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
+			remoteInfo = ReactNativeConfig;
+		};
 		758076491D5BA62B00724E08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 758076421D5BA62B00724E08 /* RCTCameraRoll.xcodeproj */;
@@ -150,13 +157,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 46FEDE8A1AFF192F00D3261C;
 			remoteInfo = RNMailTests;
-		};
-		7580770F1D5E7CD300724E08 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9FABDE59C9C64647A81DF9D0 /* ReactNativeConfig.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
-			remoteInfo = ReactNativeConfig;
 		};
 		75A9F1A71D1981FB00E1AE17 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -198,6 +198,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* inPhoodRNTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = inPhoodRNTests.m; sourceTree = "<group>"; };
 		0EC13ECCD5C14AAD826D238F /* RNFS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
+		0F1C6D1BC2774E4F854841AA /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* InPhood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InPhood.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,7 +214,7 @@
 		3BAE77882E004185B47E5A48 /* RNMail.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNMail.xcodeproj; path = "../node_modules/react-native-mail/RNMail.xcodeproj"; sourceTree = "<group>"; };
 		4CAD52C3DE514835972AA696 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		63675BAC90914873A9A4162B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		6477608B28704E35B596521D /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
+		647291E1B81A4F7ABF41DB29 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		6D49B063EAC4415E964E5EAF /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		7512D6651D23717B00210FCE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		7512D6661D23717B00210FCE /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -230,7 +231,6 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		967B55463FEF4FF0BEC82263 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
-		9FABDE59C9C64647A81DF9D0 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		D7593193415E4F15ABEFB83E /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		EBCEB82D4979486EAB4DEB83 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		F711100E3834491B848868BC /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -270,7 +270,7 @@
 				4B9C5813B7924CC7B531CCAE /* libRNVectorIcons.a in Frameworks */,
 				24E378C2D19E4A808775BD16 /* libRNFS.a in Frameworks */,
 				9B82A864F0004CE3B8F61260 /* libRNMail.a in Frameworks */,
-				B218A3F47C714B6F85F860F7 /* libReactNativeConfig.a in Frameworks */,
+				86C716BD98664D5EAB906D3A /* libReactNativeConfig.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +392,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		752F468A1D60E758000F8EE6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				752F469C1D60E758000F8EE6 /* libReactNativeConfig.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		758076431D5BA62B00724E08 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,14 +429,6 @@
 			children = (
 				758076E61D5E12A700724E08 /* libRNMail.a */,
 				758076E81D5E12A700724E08 /* RNMailTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		758076FE1D5E7CD300724E08 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				758077101D5E7CD300724E08 /* libReactNativeConfig.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -477,7 +477,7 @@
 				2CE0E8A8148E43D59480DCCE /* RNVectorIcons.xcodeproj */,
 				0EC13ECCD5C14AAD826D238F /* RNFS.xcodeproj */,
 				3BAE77882E004185B47E5A48 /* RNMail.xcodeproj */,
-				9FABDE59C9C64647A81DF9D0 /* ReactNativeConfig.xcodeproj */,
+				0F1C6D1BC2774E4F854841AA /* ReactNativeConfig.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -654,8 +654,8 @@
 					ProjectRef = 7512D6B51D2C5AC700210FCE /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = 758076FE1D5E7CD300724E08 /* Products */;
-					ProjectRef = 9FABDE59C9C64647A81DF9D0 /* ReactNativeConfig.xcodeproj */;
+					ProductGroup = 752F468A1D60E758000F8EE6 /* Products */;
+					ProjectRef = 0F1C6D1BC2774E4F854841AA /* ReactNativeConfig.xcodeproj */;
 				},
 				{
 					ProductGroup = 758076AE1D5CC02A00724E08 /* Products */;
@@ -742,6 +742,13 @@
 			remoteRef = 752716D41D4D28B000EC95E2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		752F469C1D60E758000F8EE6 /* libReactNativeConfig.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeConfig.a;
+			remoteRef = 752F469B1D60E758000F8EE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		7580764A1D5BA62B00724E08 /* libRCTCameraRoll.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -775,13 +782,6 @@
 			fileType = wrapper.cfbundle;
 			path = RNMailTests.xctest;
 			remoteRef = 758076E71D5E12A700724E08 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		758077101D5E7CD300724E08 /* libReactNativeConfig.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libReactNativeConfig.a;
-			remoteRef = 7580770F1D5E7CD300724E08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		75A9F1A81D1981FB00E1AE17 /* libRCTFBSDK.a */ = {
@@ -914,6 +914,7 @@
 					"\"$(SRCROOT)/InPhood\"",
 					"\"$(SRCROOT)/InPhood\"",
 					"\"$(SRCROOT)/InPhood\"",
+					"\"$(SRCROOT)/InPhood\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = InPhood;
@@ -937,6 +938,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/inPhoodPB\"",
+					"\"$(SRCROOT)/InPhood\"",
 					"\"$(SRCROOT)/InPhood\"",
 					"\"$(SRCROOT)/InPhood\"",
 					"\"$(SRCROOT)/InPhood\"",
@@ -977,6 +979,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 				);
 				INFOPLIST_FILE = inPhoodRN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -984,6 +987,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/inPhoodPB\"",
+					"\"$(SRCROOT)/InPhood\"",
 					"\"$(SRCROOT)/InPhood\"",
 					"\"$(SRCROOT)/InPhood\"",
 					"\"$(SRCROOT)/InPhood\"",
@@ -1027,6 +1031,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 				);
 				INFOPLIST_FILE = inPhoodRN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1034,6 +1039,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/inPhoodPB\"",
+					"\"$(SRCROOT)/InPhood\"",
 					"\"$(SRCROOT)/InPhood\"",
 					"\"$(SRCROOT)/InPhood\"",
 					"\"$(SRCROOT)/InPhood\"",
@@ -1100,6 +1106,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1148,6 +1155,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

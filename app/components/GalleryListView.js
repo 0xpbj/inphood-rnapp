@@ -106,9 +106,6 @@ export default class GalleryListView extends Component{
     }
   }
   render() {
-    // return (
-    //   <NetworkImage source={{uri: 'https://dqh688v4tjben.cloudfront.net/data/LGd7ZFE3FQfCakZX5miQfYyyIA52/-KOvre7unzL2l9SCwbS6.jpg'}}/>
-    // )
     if (this.state.result === null) {
       alert ('Please Login')
       return (<View />)
@@ -180,15 +177,18 @@ export default class GalleryListView extends Component{
     }
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    let imgSource = rowData.localFile
-    // let imgSource = ''
-    // RNFS.exists(rowData.localFile)
-    // .then((result) => {
-      // imgSource = rowData.localFile
-    // })
-    // .catch((err) => {
-      // imgSource = rowData.photo
-    // })
+    let imgSource = rowData.photo
+    var imgBlock = <NetworkImage source={{uri: rowData.photo}}/>
+    RNFS.exists(rowData.localFile)
+    .then((result) => {
+      if (result) {
+        imgSource = rowData.localFile
+        imgBlock = <Image style={styles.thumb} source={{uri: rowData.localFile}}/>
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
     const mealType = rowData.mealType
     const mealTime = new Date(rowData.time).toDateString()
     return (
@@ -197,8 +197,7 @@ export default class GalleryListView extends Component{
           highlightRow(sectionID, rowID)
         }}>
         <View style={styles.row}>
-          {/* <Image style={styles.thumb} source={{uri: imgSource}} /> */}
-          <NetworkImage source={{uri: imgSource}}/>
+          {imgBlock}
           <View  style={styles.text}>
             <Text style={{fontWeight: '600', fontSize: 18}}>
               {rowData.title}: {rowData.caption}
@@ -243,6 +242,8 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#006400',
   },
   profileName: {
     marginLeft: 40,

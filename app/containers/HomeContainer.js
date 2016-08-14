@@ -7,7 +7,6 @@ function mapStateToProps (state) {
   return {
     tabs: state.tabReducer,
     auth: state.authReducer,
-    galleryNav: state.galNavReducer,
   }
 }
 

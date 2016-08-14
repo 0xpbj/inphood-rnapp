@@ -27,7 +27,7 @@ const {
 import Picture from './Picture'
 import Selected from './Selected'
 import Caption from '../containers/CaptionContainer'
-import {homeIcon, userIcon} from './Icons'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class Camera extends Component {
   constructor(props) {
@@ -98,12 +98,9 @@ export default class Camera extends Component {
     if (this.props.camera.index === 0) {
       return (
         <TouchableOpacity
-          style={styles.buttonContainer}
+          style={styles.lbuttonContainer}
           onPress={()=>this._goToLogin()}>
-          <Image
-            style={styles.button}
-            source={{uri: userIcon.uri, scale: userIcon.scale}}
-          />
+          <Icon name="ios-person-outline" size={30} color='#006400'/>
         </TouchableOpacity>
       )
     }
@@ -117,12 +114,9 @@ export default class Camera extends Component {
     if (this.props.camera.index === 0) {
       return (
         <TouchableOpacity
-          style={styles.buttonContainer}
+          style={styles.rbuttonContainer}
           onPress={()=>this._goToHome()}>
-          <Image
-            style={styles.button}
-            source={{uri: homeIcon.uri, scale: homeIcon.scale}}
-          />
+          <Icon name="ios-home-outline" size={30} color='#006400'/>
         </TouchableOpacity>
       )
     }
@@ -190,9 +184,16 @@ const styles = StyleSheet.create({
     height: 32,
     resizeMode: 'contain',
   },
-  buttonContainer: {
+  lbuttonContainer: {
     flex: 1,
-    marginLeft: 5,
+    marginLeft: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rbuttonContainer: {
+    flex: 1,
+    marginRight: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -201,6 +202,7 @@ const styles = StyleSheet.create({
     height: 28,
     width: 28,
     margin: Platform.OS === 'ios' ? 10 : 16,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    tintColor: '#006400'
   }
 })

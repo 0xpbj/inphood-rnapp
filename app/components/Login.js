@@ -3,7 +3,7 @@
 'use strict';
 
 import React, { Component } from "react";
-import {AppRegistry, StyleSheet, Text, TouchableOpacity, View, Image, NativeModules} from "react-native";
+import {AppRegistry, StyleSheet, Text, TouchableOpacity, View, Image, NativeModules, ScrollView} from "react-native";
 
 const FBSDK = require('react-native-fbsdk');
 const {
@@ -59,34 +59,51 @@ export default class Login extends Component {
       );
     }
   }
+  userProfile() {
+    if (this.props.auth.result !== null) {
+      alert('In progress: User profile page')
+    }
+  }
+  userSettings() {
+    if (this.props.auth.result !== null) {
+      alert('In progress: User setting page')
+    }
+  }
   sendEmail() {
-    let deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
-    Mailer.mail({
-      subject: 'Need Help',
-      recipients: ['support@inphood.com'],
-      body: deviceInfo,
-      // isHTML: true, // iOS only, exclude if false
-    }, (error, event) => {
-        if(error) {
-          alert('Could not send mail. Please send a mail to support@inphood.com');
-        }
-    })
+    if (this.props.auth.result !== null) {
+      let deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
+      Mailer.mail({
+        subject: 'Need Help',
+        recipients: ['support@inphood.com'],
+        body: deviceInfo,
+        // isHTML: true, // iOS only, exclude if false
+      }, (error, event) => {
+          if(error) {
+            alert('Could not send mail. Please send a mail to support@inphood.com');
+          }
+      })
+    }
   }
   render() {
     console.disableYellowBox = true;
     let uri = this.props.auth.result ? this.props.auth.result.picture.data.url : ' '
+    let buttonColor = this.props.auth.result ? '#006400' : 'white'
     return (
       <Image source={require('./img/LaunchRetina4_High.png')} style={styles.containerImage}>
-        <View style={styles.quarterHeightContainer}/>
-        <View style={styles.quarterHeightContainer}/>
-        <View style={styles.dimeHeightContainer}/>
-        <View style={styles.quarterHeightContainer}>
-          <Image
-            source={{uri: uri}}
-            style={styles.profileImage}
-          />
+        <View style={{marginTop: 390}}></View>
+        <View style={{alignItems: 'center'}}>
+          <TouchableOpacity
+            onPress={this.userProfile.bind(this)}>
+            <Image
+              source={{uri: uri}}
+              style={[styles.profileImage, {borderColor: buttonColor}]}
+            />
+          </TouchableOpacity>
           <View style={styles.buttonRowStyle}>
-            <Icon name="ios-person-outline" size={40} color="white" style={{marginRight: 17}}/>
+            <TouchableOpacity
+              onPress={this.userSettings.bind(this)}>
+              <Icon name="ios-settings-outline" size={40} color={buttonColor} style={{marginRight: 17}}/>
+            </TouchableOpacity>
             <View style={styles.marginStyle}>
               <LoginButton
                onLoginFinished={(error, result) => {
@@ -124,24 +141,16 @@ export default class Login extends Component {
             </View>
             <TouchableOpacity
               onPress={this.sendEmail.bind(this)}>
-              <Icon name="ios-mail" size={40} color="#3b5998" style={{marginLeft: 17}}/>
+              <Icon name="ios-mail-outline" size={40} color={buttonColor} style={{marginLeft: 17}}/>
             </TouchableOpacity>
           </View>
         </View>
       </Image>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
-  dimeHeightContainer: {
-    flex: 0.15,
-    alignItems: 'center',
-  },
-  quarterHeightContainer: {
-    flex: 0.25,
-    alignItems: 'center',
-  },
   containerImage: {
     flex: 1,
     resizeMode: 'contain',
@@ -155,9 +164,8 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    // borderWidth: 1,
-    // borderColor: '#3b5998',
-    // marginBottom: 10,
+    borderWidth: 2,
+    marginBottom: 10,
   },
   buttonRowStyle: {
     flexDirection: 'row',
@@ -171,4 +179,40 @@ const styles = StyleSheet.create({
   marginStyle: {
     margin: 5,
   },
-});
+  scrollView: {
+    backgroundColor: '#6A85B1',
+    height: 300,
+  },
+  horizontalScrollView: {
+    height: 120,
+  },
+  containerPage: {
+    height: 50,
+    width: 50,
+    backgroundColor: '#527FE4',
+    padding: 5,
+  },
+  text: {
+    fontSize: 20,
+    color: '#888888',
+    left: 80,
+    top: 20,
+    height: 40,
+  },
+  button: {
+    margin: 7,
+    // padding: 5,
+    alignItems: 'center',
+    backgroundColor: '#eaeaea',
+    borderRadius: 3,
+  },
+  buttonContents: {
+    flexDirection: 'row',
+    width: 64,
+    height: 64,
+  },
+  img: {
+    width: 64,
+    height: 64,
+  }
+})

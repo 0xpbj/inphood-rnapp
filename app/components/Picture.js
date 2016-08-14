@@ -78,8 +78,6 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: '#3b5998',
   },
   shutterOuterViewStyle: {
     marginTop: 5,
@@ -89,7 +87,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: 'white',
+    backgroundColor: '#006400',
     alignItems: 'center',
   }
 });

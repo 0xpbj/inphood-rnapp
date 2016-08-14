@@ -8,6 +8,7 @@ const {
   Header: NavigationHeader,
 } = NavigationExperimental
 
+import Icon from 'react-native-vector-icons/Ionicons'
 import Login from './Login'
 import Media from './Media'
 import Gallery from '../containers/GalleryContainer'
@@ -36,7 +37,7 @@ export default class HomeTabs extends Component {
                  storeResult={(action)=>this.props.storeResult(action)}
                  auth={this.props.auth}
                 />
-      case 'Media':
+      case 'Camera':
         return (
           <Media
             changeTab={(i)=>this.props.changeTab(i)}
@@ -64,29 +65,38 @@ export default class HomeTabs extends Component {
     else if (mvisible) {
       return (
         <Media
-          baseHandleBackAction={this.props._handleBackAction}
           changeTab={(i)=>this.props.changeTab(i)}
         />
       )
     }
+    if (this.props.auth.result === null) {
+      return <Login
+               loginRequest={()=>this.props.loginRequest()}
+               logoutRequest={()=>this.props.logoutRequest()}
+               storeToken={(action)=>this.props.storeToken(action)}
+               storeResult={(action)=>this.props.storeResult(action)}
+               auth={this.props.auth}
+              />
+    }
     const tabs = this.props.tabs.routes.map((tab, i) => {
       return (
-        <TabBarIOS.Item key={tab.key}
-          icon={tab.icon}
-          selectedIcon={tab.selectedIcon}
+        <Icon.TabBarItemIOS
           title={tab.title}
+          iconName={tab.name}
+          selectedIconName={tab.iconName}
+          iconSize={40}
           onPress={() => {
               this.props.changeTab(i)
           }}
           selected={this.props.tabs.index === i}>
           {this._renderTabContent(tab.key)}
-        </TabBarIOS.Item>
+        </Icon.TabBarItemIOS>
       )
     })
     return (
       <TabBarIOS
         unselectedTintColor="black"
-        tintColor="#22a3ed"
+        tintColor="#006400"
         barTintColor="white"
         translucent={true}
       >

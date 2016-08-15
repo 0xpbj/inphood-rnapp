@@ -2,46 +2,43 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
+/* @flow */
 
-import React, {Component} from 'react';
+'use strict';
 
-import {AppRegistry, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from "react";
+import {AppRegistry} from "react-native";
 
-class inPhoodRN extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
+import configureStore from './app/store/configureStore'
+const store = configureStore()
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+import HomeContainer from './app/containers/HomeContainer'
+import { Provider } from 'react-redux'
+import Config from 'react-native-config'
 
-AppRegistry.registerComponent('inPhoodRN', () => inPhoodRN);
+import firebase from 'firebase'
+  require("firebase/app");
+  require("firebase/auth");
+  require("firebase/database");
+
+{/*firebase.initializeapp({
+  apikey: config.firebase_api_key,
+  authdomain: config.firebase_auth_domain,
+  databaseurl: config.firebase_database_url,
+  storagebucket: config.firebase_storage_bucket,
+});*/}
+
+// firebase.initializeapp({
+//   apikey: 'AIzaSyCDzrz6xKXMUqsirFLVyzXKQDR7zOlkZTA',
+//   authdomain: 'shining-torch-3197.firebaseapp.com',
+//   databaseurl: 'https://shining-torch-3197.firebaseio.com',
+//   storagebucket: 'shining-torch-3197.appspot.com',
+// });
+
+const App = () => (
+  <Provider store={store}>
+    <HomeContainer />
+  </Provider>
+)
+
+AppRegistry.registerComponent('inPhoodRN', () => App);

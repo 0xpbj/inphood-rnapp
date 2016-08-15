@@ -13,6 +13,7 @@ const {
   LoginManager,
   AccessToken,
   Profile,
+  Platform
 } = FBSDK;
 
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -70,7 +71,7 @@ export default class Login extends Component {
     }
   }
   sendEmail() {
-    if (this.props.auth.result !== null) {
+    if (this.props.auth.result !== null && (Platform.OS === 'ios')) {
       let deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
       Mailer.mail({
         subject: 'Need Help',

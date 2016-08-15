@@ -26,7 +26,7 @@ import NetworkImage from './NetworkImage'
 import TimerMixin from 'react-timer-mixin'
 import Spinner from 'react-native-loading-spinner-overlay'
 import {sampleIcon} from './Icons'
-import RNFS from 'react-native-fs'
+// import RNFS from 'react-native-fs'
 
 const IMAGE_PREFETCH_URL = 'http://facebook.github.io/origami/public/images/blog-hero.jpg?r=1&t=' + Date.now();
 // var prefetchTask = Image.prefetch(IMAGE_PREFETCH_URL);
@@ -179,16 +179,16 @@ export default class GalleryListView extends Component{
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     let imgSource = rowData.photo
     var imgBlock = <NetworkImage source={{uri: rowData.photo}}/>
-    RNFS.exists(rowData.localFile)
-    .then((result) => {
-      if (result) {
-        imgSource = rowData.localFile
-        imgBlock = <Image style={styles.thumb} source={{uri: rowData.localFile}}/>
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    // RNFS.exists(rowData.localFile)
+    // .then((result) => {
+    //   if (result) {
+    //     imgSource = rowData.localFile
+    //     imgBlock = <Image style={styles.thumb} source={{uri: rowData.localFile}}/>
+    //   }
+    // })
+    // .catch((err) => {
+    //   console.log(err)
+    // })
     const mealType = rowData.mealType
     const mealTime = new Date(rowData.time).toDateString()
     return (

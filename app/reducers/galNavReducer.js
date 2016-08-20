@@ -1,4 +1,4 @@
-import { FEEDBACK_PHOTO, PUSH_GAL_ROUTE, POP_GAL_ROUTE } from '../constants/ActionTypes'
+import { PUSH_GAL_ROUTE, POP_GAL_ROUTE } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -6,7 +6,6 @@ const {
 
 const defaultState = {
   index: 0,
-  selected: '',
   key: 'root',
   routes: [
     {
@@ -18,11 +17,6 @@ const defaultState = {
 
 export default function galleryNav(state = defaultState, action) {
   switch(action.type) {
-    case FEEDBACK_PHOTO:
-      return {
-        ...state,
-        selected: action.selected
-      }
     case PUSH_GAL_ROUTE:
       if (state.routes[state.index].key === (action.route && action.route.key)) {
         return state

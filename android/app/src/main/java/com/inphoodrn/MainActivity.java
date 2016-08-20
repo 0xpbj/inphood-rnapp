@@ -1,6 +1,12 @@
 package com.inphoodrn;
 
 import com.facebook.react.ReactActivity;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.chirag.RNMail.RNMail;
+import com.rnfs.RNFSPackage;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+import com.lwansbrough.ReactCamera.ReactCamera;
 
 public class MainActivity extends ReactActivity {
 

@@ -19,9 +19,6 @@ const {
 
 import GalleryView  from '../containers/GalleryViewContainer'
 import ChatView from '../containers/ChatContainer'
-import Selected from './Selected'
-import {homeIcon} from './Icons'
-import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu'
 
 export default class Gallery extends Component {
   constructor(props) {

@@ -5,6 +5,7 @@ const tabs = [
   { key: 'Login', icon: userIcon, title: 'Login', name: 'ios-person-outline', iconName: 'ios-person'},
   { key: 'Camera', icon: sampleIcon, title: 'Camera', name: 'ios-camera-outline', iconName: 'ios-camera'},
   { key: 'Home', icon: homeIcon, title: 'Home', name: 'ios-home-outline', iconName: 'ios-home'},
+  { key: 'Clients', icon: homeIcon, title: 'Clients', name: 'ios-people-outline', iconName: 'ios-people'},
 ]
 
 const initialState = {

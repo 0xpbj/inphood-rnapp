@@ -15,6 +15,7 @@ export default class ChatThread extends Component {
       messages: props.messages,
       loadEarlier: true,
       isTyping: null,
+      id: firebase.auth().currentUser.uid
     }
     this.onSend = this.onSend.bind(this);
     this.onReceive = this.onReceive.bind(this);
@@ -45,6 +46,7 @@ export default class ChatThread extends Component {
   }
   onSend(messages = []) {
     this.props.storeMessages(messages)
+    this.props.initChatSaga()
     this.setState((previousState) => {
       return {
         messages: GiftedChat.append(previousState.messages, messages),
@@ -97,13 +99,13 @@ export default class ChatThread extends Component {
       <GiftedChat
         messages={this.state.messages}
         onSend={this.onSend}
+        onReceive={this.onReceive}
         loadEarlier={this.state.loadEarlier}
         onLoadEarlier={this.onLoadEarlier}
         user={{
-          _id: firebase.auth().currentUser, // sent messages should have same user._id,
-          name: this.props.result.first_name,
-          avatar: this.props.result.picture.data.url,
-
+          _id: this.state.id, // sent messages should have same user._id,
+          // name: this.props.result.first_name,
+          // avatar: this.props.result.picture.data.url,
         }}
         renderBubble={this.renderBubble}
         renderFooter={this.renderFooter}

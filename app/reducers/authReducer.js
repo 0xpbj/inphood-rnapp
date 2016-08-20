@@ -5,13 +5,15 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT_SUCCESS,
-  LOGOUT_ERROR
+  LOGOUT_ERROR,
+  STORE_TRAINER,
 } from '../constants/ActionTypes';
 
 const initialState = {
   token: '',
   result: null,
-  error: null
+  error: null,
+  trainer: false,
 }
 
 export default function authentication(state = initialState, action) {
@@ -20,6 +22,11 @@ export default function authentication(state = initialState, action) {
       return {
         ...state,
         token: action.token
+      }
+    case STORE_TRAINER:
+      return {
+        ...state,
+        trainer: action.flag
       }
     case STORE_RESULT:
       return {

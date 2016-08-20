@@ -1,6 +1,6 @@
 import {
-  PUSH_ROUTE,
-  POP_ROUTE,
+  PUSH_EXP_ROUTE,
+  POP_EXP_ROUTE,
   POP_GAL_ROUTE,
   PUSH_GAL_ROUTE,
   POP_CAM_ROUTE,
@@ -25,6 +25,7 @@ import {
   SEND_FIREBASE_ERROR,
   SEND_FIREBASE_INIT_CAMERA,
   SEND_FIREBASE_INIT_LIBRARY,
+  STORE_TRAINER,
   STORE_TOKEN,
   STORE_RESULT,
   STORE_CAMERA_CAPTION,
@@ -33,8 +34,8 @@ import {
   STORE_LIBRARY_TITLE,
   ADD_CAMERA_MEAL_DATA,
   ADD_LIBRARY_MEAL_DATA,
-  STORE_USER_MESSAGES,
-  STORE_TRAINER_MESSAGES,
+  STORE_MESSAGES,
+  INIT_CHAT_SAGA,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
@@ -42,19 +43,22 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_ERRROR,
   IS_NEW_USER,
-  FILTER_PHOTOS
+  FILTER_PHOTOS,
+  SET_CLIENT_ID,
+  SET_CLIENT_PHOTO,
+  SET_CLIENT_NAME,
 } from '../constants/ActionTypes'
 
-export function push (route) {
+export function pushExp (route) {
   return {
-    type: PUSH_ROUTE,
+    type: PUSH_EXP_ROUTE,
     route,
   }
 }
 
-export function pop () {
+export function popExp () {
   return {
-    type: POP_ROUTE
+    type: POP_EXP_ROUTE
   }
 }
 
@@ -132,10 +136,10 @@ export function selectPhoto (selected) {
   }
 }
 
-export function feedbackPhoto (selected) {
+export function feedbackPhoto (feedbackPhoto) {
   return {
     type: FEEDBACK_PHOTO,
-    selected
+    feedbackPhoto
   }
 }
 
@@ -217,16 +221,21 @@ export function addLibraryMealData(mealType) {
 
 export function storeMessages(messages) {
   return {
-    type: STORE_USER_MESSAGES,
+    type: STORE_MESSAGES,
     messages
   }
 }
 
-
-export function storeTrainerMessages(trainerMessages) {
+export function initChatSaga() {
   return {
-    type: STORE_TRAINER_MESSAGES,
-    trainerMessages
+    type: INIT_CHAT_SAGA,
+  }
+}
+
+export function storeTrainer(flag) {
+  return {
+    type: STORE_TRAINER,
+    flag
   }
 }
 
@@ -294,5 +303,26 @@ export function filterPhotos(filter){
   return {
     type: FILTER_PHOTOS,
     filter: filter
+  }
+}
+
+export function setClientId(id) {
+  return {
+    type: SET_CLIENT_ID,
+    id: id
+  }
+}
+
+export function setClientPhoto(photo) {
+  return {
+    type: SET_CLIENT_PHOTO,
+    photo: photo
+  }
+}
+
+export function setClientName(name) {
+  return {
+    type: SET_CLIENT_NAME,
+    name: name
   }
 }

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { bindActionCreators, compose } from 'redux'
 import ChatThread from '../components/ChatThread'
-import * as actionCreators from '../actions/Actions';
+import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps (state) {
   return {

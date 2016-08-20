@@ -1,31 +1,27 @@
-import { STORE_IMAGE_DATA, STORE_USER_MESSAGES, STORE_TRAINER_MESSAGES } from '../constants/ActionTypes'
+import { FEEDBACK_PHOTO, STORE_MESSAGES, LOAD_MESSAGES_SUCCESS } from '../constants/ActionTypes'
 
 const defaultState = {
+  feedbackPhoto: '',
   messages: [],
-  trainerMessages: [],
-  imageData: [],
+  previousMessages: [],
 }
 
 export default function chat(state = defaultState, action) {
   switch(action.type) {
-    case STORE_IMAGE_DATA:
+    case FEEDBACK_PHOTO:
       return {
         ...state,
-        imageData: action.imageData
+        feedbackPhoto: action.feedbackPhoto
       }
-    case STORE_USER_MESSAGES:
-      let uarray = state.messages
-      uarray.push.apply(uarray, action.messages)
+    case STORE_MESSAGES:
       return {
         ...state,
-        messages: uarray
+        messages: action.messages
       }
-    case STORE_TRAINER_MESSAGES:
-      let tarray = state.trainerMessages
-      tarray.push.apply(tarray, action.trainerMessages)
+    case LOAD_MESSAGES_SUCCESS:
       return {
         ...state,
-        trainerMessages: tarray
+        previousMessages: action.messages
       }
     default:
       return state

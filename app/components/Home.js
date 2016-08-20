@@ -12,6 +12,8 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import Login from './Login'
 import Media from './Media'
 import Gallery from '../containers/GalleryContainer'
+import Expert from '../containers/ExpertGalleryContainer'
+// import Expert from './ExpertGallery'
 
 export default class HomeTabs extends Component {
   constructor(props) {
@@ -49,6 +51,10 @@ export default class HomeTabs extends Component {
             result={this.props.auth.result}
           />
         )
+      case 'Clients':
+        return (
+          <Expert />
+        )
       default:
         return <View />
     }
@@ -78,20 +84,38 @@ export default class HomeTabs extends Component {
                auth={this.props.auth}
               />
     }
+    const trainer = this.props.auth.trainer
     const tabs = this.props.tabs.routes.map((tab, i) => {
-      return (
-        <Icon.TabBarItemIOS
-          title={tab.title}
-          iconName={tab.name}
-          selectedIconName={tab.iconName}
-          iconSize={40}
-          onPress={() => {
-              this.props.changeTab(i)
-          }}
-          selected={this.props.tabs.index === i}>
-          {this._renderTabContent(tab.key)}
-        </Icon.TabBarItemIOS>
-      )
+      if (i !== 3) {
+        return (
+          <Icon.TabBarItemIOS
+            title={tab.title}
+            iconName={tab.name}
+            selectedIconName={tab.iconName}
+            iconSize={40}
+            onPress={() => {
+                this.props.changeTab(i)
+            }}
+            selected={this.props.tabs.index === i}>
+            {this._renderTabContent(tab.key)}
+          </Icon.TabBarItemIOS>
+        )
+      }
+      else if (trainer && i === 3) {
+        return (
+          <Icon.TabBarItemIOS
+            title={tab.title}
+            iconName={tab.name}
+            selectedIconName={tab.iconName}
+            iconSize={40}
+            onPress={() => {
+                this.props.changeTab(i)
+            }}
+            selected={this.props.tabs.index === i}>
+            {this._renderTabContent(tab.key)}
+          </Icon.TabBarItemIOS>
+        )
+      }
     })
     return (
       <TabBarIOS

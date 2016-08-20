@@ -3,7 +3,7 @@
 'use strict';
 
 import React, { Component } from "react";
-import {AppRegistry, StyleSheet, Text, TouchableOpacity, View, Image, NativeModules, ScrollView} from "react-native";
+import {AppRegistry, StyleSheet, Text, TouchableOpacity, View, Image, NativeModules, ScrollView, Platform} from "react-native";
 
 const FBSDK = require('react-native-fbsdk');
 const {
@@ -13,7 +13,6 @@ const {
   LoginManager,
   AccessToken,
   Profile,
-  Platform
 } = FBSDK;
 
 import Icon from 'react-native-vector-icons/Ionicons'

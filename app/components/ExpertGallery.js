@@ -1,0 +1,153 @@
+import React, { Component } from "react"
+import {
+  Image,
+  View,
+  Text,
+  Platform,
+  StyleSheet,
+  BackAndroid,
+  TouchableOpacity,
+  NavigationExperimental
+} from 'react-native'
+
+const {
+  Reducer: NavigationTabsReducer,
+  CardStack: NavigationCardStack,
+  AnimatedView: NavigationAnimatedView,
+  Header: NavigationHeader,
+} = NavigationExperimental
+
+import ExpertGalleryListView from './ExpertGalleryListView'
+import ClientGalleryListView from './ClientGalleryListView'
+import ChatView from '../containers/ChatContainer'
+// import ChatView from './ChatThread'
+
+export default class ExpertGallery extends Component {
+  constructor(props) {
+    super(props);
+    this._renderScene = this._renderScene.bind(this)
+    this._handleBackAction = this._handleBackAction.bind(this)
+    this._handleNavigate = this._handleNavigate.bind(this)
+  }
+  componentDidMount () {
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
+  }
+  componentWillUnmount () {
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
+  }
+  _renderScene (props) {
+    const prefix = 'scene_'
+    const { scene } = props
+    if (scene.key === prefix + 'expert') {
+      return (
+        <ExpertGalleryListView
+          _handleNavigate={this._handleNavigate.bind(this)}
+          _setClientId={(action) => this.props.setClientId(action)}
+          _setClientPhoto={(action) => this.props.setClientPhoto(action)}
+          _setClientName={(action) => this.props.setClientName(action)}
+        />
+      )
+    }
+    else if (scene.key === prefix + 'client') {
+      return (
+        <ClientGalleryListView
+          _handleNavigate={this._handleNavigate.bind(this)}
+          _clientId={this.props.trainerData.clientId}
+          _clientPhoto={this.props.trainerData.clientPhoto}
+          _clientName={this.props.trainerData.clientName}
+          _setFeedback={(action) => this.props.feedbackPhoto(action)}
+        />
+      )
+    }
+    else if (scene.key === prefix + 'chat') {
+      return (
+        <ChatView
+         _handleNavigate={this._handleNavigate.bind(this)}
+        />
+      )
+    }
+  }
+  _renderOverlay(props) {
+    if (this.props.trainerNav.index !== 0) {
+      return (
+        <NavigationHeader
+          {...props}
+          onNavigateBack={this._handleBackAction}
+          renderTitleComponent={this._renderTitleComponent}
+          renderLeftComponent={this._renderLeftComponent.bind(this)}
+        />
+      )
+    }
+  }
+  _renderLeftComponent(props) {
+    return (
+      <NavigationHeader.BackButton
+        onPress={props.onNavigateBack}
+      />
+    )
+  }
+  _renderTitleComponent(props) {
+    return (
+      <NavigationHeader.Title>
+        {props.scene.route.title}
+      </NavigationHeader.Title>
+    )
+  }
+  _handleBackAction () {
+    this.props.chatVisible(false)
+    if (this.props.trainerNav.index === 0) {
+      return false
+    }
+    this.props.popExp()
+    return true
+  }
+  _handleNavigate (action) {
+    switch (action && action.type) {
+      case 'push':
+        this.props.pushExp(action.route)
+        return true
+      case 'back':
+      case 'pop':
+        return this._handleBackAction()
+      default:
+        return false
+    }
+  }
+  render () {
+    return (
+      <NavigationCardStack
+        navigationState={this.props.trainerNav}
+        onNavigate={this._handleNavigate.bind(this)}
+        renderScene={this._renderScene.bind(this)}
+        renderOverlay={this._renderOverlay.bind(this)}
+      />
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  base64: {
+    flex: 1,
+    height: 32,
+    resizeMode: 'contain',
+  },
+  buttonContainer: {
+    flex: 1,
+    marginLeft: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    height: 28,
+    width: 28,
+    margin: Platform.OS === 'ios' ? 10 : 16,
+    resizeMode: 'contain'
+  },
+  topbar: {
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF'
+  }
+})

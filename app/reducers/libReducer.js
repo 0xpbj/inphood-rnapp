@@ -1,4 +1,4 @@
-import { LOAD_CAMERAMEDIA_SUCCESS, SELECT_PHOTO, STORE_LIBRARY_CAPTION, STORE_LIBRARY_TITLE, ADD_LIBRARY_MEAL_DATA, PUSH_LIB_ROUTE, POP_LIB_ROUTE  } from '../constants/ActionTypes'
+import { SELECT_PHOTO, STORE_LIBRARY_CAPTION, STORE_LIBRARY_TITLE, ADD_LIBRARY_MEAL_DATA, PUSH_LIB_ROUTE, POP_LIB_ROUTE  } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils

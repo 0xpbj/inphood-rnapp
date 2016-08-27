@@ -17,17 +17,19 @@ const {
   Header: NavigationHeader,
 } = NavigationExperimental
 
-import ExpertGalleryListView from './ExpertGalleryListView'
-import ClientGalleryListView from './ClientGalleryListView'
-import ChatView from '../containers/ChatContainer'
-// import ChatView from './ChatThread'
+import Client from '../containers/ClientContainer'
+import ClientGallery from '../containers/ClientGalleryContainer'
+import ChatView from '../containers/TrainerChatContainer'
 
-export default class ExpertGallery extends Component {
+export default class Expert extends Component {
   constructor(props) {
     super(props);
     this._renderScene = this._renderScene.bind(this)
     this._handleBackAction = this._handleBackAction.bind(this)
     this._handleNavigate = this._handleNavigate.bind(this)
+    this.state = {
+      hack: false,
+    }
   }
   componentDidMount () {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
@@ -40,26 +42,19 @@ export default class ExpertGallery extends Component {
     const { scene } = props
     if (scene.key === prefix + 'expert') {
       return (
-        <ExpertGalleryListView
+        <Client
           _handleNavigate={this._handleNavigate.bind(this)}
-          _setClientId={(action) => this.props.setClientId(action)}
-          _setClientPhoto={(action) => this.props.setClientPhoto(action)}
-          _setClientName={(action) => this.props.setClientName(action)}
         />
       )
     }
     else if (scene.key === prefix + 'client') {
       return (
-        <ClientGalleryListView
+        <ClientGallery
           _handleNavigate={this._handleNavigate.bind(this)}
-          _clientId={this.props.trainerData.clientId}
-          _clientPhoto={this.props.trainerData.clientPhoto}
-          _clientName={this.props.trainerData.clientName}
-          _setFeedback={(action) => this.props.feedbackPhoto(action)}
         />
       )
     }
-    else if (scene.key === prefix + 'chat') {
+    else if (scene.key === prefix + 'tchat') {
       return (
         <ChatView
          _handleNavigate={this._handleNavigate.bind(this)}
@@ -94,7 +89,8 @@ export default class ExpertGallery extends Component {
     )
   }
   _handleBackAction () {
-    this.props.chatVisible(false)
+    this.props.trainerChatVisible(false)
+    this.setState({hack: true})
     if (this.props.trainerNav.index === 0) {
       return false
     }

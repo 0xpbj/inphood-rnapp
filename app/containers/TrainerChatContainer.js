@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import Gallery from '../components/Gallery'
+import { bindActionCreators, compose } from 'redux'
+import TrainerChatThread from '../components/TrainerChatThread'
 import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps (state) {
   return {
-    galleryNav: state.galNavReducer
+    chat: state.trainerChatReducer
   }
 }
 
@@ -16,4 +16,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Gallery)
+)(TrainerChatThread)

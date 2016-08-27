@@ -1,4 +1,4 @@
-import { FEEDBACK_PHOTO, STORE_MESSAGES, LOAD_MESSAGES_SUCCESS } from '../constants/ActionTypes'
+import { CLIENT_FEEDBACK_PHOTO, CLIENT_STORE_MESSAGES, CLIENT_LOAD_MESSAGES } from '../constants/ActionTypes'
 
 const defaultState = {
   feedbackPhoto: '',
@@ -8,17 +8,17 @@ const defaultState = {
 
 export default function chat(state = defaultState, action) {
   switch(action.type) {
-    case FEEDBACK_PHOTO:
+    case CLIENT_FEEDBACK_PHOTO:
       return {
         ...state,
         feedbackPhoto: action.feedbackPhoto
       }
-    case STORE_MESSAGES:
+    case CLIENT_STORE_MESSAGES:
       return {
         ...state,
         messages: action.messages
       }
-    case LOAD_MESSAGES_SUCCESS:
+    case CLIENT_LOAD_MESSAGES:
       return {
         ...state,
         previousMessages: action.messages

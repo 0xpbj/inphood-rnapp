@@ -128,11 +128,13 @@ export default class Library extends Component {
   _goToLogin() {
     this.props.mediaVisible(false)
     this.props.chatVisible(false)
+    this.props.trainerChatVisible(false)
     this.props.changeTab(0)
   }
   _goToHome() {
     this.props.mediaVisible(false)
     this.props.chatVisible(false)
+    this.props.trainerChatVisible(false)
     this.props.changeTab(2)
   }
   _handleBackAction () {
@@ -148,6 +150,7 @@ export default class Library extends Component {
     this._handleBackAction()
     this.props.mediaVisible(false)
     this.props.chatVisible(false)
+    this.props.trainerChatVisible(false)
     this.props.changeTab(2)
     return true
   }

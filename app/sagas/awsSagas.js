@@ -1,11 +1,7 @@
 import {
-SEND_FIREBASE_LIBRARY_SUCCESS,
-SEND_FIREBASE_CAMERA_SUCCESS,
-SEND_AWS_SUCCESS,
-SEND_AWS_ERROR,
-SEND_FIREBASE_ERROR,
-SEND_FIREBASE_INIT_CAMERA,
-SEND_FIREBASE_INIT_LIBRARY,
+SEND_AWS_SUCCESS, SEND_AWS_ERROR,
+SEND_FIREBASE_INIT_CAMERA, SEND_FIREBASE_INIT_LIBRARY,
+SEND_FIREBASE_LIBRARY_SUCCESS, SEND_FIREBASE_CAMERA_SUCCESS, SEND_FIREBASE_ERROR,
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -13,21 +9,12 @@ import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { RNS3 } from 'react-native-aws3'
 import Config from 'react-native-config'
 
-{/*let options = {
+let options = {
   keyPrefix: "data/",
   bucket: Config.AWS_BUCKET,
   region: Config.AWS_BUCKET_REGION,
   accessKey: Config.AWS_CONFIG_KEY,
   secretKey: Config.AWS_SECRET_KEY,
-  successActionStatus: 201
-}*/}
-
-let options = {
-  keyPrefix: "data/",
-  bucket: 'inphoodimagescdn',
-  region: 'us-west-2',
-  accessKey: 'AKIAI25XHNISG4KDDM3Q',
-  secretKey: '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',
   successActionStatus: 201
 }
 
@@ -40,20 +27,21 @@ const sendToAWS = (image, fileName) => {
   return RNS3.put(imgfile, options)
   .then(response => {
     if (response.status !== 201)
-      throw new Error("Failed to upload image to S3");
+      throw new Error("Failed to upload image to S3")
   })
-  .catch(err => console.log('Errors uploading: ' + err));
+  .catch(err => {
+    console.log('Errors uploading: ' + err)
+  })
 }
 
 function* loadAWSCall(flag, fileName) {
   try {
-    const state = yield select()
     let image = ''
     if (flag) {
-      image = state.camReducer.photo
+      image = yield select(state => state.camReducer.photo)
     }
     else {
-      image = state.libReducer.selected
+      image = yield select(state => state.libReducer.selected)
     }
     yield call (sendToAWS, image, fileName)
     yield put ({type: SEND_AWS_SUCCESS})
@@ -71,10 +59,8 @@ const sendToFirebase = (state, flag) => {
   let id = result.id
   let picture = result.picture.data.url
   let time = Date.now()
-  firebase.database().ref('/global/' + uid + '/userInfo/private').set({
-    id,
-  })
   firebase.database().ref('/global/' + uid + '/userInfo/public').set({
+    id,
     name,
     picture,
   })
@@ -82,8 +68,8 @@ const sendToFirebase = (state, flag) => {
     gender,
   })
   let key = firebase.database().ref('/global/' + uid + '/userData').push()
-  let fileTail = key.path.o[3] + '.jpg'
-  let fileName = uid + '/' + fileTail
+  let fileTail = key.path.o[3]
+  let fileName = uid + '/' + fileTail + '.jpg'
   let caption = ''
   let mealType = ''
   let messages = []
@@ -103,6 +89,7 @@ const sendToFirebase = (state, flag) => {
   }
   messages = state.chatReducer.messages
   key.child("immutable").set({
+    uid,
     fileName,
     fileTail,
     title,
@@ -133,16 +120,21 @@ function* loadFirebaseCall(flag) {
   }
 }
 
-export function* watchFirebaseCameraCall() {
+function* watchFirebaseCameraCall() {
   while(true) {
     yield take(SEND_FIREBASE_INIT_CAMERA)
     yield call(loadFirebaseCall, true)
   }
 }
 
-export function* watchFirebaseLibraryCall() {
+function* watchFirebaseLibraryCall() {
   while(true) {
     yield take(SEND_FIREBASE_INIT_LIBRARY)
     yield call(loadFirebaseCall, false)
   }
+}
+
+export default function* rootSaga() {
+  yield fork(watchFirebaseLibraryCall)
+  yield fork(watchFirebaseCameraCall)
 }

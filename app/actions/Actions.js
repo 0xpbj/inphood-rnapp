@@ -10,16 +10,16 @@ import {
   CHANGE_TAB,
   MEDIA_TAB_VISIBLE,
   CHAT_TAB_VISIBLE,
+  TRAINER_CHAT_TAB_VISIBLE,
   TAKE_PHOTO,
   SELECT_PHOTO,
-  FEEDBACK_PHOTO,
+  CLIENT_FEEDBACK_PHOTO,
+  TRAINER_FEEDBACK_PHOTO,
   LOAD_PHOTOS_INIT,
   LOAD_PHOTOS_SUCCESS,
-  LOAD_PHOTOS_FAILURE,
+  LOAD_PHOTOS_ERROR,
   TAKE_PICTURE,
   LOAD_PICTURE,
-  LOAD_CAMERAMEDIA_SUCCESS,
-  LOAD_CAMERAMEDIA_ERROR,
   SEND_FIREBASE_LIBRARY_SUCCESS,
   SEND_FIREBASE_CAMERA_SUCCESS,
   SEND_FIREBASE_ERROR,
@@ -34,7 +34,8 @@ import {
   STORE_LIBRARY_TITLE,
   ADD_CAMERA_MEAL_DATA,
   ADD_LIBRARY_MEAL_DATA,
-  STORE_MESSAGES,
+  CLIENT_STORE_MESSAGES,
+  TRAINER_STORE_MESSAGES,
   INIT_CHAT_SAGA,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -43,7 +44,6 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_ERRROR,
   IS_NEW_USER,
-  FILTER_PHOTOS,
   SET_CLIENT_ID,
   SET_CLIENT_PHOTO,
   SET_CLIENT_NAME,
@@ -115,6 +115,13 @@ export function chatVisible (visible) {
   }
 }
 
+export function trainerChatVisible (visible) {
+  return {
+    type: TRAINER_CHAT_TAB_VISIBLE,
+    visible
+  }
+}
+
 export function mediaVisible (visible) {
   return {
     type: MEDIA_TAB_VISIBLE,
@@ -136,9 +143,16 @@ export function selectPhoto (selected) {
   }
 }
 
-export function feedbackPhoto (feedbackPhoto) {
+export function clientFeedbackPhoto (feedbackPhoto) {
   return {
-    type: FEEDBACK_PHOTO,
+    type: CLIENT_FEEDBACK_PHOTO,
+    feedbackPhoto
+  }
+}
+
+export function trainerFeedbackPhoto (feedbackPhoto) {
+  return {
+    type: TRAINER_FEEDBACK_PHOTO,
     feedbackPhoto
   }
 }
@@ -156,9 +170,9 @@ export function loadPhotosSuccess(photos) {
   }
 }
 
-export function loadPhotosFailure(error) {
+export function loadPhotosError(error) {
   return {
-    type: LOAD_PHOTOS_FAILURE,
+    type: LOAD_PHOTOS_ERROR,
     error: error
   }
 }
@@ -219,9 +233,16 @@ export function addLibraryMealData(mealType) {
   }
 }
 
-export function storeMessages(messages) {
+export function clientStoreMessages(messages) {
   return {
-    type: STORE_MESSAGES,
+    type: CLIENT_STORE_MESSAGES,
+    messages
+  }
+}
+
+export function trainerStoreMessages(messages) {
+  return {
+    type: TRAINER_STORE_MESSAGES,
     messages
   }
 }
@@ -296,13 +317,6 @@ export function isNewUser(flag){
   return {
     type: IS_NEW_USER,
     flag: flag
-  }
-}
-
-export function filterPhotos(filter){
-  return {
-    type: FILTER_PHOTOS,
-    filter: filter
   }
 }
 

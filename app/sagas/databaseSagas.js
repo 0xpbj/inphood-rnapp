@@ -1,24 +1,24 @@
 import {
-  SEND_FIREBASE_CAMERA_SUCCESS,
-  SEND_FIREBASE_LIBRARY_SUCCESS,
-  APPEND_PHOTOS_SUCCESS,
-  APPEND_PHOTOS_FAILURE,
+  LOGIN_SUCCESS,
+  LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_ERROR,
+  SEND_FIREBASE_CAMERA_SUCCESS, SEND_FIREBASE_LIBRARY_SUCCESS,
+  APPEND_PHOTOS_SUCCESS, APPEND_PHOTOS_ERROR,
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
+import { Image } from "react-native"
 import Config from 'react-native-config'
 
-//let turlHead = Config.AWS_CDN_THU_URL
-//let urlHead = Config.AWS_CDN_IMG_URL
+const turlHead = Config.AWS_CDN_THU_URL
+const urlHead = Config.AWS_CDN_IMG_URL
 
-let urlHead='http://dqh688v4tjben.cloudfront.net/data/'
-let turlHead='http://d2sb22kvjaot7x.cloudfront.net/resized-data/'
+// let urlHead='http://dqh688v4tjben.cloudfront.net/data/'
+// let turlHead='http://d2sb22kvjaot7x.cloudfront.net/resized-data/'
 
-export const fetchFirebaseData = (appendPhotos) => {
-  let user = firebase.auth().currentUser
-  return firebase.database().ref('/global/' + user.uid + '/userData').orderByKey().limitToLast(1).once('value')
-  .then (function(snapshot){
-    return snapshot.forEach(function(childSnapshot) {
+const fetchFirebaseData = (imageRef, photos, user) => {
+  return imageRef.once('value')
+  .then(snapshot => {
+    return snapshot.forEach(childSnapshot => {
       let thumb = turlHead+childSnapshot.child("immutable").val().fileName
       let photo = urlHead+childSnapshot.child("immutable").val().fileName
       let caption = childSnapshot.child("immutable").val().caption
@@ -26,29 +26,62 @@ export const fetchFirebaseData = (appendPhotos) => {
       let mealType = childSnapshot.child("immutable").val().mealType
       let time = childSnapshot.child("immutable").val().time
       let localFile = childSnapshot.child("immutable").val().localFile
+      var prefetchTask = Image.prefetch(photo)
+      prefetchTask
+      .then(() => {})
+      .catch(error => {})
       let obj = {photo,caption,mealType,time,title,localFile}
-      appendPhotos.push(obj)
+      photos.unshift(obj)
     })
-  }, function(error) {
+  })
+  .catch(error => {
     console.log("Value Added Error", error);
   })
 }
 
-export function* firebaseData() {
+function* firebaseData() {
   try {
     let appendPhotos = []
-    yield call(fetchFirebaseData, appendPhotos)
+    let user = yield select(state => state.authReducer.user)
+    let imageRef = firebase.database().ref('/global/' + user.uid + '/userData').orderByKey().limitToLast(1)
+    yield call(fetchFirebaseData, imageRef, appendPhotos, user)
     yield put ({type: APPEND_PHOTOS_SUCCESS, appendPhotos})
   }
   catch(error) {
     console.log(error)
-    yield put ({type: APPEND_PHOTOS_FAILURE, error})
+    yield put ({type: APPEND_PHOTOS_ERROR, error})
   }
 }
 
-export function* watchFirebaseDataFlow() {
+function* watchFirebaseDataFlow() {
   while (true) {
     yield take([SEND_FIREBASE_LIBRARY_SUCCESS, SEND_FIREBASE_CAMERA_SUCCESS])
     yield call(firebaseData)
   }
+}
+
+function* loadInitialData() {
+  try {
+    var photos = []
+    let user = yield select(state => state.authReducer.user)
+    let imageRef = firebase.database().ref('/global/' + user.uid + '/userData').orderByKey()
+    yield call(fetchFirebaseData, imageRef, photos, user)
+    yield put ({type: LOAD_PHOTOS_SUCCESS, photos})
+  }
+  catch(error) {
+    console.log(error)
+    yield put ({type: LOAD_PHOTOS_ERROR, error})
+  }
+}
+
+function* initialFirebaseData() {
+  while (true) {
+    yield take(LOGIN_SUCCESS)
+    yield call(loadInitialData)
+  }
+}
+
+export default function* rootSaga() {
+  yield fork(initialFirebaseData)
+  yield fork(watchFirebaseDataFlow)
 }

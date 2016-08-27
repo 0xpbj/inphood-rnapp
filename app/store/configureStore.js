@@ -3,28 +3,24 @@ import {
   applyMiddleware,
   compose
 } from 'redux'
-import rootReducer from '../reducers'
-import createSagaMiddleware from 'redux-saga'
-import {
-  watchLoginFlow,
-  watchLogoutFlow
-} from '../sagas/loginSagas'
-import {
-  watchFirebaseCameraCall,
-  watchFirebaseLibraryCall,
-} from '../sagas/awsSagas'
-import {
-  watchFirebaseDataFlow,
-} from '../sagas/databaseSagas'
-import {
-  watchOldFirebaseChatFlow,
-  watchFirebaseChatFlow,
-} from '../sagas/chatSagas'
-import {
-  watchClients,
-} from '../sagas/clientSagas'
 
-// create the saga middleware
+import Config from 'react-native-config'
+import firebase from 'firebase'
+require("firebase/app");
+require("firebase/auth");
+require("firebase/database");
+const config = {
+  apiKey: Config.FIREBASE_API_KEY,
+  authDomain: Config.FIREBASE_AUTH_DOMAIN,
+  databaseURL: Config.FIREBASE_DATABASE_URL,
+  storageBucket: Config.FIREBASE_STORAGE_BUCKET,
+}
+firebase.initializeApp(config)
+
+import rootReducer from '../reducers'
+import rootSaga from '../sagas/index'
+
+import createSagaMiddleware from 'redux-saga'
 const sagaMiddleware = createSagaMiddleware()
 
 export default function configureStore() {
@@ -32,17 +28,7 @@ export default function configureStore() {
     rootReducer,
     applyMiddleware(sagaMiddleware),
   )
-
-  // then run the saga
-  sagaMiddleware.run(watchLoginFlow)
-  sagaMiddleware.run(watchLogoutFlow)
-  sagaMiddleware.run(watchFirebaseCameraCall)
-  sagaMiddleware.run(watchFirebaseLibraryCall)
-  sagaMiddleware.run(watchFirebaseDataFlow)
-  sagaMiddleware.run(watchOldFirebaseChatFlow)
-  sagaMiddleware.run(watchFirebaseChatFlow)
-  sagaMiddleware.run(watchClients)
-
+  sagaMiddleware.run(rootSaga)
   if (module.hot) {
     module.hot.accept(() => {
       const nextRootReducer = require('../reducers/index').default

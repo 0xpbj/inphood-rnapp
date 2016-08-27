@@ -1,12 +1,7 @@
 import {
-  STORE_TOKEN,
-  STORE_RESULT,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_ERROR,
-  LOGOUT_SUCCESS,
-  LOGOUT_ERROR,
-  STORE_TRAINER,
+  LOGIN_SUCCESS, LOGIN_ERROR,
+  LOGOUT_SUCCESS, LOGOUT_ERROR,
+  STORE_TOKEN, STORE_RESULT, STORE_TRAINER,
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -14,10 +9,29 @@ const initialState = {
   result: null,
   error: null,
   trainer: false,
+  user: ''
 }
 
 export default function authentication(state = initialState, action) {
   switch (action.type) {
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        user: action.user
+      }
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        token: '',
+        result: null,
+        error: null
+      }
+    case LOGIN_ERROR:
+    case LOGOUT_ERROR:
+      return {
+        ...state,
+        error: action.error
+      }
     case STORE_TOKEN:
       return {
         ...state,
@@ -32,19 +46,6 @@ export default function authentication(state = initialState, action) {
       return {
         ...state,
         result: action.result
-      }
-    case LOGOUT_SUCCESS:
-      return {
-        ...state,
-        token: '',
-        result: null,
-        error: null
-      }
-    case LOGIN_ERROR:
-    case LOGOUT_ERROR:
-      return {
-        ...state,
-        error: action.error
       }
     default:
       return state

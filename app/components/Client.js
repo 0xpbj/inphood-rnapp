@@ -22,23 +22,11 @@ const route = {
   }
 }
 
-export default class ExpertGalleryListView extends Component {
+export default class Client extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      clients: [],
-      clientInfo: [],
-      dataSource: this._createDataSource([])
-    }
-  }
-  componentWillMount() {
-    this.getClients()
-  }
-  componentWillUnmount() {
-    this.trainerRef.off()
-    for (let i = 0; i < this.clientsRef.length; i++) {
-      this.clientsRef[i].off()
-    }
+    super(props)
+    this._createDataSource(this.props.trainerData.infos)
+    this.state = {dataSource: this._createDataSource(this.props.trainerData.infos)}
   }
   _createDataSource(list) {
     const dataSource = new ListView.DataSource({
@@ -46,61 +34,15 @@ export default class ExpertGalleryListView extends Component {
     });
     return dataSource.cloneWithRows(list);
   }
-  getClients() {
-    let user = firebase.auth().currentUser
-    this.trainerRef = firebase.database().ref('/global/' + user.uid + '/trainerInfo/clientId')
-    this.trainerRef.on('value', function(dataSnapshot) {
-      let clients = []
-      dataSnapshot.forEach(function(childSnapshot) {
-        let item = childSnapshot.val()
-        item['.key'] = childSnapshot.key
-        clients.push(item)
-      }.bind(this))
-      this.setState({
-        clients: clients
-      })
-      this.getClientPhotos(clients)
-    }.bind(this))
+  componentWillReceiveProps(nextProps) {
+    this.setState({dataSource: this._createDataSource(nextProps.trainerData.infos)})
   }
-  getClientPhotos(clients) {
-    this.clientsRef = []
-    let clientInfo = []
-    for (let i = 0; i < clients.length; i++) {
-      this.clientsRef[i] = firebase.database().ref('/global/' + clients[i] + '/userInfo/public')
-      this.clientsRef[i].once('value')
-      .then(function(dataSnapshot){
-        let name = ''
-        let picture = ''
-        let gender = ''
-        let clientId = clients[i]
-        dataSnapshot.forEach(function(childSnapshot) {
-          if (childSnapshot.key === 'name') {
-            name = childSnapshot.val()
-          }
-          else if (childSnapshot.key === 'picture') {
-            picture = childSnapshot.val()
-          }
-          else if (childSnapshot.key === 'physicals') {
-            childSnapshot.forEach(function(physicalSnapshot) {
-              gender = physicalSnapshot.val()
-            })
-          }
-        }.bind(this))
-        let item = {name, picture, gender, clientId}
-        clientInfo.push(item)
-        if (i === clients.length - 1) {
-          this.setState({
-            clientInfo: clientInfo,
-            dataSource: this._createDataSource(clientInfo)
-          })
-        }
-      }.bind(this))
-    }
+  componentWillMount() {
+    this.setState({dataSource: this._createDataSource(this.props.trainerData.infos)})
   }
   render() {
-    // console.log(this.state.clientInfo)
     return (
-      <View>
+      <View style={styles.container}>
         <Text style={styles.profileName}>Client's InPhood</Text>
         <ListView
           dataSource={this.state.dataSource}
@@ -112,13 +54,14 @@ export default class ExpertGalleryListView extends Component {
     )
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    let clientImage = <Image style={styles.profileImage} source={{uri: rowData.picture}}/>
-    let clientName = rowData.name
-    let clientGender = rowData.gender
-    let clientId = rowData.clientId
+    const data = rowData.data
+    const clientId = rowData.id
+    const clientImage = <Image style={styles.profileImage} source={{uri: data.val().picture}}/>
+    const clientName = data.val().name
+    const clientGender = data.child('physicals').val().gender
     return (
       <TouchableHighlight onPress={() => {
-          this._pressRow(clientId, rowData.picture, clientName)
+          this._pressRow(clientId, data.val().picture, clientName)
           highlightRow(sectionID, rowID)
         }}>
         <View style={styles.row}>
@@ -134,11 +77,12 @@ export default class ExpertGalleryListView extends Component {
         </View>
       </TouchableHighlight>
     )
+    // return <View />
   }
   _pressRow(clientId: string, clientPhoto: string, clientName: string) {
-    this.props._setClientId(clientId)
-    this.props._setClientPhoto(clientPhoto)
-    this.props._setClientName(clientName)
+    this.props.setClientId(clientId)
+    this.props.setClientPhoto(clientPhoto)
+    this.props.setClientName(clientName)
     this.props._handleNavigate(route)
   }
   _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {

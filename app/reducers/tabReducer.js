@@ -1,11 +1,11 @@
-import { CHANGE_TAB, MEDIA_TAB_VISIBLE, CHAT_TAB_VISIBLE } from '../constants/ActionTypes'
+import { CHANGE_TAB, MEDIA_TAB_VISIBLE, CHAT_TAB_VISIBLE, TRAINER_CHAT_TAB_VISIBLE } from '../constants/ActionTypes'
 import {userIcon, sampleIcon, homeIcon} from '../components/Icons'
 
 const tabs = [
   { key: 'Login', icon: userIcon, title: 'Login', name: 'ios-person-outline', iconName: 'ios-person'},
   { key: 'Camera', icon: sampleIcon, title: 'Camera', name: 'ios-camera-outline', iconName: 'ios-camera'},
   { key: 'Home', icon: homeIcon, title: 'Home', name: 'ios-home-outline', iconName: 'ios-home'},
-  { key: 'Clients', icon: homeIcon, title: 'Clients', name: 'ios-people-outline', iconName: 'ios-people'},
+  { key: 'Expert', icon: homeIcon, title: 'Clients', name: 'ios-people-outline', iconName: 'ios-people'},
 ]
 
 const initialState = {
@@ -13,6 +13,7 @@ const initialState = {
   routes: tabs,
   mvisible: false,
   cvisible: false,
+  evisible: false,
 }
 
 function tabsNav (state = initialState, action) {
@@ -32,6 +33,11 @@ function tabsNav (state = initialState, action) {
       return {
         ...state,
         cvisible: action.visible
+      }
+    case TRAINER_CHAT_TAB_VISIBLE:
+      return {
+        ...state,
+        evisible: action.visible
       }
     default:
       return state

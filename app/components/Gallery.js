@@ -45,7 +45,7 @@ export default class Gallery extends Component {
         <GalleryView
            result={this.props.result}
           _handleNavigate={this._handleNavigate.bind(this)}
-          _setFeedback={(action) => this.props.feedbackPhoto(action)}
+          _setFeedback={(action) => this.props.clientFeedbackPhoto(action)}
         />
       )
     }
@@ -59,7 +59,7 @@ export default class Gallery extends Component {
     }
   }
   _renderOverlay(props) {
-    if (this.props.gallery.index !== 0) {
+    if (this.props.galleryNav.index !== 0) {
       return (
         <NavigationHeader
           {...props}
@@ -87,7 +87,7 @@ export default class Gallery extends Component {
   _handleBackAction () {
     this.props.chatVisible(false)
     this.setState({hack: true})
-    if (this.props.gallery.index === 0) {
+    if (this.props.galleryNav.index === 0) {
       return false
     }
     this.props.popGal()
@@ -108,7 +108,7 @@ export default class Gallery extends Component {
   render () {
     return (
       <NavigationCardStack
-        navigationState={this.props.gallery}
+        navigationState={this.props.galleryNav}
         onNavigate={this._handleNavigate.bind(this)}
         renderScene={this._renderScene.bind(this)}
         renderOverlay={this._renderOverlay.bind(this)}

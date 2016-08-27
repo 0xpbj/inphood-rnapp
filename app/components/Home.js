@@ -12,8 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import Login from './Login'
 import Media from './Media'
 import Gallery from '../containers/GalleryContainer'
-import Expert from '../containers/ExpertGalleryContainer'
-// import Expert from './ExpertGallery'
+import Expert from '../containers/ExpertContainer'
 
 export default class HomeTabs extends Component {
   constructor(props) {
@@ -21,12 +20,14 @@ export default class HomeTabs extends Component {
     this.state = {
       cvisible: false,
       mvisible: false,
+      evisible: false,
     }
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
       cvisible: nextProps.tabs.cvisible,
       mvisible: nextProps.tabs.mvisible,
+      evisible: nextProps.tabs.evisible,
     })
   }
   _renderTabContent (key) {
@@ -51,7 +52,7 @@ export default class HomeTabs extends Component {
             result={this.props.auth.result}
           />
         )
-      case 'Clients':
+      case 'Expert':
         return (
           <Expert />
         )
@@ -60,7 +61,7 @@ export default class HomeTabs extends Component {
     }
   }
   render () {
-    const {cvisible, mvisible} = this.state
+    const {cvisible, mvisible, evisible} = this.state
     if (cvisible) {
       return (
         <Gallery
@@ -73,6 +74,11 @@ export default class HomeTabs extends Component {
         <Media
           changeTab={(i)=>this.props.changeTab(i)}
         />
+      )
+    }
+    else if (evisible) {
+      return (
+        <Expert />
       )
     }
     if (this.props.auth.result === null) {

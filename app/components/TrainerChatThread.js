@@ -8,7 +8,7 @@ import {
 
 import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
 
-export default class ChatThread extends Component {
+export default class TrainerChatThread extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ export default class ChatThread extends Component {
     this._isAlright = null;
   }
   componentDidMount() {
-    this.props.chatVisible(true)
+    this.props.trainerChatVisible(true)
   }
   onLoadEarlier() {
     this.setState((previousState) => {

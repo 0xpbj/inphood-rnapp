@@ -1,39 +1,68 @@
-import { LOAD_CLIENTS_PHOTOS, LOAD_CLIENTS_LIST, SET_CLIENT_PHOTO, SET_CLIENT_ID, SET_CLIENT_NAME } from '../constants/ActionTypes'
+import { 
+  ADD_CLIENTS, ADD_PHOTOS, ADD_MESSAGES, ADD_INFOS,
+  SET_CLIENT_ID, SET_CLIENT_PHOTO, SET_CLIENT_NAME,
+  PHOTOS_COUNT, FEEDBACK_PHOTO
+} from '../constants/ActionTypes'
 
 const initialState = {
-  clients: [],
+  clients: new Set(),
+  photos: [],
+  messages: new Set(),
+  infos: new Set(),
+  photosCount: 0,
   clientId: '',
   clientPhoto: '',
   clientName: '',
-  clientsPhotos: [],
+  feedbackPhoto: '',
 }
 
-export default function library (state = initialState, action) {
+export default function trainer (state = initialState, action) {
   switch (action.type) {
-    case LOAD_CLIENTS_LIST:
+    case ADD_CLIENTS:
       return {
         ...state,
-        clients: action.clients
+        clients: [...state.clients, action.child]
+      }
+    case ADD_INFOS:
+      return {
+        ...state,
+        infos: [...state.infos, action.child]
+      }
+    case ADD_PHOTOS:
+      return {
+        ...state,
+        photos: [...state.photos, action.child]
+      }
+    case ADD_MESSAGES:
+      return {
+        ...state,
+        messages: [...state.messages, action.child]
+      }
+    case PHOTOS_COUNT:
+      const count = state.photosCount
+      return {
+        ...state,
+        photosCount: count + action.count
       }
     case SET_CLIENT_ID:
       return {
         ...state,
         clientId: action.id
       }
-    case SET_CLIENT_PHOTO:
-      return {
-        ...state,
-        clientPhoto: action.photo
-      }
     case SET_CLIENT_NAME:
       return {
         ...state,
         clientName: action.name
       }
-    case LOAD_CLIENTS_PHOTOS:
+    case SET_CLIENT_PHOTO:
       return {
         ...state,
-        clientsPhotos: action.clientsPhotos
+        clientPhoto: action.photo
+      }
+    case FEEDBACK_PHOTO:
+      return {
+        ...state,
+        feedbackPhoto: action.feedbackPhoto
       }
     default:
       return state

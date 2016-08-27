@@ -1,16 +1,11 @@
-import {
-  connect
-} from 'react-redux'
-import {
-  bindActionCreators
-} from 'redux'
-import ExpertGallery from '../components/ExpertGallery'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import ClientGallery from '../components/ClientGallery'
 import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps(state) {
   return {
     trainerData: state.trainerReducer,
-    trainerNav: state.trainerNavReducer
   }
 }
 
@@ -21,4 +16,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ExpertGallery)
+)(ClientGallery)

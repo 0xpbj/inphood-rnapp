@@ -4,7 +4,7 @@ import {
   STORE_CHAT_DATA_SUCCESS,
   STORE_CHAT_DATA_ERROR,
   LOAD_MESSAGES_ERROR,
-  LOAD_MESSAGES_SUCCESS,
+  CLIENT_LOAD_MESSAGES,
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -13,6 +13,8 @@ export const storeChatData = (uid, messages, feedbackPhoto) => {
   let photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
   let key = firebase.database().ref('/global/' + uid + '/userData/' + photo + '/messages').push()
   key.set({
+    "uid": uid,
+    "photo": photo,
     "time": Date.now(),
     "content": messages[0]
   })
@@ -60,7 +62,7 @@ function* loadOldMessages() {
   try {
     var messages = []
     yield call(oldMessages, messages)
-    yield put ({type: LOAD_MESSAGES_SUCCESS, messages})
+    yield put ({type: CLIENT_LOAD_MESSAGES, messages})
   }
   catch(error) {
     console.log(error)

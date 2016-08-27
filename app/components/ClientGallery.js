@@ -17,7 +17,7 @@ import {
 const route = {
   type: 'push',
   route: {
-    key: 'chat',
+    key: 'tchat',
     title: 'Feedback'
   }
 }
@@ -26,16 +26,10 @@ import NetworkImage from './NetworkImage'
 import TimerMixin from 'react-timer-mixin'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-export default class ClientGalleryListView extends Component{
+export default class ClientGallery extends Component{
   constructor(props) {
     super(props)
-    this.state = {
-      clientId: this.props._clientId,
-      clientPhoto: this.props._clientPhoto,
-      clientName: this.props._clientName,
-      mediaList: '',
-      dataSource: this._createDataSource([])
-    }
+    this.state = {dataSource: this._createDataSource([])}
   }
   _createDataSource(list) {
     const dataSource = new ListView.DataSource({
@@ -43,58 +37,33 @@ export default class ClientGalleryListView extends Component{
     });
     return dataSource.cloneWithRows(list);
   }
-  componentWillUnmount() {
-    this.clientRef.off()
-  }
   componentWillMount() {
-    this.getPhotos()
-  }
-  getPhotos() {
-    this.clientRef = firebase.database().ref('/global/' + this.state.clientId + '/userData')
-    this.clientRef.on('value', function(dataSnapshot){
-      let photos = []
-      dataSnapshot.forEach(function(childSnapshot) {
-        childSnapshot.forEach(function(photoSnapshot) {
-          if (photoSnapshot.key === 'immutable') {
-            let item = photoSnapshot.val()
-            // console.log(item)
-            photos.push(item)
-          }
-        }.bind(this))
-      }.bind(this))
-      // console.log(photos)
-      this.getData(photos)
-    }.bind(this))
-  }
-  getData(photos) {
-    let urlHead='http://dqh688v4tjben.cloudfront.net/data/'
-    let turlHead='http://d2sb22kvjaot7x.cloudfront.net/resized-data/'
-    // console.log(photos)
-    let dataList = []
-    for (let i = 0; i < photos.length; i++) {
-      let thumb = turlHead+photos[i].fileName
-      let photo = urlHead+photos[i].fileName
-      let caption = photos[i].caption
-      let title = photos[i].title
-      let mealType = photos[i].mealType
-      let time = photos[i].time
-      let localFile = photos[i].localFile
-      let obj = {photo,caption,mealType,time,title,localFile}
-      dataList.push(obj)
+    const id = this.props.trainerData.clientId 
+    const vals = this.props.trainerData.photos
+    var data = []
+    for (var key in vals) {
+      if (vals[key][id])
+        data.unshift(vals[key][id])
     }
-    console.log(dataList)
-    this.setState({
-      mediaList: dataList,
-      dataSource: this._createDataSource(dataList)
-    })
+    this.setState({dataSource: this._createDataSource(data)})
+  }
+  componentWillReceiveProps(nextProps) {
+    const id = nextProps.trainerData.clientId 
+    const vals = (nextProps.trainerData.photos)
+    var data = []
+    for (var key in vals) {
+      if (vals[key][id])
+        data.unshift(vals[key][id])
+    }
+    this.setState({dataSource: this._createDataSource(data)})
   }
   render() {
-    let name = this.state.clientName.split(' ')
+    let name = this.props.trainerData.clientName.split(' ')
     return (
       <View style={styles.container}>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
-            source={{uri: this.state.clientPhoto}}
+            source={{uri: this.props.trainerData.clientPhoto}}
             style={styles.profileImage}
           />
           <Text style={styles.profileName}>{name[0]}'s InPhood</Text>
@@ -108,21 +77,21 @@ export default class ClientGalleryListView extends Component{
       </View>
     )
   }
-  _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    const imgSource = rowData.photo
-    const imgBlock = <NetworkImage source={{uri: rowData.photo}}/>
-    const mealType = rowData.mealType
-    const mealTime = new Date(rowData.time).toDateString()
+  _renderRow(data: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
+    const imgSource = data.photo
+    const imgBlock = <NetworkImage source={{uri: data.photo}}/>
+    const mealType = data.mealType
+    const mealTime = new Date(data.time).toDateString()
     return (
       <TouchableHighlight onPress={() => {
-          this._pressRow(rowData.photo)
+          this._pressRow(data.photo)
           highlightRow(sectionID, rowID)
         }}>
         <View style={styles.row}>
           {imgBlock}
           <View  style={styles.text}>
             <Text style={{fontWeight: '600', fontSize: 18}}>
-              {rowData.title}: {rowData.caption}
+              {data.title}: {data.caption}
             </Text>
             <Text>
               {mealType}
@@ -136,8 +105,8 @@ export default class ClientGalleryListView extends Component{
     )
   }
   _pressRow(imgSource: string) {
-    // this.props._handleNavigate(route)
-    // this.props._setFeedback(imgSource)
+    this.props._handleNavigate(route)
+    this.props.trainerFeedbackPhoto(imgSource)
   }
   _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
     return (
@@ -156,6 +125,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 60,
+    paddingBottom: 50,
     backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
   },
   profileImage: {

@@ -174,21 +174,11 @@ export default class GalleryListView extends Component{
     }
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    // let imgSource = rowData.photo
-    // var imgBlock = <NetworkImage source={{uri: rowData.photo}}/>
-    // console.log(imgSource)
-    const imgSource = rowData.localFile
-    const imgBlock = <Image style={styles.thumb} source={{uri: rowData.localFile}}/>
-    // RNFS.exists(rowData.localFile)
-    // .then((result) => {
-    //   if (result) {
-    //     imgSource = rowData.localFile
-    //     imgBlock = <Image style={styles.thumb} source={{uri: rowData.localFile}}/>
-    //   }
-    // })
-    // .catch((err) => {
-    //   console.log(err)
-    // })
+    let imgBlock = <Image style={styles.thumb} source={{uri: rowData.localFile}}/>
+    if ((Date.now() - rowData.time)/1000 > 86400) {
+      imgBlock = <NetworkImage source={{uri: rowData.photo}}/>
+    }
+    const imgSource = rowData.photo
     const mealType = rowData.mealType
     const mealTime = new Date(rowData.time).toDateString()
     return (
@@ -259,7 +249,7 @@ const styles = StyleSheet.create({
   },
   thumb: {
     width: 300,
-    height: 200,
+    height: 330,
   },
   text: {
     flex: 1,

@@ -67,12 +67,11 @@ const sendToFirebase = (state, flag) => {
   firebase.database().ref('/global/' + uid + '/userInfo/public/physicals').set({
     gender,
   })
-  let key = firebase.database().ref('/global/' + uid + '/userData').push()
+  let key = firebase.database().ref('/global/' + uid + '/photoData').push()
   let fileTail = key.path.o[3]
   let fileName = uid + '/' + fileTail + '.jpg'
   let caption = ''
   let mealType = ''
-  let messages = []
   let title = ''
   let localFile = ''
   if (flag) {
@@ -87,8 +86,7 @@ const sendToFirebase = (state, flag) => {
     mealType = state.libReducer.mealType
     localFile = state.libReducer.selected
   }
-  messages = state.chatReducer.messages
-  key.child("immutable").set({
+  key.set({
     uid,
     fileName,
     fileTail,
@@ -97,7 +95,7 @@ const sendToFirebase = (state, flag) => {
     mealType,
     localFile,
     time
-  });
+  })
   return fileName
 }
 

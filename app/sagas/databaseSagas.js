@@ -19,18 +19,21 @@ const fetchFirebaseData = (imageRef, photos, user) => {
   return imageRef.once('value')
   .then(snapshot => {
     return snapshot.forEach(childSnapshot => {
-      let thumb = turlHead+childSnapshot.child("immutable").val().fileName
-      let photo = urlHead+childSnapshot.child("immutable").val().fileName
-      let caption = childSnapshot.child("immutable").val().caption
-      let title = childSnapshot.child("immutable").val().title
-      let mealType = childSnapshot.child("immutable").val().mealType
-      let time = childSnapshot.child("immutable").val().time
-      let localFile = childSnapshot.child("immutable").val().localFile
+      // let thumb = turlHead+childSnapshot.val().fileName
+      const fileName = childSnapshot.val().fileName
+      const photo = turlHead+fileName
+      const caption = childSnapshot.val().caption
+      const title = childSnapshot.val().title
+      const mealType = childSnapshot.val().mealType
+      const time = childSnapshot.val().time
+      const localFile = childSnapshot.val().localFile
+      var flag = false
       var prefetchTask = Image.prefetch(photo)
-      prefetchTask
-      .then(() => {})
-      .catch(error => {})
-      let obj = {photo,caption,mealType,time,title,localFile}
+      prefetchTask.then(() => {
+        flag = true
+      })
+      .catch(error => {console.log(error + ' - ' + photo)})
+      const obj = {photo,caption,mealType,time,title,localFile,flag}
       photos.unshift(obj)
     })
   })
@@ -41,9 +44,9 @@ const fetchFirebaseData = (imageRef, photos, user) => {
 
 function* firebaseData() {
   try {
-    let appendPhotos = []
-    let user = yield select(state => state.authReducer.user)
-    let imageRef = firebase.database().ref('/global/' + user.uid + '/userData').orderByKey().limitToLast(1)
+    var appendPhotos = []
+    const user = yield select(state => state.authReducer.user)
+    const imageRef = firebase.database().ref('/global/' + user.uid + '/photoData').orderByKey().limitToLast(1)
     yield call(fetchFirebaseData, imageRef, appendPhotos, user)
     yield put ({type: APPEND_PHOTOS_SUCCESS, appendPhotos})
   }
@@ -63,8 +66,8 @@ function* watchFirebaseDataFlow() {
 function* loadInitialData() {
   try {
     var photos = []
-    let user = yield select(state => state.authReducer.user)
-    let imageRef = firebase.database().ref('/global/' + user.uid + '/userData').orderByKey()
+    const user = yield select(state => state.authReducer.user)
+    const imageRef = firebase.database().ref('/global/' + user.uid + '/photoData').orderByKey()
     yield call(fetchFirebaseData, imageRef, photos, user)
     yield put ({type: LOAD_PHOTOS_SUCCESS, photos})
   }

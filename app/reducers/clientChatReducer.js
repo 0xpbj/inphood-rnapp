@@ -1,9 +1,10 @@
-import { CLIENT_FEEDBACK_PHOTO, CLIENT_STORE_MESSAGES, CLIENT_LOAD_MESSAGES } from '../constants/ActionTypes'
+import { CLIENT_FEEDBACK_PHOTO, CLIENT_STORE_MESSAGES, CLIENT_LOAD_MESSAGES, CLIENT_ADD_MESSAGES } from '../constants/ActionTypes'
 
 const defaultState = {
   feedbackPhoto: '',
   messages: [],
   previousMessages: [],
+  loadEarlier: true
 }
 
 export default function chat(state = defaultState, action) {
@@ -22,6 +23,13 @@ export default function chat(state = defaultState, action) {
       return {
         ...state,
         previousMessages: action.messages
+      }
+    case CLIENT_ADD_MESSAGES:
+      let messages = state.previousMessages
+      messages[action.photo] = action.messages
+      return {
+        ...state,
+        previousMessages: messages
       }
     default:
       return state

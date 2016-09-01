@@ -1,9 +1,11 @@
 import {
-  ADD_PHOTOS, ADD_INFOS, INIT_DATA, INIT_MESSAGES, PHOTOS_COUNT,
+  ADD_PHOTOS, ADD_INFOS, ADD_MESSAGES, INIT_DATA, INIT_MESSAGES, PHOTOS_COUNT,
   syncCountPhotoChild, syncAddedPhotoChild, syncRemovedPhotoChild,
   SYNC_COUNT_PHOTO_CHILD, SYNC_ADDED_PHOTO_CHILD, SYNC_REMOVED_PHOTO_CHILD,
   syncAddedInfoChild, syncRemovedInfoChild,
   SYNC_ADDED_INFO_CHILD, SYNC_REMOVED_INFO_CHILD,
+  syncAddedMessagesChild, syncRemovedMessagesChild,
+  SYNC_ADDED_MESSAGES_CHILD, SYNC_REMOVED_MESSAGES_CHILD,
 } from '../constants/ActionTypes'
 
 import * as db from './firebase'
@@ -18,7 +20,7 @@ function* triggerGetPhotoCount() {
   let clientCount = 0;
   while (true) {
     const { payload: { data } } = yield take(SYNC_COUNT_PHOTO_CHILD)
-    if (data.key === 'userData') {
+    if (data.key === 'photoData') {
       const count = data.numChildren()
       yield put({type: PHOTOS_COUNT, count})
       const {clients, photos, photosCount} = yield select(state => state.trainerReducer)
@@ -29,6 +31,22 @@ function* triggerGetPhotoCount() {
         }
       }
     }
+  }
+}
+
+function* triggerGetMessagesChild() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CHILD)
+    const child = data
+    console.log(child.val())
+    yield put({type: ADD_MESSAGES, child})
+  }  
+}
+
+function* triggerRemMessagesChild() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_REMOVED_MESSAGES_CHILD)
+    const child = data
   }
 }
 
@@ -51,7 +69,7 @@ function* triggerRemInfoChild() {
 function* triggerGetPhotoChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_PHOTO_CHILD)
-    const file = data.child('immutable').val()
+    const file = data.val()
     const uid = file.uid
     const thumb = turlHead+file.fileName
     const photo = urlHead+file.fileName
@@ -85,9 +103,13 @@ function* syncData() {
     yield fork(db.sync, path, {
       child_added: syncCountPhotoChild,
     })
-    yield fork(db.sync, path + '/userData', {
+    yield fork(db.sync, path + '/photoData', {
       child_added: syncAddedPhotoChild,
       child_removed: syncRemovedPhotoChild,
+    })
+    yield fork(db.sync, path + '/messages', {
+      child_added: syncAddedMessagesChild,
+      child_removed: syncRemovedMessagesChild,
     })
     yield fork(db.sync, path + '/userInfo', {
       child_added: syncAddedInfoChild,
@@ -104,4 +126,6 @@ export default function* rootSaga() {
   yield fork(triggerRemPhotoChild)
   yield fork(triggerGetInfoChild)
   yield fork(triggerRemInfoChild)
+  yield fork(triggerGetMessagesChild)
+  yield fork(triggerRemMessagesChild)
 }

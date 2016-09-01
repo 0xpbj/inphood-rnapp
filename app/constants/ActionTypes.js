@@ -80,6 +80,7 @@ export const CLIENT_LOAD_MESSAGES = 'CLIENT_LOAD_MESSAGES'
 export const TRAINER_LOAD_MESSAGES = 'TRAINER_LOAD_MESSAGES'
 export const STORE_CHAT_DATA_SUCCESS = 'STORE_CHAT_DATA_SUCCESS'
 export const STORE_CHAT_DATA_ERROR = 'STORE_CHAT_DATA_ERROR'
+export const CLIENT_ADD_MESSAGES = 'CLIENT_ADD_MESSAGES'
 
 
 
@@ -119,3 +120,8 @@ export const SYNC_ADDED_MESSAGES_CHILD = 'SYNC_ADDED_MESSAGES_CHILD'
 export const SYNC_REMOVED_MESSAGES_CHILD = 'SYNC_REMOVED_MESSAGES_CHILD'
 export const syncAddedMessagesChild = createAction(SYNC_ADDED_MESSAGES_CHILD)
 export const syncRemovedMessagesChild = createAction(SYNC_REMOVED_MESSAGES_CHILD)
+
+export const SYNC_ADDED_MESSAGES = 'SYNC_ADDED_MESSAGES'
+export const SYNC_REMOVED_MESSAGES = 'SYNC_REMOVED_MESSAGES'
+export const syncAddedMessages = createAction(SYNC_ADDED_MESSAGES)
+export const syncRemovedMessages = createAction(SYNC_REMOVED_MESSAGES)

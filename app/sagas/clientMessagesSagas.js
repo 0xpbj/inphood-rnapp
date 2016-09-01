@@ -25,9 +25,9 @@ function* triggerRemMessagesChild() {
 function* syncMessages() {
   let photos = yield select(state => state.trainerReducer.photos)
   // for (let i = 0; i < photos.length; i++) {
-  //   const uid = photos[i].data.child('immutable/uid').val()
-  //   const file = photos[i].data.child('immutable/fileTail').val()
-  //   let path = '/global/' + uid + '/userData/' + file + '/messages/'
+  //   const uid = photos[i].data.child('uid').val()
+  //   const file = photos[i].data.child('fileTail').val()
+  //   let path = '/global/' + uid + '/messages/' + file
   //   yield fork(db.sync, path, {
   //     child_added: syncAddedMessagesChild,
   //     child_removed: syncRemovedMessagesChild,

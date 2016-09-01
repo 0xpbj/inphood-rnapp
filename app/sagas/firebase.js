@@ -27,6 +27,14 @@ export function* get(path, key) {
   return data.val();
 }
 
+// TODO: Handle errors
+export function* getPath(path) {
+  const ops = newOps('error');
+  const ref = firebase.database().ref(path);
+  const data = yield call([ref, ref.once], 'value');
+  return data
+}
+
 export function* create(path, fn) {
   const key = yield call(newKey, path);
   const payload = yield call(fn, key);

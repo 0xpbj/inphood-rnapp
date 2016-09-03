@@ -87,7 +87,6 @@ export default class Camera extends Component {
     return (
       <NavigationHeader
         {...props}
-        onNavigateBack={this._handleBackAction}
         renderTitleComponent={this._renderTitleComponent}
         renderLeftComponent={this._renderLeftComponent.bind(this)}
         renderRightComponent={this._renderRightComponent.bind(this)}
@@ -106,7 +105,7 @@ export default class Camera extends Component {
     }
     return (
       <NavigationHeader.BackButton
-        onPress={props.onNavigateBack}
+        onPress={this._handleBackAction}
       />
     )
   }
@@ -174,8 +173,9 @@ export default class Camera extends Component {
       <NavigationCardStack
         navigationState={this.props.camera}
         onNavigate={this._handleNavigate.bind(this)}
+        onNavigateBack={this._handleBackAction}
         renderScene={this._renderScene.bind(this)}
-        renderOverlay={this._renderOverlay.bind(this)}
+        renderHeader={this._renderOverlay.bind(this)}
       />
     )
   }

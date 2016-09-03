@@ -180,7 +180,6 @@ export default class CameraRollPicker extends Component {
 const styles = StyleSheet.create({
   wrapper:{
     flex: 1,
-    marginTop: 64,
   },
   row:{
     flexDirection: 'row',

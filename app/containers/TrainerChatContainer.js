@@ -5,7 +5,8 @@ import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps (state) {
   return {
-    chat: state.trainerChatReducer
+    data: state.trainerReducer,
+    chat: state.clientChatReducer
   }
 }
 

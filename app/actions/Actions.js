@@ -35,8 +35,10 @@ import {
   ADD_CAMERA_MEAL_DATA,
   ADD_LIBRARY_MEAL_DATA,
   CLIENT_STORE_MESSAGES,
+  CLIENT_LOAD_ID,
   TRAINER_STORE_MESSAGES,
   INIT_CHAT_SAGA,
+  INIT_TRAINER_CHAT_SAGA,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
@@ -240,6 +242,13 @@ export function clientStoreMessages(messages) {
   }
 }
 
+export function clientStoreId(id) {
+  return {
+    type: CLIENT_LOAD_ID,
+    id
+  }
+}
+
 export function trainerStoreMessages(messages) {
   return {
     type: TRAINER_STORE_MESSAGES,
@@ -250,6 +259,12 @@ export function trainerStoreMessages(messages) {
 export function initChatSaga() {
   return {
     type: INIT_CHAT_SAGA,
+  }
+}
+
+export function initTrainerChatSaga() {
+  return {
+    type: INIT_TRAINER_CHAT_SAGA,
   }
 }
 

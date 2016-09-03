@@ -80,11 +80,10 @@ export default class Library extends Component {
       )
     }
   }
-  _renderOverlay(props) {
+  _renderHeader(props) {
     return (
       <NavigationHeader
         {...props}
-        onNavigateBack={this._handleBackAction}
         renderTitleComponent={this._renderTitleComponent}
         renderLeftComponent={this._renderLeftComponent.bind(this)}
         renderRightComponent={this._renderRightComponent.bind(this)}
@@ -103,7 +102,7 @@ export default class Library extends Component {
     }
     return (
       <NavigationHeader.BackButton
-        onPress={props.onNavigateBack}
+        onPress={this._handleBackAction}
       />
     )
   }
@@ -171,8 +170,9 @@ export default class Library extends Component {
       <NavigationCardStack
         navigationState={this.props.library}
         onNavigate={this._handleNavigate.bind(this)}
+        onNavigateBack={this._handleBackAction.bind(this)}
         renderScene={this._renderScene.bind(this)}
-        renderOverlay={this._renderOverlay.bind(this)}
+        renderHeader={this._renderHeader.bind(this)}
       />
     )
   }

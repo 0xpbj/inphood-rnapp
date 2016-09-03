@@ -245,7 +245,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 64,
     zIndex: 3,
     backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
   },

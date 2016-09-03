@@ -83,9 +83,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center'
   },
-  container: {
-    paddingTop: 64,
-  },
   default: {
     height: 40,
     borderWidth: 2,

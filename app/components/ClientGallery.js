@@ -2,16 +2,16 @@
 
 import React, {Component} from 'react'
 import {
+  Text,
+  View,
   Image,
+  Picker,
   ListView,
   Platform,
   Dimensions,
-  TouchableHighlight,
   StyleSheet,
+  TouchableHighlight,
   RecyclerViewBackedScrollView,
-  Text,
-  View,
-  Picker,
 } from 'react-native'
 
 const route = {
@@ -124,13 +124,12 @@ export default class ClientGallery extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 60,
     paddingBottom: 50,
     backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
   },
   profileImage: {
     marginLeft: 25,
-    marginTop: 22,
+    marginTop: 8,
     width: 60,
     height: 60,
     borderRadius: 30,
@@ -139,7 +138,7 @@ const styles = StyleSheet.create({
   },
   profileName: {
     marginLeft: 20,
-    marginTop: 42,
+    marginTop: 28,
     fontSize: 18,
     fontWeight: 'bold'
   },
@@ -151,7 +150,7 @@ const styles = StyleSheet.create({
   },
   thumb: {
     width: 300,
-    height: 200,
+    height: 330,
   },
   text: {
     flex: 1,

@@ -1,5 +1,5 @@
 import {
-  ADD_PHOTOS, ADD_INFOS, ADD_MESSAGES, INIT_DATA, INIT_MESSAGES, PHOTOS_COUNT,
+  ADD_PHOTOS, ADD_INFOS, CLIENT_ADD_MESSAGES, INIT_DATA, INIT_MESSAGES, PHOTOS_COUNT,
   syncCountPhotoChild, syncAddedPhotoChild, syncRemovedPhotoChild,
   SYNC_COUNT_PHOTO_CHILD, SYNC_ADDED_PHOTO_CHILD, SYNC_REMOVED_PHOTO_CHILD,
   syncAddedInfoChild, syncRemovedInfoChild,
@@ -38,8 +38,7 @@ function* triggerGetMessagesChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CHILD)
     const child = data
-    console.log(child.val())
-    yield put({type: ADD_MESSAGES, child})
+    yield put({type: CLIENT_ADD_MESSAGES, child})
   }  
 }
 
@@ -71,8 +70,8 @@ function* triggerGetPhotoChild() {
     const { payload: { data } } = yield take(SYNC_ADDED_PHOTO_CHILD)
     const file = data.val()
     const uid = file.uid
-    const thumb = turlHead+file.fileName
-    const photo = urlHead+file.fileName
+    // const thumb = turlHead+file.fileName
+    const photo = turlHead+file.fileName
     const caption = file.caption
     const title = file.title
     const mealType = file.mealType

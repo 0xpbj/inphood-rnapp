@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { View, NavigationExperimental, BackAndroid, TabBarIOS } from 'react-native'
+import { 
+  View, 
+  TabBarIOS, 
+  BackAndroid, 
+  PushNotificationIOS, 
+  NavigationExperimental 
+} from 'react-native'
 
 const {
   Reducer: NavigationTabsReducer,
@@ -22,6 +28,7 @@ export default class HomeTabs extends Component {
       mvisible: false,
       evisible: false,
     }
+    PushNotificationIOS.requestPermissions()
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -54,7 +61,9 @@ export default class HomeTabs extends Component {
         )
       case 'Expert':
         return (
-          <Expert />
+          <Expert 
+            result={this.props.auth.result}
+          />
         )
       default:
         return <View />
@@ -78,7 +87,9 @@ export default class HomeTabs extends Component {
     }
     else if (evisible) {
       return (
-        <Expert />
+        <Expert
+          result={this.props.auth.result}
+        />
       )
     }
     if (this.props.auth.result === null) {
@@ -91,6 +102,7 @@ export default class HomeTabs extends Component {
               />
     }
     const trainer = this.props.auth.trainer
+    PushNotificationIOS.setApplicationIconBadgeNumber(2)
     const tabs = this.props.tabs.routes.map((tab, i) => {
       if (i !== 3) {
         return (
@@ -99,8 +111,9 @@ export default class HomeTabs extends Component {
             iconName={tab.name}
             selectedIconName={tab.iconName}
             iconSize={40}
+            badge={i === 2 ? 1 : undefined}
             onPress={() => {
-                this.props.changeTab(i)
+              this.props.changeTab(i)
             }}
             selected={this.props.tabs.index === i}>
             {this._renderTabContent(tab.key)}
@@ -114,8 +127,9 @@ export default class HomeTabs extends Component {
             iconName={tab.name}
             selectedIconName={tab.iconName}
             iconSize={40}
+            badge={1}
             onPress={() => {
-                this.props.changeTab(i)
+              this.props.changeTab(i)
             }}
             selected={this.props.tabs.index === i}>
             {this._renderTabContent(tab.key)}

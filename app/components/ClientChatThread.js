@@ -31,21 +31,7 @@ export default class ClientChatThread extends Component {
   componentDidMount() {
     this.props.chatVisible(true)
   }
-  componentWillReceiveProps(nextProps = {}) {
-    // const feedbackPhoto = nextProps.chat.feedbackPhoto
-    // const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
-    // const lastMessage = nextProps.chat.lastMessage
-    // console.log(lastMessage.key, lastMessage.val())
-    // var messages = []
-    // // let message = lastMessage.message
-    // // message.createdAt = lastMessage.createdAt
-    // // messages.push(message)
-    // this.setState((previousState) => {
-    //   return {
-    //     messages: GiftedChat.append(previousState.messages, messages)
-    //   }
-    // })
-  }
+  componentWillReceiveProps(nextProps = {}) {}
   onLoadEarlier() {
     const feedbackPhoto = this.props.chat.feedbackPhoto
     const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
@@ -64,6 +50,8 @@ export default class ClientChatThread extends Component {
     })
   }
   onSend(messages = []) {
+    const id = this.state.id
+    this.props.clientStoreId(id)
     this.props.clientStoreMessages(messages)
     this.props.initChatSaga()
     this.setState((previousState) => {

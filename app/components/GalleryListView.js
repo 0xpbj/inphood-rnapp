@@ -2,16 +2,16 @@
 
 import React, {Component} from 'react'
 import {
-  Image,
-  ListView,
-  Platform,
-  Dimensions,
-  TouchableHighlight,
-  StyleSheet,
-  RecyclerViewBackedScrollView,
   Text,
   View,
+  Image,
   Picker,
+  ListView,
+  Platform,
+  StyleSheet,
+  Dimensions,
+  TouchableHighlight,
+  RecyclerViewBackedScrollView
 } from 'react-native'
 
 const route = {
@@ -25,7 +25,6 @@ const route = {
 import NetworkImage from './NetworkImage'
 import TimerMixin from 'react-timer-mixin'
 import Spinner from 'react-native-loading-spinner-overlay'
-import {sampleIcon} from './Icons'
 // import RNFS from 'react-native-fs'
 
 export default class GalleryListView extends Component{
@@ -137,13 +136,8 @@ export default class GalleryListView extends Component{
               />
               <Text style={styles.profileName}>{this.state.result.first_name}'s InPhood</Text>
             </View>
-            <View style={{justifyContent: 'center', marginLeft: 20, marginTop: 150, flexDirection: 'row'}}>
-              <Text>Go to </Text>
-              <Image
-                style={styles.button}
-                source={{uri: sampleIcon.uri, scale: sampleIcon.scale}}
-              />
-              <Text> tab to add photos...</Text>
+            <View style={{justifyContent: 'center', marginTop: 150, flexDirection: 'row'}}>
+              <Text>Go to Camera tab to add photos...</Text>
             </View>
           </View>
         )
@@ -175,7 +169,7 @@ export default class GalleryListView extends Component{
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     let imgBlock = <Image style={styles.thumb} source={{uri: rowData.localFile}}/>
-    if ((Date.now() - rowData.time)/1000 > 86400) {
+    if ((Date.now() - rowData.time)/1000 > 26400) {
       imgBlock = <NetworkImage source={{uri: rowData.photo}}/>
     }
     const imgSource = rowData.photo

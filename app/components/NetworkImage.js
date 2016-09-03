@@ -42,7 +42,7 @@ export default class NetworkImage extends Component {
 var styles = StyleSheet.create({
   base: {
     width: 300,
-    height: 200,
+    height: 330,
   },
   progress: {
     flex: 1,

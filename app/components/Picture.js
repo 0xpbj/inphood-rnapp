@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   shutterOuterViewStyle: {
     marginTop: 5,
-    marginBottom: 65,
+    marginBottom: 125,
     marginRight: 35,
     marginLeft: 35,
     width: 60,

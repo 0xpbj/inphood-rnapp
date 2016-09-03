@@ -10,9 +10,10 @@ import * as db from './firebase'
 function* sendChatData() {
   try {
     const user = yield select(state => state.authReducer.user)
+    const client = yield select(state => state.clientChatReducer.client)
     const {messages, feedbackPhoto} = yield select(state => state.clientChatReducer)
     const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
-    const key = firebase.database().ref('/global/' + user.uid + '/messages/' + photo).push()
+    const key = firebase.database().ref('/global/' + client + '/messages/' + photo).push()
     key.set({
       "uid": user.uid,
       "photo": photo,
@@ -49,10 +50,10 @@ const fetchChatData = (chatRef, messages) => {
 
 function* getChatData() {
   try {
-    const user = yield select(state => state.authReducer.user)
-    let {feedbackPhoto, previousMessages} = yield select(state => state.clientChatReducer)
+    const client = yield select(state => state.clientChatReducer.client)
+    const {feedbackPhoto, previousMessages} = yield select(state => state.clientChatReducer)
     const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
-    const path = '/global/' + user.uid + '/messages/' + photo
+    const path = '/global/' + client + '/messages/' + photo
     const chatRef = firebase.database().ref(path).orderByKey()
     var messages = []
     yield call(fetchChatData, chatRef, messages)

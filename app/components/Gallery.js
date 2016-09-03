@@ -63,7 +63,6 @@ export default class Gallery extends Component {
       return (
         <NavigationHeader
           {...props}
-          onNavigateBack={this._handleBackAction}
           renderTitleComponent={this._renderTitleComponent}
           renderLeftComponent={this._renderLeftComponent.bind(this)}
         />
@@ -73,7 +72,7 @@ export default class Gallery extends Component {
   _renderLeftComponent(props) {
     return (
       <NavigationHeader.BackButton
-        onPress={props.onNavigateBack}
+        onPress={this._handleBackAction}
       />
     )
   }
@@ -110,8 +109,9 @@ export default class Gallery extends Component {
       <NavigationCardStack
         navigationState={this.props.galleryNav}
         onNavigate={this._handleNavigate.bind(this)}
+        onNavigateBack={this._handleBackAction}
         renderScene={this._renderScene.bind(this)}
-        renderOverlay={this._renderOverlay.bind(this)}
+        renderHeader={this._renderOverlay.bind(this)}
       />
     )
   }

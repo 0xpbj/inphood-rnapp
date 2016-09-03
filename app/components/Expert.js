@@ -57,6 +57,7 @@ export default class Expert extends Component {
     else if (scene.key === prefix + 'tchat') {
       return (
         <ChatView
+          result={this.props.result}
          _handleNavigate={this._handleNavigate.bind(this)}
         />
       )
@@ -67,7 +68,6 @@ export default class Expert extends Component {
       return (
         <NavigationHeader
           {...props}
-          onNavigateBack={this._handleBackAction}
           renderTitleComponent={this._renderTitleComponent}
           renderLeftComponent={this._renderLeftComponent.bind(this)}
         />
@@ -77,7 +77,7 @@ export default class Expert extends Component {
   _renderLeftComponent(props) {
     return (
       <NavigationHeader.BackButton
-        onPress={props.onNavigateBack}
+        onPress={this._handleBackAction}
       />
     )
   }
@@ -114,8 +114,9 @@ export default class Expert extends Component {
       <NavigationCardStack
         navigationState={this.props.trainerNav}
         onNavigate={this._handleNavigate.bind(this)}
+        onNavigateBack={this._handleBackAction}
         renderScene={this._renderScene.bind(this)}
-        renderOverlay={this._renderOverlay.bind(this)}
+        renderHeader={this._renderOverlay.bind(this)}
       />
     )
   }

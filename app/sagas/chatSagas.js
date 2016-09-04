@@ -1,8 +1,8 @@
 import {
   LOGIN_SUCCESS, INIT_CHAT_SAGA,
-  ADD_MESSAGES, LOAD_MESSAGES,
-  STORE_CHAT_SUCCESS, STORE_CHAT_ERROR,
-  MARK_MESSAGE_READ, DECREMENT_TRAINER_NOTIFICATION,
+  ADD_MESSAGES, LOAD_MESSAGES, LOAD_MESSAGES_ERROR,
+  STORE_CHAT_SUCCESS, STORE_CHAT_ERROR, MARK_MESSAGE_READ, 
+  DECREMENT_TRAINER_NOTIFICATION, INCREMENT_CLIENT_NOTIFICATION, DECREMENT_CLIENT_NOTIFICATION
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -90,9 +90,18 @@ function* loadOldMessages() {
     const path = '/global/' + uid + '/messages'
     const snapshot = yield call(db.getPath, path)
     var messages = []
-    snapshot.forEach(function(childSnapshot) {
-      messages[childSnapshot.key] = childSnapshot.val()
+    var count = 0
+    snapshot.forEach(snapshot => {
+      messages[snapshot.key] = snapshot.val()
+      snapshot.forEach(message => {
+        if (message.val().clientRead === false) {
+          count = count + 1
+        }
+      })
     })
+    for (let i = 0; i < count; i++) {
+      yield put({type: INCREMENT_CLIENT_NOTIFICATION})
+    }
     yield put ({type: LOAD_MESSAGES, messages})
   }
   catch(error) {
@@ -104,8 +113,14 @@ function* loadOldMessages() {
 function* readFirebaseChatFlow() {
   while (true) {
     const data = yield take(MARK_MESSAGE_READ)
-    firebase.database().ref(data.path).update({'trainerRead': true})
-    yield put({type: DECREMENT_TRAINER_NOTIFICATION})
+    if (data.trainer) {
+      firebase.database().ref(data.path).update({'trainerRead': true})
+      yield put({type: DECREMENT_TRAINER_NOTIFICATION})
+    }
+    else {
+      firebase.database().ref(data.path).update({'clientRead': true})
+      yield put({type: DECREMENT_CLIENT_NOTIFICATION})
+    }
   }
 }
 

@@ -47,7 +47,13 @@ export default class ClientChatThread extends Component {
         if (this.state.id !== oldMessages[keys].uid) {
           const path = '/global/' + oldMessages[keys].uid + '/messages/' + oldMessages[keys].photo + '/' + keys
           if (oldMessages[keys].trainerRead === false) {
-            this.props.markMessageRead(path)
+            this.props.markMessageRead(path, true)
+          }
+        }
+        else {
+          const path = '/global/' + oldMessages[keys].uid + '/messages/' + oldMessages[keys].photo + '/' + keys
+          if (oldMessages[keys].clientRead === false) {
+            this.props.markMessageRead(path, false)
           }
         }
         let message = oldMessages[keys].message

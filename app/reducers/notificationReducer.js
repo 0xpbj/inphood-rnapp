@@ -24,6 +24,9 @@ export default function library (state = initialState, action) {
           client: state.client - 1
         }
       }
+      else {
+        return state
+      }
     case INCREMENT_TRAINER_NOTIFICATION:
       return {
         ...state,
@@ -35,6 +38,9 @@ export default function library (state = initialState, action) {
           ...state,
           trainer: state.trainer - 1
         }
+      }
+      else {
+        return state
       }
     default:
       return state

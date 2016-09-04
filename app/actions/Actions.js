@@ -236,10 +236,11 @@ export function storeMessages(messages) {
   }
 }
 
-export function markMessageRead(path) {
+export function markMessageRead(path, trainer) {
   return {
     type: MARK_MESSAGE_READ,
-    path
+    path,
+    trainer
   }
 }
 

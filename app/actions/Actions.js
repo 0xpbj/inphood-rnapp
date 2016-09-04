@@ -13,8 +13,7 @@ import {
   TRAINER_CHAT_TAB_VISIBLE,
   TAKE_PHOTO,
   SELECT_PHOTO,
-  CLIENT_FEEDBACK_PHOTO,
-  TRAINER_FEEDBACK_PHOTO,
+  FEEDBACK_PHOTO,
   LOAD_PHOTOS_INIT,
   LOAD_PHOTOS_SUCCESS,
   LOAD_PHOTOS_ERROR,
@@ -34,8 +33,10 @@ import {
   STORE_LIBRARY_TITLE,
   ADD_CAMERA_MEAL_DATA,
   ADD_LIBRARY_MEAL_DATA,
-  CLIENT_STORE_MESSAGES,
-  CLIENT_LOAD_ID,
+  STORE_MESSAGES,
+  MARK_MESSAGE_READ,
+  MARK_PHOTO_READ,
+  LOAD_ID,
   TRAINER_STORE_MESSAGES,
   INIT_CHAT_SAGA,
   INIT_TRAINER_CHAT_SAGA,
@@ -145,16 +146,9 @@ export function selectPhoto (selected) {
   }
 }
 
-export function clientFeedbackPhoto (feedbackPhoto) {
+export function feedbackPhoto (feedbackPhoto) {
   return {
-    type: CLIENT_FEEDBACK_PHOTO,
-    feedbackPhoto
-  }
-}
-
-export function trainerFeedbackPhoto (feedbackPhoto) {
-  return {
-    type: TRAINER_FEEDBACK_PHOTO,
+    type: FEEDBACK_PHOTO,
     feedbackPhoto
   }
 }
@@ -235,36 +229,37 @@ export function addLibraryMealData(mealType) {
   }
 }
 
-export function clientStoreMessages(messages) {
+export function storeMessages(messages) {
   return {
-    type: CLIENT_STORE_MESSAGES,
+    type: STORE_MESSAGES,
     messages
   }
 }
 
-export function clientStoreId(id) {
+export function markMessageRead(path) {
   return {
-    type: CLIENT_LOAD_ID,
+    type: MARK_MESSAGE_READ,
+    path
+  }
+}
+
+export function markPhotoRead(path) {
+  return {
+    type: MARK_PHOTO_READ,
+    path
+  }
+}
+
+export function storeId(id) {
+  return {
+    type: LOAD_ID,
     id
-  }
-}
-
-export function trainerStoreMessages(messages) {
-  return {
-    type: TRAINER_STORE_MESSAGES,
-    messages
   }
 }
 
 export function initChatSaga() {
   return {
     type: INIT_CHAT_SAGA,
-  }
-}
-
-export function initTrainerChatSaga() {
-  return {
-    type: INIT_TRAINER_CHAT_SAGA,
   }
 }
 

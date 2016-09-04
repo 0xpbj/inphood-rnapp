@@ -45,7 +45,7 @@ export default class Gallery extends Component {
         <GalleryView
            result={this.props.result}
           _handleNavigate={this._handleNavigate.bind(this)}
-          _setFeedback={(action) => this.props.clientFeedbackPhoto(action)}
+          _setFeedback={(action) => this.props.feedbackPhoto(action)}
         />
       )
     }
@@ -54,6 +54,7 @@ export default class Gallery extends Component {
         <ChatView
           result={this.props.result}
          _handleNavigate={this._handleNavigate.bind(this)}
+          caller="client"
         />
       )
     }

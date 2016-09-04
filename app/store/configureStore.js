@@ -15,7 +15,6 @@ const config = {
   databaseURL: Config.FIREBASE_DATABASE_URL,
   storageBucket: Config.FIREBASE_STORAGE_BUCKET,
 }
-firebase.initializeApp(config)
 
 import rootReducer from '../reducers'
 import rootSaga from '../sagas/index'
@@ -28,6 +27,7 @@ export default function configureStore() {
     rootReducer,
     applyMiddleware(sagaMiddleware),
   )
+  firebase.initializeApp(config)
   sagaMiddleware.run(rootSaga)
   if (module.hot) {
     module.hot.accept(() => {

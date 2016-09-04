@@ -102,7 +102,9 @@ export default class HomeTabs extends Component {
               />
     }
     const trainer = this.props.auth.trainer
-    PushNotificationIOS.setApplicationIconBadgeNumber(2)
+    const notificationCount = this.props.notification.client + this.props.notification.trainer
+    const notification = notificationCount > 0 ? notificationCount : 0
+    PushNotificationIOS.setApplicationIconBadgeNumber(notification)
     const tabs = this.props.tabs.routes.map((tab, i) => {
       if (i !== 3) {
         return (
@@ -111,7 +113,7 @@ export default class HomeTabs extends Component {
             iconName={tab.name}
             selectedIconName={tab.iconName}
             iconSize={40}
-            badge={i === 2 ? 1 : undefined}
+            badge={i === 2 ? (this.props.notification.client > 0 ? this.props.notification.client : undefined) : undefined}
             onPress={() => {
               this.props.changeTab(i)
             }}
@@ -127,7 +129,7 @@ export default class HomeTabs extends Component {
             iconName={tab.name}
             selectedIconName={tab.iconName}
             iconSize={40}
-            badge={1}
+            badge={this.props.notification.trainer > 0 ? this.props.notification.trainer : undefined}
             onPress={() => {
               this.props.changeTab(i)
             }}

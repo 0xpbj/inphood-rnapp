@@ -1,7 +1,8 @@
 import {
   LOGIN_SUCCESS, INIT_CHAT_SAGA,
-  CLIENT_ADD_MESSAGES, CLIENT_LOAD_MESSAGES,
-  STORE_CHAT_DATA_SUCCESS, STORE_CHAT_DATA_ERROR,
+  ADD_MESSAGES, LOAD_MESSAGES,
+  STORE_CHAT_SUCCESS, STORE_CHAT_ERROR,
+  MARK_MESSAGE_READ, DECREMENT_TRAINER_NOTIFICATION,
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -9,22 +10,33 @@ import * as db from './firebase'
 
 function* sendChatData() {
   try {
-    const user = yield select(state => state.authReducer.user)
-    const client = yield select(state => state.clientChatReducer.client)
-    const {messages, feedbackPhoto} = yield select(state => state.clientChatReducer)
+    const uid = (yield select(state => state.authReducer.user)).uid
+    const client = yield select(state => state.chatReducer.client)
+    const {messages, feedbackPhoto} = yield select(state => state.chatReducer)
     const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
     const key = firebase.database().ref('/global/' + client + '/messages/' + photo).push()
+    const createdAt = Date.now()
+    let clientRead = false
+    let trainerRead = false
+    if (uid === client) {
+      clientRead = true
+    }
+    else {
+      trainerRead = true
+    }
     key.set({
-      "uid": user.uid,
-      "photo": photo,
-      "createdAt": Date.now(),
+      uid,
+      photo,
+      createdAt,
+      clientRead,
+      trainerRead,
       "message": messages[0]
     })
-    yield put ({type: STORE_CHAT_DATA_SUCCESS})
+    yield put ({type: STORE_CHAT_SUCCESS})
   }
   catch(error) {
     console.log(error)
-    yield put ({type: STORE_CHAT_DATA_ERROR, error})
+    yield put ({type: STORE_CHAT_ERROR, error})
   }
 }
 
@@ -50,18 +62,18 @@ const fetchChatData = (chatRef, messages) => {
 
 function* getChatData() {
   try {
-    const client = yield select(state => state.clientChatReducer.client)
-    const {feedbackPhoto, previousMessages} = yield select(state => state.clientChatReducer)
+    const client = yield select(state => state.chatReducer.client)
+    const {feedbackPhoto, previousMessages} = yield select(state => state.chatReducer)
     const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
     const path = '/global/' + client + '/messages/' + photo
     const chatRef = firebase.database().ref(path).orderByKey()
     var messages = []
     yield call(fetchChatData, chatRef, messages)
-    yield put ({type: CLIENT_ADD_MESSAGES, messages, photo})
+    yield put ({type: ADD_MESSAGES, messages, photo})
   }
   catch(error) {
     console.log(error)
-    yield put ({type: STORE_CHAT_DATA_ERROR, error})
+    yield put ({type: STORE_CHAT_ERROR, error})
   }
 }
 
@@ -74,18 +86,26 @@ function* appendFirebaseChatFlow() {
 
 function* loadOldMessages() {
   try {
-    const user = yield select(state => state.authReducer.user)
-    const path = '/global/' + user.uid + '/messages'
+    const uid = (yield select(state => state.authReducer.user)).uid
+    const path = '/global/' + uid + '/messages'
     const snapshot = yield call(db.getPath, path)
     var messages = []
     snapshot.forEach(function(childSnapshot) {
       messages[childSnapshot.key] = childSnapshot.val()
     })
-    yield put ({type: CLIENT_LOAD_MESSAGES, messages})
+    yield put ({type: LOAD_MESSAGES, messages})
   }
   catch(error) {
     console.log(error)
     yield put ({type: LOAD_MESSAGES_ERROR, error})
+  }
+}
+
+function* readFirebaseChatFlow() {
+  while (true) {
+    const data = yield take(MARK_MESSAGE_READ)
+    firebase.database().ref(data.path).update({'trainerRead': true})
+    yield put({type: DECREMENT_TRAINER_NOTIFICATION})
   }
 }
 
@@ -94,4 +114,5 @@ export default function* rootSaga() {
   yield fork(loadOldMessages)
   yield fork(watchFirebaseChatFlow)
   yield fork(appendFirebaseChatFlow)
+  yield fork(readFirebaseChatFlow)
 }

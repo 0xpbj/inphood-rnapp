@@ -1,11 +1,12 @@
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux'
-import ClientChatThread from '../components/ClientChatThread'
+import Chat from '../components/Chat'
 import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps (state) {
   return {
-    chat: state.clientChatReducer
+    data: state.trainerReducer,
+    chat: state.chatReducer
   }
 }
 
@@ -16,4 +17,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ClientChatThread)
+)(Chat)

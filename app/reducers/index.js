@@ -6,10 +6,10 @@ import photoReducer from './photoReducer'
 import libReducer from './libReducer'
 import galReducer from './galReducer'
 import galNavReducer from './galNavReducer'
-import clientChatReducer from './clientChatReducer'
-import trainerChatReducer from './trainerChatReducer'
+import chatReducer from './chatReducer'
 import trainerReducer from './trainerReducer'
 import trainerNavReducer from './trainerNavReducer'
+import notificationReducer from './notificationReducer'
 
 const rootReducer = combineReducers({
     tabReducer,
@@ -19,10 +19,10 @@ const rootReducer = combineReducers({
     libReducer,
     galReducer,
     galNavReducer,
-    clientChatReducer,
-    trainerChatReducer,
+    chatReducer,
     trainerReducer,
     trainerNavReducer,
+    notificationReducer,
 })
 
 export default rootReducer

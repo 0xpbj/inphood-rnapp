@@ -33,7 +33,7 @@ export default class ClientGallery extends Component{
   }
   _createDataSource(list) {
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => true,
+      rowHasChanged: (r1, r2) => r1 !== r2,
     });
     return dataSource.cloneWithRows(list);
   }
@@ -45,7 +45,9 @@ export default class ClientGallery extends Component{
       if (vals[key][id])
         data.unshift(vals[key][id])
     }
-    this.setState({dataSource: this._createDataSource(data)})
+    if (data.length !== 0) {
+      this.setState({dataSource: this._createDataSource(data)})
+    }
   }
   componentWillReceiveProps(nextProps) {
     const id = nextProps.trainerData.clientId 
@@ -55,10 +57,26 @@ export default class ClientGallery extends Component{
       if (vals[key][id])
         data.unshift(vals[key][id])
     }
-    this.setState({dataSource: this._createDataSource(data)})
+    if (data.length !== 0) {
+      this.setState({dataSource: this._createDataSource(data)})
+    }
   }
   render() {
     let name = this.props.trainerData.clientName.split(' ')
+    let content = <View />
+    if (this.state.dataSource.getRowCount() !== 0) {
+      content = <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow.bind(this)}
+          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          renderSeparator={this._renderSeparator}
+        />
+    }
+    else {
+      content = <View style={{justifyContent: 'center', marginTop: 150, marginLeft: 60}}>
+            <Text>Client has not added new photos</Text>
+          </View>
+    }
     return (
       <View style={styles.container}>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
@@ -68,12 +86,7 @@ export default class ClientGallery extends Component{
           />
           <Text style={styles.profileName}>{name[0]}'s InPhood</Text>
         </View>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this._renderRow.bind(this)}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-          renderSeparator={this._renderSeparator}
-        />
+        {content}
       </View>
     )
   }
@@ -82,9 +95,10 @@ export default class ClientGallery extends Component{
     const imgBlock = <NetworkImage source={{uri: data.photo}}/>
     const mealType = data.mealType
     const mealTime = new Date(data.time).toDateString()
+    const path = '/global/' + data.file.uid + '/photoData/' + data.file.fileTail
     return (
       <TouchableHighlight onPress={() => {
-          this._pressRow(data.photo)
+          this._pressRow(data.photo, path)
           highlightRow(sectionID, rowID)
         }}>
         <View style={styles.row}>
@@ -104,9 +118,10 @@ export default class ClientGallery extends Component{
       </TouchableHighlight>
     )
   }
-  _pressRow(imgSource: string) {
+  _pressRow(imgSource: string, path: string) {
+    this.props.markPhotoRead(path)
     this.props._handleNavigate(route)
-    this.props.trainerFeedbackPhoto(imgSource)
+    this.props.feedbackPhoto(imgSource)
   }
   _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
     return (

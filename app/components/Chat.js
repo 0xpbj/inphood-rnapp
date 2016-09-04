@@ -25,34 +25,52 @@ export default class ClientChatThread extends Component {
     this.onReceive = this.onReceive.bind(this)
     this.renderBubble = this.renderBubble.bind(this)
     this.renderFooter = this.renderFooter.bind(this)
-    this.onLoadEarlier = this.onLoadEarlier.bind(this)
+    // this.onLoadEarlier = this.onLoadEarlier.bind(this)
     this._isAlright = null
   }
   componentDidMount() {
-    this.props.chatVisible(true)
+    if (this.props.caller === 'client') {
+      this.props.chatVisible(true)
+    }
+    else if (this.props.caller === 'trainer') {
+      this.props.trainerChatVisible(true)
+    }
   }
   componentWillReceiveProps(nextProps = {}) {}
-  onLoadEarlier() {
-    const feedbackPhoto = this.props.chat.feedbackPhoto
-    const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
-    const oldMessages = this.props.chat.previousMessages[photo]
-    var messages = []
-    for (var keys in oldMessages) {
-      let message = oldMessages[keys].message
-      message.createdAt = oldMessages[keys].createdAt
-      messages.unshift(message)
-    }
-    this.setState((previousState) => {
-      return {
-        messages: GiftedChat.append(previousState.messages, messages),
-        loadEarlier: false
+  componentWillMount() {
+    if (this.state.loadEarlier) {
+      const feedbackPhoto = this.props.chat.feedbackPhoto
+      const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
+      const oldMessages = this.props.chat.previousMessages[photo]
+      var messages = []
+      for (var keys in oldMessages) {
+        if (this.state.id !== oldMessages[keys].uid) {
+          const path = '/global/' + oldMessages[keys].uid + '/messages/' + oldMessages[keys].photo + '/' + keys
+          if (oldMessages[keys].trainerRead === false) {
+            this.props.markMessageRead(path)
+          }
+        }
+        let message = oldMessages[keys].message
+        message.createdAt = oldMessages[keys].createdAt
+        messages.unshift(message)
       }
-    })
+      this.setState((previousState) => {
+        return {
+          messages: GiftedChat.append(previousState.messages, messages),
+          loadEarlier: false
+        }
+      })
+    }
   }
   onSend(messages = []) {
-    const id = this.state.id
-    this.props.clientStoreId(id)
-    this.props.clientStoreMessages(messages)
+    const id = this.props.data.clientId
+    if (id === '') {
+      this.props.storeId(this.state.id)
+    }
+    else {
+      this.props.storeId(id)
+    }
+    this.props.storeMessages(messages)
     this.props.initChatSaga()
     this.setState((previousState) => {
       return {
@@ -108,7 +126,7 @@ export default class ClientChatThread extends Component {
         onSend={this.onSend}
         onReceive={this.onReceive}
         loadEarlier={this.state.loadEarlier}
-        onLoadEarlier={this.onLoadEarlier}
+        // onLoadEarlier={this.onLoadEarlier}
         user={{
           _id: this.state.id, // sent messages should have same user._id,
           name: this.props.result.first_name,

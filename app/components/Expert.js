@@ -19,7 +19,7 @@ const {
 
 import Client from '../containers/ClientContainer'
 import ClientGallery from '../containers/ClientGalleryContainer'
-import ChatView from '../containers/TrainerChatContainer'
+import ChatView from '../containers/ChatContainer'
 
 export default class Expert extends Component {
   constructor(props) {
@@ -27,9 +27,6 @@ export default class Expert extends Component {
     this._renderScene = this._renderScene.bind(this)
     this._handleBackAction = this._handleBackAction.bind(this)
     this._handleNavigate = this._handleNavigate.bind(this)
-    this.state = {
-      hack: false,
-    }
   }
   componentDidMount () {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
@@ -58,7 +55,8 @@ export default class Expert extends Component {
       return (
         <ChatView
           result={this.props.result}
-         _handleNavigate={this._handleNavigate.bind(this)}
+          _handleNavigate={this._handleNavigate.bind(this)}
+          caller="trainer"
         />
       )
     }
@@ -90,7 +88,6 @@ export default class Expert extends Component {
   }
   _handleBackAction () {
     this.props.trainerChatVisible(false)
-    this.setState({hack: true})
     if (this.props.trainerNav.index === 0) {
       return false
     }

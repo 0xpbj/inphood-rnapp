@@ -53,7 +53,7 @@ export default class GalleryListView extends Component{
   mixins: [TimerMixin]
   _createDataSource(list) {
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => true,
+      rowHasChanged: (r1, r2) => r1 !== r2,
     });
     return dataSource.cloneWithRows(list);
   }

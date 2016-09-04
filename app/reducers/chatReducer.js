@@ -1,42 +1,41 @@
 import { 
-  CLIENT_FEEDBACK_PHOTO, 
-  CLIENT_STORE_MESSAGES, 
-  CLIENT_LOAD_MESSAGES,
-  CLIENT_ADD_MESSAGES,
-  CLIENT_LOAD_ID
+  FEEDBACK_PHOTO, 
+  STORE_MESSAGES, 
+  LOAD_MESSAGES,
+  ADD_MESSAGES,
+  LOAD_ID
 } from '../constants/ActionTypes'
 
 const defaultState = {
   client: '',
   feedbackPhoto: '',
   messages: [],
-  previousMessages: [],
-  loadEarlier: true
+  previousMessages: []
 }
 
 export default function chat(state = defaultState, action) {
   switch(action.type) {
-    case CLIENT_FEEDBACK_PHOTO:
+    case FEEDBACK_PHOTO:
       return {
         ...state,
         feedbackPhoto: action.feedbackPhoto
       }
-    case CLIENT_STORE_MESSAGES:
+    case STORE_MESSAGES:
       return {
         ...state,
         messages: action.messages
       }
-    case CLIENT_LOAD_MESSAGES:
+    case LOAD_MESSAGES:
       return {
         ...state,
         previousMessages: action.messages
       }
-    case CLIENT_LOAD_ID:
+    case LOAD_ID:
       return {
         ...state,
         client: action.id
       }
-    case CLIENT_ADD_MESSAGES:
+    case ADD_MESSAGES:
       let messages = state.previousMessages
       messages[action.photo] = action.messages
       return {

@@ -117,7 +117,6 @@ function* syncData() {
 function* readClientPhotoFlow() {
   while (true) {
     const data = yield take(MARK_PHOTO_READ)
-
     firebase.database().ref(data.path).update({'notifyTrainer': false})
     yield put({type: DECREMENT_TRAINER_NOTIFICATION})
   }

@@ -2,7 +2,8 @@ import {
   LOGIN_SUCCESS, INIT_CHAT_SAGA,
   ADD_MESSAGES, LOAD_MESSAGES, LOAD_MESSAGES_ERROR,
   STORE_CHAT_SUCCESS, STORE_CHAT_ERROR, MARK_MESSAGE_READ, 
-  DECREMENT_TRAINER_NOTIFICATION, INCREMENT_CLIENT_NOTIFICATION, DECREMENT_CLIENT_NOTIFICATION
+  INCREMENT_TRAINER_NOTIFICATION, DECREMENT_TRAINER_NOTIFICATION, 
+  INCREMENT_CLIENT_NOTIFICATION, DECREMENT_CLIENT_NOTIFICATION
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -20,6 +21,9 @@ function* sendChatData() {
     let trainerRead = false
     if (uid === client) {
       clientRead = true
+      const path = '/global/' + uid + '/photoData/' + photo
+      firebase.database().ref(path).update({'notifyTrainer': true})
+      yield put({type: INCREMENT_TRAINER_NOTIFICATION})
     }
     else {
       trainerRead = true

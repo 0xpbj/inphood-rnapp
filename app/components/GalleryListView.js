@@ -52,6 +52,7 @@ export default class GalleryListView extends Component{
       newUser: false,
       filter: filter,
       modalVisible: false,
+      photoFlags: []
     }
   }
   mixins: [TimerMixin]
@@ -180,11 +181,11 @@ export default class GalleryListView extends Component{
     const notificationBlock = ( <View style={styles.notification}>
               <Text style={styles.notificationText}> </Text>
             </View> )
-    const showNotification = flag ? notificationBlock : <View />
     const imgSource = rowData.photo
     const mealType = rowData.mealType
     const mealTime = new Date(rowData.time).toDateString()
     const path = '/global/' + rowData.data.uid + '/photoData/' + rowData.data.fileTail
+    const showNotification = flag ? notificationBlock : <View />
     return (
         <View style={styles.row}>
           <View style={{flexDirection: 'row'}}>

@@ -1,5 +1,5 @@
 import {
-  LOGIN_SUCCESS,
+  LOAD_MESSAGES, REFRESH_CLIENT_DATA, REMOVE_CLIENT_PHOTO,
   LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_ERROR,
   SEND_FIREBASE_CAMERA_SUCCESS, SEND_FIREBASE_LIBRARY_SUCCESS,
   APPEND_PHOTOS_SUCCESS, APPEND_PHOTOS_ERROR,
@@ -19,22 +19,27 @@ const fetchFirebaseData = (imageRef, photos, user) => {
   return imageRef.once('value')
   .then(snapshot => {
     return snapshot.forEach(childSnapshot => {
-      // let thumb = turlHead+childSnapshot.val().fileName
-      const fileName = childSnapshot.val().fileName
-      const photo = turlHead+fileName
-      const caption = childSnapshot.val().caption
-      const title = childSnapshot.val().title
-      const mealType = childSnapshot.val().mealType
-      const time = childSnapshot.val().time
-      const localFile = childSnapshot.val().localFile
-      var flag = false
-      var prefetchTask = Image.prefetch(photo)
-      prefetchTask.then(() => {
-        flag = true
-      })
-      .catch(error => {console.log(error + ' - ' + photo)})
-      const obj = {photo,caption,mealType,time,title,localFile,flag}
-      photos.unshift(obj)
+      const data = childSnapshot.val()
+      const visible = data.visible
+      if (visible) {
+        // let thumb = turlHead+data.fileName
+        const fileName = data.fileName
+        const photo = turlHead+fileName
+        const caption = data.caption
+        const title = data.title
+        const mealType = data.mealType
+        const time = data.time
+        const localFile = data.localFile
+        const notification = data.notifyClient
+        var flag = false
+        var prefetchTask = Image.prefetch(photo)
+        prefetchTask.then(() => {
+          flag = true
+        })
+        .catch(error => {console.log(error + ' - ' + photo)})
+        const obj = {photo,caption,mealType,time,title,localFile,flag,data,notification}
+        photos.unshift(obj)
+      }
     })
   })
   .catch(error => {
@@ -77,14 +82,18 @@ function* loadInitialData() {
   }
 }
 
-function* initialFirebaseData() {
+function* updateDataVisibility() {
   while (true) {
-    yield take(LOGIN_SUCCESS)
-    yield call(loadInitialData)
+    const data = yield take(REMOVE_CLIENT_PHOTO)
+    console.log(data.path)
+    firebase.database().ref(data.path).update({'visible': false})
+    yield put({type: REFRESH_CLIENT_DATA})
   }
 }
 
 export default function* rootSaga() {
-  yield fork(initialFirebaseData)
+  yield take([LOAD_MESSAGES, REFRESH_CLIENT_DATA])
+  yield call(loadInitialData)
   yield fork(watchFirebaseDataFlow)
+  yield fork(updateDataVisibility)
 }

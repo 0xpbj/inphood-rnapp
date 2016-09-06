@@ -59,12 +59,12 @@ const sendToFirebase = (state, flag) => {
   let id = result.id
   let picture = result.picture.data.url
   let time = Date.now()
-  firebase.database().ref('/global/' + uid + '/userInfo/public').set({
+  firebase.database().ref('/global/' + uid + '/userInfo/public').update({
     id,
     name,
     picture,
   })
-  firebase.database().ref('/global/' + uid + '/userInfo/public/physicals').set({
+  firebase.database().ref('/global/' + uid + '/userInfo/public/physicals').update({
     gender,
   })
   let key = firebase.database().ref('/global/' + uid + '/photoData').push()

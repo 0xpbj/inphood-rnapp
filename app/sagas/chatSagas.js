@@ -21,7 +21,7 @@ function* sendChatData() {
     let trainerRead = false
     if (uid === client) {
       clientRead = true
-      const path = '/global/' + uid + '/photoData/' + photo
+      const path = '/global/' + uid + '/photoData/' + photo 
       firebase.database().ref(path).update({'notifyTrainer': true})
       yield put({type: INCREMENT_TRAINER_NOTIFICATION})
     }
@@ -95,14 +95,25 @@ function* loadOldMessages() {
     const snapshot = yield call(db.getPath, path)
     var messages = []
     var count = 0
+    var photos = []
     snapshot.forEach(snapshot => {
       messages[snapshot.key] = snapshot.val()
       snapshot.forEach(message => {
         if (message.val().clientRead === false) {
           count = count + 1
+          const ipath = '/global/' + uid + '/photoData/' + message.val().photo
+          if (photos[ipath] === undefined) {
+            photos[ipath] = 1
+          }
+          else {
+            photos[ipath]++
+          }
         }
       })
     })
+    for (let index in photos) {
+      firebase.database().ref(index).update({'clientNotification': photos[index]})
+    }
     for (let i = 0; i < count; i++) {
       yield put({type: INCREMENT_CLIENT_NOTIFICATION})
     }

@@ -34,6 +34,7 @@ import {
   ADD_CAMERA_MEAL_DATA,
   ADD_LIBRARY_MEAL_DATA,
   STORE_MESSAGES,
+  REMOVE_CLIENT_PHOTO,
   MARK_MESSAGE_READ,
   MARK_PHOTO_READ,
   LOAD_ID,
@@ -247,6 +248,13 @@ export function markMessageRead(path, trainer) {
 export function markPhotoRead(path) {
   return {
     type: MARK_PHOTO_READ,
+    path
+  }
+}
+
+export function removeClientPhoto(path) {
+  return {
+    type: REMOVE_CLIENT_PHOTO,
     path
   }
 }

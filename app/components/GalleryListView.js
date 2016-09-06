@@ -5,11 +5,13 @@ import {
   Text,
   View,
   Image,
+  Modal,
   Picker,
   ListView,
   Platform,
   StyleSheet,
   Dimensions,
+  TouchableOpacity,
   TouchableHighlight,
   RecyclerViewBackedScrollView
 } from 'react-native'
@@ -25,6 +27,7 @@ const route = {
 import NetworkImage from './NetworkImage'
 import TimerMixin from 'react-timer-mixin'
 import Spinner from 'react-native-loading-spinner-overlay'
+import Icon from 'react-native-vector-icons/Ionicons'
 // import RNFS from 'react-native-fs'
 
 export default class GalleryListView extends Component{
@@ -48,6 +51,7 @@ export default class GalleryListView extends Component{
       dataSource: (filter === '') ? this._createDataSource(mediaList) : this._createDataSource(filteredList),
       newUser: false,
       filter: filter,
+      modalVisible: false,
     }
   }
   mixins: [TimerMixin]
@@ -172,29 +176,71 @@ export default class GalleryListView extends Component{
     if ((Date.now() - rowData.time)/1000 > 26400) {
       imgBlock = <NetworkImage source={{uri: rowData.photo}}/>
     }
+    const flag = rowData.notification
+    const notificationBlock = ( <View style={styles.notification}>
+              <Text style={styles.notificationText}> </Text>
+            </View> )
+    const showNotification = flag ? notificationBlock : <View />
     const imgSource = rowData.photo
     const mealType = rowData.mealType
     const mealTime = new Date(rowData.time).toDateString()
+    const path = '/global/' + rowData.data.uid + '/photoData/' + rowData.data.fileTail
     return (
-      <TouchableHighlight onPress={() => {
-          this._pressRow(rowData.photo)
-          highlightRow(sectionID, rowID)
-        }}>
         <View style={styles.row}>
-          {imgBlock}
-          <View  style={styles.text}>
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity 
+              onPress={() => {
+                this._pressRow(rowData.photo)
+                highlightRow(sectionID, rowID)
+              }}
+            >
+              {imgBlock}
+            </TouchableOpacity>
+            {showNotification}
+          </View>
+          <View style={styles.text}>
             <Text style={{fontWeight: '600', fontSize: 18}}>
               {rowData.title}: {rowData.caption}
             </Text>
             <Text>
               {mealType}
             </Text>
-            <Text style={{fontStyle: 'italic'}}>
-              {mealTime}
-            </Text>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={{fontStyle: 'italic'}}>
+                {mealTime}
+              </Text>
+              <TouchableOpacity 
+                style={{marginLeft: 160}}
+                onPress={this._setModalVisible.bind(this, true)}
+              >
+                <Icon name="ios-options-outline" size={20} color='black'/>
+              </TouchableOpacity>
+            </View>
           </View>
+          <Modal
+            animationType='none'
+            transparent={true}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {this._setModalVisible(false)}}
+            >
+            <View style={styles.modalContainer}>
+              <View style={[styles.innerContainer, {backgroundColor: '#fff', padding: 10}]}>
+                <TouchableOpacity
+                  onPress={this._removeClientPhoto.bind(this, path)}
+                  style={[styles.button, styles.modalButton]}
+                >
+                  <Text style={[styles.buttonText, {color: 'red'}]}>Delete</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={this._setModalVisible.bind(this, false)}
+                  style={[styles.button, styles.modalButton]}
+                >
+                  <Text style={[styles.buttonText]}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
         </View>
-      </TouchableHighlight>
     )
   }
   _pressRow(imgSource: string) {
@@ -212,6 +258,13 @@ export default class GalleryListView extends Component{
       />
     )
   }
+  _removeClientPhoto(path) {
+    this.props.removeClientPhoto(path)
+    this.setState({modalVisible: false})
+  }
+  _setModalVisible(visible) {
+    this.setState({modalVisible: visible})
+  }
 }
 
 const styles = StyleSheet.create({
@@ -219,6 +272,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20,
     backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 60,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
   profileImage: {
     marginLeft: 20,
@@ -256,8 +315,36 @@ const styles = StyleSheet.create({
     width: 100,
   },
   button: {
-    height: 28,
-    width: 28,
-    resizeMode: 'contain'
-  }
+    borderRadius: 5,
+    flex: 1,
+    height: 44,
+    // alignSelf: 'stretch',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  buttonText: {
+    fontSize: 18,
+    margin: 5,
+    textAlign: 'center',
+  },
+  innerContainer: {
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  notification: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    width: 25,
+  },
+  notificationText: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: 'white',
+    backgroundColor: 'red',
+    fontWeight: 'bold',
+  },
 })

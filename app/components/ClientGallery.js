@@ -96,13 +96,21 @@ export default class ClientGallery extends Component{
     const mealType = data.mealType
     const mealTime = new Date(data.time).toDateString()
     const path = '/global/' + data.file.uid + '/photoData/' + data.file.fileTail
+    const flag = data.notification
+    const notificationBlock = ( <View style={styles.notification}>
+              <Text style={styles.notificationText}> </Text>
+            </View> )
+    const showNotification = flag ? notificationBlock : <View />
     return (
       <TouchableHighlight onPress={() => {
           this._pressRow(data.photo, path)
           highlightRow(sectionID, rowID)
         }}>
         <View style={styles.row}>
-          {imgBlock}
+          <View style={{flexDirection: 'row'}}>
+            {imgBlock}
+            {showNotification}
+          </View>
           <View  style={styles.text}>
             <Text style={{fontWeight: '600', fontSize: 18}}>
               {data.title}: {data.caption}
@@ -181,5 +189,21 @@ const styles = StyleSheet.create({
     height: 28,
     width: 28,
     resizeMode: 'contain'
-  }
+  },
+  notification: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    width: 28,
+  },
+  notificationText: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: 'white',
+    backgroundColor: 'red',
+    fontWeight: 'bold',
+  },
 })

@@ -30,6 +30,7 @@ function* triggerGetMessagesChild() {
       const photo = children[index].photo
       yield put ({type: ADD_MESSAGES, messages, photo})
       if (children[index].trainerRead === false) {
+        const path = '/global/' + children[index].uid + '/photoData/' + photo
         yield put({type: INCREMENT_TRAINER_NOTIFICATION})
       }
     }
@@ -72,13 +73,15 @@ function* triggerGetPhotoChild() {
       const mealType = file.mealType
       const time = file.time
       const localFile = file.localFile
+      const notification = file.notifyTrainer
       var prefetchTask = Image.prefetch(photo)
       prefetchTask
       .then(() => {})
       .catch(error => {})
-      const obj = {photo,caption,mealType,time,title,localFile,file}
+      const obj = {photo,caption,mealType,time,title,localFile,file,notification}
       var child = {}
       child[uid] = obj
+      const path = '/global/' + uid + '/photoData/' + file.fileTail
       yield put({type: INCREMENT_TRAINER_NOTIFICATION})
       yield put({type: ADD_PHOTOS, child})
     }

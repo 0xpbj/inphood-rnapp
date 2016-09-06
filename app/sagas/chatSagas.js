@@ -101,19 +101,9 @@ function* loadOldMessages() {
       snapshot.forEach(message => {
         if (message.val().clientRead === false) {
           count = count + 1
-          const ipath = '/global/' + uid + '/photoData/' + message.val().photo
-          if (photos[ipath] === undefined) {
-            photos[ipath] = 1
-          }
-          else {
-            photos[ipath]++
-          }
         }
       })
     })
-    for (let index in photos) {
-      firebase.database().ref(index).update({'clientNotification': photos[index]})
-    }
     for (let i = 0; i < count; i++) {
       yield put({type: INCREMENT_CLIENT_NOTIFICATION})
     }

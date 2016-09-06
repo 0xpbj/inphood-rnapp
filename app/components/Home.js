@@ -16,6 +16,7 @@ const {
 
 import Icon from 'react-native-vector-icons/Ionicons'
 import Login from './Login'
+// import Login from './emailLogin/email'
 import Media from './Media'
 import Gallery from '../containers/GalleryContainer'
 import Expert from '../containers/ExpertContainer'

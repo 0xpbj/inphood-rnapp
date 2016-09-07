@@ -224,11 +224,11 @@
 		63675BAC90914873A9A4162B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		647291E1B81A4F7ABF41DB29 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		6D49B063EAC4415E964E5EAF /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		7512D6651D23717B00210FCE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		7512D6661D23717B00210FCE /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		7512D6671D23717B00210FCE /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		7512D6651D23717B00210FCE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Users/aycarrei/Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = DEVELOPER_DIR; };
+		7512D6661D23717B00210FCE /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Users/aycarrei/Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = DEVELOPER_DIR; };
+		7512D6671D23717B00210FCE /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../Users/aycarrei/Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = DEVELOPER_DIR; };
 		7512D6B51D2C5AC700210FCE /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		7512D6C91D2C5B4600210FCE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
+		7512D6C91D2C5B4600210FCE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../../Users/aycarrei/Documents/FacebookSDK/Bolts.framework; sourceTree = DEVELOPER_DIR; };
 		751F45751CFAAE9F00CE681B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		752F47451D79EF5D000F8EE6 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		757238ED1D7B63B80099EE39 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
@@ -375,7 +375,7 @@
 			name = inPhoodRN;
 			sourceTree = "<group>";
 		};
-		750C063B1CC9D56C0054AA98 /* Framerworks */ = {
+		750C063B1CC9D56C0054AA98 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				7512D6C91D2C5B4600210FCE /* Bolts.framework */,
@@ -383,7 +383,7 @@
 				7512D6661D23717B00210FCE /* FBSDKLoginKit.framework */,
 				7512D6671D23717B00210FCE /* FBSDKShareKit.framework */,
 			);
-			name = Framerworks;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		7512D6B61D2C5AC700210FCE /* Products */ = {
@@ -512,7 +512,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				750C063B1CC9D56C0054AA98 /* Framerworks */,
+				750C063B1CC9D56C0054AA98 /* Frameworks */,
 				13B07FAE1A68108700A75B9A /* inPhoodRN */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* inPhoodRNTests */,
@@ -936,15 +936,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/inPhoodPB\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = InPhood;
@@ -967,15 +958,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/inPhoodPB\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
-					"\"$(SRCROOT)/InPhood\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = InPhood;

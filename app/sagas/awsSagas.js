@@ -76,6 +76,7 @@ const sendToFirebase = (state, flag) => {
   let localFile = ''
   const notifyTrainer = true
   const notifyClient = false
+  const visible = true
   if (flag) {
     caption = state.camReducer.caption
     title = state.camReducer.title
@@ -98,6 +99,7 @@ const sendToFirebase = (state, flag) => {
     localFile,
     time,
     notifyTrainer,
+    visible,
     notifyClient
   })
   return fileName

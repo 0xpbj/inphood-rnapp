@@ -1,5 +1,5 @@
 import {
-  LOAD_MESSAGES, REFRESH_CLIENT_DATA, REMOVE_CLIENT_PHOTO,
+  LOGIN_SUCCESS, LOAD_MESSAGES, REFRESH_CLIENT_DATA, REMOVE_CLIENT_PHOTO,
   LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_ERROR,
   SEND_FIREBASE_CAMERA_SUCCESS, SEND_FIREBASE_LIBRARY_SUCCESS,
   APPEND_PHOTOS_SUCCESS, APPEND_PHOTOS_ERROR,
@@ -91,9 +91,17 @@ function* updateDataVisibility() {
   }
 }
 
+function* dataInit() {
+  while (true) {
+    // TODO: Prabhaav, fix the LOGIN_SUCCESS on this ...
+    yield take([LOGIN_SUCCESS, LOAD_MESSAGES, REFRESH_CLIENT_DATA])
+    yield call(loadInitialData)
+  }
+}
+
 export default function* rootSaga() {
-  yield take([LOAD_MESSAGES, REFRESH_CLIENT_DATA])
-  yield call(loadInitialData)
+  yield take([LOGIN_SUCCESS])
+  yield fork(dataInit)
   yield fork(watchFirebaseDataFlow)
   yield fork(updateDataVisibility)
 }

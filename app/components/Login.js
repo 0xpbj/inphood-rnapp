@@ -89,9 +89,9 @@ export default class Login extends Component {
     let uri = this.props.auth.result ? this.props.auth.result.picture.data.url : ' '
     let buttonColor = this.props.auth.result ? '#006400' : 'white'
     return (
-      <Image source={require('./img/LaunchRetina4_High.png')} style={styles.containerImage}>
-        <View style={{marginTop: 390}}></View>
-        <View style={{alignItems: 'center'}}>
+      <Image source={require('./img/HD_5_5.png')} style={styles.containerImage}>
+        <View style={{flex: 3}}></View>
+        <View style={{flex: 1, alignItems: 'center'}}>
           <TouchableOpacity
             onPress={this.userProfile.bind(this)}>
             <Image

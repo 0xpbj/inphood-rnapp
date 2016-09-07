@@ -1,19 +1,2 @@
-# The following patterns exclude the contents of the node_modules directory
-# from consideration by git with the exception of sub-directory:
-#
-#  react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj
-#
-# The multiple patterns are required b/c the parent directory cannot be
-# excluded if git consideration is needed. Read more here: 
-#
-#  https://git-scm.com/docs/gitignore
-#
-/node_modules/*
-/node_modules/react-native/*
-/node_modules/react-native/Libraries/*
-/node_modules/react-native/Libraries/PushNotificationIOS/*
-#
-!/node_modules/react-native
-!/node_modules/react-native/Libraries
-!/node_modules/react-native/Libraries/PushNotificationIOS
-!/node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj
+xcuserdata
+node_modules

@@ -12,9 +12,6 @@ import Config from 'react-native-config'
 const turlHead = Config.AWS_CDN_THU_URL
 const urlHead = Config.AWS_CDN_IMG_URL
 
-// let urlHead='http://dqh688v4tjben.cloudfront.net/data/'
-// let turlHead='http://d2sb22kvjaot7x.cloudfront.net/resized-data/'
-
 const fetchFirebaseData = (imageRef, photos, user) => {
   return imageRef.once('value')
   .then(snapshot => {
@@ -85,7 +82,6 @@ function* loadInitialData() {
 function* updateDataVisibility() {
   while (true) {
     const data = yield take(REMOVE_CLIENT_PHOTO)
-    console.log(data.path)
     firebase.database().ref(data.path).update({'visible': false})
     yield put({type: REFRESH_CLIENT_DATA})
   }
@@ -93,14 +89,13 @@ function* updateDataVisibility() {
 
 function* dataInit() {
   while (true) {
-    // TODO: Prabhaav, fix the LOGIN_SUCCESS on this ...
-    yield take([LOGIN_SUCCESS, LOAD_MESSAGES, REFRESH_CLIENT_DATA])
+    yield take([LOAD_MESSAGES, REFRESH_CLIENT_DATA])
     yield call(loadInitialData)
   }
 }
 
 export default function* rootSaga() {
-  yield take([LOGIN_SUCCESS])
+  yield take(LOGIN_SUCCESS)
   yield fork(dataInit)
   yield fork(watchFirebaseDataFlow)
   yield fork(updateDataVisibility)

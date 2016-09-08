@@ -3,7 +3,7 @@ import React from 'react'
 import { Text, TouchableHighlight, StyleSheet } from 'react-native'
 
 export default ({label, onPress, color}) => (
-  <TouchableHighlight underlayColor='#35b5ff' onPress={onPress} style={[styles.button, {backgroundColor: color}]}>
+  <TouchableHighlight underlayColor={color} onPress={onPress} style={[styles.button, {backgroundColor: color}]}>
     <Text style={styles.label}>{label}</Text>
   </TouchableHighlight>
 )

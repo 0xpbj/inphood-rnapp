@@ -33,7 +33,7 @@ export default class ClientGallery extends Component{
   }
   _createDataSource(list) {
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
+      rowHasChanged: (r1, r2) => true,
     });
     return dataSource.cloneWithRows(list);
   }
@@ -46,7 +46,16 @@ export default class ClientGallery extends Component{
         data.unshift(vals[key][id])
     }
     if (data.length !== 0) {
-      this.setState({dataSource: this._createDataSource(data)})
+      var photoNotifications = []
+      for (let index in data) {
+        photoNotifications[data[index].photo] = data[index].notification
+      }
+      console.log('Initial notifications: ')
+      console.log(photoNotifications)
+      this.setState({
+        dataSource: this._createDataSource(data),
+        photoNotifications: photoNotifications
+      })
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -58,7 +67,16 @@ export default class ClientGallery extends Component{
         data.unshift(vals[key][id])
     }
     if (data.length !== 0) {
-      this.setState({dataSource: this._createDataSource(data)})
+      var photoNotifications = []
+      for (let index in data) {
+        photoNotifications[data[index].photo] = data[index].notification
+      }
+      console.log('New notifications: ')
+      console.log(photoNotifications)
+      this.setState({
+        dataSource: this._createDataSource(data),
+        photoNotifications: photoNotifications
+      })
     }
   }
   render() {
@@ -96,7 +114,7 @@ export default class ClientGallery extends Component{
     const mealType = data.mealType
     const mealTime = new Date(data.time).toDateString()
     const path = '/global/' + data.file.uid + '/photoData/' + data.file.fileTail
-    const flag = data.notification
+    const flag = this.state.photoNotifications[imgSource]
     const notificationBlock = ( <View style={styles.notification}>
               <Text style={styles.notificationText}> </Text>
             </View> )
@@ -127,6 +145,11 @@ export default class ClientGallery extends Component{
     )
   }
   _pressRow(imgSource: string, path: string) {
+    let newNotifications = this.state.photoNotifications
+    newNotifications[imgSource] = false
+    this.setState({
+      photoNotifications: newNotifications
+    })
     this.props.markPhotoRead(path)
     this.props._handleNavigate(route)
     this.props.feedbackPhoto(imgSource)

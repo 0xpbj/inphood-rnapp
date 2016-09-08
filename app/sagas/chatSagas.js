@@ -107,7 +107,6 @@ function* loadOldMessages() {
       })
     })
     for (let index in photos) {
-      console.log(index)
       firebase.database().ref(index).update({'notifyClient': true})
     }
     for (let i = 0; i < count; i++) {

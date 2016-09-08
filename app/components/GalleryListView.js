@@ -33,32 +33,26 @@ import Icon from 'react-native-vector-icons/Ionicons'
 export default class GalleryListView extends Component{
   constructor(props) {
     super(props)
-    let mediaList = props.galleryView.photos
-    let filter = this.props.galleryView.filter
-    let filteredList = []
-    if (filter === '') {
-      let length = mediaList.length
-      for (var i = 0; i < length; i++) {
-        if (mediaList[i].mealType === filter) {
-          filteredList.push(mediaList[i])
-        }
-      }
+    const mediaList = props.galleryView.photos
+    var photoNotifications = []
+    for (let index in mediaList) {
+      photoNotifications[mediaList[index].photo] = mediaList[index].notification
     }
     this.state = {
-      mediaList: (filter === '') ? mediaList : filteredList,
+      mediaList: mediaList,
       result: this.props.result,
       size: mediaList.length,
-      dataSource: (filter === '') ? this._createDataSource(mediaList) : this._createDataSource(filteredList),
+      dataSource: this._createDataSource(mediaList),
       newUser: false,
       filter: filter,
       modalVisible: false,
-      photoFlags: []
+      photoNotifications: photoNotifications,
     }
   }
   mixins: [TimerMixin]
   _createDataSource(list) {
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
+      rowHasChanged: (r1, r2) => true,
     });
     return dataSource.cloneWithRows(list);
   }
@@ -76,35 +70,20 @@ export default class GalleryListView extends Component{
     )
   }
   componentWillReceiveProps(nextProps) {
-    let filter = nextProps.galleryView.filter
-    if (filter === '') {
-      this.setState({
-        mediaList: nextProps.galleryView.photos,
-        result: nextProps.result,
-        size: nextProps.galleryView.photos.length,
-        dataSource: this._createDataSource(nextProps.galleryView.photos),
-        newUser: nextProps.galleryView.photos.length === 0 ? true : false,
-        filter: filter
-      })
+    const mediaList = nextProps.galleryView.photos
+    var photoNotifications = []
+    for (let index in mediaList) {
+      photoNotifications[mediaList[index].photo] = mediaList[index].notification
     }
-    else {
-      let mediaList = nextProps.galleryView.photos
-      let length = mediaList.length
-      let filteredList = []
-      for (var i = 0; i < length; i++) {
-        if (mediaList[i].mealType === filter) {
-          filteredList.push(mediaList[i])
-        }
-      }
-      this.setState({
-        mediaList: filteredList,
-        result: nextProps.result,
-        size: nextProps.galleryView.photos.length,
-        dataSource: this._createDataSource(filteredList),
-        newUser: nextProps.galleryView.photos.length === 0 ? true : false,
-        filter: filter
-      })
-    }
+    this.setState({
+      mediaList: mediaList,
+      result: nextProps.result,
+      size: mediaList.length,
+      dataSource: this._createDataSource(mediaList),
+      newUser: mediaList.length === 0 ? true : false,
+      filter: filter,
+      photoNotifications: photoNotifications,
+    })
   }
   render() {
     if (this.state.result === null) {
@@ -177,14 +156,14 @@ export default class GalleryListView extends Component{
     if ((Date.now() - rowData.time)/1000 > 26400) {
       imgBlock = <NetworkImage source={{uri: rowData.photo}}/>
     }
-    const flag = rowData.notification
-    const notificationBlock = ( <View style={styles.notification}>
-              <Text style={styles.notificationText}> </Text>
-            </View> )
     const imgSource = rowData.photo
     const mealType = rowData.mealType
     const mealTime = new Date(rowData.time).toDateString()
     const path = '/global/' + rowData.data.uid + '/photoData/' + rowData.data.fileTail
+    const flag = this.state.photoNotifications[imgSource]
+    const notificationBlock = ( <View style={styles.notification}>
+              <Text style={styles.notificationText}> </Text>
+            </View> )
     const showNotification = flag ? notificationBlock : <View />
     return (
         <View style={styles.row}>
@@ -245,6 +224,11 @@ export default class GalleryListView extends Component{
     )
   }
   _pressRow(imgSource: string) {
+    let newNotifications = this.state.photoNotifications
+    newNotifications[imgSource] = false
+    this.setState({
+      photoNotifications: newNotifications
+    })
     this.props._handleNavigate(route)
     this.props._setFeedback(imgSource)
   }

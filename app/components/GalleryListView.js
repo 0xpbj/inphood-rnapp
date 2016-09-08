@@ -44,7 +44,6 @@ export default class GalleryListView extends Component{
       size: mediaList.length,
       dataSource: this._createDataSource(mediaList),
       newUser: false,
-      filter: filter,
       modalVisible: false,
       photoNotifications: photoNotifications,
     }
@@ -81,7 +80,6 @@ export default class GalleryListView extends Component{
       size: mediaList.length,
       dataSource: this._createDataSource(mediaList),
       newUser: mediaList.length === 0 ? true : false,
-      filter: filter,
       photoNotifications: photoNotifications,
     })
   }
@@ -168,7 +166,7 @@ export default class GalleryListView extends Component{
     return (
         <View style={styles.row}>
           <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={() => {
                 this._pressRow(rowData.photo)
                 highlightRow(sectionID, rowID)
@@ -189,7 +187,7 @@ export default class GalleryListView extends Component{
               <Text style={{fontStyle: 'italic'}}>
                 {mealTime}
               </Text>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={{marginLeft: 160}}
                 onPress={this._setModalVisible.bind(this, true)}
               >

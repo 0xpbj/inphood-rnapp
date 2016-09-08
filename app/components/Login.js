@@ -4,6 +4,8 @@
 
 import React, { Component } from "react";
 import {AppRegistry, StyleSheet, Text, TouchableOpacity, View, Image, NativeModules, ScrollView, Platform} from "react-native";
+// import Swiper from 'react-native-swiper'
+import SwipeALot from 'react-native-swipe-a-lot'
 
 const FBSDK = require('react-native-fbsdk');
 const {
@@ -90,8 +92,33 @@ export default class Login extends Component {
     let buttonColor = this.props.auth.result ? '#006400' : 'white'
     return (
       <Image source={require('./img/HD_5_5.png')} style={styles.containerImage}>
-        <View style={{flex: 3}}></View>
-        <View style={{flex: 1, alignItems: 'center'}}>
+
+        <View style={{flex: 1, backgroundColor: 'transparent'}}/>
+
+        {/*<View style={{flex: 2, backgroundColor: 'transparent'}}>
+          <Swiper autoplay={true} loadMinimal={true} showsPagination={true} height={400}>
+            <View style={{flex: 1, backgroundColor: 'transparent'}}>
+              <Image style={{flex: 1}} source={require('./img/exampleBanana.jpg')}/>
+            </View>
+            <View style={{flex: 1, backgroundColor: 'transparent'}}>
+              <Image source={require('./img/exampleBanana.jpg')}/>
+            </View>
+          </Swiper>
+        </View>*/}
+
+        <View style={{flex: 2, backgroundColor: 'transparent'}}>
+          <SwipeALot>
+            <View style={{flex: 1, backgroundColor: 'transparent'}}>
+              <Image source={require('./img/exampleBanana.jpg')}/>
+            </View>
+            <View style={{flex: 1, backgroundColor: 'transparent'}}>
+              <Image source={require('./img/exampleBanana.jpg')}/>
+            </View>
+          </SwipeALot>
+        </View>
+
+
+        <View style={{flex: 1, top: 10, alignItems: 'center'}}>
           <TouchableOpacity
             onPress={this.userProfile.bind(this)}>
             <Image
@@ -145,6 +172,7 @@ export default class Login extends Component {
             </TouchableOpacity>
           </View>
         </View>
+
       </Image>
     );
   }

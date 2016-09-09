@@ -25,6 +25,8 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this._responseInfoCallback = this._responseInfoCallback.bind(this);
+
+    this.state = { width: null, height: null }
   }
   //Create response callback.
   _responseInfoCallback(error: ?Object, result: ?Object) {
@@ -95,6 +97,29 @@ export default class Login extends Component {
 
         <View style={{flex: 1, backgroundColor: 'transparent'}}/>
 
+        {/*<View style={{flex: 2, flexDirection: 'row', borderWidth: 1, borderColor: 'red', backgroundColor: 'transparent'}}>
+          <ScrollView
+              contentContainerStyle={{margin: 0, padding: 0, borderWidth: 1, borderColor: 'blue', backgroundColor: 'transparent'}}
+              horizontal={true}
+              pagingEnabled={true}>
+              <View style={styles.scrollViewContentStyle}>
+                <Image resizeMode='contain' style={styles.dontFuckWithStyle} source={require('./img/f1.png')}/>
+              </View>
+              <View style={styles.scrollViewContentStyle}>
+                <Image resizeMode='contain' style={styles.dontFuckWithStyle} source={require('./img/f2.png')}/>
+              </View>
+              <View style={styles.scrollViewContentStyle}>
+                <Image resizeMode='contain' style={styles.dontFuckWithStyle} source={require('./img/f3.png')}/>
+              </View>
+              <View style={styles.scrollViewContentStyle}>
+                <Image resizeMode='contain' style={styles.dontFuckWithStyle} source={require('./img/f4.png')}/>
+              </View>
+              <View style={styles.scrollViewContentStyle}>
+                <Image resizeMode='contain' style={styles.dontFuckWithStyle} source={require('./img/f5.png')}/>
+              </View>
+          </ScrollView>
+        </View>*/}
+
         {/*<View style={{flex: 2, backgroundColor: 'transparent'}}>
           <Swiper autoplay={true} loadMinimal={true} showsPagination={true} height={400}>
             <View style={{flex: 1, backgroundColor: 'transparent'}}>
@@ -106,13 +131,31 @@ export default class Login extends Component {
           </Swiper>
         </View>*/}
 
+        // TODO:
+        //    1. Need to resolve height and width properly for the different phone platforms. The numbers below are
+        //       for iPhone 6s+.  They look ok on iPhone 6s, but are obviously wrong on iPhone 4SE.
+        //    2. Need to update images here--these are placeholders.
+        //    3. Consider disabling thise widget entirely when a user has logged in?
+        //          - not MVP
+        //          - also what's the value of disabling it?
+        //          - entertain idea of displaying other tips / tricks for inPhood here
+        //
         <View style={{flex: 2, backgroundColor: 'transparent'}}>
-          <SwipeALot>
+          <SwipeALot autoplay={{enabled: true, disableOnSwipe: false, delayBetweenAutoSwipes: 5000}}>
             <View style={{flex: 1, backgroundColor: 'transparent'}}>
-              <Image source={require('./img/exampleBanana.jpg')}/>
+              <Image resizeMode='contain' style={{height:368, width:414}} source={require('./img/f1.png')}/>
             </View>
             <View style={{flex: 1, backgroundColor: 'transparent'}}>
-              <Image source={require('./img/exampleBanana.jpg')}/>
+              <Image resizeMode='contain' style={{height:368, width:414}} source={require('./img/f2.png')}/>
+            </View>
+            <View style={{flex: 1, backgroundColor: 'transparent'}}>
+              <Image resizeMode='contain' style={{height:368, width:414}} source={require('./img/f3.png')}/>
+            </View>
+            <View style={{flex: 1, backgroundColor: 'transparent'}}>
+              <Image resizeMode='contain' style={{height:368, width:414}} source={require('./img/f4.png')}/>
+            </View>
+            <View style={{flex: 1, backgroundColor: 'transparent'}}>
+              <Image resizeMode='contain' style={{height:368, width:414}} source={require('./img/f5.png')}/>
             </View>
           </SwipeALot>
         </View>
@@ -238,6 +281,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: 64,
     height: 64,
+  },
+  scrollViewContentStyle: {
+  },
+  // dontFuckWithStyle: {
+  //   // TODO: Use PixelRatio.get() to divide the actual resolutions
+  //   // down to the values below (PixelRatio is 3 on a iPhone 6s plus so
+  //   // I manually got those number from (1242 by 1104) / 3. )
+  //   height: 368,
+  //   width: 414,
+  // },
+  flipBoardImageStyle: {
   },
   img: {
     width: 64,

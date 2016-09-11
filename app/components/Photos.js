@@ -20,7 +20,8 @@ const route = {
   }
 }
 
-import Spinner from 'react-native-loading-spinner-overlay';
+import Spinner from 'react-native-loading-spinner-overlay'
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
 
 export default class CameraRollPicker extends Component {
   constructor(props) {
@@ -180,6 +181,7 @@ export default class CameraRollPicker extends Component {
 const styles = StyleSheet.create({
   wrapper:{
     flex: 1,
+    marginTop: STATUSBAR_HEIGHT
   },
   row:{
     flexDirection: 'row',

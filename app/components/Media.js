@@ -15,14 +15,13 @@ export default class Media extends Component {
         tabBarUnderlineColor="#006400"
         tabBarActiveTextColor="#006400"
         tabBarPosition="bottom"
-        locked={true}
       >
-        <Library
-          tabLabel="Library"
-          changeTab={this.props.changeTab}
-        />
         <Camera
           tabLabel="Camera"
+          changeTab={this.props.changeTab}
+        />
+        <Library
+          tabLabel="Library"
           changeTab={this.props.changeTab}
         />
       </ScrollableTabView>

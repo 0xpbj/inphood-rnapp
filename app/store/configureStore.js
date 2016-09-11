@@ -6,9 +6,9 @@ import {
 
 import Config from 'react-native-config'
 import firebase from 'firebase'
-require("firebase/app");
-require("firebase/auth");
-require("firebase/database");
+require("firebase/app")
+require("firebase/auth")
+require("firebase/database")
 const config = {
   apiKey: Config.FIREBASE_API_KEY,
   authDomain: Config.FIREBASE_AUTH_DOMAIN,

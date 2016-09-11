@@ -4,6 +4,7 @@ import authReducer from './authReducer'
 import camReducer from './camReducer'
 import photoReducer from './photoReducer'
 import libReducer from './libReducer'
+import extReducer from './extReducer'
 import galReducer from './galReducer'
 import galNavReducer from './galNavReducer'
 import chatReducer from './chatReducer'
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     camReducer,
     photoReducer,
     libReducer,
+    extReducer,
     galReducer,
     galNavReducer,
     chatReducer,

@@ -63,7 +63,7 @@ function* triggerRemInfoChild() {
 function* triggerGetPhotoChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_PHOTO_CHILD)
-    if (data.val().notifyTrainer) {
+    if (data.val().visible) {
       const file = data.val()
       const uid = file.uid
       // const thumb = turlHead+file.fileName
@@ -82,7 +82,8 @@ function* triggerGetPhotoChild() {
       var child = {}
       child[uid] = obj
       const path = '/global/' + uid + '/photoData/' + file.fileTail
-      yield put({type: INCREMENT_TRAINER_NOTIFICATION})
+      if (file.notifyTrainer)
+        yield put({type: INCREMENT_TRAINER_NOTIFICATION})
       yield put({type: ADD_PHOTOS, child})
     }
   }  

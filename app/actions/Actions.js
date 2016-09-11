@@ -7,6 +7,8 @@ import {
   PUSH_CAM_ROUTE,
   POP_LIB_ROUTE,
   PUSH_LIB_ROUTE,
+  PUSH_EXT_ROUTE,
+  POP_EXT_ROUTE,
   CHANGE_TAB,
   MEDIA_TAB_VISIBLE,
   CHAT_TAB_VISIBLE,
@@ -102,6 +104,19 @@ export function pushLib (route) {
 export function popLib () {
   return {
     type: POP_LIB_ROUTE
+  }
+}
+
+export function pushExt (route) {
+  return {
+    type: PUSH_EXT_ROUTE,
+    route,
+  }
+}
+
+export function popExt () {
+  return {
+    type: POP_EXT_ROUTE
   }
 }
 

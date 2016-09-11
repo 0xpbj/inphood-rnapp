@@ -153,7 +153,7 @@ export default class Camera extends Component {
     this.props.mediaVisible(false)
     this.props.chatVisible(false)
     this.props.trainerChatVisible(false)
-    this.props.changeTab(2)
+    this.props.changeTab(1)
     return true
   }
   _handleNavigate (action) {
@@ -175,7 +175,7 @@ export default class Camera extends Component {
         onNavigate={this._handleNavigate.bind(this)}
         onNavigateBack={this._handleBackAction}
         renderScene={this._renderScene.bind(this)}
-        renderHeader={this._renderOverlay.bind(this)}
+        // renderHeader={this._renderOverlay.bind(this)}
       />
     )
   }

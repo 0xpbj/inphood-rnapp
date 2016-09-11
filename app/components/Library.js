@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import {
   Image,
   View,
@@ -150,7 +150,7 @@ export default class Library extends Component {
     this.props.mediaVisible(false)
     this.props.chatVisible(false)
     this.props.trainerChatVisible(false)
-    this.props.changeTab(2)
+    this.props.changeTab(1)
     return true
   }
   _handleNavigate (action) {
@@ -172,7 +172,7 @@ export default class Library extends Component {
         onNavigate={this._handleNavigate.bind(this)}
         onNavigateBack={this._handleBackAction.bind(this)}
         renderScene={this._renderScene.bind(this)}
-        renderHeader={this._renderHeader.bind(this)}
+        // renderHeader={this._renderHeader.bind(this)}
       />
     )
   }

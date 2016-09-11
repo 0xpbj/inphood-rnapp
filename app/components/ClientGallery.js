@@ -31,12 +31,6 @@ export default class ClientGallery extends Component{
     super(props)
     this.state = {dataSource: this._createDataSource([])}
   }
-  _createDataSource(list) {
-    const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => true,
-    });
-    return dataSource.cloneWithRows(list);
-  }
   componentWillMount() {
     const id = this.props.trainerData.clientId 
     const vals = this.props.trainerData.photos
@@ -88,6 +82,7 @@ export default class ClientGallery extends Component{
           renderRow={this._renderRow.bind(this)}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={this._renderSeparator}
+          removeClippedSubviews={false}
         />
     }
     else {
@@ -107,6 +102,12 @@ export default class ClientGallery extends Component{
         {content}
       </View>
     )
+  }
+  _createDataSource(list) {
+    const dataSource = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => true,
+    });
+    return dataSource.cloneWithRows(list);
   }
   _renderRow(data: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     const imgSource = data.photo

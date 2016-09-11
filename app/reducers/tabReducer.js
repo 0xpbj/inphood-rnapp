@@ -2,10 +2,10 @@ import { CHANGE_TAB, MEDIA_TAB_VISIBLE, CHAT_TAB_VISIBLE, TRAINER_CHAT_TAB_VISIB
 import {userIcon, sampleIcon, homeIcon} from '../components/Icons'
 
 const tabs = [
-  { key: 'Login', icon: userIcon, title: 'Login', name: 'ios-person-outline', iconName: 'ios-person'},
   { key: 'Camera', icon: sampleIcon, title: 'Camera', name: 'ios-camera-outline', iconName: 'ios-camera'},
   { key: 'Home', icon: homeIcon, title: 'Home', name: 'ios-home-outline', iconName: 'ios-home'},
   { key: 'Expert', icon: homeIcon, title: 'Clients', name: 'ios-people-outline', iconName: 'ios-people'},
+  { key: 'Extras', icon: sampleIcon, title: 'Extras', name: 'ios-options-outline', iconName: 'ios-options'},
 ]
 
 const initialState = {

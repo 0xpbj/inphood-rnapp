@@ -89,7 +89,7 @@ export default class GalleryListView extends Component{
       return (<View />)
     }
     else {
-      let uri = this.state.result ? this.state.result.picture.data.url : ' '
+      let uri = this.state.result ? this.state.result.picture : ' '
       let flag = this.state.size === 0 && (!this.props.galleryView.newUser || !this.state.newUser)
       if (flag) {
         return (

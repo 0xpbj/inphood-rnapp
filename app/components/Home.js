@@ -22,25 +22,13 @@ import Extras from '../containers/ExtrasContainer'
 
 export default class HomeTabs extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      cvisible: false,
-      mvisible: false,
-      evisible: false,
-      result: props.auth.result
-    }
+    super(props)
     PushNotificationIOS.requestPermissions()
+  }
+  componentWillReceiveProps(nextProps) {}
+  componentWillMount() {
     this.props.loginRequest()
   }
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      cvisible: nextProps.tabs.cvisible,
-      mvisible: nextProps.tabs.mvisible,
-      evisible: nextProps.tabs.evisible,
-      result: nextProps.auth.result
-    })
-  }
-  componentWillMount() {}
   _renderTabContent (key) {
     switch (key) {
       case 'Camera':
@@ -93,7 +81,7 @@ export default class HomeTabs extends Component {
     //     />
     //   )
     // }
-    if (this.state.result === null) {
+    if (this.props.auth.result === null) {
       return <Extras />
     }
     const trainer = this.props.auth.trainer

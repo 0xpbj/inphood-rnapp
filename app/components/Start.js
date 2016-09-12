@@ -250,8 +250,8 @@ export default class Start extends Component {
     }
   }
   _emailLogin() {
-    this.props._handleNavigate(loginRoute)
     this._setModalVisible(false)
+    this.props._handleNavigate(loginRoute)
   }
   _emailLogout() {
     this.props.logoutRequest()

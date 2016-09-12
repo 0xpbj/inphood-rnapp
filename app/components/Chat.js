@@ -114,19 +114,21 @@ export default class ChatThread extends Component {
   }
   render() {
     return (
-      <GiftedChat
-        messages={this.state.messages}
-        onSend={this.onSend}
-        loadEarlier={this.state.loadEarlier}
-        user={{
-          _id: this.state.id,
-          name: this.props.result.first_name,
-          avatar: this.props.result.picture,
-        }}
-        renderBubble={this.renderBubble}
-        renderFooter={this.renderFooter}
-        bottomOffset={56}
-      />
+      <View style={{flex: 1}}>
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={this.onSend}
+          loadEarlier={this.state.loadEarlier}
+          user={{
+            _id: this.state.id,
+            name: this.props.result.first_name,
+            avatar: this.props.result.picture,
+          }}
+          renderBubble={this.renderBubble}
+          renderFooter={this.renderFooter}
+          bottomOffset={56} 
+        />
+      </View>
     )
   }
 }

@@ -48,18 +48,18 @@ export default class GalleryListView extends Component{
       photoNotifications: photoNotifications,
     }
   }
-  mixins: [TimerMixin]
   _createDataSource(list) {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => true,
     });
     return dataSource.cloneWithRows(list);
   }
+  mixins: [TimerMixin]
   componentDidMount() {
     setTimeout(
       () => {
         this.setState({
-          newUser: true,
+        newUser: true,
         },
         () => {
           this.props.isNewUser(this.state.newUser)

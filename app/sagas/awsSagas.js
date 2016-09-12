@@ -57,16 +57,16 @@ const sendToFirebase = (state, flag) => {
   let name = result.name
   let gender = result.gender
   let id = result.id
-  let picture = result.picture.data.url
+  let picture = result.picture
   let time = Date.now()
   firebase.database().ref('/global/' + uid + '/userInfo/public').update({
     id,
     name,
     picture,
   })
-  firebase.database().ref('/global/' + uid + '/userInfo/public/physicals').update({
-    gender,
-  })
+  // firebase.database().ref('/global/' + uid + '/userInfo/public/physicals').update({
+  //   gender,
+  // })
   let key = firebase.database().ref('/global/' + uid + '/photoData').push()
   let fileTail = key.path.o[3]
   let fileName = uid + '/' + fileTail + '.jpg'

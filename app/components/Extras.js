@@ -27,9 +27,6 @@ import Profile from './UserProfile'
 export default class Extras extends Component {
   constructor(props) {
     super(props)
-    this._renderScene = this._renderScene.bind(this)
-    this._handleBackAction = this._handleBackAction.bind(this)
-    this._handleNavigate = this._handleNavigate.bind(this)
   }
   componentDidMount () {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
@@ -56,6 +53,8 @@ export default class Extras extends Component {
       return (
         <Login
           _handleNavigate={this._handleNavigate.bind(this)}
+          emailLoginRequest={(action)=>this.props.emailLoginRequest(action)}
+          goBack={this._handleBackAction.bind(this)}
         />
       )
     }
@@ -63,6 +62,8 @@ export default class Extras extends Component {
       return (
         <Signup
           _handleNavigate={this._handleBackAction.bind(this)}
+          emailCreateUser={(action)=>this.props.emailCreateUser(action)}
+          goBack={this._handleBackAction.bind(this)}
         />
       )
     }
@@ -91,7 +92,7 @@ export default class Extras extends Component {
   _renderLeftComponent(props) {
     return (
       <NavigationHeader.BackButton
-        onPress={this._handleBackAction}
+        onPress={this._handleBackAction.bind(this)}
       />
     )
   }

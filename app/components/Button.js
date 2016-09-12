@@ -5,7 +5,20 @@ import { Text, TouchableHighlight } from 'react-native'
 var commonStyles = require('./styles/common-styles')
 
 export default ({label, onPress, color}) => (
-  <TouchableHighlight underlayColor={color} onPress={onPress} style={[commonStyles.button2, {backgroundColor: color}]}>
-    <Text style={commonStyles.button2Label}>{label}</Text>
+  <TouchableHighlight
+    style={[{backgroundColor: color},
+            commonStyles.singleSegmentView,
+            commonStyles.universalButtonContentAlignment,
+            commonStyles.universalBorder,
+            commonStyles.universalBorderRadius,
+            commonStyles.universalMargin]}
+    underlayColor={color}
+    onPress={onPress}>
+
+    <Text
+      style={commonStyles.universalButtonTextStyling}>
+      {label}
+    </Text>
+
   </TouchableHighlight>
 )

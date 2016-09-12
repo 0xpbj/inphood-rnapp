@@ -45,6 +45,9 @@ export default class EmailLogin extends Component {
   constructor(props) {
     super(props)
   }
+  componentWillUnmount() {
+    this.props.goBack()
+  }
   render() {
     return (
       <View style={commonStyles.emailLoginContainer}>
@@ -67,10 +70,7 @@ export default class EmailLogin extends Component {
   login() {
     const value = this.refs.form.getValue();
     if (value) {
-      firebase.auth().signInWithEmailAndPassword(value.email, value.password)
-      .catch(error => {
-        alert(error.message)
-      })
+      this.props.emailLoginRequest(value)
     }
   }
   goToSignup() {

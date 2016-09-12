@@ -15,23 +15,11 @@ module.exports = StyleSheet.create({
     marginBottom: 10,
     justifyContent: 'center'
   },
+  // TODO: unify this with other styles (i.e. 14 is our default font)
   buttonText: {
     fontSize: 15,
     color: 'white',
     alignSelf: 'center'
-  },
-
-  // These next two styles go in Button.js which is used by Caption.js and
-  // Selected.js
-  button2: {
-    height: 70,
-    // backgroundColor: color,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  button2Label: {
-    color: 'white',
-    fontSize: 20,
   },
 
   containerImage: {
@@ -73,17 +61,11 @@ module.exports = StyleSheet.create({
     zIndex: 3,
     backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
   },
-  captionGif: {
-    width: 80,
-    height: 80,
-  },
-  captionDefault: {
-    height: 80,
-    borderWidth: 1.5,
-    borderColor: 'black',
+  captionSwitchGroup: {
+    flexDirection: 'row',
     flex: 1,
-    fontSize: 20,
-    padding: 4,
+    marginTop: 15,
+    marginLeft: 5,
   },
 
   // Styles used in Chat.js:
@@ -331,6 +313,14 @@ module.exports = StyleSheet.create({
     flex: 1
   },
 
+  flexRow: {
+    flexDirection: 'row',
+  },
+
+  flexCol: {
+    flexDirection: 'column'
+  },
+
   picturePreview: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -357,14 +347,6 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
   },
 
-  selectedDefault: {
-    height: 40,
-    borderWidth: 2,
-    borderColor: 'black',
-    flex: 1,
-    fontSize: 20,
-    padding: 4,
-  },
   // modalButton is referenced in Start.js, but had no styling, keeping it for
   // the moment here.
   // TODO: talk to PBJ about this--I think it might be the global nature of CSS
@@ -374,6 +356,87 @@ module.exports = StyleSheet.create({
   },
   // ditto spinner in Photos.js
   spinner: {
-  }
+  },
 
+
+
+  // Twenty segment layout styles:
+  //
+  //  In this layout, the screen is divided into twenty equal-height horizontal
+  //  segments.
+  //
+  //  The first segment is empty to allow the device status bar to be seen.
+  //  For pages with keyboard input, the bottom eight segments are also empty
+  //  to allow the keyboard to be seen and not to obscure any edit / text input
+  //  areas.
+  deviceStatusBarView: {
+    flex: 1,
+  },
+  deviceKeyboardView: {
+    flex: 8,
+  },
+  singleSegmentView: {
+    flex: 1,
+  },
+
+  selectedImage: {
+    flex: 9,
+    margin: 1,
+  },
+
+  // Universal input styling
+  //
+  //  TODO: this probably needs to become a class since it's a view wrapping
+  //        text input.
+  //
+  universalInputView: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'black',
+  },
+
+  // Univeral font size
+  //
+  universalFontSize: {
+    fontSize: 14
+  },
+  universalSwitchFontSize: {
+    fontSize: 24
+  },
+
+  // Universal border styling
+  //
+  universalBorder: {
+    borderColor: 'black',
+    borderWidth: 1,
+  },
+  universalBorderRadius: {
+    borderRadius: 10,
+  },
+
+  // Universal margin styling
+  //
+  universalMargin: {
+    margin: 1,
+  },
+
+  // Universal button content alignment
+  //
+  universalButtonContentAlignment: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  // Universal Button Text styling
+  //
+  universalButtonTextStyling: {
+    fontSize: 14,
+    color: 'white',
+  },
+
+  // Universal container (top-level)
+  //
+  universalContainer: {
+    flexDirection: 'column',
+    flex: 1,
+  },
 })

@@ -16,11 +16,11 @@ var example = (
         <ScrollView
           automaticallyAdjustContentInsets={false}
           horizontal={true}
-          style={[styles.scrollView, styles.horizontalScrollView]}>
+          style={[styles.testScrollView, styles.testHorizontalScrollView]}>
           {THUMBS.map(createThumbRow)}
         </ScrollView>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.testButton}
           onPress={() => { ScrollView.scrollTo({x: 0}); }}>
           <Text>Scroll to start</Text>
         </TouchableOpacity>
@@ -33,8 +33,8 @@ var Thumb = React.createClass({
   },
   render: function() {
     return (
-      <View style={styles.button}>
-        <Image style={styles.img} source={{uri:this.props.uri}} />
+      <View style={styles.testButton}>
+        <Image style={styles.testImg} source={{uri:this.props.uri}} />
       </View>
     );
   }
@@ -44,40 +44,25 @@ var THUMBS = ['https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128
 THUMBS = THUMBS.concat(THUMBS); // double length of THUMBS
 var createThumbRow = (uri, i) => <Thumb key={i} uri={uri} />;
 
+// AC: I'm not centralizing these in common-styles.js b/c they do not appear to
+// be production:
+//
 var styles = StyleSheet.create({
-  scrollView: {
+  testScrollView: {
     backgroundColor: '#6A85B1',
     height: 300,
   },
-  horizontalScrollView: {
+  testHorizontalScrollView: {
     height: 120,
   },
-  containerPage: {
-    height: 50,
-    width: 50,
-    backgroundColor: '#527FE4',
-    padding: 5,
-  },
-  text: {
-    fontSize: 20,
-    color: '#888888',
-    left: 80,
-    top: 20,
-    height: 40,
-  },
-  button: {
+  testButton: {
     margin: 7,
     padding: 5,
     alignItems: 'center',
     backgroundColor: '#eaeaea',
     borderRadius: 3,
   },
-  buttonContents: {
-    flexDirection: 'row',
-    width: 64,
-    height: 64,
-  },
-  img: {
+  testImg: {
     width: 64,
     height: 64,
   }

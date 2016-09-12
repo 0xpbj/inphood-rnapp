@@ -18,6 +18,7 @@ var EmailSignUp = Comb.struct({
   age: Comb.Number,
   email: Comb.String,
   password: Comb.String,
+  pictureURL: Comb.maybe(Comb.String),
 })
 var options = {
   fields: {
@@ -41,11 +42,12 @@ export default class UserSignUp extends Component {
   signup() {
     const value = this.refs.form.getValue();
     if (value) {
-      firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-      .catch (error => {
-        alert(error.message)
-      })
+      this.props.emailCreateUser(value)
     }
+  }
+  componentWillUnmount() {
+    this.props.goBack()
+    this.props.goBack()
   }
   render() {
     return (

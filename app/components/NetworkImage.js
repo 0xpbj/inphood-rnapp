@@ -5,7 +5,6 @@ import {
   ActivityIndicator,
   Image,
   Platform,
-  StyleSheet,
   Text,
   View
 } from 'react-native'

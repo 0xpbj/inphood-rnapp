@@ -1,10 +1,14 @@
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR,
+  EM_LOGIN_REQUEST, EM_CREATE_USER, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR,
   LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR,
   STORE_RESULT, STORE_TOKEN,
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
+import * as db from './firebase'
+import Config from 'react-native-config'
+
+const defaultPicture = Config.AWS_CDN_IMG_URL + 'banana.jpg'
 
 const FBSDK = require('react-native-fbsdk')
 const {
@@ -50,7 +54,7 @@ const facebookLogin = () => {
   })
 }
 
-function* loginFlow() {
+function* fbloginFlow() {
   try {
     const {user, error} = yield call(facebookLogin)
     // yield cps(facebookGraph)
@@ -72,11 +76,85 @@ function* loginFlow() {
   }
 }
 
-function* watchLoginFlow() {
-  while (true) {
-    yield take(LOGIN_REQUEST)
-    yield call(loginFlow)
+function* watchFBLoginFlow() {
+  yield take(LOGIN_REQUEST)
+  yield call(fbloginFlow)
+}
+
+const emailCreate = (value) => {
+  return firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
+    .catch (error => {
+      alert(error.message)
+    }
+  )
+}
+
+function* emailCreateFlow(value) {
+  try {
+    yield call(emailCreate, value)
+    const user = firebase.auth().currentUser
+    const id = user.providerData[0].uid
+    const first_name = value.firstname
+    const last_name = value.lastname
+    const name = value.firstname + ' ' + value.lastname
+    const picture = value.pictureURL ? value.pictureURL : defaultPicture
+    const provider = user.providerData[0].providerId
+    const token = user.uid
+    const result = {id, name, picture, first_name, last_name, provider}
+    firebase.database().ref('/global/' + token + '/userInfo/public').update({
+      id,
+      name,
+      picture,
+    })
+    yield put ({type: STORE_RESULT, result})
+    yield put ({type: STORE_TOKEN, token})
+    yield put ({type: LOGIN_SUCCESS, user})
   }
+  catch(error) {
+    yield put ({type: LOGIN_ERROR, error})
+  }
+}
+
+function* watchEMCreateFlow() {
+  const data = yield take(EM_CREATE_USER)
+  yield call(emailCreateFlow, data.value)
+}
+
+
+const emailLogin = (value) => {
+  return firebase.auth().signInWithEmailAndPassword(value.email, value.password)
+    .catch(error => {
+      alert(error.message)
+    }
+  )
+}
+
+function* emloginFlow(value) {
+  try {
+    yield call(emailLogin, value)
+    const user = firebase.auth().currentUser
+    const token = user.uid
+    const path = '/global/' + token + '/userInfo/public'
+    const id = (yield call(db.getPath, path + '/id')).val()
+    const name = (yield call(db.getPath, path + '/name')).val()
+    const picture = (yield call(db.getPath, path + '/picture')).val()
+    const provider = user.providerData[0].providerId
+    const values = name.split(" ")
+    const first_name = values[0]
+    const last_name = values[1]
+    const result = {id, name, picture, first_name, last_name, provider}
+    yield put ({type: STORE_RESULT, result})
+    yield put ({type: STORE_TOKEN, token})
+    yield put ({type: LOGIN_SUCCESS, user})
+  }
+  catch(error) {
+    yield put ({type: LOGIN_ERROR, error})
+  }
+}
+
+function* watchEMLoginFlow() {
+  const data = yield take(EM_LOGIN_REQUEST)
+  yield call(emloginFlow, data.value)
 }
 
 const firebaseLogout = () => {
@@ -99,13 +177,13 @@ function* logoutFlow() {
 }
 
 function* watchLogoutFlow() {
-  while (true) {
-    yield take(LOGOUT_REQUEST)
-    yield call(logoutFlow)
-  }
+  yield take(LOGOUT_REQUEST)
+  yield call(logoutFlow)
 }
 
 export default function* rootSaga() {
-  yield fork(watchLoginFlow)
+  yield fork(watchFBLoginFlow)
+  yield fork(watchEMLoginFlow)
+  yield fork(watchEMCreateFlow)
   yield fork(watchLogoutFlow)
 }

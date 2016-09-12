@@ -112,7 +112,7 @@ export default class GalleryListView extends Component{
       else if (this.state.size === 0) {
         return (
           <View style={commonStyles.commonContainer}>
-            <View style={commonStyle.flexRowMarginBottom10}>
+            <View style={commonStyles.flexRowMarginBottom10}>
               <Image
                 source={{uri: uri}}
                 style={commonStyles.galleryListViewProfileImage}

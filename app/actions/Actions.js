@@ -44,6 +44,8 @@ import {
   INIT_CHAT_SAGA,
   INIT_TRAINER_CHAT_SAGA,
   LOGIN_REQUEST,
+  EM_LOGIN_REQUEST,
+  EM_CREATE_USER,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT_REQUEST,
@@ -314,24 +316,38 @@ export function loginRequest(){
   };
 }
 
+export function emailLoginRequest(value){
+  return {
+    type: EM_LOGIN_REQUEST,
+    value
+  }
+}
+
+export function emailCreateUser(value){
+  return {
+    type: EM_CREATE_USER,
+    value
+  }
+}
+
 export function loginSuccess(){
   return {
     type: LOGIN_SUCCESS
-  };
+  }
 }
 
 export function loginError(error){
   return {
     type: LOGIN_ERROR,
     error: error
-  };
+  }
 }
 
 // triggered to logout the user
 export function logoutRequest(){
   return {
     type: LOGOUT_REQUEST
-  };
+  }
 }
 
 export function logoutSuccess(){

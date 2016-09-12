@@ -6,7 +6,6 @@ import {
   Image,
   Switch,
   Platform,
-  StyleSheet,
   TextInput,
   Picker,
   Dimensions,
@@ -15,6 +14,8 @@ import {
 
 import Button from './Button'
 import Spinner from 'react-native-loading-spinner-overlay'
+
+var commonStyles = require('./styles/common-styles')
 
 var { width, height } = Dimensions.get('window');
 
@@ -91,7 +92,7 @@ export default class Caption extends Component {
   render() {
     let whiteSpace = new RegExp(/^\s+$/)
     return (
-      <View style={styles.container}>
+      <View style={commonStyles.captionContainer}>
         <View style={{flexDirection: 'row'}}>
           <TextInput
             autoCapitalize="none"
@@ -113,11 +114,11 @@ export default class Caption extends Component {
                 }
               }
             }
-            style={styles.default}
+            style={commonStyles.captionDefault}
           />
           <TouchableHighlight onPress={this.props._handleBackAction}>
             <Image
-              style={styles.gif}
+              style={commonStyles.captionGif}
               source={{uri: this.props._selectedPhoto}}
             />
           </TouchableHighlight>
@@ -236,28 +237,3 @@ export default class Caption extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  title: {
-    marginBottom: 20,
-    fontSize: 22,
-    textAlign: 'center'
-  },
-  container: {
-    flex: 1,
-    zIndex: 3,
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
-  },
-  gif: {
-    width: 80,
-    height: 80,
-  },
-  default: {
-    height: 80,
-    borderWidth: 1.5,
-    borderColor: 'black',
-    flex: 1,
-    fontSize: 20,
-    padding: 4,
-  },
-})

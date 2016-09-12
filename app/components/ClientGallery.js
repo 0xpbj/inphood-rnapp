@@ -9,10 +9,11 @@ import {
   ListView,
   Platform,
   Dimensions,
-  StyleSheet,
   TouchableHighlight,
   RecyclerViewBackedScrollView,
 } from 'react-native'
+
+var commonStyles = require('./styles/common-styles')
 
 const route = {
   type: 'push',
@@ -32,7 +33,7 @@ export default class ClientGallery extends Component{
     this.state = {dataSource: this._createDataSource([])}
   }
   componentWillMount() {
-    const id = this.props.trainerData.clientId 
+    const id = this.props.trainerData.clientId
     const vals = this.props.trainerData.photos
     var data = []
     for (var key in vals) {
@@ -53,7 +54,7 @@ export default class ClientGallery extends Component{
     }
   }
   componentWillReceiveProps(nextProps) {
-    const id = nextProps.trainerData.clientId 
+    const id = nextProps.trainerData.clientId
     const vals = (nextProps.trainerData.photos)
     var data = []
     for (var key in vals) {
@@ -86,18 +87,18 @@ export default class ClientGallery extends Component{
         />
     }
     else {
-      content = <View style={{justifyContent: 'center', marginTop: 150, marginLeft: 60}}>
+      content = <View style={commonStyles.clientGalleryAddPhotosMessage}>
             <Text>Client has not added new photos</Text>
           </View>
     }
     return (
-      <View style={styles.container}>
-        <View style={{flexDirection: 'row', marginBottom: 10}}>
+      <View style={commonStyles.clientGalleryContainer}>
+        <View style={commonStyles.flexRowMarginBottom10}>
           <Image
             source={{uri: this.props.trainerData.clientPhoto}}
-            style={styles.profileImage}
+            style={commonStyles.clientGalleryProfileImage}
           />
-          <Text style={styles.profileName}>{name[0]}'s InPhood</Text>
+          <Text style={commonStyles.clientGalleryProfileNameText}>{name[0]}'s InPhood</Text>
         </View>
         {content}
       </View>
@@ -116,28 +117,31 @@ export default class ClientGallery extends Component{
     const mealTime = new Date(data.time).toDateString()
     const path = '/global/' + data.file.uid + '/photoData/' + data.file.fileTail
     const flag = this.state.photoNotifications[imgSource]
-    const notificationBlock = ( <View style={styles.notification}>
-              <Text style={styles.notificationText}> </Text>
+    const notificationBlock = ( <View style={commonStyles.notificationView}>
+              <Text style={commonStyles.notificationText}> </Text>
             </View> )
     const showNotification = flag ? notificationBlock : <View />
+
+    // TODO: refactor to common generating class (this is identical to GalleryListView.js)
+    //
     return (
       <TouchableHighlight onPress={() => {
           this._pressRow(data.photo, path)
           highlightRow(sectionID, rowID)
         }}>
-        <View style={styles.row}>
-          <View style={{flexDirection: 'row'}}>
+        <View style={commonStyles.galleryRow}>
+          <View style={commonStyles.flexRow}>
             {imgBlock}
             {showNotification}
           </View>
-          <View  style={styles.text}>
-            <Text style={{fontWeight: '600', fontSize: 18}}>
+          <View  style={commonStyles.galleryText}>
+            <Text style={commonStyles.heavyFont}>
               {data.title}: {data.caption}
             </Text>
             <Text>
               {mealType}
             </Text>
-            <Text style={{fontStyle: 'italic'}}>
+            <Text style={commonsStyles.italicFont}>
               {mealTime}
             </Text>
           </View>
@@ -159,75 +163,10 @@ export default class ClientGallery extends Component{
     return (
       <View
         key={`${sectionID}-${rowID}`}
-        style={{
-          height: adjacentRowHighlighted ? 4 : 1,
-          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
-        }}
+        style={adjacentRowHighlighted ?
+                  adjacentRowHighlightedSeparator :
+                  adjacentRowNotHighlightedSeparator}
       />
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingBottom: 50,
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
-  },
-  profileImage: {
-    marginLeft: 25,
-    marginTop: 8,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    borderWidth: 2,
-    borderColor: '#006400',
-  },
-  profileName: {
-    marginLeft: 20,
-    marginTop: 28,
-    fontSize: 18,
-    fontWeight: 'bold'
-  },
-  row: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    padding: 10,
-    backgroundColor: '#F6F6F6',
-  },
-  thumb: {
-    width: 300,
-    height: 330,
-  },
-  text: {
-    flex: 1,
-    marginLeft: 10,
-    flexDirection: 'column',
-    borderColor: 'black',
-    borderStyle: 'solid'
-  },
-  picker: {
-    width: 100,
-  },
-  button: {
-    height: 28,
-    width: 28,
-    resizeMode: 'contain'
-  },
-  notification: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    width: 28,
-  },
-  notificationText: {
-    fontSize: 18,
-    textAlign: 'center',
-    color: 'white',
-    backgroundColor: 'red',
-    fontWeight: 'bold',
-  },
-})

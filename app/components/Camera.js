@@ -5,7 +5,6 @@ import {
   Platform,
   BackAndroid,
   TouchableOpacity,
-  StyleSheet,
   NavigationExperimental
 } from 'react-native'
 
@@ -83,62 +82,6 @@ export default class Camera extends Component {
       )
     }
   }
-  _renderOverlay(props) {
-    return (
-      <NavigationHeader
-        {...props}
-        renderTitleComponent={this._renderTitleComponent}
-        renderLeftComponent={this._renderLeftComponent.bind(this)}
-        renderRightComponent={this._renderRightComponent.bind(this)}
-      />
-    )
-  }
-  _renderLeftComponent(props) {
-    if (this.props.camera.index === 0) {
-      return (
-        <TouchableOpacity
-          style={styles.lbuttonContainer}
-          onPress={()=>this._goToLogin()}>
-          <Icon name="ios-person-outline" size={30} color='#006400'/>
-        </TouchableOpacity>
-      )
-    }
-    return (
-      <NavigationHeader.BackButton
-        onPress={this._handleBackAction}
-      />
-    )
-  }
-  _renderRightComponent(props) {
-    if (this.props.camera.index === 0) {
-      return (
-        <TouchableOpacity
-          style={styles.rbuttonContainer}
-          onPress={()=>this._goToHome()}>
-          <Icon name="ios-home-outline" size={30} color='#006400'/>
-        </TouchableOpacity>
-      )
-    }
-  }
-  _renderTitleComponent(props) {
-    return (
-      <NavigationHeader.Title>
-        {props.scene.route.title}
-      </NavigationHeader.Title>
-    )
-  }
-  _goToLogin() {
-    this.props.mediaVisible(false)
-    this.props.chatVisible(false)
-    this.props.trainerChatVisible(false)
-    this.props.changeTab(0)
-  }
-  _goToHome() {
-    this.props.mediaVisible(false)
-    this.props.chatVisible(false)
-    this.props.trainerChatVisible(false)
-    this.props.changeTab(2)
-  }
   _handleBackAction () {
     if (this.props.camera.index === 0) {
       return false
@@ -175,37 +118,7 @@ export default class Camera extends Component {
         onNavigate={this._handleNavigate.bind(this)}
         onNavigateBack={this._handleBackAction}
         renderScene={this._renderScene.bind(this)}
-        // renderHeader={this._renderOverlay.bind(this)}
       />
     )
   }
 }
-
-const styles = StyleSheet.create({
-  base64: {
-    flex: 1,
-    height: 32,
-    resizeMode: 'contain',
-  },
-  lbuttonContainer: {
-    flex: 1,
-    marginLeft: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  rbuttonContainer: {
-    flex: 1,
-    marginRight: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button: {
-    height: 28,
-    width: 28,
-    margin: Platform.OS === 'ios' ? 10 : 16,
-    resizeMode: 'contain',
-    tintColor: '#006400'
-  }
-})

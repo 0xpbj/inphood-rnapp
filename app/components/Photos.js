@@ -12,6 +12,8 @@ import {
   ActivityIndicator,
 } from 'react-native'
 
+var commonStyles = require('./styles/common-styles')
+
 const route = {
   type: 'push',
   route: {
@@ -21,7 +23,6 @@ const route = {
 }
 
 import Spinner from 'react-native-loading-spinner-overlay'
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
 
 export default class CameraRollPicker extends Component {
   constructor(props) {
@@ -100,7 +101,7 @@ export default class CameraRollPicker extends Component {
     var {imageMargin, backgroundColor} = this.props
     return (
       <View
-        style={[styles.wrapper, {padding: imageMargin, paddingRight: 0, backgroundColor: backgroundColor},]}>
+        style={[commonStyles.photoWrapper, {padding: imageMargin, paddingRight: 0, backgroundColor: backgroundColor},]}>
         <Spinner
           visible={this.state.images === 0}
           color='black'
@@ -135,14 +136,14 @@ export default class CameraRollPicker extends Component {
       return this._renderImage(item)
     })
     return (
-      <View style={styles.row}>
+      <View style={commonStyles.photoRow}>
         {items}
       </View>
     )
   }
   _renderFooterSpinner() {
     if (!this.state.noMore) {
-      return <ActivityIndicator style={styles.spinner} />
+      return <ActivityIndicator style={commonStyles.spinner} />
     }
     return null
   }
@@ -177,22 +178,6 @@ export default class CameraRollPicker extends Component {
     return array.map((o) => { return o[property]; }).indexOf(value)
   }
 }
-
-const styles = StyleSheet.create({
-  wrapper:{
-    flex: 1,
-    marginTop: STATUSBAR_HEIGHT
-  },
-  row:{
-    flexDirection: 'row',
-    flex: 1,
-  },
-  marker: {
-    position: 'absolute',
-    top: 5,
-    backgroundColor: 'transparent',
-  },
-})
 
 CameraRollPicker.propTypes = {
   groupTypes: React.PropTypes.oneOf([

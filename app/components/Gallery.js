@@ -4,7 +4,6 @@ import {
   View,
   Text,
   Platform,
-  StyleSheet,
   BackAndroid,
   TouchableOpacity,
   NavigationExperimental
@@ -117,30 +116,3 @@ export default class Gallery extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  base64: {
-    flex: 1,
-    height: 32,
-    resizeMode: 'contain',
-  },
-  buttonContainer: {
-    flex: 1,
-    marginLeft: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button: {
-    height: 28,
-    width: 28,
-    margin: Platform.OS === 'ios' ? 10 : 16,
-    resizeMode: 'contain'
-  },
-  topbar: {
-    padding: 10,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF'
-  }
-})

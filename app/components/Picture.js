@@ -10,6 +10,8 @@ import {
 
 import Camera from 'react-native-camera'
 
+var commonStyles = require('./styles/common-styles')
+
 const route = {
   type: 'push',
   route: {
@@ -35,15 +37,17 @@ export default class Picture extends Component {
   }
   render () {
     return (
-      <View style={styles.container}>
+      <View style={commonStyles.flexContainer}>
         <Camera
           ref={(cam) => {
             this.camera = cam;
           }}
-          style={styles.preview}
+          style={[commonStyles.picturePreview,
+                  {height: Dimensions.get('window').height,
+                   width: Dimensions.get('window').width}]}
           aspect={Camera.constants.Aspect.fill}>
-          <View style={styles.shutterOuterViewStyle}>
-            <TouchableHighlight style={styles.shutterInnerViewStyle} onPress={this.takePicture.bind(this)}>
+          <View style={commonStyles.shutterOuterViewStyle}>
+            <TouchableHighlight style={commonStyles.shutterInnerViewStyle} onPress={this.takePicture.bind(this)}>
               <View/>
             </TouchableHighlight>
           </View>
@@ -52,42 +56,3 @@ export default class Picture extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width
-  },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    color: '#000',
-    padding: 10,
-    margin: 40
-  },
-  shutterInnerViewStyle: {
-    marginTop: 5,
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: 'white',
-  },
-  shutterOuterViewStyle: {
-    marginTop: 5,
-    marginBottom: 70,
-    marginRight: 35,
-    marginLeft: 35,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: '#006400',
-    alignItems: 'center',
-  }
-});

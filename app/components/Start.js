@@ -3,15 +3,15 @@
 'use strict'
 
 import React, { Component } from "react"
-import { 
-  View, 
-  Text, 
-  Image, 
+import {
+  View,
+  Text,
+  Image,
   Modal,
   Platform,
-  StyleSheet, 
-  ScrollView, 
-  NativeModules, 
+  StyleSheet,
+  ScrollView,
+  NativeModules,
   TouchableHighlight,
 } from "react-native"
 
@@ -23,6 +23,8 @@ import EmailLogin from './EmailLogin'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Device from 'react-native-device'
 var Mailer = require('NativeModules').RNMail
+
+var commonStyles = require('./styles/common-styles')
 
 const loginRoute = {
   type: 'push',
@@ -51,8 +53,8 @@ const settingsRoute = {
 export default class Start extends Component {
   constructor(props) {
     super(props)
-    this.state = { 
-      width: null, 
+    this.state = {
+      width: null,
       height: null,
       modalVisible: false,
       login: false
@@ -92,7 +94,7 @@ export default class Start extends Component {
   }
   render() {
     const buttonColor = this.props.auth.result ? '#006400' : 'white'
-    const Button = this.props.auth.result ? <Text style={styles.buttonText}>Log Out</Text> : <Text style={styles.buttonText}>Log In</Text>
+    const Button = this.props.auth.result ? <Text style={commonStyles.buttonText}>Log Out</Text> : <Text style={commonStyles.buttonText}>Log In</Text>
     const Swiper = this.props.auth.result ? <View style={{flex: 2, backgroundColor: 'transparent'}}></View> : (
       <View style={{flex: 2, backgroundColor: 'transparent'}}>
         <SwipeALot autoplay={{enabled: true, disableOnSwipe: false, delayBetweenAutoSwipes: 5000}}>
@@ -117,7 +119,7 @@ export default class Start extends Component {
     if (this.props.auth.result === null) {
       if (this.state.login) {
         return (
-          <Image source={require('./img/HD_5_5.png')} style={styles.containerImage}>
+          <Image source={require('./img/HD_5_5.png')} style={commonStyles.containerImage}>
             <View style={{flex: 1, backgroundColor: 'transparent'}}/>
            {/*
             // TODO:
@@ -132,8 +134,8 @@ export default class Start extends Component {
            */}
             {Swiper}
             <View style={{flex: 1, top: 10, alignItems: 'center'}}>
-              <TouchableHighlight 
-                style={styles.button} 
+              <TouchableHighlight
+                style={commonStyles.button}
                 underlayColor='#99d9f4'
                 onPress={this._setModalVisible.bind(this, true)}
               >
@@ -146,8 +148,8 @@ export default class Start extends Component {
               visible={this.state.modalVisible}
               onRequestClose={() => {this._setModalVisible(false)}}
               >
-              <View style={styles.modalContainer}>
-                <View style={[styles.innerContainer, {backgroundColor: '#fff', padding: 10}]}>
+              <View style={commonStyles.modalContainer}>
+                <View style={[commonStyles.innerContainer, {backgroundColor: '#fff', padding: 10}]}>
                   <FacebookLogin
                     auth={this.props.auth}
                     storeResult={this.props.storeResult}
@@ -158,18 +160,18 @@ export default class Start extends Component {
                     storeToken={this.props.storeToken}
                     _setModalVisible={this._setModalVisible.bind(this)}
                   />
-                  <TouchableHighlight 
-                    style={[styles.button, styles.modalButton]}
+                  <TouchableHighlight
+                    style={[commonStyles.button, commonStyles.modalButton]}
                     underlayColor='#99d9f4'
                     onPress={this._emailLogin.bind(this)}
                   >
-                    <Text style={styles.buttonText}>Log in with Email</Text>
+                    <Text style={commonStyles.buttonText}>Log in with Email</Text>
                   </TouchableHighlight>
                   <TouchableHighlight
                     onPress={this._setModalVisible.bind(this, false)}
-                    style={[styles.button, styles.modalButton]}
+                    style={[commonStyles.button, commonStyles.modalButton]}
                   >
-                    <Text style={[styles.buttonText]}>Cancel</Text>
+                    <Text style={[commonStyles.buttonText]}>Cancel</Text>
                   </TouchableHighlight>
                 </View>
               </View>
@@ -179,7 +181,7 @@ export default class Start extends Component {
       }
       else {
         return (
-          <Image source={require('./img/HD_5_5.png')} style={styles.containerImage}>
+          <Image source={require('./img/HD_5_5.png')} style={commonStyles.containerImage}>
             <Spinner
               visible={true}
               color='white'
@@ -206,42 +208,42 @@ export default class Start extends Component {
           </View>
         )
       : (
-          <TouchableHighlight 
-            style={styles.button} 
+          <TouchableHighlight
+            style={commonStyles.button}
             underlayColor='#99d9f4'
             onPress={this._emailLogout.bind(this)}
           >
             <View style={{flexDirection: 'row'}}>
               <Icon name="ios-exit-outline" size={26} color='white' style={{marginLeft: 10, marginRight: 30}}/>
-              <Text style={styles.buttonText}>Email Log Out</Text>
+              <Text style={commonStyles.buttonText}>Email Log Out</Text>
             </View>
           </TouchableHighlight>
         )
       return (
-        <View style={styles.container}>
+        <View style={commonStyles.container}>
           <TouchableHighlight
             onPress={this.userProfile.bind(this)}>
             <Image
               source={{uri: uri}}
-              style={[styles.profileImage, {borderColor: buttonColor}]}
+              style={[commonStyles.profileImage, {borderColor: buttonColor}]}
             />
           </TouchableHighlight>
           <TouchableHighlight
             onPress={this.sendEmail.bind(this)}
-            style={[styles.button, styles.modalButton]}
+            style={[commonStyles.button, commonStyles.modalButton]}
           >
             <View style={{flexDirection: 'row'}}>
               <Icon name="ios-mail-outline" size={26} color='white' style={{marginLeft: 10, marginRight: 25}}/>
-              <Text style={styles.buttonText}>Help Email</Text>
+              <Text style={commonStyles.buttonText}>Help Email</Text>
             </View>
           </TouchableHighlight>
           <TouchableHighlight
             onPress={this.userSettings.bind(this)}
-            style={[styles.button, styles.modalButton]}
+            style={[commonStyles.button, commonStyles.modalButton]}
           >
             <View style={{flexDirection: 'row'}}>
               <Icon name="ios-settings-outline" size={26} color='white' style={{marginLeft: 10, marginRight: 15}}/>
-              <Text style={styles.buttonText}>User Settings</Text>
+              <Text style={commonStyles.buttonText}>User Settings</Text>
             </View>
           </TouchableHighlight>
           {logoutButton}
@@ -260,75 +262,3 @@ export default class Start extends Component {
     this.setState({modalVisible: visible})
   }
 }
-
-const styles = StyleSheet.create({
-  containerImage: {
-    flex: 1,
-    resizeMode: 'contain',
-    //  The null assignments below causes the renderer to re-determine size (which was broken
-    // when the push direct to the camera view was implemented).
-    height: null,
-    width: null,
-    alignItems: 'center',
-  },
-  innerContainer: {
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center', 
-  },
-  buttonRowStyle: {
-    flexDirection: 'row',
-    // justifyContent: 'space-around',
-    // alignItems: 'center'
-  },
-  scrollView: {
-    backgroundColor: '#6A85B1',
-    height: 300,
-  },
-  scrollViewContentStyle: {
-  },
-  // dontFuckWithStyle: {
-  //   // TODO: Use PixelRatio.get() to divide the actual resolutions
-  //   // down to the values below (PixelRatio is 3 on a iPhone 6s plus so
-  //   // I manually got those number from (1242 by 1104) / 3. )
-  //   height: 368,
-  //   width: 414,
-  // },
-  flipBoardImageStyle: {
-  },
-  buttonText: {
-    fontSize: 15,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    marginTop: 10,
-    height: 30,
-    width: 180,
-    backgroundColor: '#006400',
-    borderColor: '#006400',
-    borderWidth: 1,
-    borderRadius: 4,
-    marginBottom: 10,
-    justifyContent: 'center'
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 100,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
-  },
-  profileImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    borderWidth: 2,
-    marginBottom: 10,
-    alignSelf: 'center'
-  },
-  container: {
-    flex: 1,
-    marginTop: 150,
-    alignSelf: 'center'
-  }
-})

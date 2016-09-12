@@ -12,6 +12,8 @@ import {
 } from 'react-native'
 import Button from './Button'
 
+var commonStyles = require('./styles/common-styles')
+
 export default class Selected extends Component {
   constructor(props) {
     super(props)
@@ -61,7 +63,7 @@ export default class Selected extends Component {
               }
             }
           }
-          style={styles.default}
+          style={commonStyles.selectedDefault}
         />
         <Image
           style={{height: 345}}
@@ -78,17 +80,4 @@ export default class Selected extends Component {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    marginBottom: 20,
-    fontSize: 22,
-    textAlign: 'center'
-  },
-  default: {
-    height: 40,
-    borderWidth: 2,
-    borderColor: 'black',
-    flex: 1,
-    fontSize: 20,
-    padding: 4,
-  },
 })

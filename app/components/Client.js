@@ -14,6 +14,8 @@ import {
   RecyclerViewBackedScrollView,
 } from 'react-native'
 
+var commonStyles = require('./styles/common-styles')
+
 const route = {
   type: 'push',
   route: {
@@ -42,8 +44,8 @@ export default class Client extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.profileName}>Client's InPhood</Text>
+      <View style={commonStyles.commonContainer}>
+        <Text style={commonStyles.clientProfileName}>Client's InPhood</Text>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow.bind(this)}
@@ -56,7 +58,7 @@ export default class Client extends Component {
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     const data = rowData.data
     const clientId = rowData.id
-    const clientImage = <Image style={styles.profileImage} source={{uri: data.val().picture}}/>
+    const clientImage = <Image style={commonStyles.clientProfileImage} source={{uri: data.val().picture}}/>
     const clientName = data.val().name
     const clientGender = data.child('physicals').val().gender
     return (
@@ -64,13 +66,13 @@ export default class Client extends Component {
           this._pressRow(clientId, data.val().picture, clientName)
           highlightRow(sectionID, rowID)
         }}>
-        <View style={styles.row}>
+        <View style={commonStyles.commonRow}>
           {clientImage}
-          <View  style={styles.text}>
-            <Text style={{fontWeight: '600', fontSize: 18}}>
+          <View  style={commonStyles.commonView}>
+            <Text style={commonStyles.clientNameText}>
               {clientName}
             </Text>
-            <Text style={{fontStyle: 'italic'}}>
+            <Text style={commonStyles.clientGenderText}>
               {clientGender}
             </Text>
           </View>
@@ -97,47 +99,3 @@ export default class Client extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 20,
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 10,
-    backgroundColor: '#F6F6F6',
-  },
-  profileName: {
-    justifyContent: 'center',
-    marginLeft: 90,
-    marginTop: 30,
-    marginBottom: 12,
-    fontSize: 18,
-    fontWeight: 'bold'
-  },
-  profileImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    borderWidth: 2,
-    marginBottom: 10,
-  },
-  text: {
-    flex: 1,
-    marginLeft: 10,
-    flexDirection: 'column',
-    borderColor: 'black',
-    borderStyle: 'solid'
-  },
-  picker: {
-    width: 100,
-  },
-  button: {
-    height: 28,
-    width: 28,
-    resizeMode: 'contain'
-  }
-})

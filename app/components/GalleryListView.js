@@ -9,12 +9,13 @@ import {
   Picker,
   ListView,
   Platform,
-  StyleSheet,
   Dimensions,
   TouchableOpacity,
   TouchableHighlight,
   RecyclerViewBackedScrollView
 } from 'react-native'
+
+var commonStyles = require('./styles/common-styles')
 
 const route = {
   type: 'push',
@@ -93,32 +94,32 @@ export default class GalleryListView extends Component{
       let flag = this.state.size === 0 && (!this.props.galleryView.newUser || !this.state.newUser)
       if (flag) {
         return (
-          <View style={styles.container}>
+          <View style={commonStyles.commonContainer}>
             <Spinner
               visible={flag}
               color='black'
             />
-            <View style={{flexDirection: 'row', marginBottom: 10}}>
+            <View style={commonStyles.flexRowMarginBottom10}>
               <Image
                 source={{uri: uri}}
-                style={styles.profileImage}
+                style={commonStyles.galleryListViewProfileImage}
               />
-              <Text style={styles.profileName}>{this.state.result.first_name}'s InPhood</Text>
+              <Text style={commonStyles.galleryListViewProfileName}>{this.state.result.first_name}'s InPhood</Text>
             </View>
           </View>
         )
       }
       else if (this.state.size === 0) {
         return (
-          <View style={styles.container}>
-            <View style={{flexDirection: 'row', marginBottom: 10}}>
+          <View style={commonStyles.commonContainer}>
+            <View style={commonStyle.flexRowMarginBottom10}>
               <Image
                 source={{uri: uri}}
-                style={styles.profileImage}
+                style={commonStyles.galleryListViewProfileImage}
               />
-              <Text style={styles.profileName}>{this.state.result.first_name}'s InPhood</Text>
+              <Text style={commonStyles.galleryListViewProfileName}>{this.state.result.first_name}'s InPhood</Text>
             </View>
-            <View style={{justifyContent: 'center', marginTop: 150, flexDirection: 'row'}}>
+            <View style={commonStyles.addPhotosMessage}>
               <Text>Go to Camera tab to add photos...</Text>
             </View>
           </View>
@@ -126,17 +127,17 @@ export default class GalleryListView extends Component{
       }
       else {
         return (
-          <View style={styles.container}>
+          <View style={commonStyles.commonContainer}>
             <Spinner
               visible={flag}
               color='black'
             />
-            <View style={{flexDirection: 'row', marginBottom: 10}}>
+            <View style={commonStyles.flexRowMarginBottom10}>
               <Image
                 source={{uri: uri}}
-                style={styles.profileImage}
+                style={commonStyles.galleryListViewProfileImage}
               />
-              <Text style={styles.profileName}>{this.state.result.first_name}'s InPhood</Text>
+              <Text style={commonStyles.galleryListViewProfileName}>{this.state.result.first_name}'s InPhood</Text>
             </View>
             <ListView
               dataSource={this.state.dataSource}
@@ -150,7 +151,7 @@ export default class GalleryListView extends Component{
     }
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    let imgBlock = <Image style={styles.thumb} source={{uri: rowData.localFile}}/>
+    let imgBlock = <Image style={commonStyles.galleryListViewThumb} source={{uri: rowData.localFile}}/>
     if ((Date.now() - rowData.time)/1000 > 26400) {
       imgBlock = <NetworkImage source={{uri: rowData.photo}}/>
     }
@@ -159,13 +160,13 @@ export default class GalleryListView extends Component{
     const mealTime = new Date(rowData.time).toDateString()
     const path = '/global/' + rowData.data.uid + '/photoData/' + rowData.data.fileTail
     const flag = this.state.photoNotifications[imgSource]
-    const notificationBlock = ( <View style={styles.notification}>
-              <Text style={styles.notificationText}> </Text>
+    const notificationBlock = ( <View style={commonStyles.notificationView}>
+              <Text style={commonStyles.notificationText}> </Text>
             </View> )
     const showNotification = flag ? notificationBlock : <View />
     return (
-        <View style={styles.row}>
-          <View style={{flexDirection: 'row'}}>
+        <View style={commonStyles.galleryRow}>
+          <View style={commonStyles.flexRow}>
             <TouchableOpacity
               onPress={() => {
                 this._pressRow(rowData.photo)
@@ -176,15 +177,15 @@ export default class GalleryListView extends Component{
             </TouchableOpacity>
             {showNotification}
           </View>
-          <View style={styles.text}>
-            <Text style={{fontWeight: '600', fontSize: 18}}>
+          <View style={commonStyles.galleryText}>
+            <Text style={commonStyles.heavyFont}>
               {rowData.title}: {rowData.caption}
             </Text>
             <Text>
               {mealType}
             </Text>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={{fontStyle: 'italic'}}>
+            <View style={commonStyles.flexRow}>
+              <Text style={commonStyles.italicFont}>
                 {mealTime}
               </Text>
               <TouchableOpacity
@@ -201,19 +202,19 @@ export default class GalleryListView extends Component{
             visible={this.state.modalVisible}
             onRequestClose={() => {this._setModalVisible(false)}}
             >
-            <View style={styles.modalContainer}>
-              <View style={[styles.innerContainer, {backgroundColor: '#fff', padding: 10}]}>
+            <View style={commonStyles.modalContainer}>
+              <View style={[commonStyles.galleryListViewInnerContainer, {backgroundColor: '#fff', padding: 10}]}>
                 <TouchableOpacity
                   onPress={this._removeClientPhoto.bind(this, path)}
-                  style={[styles.button, styles.modalButton]}
+                  style={[commonStyles.galleryListViewButton, commonStyles.modalButton]}
                 >
-                  <Text style={[styles.buttonText, {color: 'red'}]}>Delete</Text>
+                  <Text style={[commonStyles.galleryListViewButtonText, {color: 'red'}]}>Delete</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={this._setModalVisible.bind(this, false)}
-                  style={[styles.button, styles.modalButton]}
+                  style={[commonStyles.galleryListViewButton, commonStyles.modalButton]}
                 >
-                  <Text style={[styles.buttonText]}>Cancel</Text>
+                  <Text style={[commonStyles.galleryListViewButtonText]}>Cancel</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -234,10 +235,9 @@ export default class GalleryListView extends Component{
     return (
       <View
         key={`${sectionID}-${rowID}`}
-        style={{
-          height: adjacentRowHighlighted ? 4 : 1,
-          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
-        }}
+        style={adjacentRowHighlighted ?
+                commonStyles.adjacentRowHighlightedSeparator :
+                commonStyles.adjacentRowNotHighlightedSeparator}
       />
     )
   }
@@ -249,85 +249,3 @@ export default class GalleryListView extends Component{
     this.setState({modalVisible: visible})
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 20,
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 60,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
-  },
-  profileImage: {
-    marginLeft: 20,
-    marginTop: 22,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    borderWidth: 2,
-    borderColor: '#006400',
-  },
-  profileName: {
-    marginLeft: 40,
-    marginTop: 42,
-    fontSize: 18,
-    fontWeight: 'bold'
-  },
-  row: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    padding: 10,
-    backgroundColor: '#F6F6F6',
-  },
-  thumb: {
-    width: 300,
-    height: 330,
-  },
-  text: {
-    flex: 1,
-    marginLeft: 10,
-    flexDirection: 'column',
-    borderColor: 'black',
-    borderStyle: 'solid'
-  },
-  picker: {
-    width: 100,
-  },
-  button: {
-    borderRadius: 5,
-    flex: 1,
-    height: 44,
-    // alignSelf: 'stretch',
-    justifyContent: 'center',
-    overflow: 'hidden',
-  },
-  buttonText: {
-    fontSize: 18,
-    margin: 5,
-    textAlign: 'center',
-  },
-  innerContainer: {
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-  notification: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    width: 25,
-  },
-  notificationText: {
-    fontSize: 18,
-    textAlign: 'center',
-    color: 'white',
-    backgroundColor: 'red',
-    fontWeight: 'bold',
-  },
-})

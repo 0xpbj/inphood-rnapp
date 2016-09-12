@@ -1,22 +1,11 @@
 import React from 'react'
 
-import { Text, TouchableHighlight, StyleSheet } from 'react-native'
+import { Text, TouchableHighlight } from 'react-native'
+
+var commonStyles = require('./styles/common-styles')
 
 export default ({label, onPress, color}) => (
-  <TouchableHighlight underlayColor={color} onPress={onPress} style={[styles.button, {backgroundColor: color}]}>
-    <Text style={styles.label}>{label}</Text>
+  <TouchableHighlight underlayColor={color} onPress={onPress} style={[commonStyles.button2, {backgroundColor: color}]}>
+    <Text style={commonStyles.button2Label}>{label}</Text>
   </TouchableHighlight>
 )
-
-var styles = StyleSheet.create({
-  button: {
-    height: 70,
-    // backgroundColor: color,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  label: {
-    color: 'white',
-    fontSize: 20,
-  }
-})

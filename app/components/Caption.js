@@ -92,137 +92,27 @@ export default class Caption extends Component {
   render() {
     let whiteSpace = new RegExp(/^\s+$/)
 
-    // React native flex layout doesn't really seem to understand how to mix
-    // flexDirection in a flex layout.  If you are going vertical and then nest
-    // a horizontal child element, it sets the height to zero.  We can
-    // workaround this by calculating the height we need for the layout.
-    // In this particular case, it's based on the 20 segment layout:
-    //
-    //  imageHeight = (selectedImage->flex segments - fudge factor)
-    //                * windowHeight / 20 segments
-    //
-    let imageHeight = (9 - 1) * Dimensions.get('window').height / 20;
-    //
-    // It also doesn't know how to size the imageWidth so we set that to 50%:
-    //
-    let imageWidth = Dimensions.get('window').width / 2;
-
     return (
+
       // This view divides the screen into 20 segments.  The bottom 8 segments
       // are left blank for the keyboard.  The top segment is left blank for
       // the device status bar.
-      <View
-        style={[commonStyles.flexContainer, commonStyles.flexCol]}>
+      <View style={commonStyles.flexContainer}>
 
         <View style={commonStyles.deviceStatusBarView}/>
 
-        <View style={commonStyles.selectedImage}>
-          {/* Workarounds for nested flex layout direction mixing with images
-              abound in the view below: */}
-          <View style={{height: imageHeight}, commonStyles.flexRow}>
+        <TouchableHighlight
+          onPress={this.props._handleBackAction}
+          style={[commonStyles.selectedImage,
+                  commonStyles.universalMargin]}>
+          <Image
+            style={[{flex:1},
+                    commonStyles.universalBorderRadius]}
+            source={{uri: this.props._selectedPhoto}}/>
+        </TouchableHighlight>
 
-            <View style={[commonStyles.flexCol, {flex: 1, height: imageHeight}]}>
-
-              <View style={commonStyles.captionSwitchGroup}>
-                <Switch
-                  onValueChange={(value) => {
-                    if (value) {
-                      this.setState({
-                        breakfast: value,
-                        lunch: !value,
-                        dinner: !value,
-                        snack: !value,
-                      })
-                    } else {
-                      this.setState({breakfast: value})
-                    }
-                  }}
-                  value={this.state.breakfast} />
-
-                  <Text style={commonStyles.universalSwitchFontSize}>
-                    Breakfast
-                  </Text>
-              </View>
-
-              <View style={commonStyles.captionSwitchGroup}>
-                <Switch
-                onValueChange={(value) => {
-                  if (value) {
-                    this.setState({
-                      breakfast: !value,
-                      lunch: value,
-                      dinner: !value,
-                      snack: !value,
-                    })
-                  }
-                  else {
-                    this.setState({lunch: value})
-                  }
-                }}
-                value={this.state.lunch} />
-
-                <Text style={commonStyles.universalSwitchFontSize}>
-                  Lunch
-                </Text>
-              </View>
-
-              <View style={commonStyles.captionSwitchGroup}>
-                <Switch
-                onValueChange={(value) => {
-                  if (value) {
-                    this.setState({
-                      breakfast: !value,
-                      lunch: !value,
-                      dinner: value,
-                      snack: !value,
-                    })
-                  }
-                  else {
-                    this.setState({dinner: value})
-                  }
-                }}
-                value={this.state.dinner} />
-
-                <Text style={commonStyles.universalSwitchFontSize}>
-                  Dinner
-                </Text>
-              </View>
-
-              <View style={commonStyles.captionSwitchGroup}>
-                <Switch
-                onValueChange={(value) => {
-                  if (value) {
-                    this.setState({
-                      breakfast: !value,
-                      lunch: !value,
-                      dinner: !value,
-                      snack: value,
-                    })
-                  }
-                  else {
-                    this.setState({snack: value})
-                  }
-                }}
-                value={this.state.snack} />
-
-                <Text style={commonStyles.universalSwitchFontSize}>
-                  Snack
-                </Text>
-              </View>
-
-            </View>
-
-            <TouchableHighlight onPress={this.props._handleBackAction}>
-              <Image
-                style={[{height: imageHeight, width: imageWidth},
-                        commonStyles.universalBorderRadius]}
-                resizeMode='cover'
-                source={{uri: this.props._selectedPhoto}}/>
-            </TouchableHighlight>
-          </View>
-
-        </View>
-
+        {/* TODO: Ask PBJ what this is all about here?
+          */}
         <View>
           <Spinner color='black' visible={this.state.animating} />
         </View>
@@ -264,7 +154,96 @@ export default class Caption extends Component {
           color={this.state.color}
         />
 
-        <View style={commonStyles.deviceKeyboardView}/>
+        <View style={[commonStyles.deviceKeyboardView,
+                     {marginTop: 5}]}>
+
+          <View style={commonStyles.captionSwitchGroup}>
+            <Switch
+              onValueChange={(value) => {
+                if (value) {
+                  this.setState({
+                    breakfast: value,
+                    lunch: !value,
+                    dinner: !value,
+                    snack: !value,
+                  })
+                } else {
+                  this.setState({breakfast: value})
+                }
+              }}
+              value={this.state.breakfast} />
+
+              <Text style={commonStyles.universalSwitchFontSize}>
+                Breakfast
+              </Text>
+          </View>
+
+          <View style={commonStyles.captionSwitchGroup}>
+            <Switch
+            onValueChange={(value) => {
+              if (value) {
+                this.setState({
+                  breakfast: !value,
+                  lunch: value,
+                  dinner: !value,
+                  snack: !value,
+                })
+              }
+              else {
+                this.setState({lunch: value})
+              }
+            }}
+            value={this.state.lunch} />
+
+            <Text style={commonStyles.universalSwitchFontSize}>
+              Lunch
+            </Text>
+          </View>
+
+          <View style={commonStyles.captionSwitchGroup}>
+            <Switch
+            onValueChange={(value) => {
+              if (value) {
+                this.setState({
+                  breakfast: !value,
+                  lunch: !value,
+                  dinner: value,
+                  snack: !value,
+                })
+              }
+              else {
+                this.setState({dinner: value})
+              }
+            }}
+            value={this.state.dinner} />
+
+            <Text style={commonStyles.universalSwitchFontSize}>
+              Dinner
+            </Text>
+          </View>
+
+          <View style={commonStyles.captionSwitchGroup}>
+            <Switch
+            onValueChange={(value) => {
+              if (value) {
+                this.setState({
+                  breakfast: !value,
+                  lunch: !value,
+                  dinner: !value,
+                  snack: value,
+                })
+              }
+              else {
+                this.setState({snack: value})
+              }
+            }}
+            value={this.state.snack} />
+
+            <Text style={commonStyles.universalSwitchFontSize}>
+              Snack
+            </Text>
+          </View>
+        </View>
 
       </View>
     )

@@ -51,8 +51,7 @@ export default class Selected extends Component {
           style={[commonStyles.selectedImage,
                   commonStyles.universalBorderRadius,
                   commonStyles.universalMargin]}
-          source={{uri: this.props._selectedPhoto}}
-        />
+          source={{uri: this.props._selectedPhoto}}/>
 
         {/*Need this View wrapping TextInput to support single sided border
           text input line.*/}

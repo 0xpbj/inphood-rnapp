@@ -64,7 +64,7 @@ module.exports = StyleSheet.create({
   captionSwitchGroup: {
     flexDirection: 'row',
     flex: 1,
-    marginTop: 15,
+    // marginTop: 15,
     marginLeft: 5,
   },
 
@@ -413,7 +413,7 @@ module.exports = StyleSheet.create({
   universalMargin: {
     margin: 1,
   },
-
+  
   // Universal button content alignment
   //
   universalButtonContentAlignment: {

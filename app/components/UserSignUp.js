@@ -59,8 +59,11 @@ export default class UserSignUp extends Component {
           type={EmailSignUp}
           options={options}
         />
-        <TouchableHighlight style={styles.prabhaavButton} onPress={this.signup.bind(this)} underlayColor='#99d9f4'>
-          <Text style={[commonStyles.universalButtonTextStyling]}>Sign Up</Text>
+        <TouchableHighlight
+          style={commonStyles.prabhaavButton}
+          onPress={this.signup.bind(this)}
+          underlayColor='#99d9f4'>
+          <Text style={commonStyles.universalButtonTextStyling}>Sign Up</Text>
         </TouchableHighlight>
       </View>
     )
@@ -72,5 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 20,
     backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: 'black',
   },
 })

@@ -24,15 +24,19 @@ const route = {
   }
 }
 
-import Photos  from '../containers/PhotosContainer'
 import Selected from './Selected'
+import Photos  from '../containers/PhotosContainer'
 import Caption from '../containers/CaptionContainer'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
+
 export default class Library extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      page: 0
+    }
     this._renderScene = this._renderScene.bind(this)
     this._handleBackAction = this._handleBackAction.bind(this)
     this._handleNavigate = this._handleNavigate.bind(this)
@@ -79,6 +83,31 @@ export default class Library extends Component {
       )
     }
   }
+  _renderHeader(props) {
+    if (this.props.library.index !== 0) {
+      return (
+        <NavigationHeader
+          {...props}
+          renderTitleComponent={this._renderTitleComponent}
+          renderLeftComponent={this._renderLeftComponent.bind(this)}
+        />
+      )
+    }
+  }
+  _renderLeftComponent(props) {
+    return (
+      <NavigationHeader.BackButton
+        onPress={this._handleBackAction.bind(this)}
+      />
+    )
+  }
+  _renderTitleComponent(props) {
+    return (
+      <NavigationHeader.Title>
+        {props.scene.route.title}
+      </NavigationHeader.Title>
+    )
+  }
   _handleBackAction () {
     if (this.props.library.index === 0) {
       return false
@@ -90,6 +119,7 @@ export default class Library extends Component {
     this.props.selectPhoto('')
     this._handleBackAction()
     this._handleBackAction()
+    this.setState({page: 0})
     this.props.mediaVisible(false)
     this.props.chatVisible(false)
     this.props.trainerChatVisible(false)
@@ -115,6 +145,7 @@ export default class Library extends Component {
         onNavigate={this._handleNavigate.bind(this)}
         onNavigateBack={this._handleBackAction.bind(this)}
         renderScene={this._renderScene.bind(this)}
+        renderHeader={this._renderHeader.bind(this)}
       />
     )
   }

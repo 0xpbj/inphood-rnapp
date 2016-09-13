@@ -34,9 +34,6 @@ const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
 export default class Library extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      page: 0
-    }
     this._renderScene = this._renderScene.bind(this)
     this._handleBackAction = this._handleBackAction.bind(this)
     this._handleNavigate = this._handleNavigate.bind(this)
@@ -119,7 +116,6 @@ export default class Library extends Component {
     this.props.selectPhoto('')
     this._handleBackAction()
     this._handleBackAction()
-    this.setState({page: 0})
     this.props.mediaVisible(false)
     this.props.chatVisible(false)
     this.props.trainerChatVisible(false)

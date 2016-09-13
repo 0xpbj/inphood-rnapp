@@ -26,7 +26,7 @@ const facebookGraphCallback = (error: ?Object, result: ?Object) => {
   }
   else {
     if (result) {
-      // console.log(result)
+      console.log(result)
     }
     else {
       alert ('Please login.')
@@ -77,8 +77,10 @@ function* fbloginFlow() {
 }
 
 function* watchFBLoginFlow() {
-  yield take(LOGIN_REQUEST)
-  yield call(fbloginFlow)
+  while (true) {
+    yield take(LOGIN_REQUEST)
+    yield call(fbloginFlow)
+  }
 }
 
 const emailCreate = (value) => {

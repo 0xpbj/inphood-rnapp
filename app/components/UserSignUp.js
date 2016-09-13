@@ -1,6 +1,6 @@
 'use strict'
 import React, { Component } from 'react'
-import { 
+import {
   Text,
   View,
   TextInput,
@@ -60,7 +60,7 @@ export default class UserSignUp extends Component {
           options={options}
         />
         <TouchableHighlight style={styles.prabhaavButton} onPress={this.signup.bind(this)} underlayColor='#99d9f4'>
-          <Text style={[commonsStyles.universalButtonTextStyling]}>Sign Up</Text>
+          <Text style={[commonStyles.universalButtonTextStyling]}>Sign Up</Text>
         </TouchableHighlight>
       </View>
     )

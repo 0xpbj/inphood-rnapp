@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>92999712903-uckc488ri12nf214sc7rbsn71ift1kih.apps.googleusercontent.com</string>
+	<string>529180412076-psq3njtu989ho919hidr9191588orce7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.92999712903-uckc488ri12nf214sc7rbsn71ift1kih</string>
+	<string>com.googleusercontent.apps.529180412076-psq3njtu989ho919hidr9191588orce7</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCmYv_5oQF15XaEDrtFmTRkOVAlFG4tVAA</string>
+	<string>AIzaSyBmW9xYOdOWcasrKN102p9RCoWhG97hMeY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>92999712903</string>
+	<string>529180412076</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>InPhoodRN</string>
+	<string>com.inphood.mvp-aug2016</string>
 	<key>PROJECT_ID</key>
-	<string>shining-torch-3197</string>
+	<string>inphooddb-e0dfd</string>
 	<key>STORAGE_BUCKET</key>
-	<string>shining-torch-3197.appspot.com</string>
+	<string>inphooddb-e0dfd.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:92999712903:ios:f44b3405f3acbd3a</string>
+	<string>1:529180412076:ios:5abb31a688b95a85</string>
 	<key>DATABASE_URL</key>
-	<string>https://shining-torch-3197.firebaseio.com</string>
+	<string>https://inphooddb-e0dfd.firebaseio.com</string>
 </dict>
 </plist>

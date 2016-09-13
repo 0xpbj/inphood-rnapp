@@ -9,7 +9,7 @@ import {
 
 import Camera from 'react-native-camera'
 
-var commonStyles = require('./styles/common-styles')
+import commonStyles from './styles/common-styles'
 
 const route = {
   type: 'push',

@@ -15,7 +15,7 @@ import {
   RecyclerViewBackedScrollView
 } from 'react-native'
 
-var commonStyles = require('./styles/common-styles')
+import commonStyles from './styles/common-styles'
 
 const route = {
   type: 'push',

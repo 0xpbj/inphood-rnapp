@@ -11,7 +11,7 @@ import {
 import Comb from 'tcomb-form-native'
 import Signup from './UserSignUp'
 
-var commonStyles = require('./styles/common-styles')
+import commonStyles from './styles/common-styles'
 
 var Form = Comb.form.Form
 var EmailLoginForm = Comb.struct({
@@ -57,11 +57,11 @@ export default class EmailLogin extends Component {
             type={EmailLoginForm}
             options={options}
           />
-          <TouchableHighlight style={commonStyles.emailLoginButton} onPress={this.login.bind(this)} underlayColor='#99d9f4'>
-            <Text style={commonStyles.emailLoginButtonText}>Login</Text>
+          <TouchableHighlight style={commonStyles.prabhaavButton} onPress={this.login.bind(this)} underlayColor='#99d9f4'>
+            <Text style={commonStyles.universalButtonTextStyling}>Login</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={commonStyles.emailLoginButton} onPress={this.goToSignup.bind(this)} underlayColor='#99d9f4'>
-            <Text style={commonStyles.emailLoginButtonText}>Sign Up</Text>
+          <TouchableHighlight style={commonStyles.prabhaavButton} onPress={this.goToSignup.bind(this)} underlayColor='#99d9f4'>
+            <Text style={commonStyles.universalButtonTextStyling}>Sign Up</Text>
           </TouchableHighlight>
         </View>
       </View>

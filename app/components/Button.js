@@ -1,8 +1,7 @@
 import React from 'react'
 
 import { Text, TouchableHighlight } from 'react-native'
-
-var commonStyles = require('./styles/common-styles')
+import commonStyles from './styles/common-styles'
 
 export default ({label, onPress, color}) => (
   <TouchableHighlight

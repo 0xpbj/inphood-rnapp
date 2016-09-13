@@ -7,7 +7,7 @@ import {
   TouchableHighlight
 } from 'react-native'
 
-var commonStyles = require('./styles/common-styles')
+import commonStyles from './styles/common-styles'
 
 export default class UserSettings extends Component {
   constructor(props) {

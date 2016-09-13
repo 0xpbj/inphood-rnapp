@@ -24,7 +24,7 @@ import Spinner from 'react-native-loading-spinner-overlay'
 import Device from 'react-native-device'
 var Mailer = require('NativeModules').RNMail
 
-var commonStyles = require('./styles/common-styles')
+import commonStyles from './styles/common-styles'
 
 const loginRoute = {
   type: 'push',

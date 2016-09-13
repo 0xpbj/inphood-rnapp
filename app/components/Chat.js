@@ -8,7 +8,7 @@ import {
 
 import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat'
 
-var commonStyles = require('./styles/common-styles')
+import commonStyles from './styles/common-styles'
 
 export default class ChatThread extends Component {
   constructor(props) {

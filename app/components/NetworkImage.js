@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native'
 
-var commonStyles = require('./styles/common-styles')
+import commonStyles from './styles/common-styles'
 
 export default class NetworkImage extends Component {
   constructor(props) {

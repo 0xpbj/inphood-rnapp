@@ -185,12 +185,7 @@ module.exports = StyleSheet.create({
     padding: 20,
     backgroundColor: '#ffffff',
   },
-  emailLoginButtonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  emailLoginButton: {
+  prabhaavButton: {
     height: 36,
     backgroundColor: '#006400',
     borderColor: '#006400',
@@ -431,6 +426,7 @@ module.exports = StyleSheet.create({
   universalButtonTextStyling: {
     fontSize: 14,
     color: 'white',
+	alignSelf: 'center',
   },
 
   // Universal container (top-level)

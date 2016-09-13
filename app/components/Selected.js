@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import Button from './Button'
 
-var commonStyles = require('./styles/common-styles')
+import commonStyles from './styles/common-styles'
 
 export default class Selected extends Component {
   constructor(props) {

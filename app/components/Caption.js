@@ -15,7 +15,7 @@ import {
 import Button from './Button'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-var commonStyles = require('./styles/common-styles')
+import commonStyles from './styles/common-styles'
 
 var { width, height } = Dimensions.get('window');
 

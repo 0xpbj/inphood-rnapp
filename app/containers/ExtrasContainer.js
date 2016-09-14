@@ -6,12 +6,12 @@ import * as actionCreators from '../actions/Actions'
 function mapStateToProps (state) {
   return {
     auth: state.authReducer,
-    extras: state.extReducer,
+    extras: state.extReducer
   }
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
+  return bindActionCreators(actionCreators, dispatch)
 }
 
 export default connect(

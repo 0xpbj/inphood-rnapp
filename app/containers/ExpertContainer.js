@@ -1,9 +1,5 @@
-import {
-  connect
-} from 'react-redux'
-import {
-  bindActionCreators
-} from 'redux'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import Expert from '../components/Expert'
 import * as actionCreators from '../actions/Actions'
 
@@ -15,7 +11,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
+  return bindActionCreators(actionCreators, dispatch)
 }
 
 export default connect(

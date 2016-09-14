@@ -4,7 +4,7 @@ import {userIcon, sampleIcon, homeIcon} from '../components/Icons'
 const tabs = [
   { key: 'Camera', icon: sampleIcon, title: 'Camera', name: 'ios-camera-outline', iconName: 'ios-camera'},
   { key: 'Home', icon: homeIcon, title: 'Home', name: 'ios-home-outline', iconName: 'ios-home'},
-  { key: 'Expert', icon: homeIcon, title: 'Clients', name: 'ios-people-outline', iconName: 'ios-people'},
+  { key: 'Clients', icon: homeIcon, title: 'Clients', name: 'ios-people-outline', iconName: 'ios-people'},
   { key: 'Extras', icon: sampleIcon, title: 'Extras', name: 'ios-options-outline', iconName: 'ios-options'},
 ]
 

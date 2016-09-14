@@ -16,8 +16,8 @@ const {
 
 import Icon from 'react-native-vector-icons/Ionicons'
 import Media from './Media'
-import Gallery from '../containers/GalleryContainer'
-import Expert from '../containers/ExpertContainer'
+import Home from '../containers/GalleryContainer'
+import Clients from '../containers/ExpertContainer'
 import Extras from '../containers/ExtrasContainer'
 
 export default class HomeTabs extends Component {
@@ -39,13 +39,13 @@ export default class HomeTabs extends Component {
         )
       case 'Home':
         return (
-          <Gallery
+          <Home
             result={this.props.auth.result}
           />
         )
-      case 'Expert':
+      case 'Clients':
         return (
-          <Expert 
+          <Clients 
             result={this.props.auth.result}
           />
         )
@@ -62,21 +62,14 @@ export default class HomeTabs extends Component {
     // const {cvisible, mvisible, evisible} = this.state
     // if (cvisible) {
     //   return (
-    //     <Gallery
+    //     <Home
     //       result={this.props.auth.result}
-    //     />
-    //   )
-    // }
-    // else if (mvisible) {
-    //   return (
-    //     <Media
-    //       changeTab={(i)=>this.props.changeTab(i)}
     //     />
     //   )
     // }
     // else if (evisible) {
     //   return (
-    //     <Expert
+    //     <Clients
     //       result={this.props.auth.result}
     //     />
     //   )
@@ -88,8 +81,10 @@ export default class HomeTabs extends Component {
     const notificationCount = this.props.notification.client + this.props.notification.trainer
     const notification = notificationCount > 0 ? notificationCount : 0
     PushNotificationIOS.setApplicationIconBadgeNumber(notification)
+    const trainerNotificationCount = this.props.notification.trainer > 0 ? this.props.notification.trainer : undefined
+    const clientNotificationCount = this.props.notification.client > 0 ? this.props.notification.client : undefined
     const tabs = this.props.tabs.routes.map((tab, i) => {
-      if (i !== 2) {
+      if (tab.title !== 'Clients') {
         return (
           <Icon.TabBarItemIOS
             key={tab.name}
@@ -97,7 +92,7 @@ export default class HomeTabs extends Component {
             iconName={tab.name}
             selectedIconName={tab.iconName}
             iconSize={40}
-            badge={i === 2 ? (this.props.notification.client > 0 ? this.props.notification.client : undefined) : undefined}
+            badge={tab.title === 'Home' ? clientNotificationCount : undefined}
             onPress={() => {
               this.props.changeTab(i)
             }}
@@ -106,7 +101,7 @@ export default class HomeTabs extends Component {
           </Icon.TabBarItemIOS>
         )
       }
-      else if (trainer && i === 2) {
+      else if (trainer && tab.title === 'Clients') {
         return (
           <Icon.TabBarItemIOS
             key={tab.name}
@@ -114,7 +109,7 @@ export default class HomeTabs extends Component {
             iconName={tab.name}
             selectedIconName={tab.iconName}
             iconSize={40}
-            badge={this.props.notification.trainer > 0 ? this.props.notification.trainer : undefined}
+            badge={trainerNotificationCount}
             onPress={() => {
               this.props.changeTab(i)
             }}

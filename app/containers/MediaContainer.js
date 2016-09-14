@@ -8,12 +8,12 @@ function mapStateToProps (state) {
     cnavigation: state.camNavReducer,
     camera: state.camReducer,
     lnavigation: state.libNavReducer,
-    library: state.libReducer,
+    library: state.libReducer
   }
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
+  return bindActionCreators(actionCreators, dispatch)
 }
 
 export default connect(

@@ -7,12 +7,12 @@ function mapStateToProps (state) {
   return {
     tabs: state.tabReducer,
     auth: state.authReducer,
-    notification: state.notificationReducer,
+    notification: state.notificationReducer
   }
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
+  return bindActionCreators(actionCreators, dispatch)
 }
 
 export default connect(

@@ -5,12 +5,12 @@ import * as actionCreators from '../actions/Actions';
 
 function mapStateToProps (state) {
   return {
-    library: state.libReducer,
+    library: state.libReducer
   }
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
+  return bindActionCreators(actionCreators, dispatch)
 }
 
 export default connect(

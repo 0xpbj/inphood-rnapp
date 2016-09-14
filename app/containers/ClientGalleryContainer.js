@@ -5,12 +5,12 @@ import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps(state) {
   return {
-    trainerData: state.trainerReducer,
+    trainerData: state.trainerReducer
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
+  return bindActionCreators(actionCreators, dispatch)
 }
 
 export default connect(

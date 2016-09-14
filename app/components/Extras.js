@@ -16,7 +16,7 @@ const {
   Header: NavigationHeader,
 } = NavigationExperimental
 
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
 
 import Start from './Start'
 import Login from './EmailLogin'
@@ -27,6 +27,9 @@ import Profile from './UserProfile'
 export default class Extras extends Component {
   constructor(props) {
     super(props)
+    this._renderScene = this._renderScene.bind(this)
+    this._handleBackAction = this._handleBackAction.bind(this)
+    this._handleNavigate = this._handleNavigate.bind(this)
   }
   componentDidMount () {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
@@ -40,12 +43,12 @@ export default class Extras extends Component {
     if (scene.key === prefix + 'start') {
       return (
         <Start
-         loginRequest={()=>this.props.loginRequest()}
-         logoutRequest={()=>this.props.logoutRequest()}
-         storeToken={(action)=>this.props.storeToken(action)}
-         storeResult={(action)=>this.props.storeResult(action)}
-         auth={this.props.auth}
-         _handleNavigate={this._handleNavigate.bind(this)}
+          loginRequest={()=>this.props.loginRequest()}
+          logoutRequest={()=>this.props.logoutRequest()}
+          storeToken={(action)=>this.props.storeToken(action)}
+          storeResult={(action)=>this.props.storeResult(action)}
+          auth={this.props.auth}
+          _handleNavigate={this._handleNavigate.bind(this)}
         />
       )
     }

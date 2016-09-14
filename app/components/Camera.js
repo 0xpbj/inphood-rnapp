@@ -82,6 +82,31 @@ export default class Camera extends Component {
       )
     }
   }
+  _renderHeader(props) {
+    if (this.props.camera.index !== 0) {
+      return (
+        <NavigationHeader
+          {...props}
+          renderTitleComponent={this._renderTitleComponent}
+          renderLeftComponent={this._renderLeftComponent.bind(this)}
+        />
+      )
+    }
+  }
+  _renderLeftComponent(props) {
+    return (
+      <NavigationHeader.BackButton
+        onPress={this._handleBackAction.bind(this)}
+      />
+    )
+  }
+  _renderTitleComponent(props) {
+    return (
+      <NavigationHeader.Title>
+        {props.scene.route.title}
+      </NavigationHeader.Title>
+    )
+  }
   _handleBackAction () {
     if (this.props.camera.index === 0) {
       return false
@@ -118,6 +143,7 @@ export default class Camera extends Component {
         onNavigate={this._handleNavigate.bind(this)}
         onNavigateBack={this._handleBackAction}
         renderScene={this._renderScene.bind(this)}
+        renderHeader={this._renderHeader.bind(this)}
       />
     )
   }

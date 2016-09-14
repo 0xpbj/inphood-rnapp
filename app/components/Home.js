@@ -25,7 +25,6 @@ export default class HomeTabs extends Component {
     super(props)
     PushNotificationIOS.requestPermissions()
   }
-  componentWillReceiveProps(nextProps) {}
   componentWillMount() {
     this.props.loginRequest()
   }
@@ -59,21 +58,6 @@ export default class HomeTabs extends Component {
   }
   render () {
     console.disableYellowBox = true
-    // const {cvisible, mvisible, evisible} = this.state
-    // if (cvisible) {
-    //   return (
-    //     <Home
-    //       result={this.props.auth.result}
-    //     />
-    //   )
-    // }
-    // else if (evisible) {
-    //   return (
-    //     <Clients
-    //       result={this.props.auth.result}
-    //     />
-    //   )
-    // }
     if (this.props.auth.result === null) {
       return <Extras />
     }

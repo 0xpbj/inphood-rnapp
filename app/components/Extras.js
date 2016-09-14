@@ -27,9 +27,6 @@ import Profile from './UserProfile'
 export default class Extras extends Component {
   constructor(props) {
     super(props)
-    this._renderScene = this._renderScene.bind(this)
-    this._handleBackAction = this._handleBackAction.bind(this)
-    this._handleNavigate = this._handleNavigate.bind(this)
   }
   componentDidMount () {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)

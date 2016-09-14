@@ -43,14 +43,12 @@ export default class UserSignUp extends Component {
     super(props)
   }
   signup() {
-    const value = this.refs.form.getValue();
+    const value = this.refs.form.getValue()
     if (value) {
       this.props.emailCreateUser(value)
+      this.props.goBack()
+      this.props.goBack()
     }
-  }
-  componentWillUnmount() {
-    this.props.goBack()
-    this.props.goBack()
   }
   render() {
     return (

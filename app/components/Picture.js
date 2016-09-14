@@ -9,7 +9,7 @@ import {
 
 import Camera from 'react-native-camera'
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 const route = {
   type: 'push',
@@ -36,17 +36,17 @@ export default class Picture extends Component {
   }
   render () {
     return (
-      <View style={commonStyles.flexContainer}>
+      <View style={CommonStyles.flexContainer}>
         <Camera
           ref={(cam) => {
             this.camera = cam;
           }}
-          style={[commonStyles.picturePreview,
+          style={[CommonStyles.picturePreview,
                   {height: Dimensions.get('window').height,
                    width: Dimensions.get('window').width}]}
           aspect={Camera.constants.Aspect.fill}>
-          <View style={commonStyles.shutterOuterViewStyle}>
-            <TouchableHighlight style={commonStyles.shutterInnerViewStyle} onPress={this.takePicture.bind(this)}>
+          <View style={CommonStyles.shutterOuterViewStyle}>
+            <TouchableHighlight style={CommonStyles.shutterInnerViewStyle} onPress={this.takePicture.bind(this)}>
               <View/>
             </TouchableHighlight>
           </View>

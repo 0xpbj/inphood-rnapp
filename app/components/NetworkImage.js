@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native'
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 export default class NetworkImage extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export default class NetworkImage extends Component {
   }
   render() {
     var loader = this.state.loading ?
-      <View style={commonStyles.networkImageProgress}>
+      <View style={CommonStyles.networkImageProgress}>
         <Text>{this.state.progress}%</Text>
         <ActivityIndicator/>
       </View> : null;
@@ -30,7 +30,7 @@ export default class NetworkImage extends Component {
       <Text>{this.state.error}</Text> :
       <Image
         source={this.props.source}
-        style={commonStyles.networkImageBase}
+        style={CommonStyles.networkImageBase}
         onLoadStart={(e) => this.setState({loading: true})}
         onError={(e) => this.setState({error: e.nativeEvent.error, loading: false})}
         onProgress={(e) => this.setState({progress: Math.round(100 * e.nativeEvent.loaded / e.nativeEvent.total)})}

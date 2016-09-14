@@ -7,7 +7,7 @@ import {
   TouchableHighlight
 } from 'react-native'
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ export default class UserProfile extends Component {
   }
   render() {
     return (
-      <View style={commonStyles.universalContainer}>
+      <View style={CommonStyles.universalContainer}>
         <Text>Hello Profile!</Text>
       </View>
     )

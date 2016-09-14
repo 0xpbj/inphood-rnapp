@@ -14,7 +14,7 @@ import {
   RecyclerViewBackedScrollView,
 } from 'react-native'
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 const route = {
   type: 'push',
@@ -44,8 +44,8 @@ export default class Client extends Component {
   }
   render() {
     return (
-      <View style={commonStyles.commonContainer}>
-        <Text style={commonStyles.clientProfileName}>Client's InPhood</Text>
+      <View style={CommonStyles.commonContainer}>
+        <Text style={CommonStyles.clientProfileName}>Client's InPhood</Text>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow.bind(this)}
@@ -58,7 +58,7 @@ export default class Client extends Component {
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     const data = rowData.data
     const clientId = rowData.id
-    const clientImage = <Image style={commonStyles.clientProfileImage} source={{uri: data.val().picture}}/>
+    const clientImage = <Image style={CommonStyles.clientProfileImage} source={{uri: data.val().picture}}/>
     const clientName = data.val().name
     const clientGender = data.child('physicals').val().gender
     return (
@@ -66,13 +66,13 @@ export default class Client extends Component {
           this._pressRow(clientId, data.val().picture, clientName)
           highlightRow(sectionID, rowID)
         }}>
-        <View style={commonStyles.commonRow}>
+        <View style={CommonStyles.commonRow}>
           {clientImage}
-          <View  style={commonStyles.commonView}>
-            <Text style={commonStyles.clientNameText}>
+          <View  style={CommonStyles.commonView}>
+            <Text style={CommonStyles.clientNameText}>
               {clientName}
             </Text>
-            <Text style={commonStyles.clientGenderText}>
+            <Text style={CommonStyles.clientGenderText}>
               {clientGender}
             </Text>
           </View>

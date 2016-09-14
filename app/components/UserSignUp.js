@@ -8,7 +8,7 @@ import {
   TouchableHighlight
 } from 'react-native'
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 import Login from './EmailLogin'
 import Comb from 'tcomb-form-native'
@@ -52,7 +52,7 @@ export default class UserSignUp extends Component {
   }
   render() {
     return (
-      <View style={commonStyles.universalFormContainer}>
+      <View style={CommonStyles.universalFormContainer}>
 
         <Form
           ref="form"
@@ -61,14 +61,14 @@ export default class UserSignUp extends Component {
         />
 
         <TouchableHighlight
-          style={commonStyles.prabhaavButton}
+          style={CommonStyles.prabhaavButton}
           onPress={this.signup.bind(this)}
           underlayColor='#99d9f4'>
-          <Text style={commonStyles.universalButtonTextStyling}>Sign Up</Text>
+          <Text style={CommonStyles.universalButtonTextStyling}>Sign Up</Text>
         </TouchableHighlight>
 
         {/*Placeholder view to consume the remaining bottom of the scene.*/}
-        <View style={commonStyles.flexContainer}/>
+        <View style={CommonStyles.flexContainer}/>
 
       </View>
     )

@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import Button from './Button'
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 export default class Selected extends Component {
   constructor(props) {
@@ -43,25 +43,25 @@ export default class Selected extends Component {
       // This view divides the screen into 20 segments.  The bottom 8 segments
       // are left blank for the keyboard.  The top segment is left blank for
       // the device status bar.
-      <View style={commonStyles.flexContainer}>
+      <View style={CommonStyles.flexContainer}>
 
-        <View style={commonStyles.deviceStatusBarView}/>
+        <View style={CommonStyles.deviceStatusBarView}/>
 
         <Image
-          style={[commonStyles.selectedImage,
-                  commonStyles.universalBorderRadius,
-                  commonStyles.universalMargin]}
+          style={[CommonStyles.selectedImage,
+                  CommonStyles.universalBorderRadius,
+                  CommonStyles.universalMargin]}
           source={{uri: this.props._selectedPhoto}}/>
 
         {/*Need this View wrapping TextInput to support single sided border
           text input line.*/}
         <View
-          style={[commonStyles.singleSegmentView,
-                  commonStyles.universalInputView,
-                  commonStyles.universalMargin]}>
+          style={[CommonStyles.singleSegmentView,
+                  CommonStyles.universalInputView,
+                  CommonStyles.universalMargin]}>
           <TextInput
-            style={[commonStyles.singleSegmentView,
-                    commonStyles.universalFontSize]}
+            style={[CommonStyles.singleSegmentView,
+                    CommonStyles.universalFontSize]}
             autoCapitalize="none"
             placeholder="Meal title, e.g.: Spaghetti & Meatballs ..."
             returnKeyType="done"
@@ -90,7 +90,7 @@ export default class Selected extends Component {
           label='Next'
           color={this.state.color}/>
 
-        <View style={commonStyles.deviceKeyboardView}/>
+        <View style={CommonStyles.deviceKeyboardView}/>
 
       </View>
     )

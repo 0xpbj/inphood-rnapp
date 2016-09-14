@@ -24,7 +24,7 @@ import Spinner from 'react-native-loading-spinner-overlay'
 import Device from 'react-native-device'
 var Mailer = require('NativeModules').RNMail
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 const loginRoute = {
   type: 'push',
@@ -94,7 +94,7 @@ export default class Start extends Component {
   }
   render() {
     const buttonColor = this.props.auth.result ? '#006400' : 'white'
-    const Button = this.props.auth.result ? <Text style={commonStyles.buttonText}>Log Out</Text> : <Text style={commonStyles.buttonText}>Log In</Text>
+    const Button = this.props.auth.result ? <Text style={CommonStyles.buttonText}>Log Out</Text> : <Text style={commonStyles.buttonText}>Log In</Text>
     const Swiper = this.props.auth.result ? <View style={{flex: 2, backgroundColor: 'transparent'}}></View> : (
       <View style={{flex: 2, backgroundColor: 'transparent'}}>
         <SwipeALot autoplay={{enabled: true, disableOnSwipe: false, delayBetweenAutoSwipes: 5000}}>
@@ -119,7 +119,7 @@ export default class Start extends Component {
     if (this.props.auth.result === null) {
       if (this.state.login) {
         return (
-          <Image source={require('./img/HD_5_5.png')} style={commonStyles.containerImage}>
+          <Image source={require('./img/HD_5_5.png')} style={CommonStyles.containerImage}>
             <View style={{flex: 1, backgroundColor: 'transparent'}}/>
            {/*
             // TODO:
@@ -135,7 +135,7 @@ export default class Start extends Component {
             {Swiper}
             <View style={{flex: 1, top: 10, alignItems: 'center'}}>
               <TouchableHighlight
-                style={commonStyles.button}
+                style={CommonStyles.button}
                 underlayColor='#99d9f4'
                 onPress={this._setModalVisible.bind(this, true)}
               >
@@ -148,8 +148,8 @@ export default class Start extends Component {
               visible={this.state.modalVisible}
               onRequestClose={() => {this._setModalVisible(false)}}
               >
-              <View style={commonStyles.modalContainer}>
-                <View style={[commonStyles.innerContainer, {backgroundColor: '#fff', padding: 10}]}>
+              <View style={CommonStyles.modalContainer}>
+                <View style={[CommonStyles.innerContainer, {backgroundColor: '#fff', padding: 10}]}>
                   <FacebookLogin
                     auth={this.props.auth}
                     storeResult={this.props.storeResult}
@@ -161,17 +161,17 @@ export default class Start extends Component {
                     _setModalVisible={this._setModalVisible.bind(this)}
                   />
                   <TouchableHighlight
-                    style={[commonStyles.button, commonStyles.modalButton]}
+                    style={[CommonStyles.button, commonStyles.modalButton]}
                     underlayColor='#99d9f4'
                     onPress={this._emailLogin.bind(this)}
                   >
-                    <Text style={commonStyles.buttonText}>Log in with Email</Text>
+                    <Text style={CommonStyles.buttonText}>Log in with Email</Text>
                   </TouchableHighlight>
                   <TouchableHighlight
                     onPress={this._setModalVisible.bind(this, false)}
-                    style={[commonStyles.button, commonStyles.modalButton]}
+                    style={[CommonStyles.button, commonStyles.modalButton]}
                   >
-                    <Text style={[commonStyles.buttonText]}>Cancel</Text>
+                    <Text style={[CommonStyles.buttonText]}>Cancel</Text>
                   </TouchableHighlight>
                 </View>
               </View>
@@ -181,7 +181,7 @@ export default class Start extends Component {
       }
       else {
         return (
-          <Image source={require('./img/HD_5_5.png')} style={commonStyles.containerImage}>
+          <Image source={require('./img/HD_5_5.png')} style={CommonStyles.containerImage}>
             <Spinner
               visible={true}
               color='white'
@@ -209,41 +209,41 @@ export default class Start extends Component {
         )
       : (
           <TouchableHighlight
-            style={commonStyles.button}
+            style={CommonStyles.button}
             underlayColor='#99d9f4'
             onPress={this._emailLogout.bind(this)}
           >
             <View style={{flexDirection: 'row'}}>
               <Icon name="ios-exit-outline" size={26} color='white' style={{marginLeft: 10, marginRight: 30}}/>
-              <Text style={commonStyles.buttonText}>Email Log Out</Text>
+              <Text style={CommonStyles.buttonText}>Email Log Out</Text>
             </View>
           </TouchableHighlight>
         )
       return (
-        <View style={commonStyles.container}>
+        <View style={CommonStyles.container}>
           <TouchableHighlight
             onPress={this.userProfile.bind(this)}>
             <Image
               source={{uri: uri}}
-              style={[commonStyles.profileImage, {borderColor: buttonColor}]}
+              style={[CommonStyles.profileImage, {borderColor: buttonColor}]}
             />
           </TouchableHighlight>
           <TouchableHighlight
             onPress={this.sendEmail.bind(this)}
-            style={[commonStyles.button, commonStyles.modalButton]}
+            style={[CommonStyles.button, commonStyles.modalButton]}
           >
             <View style={{flexDirection: 'row'}}>
               <Icon name="ios-mail-outline" size={26} color='white' style={{marginLeft: 10, marginRight: 25}}/>
-              <Text style={commonStyles.buttonText}>Help Email</Text>
+              <Text style={CommonStyles.buttonText}>Help Email</Text>
             </View>
           </TouchableHighlight>
           <TouchableHighlight
             onPress={this.userSettings.bind(this)}
-            style={[commonStyles.button, commonStyles.modalButton]}
+            style={[CommonStyles.button, commonStyles.modalButton]}
           >
             <View style={{flexDirection: 'row'}}>
               <Icon name="ios-settings-outline" size={26} color='white' style={{marginLeft: 10, marginRight: 15}}/>
-              <Text style={commonStyles.buttonText}>User Settings</Text>
+              <Text style={CommonStyles.buttonText}>User Settings</Text>
             </View>
           </TouchableHighlight>
           {logoutButton}

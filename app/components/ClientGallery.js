@@ -13,7 +13,7 @@ import {
   RecyclerViewBackedScrollView,
 } from 'react-native'
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 const route = {
   type: 'push',
@@ -87,18 +87,18 @@ export default class ClientGallery extends Component{
         />
     }
     else {
-      content = <View style={commonStyles.clientGalleryAddPhotosMessage}>
+      content = <View style={CommonStyles.clientGalleryAddPhotosMessage}>
             <Text>Client has not added new photos</Text>
           </View>
     }
     return (
-      <View style={commonStyles.clientGalleryContainer}>
-        <View style={commonStyles.flexRowMarginBottom10}>
+      <View style={CommonStyles.clientGalleryContainer}>
+        <View style={CommonStyles.flexRowMarginBottom10}>
           <Image
             source={{uri: this.props.trainerData.clientPhoto}}
-            style={commonStyles.clientGalleryProfileImage}
+            style={CommonStyles.clientGalleryProfileImage}
           />
-          <Text style={commonStyles.clientGalleryProfileNameText}>{name[0]}'s InPhood</Text>
+          <Text style={CommonStyles.clientGalleryProfileNameText}>{name[0]}'s InPhood</Text>
         </View>
         {content}
       </View>
@@ -117,8 +117,8 @@ export default class ClientGallery extends Component{
     const mealTime = new Date(data.time).toDateString()
     const path = '/global/' + data.file.uid + '/photoData/' + data.file.fileTail
     const flag = this.state.photoNotifications[imgSource]
-    const notificationBlock = ( <View style={commonStyles.notificationView}>
-              <Text style={commonStyles.notificationText}> </Text>
+    const notificationBlock = ( <View style={CommonStyles.notificationView}>
+              <Text style={CommonStyles.notificationText}> </Text>
             </View> )
     const showNotification = flag ? notificationBlock : <View />
 
@@ -129,13 +129,13 @@ export default class ClientGallery extends Component{
           this._pressRow(data.photo, path)
           highlightRow(sectionID, rowID)
         }}>
-        <View style={commonStyles.galleryRow}>
-          <View style={commonStyles.flexRow}>
+        <View style={CommonStyles.galleryRow}>
+          <View style={CommonStyles.flexRow}>
             {imgBlock}
             {showNotification}
           </View>
-          <View  style={commonStyles.galleryText}>
-            <Text style={commonStyles.heavyFont}>
+          <View  style={CommonStyles.galleryText}>
+            <Text style={CommonStyles.heavyFont}>
               {data.title}: {data.caption}
             </Text>
             <Text>

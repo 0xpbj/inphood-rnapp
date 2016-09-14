@@ -15,7 +15,7 @@ import {
 import Button from './Button'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 var { width, height } = Dimensions.get('window');
 
@@ -97,17 +97,17 @@ export default class Caption extends Component {
       // This view divides the screen into 20 segments.  The bottom 8 segments
       // are left blank for the keyboard.  The top segment is left blank for
       // the device status bar.
-      <View style={commonStyles.flexContainer}>
+      <View style={CommonStyles.flexContainer}>
 
-        <View style={commonStyles.deviceStatusBarView}/>
+        <View style={CommonStyles.deviceStatusBarView}/>
 
         <TouchableHighlight
           onPress={this.props._handleBackAction}
-          style={[commonStyles.selectedImage,
-                  commonStyles.universalMargin]}>
+          style={[CommonStyles.selectedImage,
+                  CommonStyles.universalMargin]}>
           <Image
             style={[{flex:1},
-                    commonStyles.universalBorderRadius]}
+                    CommonStyles.universalBorderRadius]}
             source={{uri: this.props._selectedPhoto}}/>
         </TouchableHighlight>
 
@@ -120,12 +120,12 @@ export default class Caption extends Component {
         {/*Need this View wrapping TextInput to support single sided border
           text input line.*/}
         <View
-          style={[commonStyles.singleSegmentView,
-                  commonStyles.universalInputView,
-                  commonStyles.universalMargin]}>
+          style={[CommonStyles.singleSegmentView,
+                  CommonStyles.universalInputView,
+                  CommonStyles.universalMargin]}>
           <TextInput
-            style={[commonStyles.singleSegmentView,
-                    commonStyles.universalFontSize]}
+            style={[CommonStyles.singleSegmentView,
+                    CommonStyles.universalFontSize]}
             autoCapitalize="none"
             placeholder="Ingredients, e.g.: Beef, Tomatoes ..."
             returnKeyType="done"
@@ -154,10 +154,10 @@ export default class Caption extends Component {
           color={this.state.color}
         />
 
-        <View style={[commonStyles.deviceKeyboardView,
+        <View style={[CommonStyles.deviceKeyboardView,
                      {marginTop: 5}]}>
 
-          <View style={commonStyles.captionSwitchGroup}>
+          <View style={CommonStyles.captionSwitchGroup}>
             <Switch
               onValueChange={(value) => {
                 if (value) {
@@ -173,12 +173,12 @@ export default class Caption extends Component {
               }}
               value={this.state.breakfast} />
 
-              <Text style={commonStyles.universalSwitchFontSize}>
+              <Text style={CommonStyles.universalSwitchFontSize}>
                 Breakfast
               </Text>
           </View>
 
-          <View style={commonStyles.captionSwitchGroup}>
+          <View style={CommonStyles.captionSwitchGroup}>
             <Switch
             onValueChange={(value) => {
               if (value) {
@@ -195,12 +195,12 @@ export default class Caption extends Component {
             }}
             value={this.state.lunch} />
 
-            <Text style={commonStyles.universalSwitchFontSize}>
+            <Text style={CommonStyles.universalSwitchFontSize}>
               Lunch
             </Text>
           </View>
 
-          <View style={commonStyles.captionSwitchGroup}>
+          <View style={CommonStyles.captionSwitchGroup}>
             <Switch
             onValueChange={(value) => {
               if (value) {
@@ -217,12 +217,12 @@ export default class Caption extends Component {
             }}
             value={this.state.dinner} />
 
-            <Text style={commonStyles.universalSwitchFontSize}>
+            <Text style={CommonStyles.universalSwitchFontSize}>
               Dinner
             </Text>
           </View>
 
-          <View style={commonStyles.captionSwitchGroup}>
+          <View style={CommonStyles.captionSwitchGroup}>
             <Switch
             onValueChange={(value) => {
               if (value) {
@@ -239,7 +239,7 @@ export default class Caption extends Component {
             }}
             value={this.state.snack} />
 
-            <Text style={commonStyles.universalSwitchFontSize}>
+            <Text style={CommonStyles.universalSwitchFontSize}>
               Snack
             </Text>
           </View>

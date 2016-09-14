@@ -11,7 +11,7 @@ import {
 import Comb from 'tcomb-form-native'
 import Signup from './UserSignUp'
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 var Form = Comb.form.Form
 var EmailLoginForm = Comb.struct({
@@ -51,7 +51,7 @@ export default class EmailLogin extends Component {
   }
   render() {
     return (
-      <View style={commonStyles.universalFormContainer}>
+      <View style={CommonStyles.universalFormContainer}>
 
         <Form
           ref="form"
@@ -60,22 +60,22 @@ export default class EmailLogin extends Component {
         />
 
         <TouchableHighlight
-          style={[commonStyles.prabhaavButton,
+          style={[CommonStyles.prabhaavButton,
                   {marginBottom: 15}]}
           onPress={this.login.bind(this)}
           underlayColor='#99d9f4'>
-          <Text style={commonStyles.universalButtonTextStyling}>Login</Text>
+          <Text style={CommonStyles.universalButtonTextStyling}>Login</Text>
         </TouchableHighlight>
 
         <TouchableHighlight
-          style={commonStyles.prabhaavButton}
+          style={CommonStyles.prabhaavButton}
           onPress={this.goToSignup.bind(this)}
           underlayColor='#99d9f4'>
-          <Text style={commonStyles.universalButtonTextStyling}>Sign Up</Text>
+          <Text style={CommonStyles.universalButtonTextStyling}>Sign Up</Text>
         </TouchableHighlight>
 
         {/*Placeholder view to consume the remaining bottom of the scene.*/}
-        <View style={commonStyles.flexContainer}/>
+        <View style={CommonStyles.flexContainer}/>
 
       </View>
     )

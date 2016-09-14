@@ -8,7 +8,7 @@ import {
 
 import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat'
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 export default class ChatThread extends Component {
   constructor(props) {
@@ -105,8 +105,8 @@ export default class ChatThread extends Component {
   renderFooter(props) {
     if (this.state.isTyping) {
       return (
-        <View style={commonStyles.footerContainer}>
-          <Text style={commonStyles.footerText}>
+        <View style={CommonStyles.footerContainer}>
+          <Text style={CommonStyles.footerText}>
             {this.state.isTyping}
           </Text>
         </View>

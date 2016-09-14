@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native'
 
-import commonStyles from './styles/common-styles'
+import CommonStyles from './styles/common-styles'
 
 const route = {
   type: 'push',
@@ -100,7 +100,7 @@ export default class CameraRollPicker extends Component {
     var {imageMargin, backgroundColor} = this.props
     return (
       <View
-        style={[commonStyles.photoWrapper, {padding: imageMargin, paddingRight: 0, backgroundColor: backgroundColor},]}>
+        style={[CommonStyles.photoWrapper, {padding: imageMargin, paddingRight: 0, backgroundColor: backgroundColor},]}>
         <Spinner
           visible={this.state.images === 0}
           color='black'
@@ -135,14 +135,14 @@ export default class CameraRollPicker extends Component {
       return this._renderImage(item)
     })
     return (
-      <View style={commonStyles.photoRow}>
+      <View style={CommonStyles.photoRow}>
         {items}
       </View>
     )
   }
   _renderFooterSpinner() {
     if (!this.state.noMore) {
-      return <ActivityIndicator style={commonStyles.spinner} />
+      return <ActivityIndicator style={CommonStyles.spinner} />
     }
     return null
   }

@@ -21,14 +21,10 @@ import ChatView from '../containers/ChatContainer'
 
 export default class Gallery extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this._renderScene = this._renderScene.bind(this)
     this._handleBackAction = this._handleBackAction.bind(this)
     this._handleNavigate = this._handleNavigate.bind(this)
-    //hack to refresh until feedback is connected
-    this.state = {
-      hack: false,
-    }
   }
   componentDidMount () {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
@@ -72,7 +68,7 @@ export default class Gallery extends Component {
   _renderLeftComponent(props) {
     return (
       <NavigationHeader.BackButton
-        onPress={this._handleBackAction}
+        onPress={this._handleBackAction.bind(this)}
       />
     )
   }
@@ -109,7 +105,7 @@ export default class Gallery extends Component {
       <NavigationCardStack
         navigationState={this.props.galleryNav}
         onNavigate={this._handleNavigate.bind(this)}
-        onNavigateBack={this._handleBackAction}
+        onNavigateBack={this._handleBackAction.bind(this)}
         renderScene={this._renderScene.bind(this)}
         renderHeader={this._renderOverlay.bind(this)}
       />

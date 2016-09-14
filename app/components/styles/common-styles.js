@@ -180,18 +180,12 @@ module.exports = StyleSheet.create({
     backgroundColor: '#CCCCCC'
   },
 
-  emailLoginContainer: {
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#ffffff',
-  },
   prabhaavButton: {
-    height: 36,
     backgroundColor: '#006400',
     borderColor: '#006400',
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 10,
+    padding: 5,
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
@@ -413,7 +407,7 @@ module.exports = StyleSheet.create({
   universalMargin: {
     margin: 1,
   },
-  
+
   // Universal button content alignment
   //
   universalButtonContentAlignment: {
@@ -435,4 +429,13 @@ module.exports = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
   },
+
+  // Universal form container
+  //
+  universalFormContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: 'white'
+  }
 })

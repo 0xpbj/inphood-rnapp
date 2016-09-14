@@ -34,7 +34,8 @@ var options = {
       autoCorrect: false,
       secureTextEntry: true
     }
-  }
+  },
+  auto: 'placeholders'
 }
 
 export default class UserSignUp extends Component {
@@ -53,29 +54,25 @@ export default class UserSignUp extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={commonStyles.universalFormContainer}>
+
         <Form
           ref="form"
           type={EmailSignUp}
           options={options}
         />
+
         <TouchableHighlight
           style={commonStyles.prabhaavButton}
           onPress={this.signup.bind(this)}
           underlayColor='#99d9f4'>
           <Text style={commonStyles.universalButtonTextStyling}>Sign Up</Text>
         </TouchableHighlight>
+
+        {/*Placeholder view to consume the remaining bottom of the scene.*/}
+        <View style={commonStyles.flexContainer}/>
+
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#ffffff',
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-})

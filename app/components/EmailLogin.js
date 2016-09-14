@@ -28,9 +28,10 @@ var options = {
     password: {
       autoCapitalize: 'none',
       autoCorrect: false,
-      secureTextEntry: true
+      secureTextEntry: true,
     }
-  }
+  },
+  auto: 'placeholders'
 }
 
 const route = {
@@ -50,20 +51,32 @@ export default class EmailLogin extends Component {
   }
   render() {
     return (
-      <View style={commonStyles.emailLoginContainer}>
-        <View style={commonStyles.emailLoginBody}>
-          <Form
-            ref="form"
-            type={EmailLoginForm}
-            options={options}
-          />
-          <TouchableHighlight style={commonStyles.prabhaavButton} onPress={this.login.bind(this)} underlayColor='#99d9f4'>
-            <Text style={commonStyles.universalButtonTextStyling}>Login</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={commonStyles.prabhaavButton} onPress={this.goToSignup.bind(this)} underlayColor='#99d9f4'>
-            <Text style={commonStyles.universalButtonTextStyling}>Sign Up</Text>
-          </TouchableHighlight>
-        </View>
+      <View style={commonStyles.universalFormContainer}>
+
+        <Form
+          ref="form"
+          type={EmailLoginForm}
+          options={options}
+        />
+
+        <TouchableHighlight
+          style={[commonStyles.prabhaavButton,
+                  {marginBottom: 15}]}
+          onPress={this.login.bind(this)}
+          underlayColor='#99d9f4'>
+          <Text style={commonStyles.universalButtonTextStyling}>Login</Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight
+          style={commonStyles.prabhaavButton}
+          onPress={this.goToSignup.bind(this)}
+          underlayColor='#99d9f4'>
+          <Text style={commonStyles.universalButtonTextStyling}>Sign Up</Text>
+        </TouchableHighlight>
+
+        {/*Placeholder view to consume the remaining bottom of the scene.*/}
+        <View style={commonStyles.flexContainer}/>
+
       </View>
     )
   }

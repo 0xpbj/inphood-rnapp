@@ -45,7 +45,6 @@ export default class Library extends Component {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
   }
   _renderScene (props) {
-    this.props.mediaVisible(true)
     const prefix = 'scene_'
     const { scene } = props
     if (scene.key === prefix + 'photos') {
@@ -112,9 +111,6 @@ export default class Library extends Component {
     this.props.selectPhoto('')
     this._handleBackAction()
     this._handleBackAction()
-    this.props.mediaVisible(false)
-    this.props.chatVisible(false)
-    this.props.trainerChatVisible(false)
     this.props.changeTab(1)
     return true
   }

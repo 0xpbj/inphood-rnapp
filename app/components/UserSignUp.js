@@ -57,8 +57,7 @@ export default class UserSignUp extends Component {
         <Form
           ref="form"
           type={EmailSignUp}
-          options={options}
-        />
+          options={options}/>
 
         <TouchableHighlight
           style={CommonStyles.prabhaavButton}

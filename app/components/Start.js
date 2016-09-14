@@ -94,7 +94,7 @@ export default class Start extends Component {
   }
   render() {
     const buttonColor = this.props.auth.result ? '#006400' : 'white'
-    const Button = this.props.auth.result ? <Text style={CommonStyles.buttonText}>Log Out</Text> : <Text style={commonStyles.buttonText}>Log In</Text>
+    const Button = this.props.auth.result ? <Text style={CommonStyles.buttonText}>Log Out</Text> : <Text style={CommonStyles.buttonText}>Log In</Text>
     const Swiper = this.props.auth.result ? <View style={{flex: 2, backgroundColor: 'transparent'}}></View> : (
       <View style={{flex: 2, backgroundColor: 'transparent'}}>
         <SwipeALot autoplay={{enabled: true, disableOnSwipe: false, delayBetweenAutoSwipes: 5000}}>
@@ -161,7 +161,7 @@ export default class Start extends Component {
                     _setModalVisible={this._setModalVisible.bind(this)}
                   />
                   <TouchableHighlight
-                    style={[CommonStyles.button, commonStyles.modalButton]}
+                    style={[CommonStyles.button, CommonStyles.modalButton]}
                     underlayColor='#99d9f4'
                     onPress={this._emailLogin.bind(this)}
                   >
@@ -169,7 +169,7 @@ export default class Start extends Component {
                   </TouchableHighlight>
                   <TouchableHighlight
                     onPress={this._setModalVisible.bind(this, false)}
-                    style={[CommonStyles.button, commonStyles.modalButton]}
+                    style={[CommonStyles.button, CommonStyles.modalButton]}
                   >
                     <Text style={[CommonStyles.buttonText]}>Cancel</Text>
                   </TouchableHighlight>
@@ -230,7 +230,7 @@ export default class Start extends Component {
           </TouchableHighlight>
           <TouchableHighlight
             onPress={this.sendEmail.bind(this)}
-            style={[CommonStyles.button, commonStyles.modalButton]}
+            style={[CommonStyles.button, CommonStyles.modalButton]}
           >
             <View style={{flexDirection: 'row'}}>
               <Icon name="ios-mail-outline" size={26} color='white' style={{marginLeft: 10, marginRight: 25}}/>
@@ -239,7 +239,7 @@ export default class Start extends Component {
           </TouchableHighlight>
           <TouchableHighlight
             onPress={this.userSettings.bind(this)}
-            style={[CommonStyles.button, commonStyles.modalButton]}
+            style={[CommonStyles.button, CommonStyles.modalButton]}
           >
             <View style={{flexDirection: 'row'}}>
               <Icon name="ios-settings-outline" size={26} color='white' style={{marginLeft: 10, marginRight: 15}}/>

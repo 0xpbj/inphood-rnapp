@@ -1,4 +1,4 @@
-import { CHANGE_TAB, MEDIA_TAB_VISIBLE, CHAT_TAB_VISIBLE, TRAINER_CHAT_TAB_VISIBLE } from '../constants/ActionTypes'
+import { CHANGE_TAB } from '../constants/ActionTypes'
 import {userIcon, sampleIcon, homeIcon} from '../components/Icons'
 
 const tabs = [
@@ -23,21 +23,6 @@ function tabsNav (state = initialState, action) {
       return {
         ...state,
         index: action.index
-      }
-    case MEDIA_TAB_VISIBLE:
-      return {
-        ...state,
-        mvisible: action.visible
-      }
-    case CHAT_TAB_VISIBLE:
-      return {
-        ...state,
-        cvisible: action.visible
-      }
-    case TRAINER_CHAT_TAB_VISIBLE:
-      return {
-        ...state,
-        evisible: action.visible
       }
     default:
       return state

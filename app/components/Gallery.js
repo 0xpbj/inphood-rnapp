@@ -77,7 +77,6 @@ export default class Gallery extends Component {
     )
   }
   _handleBackAction () {
-    this.props.chatVisible(false)
     this.setState({hack: true})
     if (this.props.galleryNav.index === 0) {
       return false

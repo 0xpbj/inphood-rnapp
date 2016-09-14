@@ -23,20 +23,10 @@ export default class ChatThread extends Component {
       oldMessages: oldMessages,
       loadEarlier: (oldMessages) ? true : false,
     }
-    this.onSend = this.onSend.bind(this)
-    this.renderBubble = this.renderBubble.bind(this)
-    this.renderFooter = this.renderFooter.bind(this)
     this.loadMessages = this.loadMessages.bind(this)
     this._isAlright = null
   }
-  componentDidMount() {
-    if (this.props.caller === 'client') {
-      this.props.chatVisible(true)
-    }
-    else if (this.props.caller === 'trainer') {
-      this.props.trainerChatVisible(true)
-    }
-  }
+  componentDidMount() {}
   componentWillReceiveProps(nextProps = {}) {
     this.loadMessages(nextProps)
   }
@@ -121,15 +111,15 @@ export default class ChatThread extends Component {
         <View style={{flex: 83}}>
           <GiftedChat
             messages={this.state.messages}
-            onSend={this.onSend}
+            onSend={this.onSend.bind(this)}
             loadEarlier={this.state.loadEarlier}
             user={{
               _id: this.state.id,
               name: this.props.result.first_name,
               avatar: this.props.result.picture,
             }}
-            renderBubble={this.renderBubble}
-            renderFooter={this.renderFooter}
+            renderBubble={this.renderBubble.bind(this)}
+            renderFooter={this.renderFooter.bind(this)}
           />
         </View>
         <View style={{flex: 7}}/>

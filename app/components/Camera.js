@@ -49,7 +49,6 @@ export default class Camera extends Component {
   _renderScene (props) {
     const prefix = 'scene_'
     const { scene } = props
-    this.props.mediaVisible(true)
     if (scene.key === prefix + 'picture') {
       return (
         <Picture
@@ -114,9 +113,6 @@ export default class Camera extends Component {
     this.props.takePhoto('')
     this._handleBackAction()
     this._handleBackAction()
-    this.props.mediaVisible(false)
-    this.props.chatVisible(false)
-    this.props.trainerChatVisible(false)
     this.props.changeTab(1)
     return true
   }

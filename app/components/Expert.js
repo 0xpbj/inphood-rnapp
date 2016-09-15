@@ -86,7 +86,6 @@ export default class Expert extends Component {
     )
   }
   _handleBackAction () {
-    this.props.trainerChatVisible(false)
     if (this.props.trainerNav.index === 0) {
       return false
     }

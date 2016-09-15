@@ -67,7 +67,6 @@ module.exports = StyleSheet.create({
     // marginTop: 15,
     marginLeft: 5,
   },
-
   // Styles used in Chat.js:
   footerContainer: {
     marginTop: 5,
@@ -79,20 +78,17 @@ module.exports = StyleSheet.create({
     fontSize: 14,
     color: '#aaa',
   },
-
   commonContainer: {
     flex: 1,
     marginTop: 20,
     backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
   },
-
   commonRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 10,
     backgroundColor: '#F6F6F6',
   },
-
   clientProfileName: {
     justifyContent: 'center',
     marginLeft: 90,
@@ -130,7 +126,6 @@ module.exports = StyleSheet.create({
     width: 28,
     resizeMode: 'contain'
   },
-
   clientGalleryContainer: {
     flex: 1,
     paddingBottom: 50,
@@ -154,9 +149,21 @@ module.exports = StyleSheet.create({
   notificationText: {
     fontSize: 18,
     textAlign: 'center',
+    justifyContent: 'center',
     color: 'white',
-    backgroundColor: 'red',
+    backgroundColor: 'transparent',
     fontWeight: 'bold',
+  },
+  notificationView: {
+    flex: 1,
+    position: 'absolute',
+    backgroundColor: 'red',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
   },
   galleryRow: {
     flexDirection: 'column',
@@ -179,7 +186,6 @@ module.exports = StyleSheet.create({
     height: 1,
     backgroundColor: '#CCCCCC'
   },
-
   prabhaavButton: {
     backgroundColor: '#006400',
     borderColor: '#006400',
@@ -189,14 +195,12 @@ module.exports = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
-
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     padding: 60,
     backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
-
   galleryListViewProfileImage: {
     marginLeft: 20,
     marginTop: 22,
@@ -206,7 +210,6 @@ module.exports = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#006400',
   },
-
   galleryListViewProfileName: {
     marginLeft: 40,
     marginTop: 42,
@@ -225,58 +228,39 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
   },
-
   galleryListViewButtonText: {
     fontSize: 18,
     margin: 5,
     textAlign: 'center',
   },
-
   galleryListViewInnerContainer: {
     borderRadius: 10,
     alignItems: 'center',
   },
-
   flexRowMarginBottom10: {
     flexDirection: 'row',
     marginBottom: 10,
   },
-
   addPhotosMessage: {
     justifyContent: 'center',
     marginTop:  150,
     flexDirection: 'row'
   },
-
   clientGalleryAddPhotosMessage: {
     justifyContent: 'center',
     marginTop: 150,
     marginLeft: 60,
   },
-
-  notificationView: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    width: 25,
-  },
-
   flexRow: {
     flexDirection: 'row'
   },
-
   heavyFont: {
     fontWeight: '600',
     fontSize: 18,
   },
-
   italicFont: {
     fontStyle: 'italic'
   },
-
   networkImageBase: {
     width: 300,
     height: 330,
@@ -288,7 +272,6 @@ module.exports = StyleSheet.create({
     width: 100,
     marginLeft: 130,
   },
-
   photoWrapper: {
     flex: 1,
     marginTop: STATUSBAR_HEIGHT
@@ -297,25 +280,20 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
   },
-
   flexContainer: {
     flex: 1
   },
-
   flexRow: {
     flexDirection: 'row',
   },
-
   flexCol: {
     flexDirection: 'column'
   },
-
   picturePreview: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-
   shutterInnerViewStyle: {
     marginTop: 5,
     width: 50,
@@ -323,7 +301,6 @@ module.exports = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: 'white',
   },
-
   shutterOuterViewStyle: {
     marginTop: 5,
     marginBottom: 70,
@@ -335,7 +312,6 @@ module.exports = StyleSheet.create({
     backgroundColor: '#006400',
     alignItems: 'center',
   },
-
   // modalButton is referenced in Start.js, but had no styling, keeping it for
   // the moment here.
   // TODO: talk to PBJ about this--I think it might be the global nature of CSS
@@ -346,9 +322,6 @@ module.exports = StyleSheet.create({
   // ditto spinner in Photos.js
   spinner: {
   },
-
-
-
   // Twenty segment layout styles:
   //
   //  In this layout, the screen is divided into twenty equal-height horizontal
@@ -367,12 +340,10 @@ module.exports = StyleSheet.create({
   singleSegmentView: {
     flex: 1,
   },
-
   selectedImage: {
     flex: 9,
     margin: 1,
   },
-
   // Universal input styling
   //
   //  TODO: this probably needs to become a class since it's a view wrapping
@@ -382,7 +353,6 @@ module.exports = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'black',
   },
-
   // Univeral font size
   //
   universalFontSize: {
@@ -391,7 +361,6 @@ module.exports = StyleSheet.create({
   universalSwitchFontSize: {
     fontSize: 24
   },
-
   // Universal border styling
   //
   universalBorder: {
@@ -401,20 +370,17 @@ module.exports = StyleSheet.create({
   universalBorderRadius: {
     borderRadius: 10,
   },
-
   // Universal margin styling
   //
   universalMargin: {
     margin: 1,
   },
-
   // Universal button content alignment
   //
   universalButtonContentAlignment: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-
   // Universal Button Text styling
   //
   universalButtonTextStyling: {
@@ -422,14 +388,12 @@ module.exports = StyleSheet.create({
     color: 'white',
 	alignSelf: 'center',
   },
-
   // Universal container (top-level)
   //
   universalContainer: {
     flexDirection: 'column',
     flex: 1,
   },
-
   // Universal form container
   //
   universalFormContainer: {

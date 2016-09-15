@@ -6,7 +6,8 @@ import {
   SYNC_ADDED_INFO_CHILD, SYNC_REMOVED_INFO_CHILD,
   syncAddedMessagesChild, syncRemovedMessagesChild,
   SYNC_ADDED_MESSAGES_CHILD, SYNC_REMOVED_MESSAGES_CHILD,
-  MARK_PHOTO_READ, INCREMENT_TRAINER_NOTIFICATION, DECREMENT_TRAINER_NOTIFICATION
+  MARK_PHOTO_READ, INCREMENT_TRAINER_NOTIFICATION, DECREMENT_TRAINER_NOTIFICATION,
+  INCREMENT_TRAINER_CHAT_NOTIFICATION, DECREMENT_TRAINER_CHAT_NOTIFICATION
 } from '../constants/ActionTypes'
 
 import * as db from './firebase'
@@ -27,11 +28,14 @@ function* triggerGetMessagesChild() {
     var messages = []
     for (var index in children) {
       messages[index] = children[index]
-      const photo = children[index].photo
+      let photo = children[index].photo
       yield put ({type: ADD_MESSAGES, messages, photo})
       if (children[index].trainerRead === false) {
-        const path = '/global/' + children[index].uid + '/photoData/' + photo
+        let photoKey = photo
+        const path = '/global/' + children[index].uid + '/photoData/' + photoKey
+        photo = turlHead + children[index].uid + '/' + photoKey
         yield put({type: INCREMENT_TRAINER_NOTIFICATION})
+        yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo})
       }
     }
   }  
@@ -82,8 +86,10 @@ function* triggerGetPhotoChild() {
       var child = {}
       child[uid] = obj
       const path = '/global/' + uid + '/photoData/' + file.fileTail
-      if (file.notifyTrainer)
+      if (file.notifyTrainer) {
         yield put({type: INCREMENT_TRAINER_NOTIFICATION})
+        yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo})
+      }
       yield put({type: ADD_PHOTOS, child})
     }
   }  

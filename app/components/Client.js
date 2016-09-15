@@ -60,24 +60,29 @@ export default class Client extends Component {
     const clientId = rowData.id
     const clientImage = <Image style={CommonStyles.clientProfileImage} source={{uri: data.val().picture}}/>
     const clientName = data.val().name
-    const clientGender = data.child('physicals').val().gender
+    const notificationBlock = ( 
+      <View style={CommonStyles.notificationView}>
+        <Text style={CommonStyles.notificationText}>12</Text>
+      </View>
+    )
+    const showNotification = notificationBlock
     return (
-      <TouchableHighlight onPress={() => {
-          this._pressRow(clientId, data.val().picture, clientName)
-          highlightRow(sectionID, rowID)
-        }}>
-        <View style={CommonStyles.commonRow}>
-          {clientImage}
-          <View  style={CommonStyles.commonView}>
-            <Text style={CommonStyles.clientNameText}>
-              {clientName}
-            </Text>
-            <Text style={CommonStyles.clientGenderText}>
-              {clientGender}
-            </Text>
+      <View>
+        <TouchableHighlight onPress={() => {
+            this._pressRow(clientId, data.val().picture, clientName)
+            highlightRow(sectionID, rowID)
+          }}>
+          <View style={CommonStyles.commonRow}>
+            {clientImage}
+            <View  style={CommonStyles.commonView}>
+              <Text style={CommonStyles.clientNameText}>
+                {clientName}
+              </Text>
+            </View>
           </View>
-        </View>
-      </TouchableHighlight>
+        </TouchableHighlight>
+        {showNotification}
+      </View>
     )
     // return <View />
   }

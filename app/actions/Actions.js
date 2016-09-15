@@ -230,18 +230,20 @@ export function storeMessages(messages) {
   }
 }
 
-export function markMessageRead(path, trainer) {
+export function markMessageRead(path, trainer, photo) {
   return {
     type: MARK_MESSAGE_READ,
     path,
-    trainer
+    trainer,
+    photo
   }
 }
 
-export function markPhotoRead(path) {
+export function markPhotoRead(path, photo) {
   return {
     type: MARK_PHOTO_READ,
-    path
+    path,
+    photo
   }
 }
 

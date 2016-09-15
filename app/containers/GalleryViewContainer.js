@@ -5,7 +5,8 @@ import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps (state) {
   return {
-    galleryView: state.galReducer
+    galleryView: state.galReducer,
+    notification: state.notificationReducer
   }
 }
 

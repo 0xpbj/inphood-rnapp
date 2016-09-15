@@ -9,6 +9,9 @@ import {
 import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat'
 
 import CommonStyles from './styles/common-styles'
+import Config from 'react-native-config'
+
+const turlHead = Config.AWS_CDN_THU_URL
 
 export default class ChatThread extends Component {
   constructor(props) {
@@ -44,13 +47,15 @@ export default class ChatThread extends Component {
       if (this.state.id !== oldMessages[keys].uid) {
         const path = '/global/' + oldMessages[keys].uid + '/messages/' + oldMessages[keys].photo + '/' + keys
         if (oldMessages[keys].trainerRead === false) {
-          props.markMessageRead(path, true)
+          const photo = turlHead + oldMessages[keys].uid + '/' + oldMessages[keys].photo
+          props.markMessageRead(path, true, photo)
         }
       }
       else {
         const path = '/global/' + oldMessages[keys].uid + '/messages/' + oldMessages[keys].photo + '/' + keys
         if (oldMessages[keys].clientRead === false) {
-          props.markMessageRead(path, false)
+          const photo = turlHead + oldMessages[keys].uid + '/' + oldMessages[keys].photo
+          props.markMessageRead(path, false, photo)
         }
       }
       let message = oldMessages[keys].message

@@ -40,39 +40,21 @@ export default class ClientGallery extends Component{
       if (vals[key][id])
         data.unshift(vals[key][id])
     }
-    if (data.length !== 0) {
-      var photoNotifications = []
-      for (let index in data) {
-        photoNotifications[data[index].photo] = data[index].notification
-      }
-      console.log('Initial notifications: ')
-      console.log(photoNotifications)
-      this.setState({
-        dataSource: this._createDataSource(data),
-        photoNotifications: photoNotifications
-      })
-    }
+    this.setState({
+      dataSource: this._createDataSource(data),
+    })
   }
   componentWillReceiveProps(nextProps) {
     const id = nextProps.trainerData.clientId
-    const vals = (nextProps.trainerData.photos)
+    const vals = nextProps.trainerData.photos
     var data = []
     for (var key in vals) {
       if (vals[key][id])
         data.unshift(vals[key][id])
     }
-    if (data.length !== 0) {
-      var photoNotifications = []
-      for (let index in data) {
-        photoNotifications[data[index].photo] = data[index].notification
-      }
-      console.log('New notifications: ')
-      console.log(photoNotifications)
-      this.setState({
-        dataSource: this._createDataSource(data),
-        photoNotifications: photoNotifications
-      })
-    }
+    this.setState({
+      dataSource: this._createDataSource(data),
+    })
   }
   render() {
     let name = this.props.trainerData.clientName.split(' ')
@@ -116,56 +98,57 @@ export default class ClientGallery extends Component{
     const mealType = data.mealType
     const mealTime = new Date(data.time).toDateString()
     const path = '/global/' + data.file.uid + '/photoData/' + data.file.fileTail
-    const flag = this.state.photoNotifications[imgSource]
-    const notificationBlock = ( <View style={CommonStyles.notificationView}>
-              <Text style={CommonStyles.notificationText}> </Text>
-            </View> )
+    const flag = this.props.notification.trainerPhotos[imgSource]
+    console.log('Count: ' + flag)
+    const notificationBlock = ( 
+      <View style={CommonStyles.notificationView}>
+        <Text style={CommonStyles.notificationText}>{flag}</Text>
+      </View>
+    )
     const showNotification = flag ? notificationBlock : <View />
+    // const showNotification = notificationBlock
 
     // TODO: refactor to common generating class (this is identical to GalleryListView.js)
     //
     return (
-      <TouchableHighlight onPress={() => {
-          this._pressRow(data.photo, path)
-          highlightRow(sectionID, rowID)
-        }}>
-        <View style={CommonStyles.galleryRow}>
-          <View style={CommonStyles.flexRow}>
-            {imgBlock}
-            {showNotification}
+      <View>
+        <TouchableHighlight onPress={() => {
+            this._pressRow(data.photo, path)
+            highlightRow(sectionID, rowID)
+          }}>
+          <View style={CommonStyles.galleryRow}>
+            <View style={CommonStyles.flexRow}>
+              {imgBlock}
+            </View>
+            <View  style={CommonStyles.galleryText}>
+              <Text style={CommonStyles.heavyFont}>
+                {data.title}: {data.caption}
+              </Text>
+              <Text>
+                {mealType}
+              </Text>
+              <Text style={CommonStyles.italicFont}>
+                {mealTime}
+              </Text>
+            </View>
           </View>
-          <View  style={CommonStyles.galleryText}>
-            <Text style={CommonStyles.heavyFont}>
-              {data.title}: {data.caption}
-            </Text>
-            <Text>
-              {mealType}
-            </Text>
-            <Text style={commonsStyles.italicFont}>
-              {mealTime}
-            </Text>
-          </View>
-        </View>
-      </TouchableHighlight>
+        </TouchableHighlight>
+        {showNotification}
+      </View>
     )
   }
-  _pressRow(imgSource: string, path: string) {
-    let newNotifications = this.state.photoNotifications
-    newNotifications[imgSource] = false
-    this.setState({
-      photoNotifications: newNotifications
-    })
-    this.props.markPhotoRead(path)
+  _pressRow(photo: string, path: string) {
+    this.props.markPhotoRead(path, photo)
     this.props._handleNavigate(route)
-    this.props.feedbackPhoto(imgSource)
+    this.props.feedbackPhoto(photo)
   }
   _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
     return (
       <View
         key={`${sectionID}-${rowID}`}
         style={adjacentRowHighlighted ?
-                  adjacentRowHighlightedSeparator :
-                  adjacentRowNotHighlightedSeparator}
+                  CommonStyles.adjacentRowHighlightedSeparator :
+                  CommonStyles.adjacentRowNotHighlightedSeparator}
       />
     )
   }

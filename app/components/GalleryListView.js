@@ -35,10 +35,6 @@ export default class GalleryListView extends Component{
   constructor(props) {
     super(props)
     const mediaList = props.galleryView.photos
-    var photoNotifications = []
-    for (let index in mediaList) {
-      photoNotifications[mediaList[index].photo] = mediaList[index].notification
-    }
     this.state = {
       mediaList: mediaList,
       result: this.props.result,
@@ -46,7 +42,6 @@ export default class GalleryListView extends Component{
       dataSource: this._createDataSource(mediaList),
       newUser: false,
       modalVisible: false,
-      photoNotifications: photoNotifications,
     }
   }
   _createDataSource(list) {
@@ -71,17 +66,12 @@ export default class GalleryListView extends Component{
   }
   componentWillReceiveProps(nextProps) {
     const mediaList = nextProps.galleryView.photos
-    var photoNotifications = []
-    for (let index in mediaList) {
-      photoNotifications[mediaList[index].photo] = mediaList[index].notification
-    }
     this.setState({
       mediaList: mediaList,
       result: nextProps.result,
       size: mediaList.length,
       dataSource: this._createDataSource(mediaList),
       newUser: mediaList.length === 0 ? true : false,
-      photoNotifications: photoNotifications,
     })
   }
   render() {
@@ -153,81 +143,81 @@ export default class GalleryListView extends Component{
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     let imgBlock = <Image style={CommonStyles.galleryListViewThumb} source={{uri: rowData.localFile}}/>
     if ((Date.now() - rowData.time)/1000 > 26400) {
-      imgBlock = <NetworkImage source={{uri: rowData.photo}}/>
+      imgBlock = (
+        <NetworkImage source={{uri: rowData.photo}}>
+        </NetworkImage>
+      )
     }
     const imgSource = rowData.photo
     const mealType = rowData.mealType
     const mealTime = new Date(rowData.time).toDateString()
     const path = '/global/' + rowData.data.uid + '/photoData/' + rowData.data.fileTail
-    const flag = this.state.photoNotifications[imgSource]
-    const notificationBlock = ( <View style={CommonStyles.notificationView}>
-              <Text style={CommonStyles.notificationText}> </Text>
-            </View> )
+    const flag = this.props.notification.clientPhotos[imgSource]
+    const notificationBlock = (
+      <View style={CommonStyles.notificationView}>
+        <Text style={CommonStyles.notificationText}>{flag}</Text>
+      </View>
+    )
     const showNotification = flag ? notificationBlock : <View />
     return (
-        <View style={CommonStyles.galleryRow}>
+      <View style={CommonStyles.galleryRow}>
+        <View style={CommonStyles.flexRow}>
+          <TouchableOpacity
+            onPress={() => {
+              this._pressRow(rowData.photo)
+              highlightRow(sectionID, rowID)
+            }}
+          >
+            {imgBlock}
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyles.galleryText}>
+          <Text style={CommonStyles.heavyFont}>
+            {rowData.title}: {rowData.caption}
+          </Text>
+          <Text>
+            {mealType}
+          </Text>
           <View style={CommonStyles.flexRow}>
+            <Text style={CommonStyles.italicFont}>
+              {mealTime}
+            </Text>
             <TouchableOpacity
-              onPress={() => {
-                this._pressRow(rowData.photo)
-                highlightRow(sectionID, rowID)
-              }}
+              style={{marginLeft: 160}}
+              onPress={this._setModalVisible.bind(this, true)}
             >
-              {imgBlock}
+              <Icon name="ios-options-outline" size={20} color='black'/>
             </TouchableOpacity>
-            {showNotification}
           </View>
-          <View style={CommonStyles.galleryText}>
-            <Text style={CommonStyles.heavyFont}>
-              {rowData.title}: {rowData.caption}
-            </Text>
-            <Text>
-              {mealType}
-            </Text>
-            <View style={CommonStyles.flexRow}>
-              <Text style={CommonStyles.italicFont}>
-                {mealTime}
-              </Text>
+        </View>
+        <Modal
+          animationType='none'
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {this._setModalVisible(false)}}
+          >
+          <View style={CommonStyles.modalContainer}>
+            <View style={[CommonStyles.galleryListViewInnerContainer, {backgroundColor: '#fff', padding: 10}]}>
               <TouchableOpacity
-                style={{marginLeft: 160}}
-                onPress={this._setModalVisible.bind(this, true)}
+                onPress={this._removeClientPhoto.bind(this, path)}
+                style={[CommonStyles.galleryListViewButton, CommonStyles.modalButton]}
               >
-                <Icon name="ios-options-outline" size={20} color='black'/>
+                <Text style={[CommonStyles.galleryListViewButtonText, {color: 'red'}]}>Delete</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={this._setModalVisible.bind(this, false)}
+                style={[CommonStyles.galleryListViewButton, CommonStyles.modalButton]}
+              >
+                <Text style={[CommonStyles.galleryListViewButtonText]}>Cancel</Text>
               </TouchableOpacity>
             </View>
           </View>
-          <Modal
-            animationType='none'
-            transparent={true}
-            visible={this.state.modalVisible}
-            onRequestClose={() => {this._setModalVisible(false)}}
-            >
-            <View style={CommonStyles.modalContainer}>
-              <View style={[CommonStyles.galleryListViewInnerContainer, {backgroundColor: '#fff', padding: 10}]}>
-                <TouchableOpacity
-                  onPress={this._removeClientPhoto.bind(this, path)}
-                  style={[CommonStyles.galleryListViewButton, commonStyles.modalButton]}
-                >
-                  <Text style={[CommonStyles.galleryListViewButtonText, {color: 'red'}]}>Delete</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={this._setModalVisible.bind(this, false)}
-                  style={[CommonStyles.galleryListViewButton, commonStyles.modalButton]}
-                >
-                  <Text style={[CommonStyles.galleryListViewButtonText]}>Cancel</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
-        </View>
+        </Modal>
+        {showNotification}
+      </View>
     )
   }
   _pressRow(imgSource: string) {
-    let newNotifications = this.state.photoNotifications
-    newNotifications[imgSource] = false
-    this.setState({
-      photoNotifications: newNotifications
-    })
     this.props._handleNavigate(route)
     this.props._setFeedback(imgSource)
   }

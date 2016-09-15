@@ -3,11 +3,16 @@ import {
   ADD_MESSAGES, LOAD_MESSAGES, LOAD_MESSAGES_ERROR,
   STORE_CHAT_SUCCESS, STORE_CHAT_ERROR, MARK_MESSAGE_READ, 
   INCREMENT_TRAINER_NOTIFICATION, DECREMENT_TRAINER_NOTIFICATION, 
-  INCREMENT_CLIENT_NOTIFICATION, DECREMENT_CLIENT_NOTIFICATION
+  INCREMENT_CLIENT_NOTIFICATION, DECREMENT_CLIENT_NOTIFICATION,
+  INCREMENT_CLIENT_CHAT_NOTIFICATION, DECREMENT_CLIENT_CHAT_NOTIFICATION,
+  DECREMENT_TRAINER_CHAT_NOTIFICATION
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import * as db from './firebase'
+import Config from 'react-native-config'
+
+const turlHead = Config.AWS_CDN_THU_URL
 
 function* sendChatData() {
   try {
@@ -108,9 +113,10 @@ function* loadOldMessages() {
     })
     for (let index in photos) {
       firebase.database().ref(index).update({'notifyClient': true})
-    }
-    for (let i = 0; i < count; i++) {
+      const photoKey = photos[index].substring(photos[index].lastIndexOf('/')+1)
+      const photo = turlHead + uid + '/' + photoKey
       yield put({type: INCREMENT_CLIENT_NOTIFICATION})
+      yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo})
     }
     yield put ({type: LOAD_MESSAGES, messages})
   }
@@ -123,13 +129,16 @@ function* loadOldMessages() {
 function* readFirebaseChatFlow() {
   while (true) {
     const data = yield take(MARK_MESSAGE_READ)
+    const photo = data.photo
     if (data.trainer) {
       firebase.database().ref(data.path).update({'trainerRead': true})
       yield put({type: DECREMENT_TRAINER_NOTIFICATION})
+      yield put({type: DECREMENT_TRAINER_CHAT_NOTIFICATION, photo})
     }
     else {
       firebase.database().ref(data.path).update({'clientRead': true})
       yield put({type: DECREMENT_CLIENT_NOTIFICATION})
+      yield put({type: DECREMENT_CLIENT_CHAT_NOTIFICATION, photo})
     }
   }
 }

@@ -430,12 +430,20 @@ module.exports = StyleSheet.create({
     flex: 1,
   },
 
-  // Universal form container
+  // Universal form containers
   //
   universalFormContainer: {
     flex: 1,
     justifyContent: 'center',
     padding: 20,
     backgroundColor: 'white'
-  }
+  },
+
+  // Omits flex to permit inifinite size for scrolling:
+  universalFormScrollingContainer: {
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: 'white',
+  },
+
 })

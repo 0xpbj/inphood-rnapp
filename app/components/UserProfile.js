@@ -54,36 +54,23 @@ export default class UserProfile extends Component {
 
   render() {
     return (
+
       <View style={{flex: 1}}>
-
-        <ScrollView style={{flex: 9}}>
-
-          {/*<View style={CommonStyles.universalFormContainer}>*/}
-          <View
-            style={{justifyContent: 'center', padding: 20, backgroundColor: 'white'}}>
+        <ScrollView
+          style={{flex: 9}}
+          contentContainerStyle={CommonStyles.universalFormScrollingContainer}>
 
             <Form
               ref="form"
               type={UserProfileForm}
               options={options}/>
 
-            <TouchableHighlight
-              style={CommonStyles.prabhaavButton}
-              onPress={this.applyChanges.bind(this)}
-              underlayColor='#99d9f4'>
-              <Text
-                style={CommonStyles.universalButtonTextStyling}>
-                Apply Changes
-              </Text>
-            </TouchableHighlight>
-
             {/*Placeholder view to consume the remaining bottom of the scene.*/}
             <View style={CommonStyles.flexContainer}/>
 
-          </View>
         </ScrollView>
 
-        <View style={{flex: 1}}/>
+        <View style={{flex: 1, backgroundColor: 'white'}}/>
 
       </View>
     )

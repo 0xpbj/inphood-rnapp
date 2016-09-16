@@ -1,6 +1,6 @@
 import {
   LOGIN_SUCCESS, ADD_MESSAGES, REFRESH_CLIENT_DATA, REMOVE_CLIENT_PHOTO,
-  LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_ERROR,
+  LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_ERROR, INIT_MESSAGES,
   SEND_FIREBASE_CAMERA_SUCCESS, SEND_FIREBASE_LIBRARY_SUCCESS,
   APPEND_PHOTOS_SUCCESS, APPEND_PHOTOS_ERROR,
 } from '../constants/ActionTypes'
@@ -89,7 +89,7 @@ function* updateDataVisibility() {
 
 function* dataInit() {
   while (true) {
-    yield take([ADD_MESSAGES, REFRESH_CLIENT_DATA])
+    yield take([INIT_MESSAGES, REFRESH_CLIENT_DATA])
     yield call(loadInitialData)
   }
 }

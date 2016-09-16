@@ -97,7 +97,8 @@ export default class ClientGallery extends Component{
     const imgBlock = <NetworkImage source={{uri: data.photo}}/>
     const mealType = data.mealType
     const mealTime = new Date(data.time).toDateString()
-    const path = '/global/' + data.file.uid + '/photoData/' + data.file.fileTail
+    const uid = data.file.uid
+    const path = '/global/' + uid + '/photoData/' + data.file.fileTail
     const flag = this.props.notification.trainerPhotos[imgSource]
     const notificationBlock = ( 
       <View style={CommonStyles.notificationView}>
@@ -112,7 +113,7 @@ export default class ClientGallery extends Component{
     return (
       <View>
         <TouchableHighlight onPress={() => {
-            this._pressRow(data.photo, path)
+            this._pressRow(data.photo, path, uid)
             highlightRow(sectionID, rowID)
           }}>
           <View style={CommonStyles.galleryRow}>
@@ -136,8 +137,8 @@ export default class ClientGallery extends Component{
       </View>
     )
   }
-  _pressRow(photo: string, path: string) {
-    this.props.markPhotoRead(path, photo)
+  _pressRow(photo: string, path: string, uid: string) {
+    this.props.markPhotoRead(path, photo, uid)
     this.props._handleNavigate(route)
     this.props.feedbackPhoto(photo)
   }

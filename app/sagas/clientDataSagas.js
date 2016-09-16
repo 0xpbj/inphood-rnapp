@@ -25,9 +25,11 @@ function* triggerGetMessagesChild() {
     const photo = messages.photo
     yield put ({type: ADD_MESSAGES, messages, photo})
     if (messages.trainerRead === false) {
-      const path = '/global/' + messages.uid + '/photoData/' + photo
-      const info = turlHead + messages.uid + '/' + photo
-      yield put({type: INCREMENT_TRAINER_NOTIFICATION})
+      const uid  = messages.uid
+      const path = '/global/' + uid + '/photoData/' + photo
+      const info = turlHead + uid + '/' + photo + '.jpg'
+      console.log('Write Chat Photo1: ' + info)
+      yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
       yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo: info})
     }
   }  
@@ -79,7 +81,7 @@ function* triggerGetPhotoChild() {
       child[uid] = obj
       const path = '/global/' + uid + '/photoData/' + file.fileTail
       if (file.notifyTrainer) {
-        yield put({type: INCREMENT_TRAINER_NOTIFICATION})
+        yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
         yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo})
       }
       yield put({type: ADD_PHOTOS, child})
@@ -119,8 +121,9 @@ function* syncData() {
 function* readClientPhotoFlow() {
   while (true) {
     const data = yield take(MARK_PHOTO_READ)
-    firebase.database().ref(data.path).update({'notifyTrainer': false})
-    yield put({type: DECREMENT_TRAINER_NOTIFICATION})
+    const {path, uid} = data
+    firebase.database().ref(path).update({'notifyTrainer': false})
+    yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
   }
 }
 

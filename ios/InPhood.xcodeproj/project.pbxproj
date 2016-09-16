@@ -999,7 +999,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.inphood.mvp-aug2016";
+				PRODUCT_BUNDLE_IDENTIFIER = inPhoodPB;
 				PRODUCT_NAME = InPhood;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1039,7 +1039,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.inphood.mvp-aug2016";
+				PRODUCT_BUNDLE_IDENTIFIER = inPhoodPB;
 				PRODUCT_NAME = InPhood;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

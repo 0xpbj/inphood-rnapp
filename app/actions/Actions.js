@@ -239,11 +239,12 @@ export function markMessageRead(path, trainer, photo, uid) {
   }
 }
 
-export function markPhotoRead(path, photo) {
+export function markPhotoRead(path, photo, uid) {
   return {
     type: MARK_PHOTO_READ,
     path,
-    photo
+    photo,
+    uid
   }
 }
 

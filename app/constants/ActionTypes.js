@@ -79,6 +79,7 @@ export const APPEND_PHOTOS_ERROR = 'APPEND_PHOTOS_ERROR'
 //CHAT Sagas Actions
 export const LOAD_ID = 'LOAD_ID'
 export const ADD_MESSAGES = 'ADD_MESSAGES'
+export const INIT_MESSAGES = 'INIT_MESSAGES'
 export const LOAD_MESSAGES = 'LOAD_MESSAGES'
 export const STORE_MESSAGES = 'STORE_MESSAGES'
 export const INIT_CHAT_SAGA = 'INIT_CHAT_SAGA'
@@ -134,8 +135,10 @@ export const SYNC_REMOVED_MESSAGES_CHILD = 'SYNC_REMOVED_MESSAGES_CHILD'
 export const syncAddedMessagesChild = createAction(SYNC_ADDED_MESSAGES_CHILD)
 export const syncRemovedMessagesChild = createAction(SYNC_REMOVED_MESSAGES_CHILD)
 
+export const SYNC_COUNT_CLIENT_MESSAGES_CHILD = 'SYNC_COUNT_CLIENT_MESSAGES_CHILD'
 export const SYNC_ADDED_MESSAGES_CLIENT_CHILD = 'SYNC_ADDED_MESSAGES_CLIENT_CHILD'
 export const SYNC_REMOVED_MESSAGES_CLIENT_CHILD = 'SYNC_REMOVED_MESSAGES_CLIENT_CHILD'
+export const syncCountClientMessagesChild = createAction(SYNC_COUNT_CLIENT_MESSAGES_CHILD)
 export const syncAddedMessagesClientChild = createAction(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
 export const syncRemovedMessagesClientChild = createAction(SYNC_REMOVED_MESSAGES_CLIENT_CHILD)
 

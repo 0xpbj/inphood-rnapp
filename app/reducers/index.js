@@ -12,7 +12,7 @@ import trainerReducer from './trainerReducer'
 import trainerNavReducer from './trainerNavReducer'
 import notificationReducer from './notificationReducer'
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     tabReducer,
     authReducer,
     camReducer,
@@ -26,5 +26,12 @@ const rootReducer = combineReducers({
     trainerNavReducer,
     notificationReducer,
 })
+
+const rootReducer = (state, action) => {
+  if (action.type === 'LOGOUT_SUCCESS') {
+    state = undefined
+  }
+  return appReducer(state, action)
+}
 
 export default rootReducer

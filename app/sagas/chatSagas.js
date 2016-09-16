@@ -1,5 +1,5 @@
 import {
-  LOGIN_SUCCESS, INIT_CHAT_SAGA,
+  LOGIN_SUCCESS, INIT_CHAT_SAGA, INIT_MESSAGES,
   ADD_MESSAGES, LOAD_MESSAGES, LOAD_MESSAGES_ERROR,
   syncAddedMessagesClientChild, syncRemovedMessagesClientChild,
   SYNC_ADDED_MESSAGES_CLIENT_CHILD, SYNC_REMOVED_MESSAGES_CLIENT_CHILD,
@@ -7,7 +7,8 @@ import {
   INCREMENT_TRAINER_NOTIFICATION, DECREMENT_TRAINER_NOTIFICATION, 
   INCREMENT_CLIENT_NOTIFICATION, DECREMENT_CLIENT_NOTIFICATION,
   INCREMENT_CLIENT_CHAT_NOTIFICATION, DECREMENT_CLIENT_CHAT_NOTIFICATION,
-  INCREMENT_TRAINER_CHAT_NOTIFICATION, DECREMENT_TRAINER_CHAT_NOTIFICATION
+  INCREMENT_TRAINER_CHAT_NOTIFICATION, DECREMENT_TRAINER_CHAT_NOTIFICATION,
+  syncCountClientMessagesChild, SYNC_COUNT_CLIENT_MESSAGES_CHILD
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -16,6 +17,17 @@ import Config from 'react-native-config'
 
 const turlHead = Config.AWS_CDN_THU_URL
 
+function* triggerGetClientMessagesCount() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_COUNT_CLIENT_MESSAGES_CHILD)
+    const count = data.numChildren()
+    const {previousMessages} = yield select(state => state.chatReducer)
+    if (previousMessages.length === count) {
+      yield put({type: INIT_MESSAGES})
+    }
+  }
+}
+
 function* triggerGetMessagesClientChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
@@ -23,8 +35,10 @@ function* triggerGetMessagesClientChild() {
     const photo = messages.photo
     yield put ({type: ADD_MESSAGES, messages, photo})
     if (messages.clientRead === false) {
-      const path = '/global/' + messages.uid + '/photoData/' + photo
-      const info = turlHead + messages.uid + '/' + photo
+      const uid  = messages.uid
+      const path = '/global/' + uid + '/photoData/' + photo
+      const info = turlHead + uid + '/' + photo + '.jpg'
+      console.log('Read Chat Photo1: ' + info)
       yield put({type: INCREMENT_CLIENT_NOTIFICATION})
       yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo: info})
     }
@@ -41,6 +55,9 @@ function* triggerRemMessagesClientChild() {
 function* syncData() {
   const uid = (yield select(state => state.authReducer.user)).uid
   let path = '/global/' + uid
+  yield fork(db.sync, path + '/messages', {
+    value: syncCountClientMessagesChild,
+  })
   yield fork(db.sync, path + '/messages', {
     child_added: syncAddedMessagesClientChild,
     child_removed: syncRemovedMessagesClientChild,
@@ -62,7 +79,8 @@ function* sendChatData() {
       clientRead = true
       const path = '/global/' + uid + '/photoData/' + photo
       firebase.database().ref(path).update({'notifyTrainer': true})
-      const data = turlHead + uid + '/' + photo
+      const data = turlHead + uid + '/' + photo + '.jpg'
+      console.log('Write Chat Photo2: ' + data)
       yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
       yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo: data})
     }
@@ -96,8 +114,9 @@ function* watchFirebaseChatFlow() {
 function* readFirebaseChatFlow() {
   while (true) {
     const data = yield take(MARK_MESSAGE_READ)
-    const photo = data.photo
+    const photo = data.photo + '.jpg'
     const uid = data.uid
+    console.log('Read Chat Photo2: ' + photo)
     if (data.trainer) {
       // firebase.database().ref(data.path).update({'trainerRead': true})
       yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
@@ -113,6 +132,7 @@ function* readFirebaseChatFlow() {
 
 export default function* rootSaga() {
   yield take(LOGIN_SUCCESS)
+  yield fork(triggerGetClientMessagesCount)
   yield fork(triggerGetMessagesClientChild)
   yield fork(triggerRemMessagesClientChild)
   yield fork(syncData)

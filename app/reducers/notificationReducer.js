@@ -12,6 +12,8 @@ import {
 const initialState = {
   client: 0,
   trainer: 0,
+  clientUID: [],
+  trainerUID: [],
   clientPhotos: [],
   trainerPhotos: []
 }
@@ -19,24 +21,43 @@ const initialState = {
 export default function library (state = initialState, action) {
   switch (action.type) {
     case INCREMENT_CLIENT_NOTIFICATION:
+      let cuid1 = state.clientUID
+      if(cuid1[action.uid]) {
+        cuid1[action.uid] = cuid1[action.uid] + 1
+      }
+      else {
+        cuid1[action.uid] = 1
+      }
       return {
         ...state,
-        client: state.client + 1
+        client: state.client + 1,
+        clientUID: cuid1
       }
     case DECREMENT_CLIENT_NOTIFICATION:
+      let cuid2 = state.clientUID
+      cuid2[action.uid] = 0
       if (state.client > 0) {
         return {
           ...state,
-          client: state.client - 1
+          client: state.client - 1,
+          clientUID: cuid2
         }
       }
       else {
         return state
       }
     case INCREMENT_TRAINER_NOTIFICATION:
+      let tuid = state.clientUID
+      if(tuid[action.uid]) {
+        tuid[action.uid] = tuid[action.uid] + 1
+      }
+      else {
+        tuid[action.uid] = 1
+      }
       return {
         ...state,
-        trainer: state.trainer + 1
+        trainer: state.trainer + 1,
+        trainerUID: tuid
       }
     case DECREMENT_TRAINER_NOTIFICATION:
       if (state.trainer > 0) {

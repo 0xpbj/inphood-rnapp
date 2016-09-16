@@ -6,6 +6,7 @@ import * as actionCreators from '../actions/Actions'
 function mapStateToProps(state) {
   return {
     trainerData: state.trainerReducer,
+    notification: state.notificationReducer
   }
 }
 

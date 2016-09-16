@@ -10,7 +10,7 @@ const defaultState = {
   client: '',
   feedbackPhoto: '',
   messages: [],
-  previousMessages: []
+  previousMessages: new Set()
 }
 
 export default function chat(state = defaultState, action) {
@@ -36,11 +36,15 @@ export default function chat(state = defaultState, action) {
         client: action.id
       }
     case ADD_MESSAGES:
-      let messages = state.previousMessages
-      messages[action.photo] = action.messages
+      const {photo, messages} = action
+      let array = state.previousMessages
+      if (!array[photo]) {
+        array[photo] = []
+      }
+      array[photo] = [...array[photo], messages]
       return {
         ...state,
-        previousMessages: messages
+        previousMessages: array
       }
     default:
       return state

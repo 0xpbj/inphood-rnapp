@@ -37,7 +37,6 @@ import {
   MARK_MESSAGE_READ,
   MARK_PHOTO_READ,
   LOAD_ID,
-  TRAINER_STORE_MESSAGES,
   INIT_CHAT_SAGA,
   INIT_TRAINER_CHAT_SAGA,
   LOGIN_REQUEST,
@@ -230,12 +229,13 @@ export function storeMessages(messages) {
   }
 }
 
-export function markMessageRead(path, trainer, photo) {
+export function markMessageRead(path, trainer, photo, uid) {
   return {
     type: MARK_MESSAGE_READ,
     path,
     trainer,
-    photo
+    photo,
+    uid
   }
 }
 

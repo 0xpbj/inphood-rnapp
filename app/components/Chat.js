@@ -31,32 +31,30 @@ export default class ChatThread extends Component {
   }
   componentDidMount() {}
   componentWillReceiveProps(nextProps = {}) {
-    this.loadMessages(nextProps)
+    this.loadMessages()
   }
   componentWillMount() {
     if (this.state.loadEarlier) {
-      this.loadMessages(this.props)
+      this.loadMessages()
     }
   }
-  loadMessages(props) {
-    const feedbackPhoto = props.chat.feedbackPhoto
-    const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
-    const oldMessages = props.chat.previousMessages[photo]
+  loadMessages() {
+    const feedbackPhoto = this.props.chat.feedbackPhoto
+    const key = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
+    const oldMessages = this.props.chat.previousMessages[key]
     var messages = []
     for (var keys in oldMessages) {
-      if (this.state.id !== oldMessages[keys].uid) {
-        const path = '/global/' + oldMessages[keys].uid + '/messages/' + oldMessages[keys].photo + '/' + keys
-        if (oldMessages[keys].trainerRead === false) {
-          const photo = turlHead + oldMessages[keys].uid + '/' + oldMessages[keys].photo
-          props.markMessageRead(path, true, photo)
-        }
+      if (this.props.caller === "trainer" && oldMessages[keys].trainerRead === false) {
+        const uid = oldMessages[keys].uid
+        const path = '/global/' + uid + '/messages/' + oldMessages[keys].photo + '/' + keys
+        const photo = turlHead + uid + '/' + oldMessages[keys].photo
+        this.props.markMessageRead(path, true, photo, uid)
       }
-      else {
-        const path = '/global/' + oldMessages[keys].uid + '/messages/' + oldMessages[keys].photo + '/' + keys
-        if (oldMessages[keys].clientRead === false) {
-          const photo = turlHead + oldMessages[keys].uid + '/' + oldMessages[keys].photo
-          props.markMessageRead(path, false, photo)
-        }
+      else if (this.props.caller === "client" && oldMessages[keys].clientRead === false) {
+        const uid = this.state.id
+        const path = '/global/' + uid + '/messages/' + oldMessages[keys].photo + '/' + keys
+        const photo = turlHead + uid + '/' + oldMessages[keys].photo
+        this.props.markMessageRead(path, false, photo, uid)
       }
       let message = oldMessages[keys].message
       message.createdAt = oldMessages[keys].createdAt
@@ -71,19 +69,14 @@ export default class ChatThread extends Component {
   }
   onSend(messages = []) {
     const id = this.props.data.clientId
-    if (id === '') {
-      this.props.storeId(this.state.id)
+    if (this.props.caller === "trainer") {
+      this.props.storeId(this.props.data.clientId)
     }
-    else {
-      this.props.storeId(id)
+    else if (this.props.caller === "client") {
+      this.props.storeId(this.state.id)
     }
     this.props.storeMessages(messages)
     this.props.initChatSaga()
-    this.setState((previousState) => {
-      return {
-        messages: GiftedChat.append(previousState.messages, messages),
-      }
-    })
   }
   renderBubble(props) {
     return (

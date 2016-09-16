@@ -62,11 +62,13 @@ function* fbloginFlow() {
     const name = user.providerData[0].displayName
     const picture = user.providerData[0].photoURL
     const provider = user.providerData[0].providerId
+    const token = user.uid
+    const path = '/global/' + token + '/userInfo/public'
+    const trainerId = (yield call(db.getPath, path + '/trainerId')).val()
     const values = name.split(" ")
     const first_name = values[0]
     const last_name = values[1]
-    const result = {id, name, picture, first_name, last_name, provider}
-    const token = user.uid
+    const result = {id, name, picture, first_name, last_name, provider, trainerId}
     yield put ({type: STORE_RESULT, result})
     yield put ({type: STORE_TOKEN, token})
     yield put ({type: LOGIN_SUCCESS, user})
@@ -140,11 +142,12 @@ function* emloginFlow(value) {
     const id = (yield call(db.getPath, path + '/id')).val()
     const name = (yield call(db.getPath, path + '/name')).val()
     const picture = (yield call(db.getPath, path + '/picture')).val()
+    const trainerId = (yield call(db.getPath, path + '/trainerId')).val()
     const provider = user.providerData[0].providerId
     const values = name.split(" ")
     const first_name = values[0]
     const last_name = values[1]
-    const result = {id, name, picture, first_name, last_name, provider}
+    const result = {id, name, picture, first_name, last_name, provider, trainerId}
     yield put ({type: STORE_RESULT, result})
     yield put ({type: STORE_TOKEN, token})
     yield put ({type: LOGIN_SUCCESS, user})

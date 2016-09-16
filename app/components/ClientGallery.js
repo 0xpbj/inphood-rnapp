@@ -99,7 +99,6 @@ export default class ClientGallery extends Component{
     const mealTime = new Date(data.time).toDateString()
     const path = '/global/' + data.file.uid + '/photoData/' + data.file.fileTail
     const flag = this.props.notification.trainerPhotos[imgSource]
-    console.log('Count: ' + flag)
     const notificationBlock = ( 
       <View style={CommonStyles.notificationView}>
         <Text style={CommonStyles.notificationText}>{flag}</Text>

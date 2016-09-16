@@ -27,7 +27,6 @@ const route = {
 export default class Client extends Component {
   constructor(props) {
     super(props)
-    this._createDataSource(this.props.trainerData.infos)
     this.state = {dataSource: this._createDataSource(this.props.trainerData.infos)}
   }
   _createDataSource(list) {
@@ -60,12 +59,13 @@ export default class Client extends Component {
     const clientId = rowData.id
     const clientImage = <Image style={CommonStyles.clientProfileImage} source={{uri: data.val().picture}}/>
     const clientName = data.val().name
+    const flag = this.props.notification.clientUID[clientId]
     const notificationBlock = ( 
       <View style={CommonStyles.notificationView}>
-        <Text style={CommonStyles.notificationText}>12</Text>
+        <Text style={CommonStyles.notificationText}>{flag}</Text>
       </View>
     )
-    const showNotification = notificationBlock
+    const showNotification = flag ? notificationBlock : <View />
     return (
       <View>
         <TouchableHighlight onPress={() => {

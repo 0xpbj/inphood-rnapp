@@ -21,22 +21,14 @@ const urlHead = Config.AWS_CDN_IMG_URL
 function* triggerGetMessagesChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CHILD)
-    var children = []
-    data.forEach((snapshot) => {
-      children[snapshot.key] = snapshot.val()
-    })
-    var messages = []
-    for (var index in children) {
-      messages[index] = children[index]
-      let photo = children[index].photo
-      yield put ({type: ADD_MESSAGES, messages, photo})
-      if (children[index].trainerRead === false) {
-        let photoKey = photo
-        const path = '/global/' + children[index].uid + '/photoData/' + photoKey
-        photo = turlHead + children[index].uid + '/' + photoKey
-        yield put({type: INCREMENT_TRAINER_NOTIFICATION})
-        yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo})
-      }
+    const messages = data.val()
+    const photo = messages.photo
+    yield put ({type: ADD_MESSAGES, messages, photo})
+    if (messages.trainerRead === false) {
+      const path = '/global/' + messages.uid + '/photoData/' + photo
+      const info = turlHead + messages.uid + '/' + photo
+      yield put({type: INCREMENT_TRAINER_NOTIFICATION})
+      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo: info})
     }
   }  
 }

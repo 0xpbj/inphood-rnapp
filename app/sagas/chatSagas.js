@@ -1,11 +1,13 @@
 import {
   LOGIN_SUCCESS, INIT_CHAT_SAGA,
   ADD_MESSAGES, LOAD_MESSAGES, LOAD_MESSAGES_ERROR,
+  syncAddedMessagesClientChild, syncRemovedMessagesClientChild,
+  SYNC_ADDED_MESSAGES_CLIENT_CHILD, SYNC_REMOVED_MESSAGES_CLIENT_CHILD,
   STORE_CHAT_SUCCESS, STORE_CHAT_ERROR, MARK_MESSAGE_READ, 
   INCREMENT_TRAINER_NOTIFICATION, DECREMENT_TRAINER_NOTIFICATION, 
   INCREMENT_CLIENT_NOTIFICATION, DECREMENT_CLIENT_NOTIFICATION,
   INCREMENT_CLIENT_CHAT_NOTIFICATION, DECREMENT_CLIENT_CHAT_NOTIFICATION,
-  DECREMENT_TRAINER_CHAT_NOTIFICATION
+  INCREMENT_TRAINER_CHAT_NOTIFICATION, DECREMENT_TRAINER_CHAT_NOTIFICATION
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -14,27 +16,62 @@ import Config from 'react-native-config'
 
 const turlHead = Config.AWS_CDN_THU_URL
 
+function* triggerGetMessagesClientChild() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
+    const messages = data.val()
+    const photo = messages.photo
+    yield put ({type: ADD_MESSAGES, messages, photo})
+    if (messages.clientRead === false) {
+      const path = '/global/' + messages.uid + '/photoData/' + photo
+      const info = turlHead + messages.uid + '/' + photo
+      yield put({type: INCREMENT_CLIENT_NOTIFICATION})
+      yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo: info})
+    }
+  }
+}
+
+function* triggerRemMessagesClientChild() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_REMOVED_MESSAGES_CLIENT_CHILD)
+    const child = data
+  }
+}
+
+function* syncData() {
+  const uid = (yield select(state => state.authReducer.user)).uid
+  let path = '/global/' + uid
+  yield fork(db.sync, path + '/messages', {
+    child_added: syncAddedMessagesClientChild,
+    child_removed: syncRemovedMessagesClientChild,
+  })
+}
+
 function* sendChatData() {
   try {
     const uid = (yield select(state => state.authReducer.user)).uid
+    const trainer = (yield select(state => state.authReducer.result)).trainerId
     const client = yield select(state => state.chatReducer.client)
     const {messages, feedbackPhoto} = yield select(state => state.chatReducer)
     const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
-    const key = firebase.database().ref('/global/' + client + '/messages/' + photo).push()
+    const key = firebase.database().ref('/global/' + client + '/messages').push()
     const createdAt = Date.now()
     let clientRead = false
     let trainerRead = false
     if (uid === client) {
       clientRead = true
-      const path = '/global/' + uid + '/photoData/' + photo 
+      const path = '/global/' + uid + '/photoData/' + photo
       firebase.database().ref(path).update({'notifyTrainer': true})
-      yield put({type: INCREMENT_TRAINER_NOTIFICATION})
+      const data = turlHead + uid + '/' + photo
+      yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
+      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo: data})
     }
     else {
       trainerRead = true
     }
     key.set({
       uid,
+      trainer,
       photo,
       createdAt,
       clientRead,
@@ -56,88 +93,19 @@ function* watchFirebaseChatFlow() {
   }
 }
 
-
-const fetchChatData = (chatRef, messages) => {
-  return chatRef.once('value')
-  .then(snapshot => {
-    snapshot.forEach(childSnapshot => {
-      messages[childSnapshot.key] = childSnapshot.val()
-    })
-  })
-  .catch(error => {
-    console.log("Value Added Error", error);
-  })
-}
-
-function* getChatData() {
-  try {
-    const client = yield select(state => state.chatReducer.client)
-    const {feedbackPhoto, previousMessages} = yield select(state => state.chatReducer)
-    const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
-    const path = '/global/' + client + '/messages/' + photo
-    const chatRef = firebase.database().ref(path).orderByKey()
-    var messages = []
-    yield call(fetchChatData, chatRef, messages)
-    yield put ({type: ADD_MESSAGES, messages, photo})
-  }
-  catch(error) {
-    console.log(error)
-    yield put ({type: STORE_CHAT_ERROR, error})
-  }
-}
-
-function* appendFirebaseChatFlow() {
-  while (true) {
-    yield take(INIT_CHAT_SAGA)
-    yield fork(getChatData)
-  }
-}
-
-function* loadOldMessages() {
-  try {
-    const uid = (yield select(state => state.authReducer.user)).uid
-    const path = '/global/' + uid + '/messages'
-    const snapshot = yield call(db.getPath, path)
-    var messages = []
-    var count = 0
-    var photos = []
-    snapshot.forEach(snapshot => {
-      messages[snapshot.key] = snapshot.val()
-      snapshot.forEach(message => {
-        if (message.val().clientRead === false) {
-          count = count + 1
-          const ipath = '/global/' + uid + '/photoData/' + message.val().photo
-          photos[ipath] = true
-        }
-      })
-    })
-    for (let index in photos) {
-      firebase.database().ref(index).update({'notifyClient': true})
-      const photoKey = photos[index].substring(photos[index].lastIndexOf('/')+1)
-      const photo = turlHead + uid + '/' + photoKey
-      yield put({type: INCREMENT_CLIENT_NOTIFICATION})
-      yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo})
-    }
-    yield put ({type: LOAD_MESSAGES, messages})
-  }
-  catch(error) {
-    console.log(error)
-    yield put ({type: LOAD_MESSAGES_ERROR, error})
-  }
-}
-
 function* readFirebaseChatFlow() {
   while (true) {
     const data = yield take(MARK_MESSAGE_READ)
     const photo = data.photo
+    const uid = data.uid
     if (data.trainer) {
-      firebase.database().ref(data.path).update({'trainerRead': true})
-      yield put({type: DECREMENT_TRAINER_NOTIFICATION})
+      // firebase.database().ref(data.path).update({'trainerRead': true})
+      yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
       yield put({type: DECREMENT_TRAINER_CHAT_NOTIFICATION, photo})
     }
     else {
-      firebase.database().ref(data.path).update({'clientRead': true})
-      yield put({type: DECREMENT_CLIENT_NOTIFICATION})
+      // firebase.database().ref(data.path).update({'clientRead': true})
+      yield put({type: DECREMENT_CLIENT_NOTIFICATION, uid})
       yield put({type: DECREMENT_CLIENT_CHAT_NOTIFICATION, photo})
     }
   }
@@ -145,8 +113,9 @@ function* readFirebaseChatFlow() {
 
 export default function* rootSaga() {
   yield take(LOGIN_SUCCESS)
-  yield fork(loadOldMessages)
+  yield fork(triggerGetMessagesClientChild)
+  yield fork(triggerRemMessagesClientChild)
+  yield fork(syncData)
   yield fork(watchFirebaseChatFlow)
-  yield fork(appendFirebaseChatFlow)
   yield fork(readFirebaseChatFlow)
 }

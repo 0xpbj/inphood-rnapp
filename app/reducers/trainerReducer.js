@@ -5,8 +5,8 @@ import {
 } from '../constants/ActionTypes'
 
 const initialState = {
-  clients: new Set(),
   photos: [],
+  clients: new Set(),
   messages: new Set(),
   infos: new Set(),
   clientId: '',

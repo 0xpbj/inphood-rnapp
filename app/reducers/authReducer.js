@@ -2,14 +2,13 @@ import {
   LOGIN_SUCCESS, LOGIN_ERROR,
   LOGOUT_SUCCESS, LOGOUT_ERROR,
   STORE_TOKEN, STORE_RESULT, STORE_TRAINER,
-} from '../constants/ActionTypes';
+} from '../constants/ActionTypes'
 
 const initialState = {
   token: '',
   result: null,
   error: null,
   trainer: false,
-  user: ''
 }
 
 export default function authentication(state = initialState, action) {
@@ -17,7 +16,6 @@ export default function authentication(state = initialState, action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        user: action.user
       }
     case LOGOUT_SUCCESS:
       return {

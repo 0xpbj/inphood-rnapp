@@ -72,7 +72,7 @@ function* fbloginFlow() {
       const result = {id, name, picture, first_name, last_name, provider, trainerId}
       yield put ({type: STORE_RESULT, result})
       yield put ({type: STORE_TOKEN, token})
-      yield put ({type: LOGIN_SUCCESS, user})
+      yield put ({type: LOGIN_SUCCESS})
       firebase.database().ref('/global/' + token + '/userInfo/public').update({
         id,
         name,
@@ -114,7 +114,7 @@ function* emailCreateFlow(value) {
     const result = {id, name, picture, first_name, last_name, provider}
     yield put ({type: STORE_RESULT, result})
     yield put ({type: STORE_TOKEN, token})
-    yield put ({type: LOGIN_SUCCESS, user})
+    yield put ({type: LOGIN_SUCCESS})
     firebase.database().ref('/global/' + token + '/userInfo/public').update({
       id,
       name,
@@ -157,7 +157,7 @@ function* emloginFlow(value) {
     const result = {id, name, picture, first_name, last_name, provider, trainerId}
     yield put ({type: STORE_RESULT, result})
     yield put ({type: STORE_TOKEN, token})
-    yield put ({type: LOGIN_SUCCESS, user})
+    yield put ({type: LOGIN_SUCCESS})
   }
   catch(error) {
     yield put ({type: LOGIN_ERROR, error})

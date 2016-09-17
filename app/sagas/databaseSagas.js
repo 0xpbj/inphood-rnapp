@@ -49,8 +49,11 @@ const fetchFirebaseData = (imageRef, photos, user) => {
 function* firebaseData() {
   try {
     var appendPhotos = []
-    const user = yield select(state => state.authReducer.user)
-    const imageRef = firebase.database().ref('/global/' + user.uid + '/photoData').orderByKey().limitToLast(1)
+    let uid = yield select(state => state.authReducer.token)
+    if (!uid) {
+      uid = firebase.auth().currentUser.uid
+    }
+    const imageRef = firebase.database().ref('/global/' + uid + '/photoData').orderByKey().limitToLast(1)
     yield call(fetchFirebaseData, imageRef, appendPhotos, user)
     yield put ({type: APPEND_PHOTOS_SUCCESS, appendPhotos})
   }
@@ -70,8 +73,11 @@ function* watchFirebaseDataFlow() {
 function* loadInitialData() {
   try {
     var photos = []
-    const user = yield select(state => state.authReducer.user)
-    const imageRef = firebase.database().ref('/global/' + user.uid + '/photoData').orderByKey()
+    let uid = yield select(state => state.authReducer.token)
+    if (!uid) {
+      uid = firebase.auth().currentUser.uid
+    }
+    const imageRef = firebase.database().ref('/global/' + uid + '/photoData').orderByKey()
     yield call(fetchFirebaseData, imageRef, photos, user)
     yield put ({type: LOAD_PHOTOS_SUCCESS, photos})
   }

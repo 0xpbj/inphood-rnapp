@@ -38,8 +38,11 @@ function* triggerRemClientIdChild() {
 }
 
 function* syncClientId() {
-  let user = yield select(state => state.authReducer.user)
-  let path = '/global/' + user.uid + '/trainerInfo'
+  let uid = yield select(state => state.authReducer.token)
+  if (!uid) {
+    uid = firebase.auth().currentUser.uid
+  }
+  let path = '/global/' + uid + '/trainerInfo'
   yield fork(db.sync, path, {
     child_added: syncCountClientIdChild,
   })

@@ -28,7 +28,7 @@ export default function configureStore() {
   )
   persistStore(store, {storage: AsyncStorage}, () => {
     console.log('rehydration complete')
-  })
+  }).purge(['trainerReducer', 'tabReducer'])
   firebase.initializeApp(config)
   sagaMiddleware.run(rootSaga)
   if (module.hot) {

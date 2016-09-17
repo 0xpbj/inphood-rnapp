@@ -54,8 +54,11 @@ function* triggerRemMessagesClientChild() {
   }
 }
 
-function* syncData() {
-  const uid = (yield select(state => state.authReducer.user)).uid
+function* syncChatData() {
+  let uid = yield select(state => state.authReducer.token)
+  if (!uid) {
+    uid = firebase.auth().currentUser.uid
+  }
   let path = '/global/' + uid
   yield fork(db.sync, path + '/messages', {
     value: syncCountClientMessagesChild,
@@ -68,7 +71,10 @@ function* syncData() {
 
 function* sendChatData() {
   try {
-    const uid = (yield select(state => state.authReducer.user)).uid
+    let uid = yield select(state => state.authReducer.token)
+    if (!uid) {
+      uid = firebase.auth().currentUser.uid
+    }
     const trainer = (yield select(state => state.authReducer.result)).trainerId
     const client = yield select(state => state.chatReducer.client)
     const {messages, feedbackPhoto} = yield select(state => state.chatReducer)
@@ -138,7 +144,7 @@ export default function* rootSaga() {
   yield fork(triggerGetClientMessagesCount)
   yield fork(triggerGetMessagesClientChild)
   yield fork(triggerRemMessagesClientChild)
-  yield fork(syncData)
+  yield fork(syncChatData)
   yield fork(watchFirebaseChatFlow)
   yield fork(readFirebaseChatFlow)
 }

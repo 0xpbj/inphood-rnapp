@@ -24,11 +24,7 @@ module.exports = StyleSheet.create({
 
   containerImage: {
     flex: 1,
-    resizeMode: 'contain',
-    //  The null assignments below causes the renderer to re-determine size (which was broken
-    // when the push direct to the camera view was implemented).
-    height: null,
-    width: null,
+    resizeMode: 'cover',
     alignItems: 'center',
   },
   modalContainer: {

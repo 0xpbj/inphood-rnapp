@@ -4,6 +4,8 @@ import {
   FEEDBACK_PHOTO, NUMBER_OF_CLIENTS
 } from '../constants/ActionTypes'
 
+import {REHYDRATE} from 'redux-persist/constants'
+
 const initialState = {
   infos: [],
   photos: [],
@@ -18,6 +20,10 @@ const initialState = {
 
 export default function trainer (state = initialState, action) {
   switch (action.type) {
+    case REHYDRATE:
+      var incoming = action.payload.trainerReducer
+      if (incoming) {console.log(incoming)}
+      return state
     case ADD_CLIENTS:
       return {
         ...state,

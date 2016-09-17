@@ -47,12 +47,15 @@ function* triggerRemMessagesChild() {
 function* triggerGetInfoChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_INFO_CHILD)
-    const name = data.val().name
-    const picture = data.val().picture
-    const child = {name, picture}
-    const id = data.ref.parent.path.o[1]
-    const info = {id, child}
-    yield put({type: ADD_INFOS, child: info})
+    const {infos, numClients} = yield select(state => state.trainerReducer)
+    if (infos.length < numClients || infos.length === 0) {
+      const name = data.val().name
+      const picture = data.val().picture
+      const child = {name, picture}
+      const id = data.ref.parent.path.o[1]
+      const info = {id, child}
+      yield put({type: ADD_INFOS, child: info})
+    }
   }
 }
 

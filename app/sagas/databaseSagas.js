@@ -9,6 +9,8 @@ import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { Image } from "react-native"
 import Config from 'react-native-config'
 
+import firebase from 'firebase'
+
 const turlHead = Config.AWS_CDN_THU_URL
 const urlHead = Config.AWS_CDN_IMG_URL
 

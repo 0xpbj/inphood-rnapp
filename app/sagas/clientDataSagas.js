@@ -10,10 +10,12 @@ import {
   INCREMENT_TRAINER_CHAT_NOTIFICATION, DECREMENT_TRAINER_CHAT_NOTIFICATION
 } from '../constants/ActionTypes'
 
-import * as db from './firebase'
+import * as db from './firebaseCommands'
 import { Image } from "react-native"
 import {fork, put, select, take} from 'redux-saga/effects'
 import Config from 'react-native-config'
+
+import firebase from 'firebase'
 
 const turlHead = Config.AWS_CDN_THU_URL
 const urlHead = Config.AWS_CDN_IMG_URL
@@ -32,7 +34,7 @@ function* triggerGetMessagesChild() {
       yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
       yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo: info})
     }
-  }  
+  }
 }
 
 function* triggerRemMessagesChild() {
@@ -48,7 +50,7 @@ function* triggerGetInfoChild() {
     const id = data.ref.parent.path.o[1]
     const child = {id, data}
     yield put({type: ADD_INFOS, child})
-  }  
+  }
 }
 
 function* triggerRemInfoChild() {
@@ -86,7 +88,7 @@ function* triggerGetPhotoChild() {
       }
       yield put({type: ADD_PHOTOS, child})
     }
-  }  
+  }
 }
 
 function* triggerRemPhotoChild() {

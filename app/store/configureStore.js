@@ -28,6 +28,9 @@ export default function configureStore() {
     applyMiddleware(sagaMiddleware),
   )
   firebase.initializeApp(config)
+  console.log('PBJ Bananas')
+  console.log(config)
+  console.log(firebase)
   sagaMiddleware.run(rootSaga)
   if (module.hot) {
     module.hot.accept(() => {

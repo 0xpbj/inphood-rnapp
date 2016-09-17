@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { 
-  View, 
-  TabBarIOS, 
-  BackAndroid, 
-  PushNotificationIOS, 
-  NavigationExperimental 
+import {
+  View,
+  TabBarIOS,
+  BackAndroid,
+  PushNotificationIOS,
+  NavigationExperimental
 } from 'react-native'
 
 const {
@@ -44,7 +44,7 @@ export default class HomeTabs extends Component {
         )
       case 'Clients':
         return (
-          <Clients 
+          <Clients
             result={this.props.auth.result}
           />
         )

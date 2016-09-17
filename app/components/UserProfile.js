@@ -53,6 +53,7 @@ export default class UserProfile extends Component {
   }
 
   render() {
+    console.log(this.props.auth.result.first_name)
     return (
 
       <View style={{flex: 1}}>

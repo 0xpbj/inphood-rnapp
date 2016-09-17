@@ -5,9 +5,9 @@ import {
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
-import * as db from './firebase'
+import * as db from './firebaseCommands'
 import Config from 'react-native-config'
-
+import firebase from 'firebase'
 const defaultPicture = Config.AWS_CDN_IMG_URL + 'banana.jpg'
 
 const FBSDK = require('react-native-fbsdk')
@@ -57,6 +57,8 @@ const facebookLogin = () => {
 function* fbloginFlow() {
   try {
     const {user, error} = yield call(facebookLogin)
+    console.log('user:')
+    console.log(user)
     // yield cps(facebookGraph)
     const id = user.providerData[0].uid
     const name = user.providerData[0].displayName

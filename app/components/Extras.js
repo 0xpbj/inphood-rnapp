@@ -74,7 +74,9 @@ export default class Extras extends Component {
     }
     else if (scene.key === prefix + 'profile') {
       return (
-        <Profile />
+        <Profile
+          auth={this.props.auth}
+        />
       )
     }
   }

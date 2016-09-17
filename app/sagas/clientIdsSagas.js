@@ -4,8 +4,10 @@ import {
   SYNC_COUNT_CLIENTID_CHILD, SYNC_ADDED_CLIENTID_CHILD, SYNC_REMOVED_CLIENTID_CHILD,
 } from '../constants/ActionTypes'
 
-import * as db from './firebase'
+import * as db from './firebaseCommands'
 import {fork, put, select, take} from 'redux-saga/effects'
+
+import firebase from 'firebase'
 
 function* triggerGetClientIdCount() {
   while (true) {

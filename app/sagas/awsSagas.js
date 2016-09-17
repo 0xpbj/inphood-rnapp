@@ -9,6 +9,8 @@ import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { RNS3 } from 'react-native-aws3'
 import Config from 'react-native-config'
 
+import firebase from 'firebase'
+
 let options = {
   keyPrefix: "data/",
   bucket: Config.AWS_BUCKET,

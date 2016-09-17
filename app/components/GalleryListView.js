@@ -61,7 +61,7 @@ export default class GalleryListView extends Component{
           this.props.isNewUser(this.state.newUser)
         })
       },
-      5000
+      3000
     )
   }
   componentWillReceiveProps(nextProps) {

@@ -1,22 +1,29 @@
 import { 
   ADD_CLIENTS, ADD_PHOTOS, ADD_MESSAGES, ADD_INFOS,
   SET_CLIENT_ID, SET_CLIENT_PHOTO, SET_CLIENT_NAME,
-  FEEDBACK_PHOTO
+  FEEDBACK_PHOTO, NUMBER_OF_CLIENTS
 } from '../constants/ActionTypes'
 
+import {REHYDRATE} from 'redux-persist/constants'
+
 const initialState = {
-  clients: new Set(),
+  infos: [],
   photos: [],
-  messages: new Set(),
-  infos: new Set(),
+  clients: [],
+  messages: [],
+  numClients: 0,
   clientId: '',
-  clientPhoto: '',
   clientName: '',
+  clientPhoto: '',
   feedbackPhoto: '',
 }
 
 export default function trainer (state = initialState, action) {
   switch (action.type) {
+    case REHYDRATE:
+      var incoming = action.payload.trainerReducer
+      if (incoming) {console.log(incoming)}
+      return state
     case ADD_CLIENTS:
       return {
         ...state,
@@ -56,6 +63,11 @@ export default function trainer (state = initialState, action) {
       return {
         ...state,
         feedbackPhoto: action.feedbackPhoto
+      }
+    case NUMBER_OF_CLIENTS:
+      return {
+        ...state,
+        numClients: action.count
       }
     default:
       return state

@@ -57,23 +57,28 @@ const facebookLogin = () => {
 function* fbloginFlow() {
   try {
     const {user, error} = yield call(facebookLogin)
-    console.log('user:')
-    console.log(user)
     // yield cps(facebookGraph)
-    const id = user.providerData[0].uid
-    const name = user.providerData[0].displayName
-    const picture = user.providerData[0].photoURL
-    const provider = user.providerData[0].providerId
-    const token = user.uid
-    const path = '/global/' + token + '/userInfo/public'
-    const trainerId = (yield call(db.getPath, path + '/trainerId')).val()
-    const values = name.split(" ")
-    const first_name = values[0]
-    const last_name = values[1]
-    const result = {id, name, picture, first_name, last_name, provider, trainerId}
-    yield put ({type: STORE_RESULT, result})
-    yield put ({type: STORE_TOKEN, token})
-    yield put ({type: LOGIN_SUCCESS, user})
+    if (user) {
+      const id = user.providerData[0].uid
+      const name = user.providerData[0].displayName
+      const picture = user.providerData[0].photoURL
+      const provider = user.providerData[0].providerId
+      const token = user.uid
+      const path = '/global/' + token + '/userInfo/public'
+      const trainerId = (yield call(db.getPath, path + '/trainerId')).val()
+      const values = name.split(" ")
+      const first_name = values[0]
+      const last_name = values[1]
+      const result = {id, name, picture, first_name, last_name, provider, trainerId}
+      yield put ({type: STORE_RESULT, result})
+      yield put ({type: STORE_TOKEN, token})
+      yield put ({type: LOGIN_SUCCESS})
+      firebase.database().ref('/global/' + token + '/userInfo/public').update({
+        id,
+        name,
+        picture,
+      })
+    }
   }
   catch(error) {
     yield put ({type: LOGIN_ERROR, error})
@@ -107,14 +112,14 @@ function* emailCreateFlow(value) {
     const provider = user.providerData[0].providerId
     const token = user.uid
     const result = {id, name, picture, first_name, last_name, provider}
+    yield put ({type: STORE_RESULT, result})
+    yield put ({type: STORE_TOKEN, token})
+    yield put ({type: LOGIN_SUCCESS})
     firebase.database().ref('/global/' + token + '/userInfo/public').update({
       id,
       name,
       picture,
     })
-    yield put ({type: STORE_RESULT, result})
-    yield put ({type: STORE_TOKEN, token})
-    yield put ({type: LOGIN_SUCCESS, user})
   }
   catch(error) {
     yield put ({type: LOGIN_ERROR, error})
@@ -152,7 +157,7 @@ function* emloginFlow(value) {
     const result = {id, name, picture, first_name, last_name, provider, trainerId}
     yield put ({type: STORE_RESULT, result})
     yield put ({type: STORE_TOKEN, token})
-    yield put ({type: LOGIN_SUCCESS, user})
+    yield put ({type: LOGIN_SUCCESS})
   }
   catch(error) {
     yield put ({type: LOGIN_ERROR, error})

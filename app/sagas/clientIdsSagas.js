@@ -1,5 +1,5 @@
 import {
-  LOGIN_SUCCESS, STORE_TRAINER, ADD_CLIENTS, INIT_DATA,
+  LOGIN_SUCCESS, STORE_TRAINER, ADD_CLIENTS, INIT_DATA, NUMBER_OF_CLIENTS,
   syncCountClientIdChild, syncAddedClientIdChild, syncRemovedClientIdChild,
   SYNC_COUNT_CLIENTID_CHILD, SYNC_ADDED_CLIENTID_CHILD, SYNC_REMOVED_CLIENTID_CHILD,
 } from '../constants/ActionTypes'
@@ -13,6 +13,7 @@ function* triggerGetClientIdCount() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_COUNT_CLIENTID_CHILD)
     const count = data.numChildren()
+    yield put({type: NUMBER_OF_CLIENTS, count})
     const {clients} = yield select(state => state.trainerReducer)
     if (clients.length === count) {
       yield put({type: INIT_DATA})
@@ -23,10 +24,13 @@ function* triggerGetClientIdCount() {
 function* triggerGetClientIdChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_CLIENTID_CHILD)
-    const child = data
     let flag = true
-    yield put({type: STORE_TRAINER, flag})
-    yield put({type: ADD_CLIENTS, child})
+    const child = data.val()
+    const {clients, numClients} = yield select(state => state.trainerReducer)
+    if (clients.length < numClients || clients.length === 0) {
+      yield put({type: STORE_TRAINER, flag})
+      yield put({type: ADD_CLIENTS, child})
+    }
   }
 }
 
@@ -38,8 +42,11 @@ function* triggerRemClientIdChild() {
 }
 
 function* syncClientId() {
-  let user = yield select(state => state.authReducer.user)
-  let path = '/global/' + user.uid + '/trainerInfo'
+  let uid = yield select(state => state.authReducer.token)
+  if (!uid) {
+    uid = firebase.auth().currentUser.uid
+  }
+  let path = '/global/' + uid + '/trainerInfo'
   yield fork(db.sync, path, {
     child_added: syncCountClientIdChild,
   })

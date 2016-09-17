@@ -55,10 +55,10 @@ export default class Client extends Component {
     )
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    const data = rowData.data
+    const data = rowData.child
     const clientId = rowData.id
-    const clientImage = <Image style={CommonStyles.clientProfileImage} source={{uri: data.val().picture}}/>
-    const clientName = data.val().name
+    const clientImage = <Image style={CommonStyles.clientProfileImage} source={{uri: data.picture}}/>
+    const clientName = data.name
     const flag = this.props.notification.trainerUID[clientId]
     const notificationBlock = ( 
       <View style={CommonStyles.notificationView}>
@@ -69,7 +69,7 @@ export default class Client extends Component {
     return (
       <View>
         <TouchableHighlight onPress={() => {
-            this._pressRow(clientId, data.val().picture, clientName)
+            this._pressRow(clientId, data.picture, clientName)
             highlightRow(sectionID, rowID)
           }}>
           <View style={CommonStyles.commonRow}>

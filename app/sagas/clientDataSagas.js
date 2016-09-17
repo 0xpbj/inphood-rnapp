@@ -47,9 +47,15 @@ function* triggerRemMessagesChild() {
 function* triggerGetInfoChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_INFO_CHILD)
-    const id = data.ref.parent.path.o[1]
-    const child = {id, data}
-    yield put({type: ADD_INFOS, child})
+    const {infos, numClients} = yield select(state => state.trainerReducer)
+    if (infos.length < numClients || infos.length === 0) {
+      const name = data.val().name
+      const picture = data.val().picture
+      const child = {name, picture}
+      const id = data.ref.parent.path.o[1]
+      const info = {id, child}
+      yield put({type: ADD_INFOS, child: info})
+    }
   }
 }
 
@@ -101,7 +107,7 @@ function* triggerRemPhotoChild() {
 function* syncData() {
   let clients = yield select(state => state.trainerReducer.clients)
   for (let i = 0; i < clients.length; i++) {
-    let path = '/global/' + clients[i].val()
+    let path = '/global/' + clients[i]
     yield fork(db.sync, path, {
       child_added: syncCountPhotoChild,
     })

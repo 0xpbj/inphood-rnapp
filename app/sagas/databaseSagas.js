@@ -14,7 +14,7 @@ import firebase from 'firebase'
 const turlHead = Config.AWS_CDN_THU_URL
 const urlHead = Config.AWS_CDN_IMG_URL
 
-const fetchFirebaseData = (imageRef, photos, user) => {
+const fetchFirebaseData = (imageRef, photos) => {
   return imageRef.once('value')
   .then(snapshot => {
     return snapshot.forEach(childSnapshot => {
@@ -49,9 +49,12 @@ const fetchFirebaseData = (imageRef, photos, user) => {
 function* firebaseData() {
   try {
     var appendPhotos = []
-    const user = yield select(state => state.authReducer.user)
-    const imageRef = firebase.database().ref('/global/' + user.uid + '/photoData').orderByKey().limitToLast(1)
-    yield call(fetchFirebaseData, imageRef, appendPhotos, user)
+    let uid = yield select(state => state.authReducer.token)
+    if (!uid) {
+      uid = firebase.auth().currentUser.uid
+    }
+    const imageRef = firebase.database().ref('/global/' + uid + '/photoData').orderByKey().limitToLast(1)
+    yield call(fetchFirebaseData, imageRef, appendPhotos)
     yield put ({type: APPEND_PHOTOS_SUCCESS, appendPhotos})
   }
   catch(error) {
@@ -70,9 +73,12 @@ function* watchFirebaseDataFlow() {
 function* loadInitialData() {
   try {
     var photos = []
-    const user = yield select(state => state.authReducer.user)
-    const imageRef = firebase.database().ref('/global/' + user.uid + '/photoData').orderByKey()
-    yield call(fetchFirebaseData, imageRef, photos, user)
+    let uid = yield select(state => state.authReducer.token)
+    if (!uid) {
+      uid = firebase.auth().currentUser.uid
+    }
+    const imageRef = firebase.database().ref('/global/' + uid + '/photoData').orderByKey()
+    yield call(fetchFirebaseData, imageRef, photos)
     yield put ({type: LOAD_PHOTOS_SUCCESS, photos})
   }
   catch(error) {

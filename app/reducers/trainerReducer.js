@@ -1,17 +1,18 @@
 import { 
   ADD_CLIENTS, ADD_PHOTOS, ADD_MESSAGES, ADD_INFOS,
   SET_CLIENT_ID, SET_CLIENT_PHOTO, SET_CLIENT_NAME,
-  FEEDBACK_PHOTO
+  FEEDBACK_PHOTO, NUMBER_OF_CLIENTS
 } from '../constants/ActionTypes'
 
 const initialState = {
+  infos: [],
   photos: [],
-  clients: new Set(),
-  messages: new Set(),
-  infos: new Set(),
+  clients: [],
+  messages: [],
+  numClients: 0,
   clientId: '',
-  clientPhoto: '',
   clientName: '',
+  clientPhoto: '',
   feedbackPhoto: '',
 }
 
@@ -56,6 +57,11 @@ export default function trainer (state = initialState, action) {
       return {
         ...state,
         feedbackPhoto: action.feedbackPhoto
+      }
+    case NUMBER_OF_CLIENTS:
+      return {
+        ...state,
+        numClients: action.count
       }
     default:
       return state

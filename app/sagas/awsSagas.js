@@ -55,7 +55,10 @@ function* loadAWSCall(flag, fileName) {
 
 const sendToFirebase = (state, flag) => {
   let result = state.authReducer.result
-  let uid = firebase.auth().currentUser.uid
+  let uid = state.authReducer.token
+  if (!uid) {
+    uid = firebase.auth().currentUser.uid
+  }
   let name = result.name
   let id = result.id
   let picture = result.picture

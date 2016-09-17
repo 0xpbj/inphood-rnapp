@@ -74,6 +74,7 @@ function* sendChatData() {
     const {messages, feedbackPhoto} = yield select(state => state.chatReducer)
     const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
     const key = firebase.database().ref('/global/' + client + '/messages').push()
+    console.log(key.key)
     const createdAt = Date.now()
     let clientRead = false
     let trainerRead = false

@@ -68,7 +68,7 @@ export default class Start extends Component {
           login: true,
         })
       },
-      10000
+      5000
     )
   }
   userProfile() {

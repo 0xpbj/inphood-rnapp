@@ -1,8 +1,6 @@
-import {
-  createStore,
-  applyMiddleware,
-  compose
-} from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { persistStore, autoRehydrate } from 'redux-persist'
+var { AsyncStorage } = require('react-native')
 
 import Config from 'react-native-config'
 import firebase from 'firebase'
@@ -26,11 +24,12 @@ export default function configureStore() {
   const store = createStore(
     rootReducer,
     applyMiddleware(sagaMiddleware),
+    autoRehydrate()
   )
+  persistStore(store, {storage: AsyncStorage}, () => {
+    console.log('rehydration complete')
+  })
   firebase.initializeApp(config)
-  console.log('PBJ Bananas')
-  console.log(config)
-  console.log(firebase)
   sagaMiddleware.run(rootSaga)
   if (module.hot) {
     module.hot.accept(() => {

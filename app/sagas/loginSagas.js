@@ -1,7 +1,6 @@
 import {
   EM_LOGIN_REQUEST, EM_CREATE_USER, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR,
-  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR,
-  STORE_RESULT, STORE_TOKEN,
+  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_RESULT, STORE_TOKEN,
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'

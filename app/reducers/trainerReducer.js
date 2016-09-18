@@ -69,8 +69,6 @@ export default function trainer (state = initialState, action) {
         ...state,
         numClients: action.count
       }
-    case LOGOUT_SUCCESS:
-      return initialState
     default:
       return state
   }

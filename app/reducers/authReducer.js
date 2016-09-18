@@ -18,12 +18,7 @@ export default function authentication(state = initialState, action) {
         ...state,
       }
     case LOGOUT_SUCCESS:
-      return {
-        ...state,
-        token: '',
-        result: null,
-        error: null
-      }
+      return initialState
     case LOGIN_ERROR:
     case LOGOUT_ERROR:
       return {

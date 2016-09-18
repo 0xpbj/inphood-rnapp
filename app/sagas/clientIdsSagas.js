@@ -57,9 +57,11 @@ function* syncClientId() {
 }
 
 export default function* rootSaga() {
-  yield take(LOGIN_SUCCESS)
-  yield fork(syncClientId)
-  yield fork(triggerGetClientIdCount)
-  yield fork(triggerGetClientIdChild)
-  yield fork(triggerRemClientIdChild)
+  while (true) {
+    yield take(LOGIN_SUCCESS)
+    yield fork(syncClientId)
+    yield fork(triggerGetClientIdCount)
+    yield fork(triggerGetClientIdChild)
+    yield fork(triggerRemClientIdChild)
+  }
 }

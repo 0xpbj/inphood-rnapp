@@ -168,7 +168,8 @@ export default class Start extends Component {
             <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f5.png')}/>
           </View>
         </Swiper>
-      </View>)
+      </View>
+    )
   }
   loginOutButton() {
     const buttonText =  this.props.auth.result ? 'Log Out' : 'Log In'
@@ -180,7 +181,8 @@ export default class Start extends Component {
           onPress={this._setModalVisible.bind(this,true)}>
           <Text style={CommonStyles.buttonText}>{buttonText}</Text>
         </TouchableHighlight>
-      </View>)
+      </View>
+    )
   }
   modalFacebookLoginButton() {
     return (
@@ -217,7 +219,6 @@ export default class Start extends Component {
   modalLoginOutDialog() {
     return (
       <Modal
-
         animationType='none'
         transparent={true}
         visible={this.state.modalVisible}

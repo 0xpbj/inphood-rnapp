@@ -172,15 +172,17 @@ function* watchEMLoginFlow() {
 const firebaseLogout = () => {
   return firebase.auth().signOut()
   .then(() => {
-    alert('Logged out.');
+    return true
   }, (error) => {
-  });
+  })
 }
 
 function* logoutFlow() {
   try {
-    yield call(firebaseLogout)
-    yield put ({type: LOGOUT_SUCCESS})
+    const success = yield call(firebaseLogout)
+    if (success) {
+      yield put ({type: LOGOUT_SUCCESS})
+    }
   }
   catch(error) {
     console.log(error)
@@ -189,8 +191,10 @@ function* logoutFlow() {
 }
 
 function* watchLogoutFlow() {
-  yield take(LOGOUT_REQUEST)
-  yield call(logoutFlow)
+  while(true) {
+    yield take(LOGOUT_REQUEST)
+    yield call(logoutFlow)
+  }
 }
 
 export default function* rootSaga() {

@@ -1,7 +1,7 @@
 import { 
   ADD_CLIENTS, ADD_PHOTOS, ADD_MESSAGES, ADD_INFOS,
   SET_CLIENT_ID, SET_CLIENT_PHOTO, SET_CLIENT_NAME,
-  FEEDBACK_PHOTO, NUMBER_OF_CLIENTS
+  FEEDBACK_PHOTO, NUMBER_OF_CLIENTS, LOGOUT_SUCCESS,
 } from '../constants/ActionTypes'
 
 import {REHYDRATE} from 'redux-persist/constants'
@@ -69,6 +69,8 @@ export default function trainer (state = initialState, action) {
         ...state,
         numClients: action.count
       }
+    case LOGOUT_SUCCESS:
+      return initialState
     default:
       return state
   }

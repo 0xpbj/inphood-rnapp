@@ -144,9 +144,6 @@ export default class Start extends Component {
       </Image>
     )
   }
-  emptyView() {
-    return(<View style={{flex: 1}}/>)
-  }
   flipBoard() {
     return (
       <View style={{flex: 1, backgroundColor: 'transparent'}}>

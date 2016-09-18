@@ -11,6 +11,7 @@ import chatReducer from './chatReducer'
 import trainerReducer from './trainerReducer'
 import trainerNavReducer from './trainerNavReducer'
 import notificationReducer from './notificationReducer'
+import { LOGOUT_SUCCESS }from '../constants/ActionTypes'
 
 const appReducer = combineReducers({
     tabReducer,
@@ -28,7 +29,7 @@ const appReducer = combineReducers({
 })
 
 const rootReducer = (state, action) => {
-  if (action.type === 'LOGOUT_SUCCESS') {
+  if (action.type === LOGOUT_SUCCESS) {
     state = undefined
   }
   return appReducer(state, action)

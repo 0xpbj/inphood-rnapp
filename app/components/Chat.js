@@ -9,6 +9,7 @@ import {
 import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat'
 
 import CommonStyles from './styles/common-styles'
+import firebase from 'firebase'
 import Config from 'react-native-config'
 
 const turlHead = Config.AWS_CDN_THU_URL

@@ -3,17 +3,18 @@ import {
   STORE_MESSAGES, 
   LOAD_MESSAGES,
   ADD_MESSAGES,
-  LOAD_ID
+  LOAD_ID,
+  LOGOUT_SUCCESS,
 } from '../constants/ActionTypes'
 
-const defaultState = {
+const initialState = {
   client: '',
   feedbackPhoto: '',
   messages: [],
-  previousMessages: new Set()
+  previousMessages: []
 }
 
-export default function chat(state = defaultState, action) {
+export default function chat(state = initialState, action) {
   switch(action.type) {
     case FEEDBACK_PHOTO:
       return {
@@ -46,6 +47,8 @@ export default function chat(state = defaultState, action) {
         ...state,
         previousMessages: array
       }
+    case LOGOUT_SUCCESS:
+      return initialState
     default:
       return state
   }

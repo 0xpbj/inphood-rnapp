@@ -13,13 +13,36 @@ import CommonStyles from './styles/common-styles'
 import Comb from 'tcomb-form-native'
 
 var Form = Comb.form.Form
+// TODO: Complete this with complete list
+var Diet = Comb.enums({
+  N: 'No Specific Diet',
+  V: 'Vegetarian',
+  U: 'Vegan',
+  P: 'Paleo',
+})
+var Positive = Comb.refinement(Comb.Number, function(n) {
+  return n >= 0
+})
+// TODO: This component really sucks, but I wasn't able to
+// get react-form to work after ~2 hours.  Talk to PBJ about
+// getting react-form to work and scoping out some of this
+// data for MVP (i.e. Location, Height, pictureURL--should
+// really be a picker from the camera roll)
+//
+// There's all kinds of problems to deal with here too:
+// - Diet has a '-' enum
+// - Things take forever when you click on edit boxes
+//
+// If we don't scope things mentioned above out, we'll need
+// to add storage to them in Firebase and better pickers
+// for things like height / weight (with units etc.)
 var UserProfileForm = Comb.struct({
   firstname: Comb.String,
   lastname: Comb.String,
-  age: Comb.Number,
-  diet: Comb.String,
-  weight: Comb.Number,
-  height: Comb.Number,
+  birthday: Comb.Date,
+  diet: Diet,
+  weight: Positive,
+  height: Positive,
   location: Comb.String,
   email: Comb.String,
   password: Comb.String,
@@ -53,7 +76,13 @@ export default class UserProfile extends Component {
   }
 
   render() {
-    console.log(this.props.auth.result.first_name)
+    let value = {
+      firstname: this.props.auth.result.first_name,
+      lastname: this.props.auth.result.last_name,
+      email: this.props.auth.result.email,
+      pictureURL: this.props.auth.result.picture,
+    }
+
     return (
 
       <View style={{flex: 1}}>
@@ -63,6 +92,7 @@ export default class UserProfile extends Component {
 
             <Form
               ref="form"
+              value={value}
               type={UserProfileForm}
               options={options}/>
 

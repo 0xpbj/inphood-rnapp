@@ -170,14 +170,23 @@ export default class Start extends Component {
   }
   loginOutButton() {
     const buttonText =  this.props.auth.result ? 'Log Out' : 'Log In'
+    const offsetFromBottom = windowSize.height / 10
     return (
-      <View style={{bottom: 130, alignItems: 'center'}}>
-        <TouchableHighlight
-          style={CommonStyles.button}
-          underlayColor='#99d9f4'
-          onPress={this._setModalVisible.bind(this,true)}>
-          <Text style={CommonStyles.buttonText}>{buttonText}</Text>
-        </TouchableHighlight>
+      <View style={{alignItems: 'center'}}>
+        <View style={{bottom: offsetFromBottom,
+                      width: 200,
+                      backgroundColor: 'rgba(127, 127, 127, 0.3)',
+                      alignItems: 'center',
+                      paddingRight: 10,
+                      paddingLeft: 10,
+                      borderRadius: 4,}}>
+          <TouchableHighlight
+            style={CommonStyles.button}
+            underlayColor='#99d9f4'
+            onPress={this._setModalVisible.bind(this,true)}>
+            <Text style={CommonStyles.buttonText}>{buttonText}</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     )
   }

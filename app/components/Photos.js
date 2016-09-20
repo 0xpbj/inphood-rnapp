@@ -142,7 +142,7 @@ export default class CameraRollPicker extends Component {
   }
   _renderFooterSpinner() {
     if (!this.state.noMore) {
-      return <ActivityIndicator style={CommonStyles.spinner} />
+      return <ActivityIndicator/>
     }
     return null
   }

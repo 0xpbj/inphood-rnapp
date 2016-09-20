@@ -308,10 +308,7 @@ module.exports = StyleSheet.create({
     backgroundColor: '#006400',
     alignItems: 'center',
   },
-  // spinner is referenced in Photos.js, but had no styling, keeping it for now
-  spinner: {
-  },
-  // Twenty segment layout styles:
+  // Seventeen segment layout styles:
   //
   //  In this layout, the screen is divided into twenty equal-height horizontal
   //  segments.

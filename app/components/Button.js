@@ -10,7 +10,7 @@ export default ({label, onPress, color}) => (
             CommonStyles.universalButtonContentAlignment,
             CommonStyles.universalBorder,
             CommonStyles.universalBorderRadius,
-            CommonStyles.universalMargin]}
+            CommonStyles.buttonMargin]}
     underlayColor={color}
     onPress={onPress}>
 

@@ -94,12 +94,9 @@ export default class Caption extends Component {
 
     return (
 
-      // This view divides the screen into 20 segments.  The bottom 8 segments
-      // are left blank for the keyboard.  The top segment is left blank for
-      // the device status bar.
+      // This view divides the screen into 17 segments.  The bottom 8 segments
+      // are left blank for the keyboard.
       <View style={CommonStyles.flexContainer}>
-
-        <View style={CommonStyles.deviceStatusBarView}/>
 
         <TouchableHighlight
           onPress={this.props._handleBackAction}
@@ -108,6 +105,7 @@ export default class Caption extends Component {
           <Image
             style={[{flex:1},
                     CommonStyles.universalBorderRadius]}
+            resizeMode='cover'
             source={{uri: this.props._selectedPhoto}}/>
         </TouchableHighlight>
 
@@ -150,7 +148,7 @@ export default class Caption extends Component {
 
         <Button
           onPress={this._pauseBeforeTransition.bind(this)}
-          label='Send'
+          label='Share'
           color={this.state.color}
         />
 

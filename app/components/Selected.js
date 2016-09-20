@@ -40,17 +40,15 @@ export default class Selected extends Component {
   }
   render() {
     return (
-      // This view divides the screen into 20 segments.  The bottom 8 segments
-      // are left blank for the keyboard.  The top segment is left blank for
-      // the device status bar.
+      // This view divides the screen into 17 segments.  The bottom 8 segments
+      // are left blank for the keyboard.
       <View style={CommonStyles.flexContainer}>
-
-        <View style={CommonStyles.deviceStatusBarView}/>
 
         <Image
           style={[CommonStyles.selectedImage,
                   CommonStyles.universalBorderRadius,
                   CommonStyles.universalMargin]}
+          resizeMode='cover'
           source={{uri: this.props._selectedPhoto}}/>
 
         {/*Need this View wrapping TextInput to support single sided border

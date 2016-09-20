@@ -337,7 +337,7 @@ module.exports = StyleSheet.create({
     flex: 1,
   },
   selectedImage: {
-    flex: 9,
+    flex: 7,
     margin: 1,
   },
   // Universal input styling
@@ -369,7 +369,16 @@ module.exports = StyleSheet.create({
   // Universal margin styling
   //
   universalMargin: {
-    margin: 1,
+    marginTop: 1,
+    marginBottom: 1,
+    marginLeft: 5,
+    marginRight: 5,
+  },
+  buttonMargin: {
+    marginTop: 5,
+    marginBottom: 5,
+    marginLeft: 25,
+    marginRight: 25,
   },
   // Universal button content alignment
   //

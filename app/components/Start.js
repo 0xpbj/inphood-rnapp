@@ -144,25 +144,76 @@ export default class Start extends Component {
       </Image>
     )
   }
+  flipBoardCaption(captionLocation, captionText) {
+    const onePercentWidth = windowSize.width / 100
+    const onePercentHeight = windowSize.height / 100
+    const captionWidth = 60 * onePercentWidth
+    const captionHeight = 20 * onePercentHeight
+    const resolvedCaptionLocation = {top: captionLocation.top * onePercentHeight,
+                                     left: captionLocation.left * onePercentWidth}
+    const darkGoldenRodTransluscent = 'rgba(184, 134, 11, 0.90)'
+
+    // TODO: Algorithm to scale the font based on screen size / pixel density
+    // (Presently if the screen is longer, the font won't fill the caption as
+    // far down and the caption bottom may not intersect items of interest.)
+
+    return(
+      <View
+        style={[{width: captionWidth,
+                backgroundColor: darkGoldenRodTransluscent,
+                padding: 10,
+                borderWidth: 1,
+                borderColor: 'black',
+                borderRadius: 8,},
+                resolvedCaptionLocation]}>
+        <Text
+          style={{fontSize: 20,
+                  fontWeight: 'bold',
+                  color: 'white'}}>
+          {captionText}</Text>
+      </View>
+    )
+  }
   flipBoard() {
+    const pageOneCaptionLocation = {top: 60, left: 30}
+    const pageOneCaptionText = '1. Take a photo of a meal.'
+    const pageTwoCaptionLocation = {top: 45, left: 30}
+    const pageTwoCaptionText = '2. Give it a title.'
+    const pageThreeCaptionLocation = {top: 65, left: 35}
+    const pageThreeCaptionText = '3. Describe it\'s ingredients.'
+    const pageFourCaptionLocation = {top: 45, left: 35}
+    const pageFourCaptionText = '4. Your trainer sees the photo & description.'
+    const pageFiveCaptionLocation = {top: 20, left: 10}
+    const pageFiveCaptionText = '5. Discuss the meal with your trainer.'
+
     return (
       <View style={{flex: 1, backgroundColor: 'transparent'}}>
         <Swiper
           autoplay={true}>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f1.png')}/>
+            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f1.png')}>
+            {this.flipBoardCaption(pageOneCaptionLocation, pageOneCaptionText)}
+            </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f2.png')}/>
+            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f2.png')}>
+            {this.flipBoardCaption(pageTwoCaptionLocation, pageTwoCaptionText)}
+            </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f3.png')}/>
+            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f3.png')}>
+            {this.flipBoardCaption(pageThreeCaptionLocation, pageThreeCaptionText)}
+            </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f4.png')}/>
+            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f4.png')}>
+            {this.flipBoardCaption(pageFourCaptionLocation, pageFourCaptionText)}
+            </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f5.png')}/>
+            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f5.png')}>
+            {this.flipBoardCaption(pageFiveCaptionLocation, pageFiveCaptionText)}
+            </Image>
           </View>
         </Swiper>
       </View>
@@ -175,7 +226,7 @@ export default class Start extends Component {
       <View style={{alignItems: 'center'}}>
         <View style={{bottom: offsetFromBottom,
                       width: 200,
-                      backgroundColor: 'rgba(127, 127, 127, 0.3)',
+                      backgroundColor: 'rgba(127, 127, 127, 0.4)',
                       alignItems: 'center',
                       paddingRight: 10,
                       paddingLeft: 10,

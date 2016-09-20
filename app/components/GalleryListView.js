@@ -74,71 +74,91 @@ export default class GalleryListView extends Component{
       newUser: mediaList.length === 0 ? true : false,
     })
   }
+  _renderSpinner(size, flag) {
+    if (size === 0) {
+      return
+    } else {
+      return (
+        <Spinner visible={flag} color='black'/>
+      )
+    }
+  }
+  _renderProfileInformation(uri) {
+    return (
+      <View style={CommonStyles.flexRowMarginBottom10}>
+        <Image
+          source={{uri: uri}}
+          style={CommonStyles.galleryListViewProfileImage}/>
+        {/*TODO: make inPhood below match our Logo*/}
+        <Text style={CommonStyles.galleryListViewProfileName}>
+          {this.state.result.first_name}'s inPhood
+        </Text>
+      </View>
+    )
+  }
+  _renderListViewContent(flag, size) {
+    if (flag) {
+      return
+    } else if (size === 0) {
+      return (
+        <View style={CommonStyles.addPhotosMessage}>
+          <Text>Go to Camera tab to add photos...</Text>
+        </View>
+      )
+    } else {
+      return (
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow.bind(this)}
+          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          renderSeparator={this._renderSeparator}/>
+      )
+    }
+  }
   render() {
     if (this.state.result === null) {
       alert ('Please Login')
       return (<View />)
-    }
-    else {
+    } else {
       let uri = this.state.result ? this.state.result.picture : ' '
-      let flag = this.state.size === 0 && (!this.props.galleryView.newUser || !this.state.newUser)
-      if (flag) {
-        return (
-          <View style={CommonStyles.commonContainer}>
-            <Spinner
-              visible={flag}
-              color='black'
-            />
-            <View style={CommonStyles.flexRowMarginBottom10}>
-              <Image
-                source={{uri: uri}}
-                style={CommonStyles.galleryListViewProfileImage}
-              />
-              <Text style={CommonStyles.galleryListViewProfileName}>{this.state.result.first_name}'s InPhood</Text>
-            </View>
-          </View>
-        )
-      }
-      else if (this.state.size === 0) {
-        return (
-          <View style={CommonStyles.commonContainer}>
-            <View style={CommonStyles.flexRowMarginBottom10}>
-              <Image
-                source={{uri: uri}}
-                style={CommonStyles.galleryListViewProfileImage}
-              />
-              <Text style={CommonStyles.galleryListViewProfileName}>{this.state.result.first_name}'s InPhood</Text>
-            </View>
-            <View style={CommonStyles.addPhotosMessage}>
-              <Text>Go to Camera tab to add photos...</Text>
-            </View>
-          </View>
-        )
-      }
-      else {
-        return (
-          <View style={CommonStyles.commonContainer}>
-            <Spinner
-              visible={flag}
-              color='black'
-            />
-            <View style={CommonStyles.flexRowMarginBottom10}>
-              <Image
-                source={{uri: uri}}
-                style={CommonStyles.galleryListViewProfileImage}
-              />
-              <Text style={CommonStyles.galleryListViewProfileName}>{this.state.result.first_name}'s InPhood</Text>
-            </View>
-            <ListView
-              dataSource={this.state.dataSource}
-              renderRow={this._renderRow.bind(this)}
-              renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-              renderSeparator={this._renderSeparator}
-            />
-          </View>
-        )
-      }
+      let flag = this.state.size === 0 &&
+                 (!this.props.galleryView.newUser || !this.state.newUser)
+      let size = this.state.size
+
+      return (
+        <View style={CommonStyles.commonContainer}>
+          {this._renderSpinner(size, flag)}
+          {this._renderProfileInformation(uri)}
+          {this._renderListViewContent(flag, size)}
+        </View>)
     }
+  }
+  _renderModal(path) {
+    return (
+      <Modal
+        animationType='none'
+        transparent={true}
+        visible={this.state.modalVisible}
+        onRequestClose={() => {this._setModalVisible(false)}}>
+
+        <View style={CommonStyles.modalContainer}>
+          <View
+            style={[CommonStyles.galleryListViewInnerContainer,
+                    {backgroundColor: '#fff', padding: 10}]}>
+            <TouchableOpacity
+              onPress={this._removeClientPhoto.bind(this, path)}
+              style={[CommonStyles.galleryListViewButton, CommonStyles.modalButton]}>
+              <Text style={[CommonStyles.galleryListViewButtonText, {color: 'red'}]}>Delete</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this._setModalVisible.bind(this, false)}
+              style={[CommonStyles.galleryListViewButton, CommonStyles.modalButton]}>
+              <Text style={[CommonStyles.galleryListViewButtonText]}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    )
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     let imgBlock = <Image style={CommonStyles.galleryListViewThumb} source={{uri: rowData.localFile}}/>
@@ -171,48 +191,31 @@ export default class GalleryListView extends Component{
             {imgBlock}
           </TouchableOpacity>
         </View>
+
         <View style={CommonStyles.galleryText}>
+
           <Text style={CommonStyles.heavyFont}>
             {rowData.title}: {rowData.caption}
           </Text>
+
           <Text>
             {mealType}
           </Text>
+
           <View style={CommonStyles.flexRow}>
             <Text style={CommonStyles.italicFont}>
               {mealTime}
             </Text>
+
             <TouchableOpacity
               style={{marginLeft: 160}}
-              onPress={this._setModalVisible.bind(this, true)}
-            >
+              onPress={this._setModalVisible.bind(this, true)}>
               <Icon name="ios-options-outline" size={20} color='black'/>
             </TouchableOpacity>
           </View>
+
         </View>
-        <Modal
-          animationType='none'
-          transparent={true}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {this._setModalVisible(false)}}
-          >
-          <View style={CommonStyles.modalContainer}>
-            <View style={[CommonStyles.galleryListViewInnerContainer, {backgroundColor: '#fff', padding: 10}]}>
-              <TouchableOpacity
-                onPress={this._removeClientPhoto.bind(this, path)}
-                style={[CommonStyles.galleryListViewButton, CommonStyles.modalButton]}
-              >
-                <Text style={[CommonStyles.galleryListViewButtonText, {color: 'red'}]}>Delete</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={this._setModalVisible.bind(this, false)}
-                style={[CommonStyles.galleryListViewButton, CommonStyles.modalButton]}
-              >
-                <Text style={[CommonStyles.galleryListViewButtonText]}>Cancel</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
+        {this._renderModal(path)}
         {showNotification}
       </View>
     )

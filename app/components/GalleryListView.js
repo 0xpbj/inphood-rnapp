@@ -147,12 +147,12 @@ export default class GalleryListView extends Component{
                     {backgroundColor: '#fff', padding: 10}]}>
             <TouchableOpacity
               onPress={this._removeClientPhoto.bind(this, path)}
-              style={[CommonStyles.galleryListViewButton, CommonStyles.modalButton]}>
+              style={CommonStyles.galleryListViewButton}>
               <Text style={[CommonStyles.galleryListViewButtonText, {color: 'red'}]}>Delete</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={this._setModalVisible.bind(this, false)}
-              style={[CommonStyles.galleryListViewButton, CommonStyles.modalButton]}>
+              style={CommonStyles.galleryListViewButton}>
               <Text style={[CommonStyles.galleryListViewButtonText]}>Cancel</Text>
             </TouchableOpacity>
           </View>

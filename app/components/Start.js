@@ -327,7 +327,7 @@ export default class Start extends Component {
     return (
       <TouchableHighlight
         onPress={this.sendEmail.bind(this)}
-        style={[CommonStyles.button, CommonStyles.modalButton]}>
+        style={CommonStyles.button}>
         <View style={{flexDirection: 'row'}}>
           <Icon
             name="ios-mail-outline"
@@ -342,7 +342,7 @@ export default class Start extends Component {
     return (
       <TouchableHighlight
         onPress={this.userSettings.bind(this)}
-        style={[CommonStyles.button, CommonStyles.modalButton]}>
+        style={CommonStyles.button}>
         <View style={{flexDirection: 'row'}}>
           <Icon
             name="ios-settings-outline"

@@ -308,14 +308,7 @@ module.exports = StyleSheet.create({
     backgroundColor: '#006400',
     alignItems: 'center',
   },
-  // modalButton is referenced in Start.js, but had no styling, keeping it for
-  // the moment here.
-  // TODO: talk to PBJ about this--I think it might be the global nature of CSS
-  // where this was accessing a previously defined modalButton, but for whatever
-  // reason it requires class styles to be defined
-  modalButton: {
-  },
-  // ditto spinner in Photos.js
+  // spinner is referenced in Photos.js, but had no styling, keeping it for now
   spinner: {
   },
   // Twenty segment layout styles:

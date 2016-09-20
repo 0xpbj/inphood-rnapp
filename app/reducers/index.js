@@ -30,7 +30,10 @@ const appReducer = combineReducers({
 
 const rootReducer = (state, action) => {
   if (action.type === LOGOUT_SUCCESS) {
+    console.log('state cleared')
+    console.log(state)
     state = undefined
+    console.log(state)
   }
   return appReducer(state, action)
 }

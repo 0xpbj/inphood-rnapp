@@ -67,17 +67,17 @@ export default class Start extends Component {
       login: false
     }
   }
-  mixins: [TimerMixin]
-  componentDidMount() {
-    setTimeout(
-      () => {
-        this.setState({
-          login: true,
-        })
-      },
-      5000
-    )
-  }
+  // mixins: [TimerMixin]
+  // componentDidMount() {
+  //   setTimeout(
+  //     () => {
+  //       this.setState({
+  //         login: true,
+  //       })
+  //     },
+  //     5000
+  //   )
+  // }
   userProfile() {
     this.props._handleNavigate(profileRoute)
   }
@@ -101,17 +101,13 @@ export default class Start extends Component {
   }
   render() {
     if (this.props.auth.result === null) {
-      if (this.state.login) {
-        return (
-          <View style={{flex: 1}}>
-            {this.flipBoard()}
-            {this.loginOutButton()}
-            {this.modalLoginOutDialog()}
-          </View>
-        )
-      } else {
-        return (this.launchScreen())
-      }
+      return (
+        <View style={{flex: 1}}>
+          {this.flipBoard()}
+          {this.loginOutButton()}
+          {this.modalLoginOutDialog()}
+        </View>
+      )
     } else {
       return (
         <View style={CommonStyles.container}>
@@ -138,9 +134,9 @@ export default class Start extends Component {
       <Image
         source={require('./img/HD_5_5.png')}
         style={[launchImageSize, CommonStyles.containerImage]}>
-        <Spinner
+        {/*<Spinner
           visible={true}
-          color='white'/>
+          color='white'/>*/}
       </Image>
     )
   }

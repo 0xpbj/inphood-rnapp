@@ -48,6 +48,8 @@ function* triggerGetInfoChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_INFO_CHILD)
     const {infos, numClients} = yield select(state => state.trainerReducer)
+    // console.log('outside infos')
+    // console.log(infos, numClients)
     if (infos.length < numClients || infos.length === 0) {
       const name = data.val().name
       const picture = data.val().picture
@@ -55,6 +57,8 @@ function* triggerGetInfoChild() {
       const id = data.ref.parent.path.o[1]
       const info = {id, child}
       yield put({type: ADD_INFOS, child: info})
+      // console.log('inside info')
+      // console.log(info)
     }
   }
 }
@@ -136,13 +140,15 @@ function* readClientPhotoFlow() {
 }
 
 export default function* rootSaga() {
-  yield take(INIT_DATA)
-  yield fork(syncData)
-  yield fork(triggerGetPhotoChild)
-  yield fork(triggerRemPhotoChild)
-  yield fork(triggerGetInfoChild)
-  yield fork(triggerRemInfoChild)
-  yield fork(triggerGetMessagesChild)
-  yield fork(triggerRemMessagesChild)
-  yield fork(readClientPhotoFlow)
+  while (true) {
+    yield take(INIT_DATA)
+    yield fork(syncData)
+    yield fork(triggerGetPhotoChild)
+    yield fork(triggerRemPhotoChild)
+    yield fork(triggerGetInfoChild)
+    yield fork(triggerRemInfoChild)
+    yield fork(triggerGetMessagesChild)
+    yield fork(triggerRemMessagesChild)
+    yield fork(readClientPhotoFlow)
+  }
 }

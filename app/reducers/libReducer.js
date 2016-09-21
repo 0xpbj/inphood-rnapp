@@ -1,4 +1,4 @@
-import { SELECT_PHOTO, STORE_LIBRARY_CAPTION, STORE_LIBRARY_TITLE, ADD_LIBRARY_MEAL_DATA, PUSH_LIB_ROUTE, POP_LIB_ROUTE  } from '../constants/ActionTypes'
+import { SELECT_PHOTO, STORE_LIBRARY_CAPTION, STORE_LIBRARY_TITLE, ADD_LIBRARY_MEAL_DATA, PUSH_LIB_ROUTE, POP_LIB_ROUTE, LOGOUT_SUCCESS  } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -56,6 +56,8 @@ export default function library (state = initialState, action) {
       else {
         return NavigationStateUtils.pop(state)
       }
+    case LOGOUT_SUCCESS:
+      return initialState
     default:
       return state
   }

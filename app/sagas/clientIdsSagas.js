@@ -15,8 +15,11 @@ function* triggerGetClientIdCount() {
     const count = data.numChildren()
     yield put({type: NUMBER_OF_CLIENTS, count})
     const {clients} = yield select(state => state.trainerReducer)
+    // console.log('outside init data')
+    // console.log(clients)
     if (clients.length === count) {
       yield put({type: INIT_DATA})
+      // console.log('inside init data')
     }
   }
 }
@@ -27,7 +30,11 @@ function* triggerGetClientIdChild() {
     let flag = true
     const child = data.val()
     const {clients, numClients} = yield select(state => state.trainerReducer)
+    // console.log('outside clients')
+    // console.log(clients, numClients)
     if (clients.length < numClients || clients.length === 0) {
+      // console.log('inside clients')
+      // console.log(child)
       yield put({type: STORE_TRAINER, flag})
       yield put({type: ADD_CLIENTS, child})
     }

@@ -1,10 +1,10 @@
-import { PUSH_GAL_ROUTE, POP_GAL_ROUTE } from '../constants/ActionTypes'
+import { PUSH_GAL_ROUTE, POP_GAL_ROUTE, LOGOUT_SUCCESS } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
 } = NavigationExperimental
 
-const defaultState = {
+const initialState = {
   index: 0,
   key: 'root',
   routes: [
@@ -15,7 +15,7 @@ const defaultState = {
   ]
 }
 
-export default function galleryNav(state = defaultState, action) {
+export default function galleryNav(state = initialState, action) {
   switch(action.type) {
     case PUSH_GAL_ROUTE:
       if (state.routes[state.index].key === (action.route && action.route.key)) {
@@ -31,6 +31,8 @@ export default function galleryNav(state = defaultState, action) {
       else {
         return NavigationStateUtils.pop(state)
       }
+    case LOGOUT_SUCCESS:
+      return initialState
     default:
       return state
   }

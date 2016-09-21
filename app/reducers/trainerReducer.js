@@ -22,7 +22,7 @@ export default function trainer (state = initialState, action) {
   switch (action.type) {
     case REHYDRATE:
       var incoming = action.payload.trainerReducer
-      if (incoming) {console.log(incoming)}
+      // if (incoming) {console.log(incoming)}
       return state
     case ADD_CLIENTS:
       return {
@@ -69,6 +69,8 @@ export default function trainer (state = initialState, action) {
         ...state,
         numClients: action.count
       }
+    case LOGOUT_SUCCESS:
+      return initialState
     default:
       return state
   }

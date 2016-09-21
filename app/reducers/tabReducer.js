@@ -1,4 +1,4 @@
-import { CHANGE_TAB } from '../constants/ActionTypes'
+import { CHANGE_TAB, LOGOUT_SUCCESS } from '../constants/ActionTypes'
 import {userIcon, sampleIcon, homeIcon} from '../components/Icons'
 
 const tabs = [
@@ -24,6 +24,8 @@ function tabsNav (state = initialState, action) {
         ...state,
         index: action.index
       }
+    case LOGOUT_SUCCESS:
+      return initialState
     default:
       return state
   }

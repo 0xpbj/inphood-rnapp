@@ -8,6 +8,7 @@ import {
   Modal,
   Picker,
   ListView,
+  AlertIOS,
   Platform,
   Dimensions,
   TouchableOpacity,
@@ -26,7 +27,6 @@ const route = {
 }
 
 import NetworkImage from './NetworkImage'
-import TimerMixin from 'react-timer-mixin'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Icon from 'react-native-vector-icons/Ionicons'
 // import RNFS from 'react-native-fs'
@@ -38,10 +38,7 @@ export default class GalleryListView extends Component{
     this.state = {
       mediaList: mediaList,
       result: this.props.result,
-      size: mediaList.length,
       dataSource: this._createDataSource(mediaList),
-      newUser: false,
-      modalVisible: false,
     }
   }
   _createDataSource(list) {
@@ -50,39 +47,25 @@ export default class GalleryListView extends Component{
     });
     return dataSource.cloneWithRows(list);
   }
-  // Evil by Prabhaav:  Make it wait 3s before loading something
-  //
-  // mixins: [TimerMixin]
-  // componentDidMount() {
-  //   setTimeout(
-  //     () => {
-  //       this.setState({
-  //       newUser: true,
-  //       },
-  //       () => {
-  //         this.props.isNewUser(this.state.newUser)
-  //       })
-  //     },
-  //     3000
-  //   )
-  // }
   componentWillReceiveProps(nextProps) {
     const mediaList = nextProps.galleryView.photos
-    this.setState({
-      mediaList: mediaList,
-      result: nextProps.result,
-      size: mediaList.length,
-      dataSource: this._createDataSource(mediaList),
-      newUser: mediaList.length === 0 ? true : false,
-    })
+    const nextLength = mediaList.length
+    const length = this.state.mediaList
+    if (nextLength > length || mediaList[nextLength-1] !== this.state.mediaList[length-1] || this.state.result !== nextProps.result) {
+      console.log('new props')
+      this.setState({
+        mediaList: mediaList,
+        result: nextProps.result,
+        dataSource: this._createDataSource(mediaList),
+      })
+    }
   }
   _renderSpinner(size, flag) {
     if (size === 0) {
       return
-    } else {
-      return (
-        <Spinner visible={flag} color='black'/>
-      )
+    } 
+    else {
+      return <Spinner visible={flag} color='black'/>
     }
   }
   _renderProfileInformation(uri) {
@@ -99,79 +82,57 @@ export default class GalleryListView extends Component{
     )
   }
   _renderListViewContent(flag, size) {
-    if ((flag) || (size === 0)) {
+    if (flag) {
+      return (
+        <View style={CommonStyles.addPhotosMessage}>
+          <Text>Loading photos...</Text>
+        </View>
+      )
+    }
+    else if (!size) {
       return (
         <View style={CommonStyles.addPhotosMessage}>
           <Text>Go to Camera tab to add photos...</Text>
         </View>
       )
-    } else {
+    }
+    else {
       return (
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow.bind(this)}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-          renderSeparator={this._renderSeparator}/>
+          renderSeparator={this._renderSeparator}
+        />
       )
     }
   }
   render() {
-    if (this.state.result === null) {
-      alert ('Please Login')
-      return (<View />)
-    } else {
-      let uri = this.state.result ? this.state.result.picture : ' '
-      let flag = this.state.size === 0 &&
-                 (!this.props.galleryView.newUser || !this.state.newUser)
-      let size = this.state.size
-
-      return (
-        <View style={CommonStyles.commonContainer}>
-          {/*{this._renderSpinner(size, flag)}*/}
-          {this._renderProfileInformation(uri)}
-          {this._renderListViewContent(flag, size)}
-        </View>)
-    }
-  }
-  _renderModal(path) {
+    console.log('View Rendered')
+    let uri = this.state.result ? this.state.result.picture : ' '
+    let size = this.props.galleryView.photos.length || this.props.galleryView.error !== ''
+    let flag = this.props.galleryView.isLoading
+     // && !this.props.galleryView.newUser
     return (
-      <Modal
-        animationType='none'
-        transparent={true}
-        visible={this.state.modalVisible}
-        onRequestClose={() => {this._setModalVisible(false)}}>
-
-        <View style={CommonStyles.modalContainer}>
-          <View
-            style={[CommonStyles.galleryListViewInnerContainer,
-                    {backgroundColor: '#fff', padding: 10}]}>
-            <TouchableOpacity
-              onPress={this._removeClientPhoto.bind(this, path)}
-              style={CommonStyles.galleryListViewButton}>
-              <Text style={[CommonStyles.galleryListViewButtonText, {color: 'red'}]}>Delete</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this._setModalVisible.bind(this, false)}
-              style={CommonStyles.galleryListViewButton}>
-              <Text style={[CommonStyles.galleryListViewButtonText]}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      <View style={CommonStyles.commonContainer}>
+        {this._renderSpinner(size, flag)}
+        {this._renderProfileInformation(uri)}
+        {this._renderListViewContent(flag, size)}
+      </View>
     )
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     let imgBlock = <Image style={CommonStyles.galleryListViewThumb} source={{uri: rowData.localFile}}/>
     if ((Date.now() - rowData.time)/1000 > 26400) {
       imgBlock = (
-        <NetworkImage source={{uri: rowData.photo}}>
-        </NetworkImage>
+        <NetworkImage source={{uri: rowData.photo}}></NetworkImage>
       )
     }
+    const data = rowData.data
+    const path = '/global/' + data.uid + '/photoData/' + data.fileTail
     const imgSource = rowData.photo
     const mealType = rowData.mealType
     const mealTime = new Date(rowData.time).toDateString()
-    const path = '/global/' + rowData.data.uid + '/photoData/' + rowData.data.fileTail
     const flag = this.props.notification.clientPhotos[imgSource]
     const notificationBlock = (
       <View style={CommonStyles.notificationView}>
@@ -191,31 +152,24 @@ export default class GalleryListView extends Component{
             {imgBlock}
           </TouchableOpacity>
         </View>
-
         <View style={CommonStyles.galleryText}>
-
           <Text style={CommonStyles.heavyFont}>
             {rowData.title}: {rowData.caption}
           </Text>
-
           <Text>
             {mealType}
           </Text>
-
           <View style={CommonStyles.flexRow}>
             <Text style={CommonStyles.italicFont}>
               {mealTime}
             </Text>
-
-            <TouchableOpacity
-              style={{marginLeft: 160}}
-              onPress={this._setModalVisible.bind(this, true)}>
-              <Icon name="ios-options-outline" size={20} color='black'/>
-            </TouchableOpacity>
           </View>
-
         </View>
-        {this._renderModal(path)}
+        <TouchableOpacity
+          style={CommonStyles.trashView}
+          onPress={this._removeClientPhoto.bind(this, path)}>
+          <Icon name="ios-trash-outline" size={30} color='red'/>
+        </TouchableOpacity>
         {showNotification}
       </View>
     )
@@ -228,17 +182,26 @@ export default class GalleryListView extends Component{
     return (
       <View
         key={`${sectionID}-${rowID}`}
-        style={adjacentRowHighlighted ?
-                CommonStyles.adjacentRowHighlightedSeparator :
-                CommonStyles.adjacentRowNotHighlightedSeparator}
+        style={
+          adjacentRowHighlighted ? 
+            CommonStyles.adjacentRowHighlightedSeparator : 
+            CommonStyles.adjacentRowNotHighlightedSeparator
+        }
       />
     )
   }
   _removeClientPhoto(path) {
-    this.props.removeClientPhoto(path)
-    this.setState({modalVisible: false})
-  }
-  _setModalVisible(visible) {
-    this.setState({modalVisible: visible})
+    AlertIOS.alert(
+     'Confirm Delete?',
+     '',
+     [
+        {text: 'Cancel'},
+        {text: 'Delete', 
+        onPress: () => {
+          console.log(path)
+          this.props.removeClientPhoto(path)
+        }, style: 'destructive'}
+     ],
+    )
   }
 }

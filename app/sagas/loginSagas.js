@@ -1,6 +1,6 @@
 import {
   EM_LOGIN_REQUEST, EM_CREATE_USER, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR,
-  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_RESULT, STORE_TOKEN,
+  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_RESULT, STORE_TOKEN, INIT_LOGIN,
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -81,12 +81,14 @@ function* fbloginFlow() {
   }
   catch(error) {
     yield put ({type: LOGIN_ERROR, error})
+    yield put ({type: INIT_LOGIN, flag: false})
   }
 }
 
 function* watchFBLoginFlow() {
   while (true) {
     yield take(LOGIN_REQUEST)
+    yield put ({type: INIT_LOGIN, flag: true})
     yield call(fbloginFlow)
   }
 }
@@ -122,11 +124,13 @@ function* emailCreateFlow(value) {
   }
   catch(error) {
     yield put ({type: LOGIN_ERROR, error})
+    yield put ({type: INIT_LOGIN, flag: false})
   }
 }
 
 function* watchEMCreateFlow() {
   const data = yield take(EM_CREATE_USER)
+  yield put ({type: INIT_LOGIN, flag: true})
   yield call(emailCreateFlow, data.value)
 }
 
@@ -160,11 +164,13 @@ function* emloginFlow(value) {
   }
   catch(error) {
     yield put ({type: LOGIN_ERROR, error})
+    yield put ({type: INIT_LOGIN, flag: false})
   }
 }
 
 function* watchEMLoginFlow() {
   const data = yield take(EM_LOGIN_REQUEST)
+  yield put ({type: INIT_LOGIN, flag: true})
   yield call(emloginFlow, data.value)
 }
 

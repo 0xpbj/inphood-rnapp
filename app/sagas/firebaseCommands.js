@@ -29,10 +29,16 @@ export function* get(path, key) {
   return data.val();
 }
 
-// TODO: Handle errors
 export function* getPath(path) {
   const ops = newOps('error');
   const ref = firebase.database().ref(path);
+  const data = yield call([ref, ref.once], 'value');
+  return data
+}
+
+export function* getLastPath(path) {
+  const ops = newOps('error');
+  const ref = firebase.database().ref(path).limitToLast(1);
   const data = yield call([ref, ref.once], 'value');
   return data
 }

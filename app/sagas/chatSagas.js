@@ -24,7 +24,10 @@ function* triggerGetClientMessagesCount() {
     const { payload: { data } } = yield take(SYNC_COUNT_CLIENT_MESSAGES_CHILD)
     const count = data.numChildren()
     const {previousMessages} = yield select(state => state.chatReducer)
-    if (previousMessages.length === count) {
+    if (count === 0) {
+      yield put({type: INIT_MESSAGES})
+    }
+    else if (previousMessages.length === count) {
       yield put({type: INIT_MESSAGES})
     }
   }
@@ -140,11 +143,13 @@ function* readFirebaseChatFlow() {
 }
 
 export default function* rootSaga() {
-  yield take(LOGIN_SUCCESS)
-  yield fork(triggerGetClientMessagesCount)
-  yield fork(triggerGetMessagesClientChild)
-  yield fork(triggerRemMessagesClientChild)
-  yield fork(syncChatData)
-  yield fork(watchFirebaseChatFlow)
-  yield fork(readFirebaseChatFlow)
+  while (true) {
+    yield take(LOGIN_SUCCESS)
+    yield fork(triggerGetClientMessagesCount)
+    yield fork(triggerGetMessagesClientChild)
+    yield fork(triggerRemMessagesClientChild)
+    yield fork(syncChatData)
+    yield fork(watchFirebaseChatFlow)
+    yield fork(readFirebaseChatFlow)
+  }
 }

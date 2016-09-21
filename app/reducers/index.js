@@ -11,6 +11,7 @@ import chatReducer from './chatReducer'
 import trainerReducer from './trainerReducer'
 import trainerNavReducer from './trainerNavReducer'
 import notificationReducer from './notificationReducer'
+import { reducer as formReducer } from 'redux-form'
 import { LOGOUT_SUCCESS }from '../constants/ActionTypes'
 
 const appReducer = combineReducers({
@@ -26,15 +27,11 @@ const appReducer = combineReducers({
     trainerReducer,
     trainerNavReducer,
     notificationReducer,
+    formReducer
 })
 
 const rootReducer = (state, action) => {
-  if (action.type === LOGOUT_SUCCESS) {
-    console.log('state cleared')
-    console.log(state)
-    state = undefined
-    console.log(state)
-  }
+  // if (action.type === LOGOUT_SUCCESS) { state = undefined }
   return appReducer(state, action)
 }
 

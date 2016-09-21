@@ -161,6 +161,12 @@ module.exports = StyleSheet.create({
     height: 24,
     borderRadius: 12,
   },
+  trashView: {
+    flex: 1,
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+  },
   galleryRow: {
     flexDirection: 'column',
     justifyContent: 'center',
@@ -405,4 +411,18 @@ module.exports = StyleSheet.create({
     backgroundColor: 'white',
   },
   //
+  form: {
+    flex: 1,
+    flexDirection: 'column',
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+  submitbutton: {
+    height: 48,
+    marginTop: 32,
+  },
+  textfield: {
+    height: 28,  // have to do it on iOS
+    marginTop: 32,
+  },
 })

@@ -19,7 +19,6 @@ import {
 import Swiper from 'react-native-swiper'
 
 import Icon from 'react-native-vector-icons/Ionicons'
-import TimerMixin from 'react-timer-mixin'
 import FacebookLogin from './FacebookLogin'
 import EmailLogin from './EmailLogin'
 import Spinner from 'react-native-loading-spinner-overlay'
@@ -64,20 +63,8 @@ export default class Start extends Component {
       width: null,
       height: null,
       modalVisible: false,
-      login: false
     }
   }
-  // mixins: [TimerMixin]
-  // componentDidMount() {
-  //   setTimeout(
-  //     () => {
-  //       this.setState({
-  //         login: true,
-  //       })
-  //     },
-  //     5000
-  //   )
-  // }
   userProfile() {
     this.props._handleNavigate(profileRoute)
   }
@@ -100,7 +87,10 @@ export default class Start extends Component {
     }
   }
   render() {
-    if (this.props.auth.result === null) {
+    if (this.props.auth.inProgress) {
+      return this.launchScreen()
+    }
+    else if (this.props.auth.result === null) {
       return (
         <View style={{flex: 1}}>
           {this.flipBoard()}
@@ -108,7 +98,8 @@ export default class Start extends Component {
           {this.modalLoginOutDialog()}
         </View>
       )
-    } else {
+    }
+    else {
       return (
         <View style={CommonStyles.container}>
           {this.profileImageButton()}
@@ -134,9 +125,11 @@ export default class Start extends Component {
       <Image
         source={require('./img/HD_5_5.png')}
         style={[launchImageSize, CommonStyles.containerImage]}>
-        {/*<Spinner
+        <Spinner
           visible={true}
-          color='white'/>*/}
+          color='black'
+          overlayColor='rgba(0, 0, 0, 0)'
+        />
       </Image>
     )
   }

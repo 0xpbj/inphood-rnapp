@@ -50,20 +50,22 @@ export default class GalleryListView extends Component{
     });
     return dataSource.cloneWithRows(list);
   }
-  mixins: [TimerMixin]
-  componentDidMount() {
-    setTimeout(
-      () => {
-        this.setState({
-        newUser: true,
-        },
-        () => {
-          this.props.isNewUser(this.state.newUser)
-        })
-      },
-      3000
-    )
-  }
+  // Evil by Prabhaav:  Make it wait 3s before loading something
+  //
+  // mixins: [TimerMixin]
+  // componentDidMount() {
+  //   setTimeout(
+  //     () => {
+  //       this.setState({
+  //       newUser: true,
+  //       },
+  //       () => {
+  //         this.props.isNewUser(this.state.newUser)
+  //       })
+  //     },
+  //     3000
+  //   )
+  // }
   componentWillReceiveProps(nextProps) {
     const mediaList = nextProps.galleryView.photos
     this.setState({
@@ -97,9 +99,7 @@ export default class GalleryListView extends Component{
     )
   }
   _renderListViewContent(flag, size) {
-    if (flag) {
-      return
-    } else if (size === 0) {
+    if ((flag) || (size === 0)) {
       return (
         <View style={CommonStyles.addPhotosMessage}>
           <Text>Go to Camera tab to add photos...</Text>
@@ -127,7 +127,7 @@ export default class GalleryListView extends Component{
 
       return (
         <View style={CommonStyles.commonContainer}>
-          {this._renderSpinner(size, flag)}
+          {/*{this._renderSpinner(size, flag)}*/}
           {this._renderProfileInformation(uri)}
           {this._renderListViewContent(flag, size)}
         </View>)

@@ -52,7 +52,6 @@ export default class GalleryListView extends Component{
     const nextLength = mediaList.length
     const length = this.state.mediaList
     if (nextLength > length || mediaList[nextLength-1] !== this.state.mediaList[length-1] || this.state.result !== nextProps.result) {
-      console.log('new props')
       this.setState({
         mediaList: mediaList,
         result: nextProps.result,
@@ -108,7 +107,6 @@ export default class GalleryListView extends Component{
     }
   }
   render() {
-    console.log('View Rendered')
     let uri = this.state.result ? this.state.result.picture : ' '
     let size = this.props.galleryView.photos.length || this.props.galleryView.error !== ''
     let flag = this.props.galleryView.isLoading

@@ -24,7 +24,6 @@ const route = {
 }
 
 import NetworkImage from './NetworkImage'
-import TimerMixin from 'react-timer-mixin'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 export default class ClientGallery extends Component{

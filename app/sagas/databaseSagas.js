@@ -18,7 +18,6 @@ const urlHead = Config.AWS_CDN_IMG_URL
 function* updateDataVisibility() {
   while (true) {
     const data = yield take(REMOVE_CLIENT_PHOTO)
-    console.log(data.path)
     firebase.database().ref(data.path).update({'visible': false})
     yield put({type: REFRESH_CLIENT_DATA})
   }

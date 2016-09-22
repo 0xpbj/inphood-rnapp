@@ -51,6 +51,8 @@ import {
   SET_CLIENT_ID,
   SET_CLIENT_PHOTO,
   SET_CLIENT_NAME,
+  STORE_PROFILE_FORM,
+  STORE_SETTINGS_FORM
 } from '../constants/ActionTypes'
 
 export function pushExp (route) {
@@ -367,5 +369,12 @@ export function setClientName(name) {
   return {
     type: SET_CLIENT_NAME,
     name: name
+  }
+}
+
+export function storeProfileForm(form) {
+  return {
+    type: STORE_PROFILE_FORM,
+    form: form
   }
 }

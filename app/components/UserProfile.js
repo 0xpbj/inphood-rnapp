@@ -70,11 +70,15 @@ export default class UserProfile extends Component {
   constructor(props) {
     super(props)
   }
-
-  applyChanges() {
-    // TODO:
+  componentWillUnmount() {
+    let value = this.refs.form.getValue()
+    if(!value) {
+      value = 'AC Check forms data'
+    }
+    if (value) {
+      this.props._storeForm(value)
+    }
   }
-
   render() {
     let value = {
       firstname: this.props.auth.result.first_name,
@@ -82,14 +86,11 @@ export default class UserProfile extends Component {
       email: this.props.auth.result.email,
       pictureURL: this.props.auth.result.picture,
     }
-
     return (
-
       <View style={{flex: 1}}>
         <ScrollView
           style={{flex: 9}}
           contentContainerStyle={CommonStyles.universalFormScrollingContainer}>
-
             <Form
               ref="form"
               value={value}
@@ -98,11 +99,8 @@ export default class UserProfile extends Component {
 
             {/*Placeholder view to consume the remaining bottom of the scene.*/}
             <View style={CommonStyles.flexContainer}/>
-
         </ScrollView>
-
         <View style={{flex: 1, backgroundColor: 'white'}}/>
-
       </View>
     )
   }

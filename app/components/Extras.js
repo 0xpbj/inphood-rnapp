@@ -18,7 +18,7 @@ const {
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
 
-import Start from './Start'
+import Start from '../containers/StartContainer'
 import Login from './EmailLogin'
 import Signup from './UserSignUp'
 import Settings from './UserSettings'
@@ -40,11 +40,6 @@ export default class Extras extends Component {
     if (scene.key === prefix + 'start') {
       return (
         <Start
-          loginRequest={()=>this.props.loginRequest()}
-          logoutRequest={()=>this.props.logoutRequest()}
-          storeToken={(action)=>this.props.storeToken(action)}
-          storeResult={(action)=>this.props.storeResult(action)}
-          auth={this.props.auth}
           _handleNavigate={this._handleNavigate.bind(this)}
         />
       )
@@ -76,6 +71,7 @@ export default class Extras extends Component {
       return (
         <Profile
           auth={this.props.auth}
+          _storeForm={(form) => this.props.storeProfileForm(form)}
         />
       )
     }

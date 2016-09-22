@@ -1,4 +1,4 @@
-import { PUSH_EXT_ROUTE, POP_EXT_ROUTE, LOGOUT_SUCCESS } from '../constants/ActionTypes'
+import { PUSH_EXT_ROUTE, POP_EXT_ROUTE, LOGOUT_SUCCESS, STORE_PROFILE_FORM, STORE_SETTINGS_FORM } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -12,7 +12,9 @@ const initialState = {
       key: 'start',
       title: ''
     }
-  ]
+  ],
+  profileForm: '',
+  settingsForm: '',
 }
 
 export default function extrasNav(state = initialState, action) {
@@ -33,6 +35,12 @@ export default function extrasNav(state = initialState, action) {
       }
     case LOGOUT_SUCCESS:
       return initialState
+    case STORE_PROFILE_FORM:
+    console.log(action.form)
+      return {
+        ...state,
+        profileForm: action.form
+      }
     default:
       return state
   }

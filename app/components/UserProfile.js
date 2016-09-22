@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 import CommonStyles from './styles/common-styles'
-
+import Button from './Button'
 import Comb from 'tcomb-form-native'
 
 var Form = Comb.form.Form
@@ -44,8 +44,8 @@ var UserProfileForm = Comb.struct({
   weight: Positive,
   height: Positive,
   location: Comb.String,
-  email: Comb.String,
-  password: Comb.String,
+  email: Comb.maybe(Comb.String),
+  password: Comb.maybe(Comb.String),
   pictureURL: Comb.maybe(Comb.String),
 })
 var options = {
@@ -61,7 +61,7 @@ var options = {
       secureTextEntry: true
     }
   },
-  // auto: 'placeholders'
+  auto: 'placeholders'
 }
 
 //  TODO: Add code to initialize the form value from the database
@@ -70,13 +70,11 @@ export default class UserProfile extends Component {
   constructor(props) {
     super(props)
   }
-  componentWillUnmount() {
+  storeFormData() {
     let value = this.refs.form.getValue()
-    if(!value) {
-      value = 'AC Check forms data'
-    }
     if (value) {
       this.props._storeForm(value)
+      this.props.goBack()
     }
   }
   render() {
@@ -89,17 +87,22 @@ export default class UserProfile extends Component {
     return (
       <View style={{flex: 1}}>
         <ScrollView
-          style={{flex: 9}}
+          style={{flex: 8.2}}
           contentContainerStyle={CommonStyles.universalFormScrollingContainer}>
             <Form
               ref="form"
               value={value}
               type={UserProfileForm}
               options={options}/>
-
-            {/*Placeholder view to consume the remaining bottom of the scene.*/}
             <View style={CommonStyles.flexContainer}/>
         </ScrollView>
+        <View style={{flex: 0.8, backgroundColor: 'white'}}>
+          <Button
+            onPress={this.storeFormData.bind(this)}
+            label='Submit'
+            color='#006400'
+          />
+        </View>
         <View style={{flex: 1, backgroundColor: 'white'}}/>
       </View>
     )

@@ -71,6 +71,7 @@ export default class Extras extends Component {
       return (
         <Profile
           auth={this.props.auth}
+          goBack={this._handleBackAction.bind(this)}
           _storeForm={(form) => this.props.storeProfileForm(form)}
         />
       )
@@ -82,7 +83,7 @@ export default class Extras extends Component {
         <NavigationHeader
           {...props}
           renderTitleComponent={this._renderTitleComponent}
-          renderLeftComponent={this._renderLeftComponent.bind(this)}
+          // renderLeftComponent={this._renderLeftComponent.bind(this)}
         />
       )
     }

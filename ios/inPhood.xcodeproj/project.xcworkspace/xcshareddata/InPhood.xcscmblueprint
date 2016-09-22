@@ -12,9 +12,9 @@
     "E82D2285FA0AFCD40A6DF3FD50D07B727F936E61" : "reactNativeDevelopment\/",
     "DE00B9425743C07A7E871AB71087E5FDA250B799" : "betaApp\/"
   },
-  "DVTSourceControlWorkspaceBlueprintNameKey" : "InPhood",
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "inPhood",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ios\/InPhood.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ios\/inPhood.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "gitlab.com:inphood\/betaApp.git",

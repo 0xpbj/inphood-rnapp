@@ -1,5 +1,5 @@
 import {
-  EM_LOGIN_REQUEST, EM_CREATE_USER, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR,
+  EM_LOGIN_REQUEST, EM_CREATE_USER, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, RESET_PASSWORD,
   LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_RESULT, STORE_TOKEN, INIT_LOGIN,
 } from '../constants/ActionTypes'
 
@@ -160,9 +160,22 @@ function* logoutFlow() {
   }
 }
 
+function* resetPassword() {
+  const user = firebase.auth().currentUser
+  if (user) {
+    const email = user.email
+    firebase.auth()auth.sendPasswordResetEmail(email).then(function() {
+    }, function(error) {
+      // An error happened.
+      alert(error)
+    })
+  }
+}
+
 export default function* rootSaga() {
   yield fork(takeLatest, LOGIN_REQUEST, fbloginFlow)
   yield fork(watchEMLoginFlow)
   yield fork(watchEMCreateFlow)
+  yield fork(takeLatest, RESET_PASSWORD, resetPassword)
   yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)
 }

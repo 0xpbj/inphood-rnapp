@@ -4,7 +4,6 @@ import {
   LOAD_MESSAGES,
   ADD_MESSAGES,
   LOAD_ID,
-  LOGOUT_SUCCESS,
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -47,8 +46,6 @@ export default function chat(state = initialState, action) {
         ...state,
         previousMessages: array
       }
-    case LOGOUT_SUCCESS:
-      return initialState
     default:
       return state
   }

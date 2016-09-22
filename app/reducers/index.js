@@ -9,6 +9,7 @@ import galReducer from './galReducer'
 import galNavReducer from './galNavReducer'
 import chatReducer from './chatReducer'
 import trainerReducer from './trainerReducer'
+import trainerDataReducer from './trainerDataReducer'
 import trainerNavReducer from './trainerNavReducer'
 import notificationReducer from './notificationReducer'
 import { reducer as formReducer } from 'redux-form'
@@ -25,13 +26,14 @@ const appReducer = combineReducers({
     galNavReducer,
     chatReducer,
     trainerReducer,
+    trainerDataReducer,
     trainerNavReducer,
     notificationReducer,
     formReducer
 })
 
 const rootReducer = (state, action) => {
-  // if (action.type === LOGOUT_SUCCESS) { state = undefined }
+  if (action.type === LOGOUT_SUCCESS) { state = undefined }
   return appReducer(state, action)
 }
 

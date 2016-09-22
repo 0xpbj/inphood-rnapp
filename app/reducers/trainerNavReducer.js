@@ -1,4 +1,4 @@
-import { PUSH_EXP_ROUTE, POP_EXP_ROUTE, LOGOUT_SUCCESS } from '../constants/ActionTypes'
+import { PUSH_EXP_ROUTE, POP_EXP_ROUTE } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -31,8 +31,6 @@ export default function home (state = initialState, action) {
       else {
         return NavigationStateUtils.pop(state)
       }
-    case LOGOUT_SUCCESS:
-      return initialState
     default:
       return state
   }

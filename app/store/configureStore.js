@@ -17,6 +17,26 @@ const fbConfig = {
 var { AsyncStorage } = require('react-native')
 
 const sagaMiddleware = createSagaMiddleware()
+const persistConfig = {
+  whitelist: [
+    'authReducer', 
+    'chatReducer', 
+    'galReducer',
+    'notificationReducer'
+  ],
+  blacklist: [
+    'camReducer', 
+    'extReducer', 
+    'galNavReducer', 
+    'libReducer', 
+    'photoReducer', 
+    'tabReducer', 
+    'trainerNavReducer', 
+    'trainerDataReducer', 
+    'trainerReducer'
+  ],
+  storage: AsyncStorage,
+}
 
 export default function configureStore() {
   const store = createStore(
@@ -24,9 +44,8 @@ export default function configureStore() {
     applyMiddleware(sagaMiddleware),
     autoRehydrate()
   )
-  persistStore(store, {storage: AsyncStorage}, () => {
-    console.log('rehydration complete')
-  }).purge()
+  persistStore(store, persistConfig, () => {})
+  .purge(persistConfig.blacklist)
   firebase.initializeApp(fbConfig)
   sagaMiddleware.run(rootSaga)
   if (module.hot) {

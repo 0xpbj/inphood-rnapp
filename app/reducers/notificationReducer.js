@@ -7,7 +7,6 @@ import {
   DECREMENT_CLIENT_CHAT_NOTIFICATION,
   INCREMENT_TRAINER_CHAT_NOTIFICATION,
   DECREMENT_TRAINER_CHAT_NOTIFICATION,
-  LOGOUT_SUCCESS,
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -104,8 +103,6 @@ export default function library (state = initialState, action) {
         ...state,
         trainerPhotos: data
       }
-    case LOGOUT_SUCCESS:
-      return initialState
     default:
       return state
   }

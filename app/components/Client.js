@@ -15,6 +15,7 @@ import {
 } from 'react-native'
 
 import CommonStyles from './styles/common-styles'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 const route = {
   type: 'push',
@@ -27,7 +28,7 @@ const route = {
 export default class Client extends Component {
   constructor(props) {
     super(props)
-    this.state = {dataSource: this._createDataSource(this.props.trainerData.infos)}
+    this.state = {dataSource: this._createDataSource(this.props.trainer.infos)}
   }
   _createDataSource(list) {
     const dataSource = new ListView.DataSource({
@@ -36,12 +37,16 @@ export default class Client extends Component {
     return dataSource.cloneWithRows(list);
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({dataSource: this._createDataSource(nextProps.trainerData.infos)})
+    this.setState({dataSource: this._createDataSource(nextProps.trainer.infos)})
   }
   componentWillMount() {
-    this.setState({dataSource: this._createDataSource(this.props.trainerData.infos)})
+    this.setState({dataSource: this._createDataSource(this.props.trainer.infos)})
   }
   render() {
+    let flag = this.props.trainer.infos.length === 0
+    if (flag) {
+      return <Spinner visible={flag} color='black'/>
+    }
     return (
       <View style={CommonStyles.commonContainer}>
         <Text style={CommonStyles.clientProfileName}>Client's InPhood</Text>

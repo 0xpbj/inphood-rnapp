@@ -83,7 +83,7 @@ export default class Extras extends Component {
         <NavigationHeader
           {...props}
           renderTitleComponent={this._renderTitleComponent}
-          // renderLeftComponent={this._renderLeftComponent.bind(this)}
+          renderLeftComponent={this._renderLeftComponent.bind(this)}
         />
       )
     }

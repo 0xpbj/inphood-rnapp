@@ -4,44 +4,14 @@ import {
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
+import { takeLatest } from 'redux-saga'
 import * as db from './firebaseCommands'
 import Config from 'react-native-config'
 import firebase from 'firebase'
 const defaultPicture = Config.AWS_CDN_IMG_URL + 'banana.jpg'
 
 const FBSDK = require('react-native-fbsdk')
-const {
-  GraphRequest,
-  GraphRequestManager,
-  LoginButton,
-  LoginManager,
-  AccessToken,
-  Profile,
-} = FBSDK
-
-const facebookGraphCallback = (error: ?Object, result: ?Object) => {
-  if (error) {
-    alert('Error fetching data: ' + error.toString())
-  }
-  else {
-    if (result) {
-      console.log(result)
-    }
-    else {
-      alert ('Please login.')
-    }
-  }
-}
-
-const facebookGraph = () => {
-  const infoRequest = new GraphRequest(
-    '/me?fields=id,email,gender,birthday,first_name,last_name,name,picture.type(normal)',
-    null,
-    facebookGraphCallback
-  )
-  const graphManager = new GraphRequestManager()
-  graphManager.addRequest(infoRequest).start()
-}
+const { AccessToken } = FBSDK
 
 const facebookLogin = () => {
   return AccessToken.getCurrentAccessToken()
@@ -55,8 +25,9 @@ const facebookLogin = () => {
 
 function* fbloginFlow() {
   try {
+  console.log('FB Login Flow')
+    yield put ({type: INIT_LOGIN, flag: true})
     const {user, error} = yield call(facebookLogin)
-    // yield cps(facebookGraph)
     if (user) {
       const id = user.providerData[0].uid
       const name = user.providerData[0].displayName
@@ -82,14 +53,6 @@ function* fbloginFlow() {
   catch(error) {
     yield put ({type: LOGIN_ERROR, error})
     yield put ({type: INIT_LOGIN, flag: false})
-  }
-}
-
-function* watchFBLoginFlow() {
-  while (true) {
-    yield take(LOGIN_REQUEST)
-    yield put ({type: INIT_LOGIN, flag: true})
-    yield call(fbloginFlow)
   }
 }
 
@@ -169,6 +132,7 @@ function* emloginFlow(value) {
 }
 
 function* watchEMLoginFlow() {
+  console.log('Email Login Flow')
   const data = yield take(EM_LOGIN_REQUEST)
   yield put ({type: INIT_LOGIN, flag: true})
   yield call(emloginFlow, data.value)
@@ -184,6 +148,7 @@ const firebaseLogout = () => {
 
 function* logoutFlow() {
   try {
+    console.log('Logout Flow')
     const success = yield call(firebaseLogout)
     if (success) {
       yield put ({type: LOGOUT_SUCCESS})
@@ -195,16 +160,9 @@ function* logoutFlow() {
   }
 }
 
-function* watchLogoutFlow() {
-  while(true) {
-    yield take(LOGOUT_REQUEST)
-    yield call(logoutFlow)
-  }
-}
-
 export default function* rootSaga() {
-  yield fork(watchFBLoginFlow)
+  yield fork(takeLatest, LOGIN_REQUEST, fbloginFlow)
   yield fork(watchEMLoginFlow)
   yield fork(watchEMCreateFlow)
-  yield fork(watchLogoutFlow)
+  yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)
 }

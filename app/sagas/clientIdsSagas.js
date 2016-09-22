@@ -6,38 +6,30 @@ import {
 
 import * as db from './firebaseCommands'
 import {fork, put, select, take} from 'redux-saga/effects'
-
+import { takeLatest } from 'redux-saga'
 import firebase from 'firebase'
 
 function* triggerGetClientIdCount() {
+  console.log('Client Count Get')
   while (true) {
     const { payload: { data } } = yield take(SYNC_COUNT_CLIENTID_CHILD)
     const count = data.numChildren()
     yield put({type: NUMBER_OF_CLIENTS, count})
     const {clients} = yield select(state => state.trainerReducer)
-    // console.log('outside init data')
-    // console.log(clients)
     if (clients.length === count) {
       yield put({type: INIT_DATA})
-      // console.log('inside init data')
     }
   }
 }
 
 function* triggerGetClientIdChild() {
+  console.log('Client ID Get')
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_CLIENTID_CHILD)
     let flag = true
     const child = data.val()
-    const {clients, numClients} = yield select(state => state.trainerReducer)
-    // console.log('outside clients')
-    // console.log(clients, numClients)
-    if (clients.length < numClients || clients.length === 0) {
-      // console.log('inside clients')
-      // console.log(child)
-      yield put({type: STORE_TRAINER, flag})
-      yield put({type: ADD_CLIENTS, child})
-    }
+    yield put({type: STORE_TRAINER, flag})
+    yield put({type: ADD_CLIENTS, child})
   }
 }
 
@@ -49,6 +41,7 @@ function* triggerRemClientIdChild() {
 }
 
 function* syncClientId() {
+  console.log('Client ID Sync')
   let uid = yield select(state => state.authReducer.token)
   if (!uid) {
     uid = firebase.auth().currentUser.uid
@@ -64,11 +57,8 @@ function* syncClientId() {
 }
 
 export default function* rootSaga() {
-  while (true) {
-    yield take(LOGIN_SUCCESS)
-    yield fork(syncClientId)
-    yield fork(triggerGetClientIdCount)
-    yield fork(triggerGetClientIdChild)
-    yield fork(triggerRemClientIdChild)
-  }
+  yield fork(takeLatest, LOGIN_SUCCESS, syncClientId)
+  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetClientIdCount)
+  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetClientIdChild)
+  yield fork(takeLatest, LOGIN_SUCCESS, triggerRemClientIdChild)
 }

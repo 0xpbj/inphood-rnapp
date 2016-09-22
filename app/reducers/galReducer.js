@@ -9,7 +9,6 @@ import {
   APPEND_PHOTOS_SUCCESS, 
   APPEND_PHOTOS_FAILURE,
   LOGIN_SUCCESS,
-  LOGOUT_SUCCESS,
   INIT_PHOTOS
 } from '../constants/ActionTypes'
 
@@ -61,8 +60,6 @@ export default function gallery(state = initialState, action) {
         ...state,
         error: action.error
       }
-    case LOGOUT_SUCCESS:
-      return initialState
     default:
       return state
   }

@@ -1,5 +1,5 @@
 import {
-  ADD_PHOTOS, ADD_INFOS, ADD_MESSAGES, LOAD_MESSAGES, INIT_DATA,
+  ADD_PHOTOS, ADD_INFOS, ADD_MESSAGES, LOAD_MESSAGES, ADD_CLIENTS, INIT_DATA,
   syncCountPhotoChild, syncAddedPhotoChild, syncRemovedPhotoChild,
   SYNC_COUNT_PHOTO_CHILD, SYNC_ADDED_PHOTO_CHILD, SYNC_REMOVED_PHOTO_CHILD,
   syncAddedInfoChild, syncRemovedInfoChild,
@@ -13,6 +13,7 @@ import {
 import * as db from './firebaseCommands'
 import { Image } from "react-native"
 import {fork, put, select, take} from 'redux-saga/effects'
+import { takeLatest } from 'redux-saga'
 import Config from 'react-native-config'
 
 import firebase from 'firebase'
@@ -21,6 +22,7 @@ const turlHead = Config.AWS_CDN_THU_URL
 const urlHead = Config.AWS_CDN_IMG_URL
 
 function* triggerGetMessagesChild() {
+  console.log('Client Messages Get')
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CHILD)
     const messages = data.val()
@@ -45,21 +47,15 @@ function* triggerRemMessagesChild() {
 }
 
 function* triggerGetInfoChild() {
+  console.log('Client Info Get')
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_INFO_CHILD)
-    const {infos, numClients} = yield select(state => state.trainerReducer)
-    // console.log('outside infos')
-    // console.log(infos, numClients)
-    if (infos.length < numClients || infos.length === 0) {
-      const name = data.val().name
-      const picture = data.val().picture
-      const child = {name, picture}
-      const id = data.ref.parent.path.o[1]
-      const info = {id, child}
-      yield put({type: ADD_INFOS, child: info})
-      // console.log('inside info')
-      // console.log(info)
-    }
+    const name = data.val().name
+    const picture = data.val().picture
+    const child = {name, picture}
+    const id = data.ref.parent.path.o[1]
+    const info = {id, child}
+    yield put({type: ADD_INFOS, child: info})
   }
 }
 
@@ -71,6 +67,7 @@ function* triggerRemInfoChild() {
 }
 
 function* triggerGetPhotoChild() {
+  console.log('Client Photo Get')
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_PHOTO_CHILD)
     if (data.val().visible) {
@@ -109,6 +106,7 @@ function* triggerRemPhotoChild() {
 }
 
 function* syncData() {
+  console.log('Client Data Sync')
   let clients = yield select(state => state.trainerReducer.clients)
   for (let i = 0; i < clients.length; i++) {
     let path = '/global/' + clients[i]
@@ -131,6 +129,7 @@ function* syncData() {
 }
 
 function* readClientPhotoFlow() {
+  console.log('Client Read Flow')
   while (true) {
     const data = yield take(MARK_PHOTO_READ)
     const {path, uid} = data
@@ -140,15 +139,12 @@ function* readClientPhotoFlow() {
 }
 
 export default function* rootSaga() {
-  while (true) {
-    yield take(INIT_DATA)
-    yield fork(syncData)
-    yield fork(triggerGetPhotoChild)
-    yield fork(triggerRemPhotoChild)
-    yield fork(triggerGetInfoChild)
-    yield fork(triggerRemInfoChild)
-    yield fork(triggerGetMessagesChild)
-    yield fork(triggerRemMessagesChild)
-    yield fork(readClientPhotoFlow)
-  }
+  yield fork(takeLatest, INIT_DATA, syncData)
+  yield fork(takeLatest, INIT_DATA, triggerGetPhotoChild)
+  yield fork(takeLatest, INIT_DATA, triggerRemPhotoChild)
+  yield fork(takeLatest, INIT_DATA, triggerGetInfoChild)
+  yield fork(takeLatest, INIT_DATA, triggerRemInfoChild)
+  yield fork(takeLatest, INIT_DATA, triggerGetMessagesChild)
+  yield fork(takeLatest, INIT_DATA, triggerRemMessagesChild)
+  yield fork(takeLatest, INIT_DATA, readClientPhotoFlow)
 }

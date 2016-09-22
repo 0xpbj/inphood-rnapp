@@ -12,6 +12,7 @@ import {
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
+import { takeLatest } from 'redux-saga'
 import * as db from './firebaseCommands'
 import Config from 'react-native-config'
 
@@ -143,13 +144,10 @@ function* readFirebaseChatFlow() {
 }
 
 export default function* rootSaga() {
-  while (true) {
-    yield take(LOGIN_SUCCESS)
-    yield fork(triggerGetClientMessagesCount)
-    yield fork(triggerGetMessagesClientChild)
-    yield fork(triggerRemMessagesClientChild)
-    yield fork(syncChatData)
-    yield fork(watchFirebaseChatFlow)
-    yield fork(readFirebaseChatFlow)
-  }
+  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetClientMessagesCount)
+  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetMessagesClientChild)
+  yield fork(takeLatest, LOGIN_SUCCESS, triggerRemMessagesClientChild)
+  yield fork(takeLatest, LOGIN_SUCCESS, syncChatData)
+  yield fork(takeLatest, LOGIN_SUCCESS, watchFirebaseChatFlow)
+  yield fork(takeLatest, LOGIN_SUCCESS, readFirebaseChatFlow)
 }

@@ -1,4 +1,4 @@
-import { PUSH_GAL_ROUTE, POP_GAL_ROUTE, LOGOUT_SUCCESS } from '../constants/ActionTypes'
+import { PUSH_GAL_ROUTE, POP_GAL_ROUTE } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -31,8 +31,6 @@ export default function galleryNav(state = initialState, action) {
       else {
         return NavigationStateUtils.pop(state)
       }
-    case LOGOUT_SUCCESS:
-      return initialState
     default:
       return state
   }

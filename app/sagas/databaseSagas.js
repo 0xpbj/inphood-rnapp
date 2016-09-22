@@ -6,6 +6,7 @@ import {
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
+import { takeLatest } from 'redux-saga'
 import { Image } from "react-native"
 import Config from 'react-native-config'
 import * as db from './firebaseCommands'
@@ -24,6 +25,7 @@ function* updateDataVisibility() {
 }
 
 function* firebaseData(flag) {
+  console.log('FB Data Get')
   try {
     let uid = yield select(state => state.authReducer.token)
     if (!uid) {
@@ -76,6 +78,7 @@ function* firebaseData(flag) {
 }
 
 function* appendFirebaseDataFlow() {
+  console.log('Append FB Data Flow')
   while (true) {
     yield take([SEND_FIREBASE_LIBRARY_SUCCESS, SEND_FIREBASE_CAMERA_SUCCESS])
     yield call(firebaseData, false)
@@ -83,6 +86,7 @@ function* appendFirebaseDataFlow() {
 }
 
 function* initFirebaseDataFlow() {
+  console.log('FB Data Flow')
   while (true) {
     yield take([INIT_MESSAGES, REFRESH_CLIENT_DATA])
     yield put ({type: INIT_PHOTOS, flag: true})
@@ -91,8 +95,7 @@ function* initFirebaseDataFlow() {
 }
 
 export default function* rootSaga() {
-  yield take(LOGIN_SUCCESS)
-  yield fork(initFirebaseDataFlow)
-  yield fork(appendFirebaseDataFlow)
-  yield fork(updateDataVisibility)
+  yield fork(takeLatest, LOGIN_SUCCESS, initFirebaseDataFlow)
+  yield fork(takeLatest, LOGIN_SUCCESS, appendFirebaseDataFlow)
+  yield fork(takeLatest, LOGIN_SUCCESS, updateDataVisibility)
 }

@@ -1,4 +1,4 @@
-import { TAKE_PHOTO, STORE_CAMERA_CAPTION, STORE_CAMERA_TITLE, ADD_CAMERA_MEAL_DATA, PUSH_CAM_ROUTE, POP_CAM_ROUTE, LOGOUT_SUCCESS } from '../constants/ActionTypes'
+import { TAKE_PHOTO, STORE_CAMERA_CAPTION, STORE_CAMERA_TITLE, ADD_CAMERA_MEAL_DATA, PUSH_CAM_ROUTE, POP_CAM_ROUTE } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -55,8 +55,6 @@ export default function camera (state = initialState, action) {
       else {
         return NavigationStateUtils.pop(state)
       }
-    case LOGOUT_SUCCESS:
-      return initialState
     default:
       return state
   }

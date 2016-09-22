@@ -20,9 +20,57 @@ var Diet = Comb.enums({
   U: 'Vegan',
   P: 'Paleo',
 })
-var Positive = Comb.refinement(Comb.Number, function(n) {
-  return n >= 0
+var Height = Comb.enums({
+  H83: '6\'11\"',
+  H82: '6\'10\"',
+  H81: '6\'9\"',
+  H80: '6\'8\"',
+  H79: '6\'7\"',
+  H78: '6\'6\"',
+  H77: '6\'5\"',
+  H76: '6\'4\"',
+  H75: '6\'3\"',
+  H74: '6\'2\"',
+  H73: '6\'1\"',
+  H72: '6\'0\"',
+  H71: '5\'11\"',
+  H70: '5\'10\"',
+  H69: '5\'9\"',
+  H68: '5\'8\"',
+  H67: '5\'7\"',
+  H66: '5\'6\"',
+  H65: '5\'5\"',
+  H64: '5\'4\"',
+  H63: '5\'3\"',
+  H62: '5\'2\"',
+  H61: '5\'1\"',
+  H60: '5\'0\"',
+  H59: '4\'11\"',
+  H58: '4\'10\"',
+  H57: '4\'9\"',
+  H56: '4\'8\"',
+  H55: '4\'7\"',
+  H54: '4\'6\"',
+  H53: '4\'5\"',
+  H52: '4\'4\"',
+  H51: '4\'3\"',
+  H50: '4\'2\"',
+  H49: '4\'1\"',
+  H48: '4\'0\"',
+  H47: '3\'11\"',
+  H46: '3\'10\"',
+  H45: '3\'9\"',
+  H44: '3\'8\"',
+  H43: '3\'7\"',
+  H42: '3\'6\"',
+  H41: '3\'5\"',
+  H40: '3\'4\"',
+  H39: '3\'3\"',
+  H38: '3\'2\"',
+  H37: '3\'1\"',
+  H36: '3\'0\"',
 })
+
 // TODO: This component really sucks, but I wasn't able to
 // get react-form to work after ~2 hours.  Talk to PBJ about
 // getting react-form to work and scoping out some of this
@@ -41,30 +89,11 @@ var UserProfileForm = Comb.struct({
   lastname: Comb.String,
   birthday: Comb.Date,
   diet: Diet,
-  weight: Positive,
-  height: Positive,
-  location: Comb.String,
+  height: Height,
   email: Comb.maybe(Comb.String),
   password: Comb.maybe(Comb.String),
   pictureURL: Comb.maybe(Comb.String),
 })
-var options = {
-  fields: {
-    email: {
-      error: 'Insert a valid email',
-      autoCapitalize: 'none',
-      autoCorrect: false,
-    },
-    password: {
-      autoCapitalize: 'none',
-      autoCorrect: false,
-      secureTextEntry: true
-    }
-  },
-  auto: 'placeholders'
-}
-
-//  TODO: Add code to initialize the form value from the database
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -78,6 +107,75 @@ export default class UserProfile extends Component {
     }
   }
   render() {
+    if (this.props.auth.result.provider === "facebook.com") {
+      // If the user is authenticated through FB, then we don't manage
+      // their email, password, or pictureURL.
+      // TODO: should their firstname/lastname/birthday be available or editable in
+      // this case?
+      var options = {
+        fields: {
+          firstname: {
+            editable: false,
+          },
+          lastname: {
+            editable: false,
+          },
+          birthday: {
+            editable: false,
+            mode: 'date',
+          },
+          diet: {
+            error: 'Please select a diet ...',
+            nullOption: {value: '', text: 'Choose a diet ...'},
+          },
+          height: {
+            error: 'Please select your height ...',
+            nullOption: {value: '', text: 'Select your height ...'},
+          },
+          email: {
+            editable: false,
+            hidden: true,
+          },
+          password: {
+            editable: false,
+            hidden: true,
+          },
+          pictureURL: {
+            editable: false,
+            hidden: true,
+          },
+        },
+      };
+    } else {
+      var options = {
+        fields: {
+          birthday: {
+            mode: 'date',
+          },
+          diet: {
+            error: 'Please select a diet ...',
+            nullOption: {value: '', text: 'Choose a diet ...'},
+          },
+          height: {
+            error: 'Please select your height ...',
+            nullOption: {value: '', text: 'Select your height ...'},
+          },
+          email: {
+            error: 'Insert a valid email',
+            autoCapitalize: 'none',
+            autoCorrect: false,
+          },
+          password: {
+            autoCapitalize: 'none',
+            autoCorrect: false,
+            secureTextEntry: true
+          },
+          pictureURL: {
+            editable: false,
+          },
+        },
+      }
+    }
     let value = {
       firstname: this.props.auth.result.first_name,
       lastname: this.props.auth.result.last_name,

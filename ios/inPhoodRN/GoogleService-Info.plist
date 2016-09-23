@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>529180412076-psq3njtu989ho919hidr9191588orce7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.529180412076-psq3njtu989ho919hidr9191588orce7</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBmW9xYOdOWcasrKN102p9RCoWhG97hMeY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>529180412076</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.inphood.mvp-aug2016</string>
+	<key>PROJECT_ID</key>
+	<string>inphooddb-e0dfd</string>
+	<key>STORAGE_BUCKET</key>
+	<string>inphooddb-e0dfd.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:529180412076:ios:5abb31a688b95a85</string>
+	<key>DATABASE_URL</key>
+	<string>https://inphooddb-e0dfd.firebaseio.com</string>
+</dict>
+</plist>

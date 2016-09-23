@@ -85,8 +85,8 @@ var Height = Comb.enums({
 // to add storage to them in Firebase and better pickers
 // for things like height / weight (with units etc.)
 var UserProfileForm = Comb.struct({
-  firstname: Comb.String,
-  lastname: Comb.String,
+  firstName: Comb.String,
+  lastName: Comb.maybe(Comb.String),
   birthday: Comb.Date,
   diet: Diet,
   height: Height,
@@ -106,23 +106,75 @@ export default class UserProfile extends Component {
       this.props.goBack()
     }
   }
+  dateFormat(date) {
+    let monthString = ''
+    switch(date.getMonth()) {
+      case 0:
+        monthString = 'January'
+        break;
+      case 1:
+        monthString = 'February'
+        break;
+      case 2:
+        monthString = 'March'
+        break;
+      case 3:
+        monthString = 'April'
+        break;
+      case 4:
+        monthString = 'May'
+        break;
+      case 5:
+        monthString = 'June'
+        break;
+      case 6:
+        monthString = 'July'
+        break;
+      case 7:
+        monthString = 'August'
+        break;
+      case 8:
+        monthString = 'September'
+        break;
+      case 9:
+        monthString = 'October'
+        break;
+      case 10:
+        monthString = 'November'
+        break;
+      default:
+        // error will always be December b/c it's a great month!
+        monthString = 'December'
+        break;
+    }
+    let newDateString = monthString + ' ' + String(date.getDate()) + ', ' + String(date.getFullYear())
+
+    return (newDateString)
+  }
   render() {
+    // Minimum user age is 13 for our product (California Law)
+    // TODO: Need warning somewhere about this and parental consent
+    //
+    //    millisecondsFor13Years = 13 yrs * 365.25 d/yr * 24 hr/d * 60 min/hr *
+    //                             60 sec/min * 1000ms/sec
+    let millisecondsFor13Years = 13 * 365.25 * 24 * 60 * 60 * 1000
+    let maximumDate = new Date(Date.now() - millisecondsFor13Years)
+
     if (this.props.auth.result.provider === "facebook.com") {
-      // If the user is authenticated through FB, then we don't manage
-      // their email, password, or pictureURL.
-      // TODO: should their firstname/lastname/birthday be available or editable in
-      // this case?
+      // User Profile form for FACEBOOK AUTHENTICATED USERS:
+      //
       var options = {
         fields: {
-          firstname: {
+          firstName: {
             editable: false,
           },
-          lastname: {
+          lastName: {
             editable: false,
           },
           birthday: {
-            editable: false,
+            label: 'Birthday',
             mode: 'date',
+            hidden: true,
           },
           diet: {
             error: 'Please select a diet ...',
@@ -145,12 +197,23 @@ export default class UserProfile extends Component {
             hidden: true,
           },
         },
+        auto: 'placeholders',
       };
     } else {
+      // User Profile form for EMAIL AUTHENTICATED USERS:
+      //
       var options = {
         fields: {
+          firstName: {
+            error: 'Please enter your first name'
+          },
           birthday: {
+            label: 'Birthday:',
             mode: 'date',
+            maximumDate: maximumDate,
+            config: {
+              format: this.dateFormat,
+            }
           },
           diet: {
             error: 'Please select a diet ...',
@@ -164,6 +227,7 @@ export default class UserProfile extends Component {
             error: 'Insert a valid email',
             autoCapitalize: 'none',
             autoCorrect: false,
+            hidden: true,
           },
           password: {
             autoCapitalize: 'none',
@@ -172,16 +236,21 @@ export default class UserProfile extends Component {
           },
           pictureURL: {
             editable: false,
+            hidden: true,
           },
         },
+        auto: 'placeholders',
       }
     }
+
     let value = {
-      firstname: this.props.auth.result.first_name,
-      lastname: this.props.auth.result.last_name,
+      firstName: this.props.auth.result.first_name,
+      lastName: this.props.auth.result.last_name,
       email: this.props.auth.result.email,
       pictureURL: this.props.auth.result.picture,
     }
+
+    console.log("Email = " + this.props.auth.result.email)
     return (
       <View style={{flex: 1}}>
         <ScrollView

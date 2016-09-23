@@ -87,8 +87,8 @@ var Height = Comb.enums({
 // TODO: A confirm password entry that makes you enter it twice, matchinglike
 //
 var UserProfileForm = Comb.struct({
-  firstName: Comb.String,
-  lastName: Comb.String,
+  first_name: Comb.String,
+  last_name: Comb.String,
   email: Comb.String,
   birthday: Comb.Date,
   diet: Diet,
@@ -164,8 +164,8 @@ export default class UserProfile extends Component {
     if (value) {
       // value is read only, ergo modifiableValue:
       let modifiableValue = {
-        firstName: value.firstName,
-        lastName: value.lastName,
+        first_name: value.first_name,
+        last_name: value.last_name,
         birthday: value.birthday,
         // Convert enums to their values for storage to db:
         height: this.heightEnumToHeightStr(value.height),
@@ -175,6 +175,7 @@ export default class UserProfile extends Component {
         picture: value.picture,
       }
       this.props._storeForm(modifiableValue)
+      this.props._storeSettings(modifiableValue)
       this.props.goBack()
     }
   }
@@ -243,10 +244,10 @@ export default class UserProfile extends Component {
       //
       var options = {
         fields: {
-          firstName: {
+          first_name: {
             editable: false,
           },
-          lastName: {
+          last_name: {
             editable: false,
           },
           birthday: {
@@ -266,6 +267,8 @@ export default class UserProfile extends Component {
           },
           email: {
             error: 'Please provide a valid email address ...',
+            autoCapitalize: 'none',
+            autoCorrect: false,
             editable: getEmail,
             hidden: hideEmail,
           },
@@ -284,7 +287,7 @@ export default class UserProfile extends Component {
       //
       var options = {
         fields: {
-          firstName: {
+          first_name: {
             error: 'Please enter your first name'
           },
           birthday: {
@@ -303,7 +306,7 @@ export default class UserProfile extends Component {
             nullOption: {value: '', text: 'Select your height ...'},
           },
           email: {
-            error: 'Insert a valid email',
+            error: 'Please provide a valid email address ...',
             autoCapitalize: 'none',
             autoCorrect: false,
             hidden: true,
@@ -323,8 +326,8 @@ export default class UserProfile extends Component {
     }
 
     let value = {
-      firstName: this.props.settings.first_name,
-      lastName: this.props.settings.last_name,
+      first_name: this.props.settings.first_name,
+      last_name: this.props.settings.last_name,
       email: this.props.settings.email,
       birthday: new Date(this.props.settings.birthday),
       height: this.heightStrToHeightEnum(this.props.settings.height),

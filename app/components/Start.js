@@ -129,7 +129,7 @@ export default class Start extends Component {
     const captionHeight = 20 * onePercentHeight
     const resolvedCaptionLocation = {top: captionLocation.top * onePercentHeight,
                                      left: captionLocation.left * onePercentWidth}
-    const darkGoldenRodTransluscent = 'rgba(184, 134, 11, 0.90)'
+    const darkGoldenRodTransluscent = 'rgba(184, 134, 11, 0.75)'
 
     // TODO: Algorithm to scale the font based on screen size / pixel density
     // (Presently if the screen is longer, the font won't fill the caption as
@@ -153,15 +153,15 @@ export default class Start extends Component {
     )
   }
   flipBoard() {
-    const pageOneCaptionLocation = {top: 60, left: 30}
+    const pageOneCaptionLocation = {top: 15, left: 20}
     const pageOneCaptionText = '1. Take a photo of a meal.'
-    const pageTwoCaptionLocation = {top: 45, left: 30}
+    const pageTwoCaptionLocation = {top: 60, left: 20}
     const pageTwoCaptionText = '2. Give it a title.'
-    const pageThreeCaptionLocation = {top: 65, left: 35}
+    const pageThreeCaptionLocation = {top: 60, left: 35}
     const pageThreeCaptionText = '3. Describe it\'s ingredients.'
-    const pageFourCaptionLocation = {top: 45, left: 35}
+    const pageFourCaptionLocation = {top: 43, left: 20}
     const pageFourCaptionText = '4. Your trainer sees the photo & description.'
-    const pageFiveCaptionLocation = {top: 20, left: 10}
+    const pageFiveCaptionLocation = {top: 60, left: 20}
     const pageFiveCaptionText = '5. Discuss the meal with your trainer.'
 
     return (

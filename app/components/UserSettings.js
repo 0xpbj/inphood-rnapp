@@ -84,13 +84,15 @@ var Height = Comb.enums({
 // If we don't scope things mentioned above out, we'll need
 // to add storage to them in Firebase and better pickers
 // for things like height / weight (with units etc.)
+// TODO: A confirm password entry that makes you enter it twice, matchinglike
+//
 var UserProfileForm = Comb.struct({
-  firstName: Comb.String,
-  lastName: Comb.maybe(Comb.String),
+  first_name: Comb.String,
+  last_name: Comb.String,
+  email: Comb.String,
   birthday: Comb.Date,
   diet: Diet,
   height: Height,
-  email: Comb.maybe(Comb.String),
   password: Comb.maybe(Comb.String),
   picture: Comb.maybe(Comb.String),
 })
@@ -162,8 +164,8 @@ export default class UserProfile extends Component {
     if (value) {
       // value is read only, ergo modifiableValue:
       let modifiableValue = {
-        firstName: value.firstName,
-        lastName: value.lastName,
+        first_name: value.first_name,
+        last_name: value.last_name,
         birthday: value.birthday,
         // Convert enums to their values for storage to db:
         height: this.heightEnumToHeightStr(value.height),
@@ -173,6 +175,7 @@ export default class UserProfile extends Component {
         picture: value.picture,
       }
       this.props._storeForm(modifiableValue)
+      this.props._storeSettings(modifiableValue)
       this.props.goBack()
     }
   }
@@ -218,7 +221,7 @@ export default class UserProfile extends Component {
           monthString = 'December'
           break;
       }
-      let newDateString = 'Birthday: ' + monthString + ' ' + String(date.getDate()) + ', ' + String(date.getFullYear())
+      let newDateString = monthString + ' ' + String(date.getDate()) + ', ' + String(date.getFullYear())
 
       return (newDateString)
     }
@@ -233,14 +236,18 @@ export default class UserProfile extends Component {
     let maximumDate = new Date(Date.now() - millisecondsFor13Years)
 
     if (this.props.auth.result.provider === "facebook.com") {
+      let emailStr = this.props.settings.email
+      let getEmail = ((emailStr === null) || (emailStr.trim() === ''))
+      let hideEmail = !getEmail
+
       // User Profile form for FACEBOOK AUTHENTICATED USERS:
       //
       var options = {
         fields: {
-          firstName: {
+          first_name: {
             editable: false,
           },
-          lastName: {
+          last_name: {
             editable: false,
           },
           birthday: {
@@ -259,8 +266,11 @@ export default class UserProfile extends Component {
             nullOption: {value: '', text: 'Select your height ...'},
           },
           email: {
-            editable: false,
-            hidden: true,
+            error: 'Please provide a valid email address ...',
+            autoCapitalize: 'none',
+            autoCorrect: false,
+            editable: getEmail,
+            hidden: hideEmail,
           },
           password: {
             editable: false,
@@ -271,14 +281,13 @@ export default class UserProfile extends Component {
             hidden: true,
           },
         },
-        auto: 'placeholders',
       };
     } else {
       // User Profile form for EMAIL AUTHENTICATED USERS:
       //
       var options = {
         fields: {
-          firstName: {
+          first_name: {
             error: 'Please enter your first name'
           },
           birthday: {
@@ -297,7 +306,7 @@ export default class UserProfile extends Component {
             nullOption: {value: '', text: 'Select your height ...'},
           },
           email: {
-            error: 'Insert a valid email',
+            error: 'Please provide a valid email address ...',
             autoCapitalize: 'none',
             autoCorrect: false,
             hidden: true,
@@ -305,22 +314,22 @@ export default class UserProfile extends Component {
           password: {
             autoCapitalize: 'none',
             autoCorrect: false,
-            secureTextEntry: true
+            secureTextEntry: true,
+            hidden: true,
           },
           picture: {
             editable: false,
             hidden: true,
           },
         },
-        auto: 'placeholders',
       }
     }
 
     let value = {
-      firstName: this.props.settings.first_name,
-      lastName: this.props.settings.last_name,
+      first_name: this.props.settings.first_name,
+      last_name: this.props.settings.last_name,
       email: this.props.settings.email,
-      birthday: this.props.settings.birthday,
+      birthday: new Date(this.props.settings.birthday),
       height: this.heightStrToHeightEnum(this.props.settings.height),
       diet: this.dietStrToDietEnum(this.props.settings.diet),
       picture: this.props.settings.picture,

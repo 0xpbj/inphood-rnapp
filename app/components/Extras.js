@@ -68,6 +68,7 @@ export default class Extras extends Component {
           settings={this.props.auth.settings}
           goBack={this._handleBackAction.bind(this)}
           _storeForm={(form) => this.props.storeSettingsForm(form)}
+          _storeSettings={(settings) => this.props.storeUserSettings(settings)}
         />
       )
     }

@@ -30,8 +30,8 @@
 		7512D66A1D23717B00210FCE /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7512D6671D23717B00210FCE /* FBSDKShareKit.framework */; };
 		7512D6C81D2C5AEA00210FCE /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7512D6C61D2C5AC800210FCE /* libReact.a */; };
 		7512D6CA1D2C5B4600210FCE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7512D6C91D2C5B4600210FCE /* Bolts.framework */; };
-		751497641D8783E0002EEB64 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751497631D8783E0002EEB64 /* GoogleService-Info.plist */; };
 		752F475E1D79EF67000F8EE6 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 752F47531D79EF5D000F8EE6 /* libRCTPushNotification.a */; };
+		752FA9B61D94A8DF00D9DF20 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 752FA9B51D94A8DF00D9DF20 /* GoogleService-Info.plist */; };
 		757238F91D7B656C0099EE39 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 757238F21D7B63B80099EE39 /* libRCTCamera.a */; };
 		757238FA1D7B656C0099EE39 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 757238F81D7B63CA0099EE39 /* libRCTCameraRoll.a */; };
 		758076EC1D5E14AF00724E08 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 758076EB1D5E14AF00724E08 /* DeviceUtil.m */; };
@@ -229,8 +229,8 @@
 		7512D6671D23717B00210FCE /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../Users/prabhaav/Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = DEVELOPER_DIR; };
 		7512D6B51D2C5AC700210FCE /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		7512D6C91D2C5B4600210FCE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../../Users/prabhaav/Documents/FacebookSDK/Bolts.framework; sourceTree = DEVELOPER_DIR; };
-		751497631D8783E0002EEB64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "inPhoodRN/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		752F47451D79EF5D000F8EE6 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
+		752FA9B51D94A8DF00D9DF20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		757238ED1D7B63B80099EE39 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		757238F31D7B63C90099EE39 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		758076EA1D5E14AF00724E08 /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceUtil.h; path = "../node_modules/react-native-device/DeviceUtil.h"; sourceTree = "<group>"; };
@@ -363,7 +363,7 @@
 		13B07FAE1A68108700A75B9A /* inPhoodRN */ = {
 			isa = PBXGroup;
 			children = (
-				751497631D8783E0002EEB64 /* GoogleService-Info.plist */,
+				752FA9B51D94A8DF00D9DF20 /* GoogleService-Info.plist */,
 				758076EA1D5E14AF00724E08 /* DeviceUtil.h */,
 				758076EB1D5E14AF00724E08 /* DeviceUtil.m */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -550,9 +550,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* inPhoodTests */ = {
+		00E356ED1AD99517003FC87E /* inPhoodDBTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "inPhoodTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "inPhoodDBTests" */;
 			buildPhases = (
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
@@ -563,14 +563,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = inPhoodTests;
+			name = inPhoodDBTests;
 			productName = inPhoodRNTests;
 			productReference = 00E356EE1AD99517003FC87E /* inPhood.temp_caseinsensitive_rename.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* inPhood */ = {
+		13B07F861A680F5B00A75B9A /* inPhoodDB */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "inPhood" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "inPhoodDB" */;
 			buildPhases = (
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
@@ -581,7 +581,7 @@
 			);
 			dependencies = (
 			);
-			name = inPhood;
+			name = inPhoodDB;
 			productName = "Hello World";
 			productReference = 13B07F961A680F5B00A75B9A /* inPhood.app */;
 			productType = "com.apple.product-type.application";
@@ -695,8 +695,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* inPhood */,
-				00E356ED1AD99517003FC87E /* inPhoodTests */,
+				13B07F861A680F5B00A75B9A /* inPhoodDB */,
+				00E356ED1AD99517003FC87E /* inPhoodDBTests */,
 			);
 		};
 /* End PBXProject section */
@@ -863,7 +863,7 @@
 				895223FA91584065ADF4D9D2 /* Foundation.ttf in Resources */,
 				96C4CCE2B958490687C186EF /* Ionicons.ttf in Resources */,
 				46F77B56F92C4D1DA38B24E0 /* MaterialIcons.ttf in Resources */,
-				751497641D8783E0002EEB64 /* GoogleService-Info.plist in Resources */,
+				752FA9B61D94A8DF00D9DF20 /* GoogleService-Info.plist in Resources */,
 				A0AE0E2861414F33A00559D0 /* Octicons.ttf in Resources */,
 				0E7EBD6458734A06B285C23A /* Zocial.ttf in Resources */,
 			);
@@ -912,7 +912,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* inPhood */;
+			target = 13B07F861A680F5B00A75B9A /* inPhoodDB */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -939,7 +939,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = inPhood.temp_caseinsensitive_rename;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inPhood.temp_caseinsensitive_rename.app/inPhood.temp_caseinsensitive_rename";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inPhood.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app/inPhood.temp_caseinsensitive_rename.temp_caseinsensitive_rename";
 			};
 			name = Debug;
 		};
@@ -961,7 +961,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = inPhood.temp_caseinsensitive_rename;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inPhood.temp_caseinsensitive_rename.app/inPhood.temp_caseinsensitive_rename";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inPhood.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app/inPhood.temp_caseinsensitive_rename.temp_caseinsensitive_rename";
 			};
 			name = Release;
 		};
@@ -1156,7 +1156,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "inPhoodTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "inPhoodDBTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -1165,7 +1165,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "inPhood" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "inPhoodDB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,

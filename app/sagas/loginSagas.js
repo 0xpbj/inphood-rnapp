@@ -164,7 +164,7 @@ function* resetPassword() {
   const user = firebase.auth().currentUser
   if (user) {
     const email = user.email
-    firebase.auth()auth.sendPasswordResetEmail(email).then(function() {
+    firebase.auth().sendPasswordResetEmail(email).then(function() {
     }, function(error) {
       // An error happened.
       alert(error)

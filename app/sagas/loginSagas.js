@@ -1,6 +1,6 @@
 import {
   EM_LOGIN_REQUEST, EM_CREATE_USER, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, RESET_PASSWORD,
-  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_RESULT, STORE_TOKEN, INIT_LOGIN,
+  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_RESULT, STORE_TOKEN, INIT_LOGIN, USER_SETTINGS,
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -36,10 +36,16 @@ function* fbloginFlow() {
       const token = user.uid
       const path = '/global/' + token + '/userInfo/public'
       const trainerId = (yield call(db.getPath, path + '/trainerId')).val()
+      const birthday = (yield call(db.getPath, path + '/birthday')).val()
+      const email = (yield call(db.getPath, path + '/email')).val()
+      const diet = (yield call(db.getPath, path + '/diet')).val()
+      const height = (yield call(db.getPath, path + '/height')).val()
       const values = name.split(" ")
       const first_name = values[0]
       const last_name = values[1]
       const result = {id, name, picture, first_name, last_name, provider, trainerId}
+      const userSettings = {first_name, last_name, birthday, height, diet, email, picture}
+      yield put ({type: USER_SETTINGS, settings: userSettings})
       yield put ({type: STORE_RESULT, result})
       yield put ({type: STORE_TOKEN, token})
       yield put ({type: LOGIN_SUCCESS})
@@ -115,12 +121,19 @@ function* emloginFlow(value) {
     const id = (yield call(db.getPath, path + '/id')).val()
     const name = (yield call(db.getPath, path + '/name')).val()
     const picture = (yield call(db.getPath, path + '/picture')).val()
+    const birthday = (yield call(db.getPath, path + '/birthday')).val()
+    const email = (yield call(db.getPath, path + '/email')).val()
+    const diet = (yield call(db.getPath, path + '/diet')).val()
+    const height = (yield call(db.getPath, path + '/height')).val()
     const trainerId = (yield call(db.getPath, path + '/trainerId')).val()
     const provider = user.providerData[0].providerId
     const values = name.split(" ")
     const first_name = values[0]
     const last_name = values[1]
     const result = {id, name, picture, first_name, last_name, provider, trainerId}
+    const userSettings = {first_name, last_name, birthday, height, diet, email, picture}
+    console.log(userSettings)
+    yield put ({type: USER_SETTINGS, settings: userSettings})
     yield put ({type: STORE_RESULT, result})
     yield put ({type: STORE_TOKEN, token})
     yield put ({type: LOGIN_SUCCESS})

@@ -74,7 +74,7 @@ var Height = Comb.enums({
 // TODO: This component really sucks, but I wasn't able to
 // get react-form to work after ~2 hours.  Talk to PBJ about
 // getting react-form to work and scoping out some of this
-// data for MVP (i.e. Location, Height, pictureURL--should
+// data for MVP (i.e. Location, Height, picture--should
 // really be a picker from the camera roll)
 //
 // There's all kinds of problems to deal with here too:
@@ -92,7 +92,7 @@ var UserProfileForm = Comb.struct({
   height: Height,
   email: Comb.maybe(Comb.String),
   password: Comb.maybe(Comb.String),
-  pictureURL: Comb.maybe(Comb.String),
+  picture: Comb.maybe(Comb.String),
 })
 
 export default class UserProfile extends Component {
@@ -104,24 +104,28 @@ export default class UserProfile extends Component {
   //
   // heightEnumToHeightStr converts something like H71 to '5\'11\"'
   heightEnumToHeightStr(heightEnumStr) {
-    let heightInInchesStr = heightEnumStr.substr(1,2)
-    let heightInInches = parseInt(heightInInchesStr)
+    if(heightEnumStr) {
+      let heightInInchesStr = heightEnumStr.substr(1,2)
+      let heightInInches = parseInt(heightInInchesStr)
 
-    let numFeet = Math.floor(heightInInches / 12)
-    let remainderInches = heightInInches % 12
+      let numFeet = Math.floor(heightInInches / 12)
+      let remainderInches = heightInInches % 12
 
-    return String(numFeet) + '\'' + String(remainderInches) + '\"'
+      return String(numFeet) + '\'' + String(remainderInches) + '\"'
+    }
   }
   // heightStrToHeightEnum converts something like '5\'11\"' to H71
   heightStrToHeightEnum(heightStr) {
-    let splitHeightStrArr = heightStr.split("\'")
-    let feetStr = splitHeightStrArr[0]
-    let inchStr = splitHeightStrArr[1].replace('\"', '')
+    if (heightStr) {
+      let splitHeightStrArr = heightStr.split("\'")
+      let feetStr = splitHeightStrArr[0]
+      let inchStr = splitHeightStrArr[1].replace('\"', '')
 
-    let numFeet = parseInt(feetStr)
-    let numInches = parseInt(inchStr)
+      let numFeet = parseInt(feetStr)
+      let numInches = parseInt(inchStr)
 
-    return 'H' + String( (numFeet*12) + numInches )
+      return 'H' + String( (numFeet*12) + numInches )
+    }
   }
   dietEnumToDietStr(dietEnumStr) {
     switch (dietEnumStr) {
@@ -166,56 +170,58 @@ export default class UserProfile extends Component {
         diet: this.dietEnumToDietStr(value.diet),
         email: value.email,
         password: value.password,
-        pictureURL: value.pictureURL,
+        picture: value.picture,
       }
       this.props._storeForm(modifiableValue)
       this.props.goBack()
     }
   }
   birthdayDateFormat(date) {
-    let monthString = ''
-    switch(date.getMonth()) {
-      case 0:
-        monthString = 'January'
-        break;
-      case 1:
-        monthString = 'February'
-        break;
-      case 2:
-        monthString = 'March'
-        break;
-      case 3:
-        monthString = 'April'
-        break;
-      case 4:
-        monthString = 'May'
-        break;
-      case 5:
-        monthString = 'June'
-        break;
-      case 6:
-        monthString = 'July'
-        break;
-      case 7:
-        monthString = 'August'
-        break;
-      case 8:
-        monthString = 'September'
-        break;
-      case 9:
-        monthString = 'October'
-        break;
-      case 10:
-        monthString = 'November'
-        break;
-      default:
-        // error will always be December b/c it's a great month!
-        monthString = 'December'
-        break;
-    }
-    let newDateString = 'Birthday: ' + monthString + ' ' + String(date.getDate()) + ', ' + String(date.getFullYear())
+    if (date) {
+      let monthString = ''
+      switch(date.getMonth()) {
+        case 0:
+          monthString = 'January'
+          break;
+        case 1:
+          monthString = 'February'
+          break;
+        case 2:
+          monthString = 'March'
+          break;
+        case 3:
+          monthString = 'April'
+          break;
+        case 4:
+          monthString = 'May'
+          break;
+        case 5:
+          monthString = 'June'
+          break;
+        case 6:
+          monthString = 'July'
+          break;
+        case 7:
+          monthString = 'August'
+          break;
+        case 8:
+          monthString = 'September'
+          break;
+        case 9:
+          monthString = 'October'
+          break;
+        case 10:
+          monthString = 'November'
+          break;
+        default:
+          // error will always be December b/c it's a great month!
+          monthString = 'December'
+          break;
+      }
+      let newDateString = 'Birthday: ' + monthString + ' ' + String(date.getDate()) + ', ' + String(date.getFullYear())
 
-    return (newDateString)
+      return (newDateString)
+    }
   }
   render() {
     // Minimum user age is 13 for our product (California Law)
@@ -260,7 +266,7 @@ export default class UserProfile extends Component {
             editable: false,
             hidden: true,
           },
-          pictureURL: {
+          picture: {
             editable: false,
             hidden: true,
           },
@@ -301,7 +307,7 @@ export default class UserProfile extends Component {
             autoCorrect: false,
             secureTextEntry: true
           },
-          pictureURL: {
+          picture: {
             editable: false,
             hidden: true,
           },
@@ -311,16 +317,14 @@ export default class UserProfile extends Component {
     }
 
     let value = {
-      // TODO: Prabhaav
-      // height: this.heightStrToHeightEnum(this...height),
-      // diet: this.dietStrToDietEnum(this...diet),
-      firstName: this.props.auth.result.first_name,
-      lastName: this.props.auth.result.last_name,
-      email: this.props.auth.result.email,
-      pictureURL: this.props.auth.result.picture,
+      firstName: this.props.settings.first_name,
+      lastName: this.props.settings.last_name,
+      email: this.props.settings.email,
+      birthday: this.props.settings.birthday,
+      height: this.heightStrToHeightEnum(this.props.settings.height),
+      diet: this.dietStrToDietEnum(this.props.settings.diet),
+      picture: this.props.settings.picture,
     }
-
-    console.log("Email = " + this.props.auth.result.email)
     return (
       <View style={{flex: 1}}>
         <ScrollView

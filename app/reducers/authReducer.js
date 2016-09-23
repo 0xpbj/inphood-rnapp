@@ -1,6 +1,6 @@
 import {
   LOGIN_SUCCESS, LOGIN_ERROR, INIT_LOGIN,
-  LOGOUT_SUCCESS, LOGOUT_ERROR,
+  LOGOUT_SUCCESS, LOGOUT_ERROR, USER_SETTINGS,
   STORE_TOKEN, STORE_RESULT, STORE_TRAINER,
 } from '../constants/ActionTypes'
 
@@ -10,6 +10,7 @@ const initialState = {
   error: null,
   trainer: false,
   inProgress: false,
+  settings: {}
 }
 
 export default function authentication(state = initialState, action) {
@@ -43,6 +44,11 @@ export default function authentication(state = initialState, action) {
         ...state,
         result: action.result,
         inProgress: false
+      }
+    case USER_SETTINGS:
+      return {
+        ...state,
+        settings: action.settings
       }
     case LOGIN_SUCCESS:
     default:

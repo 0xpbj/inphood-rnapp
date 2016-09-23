@@ -1,4 +1,4 @@
-import { PUSH_EXT_ROUTE, POP_EXT_ROUTE, STORE_SETTINGS_FORM } from '../constants/ActionTypes'
+import { PUSH_EXT_ROUTE, POP_EXT_ROUTE } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -12,7 +12,7 @@ const initialState = {
       key: 'start',
       title: ''
     }
-  ],
+  ]
 }
 
 export default function extrasNav(state = initialState, action) {
@@ -31,11 +31,6 @@ export default function extrasNav(state = initialState, action) {
       else {
         return NavigationStateUtils.pop(state)
       }
-    // case STORE_SETTINGS_FORM:
-    //   return {
-    //     ...state,
-    //     profileForm: action.form
-    //   }
     default:
       return state
   }

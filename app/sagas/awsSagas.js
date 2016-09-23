@@ -131,11 +131,13 @@ const sendUserDataToFirebase = (form, state) => {
   if (!uid) {
     uid = firebase.auth().currentUser.uid
   }
-  const diet = form.diet
-  const height = form.height
+  const {birthday, height, diet, email, picture} = form
   firebase.database().ref('/global/' + uid + '/userInfo/public').update({
-    diet,
+    birthday,
     height,
+    diet,
+    email,
+    picture
   })
 }
 

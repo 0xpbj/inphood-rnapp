@@ -129,7 +129,7 @@ export default class Start extends Component {
     const captionHeight = 20 * onePercentHeight
     const resolvedCaptionLocation = {top: captionLocation.top * onePercentHeight,
                                      left: captionLocation.left * onePercentWidth}
-    const darkGoldenRodTransluscent = 'rgba(184, 134, 11, 0.75)'
+    const darkGoldenRodTransluscent = 'rgba(255, 64, 0, 0.75)'
 
     // TODO: Algorithm to scale the font based on screen size / pixel density
     // (Presently if the screen is longer, the font won't fill the caption as

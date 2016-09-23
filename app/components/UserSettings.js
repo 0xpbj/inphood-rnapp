@@ -99,15 +99,80 @@ export default class UserProfile extends Component {
   constructor(props) {
     super(props)
   }
+  /////////////////////////////////////////////////////////////////////////////
+  // Conversion methods to/from enums
+  //
+  // heightEnumToHeightStr converts something like H71 to '5\'11\"'
+  heightEnumToHeightStr(heightEnumStr) {
+    let heightInInchesStr = heightEnumStr.substr(1,2)
+    let heightInInches = parseInt(heightInInchesStr)
+
+    let numFeet = Math.floor(heightInInches / 12)
+    let remainderInches = heightInInches % 12
+
+    return String(numFeet) + '\'' + String(remainderInches) + '\"'
+  }
+  // heightStrToHeightEnum converts something like '5\'11\"' to H71
+  heightStrToHeightEnum(heightStr) {
+    let splitHeightStrArr = heightStr.split("\'")
+    let feetStr = splitHeightStrArr[0]
+    let inchStr = splitHeightStrArr[1].replace('\"', '')
+
+    let numFeet = parseInt(feetStr)
+    let numInches = parseInt(inchStr)
+
+    return 'H' + String( (numFeet*12) + numInches )
+  }
+  dietEnumToDietStr(dietEnumStr) {
+    switch (dietEnumStr) {
+      case 'N':
+        return('No Specific Diet')
+      case 'V':
+        return('Vegetarian')
+      case 'U':
+        return('Vegan')
+      case 'P':
+        return('Paleo')
+      default:
+        return('')
+    }
+  }
+  dietStrToDietEnum(dietStr) {
+    switch (dietStr) {
+      case 'No Specific Diet':
+        return('N')
+      case 'Vegetarian':
+        return('V')
+      case 'Vegan':
+        return('U')
+      case 'Paleo':
+        return('P')
+      default:
+        return('')
+    }
+  }
+  /////////////////////////////////////////////////////////////////////////////
+  //
   storeFormData() {
     let value = this.refs.form.getValue()
     if (value) {
-      console.log(value.diet)
-      this.props._storeForm(value)
+      // value is read only, ergo modifiableValue:
+      let modifiableValue = {
+        firstName: value.firstName,
+        lastName: value.lastName,
+        birthday: value.birthday,
+        // Convert enums to their values for storage to db:
+        height: this.heightEnumToHeightStr(value.height),
+        diet: this.dietEnumToDietStr(value.diet),
+        email: value.email,
+        password: value.password,
+        pictureURL: value.pictureURL,
+      }
+      this.props._storeForm(modifiableValue)
       this.props.goBack()
     }
   }
-  dateFormat(date) {
+  birthdayDateFormat(date) {
     let monthString = ''
     switch(date.getMonth()) {
       case 0:
@@ -148,7 +213,7 @@ export default class UserProfile extends Component {
         monthString = 'December'
         break;
     }
-    let newDateString = monthString + ' ' + String(date.getDate()) + ', ' + String(date.getFullYear())
+    let newDateString = 'Birthday: ' + monthString + ' ' + String(date.getDate()) + ', ' + String(date.getFullYear())
 
     return (newDateString)
   }
@@ -173,9 +238,11 @@ export default class UserProfile extends Component {
             editable: false,
           },
           birthday: {
-            label: 'Birthday',
             mode: 'date',
-            hidden: true,
+            maximumDate: maximumDate,
+            config: {
+              format: this.birthdayDateFormat,
+            }
           },
           diet: {
             error: 'Please select a diet ...',
@@ -209,11 +276,10 @@ export default class UserProfile extends Component {
             error: 'Please enter your first name'
           },
           birthday: {
-            label: 'Birthday:',
             mode: 'date',
             maximumDate: maximumDate,
             config: {
-              format: this.dateFormat,
+              format: this.birthdayDateFormat,
             }
           },
           diet: {
@@ -245,6 +311,9 @@ export default class UserProfile extends Component {
     }
 
     let value = {
+      // TODO: Prabhaav
+      // height: this.heightStrToHeightEnum(this...height),
+      // diet: this.dietStrToDietEnum(this...diet),
       firstName: this.props.auth.result.first_name,
       lastName: this.props.auth.result.last_name,
       email: this.props.auth.result.email,

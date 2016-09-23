@@ -261,7 +261,10 @@ export default class Start extends Component {
         <View style={CommonStyles.modalContainer}>
           <View style={[{backgroundColor: '#fff', padding: 10},
                         CommonStyles.innerContainer]}>
-            {this.modalFacebookLoginButton()}
+            <View style={{marginTop: 10,
+                          marginBottom: 10}}>
+              {this.modalFacebookLoginButton()}
+            </View>
             {this.modalEmailLoginButton()}
             {this.modalCancelLoginButton()}
           </View>

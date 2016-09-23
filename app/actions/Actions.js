@@ -51,7 +51,6 @@ import {
   SET_CLIENT_ID,
   SET_CLIENT_PHOTO,
   SET_CLIENT_NAME,
-  STORE_PROFILE_FORM,
   STORE_SETTINGS_FORM,
   RESET_PASSWORD
 } from '../constants/ActionTypes'
@@ -373,9 +372,9 @@ export function setClientName(name) {
   }
 }
 
-export function storeProfileForm(form) {
+export function storeSettingsForm(form) {
   return {
-    type: STORE_PROFILE_FORM,
+    type: STORE_SETTINGS_FORM,
     form: form
   }
 }

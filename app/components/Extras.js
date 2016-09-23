@@ -22,7 +22,6 @@ import Start from '../containers/StartContainer'
 import Login from './EmailLogin'
 import Signup from './UserSignUp'
 import Settings from './UserSettings'
-import Profile from './UserProfile'
 
 export default class Extras extends Component {
   constructor(props) {
@@ -64,15 +63,10 @@ export default class Extras extends Component {
     }
     else if (scene.key === prefix + 'settings') {
       return (
-        <Settings />
-      )
-    }
-    else if (scene.key === prefix + 'profile') {
-      return (
-        <Profile
+        <Settings
           auth={this.props.auth}
           goBack={this._handleBackAction.bind(this)}
-          _storeForm={(form) => this.props.storeProfileForm(form)}
+          _storeForm={(form) => this.props.storeSettingsForm(form)}
         />
       )
     }

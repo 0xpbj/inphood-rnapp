@@ -1,5 +1,5 @@
 import {
-SEND_AWS_SUCCESS, SEND_AWS_ERROR,
+SEND_AWS_SUCCESS, SEND_AWS_ERROR, STORE_SETTINGS_FORM,
 SEND_FIREBASE_INIT_CAMERA, SEND_FIREBASE_INIT_LIBRARY,
 SEND_FIREBASE_LIBRARY_SUCCESS, SEND_FIREBASE_CAMERA_SUCCESS, SEND_FIREBASE_ERROR,
 } from '../constants/ActionTypes'
@@ -125,6 +125,28 @@ function* loadFirebaseCall(flag) {
   }
 }
 
+const sendUserDataToFirebase = (form, state) => {
+  console.log(form)
+  let uid = state.authReducer.token
+  if (!uid) {
+    uid = firebase.auth().currentUser.uid
+  }
+  const diet = form.diet
+  const height = form.height
+  firebase.database().ref('/global/' + uid + '/userInfo/public').update({
+    diet,
+    height,
+  })
+}
+
+function* watchUserDataCall() {
+  while(true) {
+    const data = yield take(STORE_SETTINGS_FORM)
+    const state = yield select()
+    yield call(sendUserDataToFirebase, data.form, state)
+  }
+}
+
 function* watchFirebaseCameraCall() {
   while(true) {
     yield take(SEND_FIREBASE_INIT_CAMERA)
@@ -142,4 +164,5 @@ function* watchFirebaseLibraryCall() {
 export default function* rootSaga() {
   yield fork(watchFirebaseLibraryCall)
   yield fork(watchFirebaseCameraCall)
+  yield fork(watchUserDataCall)
 }

@@ -35,14 +35,6 @@ const loginRoute = {
   }
 }
 
-const profileRoute = {
-  type: 'push',
-  route: {
-    key: 'profile',
-    title: 'User Profile'
-  }
-}
-
 const settingsRoute = {
   type: 'push',
   route: {
@@ -64,9 +56,6 @@ export default class Start extends Component {
       height: null,
       modalVisible: false,
     }
-  }
-  userProfile() {
-    this.props._handleNavigate(profileRoute)
   }
   userSettings() {
     this.props._handleNavigate(settingsRoute)
@@ -304,12 +293,9 @@ export default class Start extends Component {
     const uri = this.props.auth.result.picture
     const buttonColor = this.props.auth.result ? '#006400' : 'white'
     return (
-      <TouchableHighlight
-        onPress={this.userProfile.bind(this)}>
         <Image
           source={{uri: uri}}
           style={[CommonStyles.profileImage, {borderColor: buttonColor}]}/>
-      </TouchableHighlight>
     )
   }
   helpEmailButton() {

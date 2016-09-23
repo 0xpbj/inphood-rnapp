@@ -84,13 +84,15 @@ var Height = Comb.enums({
 // If we don't scope things mentioned above out, we'll need
 // to add storage to them in Firebase and better pickers
 // for things like height / weight (with units etc.)
+// TODO: A confirm password entry that makes you enter it twice, matchinglike
+//
 var UserProfileForm = Comb.struct({
   firstName: Comb.String,
-  lastName: Comb.maybe(Comb.String),
+  lastName: Comb.String,
+  email: Comb.String,
   birthday: Comb.Date,
   diet: Diet,
   height: Height,
-  email: Comb.maybe(Comb.String),
   password: Comb.maybe(Comb.String),
   picture: Comb.maybe(Comb.String),
 })
@@ -218,7 +220,7 @@ export default class UserProfile extends Component {
           monthString = 'December'
           break;
       }
-      let newDateString = 'Birthday: ' + monthString + ' ' + String(date.getDate()) + ', ' + String(date.getFullYear())
+      let newDateString = monthString + ' ' + String(date.getDate()) + ', ' + String(date.getFullYear())
 
       return (newDateString)
     }
@@ -233,6 +235,10 @@ export default class UserProfile extends Component {
     let maximumDate = new Date(Date.now() - millisecondsFor13Years)
 
     if (this.props.auth.result.provider === "facebook.com") {
+      let emailStr = this.props.settings.email
+      let getEmail = ((emailStr === null) || (emailStr.trim() === ''))
+      let hideEmail = !getEmail
+
       // User Profile form for FACEBOOK AUTHENTICATED USERS:
       //
       var options = {
@@ -259,8 +265,9 @@ export default class UserProfile extends Component {
             nullOption: {value: '', text: 'Select your height ...'},
           },
           email: {
-            editable: false,
-            hidden: true,
+            error: 'Please provide a valid email address ...',
+            editable: getEmail,
+            hidden: hideEmail,
           },
           password: {
             editable: false,
@@ -271,7 +278,6 @@ export default class UserProfile extends Component {
             hidden: true,
           },
         },
-        auto: 'placeholders',
       };
     } else {
       // User Profile form for EMAIL AUTHENTICATED USERS:
@@ -305,14 +311,14 @@ export default class UserProfile extends Component {
           password: {
             autoCapitalize: 'none',
             autoCorrect: false,
-            secureTextEntry: true
+            secureTextEntry: true,
+            hidden: true,
           },
           picture: {
             editable: false,
             hidden: true,
           },
         },
-        auto: 'placeholders',
       }
     }
 
@@ -320,7 +326,7 @@ export default class UserProfile extends Component {
       firstName: this.props.settings.first_name,
       lastName: this.props.settings.last_name,
       email: this.props.settings.email,
-      birthday: this.props.settings.birthday,
+      birthday: new Date(this.props.settings.birthday),
       height: this.heightStrToHeightEnum(this.props.settings.height),
       diet: this.dietStrToDietEnum(this.props.settings.diet),
       picture: this.props.settings.picture,

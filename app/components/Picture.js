@@ -24,27 +24,23 @@ export default class Picture extends Component {
     super(props);
   }
   takePicture() {
-    this.camera.capture((err, data) => {
-      if (err) {
-        console.log ('Camera Error')
-      }
-      else {
+    this.camera.capture()
+      .then((data) => {
         this.props._takePhoto(data)
         this.props._handleNavigate(route)
-      }
-    })
+      })
+      .catch(err => console.error(err));
   }
   render () {
     return (
       <View style={CommonStyles.flexContainer}>
         <Camera
           ref={(cam) => {
-            this.camera = cam;
+            this.camera = cam
           }}
           style={[CommonStyles.picturePreview,
                   {height: Dimensions.get('window').height,
-                   width: Dimensions.get('window').width}]}
-          aspect={Camera.constants.Aspect.fill}>
+                   width: Dimensions.get('window').width}]}>
           <View style={CommonStyles.shutterOuterViewStyle}>
             <TouchableHighlight style={CommonStyles.shutterInnerViewStyle} onPress={this.takePicture.bind(this)}>
               <View/>

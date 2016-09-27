@@ -83,8 +83,8 @@ export default class Start extends Component {
       return (
         <View style={{flex: 1}}>
           {this.flipBoard()}
-          {this.loginOutButton()}
-          {this.modalLoginOutDialog()}
+          {/*{this.loginOutButton()}
+          {this.modalLoginOutDialog()}*/}
         </View>
       )
     }
@@ -129,7 +129,7 @@ export default class Start extends Component {
     const captionHeight = 20 * onePercentHeight
     const resolvedCaptionLocation = {top: captionLocation.top * onePercentHeight,
                                      left: captionLocation.left * onePercentWidth}
-    const darkGoldenRodTransluscent = 'rgba(255, 64, 0, 0.75)'
+    const orangeRedTransluscent = 'rgba(255, 64, 0, 0.75)'
 
     // TODO: Algorithm to scale the font based on screen size / pixel density
     // (Presently if the screen is longer, the font won't fill the caption as
@@ -138,7 +138,7 @@ export default class Start extends Component {
     return(
       <View
         style={[{width: captionWidth,
-                backgroundColor: darkGoldenRodTransluscent,
+                backgroundColor: orangeRedTransluscent,
                 padding: 10,
                 borderWidth: 1,
                 borderColor: 'black',
@@ -167,7 +167,8 @@ export default class Start extends Component {
     return (
       <View style={{flex: 1, backgroundColor: 'transparent'}}>
         <Swiper
-          autoplay={true}>
+          autoplay={true}
+          autoplaytimeout={3.5}>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
             <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f1.png')}>
             {this.flipBoardCaption(pageOneCaptionLocation, pageOneCaptionText)}

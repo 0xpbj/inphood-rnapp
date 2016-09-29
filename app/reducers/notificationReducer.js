@@ -15,7 +15,8 @@ const initialState = {
   clientUID: [],
   trainerUID: [],
   clientPhotos: [],
-  trainerPhotos: []
+  trainerPhotos: [],
+  photoMessages: []
 }
 
 export default function library (state = initialState, action) {

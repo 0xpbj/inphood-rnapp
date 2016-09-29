@@ -19,16 +19,16 @@ var { AsyncStorage } = require('react-native')
 const sagaMiddleware = createSagaMiddleware()
 const persistConfig = {
   whitelist: [
-    'authReducer', 
-    'chatReducer', 
-    'galReducer',
-    'notificationReducer'
+    'authReducer',
   ],
-  blacklist: [
+  blacklist: [ 
+    'chatReducer',
     'camReducer', 
     'extReducer', 
-    'galNavReducer', 
+    'galReducer',
+    'galNavReducer',
     'libReducer', 
+    'notificationReducer',
     'photoReducer', 
     'tabReducer', 
     'trainerNavReducer', 

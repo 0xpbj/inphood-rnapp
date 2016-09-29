@@ -47,7 +47,6 @@ function* triggerRemMessagesChild() {
 }
 
 function* triggerGetInfoChild() {
-  console.log('Client Info Get')
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_INFO_CHILD)
     const name = data.val().name
@@ -67,7 +66,6 @@ function* triggerRemInfoChild() {
 }
 
 function* triggerGetPhotoChild() {
-  console.log('Client Photo Get')
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_PHOTO_CHILD)
     if (data.val().visible) {
@@ -106,7 +104,6 @@ function* triggerRemPhotoChild() {
 }
 
 function* syncData() {
-  console.log('Client Data Sync')
   let clients = yield select(state => state.trainerReducer.clients)
   for (let i = 0; i < clients.length; i++) {
     let path = '/global/' + clients[i]

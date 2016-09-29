@@ -25,7 +25,6 @@ function* updateDataVisibility() {
 }
 
 function* firebaseData(flag) {
-  console.log('FB Data Get')
   try {
     let uid = yield select(state => state.authReducer.token)
     if (!uid) {
@@ -72,13 +71,11 @@ function* firebaseData(flag) {
     }
   }
   catch(error) {
-    console.log(error)
     yield put ({type: LOAD_PHOTOS_ERROR, error})
   }
 }
 
 function* appendFirebaseDataFlow() {
-  console.log('Append FB Data Flow')
   while (true) {
     yield take([SEND_FIREBASE_LIBRARY_SUCCESS, SEND_FIREBASE_CAMERA_SUCCESS])
     yield call(firebaseData, false)
@@ -86,7 +83,6 @@ function* appendFirebaseDataFlow() {
 }
 
 function* initFirebaseDataFlow() {
-  console.log('FB Data Flow')
   while (true) {
     yield take([INIT_MESSAGES, REFRESH_CLIENT_DATA])
     yield put ({type: INIT_PHOTOS, flag: true})

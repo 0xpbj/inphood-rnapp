@@ -25,7 +25,6 @@ const facebookLogin = () => {
 
 function* fbloginFlow() {
   try {
-  console.log('FB Login Flow')
     yield put ({type: INIT_LOGIN, flag: true})
     const {user, error} = yield call(facebookLogin)
     if (user) {
@@ -132,7 +131,6 @@ function* emloginFlow(value) {
     const last_name = values[1]
     const result = {id, name, picture, first_name, last_name, provider, trainerId}
     const userSettings = {first_name, last_name, birthday, height, diet, email, picture}
-    console.log(userSettings)
     yield put ({type: USER_SETTINGS, settings: userSettings})
     yield put ({type: STORE_RESULT, result})
     yield put ({type: STORE_TOKEN, token})
@@ -145,7 +143,6 @@ function* emloginFlow(value) {
 }
 
 function* watchEMLoginFlow() {
-  console.log('Email Login Flow')
   const data = yield take(EM_LOGIN_REQUEST)
   yield put ({type: INIT_LOGIN, flag: true})
   yield call(emloginFlow, data.value)
@@ -161,14 +158,12 @@ const firebaseLogout = () => {
 
 function* logoutFlow() {
   try {
-    console.log('Logout Flow')
     const success = yield call(firebaseLogout)
     if (success) {
       yield put ({type: LOGOUT_SUCCESS})
     }
   }
   catch(error) {
-    console.log(error)
     yield put ({type: LOGOUT_ERROR, error})
   }
 }

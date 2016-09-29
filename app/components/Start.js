@@ -83,8 +83,8 @@ export default class Start extends Component {
       return (
         <View style={{flex: 1}}>
           {this.flipBoard()}
-          {/*{this.loginOutButton()}
-          {this.modalLoginOutDialog()}*/}
+          {this.loginOutButton()}
+          {this.modalLoginOutDialog()}
         </View>
       )
     }

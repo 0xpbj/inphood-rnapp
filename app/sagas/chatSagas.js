@@ -25,7 +25,7 @@ function* triggerGetClientMessagesCount() {
     const { payload: { data } } = yield take(SYNC_COUNT_CLIENT_MESSAGES_CHILD)
     const count = data.numChildren()
     const {previousMessages} = yield select(state => state.chatReducer)
-    if (count === 0) {
+    if (count === 0 || previousMessages.length === 0) {
       yield put({type: INIT_MESSAGES})
     }
     else if (previousMessages.length === count) {
@@ -39,12 +39,13 @@ function* triggerGetMessagesClientChild() {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
     const messages = data.val()
     const photo = messages.photo
+    const uid  = messages.uid
+    const path = '/global/' + uid + '/photoData/' + photo + '/visible'
+    const info = turlHead + uid + '/' + photo + '.jpg'
+    const visible = (yield call(db.getPath, path)).val()
+    console.log('Read Chat Photo1: ' + info)
     yield put ({type: ADD_MESSAGES, messages, photo})
-    if (messages.clientRead === false) {
-      const uid  = messages.uid
-      const path = '/global/' + uid + '/photoData/' + photo
-      const info = turlHead + uid + '/' + photo + '.jpg'
-      console.log('Read Chat Photo1: ' + info)
+    if (messages.clientRead === false && visible) {
       yield put({type: INCREMENT_CLIENT_NOTIFICATION})
       yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo: info})
     }
@@ -101,6 +102,7 @@ function* sendChatData() {
       trainerRead = true
     }
     key.set({
+      "key": key.key,
       uid,
       trainer,
       photo,
@@ -129,14 +131,15 @@ function* readFirebaseChatFlow() {
     const data = yield take(MARK_MESSAGE_READ)
     const photo = data.photo + '.jpg'
     const uid = data.uid
-    console.log('Read Chat Photo2: ' + photo)
+    const path = data.path
+    console.log('Read Chat Path: ' + path)
     if (data.trainer) {
-      // firebase.database().ref(data.path).update({'trainerRead': true})
+      firebase.database().ref(data.path).update({'trainerRead': true})
       yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
       yield put({type: DECREMENT_TRAINER_CHAT_NOTIFICATION, photo})
     }
     else {
-      // firebase.database().ref(data.path).update({'clientRead': true})
+      firebase.database().ref(data.path).update({'clientRead': true})
       yield put({type: DECREMENT_CLIENT_NOTIFICATION, uid})
       yield put({type: DECREMENT_CLIENT_CHAT_NOTIFICATION, photo})
     }

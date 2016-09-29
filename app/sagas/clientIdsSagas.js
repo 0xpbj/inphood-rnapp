@@ -10,7 +10,6 @@ import { takeLatest } from 'redux-saga'
 import firebase from 'firebase'
 
 function* triggerGetClientIdCount() {
-  console.log('Client Count Get')
   while (true) {
     const { payload: { data } } = yield take(SYNC_COUNT_CLIENTID_CHILD)
     const count = data.numChildren()
@@ -23,7 +22,6 @@ function* triggerGetClientIdCount() {
 }
 
 function* triggerGetClientIdChild() {
-  console.log('Client ID Get')
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_CLIENTID_CHILD)
     let flag = true
@@ -41,7 +39,6 @@ function* triggerRemClientIdChild() {
 }
 
 function* syncClientId() {
-  console.log('Client ID Sync')
   let uid = yield select(state => state.authReducer.token)
   if (!uid) {
     uid = firebase.auth().currentUser.uid

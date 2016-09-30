@@ -918,13 +918,9 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../node_modules/react-native-fbsdkcore\"/**",
-					"\"$(SRCROOT)/../node_modules/react-native-fbsdkshare\"/**",
-					"\"$(SRCROOT)/../node_modules/react-native-fbsdklogin\"/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"\"$(SRCROOT)/../../../Documents/FacebookSDK\"",
 					"$(SRCROOT)/../node_modules/react-native-lock/ios/A0RNLock/**",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
@@ -933,6 +929,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/Base",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
+					"\"$(SRCROOT)/FacebookSDK\"",
 				);
 				INFOPLIST_FILE = inPhoodRN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -966,13 +963,9 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../node_modules/react-native-fbsdkcore\"/**",
-					"\"$(SRCROOT)/../node_modules/react-native-fbsdkshare\"/**",
-					"\"$(SRCROOT)/../node_modules/react-native-fbsdklogin\"/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"\"$(SRCROOT)/../../../Documents/FacebookSDK\"",
 					"$(SRCROOT)/../node_modules/react-native-lock/ios/A0RNLock/**",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
@@ -981,6 +974,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/Base",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
+					"\"$(SRCROOT)/FacebookSDK\"",
 				);
 				INFOPLIST_FILE = inPhoodRN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;

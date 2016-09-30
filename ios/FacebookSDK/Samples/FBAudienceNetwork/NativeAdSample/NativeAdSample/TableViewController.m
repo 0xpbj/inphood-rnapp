@@ -107,7 +107,7 @@ static NSString *const kDefaultCellIdentifier = @"kDefaultCellIdentifier";
 
   // The native ad cell provider operates over a loaded ads manager and can create table cells with native
   // ad templates in them as well as help with the math to have a consistent distribution of ads within a table.
-  FBNativeAdTableViewCellProvider *cellProvider = [[FBNativeAdTableViewCellProvider alloc] initWithManager:manager forType:FBNativeAdViewTypeGenericHeight120];
+  FBNativeAdTableViewCellProvider *cellProvider = [[FBNativeAdTableViewCellProvider alloc] initWithManager:manager forType:FBNativeAdViewTypeGenericHeight300];
   self._ads = cellProvider;
   self._ads.delegate = self;
 

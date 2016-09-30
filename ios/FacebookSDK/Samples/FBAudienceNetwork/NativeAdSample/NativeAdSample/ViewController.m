@@ -18,7 +18,9 @@
 
 #import "ViewController.h"
 
+#import "CollectionViewController.h"
 #import "ScrollViewController.h"
+#import "SettingsViewController.h"
 #import "TableViewController.h"
 
 @interface ViewController ()
@@ -164,9 +166,22 @@
     [self presentViewController:tableViewController animated:YES completion:nil];
 }
 
-- (IBAction)loadNativeAdInScrollViewTapped:(id)sender {
+- (IBAction)loadNativeAdInScrollViewTapped:(id)sender
+{
     ScrollViewController *tableViewController = [ScrollViewController new];
     [self presentViewController:tableViewController animated:YES completion:nil];
+}
+
+- (IBAction)showSettingsViewController:(id)sender
+{
+    SettingsViewController *settingsViewController = [SettingsViewController new];
+    [self presentViewController:settingsViewController animated:YES completion:nil];
+}
+
+- (IBAction)showCollectionViewController:(id)sender
+{
+  CollectionViewController *collectionViewController = [CollectionViewController new];
+  [self presentViewController:collectionViewController animated:YES completion:nil];
 }
 
 #pragma mark - Orientation

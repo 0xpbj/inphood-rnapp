@@ -71,6 +71,11 @@
   return CGRectMake(xOffset, yOffset, 300, 250);
 }
 
+- (IBAction)refreshNowTapped:(UIButton *)sender {
+  self.mediumRectAdView.hidden = YES;
+  [self.mediumRectAdView loadAd];
+}
+
 #pragma mark - FBAdViewDelegate implementation
 
 // Implement this function if you want to change the viewController after the FBAdView

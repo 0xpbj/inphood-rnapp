@@ -18,6 +18,7 @@
 		58D92C9C18C751FA0090E7E2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D92C9618C751FA0090E7E2 /* Default@2x.png */; };
 		58D92C9D18C751FA0090E7E2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D92C9718C751FA0090E7E2 /* Default-568h@2x.png */; };
 		58D92C9F18C7525A0090E7E2 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D92C9E18C7525A0090E7E2 /* AdSupport.framework */; };
+		59BFFD6A1CC18DD5006E590D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BFFD691CC18DD5006E590D /* SettingsViewController.m */; };
 		737A56221A5F446200AF33D4 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 737A561E1A5F420C00AF33D4 /* FBAudienceNetwork.framework */; };
 		905E47661B260B4B00EC94D0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E6A2C71A94145E00938B52 /* AVFoundation.framework */; };
 		905E47681B260BE600EC94D0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9995321A1AA502290033D3B4 /* CoreMedia.framework */; };
@@ -39,7 +40,7 @@
 		58D92C6918C750E10090E7E2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		58D92C8418C751630090E7E2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		58D92C8518C751630090E7E2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		58D92C9118C751FA0090E7E2 /* AdUnitsSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdUnitsSample-Info.plist"; sourceTree = "<group>"; };
+		58D92C9118C751FA0090E7E2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58D92C9218C751FA0090E7E2 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		58D92C9318C751FA0090E7E2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		58D92C9418C751FA0090E7E2 /* AdUnitsSample-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AdUnitsSample-Prefix.pch"; sourceTree = "<group>"; };
@@ -47,6 +48,8 @@
 		58D92C9618C751FA0090E7E2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		58D92C9718C751FA0090E7E2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		58D92C9E18C7525A0090E7E2 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		59BFFD681CC18DD5006E590D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		59BFFD691CC18DD5006E590D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		737A561E1A5F420C00AF33D4 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBAudienceNetwork.framework; path = ../../src/build/FBAudienceNetwork.framework; sourceTree = "<group>"; };
 		73E6A2C71A94145E00938B52 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		73E6A2CB1A94148400938B52 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -142,6 +145,8 @@
 				90E8740E1A1BF90A00153004 /* MediumRectViewController.m */,
 				90E874101A1BF91800153004 /* InterstitialViewController.h */,
 				90E874111A1BF91800153004 /* InterstitialViewController.m */,
+				59BFFD681CC18DD5006E590D /* SettingsViewController.h */,
+				59BFFD691CC18DD5006E590D /* SettingsViewController.m */,
 			);
 			path = AdUnitsSample;
 			sourceTree = "<group>";
@@ -149,7 +154,7 @@
 		58D92C4E18C750E10090E7E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				58D92C9118C751FA0090E7E2 /* AdUnitsSample-Info.plist */,
+				58D92C9118C751FA0090E7E2 /* Info.plist */,
 				58D92C9218C751FA0090E7E2 /* InfoPlist.strings */,
 				58D92C9318C751FA0090E7E2 /* main.m */,
 				58D92C9418C751FA0090E7E2 /* AdUnitsSample-Prefix.pch */,
@@ -188,6 +193,11 @@
 			attributes = {
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Facebook;
+				TargetAttributes = {
+					58D92C4318C750E10090E7E2 = {
+						ProvisioningStyle = Manual;
+					};
+				};
 			};
 			buildConfigurationList = 58D92C3F18C750E10090E7E2 /* Build configuration list for PBXProject "AdUnitsSample" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -231,6 +241,7 @@
 				58D92C8618C751630090E7E2 /* AppDelegate.m in Sources */,
 				90CEE4B61A1BF8E60076D191 /* BannerViewController.m in Sources */,
 				90E8740F1A1BF90A00153004 /* MediumRectViewController.m in Sources */,
+				59BFFD6A1CC18DD5006E590D /* SettingsViewController.m in Sources */,
 				90E874121A1BF91800153004 /* InterstitialViewController.m in Sources */,
 				58D92C9A18C751FA0090E7E2 /* main.m in Sources */,
 			);
@@ -317,13 +328,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AdUnitsSample/AdUnitsSample-Prefix.pch";
-				INFOPLIST_FILE = "AdUnitsSample/AdUnitsSample-Info.plist";
+				INFOPLIST_FILE = AdUnitsSample/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.audiencenetwork.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = AdUnitsSample;
 				WRAPPER_EXTENSION = app;
@@ -335,15 +347,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 4W5TH4RKQ2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AdUnitsSample/AdUnitsSample-Prefix.pch";
-				INFOPLIST_FILE = "AdUnitsSample/AdUnitsSample-Info.plist";
+				INFOPLIST_FILE = AdUnitsSample/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.audiencenetwork.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = AdUnitsSample;
+				PROVISIONING_PROFILE = "b51c7a35-1498-43dd-baba-20e5599449b7";
+				PROVISIONING_PROFILE_SPECIFIER = "SDK AN AdUnitsSample Master Distribution";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

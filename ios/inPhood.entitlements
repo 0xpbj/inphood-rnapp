@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>inphood.app.link</string>
+		<string>applinks:inphood.app.link</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>

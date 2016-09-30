@@ -85,7 +85,6 @@ function* sendChatData() {
     const {messages, feedbackPhoto} = yield select(state => state.chatReducer)
     const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
     const key = firebase.database().ref('/global/' + client + '/messages').push()
-    console.log(key.key)
     const createdAt = Date.now()
     let clientRead = false
     let trainerRead = false
@@ -132,9 +131,9 @@ function* readFirebaseChatFlow() {
     const photo = data.photo + '.jpg'
     const uid = data.uid
     const path = data.path
-    console.log('Read Chat Path: ' + path)
     if (data.trainer) {
       firebase.database().ref(data.path).update({'trainerRead': true})
+      console.log('Read Chat Path: ' + path)
       yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
       yield put({type: DECREMENT_TRAINER_CHAT_NOTIFICATION, photo})
     }

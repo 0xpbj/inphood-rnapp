@@ -7,7 +7,7 @@ import {
   syncAddedMessagesChild, syncRemovedMessagesChild,
   SYNC_ADDED_MESSAGES_CHILD, SYNC_REMOVED_MESSAGES_CHILD,
   MARK_PHOTO_READ, INCREMENT_TRAINER_NOTIFICATION, DECREMENT_TRAINER_NOTIFICATION,
-  INCREMENT_TRAINER_CHAT_NOTIFICATION, DECREMENT_TRAINER_CHAT_NOTIFICATION
+  INCREMENT_TRAINER_CHAT_NOTIFICATION,
 } from '../constants/ActionTypes'
 
 import * as db from './firebaseCommands'
@@ -126,10 +126,10 @@ function* syncData() {
 }
 
 function* readClientPhotoFlow() {
-  console.log('Client Read Flow')
   while (true) {
     const data = yield take(MARK_PHOTO_READ)
     const {path, uid} = data
+    console.log('Client Read Flow')
     firebase.database().ref(path).update({'notifyTrainer': false})
     yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
   }

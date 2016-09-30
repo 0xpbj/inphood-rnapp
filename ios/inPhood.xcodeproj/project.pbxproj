@@ -929,7 +929,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/Base",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
-					"\"$(SRCROOT)/FacebookSDK\"",
+					"\"$(SRCROOT)/../../node_modules/react-native-fbsdk/ios\"/**",
 				);
 				INFOPLIST_FILE = inPhoodRN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -974,7 +974,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/Base",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
-					"\"$(SRCROOT)/FacebookSDK\"",
+					"\"$(SRCROOT)/../../node_modules/react-native-fbsdk/ios\"/**",
 				);
 				INFOPLIST_FILE = inPhoodRN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;

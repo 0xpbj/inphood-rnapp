@@ -4,7 +4,6 @@ import rootReducer from '../reducers'
 import rootSaga from '../sagas/index'
 import createSagaMiddleware from 'redux-saga'
 import config from 'react-native-config'
-// import clarifai from 'clarifai'
 import firebase from 'firebase'
 require("firebase/app")
 require("firebase/auth")
@@ -38,9 +37,6 @@ const persistConfig = {
   ],
   storage: AsyncStorage,
 }
-var clarifai = require('clarifai')
-const clarifaiClientId = config.CLARIFAI_CLIENT_ID
-const clarifaiClientSecret = config.CLARIFAI_CLIENT_SECRET
 
 export default function configureStore() {
   const store = createStore(
@@ -51,10 +47,6 @@ export default function configureStore() {
   persistStore(store, persistConfig, () => {})
   .purge(persistConfig.blacklist)
   firebase.initializeApp(fbConfig)
-  clarifai.initialize({
-    'clientId': clarifaiClientId,
-    'clientSecret': clarifaiClientSecret
-  })
   sagaMiddleware.run(rootSaga)
   if (module.hot) {
     module.hot.accept(() => {

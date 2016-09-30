@@ -22,7 +22,6 @@ const turlHead = Config.AWS_CDN_THU_URL
 const urlHead = Config.AWS_CDN_IMG_URL
 
 function* triggerGetMessagesChild() {
-  console.log('Client Messages Get')
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CHILD)
     const messages = data.val()

@@ -1,103 +1,129 @@
-import { LOGIN_SUCCESS } from '../constants/ActionTypes'
+import { 
+  LOGIN_SUCCESS, CLARIFAI_AUTH_SUCCESS, CLARIFAI_AUTH_ERROR,
+  CLARIFAI_TAGS_SUCCESS, CLARIFAI_TAGS_ERROR,
+  TAKE_PHOTO, SELECT_PHOTO,
+} from '../constants/ActionTypes'
+
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 import * as db from './firebaseCommands'
 import config from 'react-native-config'
+import RNFS from 'react-native-fs'
 import firebase from 'firebase'
 
-const turlHead = config.AWS_CDN_THU_URL
 const clarifaiClientId = config.CLARIFAI_CLIENT_ID
 const clarifaiClientSecret = config.CLARIFAI_CLIENT_SECRET
-
-var clarifai = require('clarifai')
-var vision = new clarifai.App(
+const clarifai = require('clarifai')
+const vision = new clarifai.App(
   clarifaiClientId,
   clarifaiClientSecret
 )
 
-// get a token
-function* getToken() {
-  vision.getToken()
-  .then((token, error) => {})
-  .catch((error) => {console.log(error)})
+const turlHead = config.AWS_CDN_THU_URL
+
+const getToken = () => {
+  return vision.getToken().then((token, error) => {})
 }
 
-// get tags with an array of images
-function* getTags() {
-  vision.getTagsByUrl([
-    'https://samples.clarifai.com/wedding.jpg',
-    'https://samples.clarifai.com/cookies.jpeg'
-  ])
-  .then((token, error) => {})
-  .catch((error) => {console.log(error)})
+function* authClarifai() {
+  try {
+    const {token, error} = yield call (getToken)
+    console.log('after' + token)
+    yield put({type: CLARIFAI_AUTH_SUCCESS})
+  }
+  catch(error) {
+    console.log('in error')
+    yield put({type: CLARIFAI_AUTH_ERROR})
+  }
 }
 
-// select which tags are returned
-function* selectClasses() {
-  vision.getTagsByUrl(
-    'https://samples.clarifai.com/wedding.jpg',
-    {
-      'selectClasses': ['people', 'dress', 'wedding']
-    }
-  ).then(
-    handleResponse,
-    handleError
+const get64Data = (path) => {
+  console.log('in get 64 data: ' + path)
+  return RNFS.readFile(path, 'base64')
+  .then( 
+    (res) => {console.log(res)}
+  )
+  .catch(
+    (error) => {console.log(error)}
   )
 }
 
-// get api info
-function* getInfo() {
-  vision.getInfo().then(
-    handleResponse,
-    handleError
-  )
-}
-
-// get languages
-function* getLanguages() {
-  vision.getLanguages().then(
-    handleResponse,
-    handleError
-  )
-}
-
-// get colors
-function* getColors() {
-  vision.getColorsByUrl('https://samples.clarifai.com/wedding.jpg').then(
-    handleResponse,
-    handleError
+const getTags = () => {
+  return vision.models.predict(clarifai.FOOD_MODEL, 'https://samples.clarifai.com/cookies.jpeg')
+  .then(
+    (response) => {
+      console.log(response)
+    },
+    (error) => {console.log(error)}
   )
 }
 
 // get api usage
-function* getUsage() {
-  vision.getUsage().then(
-    handleResponse,
-    handleError
+const getUsage = () => {
+  return vision.getUsage().then(
+    (response) => {console.log(JSON.stringify(response))},
+    (error) => {console.log(error)}
   )
 }
 
-// create feedback
-function* createFeedback() {
-  vision.createFeedback('https://samples.clarifai.com/wedding.jpg', {
-    'addTags': ['family', 'friends',],
-    'removeTags': ['military', 'protest'],
-  }).then(
-    handleResponse,
-    handleError
+const getStatus = () => {
+  return vision.inputs.getStatus()
+  .then(
+    (response) => {
+      console.log(response)
+    },
+    (err) => {console.log(response)}
   )
 }
 
-function* handleResponse(response){
-  console.log('Respons!')
-  console.log('promise response:', JSON.stringify(response))
+// function* getInputs() {
+//   vision.inputs.get({1})
+//   .then(
+//     (response) => {
+//       console.log(response)
+//     },
+//     (err) => {console.log(response)}
+//   )
+// }
+
+function* getCameraData() {
+  while(true) {
+    yield take(TAKE_PHOTO)
+    try {
+      const path = yield select(state => state.camReducer.photo)
+      yield call(getTags)
+      yield call(getStatus)
+      // yield call(getInputs)
+      yield put({type: CLARIFAI_TAGS_SUCCESS})
+    }
+    catch (error) {
+      yield put({type: CLARIFAI_TAGS_ERROR})
+    }
+  }
 }
 
-function* handleError(err){
-  console.log('promise error:', err)
+function* getLibraryData() {
+  while(true) {
+    yield take(SELECT_PHOTO)
+    try {
+      const path = yield select(state => state.libReducer.selected)
+      const res = yield call(get64Data, path)
+      console.log(res)
+      if (res) {
+        yield call(getTags)
+        yield call(getStatus)
+        // yield call(getInputs)
+        yield put({type: CLARIFAI_TAGS_SUCCESS})
+      }
+    }
+    catch (error) {
+      yield put({type: CLARIFAI_TAGS_ERROR})
+    }
+  }
 }
 
 export default function* rootSaga() {
   yield fork(takeLatest, LOGIN_SUCCESS, getToken)
-  // yield fork(takeLatest, LOGIN_SUCCESS, getTags)
+  yield fork(takeLatest, LOGIN_SUCCESS, getCameraData)
+  yield fork(takeLatest, LOGIN_SUCCESS, getLibraryData)
 }

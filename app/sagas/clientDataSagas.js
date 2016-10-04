@@ -64,6 +64,13 @@ function* triggerRemInfoChild() {
   }
 }
 
+
+const prefetchData = (photo) => {
+  return Image.prefetch(photo)
+    .then(() => {})
+    .catch(error => {console.log(error + ' - ' + photo)})
+}
+
 function* triggerGetPhotoChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_PHOTO_CHILD)
@@ -78,10 +85,7 @@ function* triggerGetPhotoChild() {
       const time = file.time
       const localFile = file.localFile
       const notification = file.notifyTrainer
-      var prefetchTask = Image.prefetch(photo)
-      prefetchTask
-      .then(() => {})
-      .catch(error => {})
+      yield fork(prefetchData, photo)
       const obj = {photo,caption,mealType,time,title,localFile,file,notification}
       var child = {}
       child[uid] = obj

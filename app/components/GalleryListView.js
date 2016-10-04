@@ -29,7 +29,6 @@ const route = {
 import NetworkImage from './NetworkImage'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Icon from 'react-native-vector-icons/Ionicons'
-// import RNFS from 'react-native-fs'
 
 export default class GalleryListView extends Component{
   constructor(props) {
@@ -110,7 +109,7 @@ export default class GalleryListView extends Component{
     let uri = this.state.result ? this.state.result.picture : ' '
     let size = this.props.galleryView.photos.length || this.props.galleryView.error !== ''
     let flag = this.props.galleryView.isLoading
-     // && !this.props.galleryView.newUser
+     && !this.props.galleryView.newUser
     return (
       <View style={CommonStyles.commonContainer}>
         {this._renderSpinner(size, flag)}
@@ -121,7 +120,7 @@ export default class GalleryListView extends Component{
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     let imgBlock = <Image style={CommonStyles.galleryListViewThumb} source={{uri: rowData.localFile}}/>
-    if ((Date.now() - rowData.time)/1000 > 26400) {
+    if (!rowData.flag || ((Date.now() - rowData.time)/1000 > 26400)) {
       imgBlock = (
         <NetworkImage source={{uri: rowData.photo}}></NetworkImage>
       )

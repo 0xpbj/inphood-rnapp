@@ -12,6 +12,7 @@ import Config from 'react-native-config'
 import * as db from './firebaseCommands'
 
 import firebase from 'firebase'
+import RNFetchBlob from 'react-native-fetch-blob'
 
 const turlHead = Config.AWS_CDN_THU_URL
 const urlHead = Config.AWS_CDN_IMG_URL
@@ -22,6 +23,18 @@ function* updateDataVisibility() {
     firebase.database().ref(data.path).update({'visible': false})
     yield put({type: REFRESH_CLIENT_DATA})
   }
+}
+
+const prefetchData = (photo) => {
+  return Image.prefetch(photo)
+    .then(() => {})
+    .catch(error => {console.log(error + ' - ' + photo)})
+}
+
+const isLocalFile = (localFile) => {
+  return RNFetchBlob.fs.exists(localFile)
+    .then(flag => ({ flag }))
+    .catch(error => ({ error }))
 }
 
 function* firebaseData(flag) {
@@ -52,12 +65,8 @@ function* firebaseData(flag) {
         const time = data.time
         const localFile = data.localFile
         const notification = data.notifyClient
-        let flag = false
-        let prefetchTask = Image.prefetch(photo)
-        prefetchTask.then(() => {
-          flag = true
-        })
-        .catch(error => {console.log(error + ' - ' + photo)})
+        yield fork(prefetchData, photo)
+        const {flag, error} = yield call(isLocalFile, localFile)
         const obj = {photo,caption,mealType,time,title,localFile,flag,data,notification}
         photos.unshift(obj)
       }

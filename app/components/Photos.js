@@ -7,7 +7,8 @@ import {
   Text,
   Dimensions,
   TouchableOpacity,
-  ListView,
+  ListView, 
+  NativeModules,
   ActivityIndicator,
 } from 'react-native'
 
@@ -152,7 +153,8 @@ export default class CameraRollPicker extends Component {
     }
   }
   _selectImage(image) {
-    this.props.callback(image.uri)
+    this.props._selectPhoto(image.uri)
+    NativeModules.ReadImageData.readImage(image.uri, (data) => this.props._store64Library(data))
     this.props._handleNavigate(route)
   }
   _nEveryRow(data, n) {

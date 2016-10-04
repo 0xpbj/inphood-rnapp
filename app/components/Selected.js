@@ -63,6 +63,7 @@ export default class Selected extends Component {
             autoCapitalize="none"
             placeholder="Meal title, e.g.: Spaghetti & Meatballs ..."
             returnKeyType="done"
+            autoFocus={true}
             onEndEditing={
               (event) => {
                 let text = event.nativeEvent.text

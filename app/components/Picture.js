@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   Dimensions,
   Text,
   TouchableHighlight,
-  View
-} from 'react-native';
+  View,
+  NativeModules,
+} from 'react-native'
 
 import Camera from 'react-native-camera'
 
@@ -21,15 +22,16 @@ const route = {
 
 export default class Picture extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
   takePicture() {
     this.camera.capture()
       .then((data) => {
+        NativeModules.ReadImageData.readImage(data.uri, (image) => this.props._store64Camera(image))
         this.props._takePhoto(data)
         this.props._handleNavigate(route)
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
   }
   render () {
     return (
@@ -48,6 +50,6 @@ export default class Picture extends Component {
           </View>
         </Camera>
       </View>
-    );
+    )
   }
 }

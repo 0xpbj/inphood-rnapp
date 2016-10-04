@@ -50,7 +50,8 @@ export default class Library extends Component {
     if (scene.key === prefix + 'photos') {
       return (
         <Photos
-          callback={(action) => this.props.selectPhoto(action)}
+          _selectPhoto={(action) => this.props.selectPhoto(action)}
+          _store64Library={(action) => this.props.store64Library(action)}
           _handleNavigate={this._handleNavigate.bind(this)}/>
       )
     }
@@ -68,6 +69,7 @@ export default class Library extends Component {
       return (
         <Caption
           _transmit={this._handleCaptionAction.bind(this)}
+          _tags={this.props.library.tags}
           _selectedPhoto={this.props.library.selected}
           _storeCaption={(action) => this.props.storeLibraryCaption(action)}
           _handleBackAction={this._handleBackAction.bind(this)}

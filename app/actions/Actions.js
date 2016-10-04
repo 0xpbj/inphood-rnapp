@@ -12,6 +12,8 @@ import {
   CHANGE_TAB,
   TAKE_PHOTO,
   SELECT_PHOTO,
+  STORE_64_PHOTO,
+  STORE_64_LIBRARY,
   FEEDBACK_PHOTO,
   LOAD_PHOTOS_INIT,
   LOAD_PHOTOS_SUCCESS,
@@ -138,6 +140,20 @@ export function takePhoto (photo) {
 export function selectPhoto (selected) {
   return {
     type: SELECT_PHOTO,
+    selected
+  }
+}
+
+export function store64Camera (photo) {
+  return {
+    type: STORE_64_PHOTO,
+    photo
+  }
+}
+
+export function store64Library (selected) {
+  return {
+    type: STORE_64_LIBRARY,
     selected
   }
 }

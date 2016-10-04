@@ -1,4 +1,4 @@
-import { TAKE_PHOTO, STORE_CAMERA_CAPTION, STORE_CAMERA_TITLE, ADD_CAMERA_MEAL_DATA, PUSH_CAM_ROUTE, POP_CAM_ROUTE } from '../constants/ActionTypes'
+import { TAKE_PHOTO, STORE_64_PHOTO, CLARIFAI_TAGS_SUCCESS, STORE_CAMERA_CAPTION, STORE_CAMERA_TITLE, ADD_CAMERA_MEAL_DATA, PUSH_CAM_ROUTE, POP_CAM_ROUTE } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -6,11 +6,13 @@ const {
 
 const initialState = {
   photo: '',
+  photo64: '',
   caption: '',
   title: '',
   mealType: '',
   index: 0,
   key: 'root',
+  tags: '',
   routes: [
     {
       key: 'picture',
@@ -25,6 +27,16 @@ export default function camera (state = initialState, action) {
       return {
         ...state,
         photo: action.photo
+      }
+    case STORE_64_PHOTO:
+      return {
+        ...state,
+        photo64: action.photo
+      }
+    case CLARIFAI_TAGS_SUCCESS:
+      return {
+        ...state,
+        tags: action.tags
       }
     case STORE_CAMERA_CAPTION:
       return {

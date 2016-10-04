@@ -36,6 +36,8 @@ export const HOLD_CHANGE_TAB = 'HOLD_CHANGE_TAB'
 
 //Media Actions
 export const TAKE_PHOTO = 'TAKE_PHOTO'
+export const STORE_64_PHOTO = 'STORE_64_PHOTO'
+export const STORE_64_LIBRARY = 'STORE_64_LIBRARY'
 export const INIT_PHOTOS = 'INIT_PHOTOS'
 export const SELECT_PHOTO = 'SELECT_PHOTO'
 export const FEEDBACK_PHOTO = 'FEEDBACK_PHOTO'

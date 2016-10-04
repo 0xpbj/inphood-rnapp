@@ -91,7 +91,10 @@ export default class Caption extends Component {
   }
   render() {
     let whiteSpace = new RegExp(/^\s+$/)
-
+    const placeholder = this.props._tags === '' ? "Ingredients, e.g.: Beef, Tomatoes ..." : this.props._tags
+    const placeholderTextColor = this.props._tags === '' ? '' : ''
+    const selectionColor = this.props._tags === '' ? '' : 'blue'
+    const clearButtonMode = this.props._tags === '' ? 'while-editing' : 'always'
     return (
 
       // This view divides the screen into 17 segments.  The bottom 8 segments
@@ -125,7 +128,10 @@ export default class Caption extends Component {
             style={[CommonStyles.singleSegmentView,
                     CommonStyles.universalFontSize]}
             autoCapitalize="none"
-            placeholder="Ingredients, e.g.: Beef, Tomatoes ..."
+            defaultValue={placeholder}
+            placeholderTextColor={placeholderTextColor}
+            autoFocus={true}
+            clearButtonMode={clearButtonMode}
             returnKeyType="done"
             onEndEditing={
               (event) => {

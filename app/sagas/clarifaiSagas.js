@@ -1,7 +1,7 @@
 import { 
   LOGIN_SUCCESS, CLARIFAI_AUTH_SUCCESS, CLARIFAI_AUTH_ERROR,
   CLARIFAI_TAGS_SUCCESS, CLARIFAI_TAGS_ERROR,
-  TAKE_PHOTO, SELECT_PHOTO,
+  STORE_64_PHOTO, STORE_64_LIBRARY,
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -26,33 +26,24 @@ const testCV = () => {
   .then(response => console.log(response))
 }
 
-const getCVData = (path) => {
-  let data = ''
-  return RNFetchBlob.fs.readStream(path, 'base64', 4095)
-  .then((ifstream) => {
-    ifstream.open()
-    ifstream.onData((chunk) => {
-      data += chunk
-    })
-    ifstream.onError((error) => {
-      console.log('Error: ', error)
-    })
-    ifstream.onEnd(() => {
-      return vision.models.predict(clarifai.FOOD_MODEL, {base64: data})
-      // .then(response => ({ response }))
-      .then(response => console.log(response))
-    })
-  })
+const getCVData = (data) => {
+  return vision.models.predict(clarifai.FOOD_MODEL, {base64: data})
+  .then(response => ({ response }))
+  // .then(response => console.log(response))
 }
 
 function* getCameraData() {
   while(true) {
     try {
-      yield take(TAKE_PHOTO)
-      const path = yield select(state => state.camReducer.photo)
-      const response = yield call(getCVData, path)
+      yield take(STORE_64_PHOTO)
+      const data = yield select(state => state.camReducer.photo64)
+      const response = yield call(getCVData, data)
       if (response) {
-        yield put({type: CLARIFAI_TAGS_SUCCESS})
+        const tag0 = response.response.data.outputs[0].data.concepts[0].name
+        const tag1 = response.response.data.outputs[0].data.concepts[1].name
+        const tag2 = response.response.data.outputs[0].data.concepts[2].name
+        const tags = { tag0, tag1, tag2 }
+        yield put({type: CLARIFAI_TAGS_SUCCESS, tags})
       }
     }
     catch (error) {
@@ -64,11 +55,15 @@ function* getCameraData() {
 function* getLibraryData() {
   while(true) {
     try {
-      yield take(SELECT_PHOTO)
-      const path = yield select(state => state.libReducer.selected)
-      const response = yield call(getCVData, path)
+      yield take(STORE_64_LIBRARY)
+      const data = yield select(state => state.libReducer.selected64)
+      const response = yield call(getCVData, data)
       if (response) {
-        yield put({type: CLARIFAI_TAGS_SUCCESS})
+        const tag0 = response.response.data.outputs[0].data.concepts[0].name
+        const tag1 = response.response.data.outputs[0].data.concepts[1].name
+        const tag2 = response.response.data.outputs[0].data.concepts[2].name
+        const tags = tag0 + ', ' + tag1 + ', ' + tag2
+        yield put({type: CLARIFAI_TAGS_SUCCESS, tags})
       }
     }
     catch (error) {

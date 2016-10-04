@@ -1,4 +1,4 @@
-import { SELECT_PHOTO, STORE_LIBRARY_CAPTION, STORE_LIBRARY_TITLE, ADD_LIBRARY_MEAL_DATA, PUSH_LIB_ROUTE, POP_LIB_ROUTE } from '../constants/ActionTypes'
+import { SELECT_PHOTO, STORE_64_LIBRARY, CLARIFAI_TAGS_SUCCESS, STORE_LIBRARY_CAPTION, STORE_LIBRARY_TITLE, ADD_LIBRARY_MEAL_DATA, PUSH_LIB_ROUTE, POP_LIB_ROUTE } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -6,12 +6,14 @@ const {
 
 const initialState = {
   selected: '',
+  selected64: '',
   caption: '',
   title: '',
   count: 0,
   mealType: '',
   index: 0,
   key: 'root',
+  tags: '',
   routes: [
     {
       key: 'photos',
@@ -26,6 +28,16 @@ export default function library (state = initialState, action) {
       return {
         ...state,
         selected: action.selected
+      }
+    case STORE_64_LIBRARY:
+      return {
+        ...state,
+        selected64: action.selected
+      }
+    case CLARIFAI_TAGS_SUCCESS:
+      return {
+        ...state,
+        tags: action.tags
       }
     case STORE_LIBRARY_CAPTION:
       return {

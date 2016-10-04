@@ -53,6 +53,7 @@ export default class Camera extends Component {
       return (
         <Picture
           _handleNavigate={this._handleNavigate.bind(this)}
+          _store64Camera={(action) => this.props.store64Camera(action)}
           _takePhoto={(action) => this.props.takePhoto(action)}/>
       )
     }
@@ -70,6 +71,7 @@ export default class Camera extends Component {
       return (
         <Caption
           _transmit={this._handleCaptionAction.bind(this)}
+          _tags={this.props.camera.tags}
           _selectedPhoto={this.state.photo}
           _storeCaption={(action) => this.props.storeCameraCaption(action)}
           _handleBackAction={this._handleBackAction.bind(this)}

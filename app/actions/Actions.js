@@ -57,7 +57,6 @@ import {
   USER_SETTINGS,
   RESET_PASSWORD,
   CLIENT_APP_INVITE,
-  TRAINER_APP_INVITE,
   FRIEND_APP_INVITE
 } from '../constants/ActionTypes'
 
@@ -414,6 +413,14 @@ export function callResetPassword() {
 
 export function sendClientAppInvite() {
   return {
-    type: CLIENT_APP_INVITE
+    type: CLIENT_APP_INVITE,
+    referralType: 'client'
+  }
+}
+
+export function sendFriendAppInvite() {
+  return {
+    type: FRIEND_APP_INVITE,
+    referralType: 'friend' 
   }
 }

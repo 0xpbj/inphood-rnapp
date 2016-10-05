@@ -60,6 +60,9 @@ export default class Start extends Component {
   clientAppInvite() {
     this.props.sendClientAppInvite()
   }
+  friendAppInvite() {
+    this.props.sendFriendAppInvite()
+  }
   userSettings() {
     this.props._handleNavigate(settingsRoute)
   }
@@ -98,6 +101,7 @@ export default class Start extends Component {
           {this.helpEmailButton()}
           {this.userSettingsButton()}
           {this.clientAppInviteButton()}
+          {this.friendAppInviteButton()}
           {this.logOutButton()}
         </View>
       )
@@ -343,10 +347,25 @@ export default class Start extends Component {
         style={CommonStyles.button}>
         <View style={{flexDirection: 'row'}}>
           <Icon
+            name="ios-clipboard-outline"
+            size={26} color='white'
+            style={{marginLeft: 10, marginRight: 25}}/>
+          <Text style={CommonStyles.buttonText}>Invite Client</Text>
+        </View>
+      </TouchableHighlight>
+    )
+  }
+  friendAppInviteButton() {
+    return (
+      <TouchableHighlight
+        onPress={this.friendAppInvite.bind(this)}
+        style={CommonStyles.button}>
+        <View style={{flexDirection: 'row'}}>
+          <Icon
             name="ios-contacts-outline"
             size={26} color='white'
             style={{marginLeft: 10, marginRight: 15}}/>
-          <Text style={CommonStyles.buttonText}>Invite Client</Text>
+          <Text style={CommonStyles.buttonText}>Invite Friend</Text>
         </View>
       </TouchableHighlight>
     )

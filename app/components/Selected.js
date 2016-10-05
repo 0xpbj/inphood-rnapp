@@ -63,6 +63,7 @@ export default class Selected extends Component {
             autoCapitalize="none"
             placeholder="Meal title, e.g.: Spaghetti & Meatballs ..."
             returnKeyType="done"
+            clearButtonMode='while-editing'
             autoFocus={true}
             onEndEditing={
               (event) => {

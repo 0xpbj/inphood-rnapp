@@ -29,7 +29,22 @@ const testCV = () => {
 const getCVData = (data) => {
   return vision.models.predict(clarifai.FOOD_MODEL, {base64: data})
   .then(response => ({ response }))
-  // .then(response => console.log(response))
+}
+
+const getTags = (response) => {
+  const {concepts} = response.response.data.outputs[0].data
+  let tags = ''
+  for (let id in concepts) {
+    if (concepts[id].value > 0.80) {
+      if (tags === '') {
+        tags = concepts[id].name
+      }
+      else {
+        tags = tags + ', ' + concepts[id].name
+      }
+    }
+  }
+  return tags
 }
 
 function* getCameraData() {
@@ -39,10 +54,7 @@ function* getCameraData() {
       const data = yield select(state => state.camReducer.photo64)
       const response = yield call(getCVData, data)
       if (response) {
-        const tag0 = response.response.data.outputs[0].data.concepts[0].name
-        const tag1 = response.response.data.outputs[0].data.concepts[1].name
-        const tag2 = response.response.data.outputs[0].data.concepts[2].name
-        const tags = { tag0, tag1, tag2 }
+        const tags = yield call(getTags, response)
         yield put({type: CLARIFAI_TAGS_SUCCESS, tags})
       }
     }
@@ -59,10 +71,7 @@ function* getLibraryData() {
       const data = yield select(state => state.libReducer.selected64)
       const response = yield call(getCVData, data)
       if (response) {
-        const tag0 = response.response.data.outputs[0].data.concepts[0].name
-        const tag1 = response.response.data.outputs[0].data.concepts[1].name
-        const tag2 = response.response.data.outputs[0].data.concepts[2].name
-        const tags = tag0 + ', ' + tag1 + ', ' + tag2
+        const tags = yield call(getTags, response)
         yield put({type: CLARIFAI_TAGS_SUCCESS, tags})
       }
     }

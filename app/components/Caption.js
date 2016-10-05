@@ -84,6 +84,41 @@ export default class Caption extends Component {
     }
     this._workBeforeTransition()
   }
+  componentWillMount() {
+    const time = new Date().getHours()
+    if (time < 11) {
+      this.setState({
+        breakfast: true,
+        lunch: false,
+        dinner: false,
+        snack: false,
+      })
+    }
+    else if (time < 14) {
+      this.setState({
+        breakfast: false,
+        lunch: true,
+        dinner: false,
+        snack: false,
+      })
+    }
+    else if (time < 18) {
+      this.setState({
+        breakfast: false,
+        lunch: false,
+        dinner: false,
+        snack: true,
+      })
+    }
+    else if (time < 24) {
+      this.setState({
+        breakfast: false,
+        lunch: false,
+        dinner: true,
+        snack: false,
+      })
+    }
+  }
   componentWillReceiveProps(nextProps) {
     // if (nextProps.gallery.photos.length > this.state.size) {
     //   this.props._transmit()
@@ -92,7 +127,7 @@ export default class Caption extends Component {
   render() {
     let whiteSpace = new RegExp(/^\s+$/)
     const placeholder = this.props._tags === '' ? "Ingredients, e.g.: Beef, Tomatoes ..." : this.props._tags
-    const placeholderTextColor = this.props._tags === '' ? '' : ''
+    // const placeholderTextColor = this.props._tags === '' ? '' : ''
     const selectionColor = this.props._tags === '' ? '' : 'blue'
     const clearButtonMode = this.props._tags === '' ? 'while-editing' : 'always'
     return (
@@ -129,7 +164,6 @@ export default class Caption extends Component {
                     CommonStyles.universalFontSize]}
             autoCapitalize="none"
             defaultValue={placeholder}
-            placeholderTextColor={placeholderTextColor}
             autoFocus={true}
             clearButtonMode={clearButtonMode}
             returnKeyType="done"

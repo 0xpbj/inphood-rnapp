@@ -21,7 +21,6 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		24E378C2D19E4A808775BD16 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E815A02F8E4374AE651741 /* libRNFS.a */; };
 		469A1D46226845D0A52FE5B5 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 221F3249DE0E405D8B50A295 /* Entypo.ttf */; };
 		46F77B56F92C4D1DA38B24E0 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63675BAC90914873A9A4162B /* MaterialIcons.ttf */; };
 		4B9C5813B7924CC7B531CCAE /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7593193415E4F15ABEFB83E /* libRNVectorIcons.a */; };
@@ -217,7 +216,6 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = inPhoodRN/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = inPhoodRN/main.m; sourceTree = "<group>"; };
 		221F3249DE0E405D8B50A295 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		24E815A02F8E4374AE651741 /* libRNFS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFS.a; sourceTree = "<group>"; };
 		2CE0E8A8148E43D59480DCCE /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		3450F66AC5B84AF79EA7B870 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		3BAE77882E004185B47E5A48 /* RNMail.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNMail.xcodeproj; path = "../node_modules/react-native-mail/RNMail.xcodeproj"; sourceTree = "<group>"; };
@@ -277,7 +275,6 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				4B9C5813B7924CC7B531CCAE /* libRNVectorIcons.a in Frameworks */,
-				24E378C2D19E4A808775BD16 /* libRNFS.a in Frameworks */,
 				9B82A864F0004CE3B8F61260 /* libRNMail.a in Frameworks */,
 				75FF69B41D9DA885007408F7 /* Bolts.framework in Frameworks */,
 				75FF69B51D9DA885007408F7 /* FBSDKCoreKit.framework in Frameworks */,

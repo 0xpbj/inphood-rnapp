@@ -39,14 +39,21 @@ const showShareSheet = (branchUniversalObject, shareOptions, linkProperties, con
   .then((channel, completed) => ({channel, completed}))
 }
 
+const getUrl = (branchUniversalObject, linkProperties, controlParams) => {
+  return branchUniversalObject.generateShortUrl(linkProperties, controlParams)
+  .then(shareUrl => ({shareUrl}))
+}
+
+function* watchInstalls() {
+  const installParams = yield call(getInstallParams)
+  console.log('Install Params: ', installParams)
+}
+
 function* branchInvite() {
   while (true) {
     try {
       const {referralType} = yield take([CLIENT_APP_INVITE, FRIEND_APP_INVITE])
-      console.log(referralType)
       const {token} = yield select(state => state.authReducer)
-      const lastParams = yield call(getLastParams)
-      const installParams = yield call(getInstallParams)
       const branchUniversalObject = branch.createBranchUniversalObject
       (
         'canonicalIdentifier', 
@@ -58,7 +65,8 @@ function* branchInvite() {
           }, 
           contentTitle: 'inPhood Invite', 
           contentDescription: 'Sending invite for inPhood'
-        }
+        },
+        'one_time_use': true
       )
       const shareOptions = { 
         messageHeader: 'inPhood App Invite', 
@@ -69,6 +77,8 @@ function* branchInvite() {
         channel: 'ios' 
       }
       const {channel, completed} = yield call(showShareSheet, branchUniversalObject, shareOptions, linkProperties)
+      const {shareUrl} = yield call(getUrl, branchUniversalObject, linkProperties)
+      console.log(shareUrl)
     }
     catch (error) {
       console.log('Error: ', error)
@@ -78,6 +88,7 @@ function* branchInvite() {
 }
 
 export default function* rootSaga() {
+  yield fork(takeLatest, LOGIN_SUCCESS, watchInstalls)
   yield fork(takeLatest, LOGIN_SUCCESS, watchBranch)
   yield fork(takeLatest, LOGIN_SUCCESS, branchInvite)
 }

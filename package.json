@@ -16,7 +16,7 @@
     "react-native-aws3": "0.0.2",
     "react-native-branch": "^0.8.0",
     "react-native-button": "^1.7.0",
-    "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
+    "react-native-camera": "^0.3.8",
     "react-native-config": "^0.1.0",
     "react-native-device": "^1.0.1",
     "react-native-fbsdk": "^0.3.0",

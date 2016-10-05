@@ -85,8 +85,7 @@ function* branchInvite() {
         channel: 'ios' 
       }
       const controlParams = { 
-        $desktop_url: {branchUrl}, 
-        $ios_url: {branchUrl}
+        $desktop_url: {branchUrl}
       }
       const {channel, completed} = yield call(showShareSheet, branchUniversalObject, shareOptions, linkProperties, controlParams)
       const {shareUrl} = yield call(getUrl, branchUniversalObject, linkProperties, controlParams)

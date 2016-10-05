@@ -6,6 +6,7 @@ import chat from './chatSagas'
 import clients from './clientIdsSagas'
 import data from './clientDataSagas'
 import vision from './clarifaiSagas'
+import branch from './branchSagas'
 
 export default function* rootSaga() {
   yield fork(aws)
@@ -15,4 +16,5 @@ export default function* rootSaga() {
   yield fork(clients)
   yield fork(data)
   yield fork(vision)
+  yield fork(branch)
 }

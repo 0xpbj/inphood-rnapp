@@ -55,7 +55,10 @@ import {
   SET_CLIENT_NAME,
   STORE_SETTINGS_FORM,
   USER_SETTINGS,
-  RESET_PASSWORD
+  RESET_PASSWORD,
+  CLIENT_APP_INVITE,
+  TRAINER_APP_INVITE,
+  FRIEND_APP_INVITE
 } from '../constants/ActionTypes'
 
 export function pushExp (route) {
@@ -406,5 +409,11 @@ export function storeUserSettings(settings) {
 export function callResetPassword() {
   return {
     type: RESET_PASSWORD
+  }
+}
+
+export function sendClientAppInvite() {
+  return {
+    type: CLIENT_APP_INVITE
   }
 }

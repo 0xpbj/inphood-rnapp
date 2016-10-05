@@ -8,6 +8,8 @@ import { takeLatest } from 'redux-saga'
 import * as db from './firebaseCommands'
 import Config from 'react-native-config'
 import firebase from 'firebase'
+import branch from 'react-native-branch'
+
 const defaultPicture = Config.AWS_CDN_IMG_URL + 'banana.jpg'
 
 const FBSDK = require('react-native-fbsdk')
@@ -29,6 +31,7 @@ function* fbloginFlow() {
     const {user, error} = yield call(facebookLogin)
     if (user) {
       const id = user.providerData[0].uid
+      branch.setIdentity(id)
       const name = user.providerData[0].displayName
       const picture = user.providerData[0].photoURL
       const provider = user.providerData[0].providerId
@@ -74,6 +77,7 @@ function* emailCreateFlow(value) {
     yield call(emailCreate, value)
     const user = firebase.auth().currentUser
     const id = user.providerData[0].uid
+    branch.setIdentity(id)
     const first_name = value.firstname
     const last_name = value.lastname
     const name = value.firstname + ' ' + value.lastname
@@ -116,6 +120,7 @@ function* emloginFlow(value) {
     yield call(emailLogin, value)
     const user = firebase.auth().currentUser
     const token = user.uid
+    branch.setIdentity(token)
     const path = '/global/' + token + '/userInfo/public'
     const id = (yield call(db.getPath, path + '/id')).val()
     const name = (yield call(db.getPath, path + '/name')).val()
@@ -160,6 +165,7 @@ function* logoutFlow() {
   try {
     const success = yield call(firebaseLogout)
     if (success) {
+      branch.logout()
       yield put ({type: LOGOUT_SUCCESS})
     }
   }

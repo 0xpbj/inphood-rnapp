@@ -64,6 +64,7 @@ export default class Extras extends Component {
     else if (scene.key === prefix + 'settings') {
       return (
         <Settings
+          clientAppInvite={() => this.props.sendClientAppInvite()}
           auth={this.props.auth}
           settings={this.props.auth.settings}
           goBack={this._handleBackAction.bind(this)}

@@ -57,6 +57,9 @@ export default class Start extends Component {
       modalVisible: false,
     }
   }
+  clientAppInvite() {
+    this.props.sendClientAppInvite()
+  }
   userSettings() {
     this.props._handleNavigate(settingsRoute)
   }
@@ -94,6 +97,7 @@ export default class Start extends Component {
           {this.profileImageButton()}
           {this.helpEmailButton()}
           {this.userSettingsButton()}
+          {this.clientAppInviteButton()}
           {this.logOutButton()}
         </View>
       )
@@ -328,6 +332,21 @@ export default class Start extends Component {
             size={26} color='white'
             style={{marginLeft: 10, marginRight: 15}}/>
           <Text style={CommonStyles.buttonText}>User Settings</Text>
+        </View>
+      </TouchableHighlight>
+    )
+  }
+  clientAppInviteButton() {
+    return (
+      <TouchableHighlight
+        onPress={this.clientAppInvite.bind(this)}
+        style={CommonStyles.button}>
+        <View style={{flexDirection: 'row'}}>
+          <Icon
+            name="ios-contacts-outline"
+            size={26} color='white'
+            style={{marginLeft: 10, marginRight: 15}}/>
+          <Text style={CommonStyles.buttonText}>Invite Client</Text>
         </View>
       </TouchableHighlight>
     )

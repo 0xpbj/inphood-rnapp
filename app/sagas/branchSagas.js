@@ -44,9 +44,17 @@ const getUrl = (branchUniversalObject, linkProperties, controlParams) => {
   .then(shareUrl => ({shareUrl}))
 }
 
-function* watchInstalls() {
+//todo: check param if trainer is already setup
+function* setupTrainer() {
   const installParams = yield call(getInstallParams)
-  console.log('Install Params: ', installParams)
+  const {id, referralType} = installParams
+  const token = yield select(state => state.authReducer)
+  if (id && id.token !== token && referralType === 'client') {
+    const trainerId = id.token
+    firebase.database().ref('/global/' + token + '/userInfo/public').update({
+      trainerId
+    })
+  }
 }
 
 function* branchInvite() {
@@ -77,8 +85,6 @@ function* branchInvite() {
         channel: 'ios' 
       }
       const {channel, completed} = yield call(showShareSheet, branchUniversalObject, shareOptions, linkProperties)
-      const {shareUrl} = yield call(getUrl, branchUniversalObject, linkProperties)
-      console.log(shareUrl)
     }
     catch (error) {
       console.log('Error: ', error)
@@ -88,7 +94,7 @@ function* branchInvite() {
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, LOGIN_SUCCESS, watchInstalls)
+  yield fork(takeLatest, LOGIN_SUCCESS, setupTrainer)
   yield fork(takeLatest, LOGIN_SUCCESS, watchBranch)
   yield fork(takeLatest, LOGIN_SUCCESS, branchInvite)
 }

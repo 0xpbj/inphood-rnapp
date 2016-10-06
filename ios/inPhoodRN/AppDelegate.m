@@ -40,7 +40,7 @@
 
    //jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
    //jsCodeLocation = [NSURL URLWithString:@"http://10.0.1.8:8081/index.ios.bundle?platform=ios&dev=true"];
-   jsCodeLocation = [NSURL URLWithString:@"http://10.0.0.103:8081/index.ios.bundle?platform=ios&dev=true"];
+   //jsCodeLocation = [NSURL URLWithString:@"http://10.0.0.103:8081/index.ios.bundle?platform=ios&dev=true"];
    //jsCodeLocation = [NSURL URLWithString:@"http://10.0.0.113:8081/index.ios.bundle?platform=ios&dev=true"];
 
   /**
@@ -51,7 +51,7 @@
    * simulator in the "Release" build configuration.
    */
 
-   //jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"inPhoodRN"

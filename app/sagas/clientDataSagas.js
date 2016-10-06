@@ -7,7 +7,7 @@ import {
   syncAddedMessagesChild, syncRemovedMessagesChild,
   SYNC_ADDED_MESSAGES_CHILD, SYNC_REMOVED_MESSAGES_CHILD,
   MARK_PHOTO_READ, INCREMENT_TRAINER_NOTIFICATION, DECREMENT_TRAINER_NOTIFICATION,
-  INCREMENT_TRAINER_CHAT_NOTIFICATION,
+  INCREMENT_TRAINER_CHAT_NOTIFICATION, INCREMENT_TRAINER_PHOTO_NOTIFICATION, DECREMENT_TRAINER_PHOTO_NOTIFICATION
 } from '../constants/ActionTypes'
 
 import * as db from './firebaseCommands'
@@ -31,9 +31,8 @@ function* triggerGetMessagesChild() {
       const uid  = messages.uid
       const path = '/global/' + uid + '/photoData/' + photo
       const info = turlHead + uid + '/' + photo + '.jpg'
-      console.log('Write Chat Photo1: ' + info)
       yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
-      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo: info})
+      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: info})
     }
   }
 }
@@ -92,7 +91,7 @@ function* triggerGetPhotoChild() {
       const path = '/global/' + uid + '/photoData/' + file.fileTail
       if (file.notifyTrainer) {
         yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
-        yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo})
+        yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, uid, time, photo})
       }
       yield put({type: ADD_PHOTOS, child})
     }
@@ -131,10 +130,10 @@ function* syncData() {
 function* readClientPhotoFlow() {
   while (true) {
     const data = yield take(MARK_PHOTO_READ)
-    const {path, uid} = data
-    console.log('Client Read Flow')
+    const {path, uid, photo} = data
     firebase.database().ref(path).update({'notifyTrainer': false})
     yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
+    yield put({type: DECREMENT_TRAINER_PHOTO_NOTIFICATION, photo})
   }
 }
 

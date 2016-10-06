@@ -56,15 +56,20 @@ export default class HomeTabs extends Component {
         return <View />
     }
   }
+  setupNotification() {
+    const notificationCount = this.props.notification.client + this.props.notification.trainer
+    const notification = notificationCount > 0 ? notificationCount : 0
+    PushNotificationIOS.setApplicationIconBadgeNumber(notification)
+    PushNotificationIOS.scheduleLocalNotification(this.props.notification.clientNotifcations)
+    PushNotificationIOS.scheduleLocalNotification(this.props.notification.trainerNotifcations)
+  }
   render () {
     console.disableYellowBox = true
     if (this.props.auth.result === null) {
       return <Extras />
     }
+    this.setupNotification()
     const trainer = this.props.auth.trainer
-    const notificationCount = this.props.notification.client + this.props.notification.trainer
-    const notification = notificationCount > 0 ? notificationCount : 0
-    PushNotificationIOS.setApplicationIconBadgeNumber(notification)
     const trainerNotificationCount = this.props.notification.trainer > 0 ? this.props.notification.trainer : undefined
     const clientNotificationCount = this.props.notification.client > 0 ? this.props.notification.client : undefined
     const tabs = this.props.tabs.routes.map((tab, i) => {

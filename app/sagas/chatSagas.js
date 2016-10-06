@@ -95,7 +95,7 @@ function* sendChatData() {
       const data = turlHead + uid + '/' + photo + '.jpg'
       console.log('Write Chat Photo2: ' + data)
       yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
-      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, photo: data})
+      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: data})
     }
     else {
       trainerRead = true

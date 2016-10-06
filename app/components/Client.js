@@ -64,7 +64,7 @@ export default class Client extends Component {
     const clientId = rowData.id
     const clientImage = <Image style={CommonStyles.clientProfileImage} source={{uri: data.picture}}/>
     const clientName = data.name
-    const flag = this.props.notification.trainerUID[clientId]
+    const flag = this.props.notification.clientUID[clientId]
     const notificationBlock = ( 
       <View style={CommonStyles.notificationView}>
         <Text style={CommonStyles.notificationText}>{flag}</Text>
@@ -89,7 +89,6 @@ export default class Client extends Component {
         {showNotification}
       </View>
     )
-    // return <View />
   }
   _pressRow(clientId: string, clientPhoto: string, clientName: string) {
     this.props.setClientId(clientId)

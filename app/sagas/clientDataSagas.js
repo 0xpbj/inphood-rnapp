@@ -12,7 +12,7 @@ import {
 
 import * as db from './firebaseCommands'
 import { Image } from "react-native"
-import {fork, put, select, take} from 'redux-saga/effects'
+import {call, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 import Config from 'react-native-config'
 
@@ -63,6 +63,19 @@ function* triggerRemInfoChild() {
   }
 }
 
+const delayDisplay = (displayTime) => {
+  while (true) {
+    if (Date.now() > displayTime) {
+      return
+    }
+  }
+}
+
+const getSize = (photo) => {
+  while (true) {
+    return Image.getSize(photo)
+  }
+}
 
 const prefetchData = (photo) => {
   return Image.prefetch(photo)
@@ -84,6 +97,8 @@ function* triggerGetPhotoChild() {
       const time = file.time
       const localFile = file.localFile
       const notification = file.notifyTrainer
+      let displayTime = time + 300000
+      yield call(delayDisplay, displayTime)
       yield fork(prefetchData, photo)
       const obj = {photo,caption,mealType,time,title,localFile,file,notification}
       var child = {}
@@ -139,11 +154,11 @@ function* readClientPhotoFlow() {
 
 export default function* rootSaga() {
   yield fork(takeLatest, INIT_DATA, syncData)
-  yield fork(takeLatest, INIT_DATA, triggerGetPhotoChild)
-  yield fork(takeLatest, INIT_DATA, triggerRemPhotoChild)
+  yield fork(takeLatest, INIT_DATA, readClientPhotoFlow)
   yield fork(takeLatest, INIT_DATA, triggerGetInfoChild)
   yield fork(takeLatest, INIT_DATA, triggerRemInfoChild)
+  yield fork(takeLatest, INIT_DATA, triggerGetPhotoChild)
+  yield fork(takeLatest, INIT_DATA, triggerRemPhotoChild)
   yield fork(takeLatest, INIT_DATA, triggerGetMessagesChild)
   yield fork(takeLatest, INIT_DATA, triggerRemMessagesChild)
-  yield fork(takeLatest, INIT_DATA, readClientPhotoFlow)
 }

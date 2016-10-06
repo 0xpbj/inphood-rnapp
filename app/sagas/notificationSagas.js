@@ -17,8 +17,7 @@ const turlHead = Config.AWS_CDN_THU_URL
 
 function* setupClientChatNotification() {
   while (true) {
-    const { payload: { data } } = yield take(INCREMENT_CLIENT_CHAT_NOTIFICATION)
-    const {photo} = data
+    const {photo} = yield take(INCREMENT_CLIENT_CHAT_NOTIFICATION)
     const trainer = (yield select(state => state.authReducer.result)).trainerId
     const fireDate = Date.now()
     const alertBody = 'Trainer has sent a new message'
@@ -31,10 +30,9 @@ function* setupClientChatNotification() {
 
 function* setupTrainerChatNotification() {
   while (true) {
-    const { payload: { data } } = yield take(INCREMENT_TRAINER_CHAT_NOTIFICATION)
-    const {uid, photo} = data
-    const info = yield select(state => state.trainerReducer.infos)[uid]
-    const name = info.name
+    const {uid, photo} = yield take(INCREMENT_TRAINER_CHAT_NOTIFICATION)
+    const path = '/global/' + uid + '/userInfo/public'
+    const name = (yield call(db.getPath, path + '/name')).val()
     const fireDate = Date.now()
     const alertBody = name + ' has sent a new message'
     const notification = {fireDate, alertBody}
@@ -46,13 +44,13 @@ function* setupTrainerChatNotification() {
 
 function* setupTrainerPhotoNotification() {
   while (true) {
-    const { payload: { data } } = yield take(INCREMENT_TRAINER_PHOTO_NOTIFICATION)
-    const {uid, photo, time} = data
-    const info = yield select(state => state.trainerReducer.infos)[uid]
-    const name = info.name
-    const fireDate = Date.now() + 300000
+    const {uid, photo, time} = yield take(INCREMENT_TRAINER_PHOTO_NOTIFICATION)
+    const path = '/global/' + uid + '/userInfo/public'
+    const name = (yield call(db.getPath, path + '/name')).val()
+    const fireDate = Date.now()
     const alertBody = name + ' has added a new meal photo'
     const notification = {fireDate, alertBody}
+    console.log(notification)
     const oldCount = yield select(state => state.notificationReducer.trainer)
     const count = oldCount + 1
     yield put({type: ADD_TRAINER_NOTIFICATION, notification, count})

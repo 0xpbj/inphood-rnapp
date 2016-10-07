@@ -18,7 +18,7 @@ const initialState = {
   error: '',
   filter: '',
   newUser: false,
-  isLoading: false,
+  isLoading: true,
 }
 
 export default function gallery(state = initialState, action) {
@@ -26,12 +26,13 @@ export default function gallery(state = initialState, action) {
     case INIT_PHOTOS:
       return {
         ...state,
-        isLoading: action.flag
+        isLoading: true
       }
     case LOAD_PHOTOS_SUCCESS:
       return {
         ...state,
-        photos: action.photos
+        photos: action.photos,
+        isLoading: false
       }
     case SEND_FIREBASE_LIBRARY_SUCCESS:
     case SEND_FIREBASE_CAMERA_SUCCESS:
@@ -47,7 +48,8 @@ export default function gallery(state = initialState, action) {
     case IS_NEW_USER:
       return {
         ...state,
-        newUser: action.flag
+        newUser: action.flag,
+        isLoading: false
       }
     case APPEND_PHOTOS_SUCCESS:
       return {
@@ -58,7 +60,8 @@ export default function gallery(state = initialState, action) {
     case APPEND_PHOTOS_FAILURE:
       return {
         ...state,
-        error: action.error
+        error: action.error,
+        isLoading: false
       }
     default:
       return state

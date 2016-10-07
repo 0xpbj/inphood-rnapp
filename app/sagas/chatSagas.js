@@ -43,7 +43,6 @@ function* triggerGetMessagesClientChild() {
     const path = '/global/' + uid + '/photoData/' + photo + '/visible'
     const info = turlHead + uid + '/' + photo + '.jpg'
     const visible = (yield call(db.getPath, path)).val()
-    console.log('Read Chat Photo1: ' + info)
     yield put ({type: ADD_MESSAGES, messages, photo})
     if (messages.clientRead === false && visible) {
       yield put({type: INCREMENT_CLIENT_NOTIFICATION})
@@ -93,7 +92,6 @@ function* sendChatData() {
       const path = '/global/' + uid + '/photoData/' + photo
       firebase.database().ref(path).update({'notifyTrainer': true})
       const data = turlHead + uid + '/' + photo + '.jpg'
-      console.log('Write Chat Photo2: ' + data)
       yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
       yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: data})
     }
@@ -133,7 +131,6 @@ function* readFirebaseChatFlow() {
     const path = data.path
     if (data.trainer) {
       firebase.database().ref(data.path).update({'trainerRead': true})
-      console.log('Read Chat Path: ' + path)
       yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
       yield put({type: DECREMENT_TRAINER_CHAT_NOTIFICATION, photo})
     }
@@ -146,10 +143,10 @@ function* readFirebaseChatFlow() {
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetClientMessagesCount)
-  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetMessagesClientChild)
-  yield fork(takeLatest, LOGIN_SUCCESS, triggerRemMessagesClientChild)
   yield fork(takeLatest, LOGIN_SUCCESS, syncChatData)
   yield fork(takeLatest, LOGIN_SUCCESS, watchFirebaseChatFlow)
   yield fork(takeLatest, LOGIN_SUCCESS, readFirebaseChatFlow)
+  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetClientMessagesCount)
+  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetMessagesClientChild)
+  yield fork(takeLatest, LOGIN_SUCCESS, triggerRemMessagesClientChild)
 }

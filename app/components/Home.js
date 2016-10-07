@@ -60,8 +60,8 @@ export default class HomeTabs extends Component {
     const notificationCount = this.props.notification.client + this.props.notification.trainer
     const notification = notificationCount > 0 ? notificationCount : 0
     PushNotificationIOS.setApplicationIconBadgeNumber(notification)
-    PushNotificationIOS.scheduleLocalNotification(this.props.notification.clientNotifcations)
-    PushNotificationIOS.scheduleLocalNotification(this.props.notification.trainerNotifcations)
+    PushNotificationIOS.presentLocalNotification(this.props.notification.clientNotifcations)
+    PushNotificationIOS.presentLocalNotification(this.props.notification.trainerNotifcations)
   }
   render () {
     console.disableYellowBox = true

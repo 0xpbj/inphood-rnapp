@@ -58,14 +58,6 @@ export default class GalleryListView extends Component{
       })
     }
   }
-  _renderSpinner(size, flag) {
-    if (size === 0) {
-      return
-    } 
-    else {
-      return <Spinner visible={flag} color='black'/>
-    }
-  }
   _renderProfileInformation(uri) {
     return (
       <View style={CommonStyles.flexRowMarginBottom10}>
@@ -83,6 +75,7 @@ export default class GalleryListView extends Component{
     if (flag) {
       return (
         <View style={CommonStyles.addPhotosMessage}>
+          <Spinner visible={flag} color='black'/>
           <Text>Loading photos...</Text>
         </View>
       )
@@ -109,10 +102,8 @@ export default class GalleryListView extends Component{
     let uri = this.state.result ? this.state.result.picture : ' '
     let size = this.props.galleryView.photos.length || this.props.galleryView.error !== ''
     let flag = this.props.galleryView.isLoading
-     && !this.props.galleryView.newUser
     return (
       <View style={CommonStyles.commonContainer}>
-        {this._renderSpinner(size, flag)}
         {this._renderProfileInformation(uri)}
         {this._renderListViewContent(flag, size)}
       </View>

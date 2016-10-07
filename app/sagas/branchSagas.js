@@ -16,13 +16,11 @@ function* watchBranch() {
       console.log('Params')
       console.log(params)
       const {id, referralType} = params
-      console.log(installParams)
-      const token = yield select(state => state.authReducer)
+      const token = firebase.auth().currentUser.uid
       if (id && id.token !== token && referralType === 'client') {
         const client = id.token
         const path = '/global/' + token + '/trainerInfo/clientId'
-        const key = yield call(db.newKey, path)
-        yield call(db.update, path, client)
+        firebase.database().ref(path).push({client})
       }
     }
   })

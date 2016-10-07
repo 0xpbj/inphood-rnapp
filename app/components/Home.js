@@ -25,9 +25,6 @@ export default class HomeTabs extends Component {
     super(props)
     PushNotificationIOS.requestPermissions()
   }
-  componentWillMount() {
-    this.props.loginRequest()
-  }
   _renderTabContent (key) {
     switch (key) {
       case 'Camera':

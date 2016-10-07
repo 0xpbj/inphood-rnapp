@@ -50,7 +50,6 @@ function* setupTrainerPhotoNotification() {
     const fireDate = Date.now()
     const alertBody = name + ' has added a new meal photo'
     const notification = {fireDate, alertBody}
-    console.log(notification)
     const oldCount = yield select(state => state.notificationReducer.trainer)
     const count = oldCount + 1
     yield put({type: ADD_TRAINER_NOTIFICATION, notification, count})

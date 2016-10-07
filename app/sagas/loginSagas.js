@@ -3,6 +3,8 @@ import {
   LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_RESULT, STORE_TOKEN, INIT_LOGIN, USER_SETTINGS,
 } from '../constants/ActionTypes'
 
+import {REHYDRATE} from 'redux-persist/constants'
+
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 import * as db from './firebaseCommands'
@@ -148,9 +150,13 @@ function* emloginFlow(value) {
 }
 
 function* watchEMLoginFlow() {
-  const data = yield take(EM_LOGIN_REQUEST)
+  let value = yield select(state => state.authReducer.value)
+  if (!value) {
+    const data = yield take(EM_LOGIN_REQUEST)
+    value = data.value
+  }
   yield put ({type: INIT_LOGIN, flag: true})
-  yield call(emloginFlow, data.value)
+  yield call(emloginFlow, value)
 }
 
 const firebaseLogout = () => {
@@ -187,8 +193,8 @@ function* resetPassword() {
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, LOGIN_REQUEST, fbloginFlow)
-  yield fork(watchEMLoginFlow)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], fbloginFlow)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], watchEMLoginFlow)
   yield fork(watchEMCreateFlow)
   yield fork(takeLatest, RESET_PASSWORD, resetPassword)
   yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)

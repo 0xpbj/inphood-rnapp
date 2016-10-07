@@ -155,7 +155,6 @@ function* watchEMLoginFlow() {
     const data = yield take(EM_LOGIN_REQUEST)
     value = data.value
   }
-  console.log('email value: ', value)
   yield put ({type: INIT_LOGIN, flag: true})
   yield call(emloginFlow, value)
 }

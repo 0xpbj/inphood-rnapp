@@ -13,13 +13,17 @@ import branch from 'react-native-branch'
 function* watchBranch() {
   branch.subscribe(({params, error, uri}) => {
     if (params) { 
-      /* handle branch link */
-      //need to firebase connection here
       console.log('Params')
       console.log(params)
-    }
-    else { 
-      /* handle uri */ 
+      const {id, referralType} = params
+      console.log(installParams)
+      const token = yield select(state => state.authReducer)
+      if (id && id.token !== token && referralType === 'client') {
+        const client = id.token
+        const path = '/global/' + token + '/trainerInfo/clientId'
+        const key = yield call(db.newKey, path)
+        yield call(db.update, path, client)
+      }
     }
   })
 }
@@ -48,6 +52,7 @@ const getUrl = (branchUniversalObject, linkProperties, controlParams) => {
 function* setupTrainer() {
   const installParams = yield call(getInstallParams)
   const {id, referralType} = installParams
+  console.log(installParams)
   const token = yield select(state => state.authReducer)
   if (id && id.token !== token && referralType === 'client') {
     const trainerId = id.token
@@ -73,8 +78,7 @@ function* branchInvite() {
           }, 
           contentTitle: 'inPhood Invite', 
           contentDescription: 'Sending invite for inPhood'
-        },
-        'one_time_use': true
+        }
       )
       const shareOptions = { 
         messageHeader: 'inPhood App Invite', 

@@ -19,12 +19,8 @@ function* setupClientChatNotification() {
   while (true) {
     const {photo} = yield take(INCREMENT_CLIENT_CHAT_NOTIFICATION)
     const trainer = (yield select(state => state.authReducer.result)).trainerId
-    const fireDate = Date.now()
-    const alertBody = 'Trainer has sent a new message'
-    const notification = {fireDate, alertBody}
-    const oldCount = yield select(state => state.notificationReducer.client)
-    const count = oldCount + 1
-    yield put({type: ADD_CLIENT_NOTIFICATION, notification, count})
+    const notification = 'Trainer has sent a new message'
+    yield put({type: ADD_CLIENT_NOTIFICATION, notification})
   }
 }
 
@@ -33,12 +29,8 @@ function* setupTrainerChatNotification() {
     const {uid, photo} = yield take(INCREMENT_TRAINER_CHAT_NOTIFICATION)
     const path = '/global/' + uid + '/userInfo/public'
     const name = (yield call(db.getPath, path + '/name')).val()
-    const fireDate = Date.now()
-    const alertBody = name + ' has sent a new message'
-    const notification = {fireDate, alertBody}
-    const oldCount = yield select(state => state.notificationReducer.trainer)
-    const count = oldCount + 1
-    yield put({type: ADD_TRAINER_NOTIFICATION, notification, count})
+    const notification = name + ' has sent a new message'
+    yield put({type: ADD_TRAINER_NOTIFICATION, notification})
   }
 }
 
@@ -47,12 +39,8 @@ function* setupTrainerPhotoNotification() {
     const {uid, photo, time} = yield take(INCREMENT_TRAINER_PHOTO_NOTIFICATION)
     const path = '/global/' + uid + '/userInfo/public'
     const name = (yield call(db.getPath, path + '/name')).val()
-    const fireDate = Date.now()
-    const alertBody = name + ' has added a new meal photo'
-    const notification = {fireDate, alertBody}
-    const oldCount = yield select(state => state.notificationReducer.trainer)
-    const count = oldCount + 1
-    yield put({type: ADD_TRAINER_NOTIFICATION, notification, count})
+    const notification = name + ' has added a new meal photo'
+    yield put({type: ADD_TRAINER_NOTIFICATION, notification})
   }
 }
 

@@ -1,5 +1,5 @@
 import {
-  EM_LOGIN_REQUEST, EM_CREATE_USER, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, RESET_PASSWORD,
+  EM_LOGIN_INIT, EM_LOGIN_REQUEST, EM_CREATE_USER, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, RESET_PASSWORD,
   LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_RESULT, STORE_TOKEN, INIT_LOGIN, USER_SETTINGS,
 } from '../constants/ActionTypes'
 
@@ -155,6 +155,7 @@ function* watchEMLoginFlow() {
     const data = yield take(EM_LOGIN_REQUEST)
     value = data.value
   }
+  console.log('email value: ', value)
   yield put ({type: INIT_LOGIN, flag: true})
   yield call(emloginFlow, value)
 }
@@ -186,7 +187,6 @@ function* resetPassword() {
     const email = user.email
     firebase.auth().sendPasswordResetEmail(email).then(function() {
     }, function(error) {
-      // An error happened.
       alert(error)
     })
   }
@@ -194,7 +194,7 @@ function* resetPassword() {
 
 export default function* rootSaga() {
   yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], fbloginFlow)
-  yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], watchEMLoginFlow)
+  yield fork(takeLatest, [REHYDRATE, EM_LOGIN_INIT], watchEMLoginFlow)
   yield fork(watchEMCreateFlow)
   yield fork(takeLatest, RESET_PASSWORD, resetPassword)
   yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)

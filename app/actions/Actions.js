@@ -42,6 +42,7 @@ import {
   INIT_CHAT_SAGA,
   INIT_TRAINER_CHAT_SAGA,
   LOGIN_REQUEST,
+  EM_LOGIN_INIT,
   EM_LOGIN_REQUEST,
   EM_CREATE_USER,
   LOGIN_SUCCESS,
@@ -314,6 +315,12 @@ export function loginRequest(){
   return {
     type: LOGIN_REQUEST
   };
+}
+
+export function emailLoginInit(){
+  return {
+    type: EM_LOGIN_INIT
+  }
 }
 
 export function emailLoginRequest(value){

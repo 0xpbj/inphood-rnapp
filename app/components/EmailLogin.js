@@ -81,7 +81,7 @@ export default class EmailLogin extends Component {
     )
   }
   login() {
-    this.props.loginRequest()
+    this.props.emailLoginInit()
     const value = this.refs.form.getValue();
     if (value) {
       this.props.emailLoginRequest(value)

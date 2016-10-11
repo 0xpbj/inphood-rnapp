@@ -87,7 +87,7 @@ function* firebaseData(flag) {
 function* appendFirebaseDataFlow() {
   while (true) {
     yield take([SEND_FIREBASE_LIBRARY_SUCCESS, SEND_FIREBASE_CAMERA_SUCCESS])
-    yield call(firebaseData, false)
+    yield fork(firebaseData, false)
   }
 }
 
@@ -95,7 +95,7 @@ function* initFirebaseDataFlow() {
   while (true) {
     yield take([INIT_MESSAGES, REFRESH_CLIENT_DATA])
     yield put ({type: INIT_PHOTOS, flag: true})
-    yield call(firebaseData, true)
+    yield fork(firebaseData, true)
   }
 }
 

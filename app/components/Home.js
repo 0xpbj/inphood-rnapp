@@ -53,22 +53,33 @@ export default class HomeTabs extends Component {
         return <View />
     }
   }
-  setupNotification() {
-    const notificationCount = this.props.notification.client + this.props.notification.trainer
-    const notification = notificationCount > 0 ? notificationCount : 0
-    PushNotificationIOS.setApplicationIconBadgeNumber(notification)
-    PushNotificationIOS.presentLocalNotification(this.props.notification.clientNotifcations)
-    PushNotificationIOS.presentLocalNotification(this.props.notification.trainerNotifcations)
-  }
   render () {
     console.disableYellowBox = true
     if (this.props.auth.result === null) {
       return <Extras />
     }
-    this.setupNotification()
+    let clientNotificationCount = undefined
+    let trainerNotificationCount = undefined
+    for (let id in this.props.notification.clientNotifications) {
+      console.log('Client notification: ', this.props.notification.clientNotifications[id])
+      PushNotificationIOS.scheduleLocalNotification(this.props.notification.clientNotifications[id])
+      if (clientNotificationCount === undefined)
+        clientNotificationCount = 0
+      clientNotificationCount = clientNotificationCount + this.props.notification.clientNotifications[id].applicationIconBadgeNumber
+    }
+    for (let id in this.props.notification.trainerNotifications) {
+      console.log('Trainer notification: ', this.props.notification.trainerNotifications[id])
+      PushNotificationIOS.scheduleLocalNotification(this.props.notification.trainerNotifications[id])
+      if (trainerNotificationCount === undefined)
+        trainerNotificationCount = 0
+      trainerNotificationCount = trainerNotificationCount + this.props.notification.trainerNotifications[id].applicationIconBadgeNumber
+    }
     const trainer = this.props.auth.trainer
-    const trainerNotificationCount = this.props.notification.trainer > 0 ? this.props.notification.trainer : undefined
-    const clientNotificationCount = this.props.notification.client > 0 ? this.props.notification.client : undefined
+    const notificationCount = this.props.notification.client + this.props.notification.trainer
+    const notification = notificationCount > 0 ? notificationCount : 0
+    PushNotificationIOS.setApplicationIconBadgeNumber(notification)
+    trainerNotificationCount = this.props.notification.trainer > 0 ? trainerNotificationCount : undefined
+    clientNotificationCount = this.props.notification.client > 0 ? clientNotificationCount : undefined
     const tabs = this.props.tabs.routes.map((tab, i) => {
       if (tab.title !== 'Clients') {
         return (

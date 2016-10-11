@@ -38,7 +38,7 @@ export default function library (state = initialState, action) {
       uid[action.uid] = uid[action.uid] + 1
       return {
         ...state,
-        client: state.client + 1,
+        // client: state.client + 1,
         trainerUID: uid
       }
     case DECREMENT_CLIENT_NOTIFICATION:
@@ -62,7 +62,7 @@ export default function library (state = initialState, action) {
       uid[action.uid] = uid[action.uid] + 1
       return {
         ...state,
-        trainer: state.trainer + 1,
+        // trainer: state.trainer + 1,
         clientUID: uid
       }
     case DECREMENT_TRAINER_NOTIFICATION:
@@ -131,13 +131,13 @@ export default function library (state = initialState, action) {
     case ADD_CLIENT_NOTIFICATION:
       return {
         ...state,
-        // client: action.count,
+        client: action.count,
         clientNotifications: [...state.clientNotifications, action.notification]
       }
     case ADD_TRAINER_NOTIFICATION:
       return {
         ...state,
-        // trainer: action.count,
+        trainer: action.count,
         trainerNotifications: [...state.trainerNotifications, action.notification]
       }
     default:

@@ -40,13 +40,14 @@ function* triggerGetMessagesClientChild() {
     const messages = data.val()
     const photo = messages.photo
     const uid  = messages.uid
-    const path = '/global/' + uid + '/photoData/' + photo + '/visible'
-    const info = turlHead + uid + '/' + photo + '.jpg'
+    const info = '/global/' + uid + '/photoData/' + photo
+    const path = info + '/visible'
+    const file = turlHead + uid + '/' + photo + '.jpg'
     const visible = (yield call(db.getPath, path)).val()
     yield put ({type: ADD_MESSAGES, messages, photo})
     if (messages.clientRead === false && visible) {
       yield put({type: INCREMENT_CLIENT_NOTIFICATION})
-      yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo: info})
+      yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo: file, path: info})
     }
   }
 }
@@ -93,9 +94,10 @@ function* sendChatData() {
       firebase.database().ref(path).update({'notifyTrainer': true})
       const data = turlHead + uid + '/' + photo + '.jpg'
       yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
-      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: data})
+      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: data, path})
     }
     else {
+      uid = client
       trainerRead = true
     }
     key.set({

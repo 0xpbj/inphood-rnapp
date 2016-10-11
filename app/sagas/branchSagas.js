@@ -50,7 +50,6 @@ const getUrl = (branchUniversalObject, linkProperties, controlParams) => {
 function* setupTrainer() {
   const installParams = yield call(getInstallParams)
   const {id, referralType} = installParams
-  console.log(installParams)
   const token = yield select(state => state.authReducer)
   if (id && id.token !== token && referralType === 'client') {
     const trainerId = id.token

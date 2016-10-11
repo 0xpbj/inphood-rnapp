@@ -126,7 +126,8 @@ export default class Caption extends Component {
   }
   render() {
     let whiteSpace = new RegExp(/^\s+$/)
-    const placeholder = this.props._tags === '' ? "Ingredients, e.g.: Beef, Tomatoes ..." : this.props._tags
+    const defaultValue = this.props._tags
+    const placeholder = this.props._tags === '' ? "Ingredients, e.g.: Beef, Tomatoes ..." : ''
     // const placeholderTextColor = this.props._tags === '' ? '' : ''
     const selectionColor = this.props._tags === '' ? '' : 'blue'
     const clearButtonMode = this.props._tags === '' ? 'while-editing' : 'always'
@@ -163,7 +164,8 @@ export default class Caption extends Component {
             style={[CommonStyles.singleSegmentView,
                     CommonStyles.universalFontSize]}
             autoCapitalize="none"
-            defaultValue={placeholder}
+            defaultValue={defaultValue}
+            placeholder={placeholder}
             autoFocus={true}
             clearButtonMode={clearButtonMode}
             returnKeyType="done"

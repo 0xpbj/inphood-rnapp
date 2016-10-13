@@ -53,12 +53,24 @@ function* loadAWSCall(flag, fileName) {
   }
 }
 
-const sendToFirebase = (state, flag) => {
-  let result = state.authReducer.result
+const prepFirebase = (state) => {
   let uid = state.authReducer.token
   if (!uid) {
     uid = firebase.auth().currentUser.uid
   }
+  const key = firebase.database().ref('/global/' + uid + '/photoData').push()
+  const fileTail = key.path.o[3]
+  const fileName = uid + '/' + fileTail + '.jpg'
+  const data = {fileTail, fileName}
+  return data
+}
+
+const sendToFirebase = (state, flag, fileTail, fileName) => {
+  let uid = state.authReducer.token
+  if (!uid) {
+    uid = firebase.auth().currentUser.uid
+  }
+  let result = state.authReducer.result
   let name = result.name
   let id = result.id
   let picture = result.picture
@@ -68,9 +80,6 @@ const sendToFirebase = (state, flag) => {
     name,
     picture,
   })
-  let key = firebase.database().ref('/global/' + uid + '/photoData').push()
-  let fileTail = key.path.o[3]
-  let fileName = uid + '/' + fileTail + '.jpg'
   let caption = ''
   let mealType = ''
   let title = ''
@@ -90,7 +99,7 @@ const sendToFirebase = (state, flag) => {
     mealType = state.libReducer.mealType
     localFile = state.libReducer.selected
   }
-  key.set({
+  firebase.database().ref('/global/' + uid + '/photoData/' + fileTail).update({
     uid,
     fileName,
     fileTail,
@@ -103,13 +112,14 @@ const sendToFirebase = (state, flag) => {
     visible,
     notifyClient
   })
-  return fileName
 }
 
 function* loadFirebaseCall(flag) {
   try {
     const state = yield select()
-    let fileName = yield call (sendToFirebase, state, flag)
+    const {fileTail, fileName} = yield call (prepFirebase, state)
+    console.log('tail: ', fileTail)
+    console.log('name: ', fileName)
     if (flag) {
       yield put ({type: SEND_FIREBASE_CAMERA_SUCCESS})
       yield call(loadAWSCall, true, fileName)
@@ -118,6 +128,7 @@ function* loadFirebaseCall(flag) {
       yield put ({type: SEND_FIREBASE_LIBRARY_SUCCESS})
       yield call(loadAWSCall, false, fileName)
     }
+    yield call (sendToFirebase, state, flag, fileTail, fileName)
   }
   catch(error) {
     console.log(error)

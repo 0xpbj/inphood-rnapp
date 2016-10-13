@@ -18,5 +18,5 @@ export default function* rootSaga() {
   yield fork(data)
   yield fork(vision)
   yield fork(branch)
-  yield fork(notification)
+  // yield fork(notification)
 }

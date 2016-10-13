@@ -1,8 +1,7 @@
 import {
   LOGIN_SUCCESS, ADD_MESSAGES, REFRESH_CLIENT_DATA, REMOVE_CLIENT_PHOTO,
   LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_ERROR, INIT_MESSAGES, INIT_PHOTOS,
-  SEND_FIREBASE_CAMERA_SUCCESS, SEND_FIREBASE_LIBRARY_SUCCESS,
-  APPEND_PHOTOS_SUCCESS, APPEND_PHOTOS_ERROR,
+  APPEND_PHOTOS_SUCCESS, APPEND_PHOTOS_ERROR, SEND_AWS_SUCCESS
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -39,6 +38,7 @@ const isLocalFile = (localFile) => {
 
 function* firebaseData(flag) {
   try {
+    console.log('firebase data invoked')
     let uid = yield select(state => state.authReducer.token)
     if (!uid) {
       uid = firebase.auth().currentUser.uid
@@ -65,7 +65,9 @@ function* firebaseData(flag) {
         const time = data.time
         const localFile = data.localFile
         const notification = data.notifyClient
-        yield fork(prefetchData, photo)
+        if (flag) {
+          yield fork(prefetchData, photo)
+        }
         const {flag, error} = yield call(isLocalFile, localFile)
         const obj = {photo,caption,mealType,time,title,localFile,flag,data,notification}
         photos.unshift(obj)
@@ -86,7 +88,7 @@ function* firebaseData(flag) {
 
 function* appendFirebaseDataFlow() {
   while (true) {
-    yield take([SEND_FIREBASE_LIBRARY_SUCCESS, SEND_FIREBASE_CAMERA_SUCCESS])
+    yield take(SEND_AWS_SUCCESS)
     yield fork(firebaseData, false)
   }
 }

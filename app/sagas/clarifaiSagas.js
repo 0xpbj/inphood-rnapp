@@ -83,6 +83,6 @@ function* getLibraryData() {
 }
 
 export default function* rootSaga() {
-  yield fork(getCameraData)
-  yield fork(getLibraryData)
+  yield fork(takeLatest, LOGIN_SUCCESS, getCameraData)
+  yield fork(takeLatest, LOGIN_SUCCESS, getLibraryData)
 }

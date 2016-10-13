@@ -25,10 +25,7 @@ function* triggerGetClientMessagesCount() {
     const { payload: { data } } = yield take(SYNC_COUNT_CLIENT_MESSAGES_CHILD)
     const count = data.numChildren()
     const {previousMessages} = yield select(state => state.chatReducer)
-    if (count === 0 || previousMessages.length === 0) {
-      yield put({type: INIT_MESSAGES})
-    }
-    else if (previousMessages.length === count) {
+    if (count === 0 || previousMessages.length === count) {
       yield put({type: INIT_MESSAGES})
     }
   }
@@ -39,13 +36,17 @@ function* triggerGetMessagesClientChild() {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
     const messages = data.val()
     const photo = messages.photo
+    let id = yield select(state => state.authReducer.token)
+    if (!id) {
+      id = firebase.auth().currentUser.uid
+    }
     const uid  = messages.uid
     const info = '/global/' + uid + '/photoData/' + photo
     const path = info + '/visible'
     const file = turlHead + uid + '/' + photo + '.jpg'
     const visible = (yield call(db.getPath, path)).val()
     yield put ({type: ADD_MESSAGES, messages, photo})
-    if (messages.clientRead === false && visible) {
+    if (messages.clientRead === false && visible && id !== uid) {
       yield put({type: INCREMENT_CLIENT_NOTIFICATION})
       yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo: file, path: info})
     }
@@ -88,7 +89,7 @@ function* sendChatData() {
     const createdAt = Date.now()
     let clientRead = false
     let trainerRead = false
-    if (uid === client) {
+    if (trainer) {
       clientRead = true
       const path = '/global/' + uid + '/photoData/' + photo
       firebase.database().ref(path).update({'notifyTrainer': true})
@@ -97,7 +98,6 @@ function* sendChatData() {
       yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: data, path})
     }
     else {
-      uid = client
       trainerRead = true
     }
     key.set({

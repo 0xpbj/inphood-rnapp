@@ -83,7 +83,9 @@ function* triggerGetPhotoChild() {
       const time = file.time
       const localFile = file.localFile
       const notification = file.notifyTrainer
-      yield fork(prefetchData, photo)
+      if ((Date.now() - time) > 60000) {
+        yield fork(prefetchData, photo)
+      }
       const obj = {photo,caption,mealType,time,title,localFile,file,notification}
       var child = {}
       child[uid] = obj

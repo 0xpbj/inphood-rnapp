@@ -11,6 +11,8 @@ import {
   DECREMENT_TRAINER_PHOTO_NOTIFICATION,
   ADD_CLIENT_NOTIFICATION,
   ADD_TRAINER_NOTIFICATION,
+  CLEAR_CLIENT_ALERT,
+  CLEAR_TRAINER_ALERT
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -22,8 +24,8 @@ const initialState = {
   trainerPhotos: [],
   trainerPhotosFlag: [],
   photoMessages: [],
-  clientNotifications: [],
-  trainerNotifications: []
+  clientNotification: '',
+  trainerNotification: ''
 }
 
 export default function library (state = initialState, action) {
@@ -38,7 +40,7 @@ export default function library (state = initialState, action) {
       uid[action.uid] = uid[action.uid] + 1
       return {
         ...state,
-        // client: state.client + 1,
+        client: state.client + 1,
         trainerUID: uid
       }
     case DECREMENT_CLIENT_NOTIFICATION:
@@ -62,7 +64,7 @@ export default function library (state = initialState, action) {
       uid[action.uid] = uid[action.uid] + 1
       return {
         ...state,
-        // trainer: state.trainer + 1,
+        trainer: state.trainer + 1,
         clientUID: uid
       }
     case DECREMENT_TRAINER_NOTIFICATION:
@@ -86,7 +88,8 @@ export default function library (state = initialState, action) {
       data[action.photo] = data[action.photo] + 1
       return {
         ...state,
-        clientPhotos: data
+        clientPhotos: data,
+        clientNotification: 'Your trainer has sent a new message'
       }
     case DECREMENT_CLIENT_CHAT_NOTIFICATION:
       data = state.clientPhotos
@@ -103,7 +106,8 @@ export default function library (state = initialState, action) {
       data[action.photo] = data[action.photo] + 1
       return {
         ...state,
-        trainerPhotos: data
+        trainerPhotos: data,
+        trainerNotification: 'Your client has sent a new message'
       }
     case DECREMENT_TRAINER_CHAT_NOTIFICATION:
       data = state.trainerPhotos
@@ -119,7 +123,8 @@ export default function library (state = initialState, action) {
       }
       return {
         ...state,
-        trainerPhotosFlag: data
+        trainerPhotosFlag: data,
+        trainerNotification: 'Your client has added a new photo'
       }
     case DECREMENT_TRAINER_PHOTO_NOTIFICATION:
       data = state.trainerPhotosFlag
@@ -131,14 +136,24 @@ export default function library (state = initialState, action) {
     case ADD_CLIENT_NOTIFICATION:
       return {
         ...state,
-        client: action.count,
-        clientNotifications: [...state.clientNotifications, action.notification]
+        // client: action.count,
+        clientNotification: action.notification
       }
     case ADD_TRAINER_NOTIFICATION:
       return {
         ...state,
-        trainer: action.count,
-        trainerNotifications: [...state.trainerNotifications, action.notification]
+        // trainer: action.count,
+        trainerNotification: action.notification
+      }
+    case CLEAR_CLIENT_ALERT:
+      return {
+        ...state,
+        clientNotification: ''
+      }
+    case CLEAR_TRAINER_ALERT:
+      return {
+        ...state,
+        trainerNotification: ''
       }
     default:
       return state

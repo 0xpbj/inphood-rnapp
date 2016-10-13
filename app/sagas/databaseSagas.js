@@ -38,7 +38,7 @@ const isLocalFile = (localFile) => {
 
 function* firebaseData(flag) {
   try {
-    console.log('firebase data invoked')
+    yield put ({type: INIT_PHOTOS, flag: true})
     let uid = yield select(state => state.authReducer.token)
     if (!uid) {
       uid = firebase.auth().currentUser.uid
@@ -94,14 +94,12 @@ function* appendFirebaseDataFlow() {
 }
 
 function* initFirebaseDataFlow() {
-  while (true) {
-    yield take([INIT_MESSAGES, REFRESH_CLIENT_DATA])
-    yield put ({type: INIT_PHOTOS, flag: true})
-    yield fork(firebaseData, true)
-  }
+  yield take(INIT_MESSAGES)
+  yield fork(firebaseData, true)
 }
 
 export default function* rootSaga() {
+  yield fork(takeLatest, REFRESH_CLIENT_DATA, firebaseData, true)
   yield fork(takeLatest, LOGIN_SUCCESS, initFirebaseDataFlow)
   yield fork(takeLatest, LOGIN_SUCCESS, appendFirebaseDataFlow)
   yield fork(takeLatest, LOGIN_SUCCESS, updateDataVisibility)

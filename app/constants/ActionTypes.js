@@ -85,9 +85,9 @@ export const APPEND_PHOTOS_ERROR = 'APPEND_PHOTOS_ERROR'
 
 //CHAT Sagas Actions
 export const LOAD_ID = 'LOAD_ID'
+export const MSG_COUNT = 'MSG_COUNT'
 export const ADD_MESSAGES = 'ADD_MESSAGES'
 export const INIT_MESSAGES = 'INIT_MESSAGES'
-export const LOAD_MESSAGES = 'LOAD_MESSAGES'
 export const STORE_MESSAGES = 'STORE_MESSAGES'
 export const INIT_CHAT_SAGA = 'INIT_CHAT_SAGA'
 export const STORE_CHAT_ERROR = 'STORE_CHAT_ERROR'

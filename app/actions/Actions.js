@@ -60,7 +60,8 @@ import {
   CLIENT_APP_INVITE,
   FRIEND_APP_INVITE,
   CLEAR_CLIENT_ALERT,
-  CLEAR_TRAINER_ALERT
+  CLEAR_TRAINER_ALERT,
+  BRANCH_AUTH_TRAINER
 } from '../constants/ActionTypes'
 
 export function pushExp (route) {
@@ -443,5 +444,12 @@ export function clearClientAlert() {
 export function clearTrainerAlert() {
   return {
     type: CLEAR_TRAINER_ALERT
+  }
+}
+
+export function setBranchAuthTrainer(response) {
+  return {
+    type: BRANCH_AUTH_TRAINER,
+    response
   }
 }

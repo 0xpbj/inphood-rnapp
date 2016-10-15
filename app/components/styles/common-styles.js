@@ -27,10 +27,16 @@ module.exports = StyleSheet.create({
     resizeMode: 'cover',
     alignItems: 'center',
   },
+  // modalContainer: {
+  //   flex: 1,
+  //   justifyContent: 'center',
+  //   padding: 100,
+  //   backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  // },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
-    padding: 100,
+    padding: 60,
     backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
   innerContainer: {
@@ -197,12 +203,6 @@ module.exports = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 60,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
-  },
   galleryListViewProfileImage: {
     marginLeft: 20,
     marginTop: 22,
@@ -284,9 +284,6 @@ module.exports = StyleSheet.create({
   },
   flexContainer: {
     flex: 1
-  },
-  flexRow: {
-    flexDirection: 'row',
   },
   flexCol: {
     flexDirection: 'column'

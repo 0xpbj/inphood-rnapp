@@ -7,7 +7,7 @@ import {
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest, takeEvery } from 'redux-saga'
 import { Image } from "react-native"
-import Config from 'react-native-config'
+import Config from '../constants/config-vars'
 import * as db from './firebaseCommands'
 
 import firebase from 'firebase'

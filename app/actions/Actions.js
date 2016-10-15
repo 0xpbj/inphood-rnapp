@@ -58,7 +58,10 @@ import {
   USER_SETTINGS,
   RESET_PASSWORD,
   CLIENT_APP_INVITE,
-  FRIEND_APP_INVITE
+  FRIEND_APP_INVITE,
+  CLEAR_CLIENT_ALERT,
+  CLEAR_TRAINER_ALERT,
+  BRANCH_AUTH_TRAINER
 } from '../constants/ActionTypes'
 
 export function pushExp (route) {
@@ -429,5 +432,24 @@ export function sendFriendAppInvite() {
   return {
     type: FRIEND_APP_INVITE,
     referralType: 'friend' 
+  }
+}
+
+export function clearClientAlert() {
+  return {
+    type: CLEAR_CLIENT_ALERT
+  }
+}
+
+export function clearTrainerAlert() {
+  return {
+    type: CLEAR_TRAINER_ALERT
+  }
+}
+
+export function setBranchAuthTrainer(response) {
+  return {
+    type: BRANCH_AUTH_TRAINER,
+    response
   }
 }

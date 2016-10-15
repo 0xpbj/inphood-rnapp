@@ -2,7 +2,7 @@ import {
   LOGIN_SUCCESS, LOGIN_ERROR, INIT_LOGIN,
   LOGOUT_SUCCESS, LOGOUT_ERROR, USER_SETTINGS,
   STORE_TOKEN, STORE_RESULT, STORE_TRAINER,
-  EM_LOGIN_REQUEST
+  EM_LOGIN_REQUEST, BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -12,7 +12,12 @@ const initialState = {
   trainer: false,
   inProgress: false,
   value: null,
-  settings: {}
+  settings: {},
+  referralSetup: false,
+  referralType: '',
+  referralId: '',
+  authTrainer: 'pending',
+  trainerName: ''
 }
 
 export default function authentication(state = initialState, action) {
@@ -56,6 +61,19 @@ export default function authentication(state = initialState, action) {
       return {
         ...state,
         value: action.value
+      }
+    case BRANCH_REFERRAL_INFO:
+      return {
+        ...state,
+        referralSetup: action.referralSetup,
+        referralType: action.referralType,
+        referralId: action.referralId,
+        trainerName: action.trainerName
+      }
+    case BRANCH_AUTH_TRAINER:
+      return {
+        ...state,
+        authTrainer: action.response
       }
     case LOGIN_SUCCESS:
     default:

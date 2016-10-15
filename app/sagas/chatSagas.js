@@ -1,6 +1,5 @@
 import {
-  LOGIN_SUCCESS, INIT_CHAT_SAGA, INIT_MESSAGES,
-  ADD_MESSAGES, LOAD_MESSAGES, LOAD_MESSAGES_ERROR,
+  LOGIN_SUCCESS, INIT_CHAT_SAGA, INIT_MESSAGES, ADD_MESSAGES, MSG_COUNT,
   syncAddedMessagesClientChild, syncRemovedMessagesClientChild,
   SYNC_ADDED_MESSAGES_CLIENT_CHILD, SYNC_REMOVED_MESSAGES_CLIENT_CHILD,
   STORE_CHAT_SUCCESS, STORE_CHAT_ERROR, MARK_MESSAGE_READ,
@@ -24,11 +23,8 @@ function* triggerGetClientMessagesCount() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_COUNT_CLIENT_MESSAGES_CHILD)
     const count = data.numChildren()
-    const {previousMessages} = yield select(state => state.chatReducer)
-    if (count === 0 || previousMessages.length === 0) {
-      yield put({type: INIT_MESSAGES})
-    }
-    else if (previousMessages.length === count) {
+    yield put({type: MSG_COUNT, count})
+    if (count === 0) {
       yield put({type: INIT_MESSAGES})
     }
   }
@@ -39,14 +35,24 @@ function* triggerGetMessagesClientChild() {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
     const messages = data.val()
     const photo = messages.photo
+    let id = yield select(state => state.authReducer.token)
+    if (!id) {
+      id = firebase.auth().currentUser.uid
+    }
     const uid  = messages.uid
-    const path = '/global/' + uid + '/photoData/' + photo + '/visible'
-    const info = turlHead + uid + '/' + photo + '.jpg'
-    const visible = (yield call(db.getPath, path)).val()
+    const path = '/global/' + uid + '/photoData/' + photo
+    const file = turlHead + uid + '/' + photo + '.jpg'
     yield put ({type: ADD_MESSAGES, messages, photo})
-    if (messages.clientRead === false && visible) {
+    // const visible = (yield call(db.getPath, path + '/visible')).val()
+    // if (messages.clientRead === false && visible && id !== uid) {
+    if (messages.clientRead === false && id !== uid) {
       yield put({type: INCREMENT_CLIENT_NOTIFICATION})
-      yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo: info})
+      yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo: file, path})
+    }
+    const prevMessages = yield select(state => state.chatReducer.messages)
+    const count = yield select(state => state.chatReducer.count)
+    if (prevMessages.length === count) {
+      yield put({type: INIT_MESSAGES})
     }
   }
 }
@@ -63,11 +69,9 @@ function* syncChatData() {
   if (!uid) {
     uid = firebase.auth().currentUser.uid
   }
-  let path = '/global/' + uid
-  yield fork(db.sync, path + '/messages', {
+  let path = '/global/' + uid + '/messages'
+  yield fork(db.sync, path, {
     value: syncCountClientMessagesChild,
-  })
-  yield fork(db.sync, path + '/messages', {
     child_added: syncAddedMessagesClientChild,
     child_removed: syncRemovedMessagesClientChild,
   })
@@ -81,19 +85,19 @@ function* sendChatData() {
     }
     const trainer = (yield select(state => state.authReducer.result)).trainerId
     const client = yield select(state => state.chatReducer.client)
-    const {messages, feedbackPhoto} = yield select(state => state.chatReducer)
+    const {chatMessages, feedbackPhoto} = yield select(state => state.chatReducer)
     const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
     const key = firebase.database().ref('/global/' + client + '/messages').push()
     const createdAt = Date.now()
     let clientRead = false
     let trainerRead = false
-    if (uid === client) {
+    if (trainer) {
       clientRead = true
       const path = '/global/' + uid + '/photoData/' + photo
       firebase.database().ref(path).update({'notifyTrainer': true})
       const data = turlHead + uid + '/' + photo + '.jpg'
       yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
-      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: data})
+      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: data, path})
     }
     else {
       trainerRead = true
@@ -106,7 +110,7 @@ function* sendChatData() {
       createdAt,
       clientRead,
       trainerRead,
-      "message": messages[0]
+      "message": chatMessages[0]
     })
     yield put ({type: STORE_CHAT_SUCCESS})
   }

@@ -98,15 +98,15 @@ export default class ClientGallery extends Component{
     const mealTime = new Date(data.time).toDateString()
     const uid = data.file.uid
     const path = '/global/' + uid + '/photoData/' + data.file.fileTail
-    const flag = this.props.notification.trainerPhotosFlag[imgSource]
+    const flag = this.props.notification.trainerPhotos[imgSource] 
+                  ? this.props.notification.trainerPhotos[imgSource]
+                  : this.props.notification.trainerPhotosFlag[imgSource] 
     const notificationBlock = ( 
       <View style={CommonStyles.notificationView}>
         <Text style={CommonStyles.notificationText}>{flag}</Text>
       </View>
     )
     const showNotification = flag ? notificationBlock : <View />
-    // const showNotification = notificationBlock
-
     // TODO: refactor to common generating class (this is identical to GalleryListView.js)
     //
     return (

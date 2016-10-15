@@ -1,6 +1,7 @@
 import {
   EM_LOGIN_INIT, EM_LOGIN_REQUEST, EM_CREATE_USER, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, RESET_PASSWORD,
   LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_RESULT, STORE_TOKEN, INIT_LOGIN, USER_SETTINGS,
+  BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER,
 } from '../constants/ActionTypes'
 
 import {REHYDRATE} from 'redux-persist/constants'
@@ -44,6 +45,13 @@ function* fbloginFlow() {
       const email = (yield call(db.getPath, path + '/email')).val()
       const diet = (yield call(db.getPath, path + '/diet')).val()
       const height = (yield call(db.getPath, path + '/height')).val()
+      const referralSetup = (yield call(db.getPath, path + '/referralSetup')).val()
+      const referralType = (yield call(db.getPath, path + '/referralType')).val()
+      const referralId = (yield call(db.getPath, path + '/referralId')).val()
+      const authTrainer = (yield call(db.getPath, path + '/authTrainer')).val()
+      const trainerName = (yield call(db.getPath, path + '/trainerName')).val()
+      yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralId, trainerName})
+      yield put({type: BRANCH_AUTH_TRAINER, response: authTrainer})
       const values = name.split(" ")
       const first_name = values[0]
       const last_name = values[1]
@@ -132,6 +140,13 @@ function* emloginFlow(value) {
     const diet = (yield call(db.getPath, path + '/diet')).val()
     const height = (yield call(db.getPath, path + '/height')).val()
     const trainerId = (yield call(db.getPath, path + '/trainerId')).val()
+    const referralSetup = (yield call(db.getPath, path + '/referralSetup')).val()
+    const referralType = (yield call(db.getPath, path + '/referralType')).val()
+    const referralId = (yield call(db.getPath, path + '/referralId')).val()
+    const authTrainer = (yield call(db.getPath, path + '/authTrainer')).val()
+    const trainerName = (yield call(db.getPath, path + '/trainerName')).val()
+    yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralId, trainerName})
+    yield put({type: BRANCH_AUTH_TRAINER, response: authTrainer})
     const provider = user.providerData[0].providerId
     const values = name.split(" ")
     const first_name = values[0]

@@ -19,7 +19,7 @@ export default class ChatThread extends Component {
     super(props)
     const feedbackPhoto = this.props.chat.feedbackPhoto
     const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
-    const oldMessages = this.props.chat.previousMessages[photo]
+    const oldMessages = this.props.chat.messages[photo]
     this.state = {
       messages: props.messages,
       isTyping: null,
@@ -42,7 +42,7 @@ export default class ChatThread extends Component {
   loadMessages() {
     const feedbackPhoto = this.props.chat.feedbackPhoto
     const key = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
-    const oldMessages = this.props.chat.previousMessages[key]
+    const oldMessages = this.props.chat.messages[key]
     var messages = []
     for (var keys in oldMessages) {
       if (this.props.caller === "trainer" && oldMessages[keys].trainerRead === false) {

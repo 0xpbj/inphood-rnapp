@@ -1,5 +1,5 @@
 import {
-  ADD_PHOTOS, ADD_INFOS, ADD_MESSAGES, LOAD_MESSAGES, ADD_CLIENTS, INIT_DATA,
+  ADD_PHOTOS, ADD_INFOS, ADD_MESSAGES, ADD_CLIENTS, INIT_DATA,
   syncCountPhotoChild, syncAddedPhotoChild, syncRemovedPhotoChild,
   SYNC_COUNT_PHOTO_CHILD, SYNC_ADDED_PHOTO_CHILD, SYNC_REMOVED_PHOTO_CHILD,
   syncAddedInfoChild, syncRemovedInfoChild,
@@ -32,7 +32,7 @@ function* triggerGetMessagesChild() {
       const path = '/global/' + uid + '/photoData/' + photo
       const info = turlHead + uid + '/' + photo + '.jpg'
       yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
-      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: info})
+      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: info, path})
     }
   }
 }
@@ -63,20 +63,6 @@ function* triggerRemInfoChild() {
   }
 }
 
-const delayDisplay = (displayTime) => {
-  while (true) {
-    if (Date.now() > displayTime) {
-      return
-    }
-  }
-}
-
-const getSize = (photo) => {
-  while (true) {
-    return Image.getSize(photo)
-  }
-}
-
 const prefetchData = (photo) => {
   return Image.prefetch(photo)
     .then(() => {})
@@ -97,9 +83,9 @@ function* triggerGetPhotoChild() {
       const time = file.time
       const localFile = file.localFile
       const notification = file.notifyTrainer
-      let displayTime = time + 300000
-      yield call(delayDisplay, displayTime)
-      yield fork(prefetchData, photo)
+      if ((Date.now() - time) > 60000) {
+        yield fork(prefetchData, photo)
+      }
       const obj = {photo,caption,mealType,time,title,localFile,file,notification}
       var child = {}
       child[uid] = obj

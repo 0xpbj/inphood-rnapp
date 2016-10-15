@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
   View,
+  AlertIOS,
   TabBarIOS,
   BackAndroid,
   PushNotificationIOS,
@@ -23,7 +24,69 @@ import Extras from '../containers/ExtrasContainer'
 export default class HomeTabs extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      clientNotification: '',
+      trainerNotification: ''
+    }
+  }
+  componentWillMount() {
     PushNotificationIOS.requestPermissions()
+    // PushNotificationIOS.addEventListener('register', this._onRegistered)
+    // PushNotificationIOS.addEventListener('registrationError', this._onRegistrationError)
+    // PushNotificationIOS.addEventListener('notification', this._onRemoteNotification)
+    // PushNotificationIOS.addEventListener('localNotification', this._onLocalNotification)
+  }
+
+  componentWillUnmount() {
+    // PushNotificationIOS.removeEventListener('register', this._onRegistered)
+    // PushNotificationIOS.removeEventListener('registrationError', this._onRegistrationError)
+    // PushNotificationIOS.removeEventListener('notification', this._onRemoteNotification)
+    // PushNotificationIOS.removeEventListener('localNotification', this._onLocalNotification)
+  }
+  componentWillReceiveProps(nextProps) {
+    // if (nextProps.notification.clientNotification) {
+    //   this.setState({
+    //     clientNotification: nextProps.notification.clientNotification
+    //   })
+    //   this.props.clearClientAlert()
+    // }
+    // if (nextProps.notification.trainerNotification) {
+    //   this.setState({
+    //     trainerNotification: nextProps.notification.trainerNotification
+    //   })
+    //   this.props.clearTrainerAlert()
+    // }
+  }
+  _onRegistered(deviceToken) {}
+  _onRegistrationError(error) {
+    AlertIOS.alert(
+      'Failed To Register For Remote Push',
+      `Error (${error.code}): ${error.message}`,
+      [{
+        text: 'Dismiss',
+        onPress: null,
+      }]
+    )
+  }
+  _onRemoteNotification(notification) {
+    AlertIOS.alert(
+      'inPhood Notification',
+      notification.getMessage(),
+      [{
+        text: 'Dismiss',
+        onPress: null,
+      }]
+    )
+  }
+  _onLocalNotification(notification){
+    AlertIOS.alert(
+      'inPhood Notification',
+      notification.getMessage(),
+      [{
+        text: 'Dismiss',
+        onPress: null,
+      }]
+    );
   }
   _renderTabContent (key) {
     switch (key) {
@@ -53,19 +116,20 @@ export default class HomeTabs extends Component {
         return <View />
     }
   }
-  setupNotification() {
-    const notificationCount = this.props.notification.client + this.props.notification.trainer
-    const notification = notificationCount > 0 ? notificationCount : 0
-    PushNotificationIOS.setApplicationIconBadgeNumber(notification)
-    PushNotificationIOS.presentLocalNotification(this.props.notification.clientNotifcations)
-    PushNotificationIOS.presentLocalNotification(this.props.notification.trainerNotifcations)
-  }
   render () {
     console.disableYellowBox = true
     if (this.props.auth.result === null) {
       return <Extras />
     }
-    this.setupNotification()
+    const notificationCount = this.props.notification.client + this.props.notification.trainer
+    const notification = notificationCount > 0 ? notificationCount : 0
+    PushNotificationIOS.setApplicationIconBadgeNumber(notification)
+    // if (this.state.clientNotification) {
+    //   PushNotificationIOS.presentLocalNotification({alertBody: this.state.clientNotification})
+    // }
+    // if (this.state.trainerNotification) {
+    //   PushNotificationIOS.presentLocalNotification({alertBody: this.state.trainerNotification})
+    // }
     const trainer = this.props.auth.trainer
     const trainerNotificationCount = this.props.notification.trainer > 0 ? this.props.notification.trainer : undefined
     const clientNotificationCount = this.props.notification.client > 0 ? this.props.notification.client : undefined

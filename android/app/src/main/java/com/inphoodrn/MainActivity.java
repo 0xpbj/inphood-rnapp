@@ -8,10 +8,8 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import com.chirag.RNMail.RNMail;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
-// AC: had removed these two imports for some reason--not sure why, re-including them for now.
-// TODO: remove stupid comment if android works with these, otherwise look into removing these
-import com.rnfs.RNFSPackage;
-import com.lwansbrough.ReactCamera.ReactCamera;
+// This import causes android builds to fail (package does not exist errors)
+//import com.lwansbrough.ReactCamera.ReactCamera;
 
 // From: https://dev.branch.io/getting-started/sdk-integration-guide/guide/react/#android-configure-manifest
 import android.content.Intent;

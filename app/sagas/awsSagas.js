@@ -7,7 +7,7 @@ SEND_FIREBASE_LIBRARY_SUCCESS, SEND_FIREBASE_CAMERA_SUCCESS, SEND_FIREBASE_ERROR
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 
 import { RNS3 } from 'react-native-aws3'
-import Config from 'react-native-config'
+import Config from '../constants/config-vars'
 
 import firebase from 'firebase'
 

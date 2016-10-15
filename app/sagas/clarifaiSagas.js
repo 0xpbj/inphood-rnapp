@@ -7,7 +7,7 @@ import {
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 import * as db from './firebaseCommands'
-import config from 'react-native-config'
+import config from '../constants/config-vars'
 import firebase from 'firebase'
 import RNFetchBlob from 'react-native-fetch-blob'
 

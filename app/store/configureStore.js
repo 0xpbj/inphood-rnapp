@@ -3,7 +3,7 @@ import { persistStore, autoRehydrate } from 'redux-persist'
 import rootReducer from '../reducers'
 import rootSaga from '../sagas/index'
 import createSagaMiddleware from 'redux-saga'
-import config from 'react-native-config'
+import config from '../constants/config-vars'
 import firebase from 'firebase'
 require("firebase/app")
 require("firebase/auth")

@@ -61,13 +61,14 @@ const getUrl = (branchUniversalObject, linkProperties, controlParams) => {
 
 function* setupTrainer() {
   const {referralId} = yield select(state => state.authReducer)
-  if (referralId === '') {
-    const installParams = yield call(getInstallParams)
-    const {id, referralType} = installParams
-    const token = yield select(state => state.authReducer)
-    if (id && id.token !== token && referralType === 'client') {
+  if (referralId === '' || referralId === null) {
+    const lastParams = yield call(getLastParams)
+    const {id, referral, trainer} = lastParams.lastParams
+    const {token} = yield select(state => state.authReducer)
+    if (id && id.token !== token && referral && referral.referralType === 'client') {
+      let referralType = referral.referralType
       const trainerId = id.token
-      const trainerName = name.name
+      const trainerName = trainer.name
       yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralId: trainerId, trainerName})
       firebase.database().ref('/global/' + token + '/userInfo/public').update({
         trainerId,
@@ -78,8 +79,10 @@ function* setupTrainer() {
         referralId: trainerId
       })
     }
-    else if (id && id.token !== token && referralType === 'friend') {
-      yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralId: id.token, trainerName: ''})
+    else if (id && id.token !== token && referral && referral.referralType === 'friend') {
+      let referralType = referral.referralType
+      let friendId = id.token
+      yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralId: friendId, trainerName: ''})
       firebase.database().ref('/global/' + token + '/userInfo/public').update({
         referralSetup,
         referralType,
@@ -95,16 +98,16 @@ function* branchInvite() {
     try {
       const {referralType} = yield take([CLIENT_APP_INVITE, FRIEND_APP_INVITE])
       const {token, settings} = yield select(state => state.authReducer)
-      const branchUniversalObject = branch.createBranchUniversalObject
       const name = settings.first_name
+      const branchUniversalObject = branch.createBranchUniversalObject
       (
         'canonicalIdentifier', 
         {
           metadata: 
           {
             id: {token},
-            name: {name},
-            referralType: {referralType}
+            trainer: {name},
+            referral: {referralType}
           }, 
           contentTitle: 'inPhood Invite', 
           contentDescription: 'Sending invite for inPhood'

@@ -44,6 +44,14 @@ export default class Library extends Component {
   componentWillUnmount () {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.library.inProgress !== null) {
+      if (nextProps.library.inProgress === true)
+        this.setState({})
+      else if (nextProps.library.inProgress === false)
+        this._handleCaptionAction()
+    }
+  }
   _renderScene (props) {
     const prefix = 'scene_'
     const { scene } = props
@@ -68,11 +76,11 @@ export default class Library extends Component {
     else if (scene.key === prefix + 'caption') {
       return (
         <Caption
-          _transmit={this._handleCaptionAction.bind(this)}
           _tags={this.props.library.tags}
           _selectedPhoto={this.props.library.selected}
           _storeCaption={(action) => this.props.storeLibraryCaption(action)}
           _handleBackAction={this._handleBackAction.bind(this)}
+          _inProgress={this.props.library.inProgress}
           _library={true}/>
       )
     }

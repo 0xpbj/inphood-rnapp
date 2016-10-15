@@ -54,7 +54,8 @@ export default function gallery(state = initialState, action) {
     case APPEND_PHOTOS_SUCCESS:
       return {
         ...state,
-        photos: [action.appendPhotos, ...state.photos]
+        photos: [action.appendPhotos, ...state.photos],
+        isLoading: false
       }
     case LOAD_PHOTOS_FAILURE:
     case APPEND_PHOTOS_FAILURE:

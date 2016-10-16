@@ -45,6 +45,12 @@ export default class Camera extends Component {
     this.setState({
       photo: nextProps.camera.photo
     })
+    if (nextProps.camera.inProgress !== null) {
+      if (nextProps.camera.inProgress === true)
+        this.setState({})
+      else if (nextProps.camera.inProgress === false)
+        this._handleCaptionAction()
+    }
   }
   _renderScene (props) {
     const prefix = 'scene_'
@@ -70,11 +76,11 @@ export default class Camera extends Component {
     else if (scene.key === prefix + 'caption') {
       return (
         <Caption
-          _transmit={this._handleCaptionAction.bind(this)}
           _tags={this.props.camera.tags}
           _selectedPhoto={this.state.photo}
           _storeCaption={(action) => this.props.storeCameraCaption(action)}
           _handleBackAction={this._handleBackAction.bind(this)}
+          _inProgress={this.props.camera.inProgress}
           _library={false}/>
       )
     }

@@ -1,5 +1,11 @@
-import { SELECT_PHOTO, STORE_64_LIBRARY, CLARIFAI_TAGS_SUCCESS, STORE_LIBRARY_CAPTION, STORE_LIBRARY_TITLE, ADD_LIBRARY_MEAL_DATA, PUSH_LIB_ROUTE, POP_LIB_ROUTE } from '../constants/ActionTypes'
+import { 
+  SELECT_PHOTO, STORE_64_LIBRARY, CLARIFAI_TAGS_SUCCESS, 
+  STORE_LIBRARY_CAPTION, STORE_LIBRARY_TITLE, ADD_LIBRARY_MEAL_DATA, 
+  PUSH_LIB_ROUTE, POP_LIB_ROUTE, SEND_FIREBASE_INIT_LIBRARY, SEND_AWS_SUCCESS 
+} from '../constants/ActionTypes'
+
 import { NavigationExperimental } from 'react-native'
+
 const {
  StateUtils: NavigationStateUtils
 } = NavigationExperimental
@@ -19,7 +25,8 @@ const initialState = {
       key: 'photos',
       title: ''
     }
-  ]
+  ],
+  inProgress: null
 }
 
 export default function library (state = initialState, action) {
@@ -27,7 +34,8 @@ export default function library (state = initialState, action) {
     case SELECT_PHOTO:
       return {
         ...state,
-        selected: action.selected
+        selected: action.selected,
+        inProgress: null
       }
     case STORE_64_LIBRARY:
       return {
@@ -67,6 +75,16 @@ export default function library (state = initialState, action) {
       }
       else {
         return NavigationStateUtils.pop(state)
+      }
+    case SEND_FIREBASE_INIT_LIBRARY:
+      return {
+        ...state,
+        inProgress: true
+      }
+    case SEND_AWS_SUCCESS:
+      return {
+        ...state,
+        inProgress: false
       }
     default:
       return state

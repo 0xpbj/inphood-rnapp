@@ -63,12 +63,10 @@ export default class Caption extends Component {
       if (this.props._library) {
         this.props.addLibraryMealData(mealType)
         this.props.sendFirebaseInitLibrary()
-        this.props._transmit()
       }
       else {
         this.props.addCameraMealData(mealType)
         this.props.sendFirebaseInitCamera()
-        this.props._transmit()
       }
     }
   }
@@ -148,12 +146,9 @@ export default class Caption extends Component {
             source={{uri: this.props._selectedPhoto}}/>
         </TouchableHighlight>
 
-        {/* TODO: Ask PBJ what this is all about here?
-          */}
         <View>
-          <Spinner color='black' visible={this.state.animating} />
+          <Spinner color='black' overlayColor='rgba(0, 0, 0, 0)' visible={this.props._inProgress} />
         </View>
-
         {/*Need this View wrapping TextInput to support single sided border
           text input line.*/}
         <View

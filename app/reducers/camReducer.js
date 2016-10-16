@@ -1,4 +1,8 @@
-import { TAKE_PHOTO, STORE_64_PHOTO, CLARIFAI_TAGS_SUCCESS, STORE_CAMERA_CAPTION, STORE_CAMERA_TITLE, ADD_CAMERA_MEAL_DATA, PUSH_CAM_ROUTE, POP_CAM_ROUTE } from '../constants/ActionTypes'
+import { 
+  TAKE_PHOTO, STORE_64_PHOTO, CLARIFAI_TAGS_SUCCESS, 
+  STORE_CAMERA_CAPTION, STORE_CAMERA_TITLE, ADD_CAMERA_MEAL_DATA, 
+  PUSH_CAM_ROUTE, POP_CAM_ROUTE, SEND_FIREBASE_INIT_CAMERA, SEND_AWS_SUCCESS
+} from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
  StateUtils: NavigationStateUtils
@@ -18,7 +22,8 @@ const initialState = {
       key: 'picture',
       title: ''
     }
-  ]
+  ],
+  inProgress: null
 }
 
 export default function camera (state = initialState, action) {
@@ -26,7 +31,8 @@ export default function camera (state = initialState, action) {
     case TAKE_PHOTO:
       return {
         ...state,
-        photo: action.photo
+        photo: action.photo,
+        inProgress: null
       }
     case STORE_64_PHOTO:
       return {
@@ -66,6 +72,16 @@ export default function camera (state = initialState, action) {
       }
       else {
         return NavigationStateUtils.pop(state)
+      }
+    case SEND_FIREBASE_INIT_CAMERA:
+      return {
+        ...state,
+        inProgress: true
+      }
+    case SEND_AWS_SUCCESS:
+      return {
+        ...state,
+        inProgress: false
       }
     default:
       return state

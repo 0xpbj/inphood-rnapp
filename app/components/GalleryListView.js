@@ -114,6 +114,7 @@ export default class GalleryListView extends Component{
           renderRow={this._renderRow.bind(this)}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={this._renderSeparator}
+          removeClippedSubviews={false}
         />
       )
     }

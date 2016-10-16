@@ -5,7 +5,7 @@ import {
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
-import { takeLatest } from 'redux-saga'
+import { takeLatest, takeEvery } from 'redux-saga'
 import { Image } from "react-native"
 import Config from '../constants/config-vars'
 import * as db from './firebaseCommands'
@@ -38,7 +38,7 @@ const isLocalFile = (localFile) => {
 
 function* firebaseData(flag) {
   try {
-    yield put ({type: INIT_PHOTOS, flag: true})
+    yield put ({type: INIT_PHOTOS})
     let uid = yield select(state => state.authReducer.token)
     if (!uid) {
       uid = firebase.auth().currentUser.uid
@@ -74,7 +74,6 @@ function* firebaseData(flag) {
       }
     }
     if (flag) {
-      yield put ({type: INIT_PHOTOS, flag: false})
       yield put ({type: LOAD_PHOTOS_SUCCESS, photos})
     }
     else if (photos[0]) {
@@ -86,21 +85,14 @@ function* firebaseData(flag) {
   }
 }
 
-function* appendFirebaseDataFlow() {
-  while (true) {
-    yield take(SEND_AWS_SUCCESS)
-    yield fork(firebaseData, false)
-  }
-}
-
 function* initFirebaseDataFlow() {
   yield take(INIT_MESSAGES)
   yield fork(firebaseData, true)
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, REFRESH_CLIENT_DATA, firebaseData, true)
-  yield fork(takeLatest, LOGIN_SUCCESS, initFirebaseDataFlow)
-  yield fork(takeLatest, LOGIN_SUCCESS, appendFirebaseDataFlow)
+  yield fork(takeEvery, REFRESH_CLIENT_DATA, firebaseData, true)
+  yield fork(takeEvery, SEND_AWS_SUCCESS, firebaseData, false)
   yield fork(takeLatest, LOGIN_SUCCESS, updateDataVisibility)
+  yield fork(takeLatest, LOGIN_SUCCESS, initFirebaseDataFlow)
 }

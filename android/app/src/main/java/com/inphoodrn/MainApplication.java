@@ -12,6 +12,11 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.List;
 
+// import Branch and RNBRANCH
+import io.branch.rnbranch.*;
+import io.branch.referral.Branch;
+
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -23,10 +28,17 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+          new RNBranchPackage()
       );
     }
   };
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    Branch.getAutoInstance(this);
+  }
 
   @Override
   public ReactNativeHost getReactNativeHost() {

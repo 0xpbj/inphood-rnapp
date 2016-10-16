@@ -16,6 +16,8 @@ import java.util.List;
 import io.branch.rnbranch.*;
 import io.branch.referral.Branch;
 
+// import react-native-fetch-blob
+import com.RNFetchBlob.*;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -29,7 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new RNBranchPackage()
+          new RNBranchPackage(),
+          new RNFetchBlobPackage()
       );
     }
   };

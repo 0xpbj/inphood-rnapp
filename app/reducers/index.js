@@ -12,7 +12,6 @@ import trainerReducer from './trainerReducer'
 import trainerDataReducer from './trainerDataReducer'
 import trainerNavReducer from './trainerNavReducer'
 import notificationReducer from './notificationReducer'
-import { reducer as formReducer } from 'redux-form'
 import { LOGOUT_SUCCESS }from '../constants/ActionTypes'
 
 const appReducer = combineReducers({
@@ -29,7 +28,6 @@ const appReducer = combineReducers({
     trainerDataReducer,
     trainerNavReducer,
     notificationReducer,
-    formReducer
 })
 
 const rootReducer = (state, action) => {

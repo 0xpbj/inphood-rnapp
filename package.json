@@ -6,11 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "art": "^0.10.1",
-    "buffer": "^5.0.0",
     "clarifai": "^2.0.9",
-    "crypto-js": "^3.1.7",
-    "firebase": "^3.4.0",
+    "firebase": "^3.5.0",
     "react": "^15.3.2",
     "react-native": "^0.35.0",
     "react-native-aws3": "0.0.2",
@@ -20,7 +17,6 @@
     "react-native-device": "^1.0.1",
     "react-native-fbsdk": "^0.3.0",
     "react-native-fetch-blob": "^0.9.6",
-    "react-native-fetch-blob-dev-env": "git+https://github.com/wkh237/react-native-fetch-blob.git",
     "react-native-gifted-chat": "0.0.10",
     "react-native-loading-spinner-overlay": "^0.3.0",
     "react-native-mail": "^2.0.0",
@@ -29,10 +25,8 @@
     "react-native-swiper": "^1.5.1",
     "react-native-vector-icons": "^2.1.0",
     "react-redux": "^4.4.5",
-    "react-timer-mixin": "^0.13.3",
     "redux": "^3.6.0",
     "redux-actions": "^0.12.0",
-    "redux-form": "^6.1.0",
     "redux-persist": "^4.0.0-alpha6",
     "redux-saga": "^0.12.0",
     "tcomb-form-native": "^0.6.1"

@@ -60,7 +60,8 @@ import {
   FRIEND_APP_INVITE,
   CLEAR_CLIENT_ALERT,
   CLEAR_TRAINER_ALERT,
-  BRANCH_AUTH_TRAINER
+  BRANCH_AUTH_TRAINER,
+  INIT_LOGIN
 } from '../constants/ActionTypes'
 
 export function pushExp (route) {
@@ -443,5 +444,13 @@ export function setBranchAuthTrainer(response) {
   return {
     type: BRANCH_AUTH_TRAINER,
     response
+  }
+}
+
+
+export function initLogin(flag) {
+  return {
+    type: INIT_LOGIN,
+    flag
   }
 }

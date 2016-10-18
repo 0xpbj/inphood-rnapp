@@ -6,7 +6,7 @@ import {
 
 import {REHYDRATE} from 'redux-persist/constants'
 
-import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
+import {race, call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 import * as db from './firebaseCommands'
 import Config from '../constants/config-vars'
@@ -70,7 +70,6 @@ function* fbloginFlow() {
   }
   catch(error) {
     yield put ({type: LOGIN_ERROR, error})
-    yield put ({type: INIT_LOGIN, flag: false})
   }
 }
 
@@ -84,6 +83,7 @@ const emailCreate = (value) => {
 
 function* emailCreateFlow(value) {
   try {
+    yield put ({type: INIT_LOGIN, flag: true})
     yield call(emailCreate, value)
     const user = firebase.auth().currentUser
     const id = user.providerData[0].uid
@@ -112,7 +112,6 @@ function* emailCreateFlow(value) {
 
 function* watchEMCreateFlow() {
   const data = yield take(EM_CREATE_USER)
-  yield put ({type: INIT_LOGIN, flag: true})
   yield call(emailCreateFlow, data.value)
 }
 
@@ -127,6 +126,7 @@ const emailLogin = (value) => {
 
 function* emloginFlow(value) {
   try {
+    yield put ({type: INIT_LOGIN, flag: true})
     yield call(emailLogin, value)
     const user = firebase.auth().currentUser
     const token = user.uid
@@ -160,7 +160,6 @@ function* emloginFlow(value) {
   }
   catch(error) {
     yield put ({type: LOGIN_ERROR, error})
-    yield put ({type: INIT_LOGIN, flag: false})
   }
 }
 
@@ -170,7 +169,6 @@ function* watchEMLoginFlow() {
     const data = yield take(EM_LOGIN_REQUEST)
     value = data.value
   }
-  yield put ({type: INIT_LOGIN, flag: true})
   yield call(emloginFlow, value)
 }
 
@@ -207,9 +205,9 @@ function* resetPassword() {
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], fbloginFlow)
-  yield fork(takeLatest, [REHYDRATE, EM_LOGIN_INIT], watchEMLoginFlow)
   yield fork(watchEMCreateFlow)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], watchEMLoginFlow)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], fbloginFlow)
   yield fork(takeLatest, RESET_PASSWORD, resetPassword)
   yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)
 }

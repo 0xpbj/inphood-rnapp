@@ -83,6 +83,8 @@ export default class Start extends Component {
   }
   render() {
     if (this.props.auth.inProgress) {
+      if (this.props.auth.result !== null)
+        this.props.initLogin(false)
       return this.launchScreen()
     }
     else if (this.props.auth.result === null) {
@@ -119,15 +121,17 @@ export default class Start extends Component {
   }
   launchScreen() {
     return (
-      <Image
-        source={require('./img/HD_5_5.png')}
-        style={[launchImageSize, CommonStyles.containerImage]}>
+      <View>
         <Spinner
           visible={true}
           color='black'
           overlayColor='rgba(0, 0, 0, 0)'
         />
-      </Image>
+        <Image
+          source={require('./img/HD_5_5.png')}
+          style={[launchImageSize, CommonStyles.containerImage]}>
+        </Image>
+      </View>
     )
   }
   flipBoardCaption(captionLocation, captionText) {

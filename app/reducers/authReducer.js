@@ -43,8 +43,7 @@ export default function authentication(state = initialState, action) {
     case STORE_RESULT:
       return {
         ...state,
-        result: action.result,
-        inProgress: false
+        result: action.result
       }
     case USER_SETTINGS:
       return {

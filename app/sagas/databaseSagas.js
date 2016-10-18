@@ -1,7 +1,9 @@
 import {
   LOGIN_SUCCESS, ADD_MESSAGES, REFRESH_CLIENT_DATA, REMOVE_CLIENT_PHOTO,
   LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_ERROR, INIT_MESSAGES, INIT_PHOTOS,
-  APPEND_PHOTOS_SUCCESS, APPEND_PHOTOS_ERROR, SEND_AWS_SUCCESS
+  APPEND_PHOTOS_SUCCESS, APPEND_PHOTOS_ERROR, SEND_AWS_SUCCESS, IS_NEW_USER,
+  syncAddedGalleryChild, syncRemovedGalleryChild,
+  SYNC_ADDED_GALLERY_CHILD, SYNC_REMOVED_GALLERY_CHILD,
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -20,7 +22,6 @@ function* updateDataVisibility() {
   while (true) {
     const data = yield take(REMOVE_CLIENT_PHOTO)
     firebase.database().ref(data.path).update({'visible': false})
-    yield put({type: REFRESH_CLIENT_DATA})
   }
 }
 
@@ -36,63 +37,47 @@ const isLocalFile = (localFile) => {
     .catch(error => ({ error }))
 }
 
-function* firebaseData(flag) {
-  try {
-    yield put ({type: INIT_PHOTOS})
-    let uid = yield select(state => state.authReducer.token)
-    if (!uid) {
-      uid = firebase.auth().currentUser.uid
+function* triggerGetGalleryChild() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_ADDED_GALLERY_CHILD)
+    if (data.val().visible) {
+      const file = data.val()
+      const fileName = file.fileName
+      const photo = turlHead+fileName
+      const caption = file.caption
+      const title = file.title
+      const mealType = file.mealType
+      const time = file.time
+      const localFile = file.localFile
+      const notification = file.notifyClient
+      const obj = {photo,caption,mealType,time,title,localFile,data:file,notification}
+      yield put ({type: APPEND_PHOTOS_SUCCESS, appendPhotos: obj})
     }
-    let photos = []
-    const path = '/global/' + uid + '/photoData'
-    let vals = []
-    if (flag) {
-      vals = (yield call(db.getPath, path)).val()
-    }
-    else {
-      vals = (yield call(db.getLastPath, path)).val()
-    }
-    for (let key in vals) {
-      const data = vals[key]
-      const visible = data.visible
-      if (visible) {
-        // let thumb = turlHead+data.fileName
-        const fileName = data.fileName
-        const photo = turlHead+fileName
-        const caption = data.caption
-        const title = data.title
-        const mealType = data.mealType
-        const time = data.time
-        const localFile = data.localFile
-        const notification = data.notifyClient
-        if (flag) {
-          yield fork(prefetchData, photo)
-        }
-        const {flag, error} = yield call(isLocalFile, localFile)
-        const obj = {photo,caption,mealType,time,title,localFile,flag,data,notification}
-        photos.unshift(obj)
-      }
-    }
-    if (flag) {
-      yield put ({type: LOAD_PHOTOS_SUCCESS, photos})
-    }
-    else if (photos[0]) {
-      yield put ({type: APPEND_PHOTOS_SUCCESS, appendPhotos: photos[0]})
-    }
-  }
-  catch(error) {
-    yield put ({type: LOAD_PHOTOS_ERROR, error})
   }
 }
 
-function* initFirebaseDataFlow() {
-  yield take(INIT_MESSAGES)
-  yield fork(firebaseData, true)
+function* triggerRemGalleryChild() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_REMOVED_GALLERY_CHILD)
+    const child = data
+  }
+}
+
+function* syncPhotoData() {
+  let uid = yield select(state => state.authReducer.token)
+  if (!uid) {
+    uid = firebase.auth().currentUser.uid
+  }
+  let path = '/global/' + uid + '/photoData'
+  yield fork(db.sync, path, {
+    child_added: syncAddedGalleryChild,
+    child_removed: syncRemovedGalleryChild,
+  })
 }
 
 export default function* rootSaga() {
-  yield fork(takeEvery, REFRESH_CLIENT_DATA, firebaseData, true)
-  yield fork(takeEvery, SEND_AWS_SUCCESS, firebaseData, false)
+  yield fork(takeLatest, LOGIN_SUCCESS, syncPhotoData)
+  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetGalleryChild)
+  yield fork(takeLatest, LOGIN_SUCCESS, triggerRemGalleryChild)
   yield fork(takeLatest, LOGIN_SUCCESS, updateDataVisibility)
-  yield fork(takeLatest, LOGIN_SUCCESS, initFirebaseDataFlow)
 }

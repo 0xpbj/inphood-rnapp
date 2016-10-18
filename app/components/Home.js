@@ -130,7 +130,7 @@ export default class HomeTabs extends Component {
     // if (this.state.trainerNotification) {
     //   PushNotificationIOS.presentLocalNotification({alertBody: this.state.trainerNotification})
     // }
-    const trainer = this.props.auth.trainer
+    const trainer = this.props.trainer.clients.length > 0
     const trainerNotificationCount = this.props.notification.trainer > 0 ? this.props.notification.trainer : undefined
     const clientNotificationCount = this.props.notification.client > 0 ? this.props.notification.client : undefined
     const tabs = this.props.tabs.routes.map((tab, i) => {

@@ -18,6 +18,7 @@ const fbConfig = {
 var { AsyncStorage } = require('react-native')
 
 const sagaMiddleware = createSagaMiddleware({sagaMonitor})
+  
 const persistConfig = {
   whitelist: [
     'authReducer',

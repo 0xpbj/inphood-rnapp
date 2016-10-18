@@ -19,17 +19,6 @@ import firebase from 'firebase'
 
 const turlHead = Config.AWS_CDN_THU_URL
 
-function* triggerGetClientMessagesCount() {
-  while (true) {
-    const { payload: { data } } = yield take(SYNC_COUNT_CLIENT_MESSAGES_CHILD)
-    const count = data.numChildren()
-    yield put({type: MSG_COUNT, count})
-    if (count === 0) {
-      yield put({type: INIT_MESSAGES})
-    }
-  }
-}
-
 function* triggerGetMessagesClientChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
@@ -71,7 +60,6 @@ function* syncChatData() {
   }
   let path = '/global/' + uid + '/messages'
   yield fork(db.sync, path, {
-    value: syncCountClientMessagesChild,
     child_added: syncAddedMessagesClientChild,
     child_removed: syncRemovedMessagesClientChild,
   })
@@ -150,7 +138,6 @@ export default function* rootSaga() {
   yield fork(takeLatest, LOGIN_SUCCESS, syncChatData)
   yield fork(takeLatest, LOGIN_SUCCESS, watchFirebaseChatFlow)
   yield fork(takeLatest, LOGIN_SUCCESS, readFirebaseChatFlow)
-  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetClientMessagesCount)
   yield fork(takeLatest, LOGIN_SUCCESS, triggerGetMessagesClientChild)
   yield fork(takeLatest, LOGIN_SUCCESS, triggerRemMessagesClientChild)
 }

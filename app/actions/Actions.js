@@ -25,7 +25,6 @@ import {
   SEND_FIREBASE_ERROR,
   SEND_FIREBASE_INIT_CAMERA,
   SEND_FIREBASE_INIT_LIBRARY,
-  STORE_TRAINER,
   STORE_TOKEN,
   STORE_RESULT,
   STORE_CAMERA_CAPTION,
@@ -290,13 +289,6 @@ export function storeId(id) {
 export function initChatSaga() {
   return {
     type: INIT_CHAT_SAGA,
-  }
-}
-
-export function storeTrainer(flag) {
-  return {
-    type: STORE_TRAINER,
-    flag
   }
 }
 

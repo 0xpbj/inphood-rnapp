@@ -132,7 +132,7 @@ export default class GalleryListView extends Component{
   }
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     let imgBlock = <Image style={CommonStyles.galleryListViewThumb} source={{uri: rowData.localFile}}/>
-    if (!rowData.flag || ((Date.now() - rowData.time)/1000 > 26400)) {
+    if ((Date.now() - rowData.time) > 60000) {
       imgBlock = (
         <NetworkImage source={{uri: rowData.photo}}></NetworkImage>
       )
@@ -176,7 +176,7 @@ export default class GalleryListView extends Component{
         </View>
         <TouchableOpacity
           style={CommonStyles.trashView}
-          onPress={this._removeClientPhoto.bind(this, path)}>
+          onPress={this._removeClientPhoto.bind(this, path, data.fileTail)}>
           <Icon name="ios-trash-outline" size={30} color='red'/>
         </TouchableOpacity>
         {showNotification}
@@ -199,7 +199,7 @@ export default class GalleryListView extends Component{
       />
     )
   }
-  _removeClientPhoto(path) {
+  _removeClientPhoto(path, tail) {
     AlertIOS.alert(
      'Confirm Delete?',
      '',
@@ -209,6 +209,21 @@ export default class GalleryListView extends Component{
         onPress: () => {
           console.log(path)
           this.props.removeClientPhoto(path)
+          let mediaList = this.state.mediaList
+          let index = -1
+          for (let id in mediaList) {
+            if (tail === mediaList[id].data.fileTail) {
+              index = id
+              break
+            }
+          }
+          if (index > -1) {
+            mediaList.splice(index, 1);
+          }
+          this.setState({
+            mediaList: mediaList,
+            dataSource: this._createDataSource(mediaList),
+          })
         }, style: 'destructive'}
      ],
     )

@@ -7,16 +7,14 @@ import clients from './clientIdsSagas'
 import data from './clientDataSagas'
 import vision from './clarifaiSagas'
 import branch from './branchSagas'
-import notification from './notificationSagas'
 
 export default function* rootSaga() {
-  yield fork(aws)
   yield fork(login)
   yield fork(database)
   yield fork(chat)
+  yield fork(aws)
   yield fork(clients)
   yield fork(data)
   yield fork(vision)
   yield fork(branch)
-  // yield fork(notification)
 }

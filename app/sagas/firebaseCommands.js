@@ -29,6 +29,13 @@ export function* get(path, key) {
   return data.val();
 }
 
+export function* getOrderedPath(path, key) {
+  const ops = newOps('error');
+  const ref = firebase.database().ref(path);
+  const data = yield call([ref, ref.once, ref.orderByChild("time")], 'value');
+  return data
+}
+
 export function* getPath(path) {
   const ops = newOps('error');
   const ref = firebase.database().ref(path);

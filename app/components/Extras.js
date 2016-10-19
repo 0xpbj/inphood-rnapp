@@ -48,7 +48,7 @@ export default class Extras extends Component {
         <Login
           _handleNavigate={this._handleNavigate.bind(this)}
           emailLoginRequest={(action)=>this.props.emailLoginRequest(action)}
-          emailLoginInit={this.props.emailLoginInit}
+          loginRequest={this.props.loginRequest}
           goBack={this._handleBackAction.bind(this)}
         />
       )

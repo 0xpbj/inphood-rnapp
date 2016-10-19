@@ -30,14 +30,8 @@ export default class ChatThread extends Component {
     this.loadMessages = this.loadMessages.bind(this)
     this._isAlright = null
   }
-  componentDidMount() {}
   componentWillReceiveProps(nextProps = {}) {
     this.loadMessages()
-  }
-  componentWillMount() {
-    if (this.state.loadEarlier) {
-      this.loadMessages()
-    }
   }
   loadMessages() {
     const feedbackPhoto = this.props.chat.feedbackPhoto
@@ -48,13 +42,13 @@ export default class ChatThread extends Component {
       if (this.props.caller === "trainer" && oldMessages[keys].trainerRead === false) {
         const uid = oldMessages[keys].uid
         const path = '/global/' + uid + '/messages/' + oldMessages[keys].key
-        const photo = turlHead + uid + '/' + oldMessages[keys].photo
+        const photo = turlHead + uid + '/' + oldMessages[keys].photo + '.jpg'
         this.props.markMessageRead(path, true, photo, uid)
       }
       else if (this.props.caller === "client" && oldMessages[keys].clientRead === false) {
         const uid = this.state.id
         const path = '/global/' + uid + '/messages/' + oldMessages[keys].key
-        const photo = turlHead + uid + '/' + oldMessages[keys].photo
+        const photo = turlHead + uid + '/' + oldMessages[keys].photo + '.jpg'
         this.props.markMessageRead(path, false, photo, uid)
       }
       let message = oldMessages[keys].message

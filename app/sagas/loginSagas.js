@@ -1,12 +1,15 @@
 import {
-  EM_LOGIN_INIT, EM_LOGIN_REQUEST, EM_CREATE_USER, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, RESET_PASSWORD,
-  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_RESULT, STORE_TOKEN, INIT_LOGIN, USER_SETTINGS,
+  EM_LOGIN_INIT, EM_LOGIN_REQUEST, EM_CREATE_USER, 
+  FB_LOGIN_SUCCESS, FB_LOGIN_ERROR, EM_LOGIN_SUCCESS, EM_LOGIN_ERROR,
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, RESET_PASSWORD,
+  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, 
+  STORE_RESULT, STORE_TOKEN, INIT_LOGIN, USER_SETTINGS,
   BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER,
 } from '../constants/ActionTypes'
 
 import {REHYDRATE} from 'redux-persist/constants'
 
-import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
+import {race, call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 import * as db from './firebaseCommands'
 import Config from '../constants/config-vars'
@@ -61,6 +64,7 @@ function* fbloginFlow() {
       yield put ({type: STORE_RESULT, result})
       yield put ({type: STORE_TOKEN, token})
       yield put ({type: LOGIN_SUCCESS})
+      yield put ({type: FB_LOGIN_SUCCESS})
       firebase.database().ref('/global/' + token + '/userInfo/public').update({
         id,
         name,
@@ -69,8 +73,8 @@ function* fbloginFlow() {
     }
   }
   catch(error) {
+    yield put ({type: FB_LOGIN_ERROR})
     yield put ({type: LOGIN_ERROR, error})
-    yield put ({type: INIT_LOGIN, flag: false})
   }
 }
 
@@ -84,6 +88,7 @@ const emailCreate = (value) => {
 
 function* emailCreateFlow(value) {
   try {
+    yield put ({type: INIT_LOGIN, flag: true})
     yield call(emailCreate, value)
     const user = firebase.auth().currentUser
     const id = user.providerData[0].uid
@@ -98,6 +103,7 @@ function* emailCreateFlow(value) {
     yield put ({type: STORE_RESULT, result})
     yield put ({type: STORE_TOKEN, token})
     yield put ({type: LOGIN_SUCCESS})
+    yield put ({type: EM_LOGIN_SUCCESS})
     firebase.database().ref('/global/' + token + '/userInfo/public').update({
       id,
       name,
@@ -105,6 +111,7 @@ function* emailCreateFlow(value) {
     })
   }
   catch(error) {
+    yield put ({type: EM_LOGIN_ERROR})
     yield put ({type: LOGIN_ERROR, error})
     yield put ({type: INIT_LOGIN, flag: false})
   }
@@ -112,7 +119,6 @@ function* emailCreateFlow(value) {
 
 function* watchEMCreateFlow() {
   const data = yield take(EM_CREATE_USER)
-  yield put ({type: INIT_LOGIN, flag: true})
   yield call(emailCreateFlow, data.value)
 }
 
@@ -127,6 +133,7 @@ const emailLogin = (value) => {
 
 function* emloginFlow(value) {
   try {
+    yield put ({type: INIT_LOGIN, flag: true})
     yield call(emailLogin, value)
     const user = firebase.auth().currentUser
     const token = user.uid
@@ -157,10 +164,11 @@ function* emloginFlow(value) {
     yield put ({type: STORE_RESULT, result})
     yield put ({type: STORE_TOKEN, token})
     yield put ({type: LOGIN_SUCCESS})
+    yield put ({type: EM_LOGIN_SUCCESS})
   }
   catch(error) {
+    yield put ({type: EM_LOGIN_ERROR})
     yield put ({type: LOGIN_ERROR, error})
-    yield put ({type: INIT_LOGIN, flag: false})
   }
 }
 
@@ -170,7 +178,6 @@ function* watchEMLoginFlow() {
     const data = yield take(EM_LOGIN_REQUEST)
     value = data.value
   }
-  yield put ({type: INIT_LOGIN, flag: true})
   yield call(emloginFlow, value)
 }
 
@@ -206,10 +213,26 @@ function* resetPassword() {
   }
 }
 
+function* initializeLogin() {
+  // while (true) {
+  //   yield take([REHYDRATE, LOGIN_REQUEST])
+    yield race({
+      task:  call(fbloginFlow),
+      cancel: take([EM_LOGIN_SUCCESS, FB_LOGIN_ERROR])
+    })
+    yield race({
+      task:  call(watchEMLoginFlow),
+      cancel: take([FB_LOGIN_SUCCESS, EM_LOGIN_ERROR])
+    })
+  // }
+}
+
 export default function* rootSaga() {
-  yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], fbloginFlow)
-  yield fork(takeLatest, [REHYDRATE, EM_LOGIN_INIT], watchEMLoginFlow)
   yield fork(watchEMCreateFlow)
+  // yield fork(initializeLogin)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], initializeLogin)
+  // yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], watchEMLoginFlow)
+  // yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], fbloginFlow)
   yield fork(takeLatest, RESET_PASSWORD, resetPassword)
   yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)
 }

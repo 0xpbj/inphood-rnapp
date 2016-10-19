@@ -1,7 +1,7 @@
 import {
   LOGIN_SUCCESS, LOGIN_ERROR, INIT_LOGIN,
   LOGOUT_SUCCESS, LOGOUT_ERROR, USER_SETTINGS,
-  STORE_TOKEN, STORE_RESULT, STORE_TRAINER,
+  STORE_TOKEN, STORE_RESULT,
   EM_LOGIN_REQUEST, BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER
 } from '../constants/ActionTypes'
 
@@ -9,7 +9,6 @@ const initialState = {
   token: '',
   result: null,
   error: null,
-  trainer: false,
   inProgress: false,
   value: null,
   settings: {},
@@ -41,16 +40,10 @@ export default function authentication(state = initialState, action) {
         ...state,
         token: action.token
       }
-    case STORE_TRAINER:
-      return {
-        ...state,
-        trainer: action.flag
-      }
     case STORE_RESULT:
       return {
         ...state,
-        result: action.result,
-        inProgress: false
+        result: action.result
       }
     case USER_SETTINGS:
       return {

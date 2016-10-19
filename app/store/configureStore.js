@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { persistStore, autoRehydrate } from 'redux-persist'
+import sagaMonitor from './sagaMonitor'
 import rootReducer from '../reducers'
 import rootSaga from '../sagas/index'
 import createSagaMiddleware from 'redux-saga'
@@ -16,7 +17,8 @@ const fbConfig = {
 }
 var { AsyncStorage } = require('react-native')
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware({sagaMonitor})
+  
 const persistConfig = {
   whitelist: [
     'authReducer',

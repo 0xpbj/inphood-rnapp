@@ -1,5 +1,5 @@
 import {
-  LOGIN_SUCCESS, STORE_TRAINER, ADD_CLIENTS, INIT_DATA, NUMBER_OF_CLIENTS,
+  LOGIN_SUCCESS, ADD_CLIENTS, INIT_DATA, NUMBER_OF_CLIENTS,
   syncCountClientIdChild, syncAddedClientIdChild, syncRemovedClientIdChild,
   SYNC_COUNT_CLIENTID_CHILD, SYNC_ADDED_CLIENTID_CHILD, SYNC_REMOVED_CLIENTID_CHILD,
 } from '../constants/ActionTypes'
@@ -24,9 +24,7 @@ function* triggerGetClientIdCount() {
 function* triggerGetClientIdChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_CLIENTID_CHILD)
-    let flag = true
     const child = data.val()
-    yield put({type: STORE_TRAINER, flag})
     yield put({type: ADD_CLIENTS, child})
   }
 }

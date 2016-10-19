@@ -25,7 +25,6 @@ import {
   SEND_FIREBASE_ERROR,
   SEND_FIREBASE_INIT_CAMERA,
   SEND_FIREBASE_INIT_LIBRARY,
-  STORE_TRAINER,
   STORE_TOKEN,
   STORE_RESULT,
   STORE_CAMERA_CAPTION,
@@ -61,7 +60,8 @@ import {
   FRIEND_APP_INVITE,
   CLEAR_CLIENT_ALERT,
   CLEAR_TRAINER_ALERT,
-  BRANCH_AUTH_TRAINER
+  BRANCH_AUTH_TRAINER,
+  INIT_LOGIN
 } from '../constants/ActionTypes'
 
 export function pushExp (route) {
@@ -293,13 +293,6 @@ export function initChatSaga() {
   }
 }
 
-export function storeTrainer(flag) {
-  return {
-    type: STORE_TRAINER,
-    flag
-  }
-}
-
 export function storeToken(token) {
   return {
     type: STORE_TOKEN,
@@ -451,5 +444,13 @@ export function setBranchAuthTrainer(response) {
   return {
     type: BRANCH_AUTH_TRAINER,
     response
+  }
+}
+
+
+export function initLogin(flag) {
+  return {
+    type: INIT_LOGIN,
+    flag
   }
 }

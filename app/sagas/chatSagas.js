@@ -11,24 +11,13 @@ import {
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
-import { takeLatest } from 'redux-saga'
+import { takeLatest, takeEvery } from 'redux-saga'
 import * as db from './firebaseCommands'
 import Config from '../constants/config-vars'
 
 import firebase from 'firebase'
 
 const turlHead = Config.AWS_CDN_THU_URL
-
-function* triggerGetClientMessagesCount() {
-  while (true) {
-    const { payload: { data } } = yield take(SYNC_COUNT_CLIENT_MESSAGES_CHILD)
-    const count = data.numChildren()
-    yield put({type: MSG_COUNT, count})
-    if (count === 0) {
-      yield put({type: INIT_MESSAGES})
-    }
-  }
-}
 
 function* triggerGetMessagesClientChild() {
   while (true) {
@@ -71,7 +60,6 @@ function* syncChatData() {
   }
   let path = '/global/' + uid + '/messages'
   yield fork(db.sync, path, {
-    value: syncCountClientMessagesChild,
     child_added: syncAddedMessagesClientChild,
     child_removed: syncRemovedMessagesClientChild,
   })
@@ -93,11 +81,11 @@ function* sendChatData() {
     let trainerRead = false
     if (trainer) {
       clientRead = true
-      const path = '/global/' + uid + '/photoData/' + photo
-      firebase.database().ref(path).update({'notifyTrainer': true})
-      const data = turlHead + uid + '/' + photo + '.jpg'
-      yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
-      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: data, path})
+      // const path = '/global/' + uid + '/photoData/' + photo
+      // const data = turlHead + uid + '/' + photo + '.jpg'
+      // firebase.database().ref(path).update({'notifyTrainer': true})
+      // yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
+      // yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: data, path})
     }
     else {
       trainerRead = true
@@ -120,20 +108,14 @@ function* sendChatData() {
   }
 }
 
-function* watchFirebaseChatFlow() {
-  while (true) {
-    yield take(INIT_CHAT_SAGA)
-    yield fork(sendChatData)
-  }
-}
-
 function* readFirebaseChatFlow() {
   while (true) {
     const data = yield take(MARK_MESSAGE_READ)
-    const photo = data.photo + '.jpg'
+    const photo = data.photo
     const uid = data.uid
     const path = data.path
-    if (data.trainer) {
+    const trainer = data.trainer
+    if (trainer) {
       firebase.database().ref(data.path).update({'trainerRead': true})
       yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
       yield put({type: DECREMENT_TRAINER_CHAT_NOTIFICATION, photo})
@@ -147,10 +129,9 @@ function* readFirebaseChatFlow() {
 }
 
 export default function* rootSaga() {
+  yield fork(takeEvery, INIT_CHAT_SAGA, sendChatData)
   yield fork(takeLatest, LOGIN_SUCCESS, syncChatData)
-  yield fork(takeLatest, LOGIN_SUCCESS, watchFirebaseChatFlow)
   yield fork(takeLatest, LOGIN_SUCCESS, readFirebaseChatFlow)
-  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetClientMessagesCount)
   yield fork(takeLatest, LOGIN_SUCCESS, triggerGetMessagesClientChild)
   yield fork(takeLatest, LOGIN_SUCCESS, triggerRemMessagesClientChild)
 }

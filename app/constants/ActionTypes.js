@@ -1,7 +1,6 @@
 import { createAction } from 'redux-actions'
 
 //AUTH Actions
-export const STORE_TRAINER = 'STORE_TRAINER'
 export const STORE_TOKEN = 'STORE_TOKEN'
 export const STORE_RESULT = 'STORE_RESULT'
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
@@ -16,6 +15,10 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_ERROR = 'LOGOUT_ERROR'
 export const IS_NEW_USER = 'IS_NEW_USER'
 export const RESET_PASSWORD = 'RESET_PASSWORD'
+export const EM_LOGIN_SUCCESS = 'EM_LOGIN_SUCCESS'
+export const EM_LOGIN_ERROR = 'EM_LOGIN_ERROR'
+export const FB_LOGIN_SUCCESS = 'FB_LOGIN_SUCCESS'
+export const FB_LOGIN_ERROR = 'FB_LOGIN_ERROR'
 
 
 
@@ -122,9 +125,12 @@ export const STORE_SETTINGS_FORM = 'STORE_SETTINGS_FORM'
 export const CLIENT_APP_INVITE = 'CLIENT_APP_INVITE'
 export const FRIEND_APP_INVITE = 'FRIEND_APP_INVITE'
 export const TRAINER_APP_INVITE = 'TRAINER_APP_INVITE'
+export const APP_INVITE_SUCCESS = 'APP_INVITE_SUCCESS'
 export const APP_INVITE_ERROR = 'APP_INVITE_ERROR'
 export const BRANCH_REFERRAL_INFO = 'BRANCH_REFERRAL_INFO'
 export const BRANCH_AUTH_TRAINER = 'BRANCH_AUTH_TRAINER'
+export const SETUP_CLIENT_ERROR = 'SETUP_CLIENT_ERROR'
+export const SETUP_TRAINER_ERROR = 'SETUP_TRAINER_ERROR'
 
 
 
@@ -141,6 +147,12 @@ export const INIT_DATA = 'INIT_DATA'
 export const ADD_INFOS = 'ADD_INFOS'
 export const ADD_PHOTOS = 'ADD_PHOTOS'
 export const ADD_CLIENTS = 'ADD_CLIENTS'
+
+
+export const SYNC_ADDED_GALLERY_CHILD = 'SYNC_ADDED_GALLERY_CHILD'
+export const SYNC_REMOVED_GALLERY_CHILD = 'SYNC_REMOVED_GALLERY_CHILD'
+export const syncAddedGalleryChild = createAction(SYNC_ADDED_GALLERY_CHILD)
+export const syncRemovedGalleryChild = createAction(SYNC_REMOVED_GALLERY_CHILD)
 
 export const SYNC_ADDED_ROOT_CHILD = 'SYNC_ADDED_ROOT_CHILD'
 export const SYNC_REMOVED_ROOT_CHILD = 'SYNC_REMOVED_ROOT_CHILD'

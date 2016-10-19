@@ -30,7 +30,7 @@ export default class HomeTabs extends Component {
   }
   componentWillMount() {
     if (Platform.OS === 'ios') {
-      var PushNotificationIOS = require('react-native')
+      var {PushNotificationIOS} = require('react-native')
       PushNotificationIOS.requestPermissions()
     }
     // PushNotificationIOS.addEventListener('register', this._onRegistered)
@@ -126,6 +126,7 @@ export default class HomeTabs extends Component {
     const notificationCount = this.props.notification.client + this.props.notification.trainer
     const notification = notificationCount > 0 ? notificationCount : 0
     if (Platform.OS === 'ios') {
+      var {PushNotificationIOS} = require('react-native')
       PushNotificationIOS.setApplicationIconBadgeNumber(notification)
     }
     // if (this.state.clientNotification) {
@@ -175,7 +176,7 @@ export default class HomeTabs extends Component {
     })
 
     if (Platform.OS === 'ios') {
-      var TabBarIOS = require('react-native')
+      var {TabBarIOS} = require('react-native')
 
       return (
         <TabBarIOS
@@ -195,7 +196,7 @@ export default class HomeTabs extends Component {
         <ScrollableTabView>
           {tabs}
         </ScrollableTabView>
-      )  
+      )
     }
   }
 }

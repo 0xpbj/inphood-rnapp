@@ -1,8 +1,8 @@
 import {
-  EM_LOGIN_INIT, EM_LOGIN_REQUEST, EM_CREATE_USER, 
+  EM_LOGIN_INIT, EM_LOGIN_REQUEST, EM_CREATE_USER,
   FB_LOGIN_SUCCESS, FB_LOGIN_ERROR, EM_LOGIN_SUCCESS, EM_LOGIN_ERROR,
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, RESET_PASSWORD,
-  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, 
+  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR,
   STORE_RESULT, STORE_TOKEN, INIT_LOGIN, USER_SETTINGS,
   BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER,
 } from '../constants/ActionTypes'
@@ -73,6 +73,7 @@ function* fbloginFlow() {
     }
   }
   catch(error) {
+    yield put ({type: INIT_LOGIN, flag: false})
     yield put ({type: FB_LOGIN_ERROR})
     yield put ({type: LOGIN_ERROR, error})
   }
@@ -226,7 +227,7 @@ function* initializeLogin() {
 
 export default function* rootSaga() {
   yield fork(watchEMCreateFlow)
-  yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], initializeLogin)
+  yield fork(takeLatest, [REHYDRATE,LOGIN_REQUEST], initializeLogin)
   yield fork(takeLatest, RESET_PASSWORD, resetPassword)
   yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)
 }

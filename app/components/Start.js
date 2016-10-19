@@ -71,7 +71,7 @@ export default class Start extends Component {
       // and not an import b/c there is no way to conditionally import on ES6 and it
       // breaks our Android run-time as soon as import is run.
       //
-      var Device = require('react-native-device')
+      var {Device} = require('react-native-device')
       let deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
       Mailer.mail({
         subject: 'Need Help',

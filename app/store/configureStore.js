@@ -18,23 +18,23 @@ const fbConfig = {
 var { AsyncStorage } = require('react-native')
 
 const sagaMiddleware = createSagaMiddleware({sagaMonitor})
-  
+
 const persistConfig = {
   whitelist: [
     'authReducer',
     'chatReducer',
     'galReducer',
-    'notificationReducer',
     'trainerDataReducer',
     'trainerReducer'
   ],
-  blacklist: [ 
+  blacklist: [
     'camReducer',
     'extReducer',
     'galNavReducer',
     'libReducer',
-    'tabReducer', 
-    'trainerNavReducer', 
+    'notificationReducer',
+    'tabReducer',
+    'trainerNavReducer',
   ],
   storage: AsyncStorage,
 }

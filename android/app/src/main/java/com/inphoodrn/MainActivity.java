@@ -8,9 +8,6 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import com.chirag.RNMail.RNMail;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
-// This import causes android builds to fail (package does not exist errors)
-//import com.lwansbrough.ReactCamera.ReactCamera;
-
 // From: https://dev.branch.io/getting-started/sdk-integration-guide/guide/react/#android-configure-manifest
 import io.branch.rnbranch.*;
 import android.content.Intent;

@@ -129,6 +129,8 @@ function* emloginFlow(value) {
   try {
     yield call(emailLogin, value)
     const user = firebase.auth().currentUser
+    console.log('----------------- Can you see me now bitch! ------------------')
+    console.log(user)
     const token = user.uid
     branch.setIdentity(token)
     const path = '/global/' + token + '/userInfo/public'
@@ -145,6 +147,7 @@ function* emloginFlow(value) {
     const referralId = (yield call(db.getPath, path + '/referralId')).val()
     const authTrainer = (yield call(db.getPath, path + '/authTrainer')).val()
     const trainerName = (yield call(db.getPath, path + '/trainerName')).val()
+    console.log(email)
     yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralId, trainerName})
     yield put({type: BRANCH_AUTH_TRAINER, response: authTrainer})
     const provider = user.providerData[0].providerId

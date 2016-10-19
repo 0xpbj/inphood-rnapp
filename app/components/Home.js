@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import {
   View,
   AlertIOS,
-  TabBarIOS,
+  Platform,
   BackAndroid,
-  PushNotificationIOS,
   NavigationExperimental
 } from 'react-native'
 
@@ -30,7 +29,10 @@ export default class HomeTabs extends Component {
     }
   }
   componentWillMount() {
-    PushNotificationIOS.requestPermissions()
+    if (Platform.OS === 'ios') {
+      var PushNotificationIOS = require('react-native')
+      PushNotificationIOS.requestPermissions()
+    }
     // PushNotificationIOS.addEventListener('register', this._onRegistered)
     // PushNotificationIOS.addEventListener('registrationError', this._onRegistrationError)
     // PushNotificationIOS.addEventListener('notification', this._onRemoteNotification)
@@ -123,7 +125,9 @@ export default class HomeTabs extends Component {
     }
     const notificationCount = this.props.notification.client + this.props.notification.trainer
     const notification = notificationCount > 0 ? notificationCount : 0
-    PushNotificationIOS.setApplicationIconBadgeNumber(notification)
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.setApplicationIconBadgeNumber(notification)
+    }
     // if (this.state.clientNotification) {
     //   PushNotificationIOS.presentLocalNotification({alertBody: this.state.clientNotification})
     // }
@@ -169,15 +173,29 @@ export default class HomeTabs extends Component {
         )
       }
     })
-    return (
-      <TabBarIOS
-        unselectedTintColor="black"
-        tintColor="#006400"
-        barTintColor="white"
-        translucent={true}
-      >
-        {tabs}
-      </TabBarIOS>
-    )
+
+    if (Platform.OS === 'ios') {
+      var TabBarIOS = require('react-native')
+
+      return (
+        <TabBarIOS
+          unselectedTintColor="black"
+          tintColor="#006400"
+          barTintColor="white"
+          translucent={true}
+        >
+          {tabs}
+        </TabBarIOS>
+      )
+    } else {
+      // TODO: Something better for Android
+      var ScrollableTabView = require('react-native-scrollable-tab-view')
+
+      return (
+        <ScrollableTabView>
+          {tabs}
+        </ScrollableTabView>
+      )  
+    }
   }
 }

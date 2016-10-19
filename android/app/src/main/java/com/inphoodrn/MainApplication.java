@@ -19,6 +19,12 @@ import io.branch.referral.Branch;
 // import react-native-fetch-blob
 import com.RNFetchBlob.*;
 
+// import react-native-camera
+import com.lwansbrough.RCTCamera.*;
+
+// import React Native Vector Icons
+import com.oblador.vectoricons.*;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -32,7 +38,9 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new RNBranchPackage(),
-          new RNFetchBlobPackage()
+          new RNFetchBlobPackage(),
+          new RCTCameraPackage(),
+          new VectorIconsPackage()
       );
     }
   };

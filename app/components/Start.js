@@ -22,7 +22,6 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import FacebookLogin from './FacebookLogin'
 import EmailLogin from './EmailLogin'
 import Spinner from 'react-native-loading-spinner-overlay'
-import Device from 'react-native-device'
 var Mailer = require('NativeModules').RNMail
 
 import CommonStyles from './styles/common-styles'
@@ -68,6 +67,11 @@ export default class Start extends Component {
   }
   sendEmail() {
     if (this.props.auth.result !== null && (Platform.OS === 'ios')) {
+      // Not supported on Android, need to find alternate. #PBJOCD: this is a require
+      // and not an import b/c there is no way to conditionally import on ES6 and it
+      // breaks our Android run-time as soon as import is run.
+      //
+      var Device = require('react-native-device')
       let deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
       Mailer.mail({
         subject: 'Need Help',

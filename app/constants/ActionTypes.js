@@ -15,6 +15,10 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_ERROR = 'LOGOUT_ERROR'
 export const IS_NEW_USER = 'IS_NEW_USER'
 export const RESET_PASSWORD = 'RESET_PASSWORD'
+export const EM_LOGIN_SUCCESS = 'EM_LOGIN_SUCCESS'
+export const EM_LOGIN_ERROR = 'EM_LOGIN_ERROR'
+export const FB_LOGIN_SUCCESS = 'FB_LOGIN_SUCCESS'
+export const FB_LOGIN_ERROR = 'FB_LOGIN_ERROR'
 
 
 

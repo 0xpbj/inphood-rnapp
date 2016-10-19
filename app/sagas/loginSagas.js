@@ -214,25 +214,19 @@ function* resetPassword() {
 }
 
 function* initializeLogin() {
-  // while (true) {
-  //   yield take([REHYDRATE, LOGIN_REQUEST])
-    yield race({
-      task:  call(fbloginFlow),
-      cancel: take([EM_LOGIN_SUCCESS, FB_LOGIN_ERROR])
-    })
-    yield race({
-      task:  call(watchEMLoginFlow),
-      cancel: take([FB_LOGIN_SUCCESS, EM_LOGIN_ERROR])
-    })
-  // }
+  yield race({
+    task:  call(fbloginFlow),
+    cancel: take([EM_LOGIN_SUCCESS, FB_LOGIN_ERROR])
+  })
+  yield race({
+    task:  call(watchEMLoginFlow),
+    cancel: take([FB_LOGIN_SUCCESS, EM_LOGIN_ERROR])
+  })
 }
 
 export default function* rootSaga() {
   yield fork(watchEMCreateFlow)
-  // yield fork(initializeLogin)
   yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], initializeLogin)
-  // yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], watchEMLoginFlow)
-  // yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], fbloginFlow)
   yield fork(takeLatest, RESET_PASSWORD, resetPassword)
   yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)
 }

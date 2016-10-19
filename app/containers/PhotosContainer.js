@@ -5,7 +5,7 @@ import * as actionCreators from '../actions/Actions';
 
 function mapStateToProps (state) {
   return {
-    media: state.photoReducer
+    library: state.libReducer
   }
 }
 

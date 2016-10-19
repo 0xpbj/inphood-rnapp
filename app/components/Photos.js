@@ -33,7 +33,7 @@ export default class CameraRollPicker extends Component {
       loadingMore: false,
       noMore: false,
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      count: this.props.media.count
+      count: this.props.library.count
     }
   }
   componentWillMount() {
@@ -46,14 +46,14 @@ export default class CameraRollPicker extends Component {
     this.fetch()
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.media.count > this.state.count) {
+    if (nextProps.library.count > this.state.count) {
       this.setState ({
         images: [],
         lastCursor: null,
         loadingMore: false,
         noMore: false,
         dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-        count: nextProps.media.count
+        count: nextProps.library.count
       })
       this.fetch()
     }

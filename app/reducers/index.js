@@ -2,7 +2,6 @@ import { combineReducers } from 'redux'
 import tabReducer from './tabReducer'
 import authReducer from './authReducer'
 import camReducer from './camReducer'
-import photoReducer from './photoReducer'
 import libReducer from './libReducer'
 import extReducer from './extReducer'
 import galReducer from './galReducer'
@@ -18,7 +17,6 @@ const appReducer = combineReducers({
     tabReducer,
     authReducer,
     camReducer,
-    photoReducer,
     libReducer,
     extReducer,
     galReducer,
@@ -31,7 +29,9 @@ const appReducer = combineReducers({
 })
 
 const rootReducer = (state, action) => {
-  if (action.type === LOGOUT_SUCCESS) { state = undefined }
+  if (action.type === LOGOUT_SUCCESS) { 
+    state = undefined
+  }
   return appReducer(state, action)
 }
 

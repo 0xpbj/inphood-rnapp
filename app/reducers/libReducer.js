@@ -1,5 +1,5 @@
 import { 
-  SELECT_PHOTO, STORE_64_LIBRARY, CLARIFAI_TAGS_SUCCESS, 
+  TAKE_PHOTO, SELECT_PHOTO, STORE_64_LIBRARY, CLARIFAI_TAGS_SUCCESS, 
   STORE_LIBRARY_CAPTION, STORE_LIBRARY_TITLE, ADD_LIBRARY_MEAL_DATA, 
   PUSH_LIB_ROUTE, POP_LIB_ROUTE, SEND_FIREBASE_INIT_LIBRARY, SEND_AWS_SUCCESS 
 } from '../constants/ActionTypes'
@@ -31,6 +31,11 @@ const initialState = {
 
 export default function library (state = initialState, action) {
   switch (action.type) {
+    case TAKE_PHOTO:
+      return {
+        ...state,
+        count: state.count + 1
+      }
     case SELECT_PHOTO:
       return {
         ...state,

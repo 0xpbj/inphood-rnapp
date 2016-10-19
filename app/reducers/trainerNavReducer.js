@@ -15,7 +15,7 @@ const initialState = {
   ]
 }
 
-export default function home (state = initialState, action) {
+export default function trainerNav (state = initialState, action) {
   switch (action.type) {
     case PUSH_EXP_ROUTE:
       if (state.routes[state.index].key === (action.route && action.route.key)) {

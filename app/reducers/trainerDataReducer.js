@@ -12,7 +12,7 @@ const initialState = {
   feedbackPhoto: '',
 }
 
-export default function trainer (state = initialState, action) {
+export default function trainerData (state = initialState, action) {
   switch (action.type) {
     case ADD_PHOTOS:
       return {

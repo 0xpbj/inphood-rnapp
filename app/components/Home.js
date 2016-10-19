@@ -140,38 +140,34 @@ export default class HomeTabs extends Component {
     const clientNotificationCount = this.props.notification.client > 0 ? this.props.notification.client : undefined
     const tabs = this.props.tabs.routes.map((tab, i) => {
       if (tab.title !== 'Clients') {
-        return (
-          <Icon.TabBarItemIOS
-            key={tab.name}
-            title={tab.title}
-            iconName={tab.name}
-            selectedIconName={tab.iconName}
-            iconSize={40}
-            badge={tab.title === 'Home' ? clientNotificationCount : undefined}
-            onPress={() => {
-              this.props.changeTab(i)
-            }}
-            selected={this.props.tabs.index === i}>
-            {this._renderTabContent(tab.key)}
-          </Icon.TabBarItemIOS>
-        )
+        badgeValue = tab.title === 'Home' ? clientNotificationCount : undefined
+      } else {
+        badgeValue = trainerNotificationCount
       }
-      else if (trainer && tab.title === 'Clients') {
-        return (
-          <Icon.TabBarItemIOS
-            key={tab.name}
-            title={tab.title}
-            iconName={tab.name}
-            selectedIconName={tab.iconName}
-            iconSize={40}
-            badge={trainerNotificationCount}
-            onPress={() => {
-              this.props.changeTab(i)
-            }}
-            selected={this.props.tabs.index === i}>
-            {this._renderTabContent(tab.key)}
-          </Icon.TabBarItemIOS>
-        )
+
+      if ( (tab.title !== 'Clients') ||
+           (tab.title === 'Clients' && trainer)) {
+
+        if (Platform.OS === 'ios') {
+          return (
+            <Icon.TabBarItemIOS
+              key={tab.name}
+              title={tab.title}
+              iconName={tab.name}
+              selectedIconName={tab.iconName}
+              iconSize={40}
+              badge={badgeValue}
+              onPress={() => {
+                this.props.changeTab(i)
+              }}
+              selected={this.props.tabs.index === i}>
+              {this._renderTabContent(tab.key)}
+            </Icon.TabBarItemIOS>
+          )
+        } else {
+          // Android
+          return(this._renderTabContent(tab.key))
+        }
       }
     })
 

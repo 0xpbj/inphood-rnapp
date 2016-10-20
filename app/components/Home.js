@@ -166,7 +166,12 @@ export default class HomeTabs extends Component {
           )
         } else {
           // Android
-          return(this._renderTabContent(tab.key))
+          return(
+            <View
+              tabLabel={tab.title}
+              style={{flex: 1}}>
+              {this._renderTabContent(tab.key)}
+            </View>)
         }
       }
     })

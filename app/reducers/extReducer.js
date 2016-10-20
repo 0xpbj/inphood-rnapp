@@ -15,7 +15,7 @@ const initialState = {
   ]
 }
 
-export default function extrasNav(state = initialState, action) {
+export default function extNav(state = initialState, action) {
   switch(action.type) {
     case PUSH_EXT_ROUTE:
       if (state.routes[state.index].key === (action.route && action.route.key)) {

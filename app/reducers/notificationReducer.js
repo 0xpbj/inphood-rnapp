@@ -28,7 +28,7 @@ const initialState = {
   trainerNotification: ''
 }
 
-export default function library (state = initialState, action) {
+export default function notification (state = initialState, action) {
   let uid = []
   let data = []
   switch (action.type) {

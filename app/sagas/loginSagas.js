@@ -33,9 +33,9 @@ const facebookLogin = () => {
 
 function* fbloginFlow() {
   try {
-    yield put ({type: INIT_LOGIN, flag: true})
     const {user, error} = yield call(facebookLogin)
     if (user) {
+      yield put ({type: INIT_LOGIN, flag: true})
       const id = user.providerData[0].uid
       branch.setIdentity(id)
       const name = user.providerData[0].displayName
@@ -70,6 +70,7 @@ function* fbloginFlow() {
         name,
         picture,
       })
+      yield put ({type: INIT_LOGIN, flag: false})
     }
   }
   catch(error) {
@@ -110,6 +111,7 @@ function* emailCreateFlow(value) {
       name,
       picture,
     })
+    yield put ({type: INIT_LOGIN, flag: false})
   }
   catch(error) {
     yield put ({type: EM_LOGIN_ERROR})
@@ -166,8 +168,10 @@ function* emloginFlow(value) {
     yield put ({type: STORE_TOKEN, token})
     yield put ({type: LOGIN_SUCCESS})
     yield put ({type: EM_LOGIN_SUCCESS})
+    yield put ({type: INIT_LOGIN, flag: false})
   }
   catch(error) {
+    yield put ({type: INIT_LOGIN, flag: false})
     yield put ({type: EM_LOGIN_ERROR})
     yield put ({type: LOGIN_ERROR, error})
   }

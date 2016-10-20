@@ -23,18 +23,29 @@ public class MainActivity extends ReactActivity {
      * This is used to schedule rendering of the component.
      */
     @Override
-    protected String getMainComponentName() {
+    protected String getMainComponentName()
+    {
         return "inPhoodRN";
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart()
+    {
         super.onStart();
         RNBranchModule.initSession(this.getIntent().getData(), this);
     }
 
     @Override
-    public void onNewIntent(Intent intent) {
+    public void onNewIntent(Intent intent)
+    {
         this.setIntent(intent);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        MainApplication.getmCallbackManager().onActivityResult(requestCode, resultCode, data);
     }
 }

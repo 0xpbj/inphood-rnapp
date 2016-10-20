@@ -20,8 +20,9 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-      <!-- TODO: add properer BranchKey below -->
-      <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_xxxxxxxxxxx" />
+      <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+      <!-- TODO: add proper BranchKey below, the one were using in strings.XML was copied from iOS -->
+      <meta-data android:name="io.branch.sdk.BranchKey" android:value="@string/branch_key" />
       <uses-permission android:name="android.permission.INTERNET" />
     </application>
 

@@ -2,6 +2,7 @@
 import {StyleSheet, Platform} from "react-native"
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
+const SHUTTER_BOTTOM_MARGIN = Platform.OS === 'ios' ? 70 : 90
 
 module.exports = StyleSheet.create({
   button: {
@@ -302,7 +303,7 @@ module.exports = StyleSheet.create({
   },
   shutterOuterViewStyle: {
     marginTop: 5,
-    marginBottom: 70,
+    marginBottom: SHUTTER_BOTTOM_MARGIN,
     marginRight: 35,
     marginLeft: 35,
     width: 60,

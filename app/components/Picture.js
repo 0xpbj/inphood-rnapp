@@ -44,7 +44,9 @@ export default class Picture extends Component {
                   {height: Dimensions.get('window').height,
                    width: Dimensions.get('window').width}]}>
           <View style={CommonStyles.shutterOuterViewStyle}>
-            <TouchableHighlight style={CommonStyles.shutterInnerViewStyle} onPress={this.takePicture.bind(this)}>
+            <TouchableHighlight
+              style={CommonStyles.shutterInnerViewStyle}
+              onPress={this.takePicture.bind(this)}>
               <View/>
             </TouchableHighlight>
           </View>

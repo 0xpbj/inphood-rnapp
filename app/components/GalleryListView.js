@@ -29,6 +29,9 @@ const route = {
 import NetworkImage from './NetworkImage'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Icon from 'react-native-vector-icons/Ionicons'
+import Config from '../constants/config-vars'
+
+const turlHead = Config.AWS_CDN_THU_URL
 
 export default class GalleryListView extends Component{
   constructor(props) {
@@ -130,19 +133,17 @@ export default class GalleryListView extends Component{
       </View>
     )
   }
-  _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    let imgBlock = <Image style={CommonStyles.galleryListViewThumb} source={{uri: rowData.localFile}}/>
-    if ((Date.now() - rowData.time) > 60000) {
+  _renderRow(rowData, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
+    const {databasePath, mealType, localFile, title, caption, time, fileTail, fileName} = rowData
+    const cdnPath = turlHead+fileName
+    let imgBlock = <Image style={CommonStyles.galleryListViewThumb} source={{uri: localFile}}/>
+    if ((Date.now() - time) > 60000) {
       imgBlock = (
-        <NetworkImage source={{uri: rowData.photo}}></NetworkImage>
+        <NetworkImage source={{uri: cdnPath}}></NetworkImage>
       )
     }
-    const data = rowData.data
-    const path = '/global/' + data.uid + '/photoData/' + data.fileTail
-    const imgSource = rowData.photo
-    const mealType = rowData.mealType
-    const mealTime = new Date(rowData.time).toDateString()
-    const flag = this.props.notification.clientPhotos[imgSource]
+    const mealTime = new Date(time).toDateString()
+    const flag = this.props.notification.clientPhotos[cdnPath]
     const notificationBlock = (
       <View style={CommonStyles.notificationView}>
         <Text style={CommonStyles.notificationText}>{flag}</Text>
@@ -154,7 +155,7 @@ export default class GalleryListView extends Component{
         <View style={CommonStyles.flexRow}>
           <TouchableOpacity
             onPress={() => {
-              this._pressRow(rowData.photo)
+              this._pressRow(databasePath, cdnPath)
               highlightRow(sectionID, rowID)
             }}
           >
@@ -163,7 +164,7 @@ export default class GalleryListView extends Component{
         </View>
         <View style={CommonStyles.galleryText}>
           <Text style={CommonStyles.heavyFont}>
-            {rowData.title}: {rowData.caption}
+            {title}: {caption}
           </Text>
           <Text>
             {mealType}
@@ -176,16 +177,16 @@ export default class GalleryListView extends Component{
         </View>
         <TouchableOpacity
           style={CommonStyles.trashView}
-          onPress={this._removeClientPhoto.bind(this, path, data.fileTail)}>
+          onPress={this._removeClientPhoto.bind(this, databasePath, fileTail)}>
           <Icon name="ios-trash-outline" size={30} color='red'/>
         </TouchableOpacity>
         {showNotification}
       </View>
     )
   }
-  _pressRow(imgSource: string) {
+  _pressRow(databasePath: string, cdnPath: string) {
     this.props._handleNavigate(route)
-    this.props._setFeedback(imgSource)
+    this.props.feedbackPhoto(databasePath, cdnPath)
   }
   _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
     return (
@@ -199,7 +200,7 @@ export default class GalleryListView extends Component{
       />
     )
   }
-  _removeClientPhoto(path, tail) {
+  _removeClientPhoto(databasePath, tail) {
     AlertIOS.alert(
      'Confirm Delete?',
      '',
@@ -207,12 +208,12 @@ export default class GalleryListView extends Component{
         {text: 'Cancel'},
         {text: 'Delete', 
         onPress: () => {
-          console.log(path)
-          this.props.removeClientPhoto(path)
+          console.log(databasePath)
+          this.props.removeClientPhoto(databasePath)
           let mediaList = this.state.mediaList
           let index = -1
           for (let id in mediaList) {
-            if (tail === mediaList[id].data.fileTail) {
+            if (tail === mediaList[id].fileTail) {
               index = id
               break
             }

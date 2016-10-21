@@ -100,7 +100,8 @@ const sendToFirebase = (state, flag, fileTail, fileName) => {
     mealType = state.libReducer.mealType
     localFile = state.libReducer.selected
   }
-  firebase.database().ref('/global/' + uid + '/photoData/' + fileTail).update({
+  const databasePath = '/global/' + uid + '/photoData/' + fileTail
+  firebase.database().ref(databasePath).update({
     uid,
     fileName,
     fileTail,
@@ -111,7 +112,8 @@ const sendToFirebase = (state, flag, fileTail, fileName) => {
     time,
     notifyTrainer,
     visible,
-    notifyClient
+    notifyClient,
+    databasePath
   })
 }
 

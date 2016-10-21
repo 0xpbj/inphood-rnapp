@@ -25,6 +25,8 @@ const route = {
 
 import NetworkImage from './NetworkImage'
 import Spinner from 'react-native-loading-spinner-overlay'
+import Config from '../constants/config-vars'
+const turlHead = Config.AWS_CDN_THU_URL
 
 export default class ClientGallery extends Component{
   constructor(props) {
@@ -92,15 +94,13 @@ export default class ClientGallery extends Component{
     return dataSource.cloneWithRows(list);
   }
   _renderRow(data: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    const imgSource = data.photo
-    const imgBlock = <NetworkImage source={{uri: data.photo}}/>
-    const mealType = data.mealType
-    const mealTime = new Date(data.time).toDateString()
-    const uid = data.file.uid
-    const path = '/global/' + uid + '/photoData/' + data.file.fileTail
-    const flag = this.props.notification.trainerPhotos[imgSource] 
-                  ? this.props.notification.trainerPhotos[imgSource]
-                  : this.props.notification.trainerPhotosFlag[imgSource] 
+    const {fileName, mealType, time, uid, fileTail, caption, title, databasePath} = data
+    const photo = turlHead + fileName
+    const imgBlock = <NetworkImage source={{uri: photo}}/>
+    const mealTime = new Date(time).toDateString()
+    const flag = this.props.notification.trainerPhotos[photo] 
+                  ? this.props.notification.trainerPhotos[photo]
+                  : this.props.notification.trainerPhotosFlag[photo] 
     const notificationBlock = ( 
       <View style={CommonStyles.notificationView}>
         <Text style={CommonStyles.notificationText}>{flag}</Text>
@@ -112,7 +112,7 @@ export default class ClientGallery extends Component{
     return (
       <View>
         <TouchableHighlight onPress={() => {
-            this._pressRow(data.photo, path, uid)
+            this._pressRow(data, databasePath, uid)
             highlightRow(sectionID, rowID)
           }}>
           <View style={CommonStyles.galleryRow}>
@@ -121,7 +121,7 @@ export default class ClientGallery extends Component{
             </View>
             <View  style={CommonStyles.galleryText}>
               <Text style={CommonStyles.heavyFont}>
-                {data.title}: {data.caption}
+                {title}: {caption}
               </Text>
               <Text>
                 {mealType}
@@ -139,7 +139,7 @@ export default class ClientGallery extends Component{
   _pressRow(photo: string, path: string, uid: string) {
     this.props.markPhotoRead(path, photo, uid)
     this.props._handleNavigate(route)
-    this.props.feedbackPhoto(photo)
+    this.props.feedbackPhoto(path, photo)
   }
   _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
     return (

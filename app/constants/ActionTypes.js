@@ -147,12 +147,19 @@ export const INIT_DATA = 'INIT_DATA'
 export const ADD_INFOS = 'ADD_INFOS'
 export const ADD_PHOTOS = 'ADD_PHOTOS'
 export const ADD_CLIENTS = 'ADD_CLIENTS'
+export const INIT_CLIENT_MESSAGES = 'INIT_CLIENT_MESSAGES'
 
 
 export const SYNC_ADDED_GALLERY_CHILD = 'SYNC_ADDED_GALLERY_CHILD'
+export const SYNC_COUNT_GALLERY_CHILD = 'SYNC_COUNT_GALLERY_CHILD'
+export const SYNC_ADDED_MESSAGES_CHILD = 'SYNC_ADDED_MESSAGES_CHILD'
 export const SYNC_REMOVED_GALLERY_CHILD = 'SYNC_REMOVED_GALLERY_CHILD'
+export const SYNC_REMOVED_MESSAGES_CHILD = 'SYNC_REMOVED_MESSAGES_CHILD'
 export const syncAddedGalleryChild = createAction(SYNC_ADDED_GALLERY_CHILD)
+export const syncGalleryChildCount = createAction(SYNC_COUNT_GALLERY_CHILD)
+export const syncAddedMessagesChild = createAction(SYNC_ADDED_MESSAGES_CHILD)
 export const syncRemovedGalleryChild = createAction(SYNC_REMOVED_GALLERY_CHILD)
+export const syncRemovedMessagesChild = createAction(SYNC_REMOVED_MESSAGES_CHILD)
 
 export const SYNC_ADDED_ROOT_CHILD = 'SYNC_ADDED_ROOT_CHILD'
 export const SYNC_REMOVED_ROOT_CHILD = 'SYNC_REMOVED_ROOT_CHILD'
@@ -178,15 +185,8 @@ export const syncCountPhotoChild = createAction(SYNC_COUNT_PHOTO_CHILD)
 export const syncAddedPhotoChild = createAction(SYNC_ADDED_PHOTO_CHILD)
 export const syncRemovedPhotoChild = createAction(SYNC_REMOVED_PHOTO_CHILD)
 
-export const SYNC_ADDED_MESSAGES_CHILD = 'SYNC_ADDED_MESSAGES_CHILD'
-export const SYNC_REMOVED_MESSAGES_CHILD = 'SYNC_REMOVED_MESSAGES_CHILD'
-export const syncAddedMessagesChild = createAction(SYNC_ADDED_MESSAGES_CHILD)
-export const syncRemovedMessagesChild = createAction(SYNC_REMOVED_MESSAGES_CHILD)
-
-export const SYNC_COUNT_CLIENT_MESSAGES_CHILD = 'SYNC_COUNT_CLIENT_MESSAGES_CHILD'
 export const SYNC_ADDED_MESSAGES_CLIENT_CHILD = 'SYNC_ADDED_MESSAGES_CLIENT_CHILD'
 export const SYNC_REMOVED_MESSAGES_CLIENT_CHILD = 'SYNC_REMOVED_MESSAGES_CLIENT_CHILD'
-export const syncCountClientMessagesChild = createAction(SYNC_COUNT_CLIENT_MESSAGES_CHILD)
 export const syncAddedMessagesClientChild = createAction(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
 export const syncRemovedMessagesClientChild = createAction(SYNC_REMOVED_MESSAGES_CLIENT_CHILD)
 

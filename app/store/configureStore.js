@@ -22,10 +22,6 @@ const sagaMiddleware = createSagaMiddleware({sagaMonitor})
 const persistConfig = {
   whitelist: [
     'authReducer',
-    'chatReducer',
-    'galReducer',
-    'trainerDataReducer',
-    'trainerReducer'
   ],
   blacklist: [
     'camReducer',
@@ -35,6 +31,10 @@ const persistConfig = {
     'notificationReducer',
     'tabReducer',
     'trainerNavReducer',
+    'chatReducer',
+    'galReducer',
+    'trainerDataReducer',
+    'trainerReducer'
   ],
   storage: AsyncStorage,
 }

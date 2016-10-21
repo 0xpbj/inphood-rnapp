@@ -7,7 +7,8 @@ function mapStateToProps (state) {
   return {
     auth: state.authReducer,
     data: state.trainerDataReducer,
-    chat: state.chatReducer
+    chat: state.chatReducer,
+    gallery: state.galReducer
   }
 }
 

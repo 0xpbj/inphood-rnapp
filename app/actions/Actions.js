@@ -164,10 +164,11 @@ export function store64Library (selected) {
   }
 }
 
-export function feedbackPhoto (feedbackPhoto) {
+export function feedbackPhoto (databasePath, cdnPath) {
   return {
     type: FEEDBACK_PHOTO,
-    feedbackPhoto
+    databasePath,
+    cdnPath
   }
 }
 
@@ -177,10 +178,10 @@ export function loadPhotosInit() {
   }
 }
 
-export function loadPhotosSuccess(photos) {
+export function loadPhotosSuccess(photo) {
   return {
     type: LOAD_PHOTOS_SUCCESS,
-    photos: photos
+    photos: photo,
   }
 }
 

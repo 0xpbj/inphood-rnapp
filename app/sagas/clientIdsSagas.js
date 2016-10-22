@@ -24,7 +24,7 @@ function* triggerGetClientIdCount() {
 function* triggerGetClientIdChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_CLIENTID_CHILD)
-    const child = data.val()
+    const child = data.val().token
     yield put({type: ADD_CLIENTS, child})
   }
 }

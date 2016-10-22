@@ -37,6 +37,7 @@ import {
   REMOVE_CLIENT_PHOTO,
   MARK_MESSAGE_READ,
   MARK_PHOTO_READ,
+  MARK_CLIENT_PHOTO_READ,
   LOAD_ID,
   INIT_CHAT_SAGA,
   INIT_TRAINER_CHAT_SAGA,
@@ -265,9 +266,17 @@ export function markMessageRead(path, trainer, photo, uid) {
   }
 }
 
-export function markPhotoRead(path, photo, uid) {
+export function markPhotoRead(path, photo) {
   return {
     type: MARK_PHOTO_READ,
+    path,
+    photo,
+  }
+}
+
+export function markClientPhotoRead(path, photo, uid) {
+  return {
+    type: MARK_CLIENT_PHOTO_READ,
     path,
     photo,
     uid

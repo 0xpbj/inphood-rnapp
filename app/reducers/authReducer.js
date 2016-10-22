@@ -1,7 +1,7 @@
 import {
   LOGIN_SUCCESS, LOGIN_ERROR, INIT_LOGIN,
   LOGOUT_SUCCESS, LOGOUT_ERROR, USER_SETTINGS,
-  STORE_TOKEN, STORE_RESULT,
+  STORE_TOKEN, STORE_RESULT, STORE_VALUE,
   EM_LOGIN_REQUEST, BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER
 } from '../constants/ActionTypes'
 
@@ -44,6 +44,11 @@ export default function authentication(state = initialState, action) {
       return {
         ...state,
         result: action.result
+      }
+    case STORE_VALUE:
+      return {
+        ...state,
+        value: action.value
       }
     case USER_SETTINGS:
       return {

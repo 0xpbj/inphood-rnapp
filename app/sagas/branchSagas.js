@@ -63,7 +63,7 @@ function* setupTrainer() {
         yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralId: trainerId, trainerName})
         firebase.database().ref('/global/' + token + '/userInfo/public').update({
           trainerId,
-          referralSetup,
+          referralSetup: true,
           referralType,
           trainerName,
           authTrainer: 'pending',
@@ -75,7 +75,7 @@ function* setupTrainer() {
         let friendId = id.token
         yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralId: friendId, trainerName: ''})
         firebase.database().ref('/global/' + token + '/userInfo/public').update({
-          referralSetup,
+          referralSetup: true,
           referralType,
           authTrainer: 'decline',
           referralId: id.token

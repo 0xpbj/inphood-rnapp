@@ -34,18 +34,6 @@ export default class ChatThread extends Component {
     let oldMessages = this.props.chat.messages[this.props.chat.databasePath]
     var messages = []
     for (var keys in oldMessages) {
-      // if (this.props.caller === "trainer" && oldMessages[keys].trainerRead === false) {
-      //   const uid = oldMessages[keys].uid
-      //   const path = '/global/' + uid + '/photoData/' + oldMessages[keys].photo + '/messages/' + oldMessages[keys].key
-      //   const photo = turlHead + uid + '/' + oldMessages[keys].photo + '.jpg'
-      //   this.props.markMessageRead(path, true, photo, uid)
-      // }
-      // else if (this.props.caller === "client" && oldMessages[keys].clientRead === false) {
-      //   const uid = this.state.id
-      //   const path = '/global/' + uid + '/photoData/' + oldMessages[keys].photo + '/messages/' + oldMessages[keys].key
-      //   const photo = turlHead + uid + '/' + oldMessages[keys].photo + '.jpg'
-      //   this.props.markMessageRead(path, false, photo, uid)
-      // }
       let message = oldMessages[keys].message
       message.createdAt = oldMessages[keys].createdAt
       messages.unshift(message)

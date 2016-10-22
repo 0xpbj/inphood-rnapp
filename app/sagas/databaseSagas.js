@@ -1,15 +1,13 @@
 import {
   LOGIN_SUCCESS, REMOVE_CLIENT_PHOTO, IS_NEW_USER,
-  LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_ERROR, INIT_CHAT_SAGA,
+  LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_ERROR, MARK_PHOTO_READ,
   INIT_MESSAGES, STORE_CHAT_SUCCESS, STORE_CHAT_ERROR,
   syncAddedGalleryChild, syncRemovedGalleryChild,
   SYNC_ADDED_GALLERY_CHILD, SYNC_REMOVED_GALLERY_CHILD,
   syncAddedMessagesChild, syncRemovedMessagesChild,
   SYNC_ADDED_MESSAGES_CHILD, SYNC_REMOVED_MESSAGES_CHILD,
-  MARK_MESSAGE_READ, ADD_MESSAGES,
-  INCREMENT_CLIENT_NOTIFICATION, INCREMENT_CLIENT_CHAT_NOTIFICATION,
-  DECREMENT_TRAINER_NOTIFICATION, DECREMENT_TRAINER_CHAT_NOTIFICATION,
-  DECREMENT_CLIENT_CHAT_NOTIFICATION, DECREMENT_CLIENT_NOTIFICATION, 
+  MARK_MESSAGE_READ, ADD_MESSAGES, INIT_CHAT_SAGA,
+  INCREMENT_CLIENT_PHOTO_NOTIFICATION, DECREMENT_CLIENT_PHOTO_NOTIFICATION, 
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -42,23 +40,12 @@ const isLocalFile = (localFile) => {
     .catch(error => ({ error }))
 }
 
-function* readFirebaseChatFlow() {
+function* readPhotoFlow() {
   while (true) {
-    const data = yield take(MARK_MESSAGE_READ)
-    const photo = data.photo
-    const uid = data.uid
-    const path = data.path
-    const trainer = data.trainer
-    if (trainer) {
-      firebase.database().ref(data.path).update({'trainerRead': true})
-      yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
-      yield put({type: DECREMENT_TRAINER_CHAT_NOTIFICATION, photo})
-    }
-    else {
-      firebase.database().ref(data.path).update({'clientRead': true})
-      yield put({type: DECREMENT_CLIENT_NOTIFICATION, uid})
-      yield put({type: DECREMENT_CLIENT_CHAT_NOTIFICATION, photo})
-    }
+    const data = yield take(MARK_PHOTO_READ)
+    const {path, photo} = data
+    firebase.database().ref(path).update({'notifyClient': false})
+    yield put({type: DECREMENT_CLIENT_PHOTO_NOTIFICATION, databasePath: path})
   }
 }
 
@@ -70,14 +57,14 @@ function* sendChatData() {
     }
     const trainer = (yield select(state => state.authReducer.result)).trainerId
     const client = yield select(state => state.chatReducer.client)
-    const {chatMessages, databasePath} = yield select(state => state.chatReducer)
+    const {chatMessages, databasePath, cdnPath} = yield select(state => state.chatReducer)
     const photo = databasePath.substring(databasePath.lastIndexOf('/')+1)
     const createdAt = Date.now()
     let clientRead = false
     let trainerRead = false
     if (trainer) {
       clientRead = true
-      firebase.database().ref(databasePath).push({'notifyTrainer': true})
+      firebase.database().ref(databasePath).update({'notifyTrainer': true})
       firebase.database().ref(databasePath + '/messages').push({
         uid,
         trainer,
@@ -90,7 +77,7 @@ function* sendChatData() {
     }
     else {
       trainerRead = true
-      firebase.database().ref(databasePath).push({'notifyClient': true})
+      firebase.database().ref(databasePath).update({'notifyClient': true})
       firebase.database().ref(databasePath + '/messages').push({
         uid: client,
         trainer: uid,
@@ -104,7 +91,6 @@ function* sendChatData() {
     yield put ({type: STORE_CHAT_SUCCESS})
   }
   catch(error) {
-    console.log(error)
     yield put ({type: STORE_CHAT_ERROR, error})
   }
 }
@@ -118,13 +104,13 @@ function* triggerGetMessagesChild() {
       id = firebase.auth().currentUser.uid
     }
     const uid  = messages.uid
+    const trainer = messages.trainer
+    const flag = messages.trainerRead
     const path = '/global/' + uid + '/photoData/' + messages.photo
     const file = turlHead + uid + '/' + messages.photo + '.jpg'
     yield put ({type: ADD_MESSAGES, messages, path})
-    if (messages.clientRead === false && id !== uid) {
-      yield put({type: INCREMENT_CLIENT_NOTIFICATION})
-      yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo: file, path})
-    }
+    if (flag)
+      yield put({type: INCREMENT_CLIENT_PHOTO_NOTIFICATION, databasePath: path})
     const prevMessages = yield select(state => state.chatReducer.messages)
     const count = yield select(state => state.chatReducer.count)
   }
@@ -168,7 +154,12 @@ function* triggerGetGalleryChild() {
     const { payload: { data } } = yield take(SYNC_ADDED_GALLERY_CHILD)
     if (data.val().visible) {
       const photo = data.val()
+      const cdnPath = turlHead+photo.fileName
+      const databasePath = photo.databasePath
       yield put ({type: LOAD_PHOTOS_SUCCESS, photo})
+      if (photo.notifyClient) {
+        yield put({type: INCREMENT_CLIENT_PHOTO_NOTIFICATION, databasePath})
+      }
       const messageData = photo.messages
       const path = photo.databasePath
       for (var keys in messageData) {
@@ -204,7 +195,7 @@ export default function* rootSaga() {
   yield fork(takeEvery, INIT_CHAT_SAGA, sendChatData)
   yield fork(takeLatest, LOGIN_SUCCESS, syncChatData)
   yield fork(takeLatest, LOGIN_SUCCESS, syncPhotoData)
-  yield fork(takeLatest, LOGIN_SUCCESS, readFirebaseChatFlow)
+  yield fork(takeLatest, LOGIN_SUCCESS, readPhotoFlow)
   yield fork(takeLatest, LOGIN_SUCCESS, updateDataVisibility)
   yield fork(takeLatest, LOGIN_SUCCESS, triggerGetGalleryChild)
   yield fork(takeLatest, LOGIN_SUCCESS, triggerRemGalleryChild)

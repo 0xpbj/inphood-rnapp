@@ -98,9 +98,7 @@ export default class ClientGallery extends Component{
     const photo = turlHead + fileName
     const imgBlock = <NetworkImage source={{uri: photo}}/>
     const mealTime = new Date(time).toDateString()
-    const flag = this.props.notification.trainerPhotos[photo] 
-                  ? this.props.notification.trainerPhotos[photo]
-                  : this.props.notification.trainerPhotosFlag[photo] 
+    const flag = this.props.notification.clientPhotos[databasePath] 
     const notificationBlock = ( 
       <View style={CommonStyles.notificationView}>
         <Text style={CommonStyles.notificationText}>{flag}</Text>
@@ -137,7 +135,7 @@ export default class ClientGallery extends Component{
     )
   }
   _pressRow(photo: string, path: string, uid: string) {
-    this.props.markPhotoRead(path, photo, uid)
+    this.props.markClientPhotoRead(path, photo, uid)
     this.props._handleNavigate(route)
     this.props.feedbackPhoto(path, photo)
   }

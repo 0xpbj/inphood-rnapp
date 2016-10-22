@@ -43,26 +43,6 @@ export default class GalleryListView extends Component{
       dataSource: this._createDataSource(mediaList),
     }
   }
-  componentDidMount() {
-    if (this.state.mediaList.length > 0) {
-      if (this.props.auth.referralType === 'client' && this.props.auth.authTrainer === 'pending') {
-        AlertIOS.alert(
-         'Share data with your trainer: ' + this.props.auth.trainerName + '?',
-         '',
-         [
-            {text: 'Accept',
-            onPress: () => {
-              this.props.setBranchAuthTrainer('accept')
-            }, style: 'default'},
-            {text: 'Decline', 
-            onPress: () => {
-              this.props.setBranchAuthTrainer('decline')
-            }, style: 'destructive'}
-         ],
-        )
-      }
-    }
-  }
   componentWillReceiveProps(nextProps) {
     const mediaList = nextProps.galleryView.photos
     const nextLength = mediaList.length
@@ -143,7 +123,7 @@ export default class GalleryListView extends Component{
       )
     }
     const mealTime = new Date(time).toDateString()
-    const flag = this.props.notification.clientPhotos[cdnPath]
+    const flag = this.props.notification.galleryPhotos[databasePath]
     const notificationBlock = (
       <View style={CommonStyles.notificationView}>
         <Text style={CommonStyles.notificationText}>{flag}</Text>
@@ -185,6 +165,23 @@ export default class GalleryListView extends Component{
     )
   }
   _pressRow(databasePath: string, cdnPath: string) {
+    if (this.props.auth.authTrainer === 'pending' && this.props.auth.referralType === 'client') {
+      AlertIOS.alert(
+       'Share data with your trainer: ' + this.props.auth.trainerName + '?',
+       '',
+       [
+          {text: 'Accept',
+          onPress: () => {
+            this.props.setBranchAuthTrainer('accept')
+          }, style: 'default'},
+          {text: 'Decline', 
+          onPress: () => {
+            this.props.setBranchAuthTrainer('decline')
+          }, style: 'destructive'}
+       ],
+      )
+    }
+    this.props.markPhotoRead(databasePath, cdnPath)
     this.props._handleNavigate(route)
     this.props.feedbackPhoto(databasePath, cdnPath)
   }
@@ -208,7 +205,6 @@ export default class GalleryListView extends Component{
         {text: 'Cancel'},
         {text: 'Delete', 
         onPress: () => {
-          console.log(databasePath)
           this.props.removeClientPhoto(databasePath)
           let mediaList = this.state.mediaList
           let index = -1

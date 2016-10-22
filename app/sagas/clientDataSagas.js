@@ -5,10 +5,8 @@ import {
   syncAddedMessagesClientChild, syncRemovedMessagesClientChild,
   SYNC_ADDED_MESSAGES_CLIENT_CHILD, SYNC_REMOVED_MESSAGES_CLIENT_CHILD,
   INIT_CLIENT_MESSAGES, syncAddedInfoChild, syncRemovedInfoChild,
-  SYNC_ADDED_INFO_CHILD, SYNC_REMOVED_INFO_CHILD,
-  INCREMENT_CLIENT_NOTIFICATION, INCREMENT_CLIENT_CHAT_NOTIFICATION,
-  MARK_PHOTO_READ, INCREMENT_TRAINER_NOTIFICATION, DECREMENT_TRAINER_NOTIFICATION,
-  INCREMENT_TRAINER_CHAT_NOTIFICATION, INCREMENT_TRAINER_PHOTO_NOTIFICATION, DECREMENT_TRAINER_PHOTO_NOTIFICATION
+  SYNC_ADDED_INFO_CHILD, SYNC_REMOVED_INFO_CHILD, MARK_CLIENT_PHOTO_READ,
+  INCREMENT_TRAINER_PHOTO_NOTIFICATION, DECREMENT_TRAINER_PHOTO_NOTIFICATION,
 } from '../constants/ActionTypes'
 
 import * as db from './firebaseCommands'
@@ -30,11 +28,10 @@ const prefetchData = (cdnPath) => {
 
 function* readClientPhotoFlow() {
   while (true) {
-    const data = yield take(MARK_PHOTO_READ)
-    const {path, uid, photo} = data
+    const data = yield take(MARK_CLIENT_PHOTO_READ)
+    const {path, uid} = data
     firebase.database().ref(path).update({'notifyTrainer': false})
-    yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
-    yield put({type: DECREMENT_TRAINER_PHOTO_NOTIFICATION, photo})
+    yield put({type: DECREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath: path, client: uid})
   }
 }
 
@@ -47,13 +44,13 @@ function* triggerGetMessagesClientChild() {
       id = firebase.auth().currentUser.uid
     }
     const uid  = messages.uid
+    const trainer = messages.trainer
+    const flag = messages.clientRead
     const path = '/global/' + uid + '/photoData/' + messages.photo
     const file = turlHead + uid + '/' + messages.photo + '.jpg'
     yield put ({type: ADD_MESSAGES, messages, path})
-    if (messages.clientRead === false && id !== uid) {
-      yield put({type: INCREMENT_CLIENT_NOTIFICATION})
-      yield put({type: INCREMENT_CLIENT_CHAT_NOTIFICATION, photo: file, path})
-    }
+    if (flag)
+      yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath: path, client: uid})
     const prevMessages = yield select(state => state.chatReducer.messages)
     const count = yield select(state => state.chatReducer.count)
   }
@@ -84,6 +81,7 @@ function* triggerGetPhotoChild() {
       const file = data.val()
       const uid = file.uid
       const cdnPath = turlHead+file.fileName
+      const databasePath = file.databasePath
       const time = file.time
       if ((Date.now() - time) > 60000) {
         yield fork(prefetchData, cdnPath)
@@ -91,8 +89,7 @@ function* triggerGetPhotoChild() {
       var child = {}
       child[uid] = file
       if (file.notifyTrainer) {
-        yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
-        yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, uid, time, cdnPath})
+        yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath, client: uid})
       }
       yield put({type: ADD_PHOTOS, child})
       const messageData = file.messages

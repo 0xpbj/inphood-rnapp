@@ -24,16 +24,13 @@ const {
 } = NavigationExperimental
 
 import Picture from './Picture'
-import Selected from './Selected'
+import Selected from '../containers/SelectedContainer'
 import Caption from '../containers/CaptionContainer'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class Camera extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      photo: this.props.camera.photo
-    }
   }
   componentDidMount () {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
@@ -42,15 +39,8 @@ export default class Camera extends Component {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      photo: nextProps.camera.photo
-    })
-    if (nextProps.camera.inProgress !== null) {
-      if (nextProps.camera.inProgress === true)
-        this.setState({})
-      else if (nextProps.camera.inProgress === false)
-        this._handleCaptionAction()
-    }
+    if (nextProps.camera.inProgress === false)
+      this._handleCaptionAction()
   }
   _renderScene (props) {
     const prefix = 'scene_'
@@ -68,17 +58,13 @@ export default class Camera extends Component {
         <Selected
           _buttonName="Next"
           _nextRoute={route}
-          _selectedPhoto={this.state.photo}
-          _storeTitle={(action) => this.props.storeCameraTitle(action)}
-          _handleNavigate={this._handleNavigate.bind(this)}/>
+          _handleNavigate={this._handleNavigate.bind(this)}
+          _library={false}/>
       )
     }
     else if (scene.key === prefix + 'caption') {
       return (
         <Caption
-          _tags={this.props.camera.tags}
-          _selectedPhoto={this.state.photo}
-          _storeCaption={(action) => this.props.storeCameraCaption(action)}
           _handleBackAction={this._handleBackAction.bind(this)}
           _inProgress={this.props.camera.inProgress}
           _library={false}/>
@@ -121,6 +107,7 @@ export default class Camera extends Component {
     this.props.takePhoto('')
     this._handleBackAction()
     this._handleBackAction()
+    this.props.resetCameraProgress()
     this.props.changeTab(1)
     return true
   }

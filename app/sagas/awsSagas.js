@@ -41,10 +41,10 @@ function* loadAWSCall(flag, fileName) {
   try {
     let image = ''
     if (flag) {
-      image = yield select(state => state.camReducer.photo)
+      image = yield select(state => state.selectedReducer.photo)
     }
     else {
-      image = yield select(state => state.libReducer.selected)
+      image = yield select(state => state.selectedReducer.library)
     }
     yield call (sendToAWS, image, fileName)
     yield put ({type: SEND_AWS_SUCCESS})
@@ -89,16 +89,16 @@ const sendToFirebase = (state, flag, fileTail, fileName) => {
   const notifyClient = false
   const visible = true
   if (flag) {
-    caption = state.camReducer.caption
-    title = state.camReducer.title
-    mealType = state.camReducer.mealType
-    localFile = state.camReducer.photo
+    caption = state.captionReducer.camCaption
+    title = state.selectedReducer.camTitle
+    mealType = state.captionReducer.camMealType
+    localFile = state.selectedReducer.photo
   }
   else {
-    caption = state.libReducer.caption
-    title = state.libReducer.title
-    mealType = state.libReducer.mealType
-    localFile = state.libReducer.selected
+    caption = state.captionReducer.libCaption
+    title = state.selectedReducer.libTitle
+    mealType = state.captionReducer.libMealType
+    localFile = state.selectedReducer.library
   }
   const databasePath = '/global/' + uid + '/photoData/' + fileTail
   firebase.database().ref(databasePath).update({

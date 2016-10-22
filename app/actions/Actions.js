@@ -20,6 +20,8 @@ import {
   LOAD_PHOTOS_ERROR,
   TAKE_PICTURE,
   LOAD_PICTURE,
+  RESET_CAMERA,
+  RESET_LIBRARY,
   SEND_FIREBASE_LIBRARY_SUCCESS,
   SEND_FIREBASE_CAMERA_SUCCESS,
   SEND_FIREBASE_ERROR,
@@ -35,7 +37,6 @@ import {
   ADD_LIBRARY_MEAL_DATA,
   STORE_MESSAGES,
   REMOVE_CLIENT_PHOTO,
-  MARK_MESSAGE_READ,
   MARK_PHOTO_READ,
   MARK_CLIENT_PHOTO_READ,
   LOAD_ID,
@@ -256,16 +257,6 @@ export function storeMessages(messages) {
   }
 }
 
-export function markMessageRead(path, trainer, photo, uid) {
-  return {
-    type: MARK_MESSAGE_READ,
-    path,
-    trainer,
-    photo,
-    uid
-  }
-}
-
 export function markPhotoRead(path, photo) {
   return {
     type: MARK_PHOTO_READ,
@@ -462,5 +453,17 @@ export function initLogin(flag) {
   return {
     type: INIT_LOGIN,
     flag
+  }
+}
+
+export function resetCameraProgress() {
+  return {
+    type: RESET_CAMERA
+  }
+}
+
+export function resetLibraryProgress() {
+  return {
+    type: RESET_LIBRARY
   }
 }

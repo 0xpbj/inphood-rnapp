@@ -153,8 +153,8 @@ export default class CameraRollPicker extends Component {
     }
   }
   _selectImage(image) {
-    this.props._selectPhoto(image.uri)
-    NativeModules.ReadImageData.readImage(image.uri, (data) => this.props._store64Library(data))
+    this.props.selectPhoto(image.uri)
+    NativeModules.ReadImageData.readImage(image.uri, (data) => this.props.store64Library(data))
     this.props._handleNavigate(route)
   }
   _nEveryRow(data, n) {

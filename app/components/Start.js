@@ -372,7 +372,7 @@ export default class Start extends Component {
             name="ios-contacts-outline"
             size={26} color='white'
             style={{marginLeft: 10, marginRight: 15}}/>
-          <Text style={CommonStyles.buttonText}>Invite Friend</Text>
+          <Text style={CommonStyles.buttonText}>Refer Friend</Text>
         </View>
       </TouchableHighlight>
     )

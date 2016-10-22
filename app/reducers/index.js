@@ -2,11 +2,14 @@ import { combineReducers } from 'redux'
 import tabReducer from './tabReducer'
 import authReducer from './authReducer'
 import camReducer from './camReducer'
+import captionReducer from './captionReducer'
 import libReducer from './libReducer'
 import extReducer from './extReducer'
 import galReducer from './galReducer'
 import galNavReducer from './galNavReducer'
 import chatReducer from './chatReducer'
+import visionReducer from './visionReducer'
+import selectedReducer from './selectedReducer'
 import trainerReducer from './trainerReducer'
 import trainerDataReducer from './trainerDataReducer'
 import trainerNavReducer from './trainerNavReducer'
@@ -17,15 +20,18 @@ const appReducer = combineReducers({
     tabReducer,
     authReducer,
     camReducer,
+    captionReducer,
     libReducer,
     extReducer,
     galReducer,
     galNavReducer,
     chatReducer,
+    selectedReducer,
     trainerReducer,
     trainerDataReducer,
     trainerNavReducer,
     notificationReducer,
+    visionReducer
 })
 
 const rootReducer = (state, action) => {

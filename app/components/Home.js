@@ -141,13 +141,12 @@ export default class HomeTabs extends Component {
     const tabs = this.props.tabs.routes.map((tab, i) => {
       if (tab.title !== 'Clients') {
         badgeValue = tab.title === 'Home' ? clientNotificationCount : undefined
-      } else {
+      }
+      else {
         badgeValue = trainerNotificationCount
       }
-
       if ( (tab.title !== 'Clients') ||
            (tab.title === 'Clients' && trainer)) {
-
         if (Platform.OS === 'ios') {
           return (
             <Icon.TabBarItemIOS
@@ -164,7 +163,8 @@ export default class HomeTabs extends Component {
               {this._renderTabContent(tab.key)}
             </Icon.TabBarItemIOS>
           )
-        } else {
+        }
+        else {
           // Android
           return(
             <View
@@ -175,10 +175,8 @@ export default class HomeTabs extends Component {
         }
       }
     })
-
     if (Platform.OS === 'ios') {
       var {TabBarIOS} = require('react-native')
-
       return (
         <TabBarIOS
           unselectedTintColor="black"
@@ -192,7 +190,6 @@ export default class HomeTabs extends Component {
     } else {
       // TODO: Something better for Android
       var ScrollableTabView = require('react-native-scrollable-tab-view')
-
       return (
         <ScrollableTabView
           tabBarPosition="bottom">

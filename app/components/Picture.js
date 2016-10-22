@@ -27,8 +27,8 @@ export default class Picture extends Component {
   takePicture() {
     this.camera.capture()
       .then((data) => {
-        NativeModules.ReadImageData.readImage(data.uri, (image) => this.props._store64Camera(image))
-        this.props._takePhoto(data)
+        NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Camera(image))
+        this.props._takePhoto(data.path)
         this.props._handleNavigate(route)
       })
       .catch(err => console.error(err))

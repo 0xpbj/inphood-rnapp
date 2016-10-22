@@ -51,7 +51,7 @@ function* getCameraData() {
   while(true) {
     try {
       yield take(STORE_64_PHOTO)
-      const data = yield select(state => state.camReducer.photo64)
+      const data = yield select(state => state.selectedReducer.photo64)
       const response = yield call(getCVData, data)
       if (response) {
         const tags = yield call(getTags, response)
@@ -68,7 +68,7 @@ function* getLibraryData() {
   while(true) {
     try {
       yield take(STORE_64_LIBRARY)
-      const data = yield select(state => state.libReducer.selected64)
+      const data = yield select(state => state.selectedReducer.library64)
       const response = yield call(getCVData, data)
       if (response) {
         const tags = yield call(getTags, response)

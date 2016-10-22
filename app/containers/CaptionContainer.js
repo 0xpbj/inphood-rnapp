@@ -5,7 +5,8 @@ import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps (state) {
   return {
-    gallery: state.galReducer
+    vision: state.visionReducer,
+    selected: state.selectedReducer
   }
 }
 

@@ -27,7 +27,6 @@ const route = {
 import Selected from './Selected'
 import Photos  from '../containers/PhotosContainer'
 import Caption from '../containers/CaptionContainer'
-import Icon from 'react-native-vector-icons/Ionicons'
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
 

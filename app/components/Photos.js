@@ -1,16 +1,17 @@
 import React, {Component} from 'react'
 import {
-  CameraRoll,
   Image,
   Platform,
   View,
   Text,
   Dimensions,
   TouchableOpacity,
-  ListView, 
+  ListView,
   NativeModules,
   ActivityIndicator,
 } from 'react-native'
+
+import CameraRoll from 'rn-camera-roll';
 
 import CommonStyles from './styles/common-styles'
 
@@ -63,6 +64,7 @@ export default class CameraRollPicker extends Component {
       this.setState({loadingMore: true}, () => { this._fetch() })
     }
   }
+
   _fetch() {
     var {groupTypes, assetType} = this.props
     var fetchParams = {
@@ -77,26 +79,42 @@ export default class CameraRollPicker extends Component {
     if (this.state.lastCursor) {
       fetchParams.after = this.state.lastCursor
     }
-    CameraRoll.getPhotos(fetchParams)
-      .then((data) => this._appendImages(data), (e) => console.log(e))
+
+    CameraRoll.getPhotos(fetchParams).then((data) => this._appendImages(data),
+                                           (e) => console.log(e))
   }
+
   _appendImages(data) {
     var assets = data.edges
     var newState = {
       loadingMore: false,
     }
-    if (!data.page_info.has_next_page) {
-      newState.noMore = true
+
+    if (Platform.OS === 'ios') {
+      if (!data.page_info.has_next_page) {
+        newState.noMore = true
+      }
+      if (assets.length > 0) {
+        newState.lastCursor = data.page_info.end_cursor
+        newState.images = this.state.images.concat(assets)
+        newState.dataSource = this.state.dataSource.cloneWithRows(
+          this._nEveryRow(newState.images, this.props.imagesPerRow)
+        )
+      }
+      this.setState(newState)
+    } else {
+      // Android: page_info etc. doesn't exist in the data array
+      //
+      if (assets.length > 0) {
+        newState.images = this.state.images.concat(assets)
+        newState.dataSource = this.state.dataSource.cloneWithRows(
+          this._nEveryRow(newState.images, this.props.imagesPerRow)
+        )
+      }
+      this.setState(newState)
     }
-    if (assets.length > 0) {
-      newState.lastCursor = data.page_info.end_cursor
-      newState.images = this.state.images.concat(assets)
-      newState.dataSource = this.state.dataSource.cloneWithRows(
-        this._nEveryRow(newState.images, this.props.imagesPerRow)
-      )
-    }
-    this.setState(newState)
   }
+
   render() {
     var {imageMargin, backgroundColor} = this.props
     return (

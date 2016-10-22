@@ -29,6 +29,7 @@
     "redux-actions": "^0.12.0",
     "redux-persist": "^4.0.0-alpha6",
     "redux-saga": "^0.12.0",
+    "rn-camera-roll": "0.0.5",
     "tcomb-form-native": "^0.6.1"
   },
   "devDependencies": {

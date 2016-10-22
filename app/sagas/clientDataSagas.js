@@ -2,12 +2,11 @@ import {
   ADD_PHOTOS, ADD_INFOS, ADD_MESSAGES, ADD_CLIENTS, INIT_DATA,
   syncCountPhotoChild, syncAddedPhotoChild, syncRemovedPhotoChild,
   SYNC_COUNT_PHOTO_CHILD, SYNC_ADDED_PHOTO_CHILD, SYNC_REMOVED_PHOTO_CHILD,
-  syncAddedInfoChild, syncRemovedInfoChild,
-  SYNC_ADDED_INFO_CHILD, SYNC_REMOVED_INFO_CHILD,
-  syncAddedMessagesChild, syncRemovedMessagesChild,
-  SYNC_ADDED_MESSAGES_CHILD, SYNC_REMOVED_MESSAGES_CHILD,
-  MARK_PHOTO_READ, INCREMENT_TRAINER_NOTIFICATION, DECREMENT_TRAINER_NOTIFICATION,
-  INCREMENT_TRAINER_CHAT_NOTIFICATION, INCREMENT_TRAINER_PHOTO_NOTIFICATION, DECREMENT_TRAINER_PHOTO_NOTIFICATION
+  syncAddedMessagesClientChild, syncRemovedMessagesClientChild,
+  SYNC_ADDED_MESSAGES_CLIENT_CHILD, SYNC_REMOVED_MESSAGES_CLIENT_CHILD,
+  INIT_CLIENT_MESSAGES, syncAddedInfoChild, syncRemovedInfoChild,
+  SYNC_ADDED_INFO_CHILD, SYNC_REMOVED_INFO_CHILD, MARK_CLIENT_PHOTO_READ,
+  INCREMENT_TRAINER_PHOTO_NOTIFICATION, DECREMENT_TRAINER_PHOTO_NOTIFICATION,
 } from '../constants/ActionTypes'
 
 import * as db from './firebaseCommands'
@@ -21,25 +20,92 @@ import firebase from 'firebase'
 const turlHead = Config.AWS_CDN_THU_URL
 const urlHead = Config.AWS_CDN_IMG_URL
 
-function* triggerGetMessagesChild() {
+const prefetchData = (cdnPath) => {
+  return Image.prefetch(cdnPath)
+    .then(() => {})
+    .catch(error => {console.log(error + ' - ' + cdnPath)})
+}
+
+function* readClientPhotoFlow() {
   while (true) {
-    const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CHILD)
+    const data = yield take(MARK_CLIENT_PHOTO_READ)
+    const {path, uid} = data
+    firebase.database().ref(path).update({'notifyTrainer': false})
+    yield put({type: DECREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath: path, client: uid})
+  }
+}
+
+function* triggerGetMessagesClientChild() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
     const messages = data.val()
-    const photo = messages.photo
-    yield put ({type: ADD_MESSAGES, messages, photo})
-    if (messages.trainerRead === false) {
-      const uid  = messages.uid
-      const path = '/global/' + uid + '/photoData/' + photo
-      const info = turlHead + uid + '/' + photo + '.jpg'
-      yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
-      yield put({type: INCREMENT_TRAINER_CHAT_NOTIFICATION, uid, photo: info, path})
+    let id = yield select(state => state.authReducer.token)
+    if (!id) {
+      id = firebase.auth().currentUser.uid
+    }
+    const uid  = messages.uid
+    const trainer = messages.trainer
+    const flag = messages.clientRead
+    const path = '/global/' + uid + '/photoData/' + messages.photo
+    const file = turlHead + uid + '/' + messages.photo + '.jpg'
+    yield put ({type: ADD_MESSAGES, messages, path})
+    if (flag)
+      yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath: path, client: uid})
+    const prevMessages = yield select(state => state.chatReducer.messages)
+    const count = yield select(state => state.chatReducer.count)
+  }
+}
+
+function* triggerRemMessagesClientChild() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_REMOVED_MESSAGES_CLIENT_CHILD)
+    const child = data
+  }
+}
+
+function* syncClientChatData() {
+  while (true) {
+    const data = yield take (INIT_CLIENT_MESSAGES)
+    const msgPath = data.path + '/messages'
+    yield fork(db.sync, msgPath, {
+      child_added: syncAddedMessagesClientChild,
+      child_removed: syncRemovedMessagesClientChild,
+    })
+  }
+}
+
+function* triggerGetPhotoChild() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_ADDED_PHOTO_CHILD)
+    if (data.val().visible) {
+      const file = data.val()
+      const uid = file.uid
+      const cdnPath = turlHead+file.fileName
+      const databasePath = file.databasePath
+      const time = file.time
+      if ((Date.now() - time) > 60000) {
+        yield fork(prefetchData, cdnPath)
+      }
+      var child = {}
+      child[uid] = file
+      if (file.notifyTrainer) {
+        yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath, client: uid})
+      }
+      yield put({type: ADD_PHOTOS, child})
+      const messageData = file.messages
+      const path = file.databasePath
+      for (var keys in messageData) {
+        const messages = messageData[keys]
+        yield put ({type: ADD_MESSAGES, messages, path})
+      }
+      yield put ({type: INIT_CLIENT_MESSAGES, path})
     }
   }
 }
 
-function* triggerRemMessagesChild() {
+function* triggerRemPhotoChild() {
   while (true) {
-    const { payload: { data } } = yield take(SYNC_REMOVED_MESSAGES_CHILD)
+    const { payload: { data } } = yield take(SYNC_REMOVED_PHOTO_CHILD)
     const child = data
   }
 }
@@ -63,49 +129,6 @@ function* triggerRemInfoChild() {
   }
 }
 
-const prefetchData = (photo) => {
-  return Image.prefetch(photo)
-    .then(() => {})
-    .catch(error => {console.log(error + ' - ' + photo)})
-}
-
-function* triggerGetPhotoChild() {
-  while (true) {
-    const { payload: { data } } = yield take(SYNC_ADDED_PHOTO_CHILD)
-    if (data.val().visible) {
-      const file = data.val()
-      const uid = file.uid
-      // const thumb = turlHead+file.fileName
-      const photo = turlHead+file.fileName
-      const caption = file.caption
-      const title = file.title
-      const mealType = file.mealType
-      const time = file.time
-      const localFile = file.localFile
-      const notification = file.notifyTrainer
-      if ((Date.now() - time) > 60000) {
-        yield fork(prefetchData, photo)
-      }
-      const obj = {photo,caption,mealType,time,title,localFile,file,notification}
-      var child = {}
-      child[uid] = obj
-      const path = '/global/' + uid + '/photoData/' + file.fileTail
-      if (file.notifyTrainer) {
-        yield put({type: INCREMENT_TRAINER_NOTIFICATION, uid})
-        yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, uid, time, photo})
-      }
-      yield put({type: ADD_PHOTOS, child})
-    }
-  }
-}
-
-function* triggerRemPhotoChild() {
-  while (true) {
-    const { payload: { data } } = yield take(SYNC_REMOVED_PHOTO_CHILD)
-    const child = data
-  }
-}
-
 function* syncData() {
   let clients = yield select(state => state.trainerReducer.clients)
   for (let i = 0; i < clients.length; i++) {
@@ -117,10 +140,6 @@ function* syncData() {
       child_added: syncAddedPhotoChild,
       child_removed: syncRemovedPhotoChild,
     })
-    yield fork(db.sync, path + '/messages', {
-      child_added: syncAddedMessagesChild,
-      child_removed: syncRemovedMessagesChild,
-    })
     yield fork(db.sync, path + '/userInfo', {
       child_added: syncAddedInfoChild,
       child_removed: syncRemovedInfoChild,
@@ -128,23 +147,14 @@ function* syncData() {
   }
 }
 
-function* readClientPhotoFlow() {
-  while (true) {
-    const data = yield take(MARK_PHOTO_READ)
-    const {path, uid, photo} = data
-    firebase.database().ref(path).update({'notifyTrainer': false})
-    yield put({type: DECREMENT_TRAINER_NOTIFICATION, uid})
-    yield put({type: DECREMENT_TRAINER_PHOTO_NOTIFICATION, photo})
-  }
-}
-
 export default function* rootSaga() {
   yield fork(takeLatest, INIT_DATA, syncData)
+  yield fork(takeLatest, INIT_DATA, syncClientChatData)
   yield fork(takeLatest, INIT_DATA, readClientPhotoFlow)
   yield fork(takeLatest, INIT_DATA, triggerGetInfoChild)
   yield fork(takeLatest, INIT_DATA, triggerRemInfoChild)
   yield fork(takeLatest, INIT_DATA, triggerGetPhotoChild)
   yield fork(takeLatest, INIT_DATA, triggerRemPhotoChild)
-  yield fork(takeLatest, INIT_DATA, triggerGetMessagesChild)
-  yield fork(takeLatest, INIT_DATA, triggerRemMessagesChild)
+  yield fork(takeLatest, INIT_DATA, triggerGetMessagesClientChild)
+  yield fork(takeLatest, INIT_DATA, triggerRemMessagesClientChild)
 }

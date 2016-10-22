@@ -17,15 +17,12 @@ const turlHead = Config.AWS_CDN_THU_URL
 export default class ChatThread extends Component {
   constructor(props) {
     super(props)
-    const feedbackPhoto = this.props.chat.feedbackPhoto
-    const photo = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
-    const oldMessages = this.props.chat.messages[photo]
     this.state = {
       messages: props.messages,
       isTyping: null,
       id: firebase.auth().currentUser.uid,
-      oldMessages: oldMessages,
-      loadEarlier: (oldMessages) ? true : false,
+      oldMessages: [],
+      loadEarlier: false,
     }
     this.loadMessages = this.loadMessages.bind(this)
     this._isAlright = null
@@ -34,23 +31,9 @@ export default class ChatThread extends Component {
     this.loadMessages()
   }
   loadMessages() {
-    const feedbackPhoto = this.props.chat.feedbackPhoto
-    const key = feedbackPhoto.substring(feedbackPhoto.lastIndexOf('/')+1, feedbackPhoto.lastIndexOf('.'))
-    const oldMessages = this.props.chat.messages[key]
+    let oldMessages = this.props.chat.messages[this.props.chat.databasePath]
     var messages = []
     for (var keys in oldMessages) {
-      if (this.props.caller === "trainer" && oldMessages[keys].trainerRead === false) {
-        const uid = oldMessages[keys].uid
-        const path = '/global/' + uid + '/messages/' + oldMessages[keys].key
-        const photo = turlHead + uid + '/' + oldMessages[keys].photo + '.jpg'
-        this.props.markMessageRead(path, true, photo, uid)
-      }
-      else if (this.props.caller === "client" && oldMessages[keys].clientRead === false) {
-        const uid = this.state.id
-        const path = '/global/' + uid + '/messages/' + oldMessages[keys].key
-        const photo = turlHead + uid + '/' + oldMessages[keys].photo + '.jpg'
-        this.props.markMessageRead(path, false, photo, uid)
-      }
       let message = oldMessages[keys].message
       message.createdAt = oldMessages[keys].createdAt
       messages.unshift(message)
@@ -63,7 +46,6 @@ export default class ChatThread extends Component {
     })
   }
   onSend(messages = []) {
-    const id = this.props.data.clientId
     if (this.props.caller === "trainer") {
       this.props.storeId(this.props.data.clientId)
     }

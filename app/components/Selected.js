@@ -22,7 +22,10 @@ export default class Selected extends Component {
     }
   }
   _workBeforeTransition() {
-    this.props._storeTitle(this.state.title)
+    if (this.props._library)
+      this.props.storeLibraryTitle(this.state.title)
+    else
+      this.props.storeCameraTitle(this.state.title)
     this.props._handleNavigate(this.props._nextRoute)
   }
   _pauseBeforeTransition() {
@@ -39,6 +42,7 @@ export default class Selected extends Component {
     this._workBeforeTransition()
   }
   render() {
+    const uri = this.props._library ? this.props.selected.library : this.props.selected.photo
     return (
       // This view divides the screen into 17 segments.  The bottom 8 segments
       // are left blank for the keyboard.
@@ -49,7 +53,7 @@ export default class Selected extends Component {
                   CommonStyles.universalBorderRadius,
                   CommonStyles.universalMargin]}
           resizeMode='cover'
-          source={{uri: this.props._selectedPhoto}}/>
+          source={{uri: uri}}/>
 
         {/*Need this View wrapping TextInput to support single sided border
           text input line.*/}

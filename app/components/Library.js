@@ -24,7 +24,7 @@ const route = {
   }
 }
 
-import Selected from './Selected'
+import Selected from '../containers/SelectedContainer'
 import Photos  from '../containers/PhotosContainer'
 import Caption from '../containers/CaptionContainer'
 
@@ -44,12 +44,8 @@ export default class Library extends Component {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.library.inProgress !== null) {
-      if (nextProps.library.inProgress === true)
-        this.setState({})
-      else if (nextProps.library.inProgress === false)
-        this._handleCaptionAction()
-    }
+    if (nextProps.library.inProgress === false)
+      this._handleCaptionAction()
   }
   _renderScene (props) {
     const prefix = 'scene_'
@@ -57,8 +53,6 @@ export default class Library extends Component {
     if (scene.key === prefix + 'photos') {
       return (
         <Photos
-          _selectPhoto={(action) => this.props.selectPhoto(action)}
-          _store64Library={(action) => this.props.store64Library(action)}
           _handleNavigate={this._handleNavigate.bind(this)}/>
       )
     }
@@ -67,17 +61,13 @@ export default class Library extends Component {
         <Selected
           _buttonName="Next"
           _nextRoute={route}
-          _selectedPhoto={this.props.library.selected}
-          _storeTitle={(action) => this.props.storeLibraryTitle(action)}
-          _handleNavigate={this._handleNavigate.bind(this)}/>
+          _handleNavigate={this._handleNavigate.bind(this)}
+          _library={true}/>
       )
     }
     else if (scene.key === prefix + 'caption') {
       return (
         <Caption
-          _tags={this.props.library.tags}
-          _selectedPhoto={this.props.library.selected}
-          _storeCaption={(action) => this.props.storeLibraryCaption(action)}
           _handleBackAction={this._handleBackAction.bind(this)}
           _inProgress={this.props.library.inProgress}
           _library={true}/>
@@ -121,6 +111,7 @@ export default class Library extends Component {
     this._handleBackAction()
     this._handleBackAction()
     this.props.changeTab(1)
+    this.props.resetLibraryProgress()
     return true
   }
   _handleNavigate (action) {

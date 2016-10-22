@@ -1,7 +1,5 @@
 import { 
-  TAKE_PHOTO, STORE_64_PHOTO, CLARIFAI_TAGS_SUCCESS, 
-  STORE_CAMERA_CAPTION, STORE_CAMERA_TITLE, ADD_CAMERA_MEAL_DATA, 
-  PUSH_CAM_ROUTE, POP_CAM_ROUTE, SEND_FIREBASE_INIT_CAMERA, SEND_AWS_SUCCESS
+  RESET_CAMERA, SEND_AWS_SUCCESS, PUSH_CAM_ROUTE, POP_CAM_ROUTE, SEND_FIREBASE_INIT_CAMERA
 } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
@@ -9,14 +7,8 @@ const {
 } = NavigationExperimental
 
 const initialState = {
-  photo: '',
-  photo64: '',
-  caption: '',
-  title: '',
-  mealType: '',
   index: 0,
   key: 'root',
-  tags: '',
   routes: [
     {
       key: 'picture',
@@ -28,36 +20,15 @@ const initialState = {
 
 export default function camera (state = initialState, action) {
   switch (action.type) {
-    case TAKE_PHOTO:
+    case SEND_FIREBASE_INIT_CAMERA:
       return {
         ...state,
-        photo: action.photo,
+        inProgress: true
+      }
+    case RESET_CAMERA:
+      return {
+        ...state,
         inProgress: null
-      }
-    case STORE_64_PHOTO:
-      return {
-        ...state,
-        photo64: action.photo
-      }
-    case CLARIFAI_TAGS_SUCCESS:
-      return {
-        ...state,
-        tags: action.tags
-      }
-    case STORE_CAMERA_CAPTION:
-      return {
-        ...state,
-        caption: action.caption
-      }
-    case STORE_CAMERA_TITLE:
-      return {
-        ...state,
-        title: action.title
-      }
-    case ADD_CAMERA_MEAL_DATA:
-      return {
-        ...state,
-        mealType: action.mealType
       }
     case PUSH_CAM_ROUTE:
       if (state.routes[state.index].key === (action.route && action.route.key)) {
@@ -72,11 +43,6 @@ export default function camera (state = initialState, action) {
       }
       else {
         return NavigationStateUtils.pop(state)
-      }
-    case SEND_FIREBASE_INIT_CAMERA:
-      return {
-        ...state,
-        inProgress: true
       }
     case SEND_AWS_SUCCESS:
       return {

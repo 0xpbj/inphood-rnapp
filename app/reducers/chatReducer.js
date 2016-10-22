@@ -9,7 +9,8 @@ import {
 const initialState = {
   client: '',
   count: 0,
-  feedbackPhoto: '',
+  databasePath: '',
+  cdnPath: '',
   messages: [],
   chatMessages: []
 }
@@ -24,7 +25,8 @@ export default function chat(state = initialState, action) {
     case FEEDBACK_PHOTO:
       return {
         ...state,
-        feedbackPhoto: action.feedbackPhoto
+        databasePath: action.databasePath,
+        cdnPath: action.cdnPath
       }
     case STORE_MESSAGES:
       return {
@@ -37,12 +39,12 @@ export default function chat(state = initialState, action) {
         client: action.id
       }
     case ADD_MESSAGES:
-      const {photo, messages} = action
+      const {path, messages} = action
       let array = state.messages
-      if (!array[photo]) {
-        array[photo] = []
+      if (!array[path]) {
+        array[path] = []
       }
-      array[photo] = [...array[photo], messages]
+      array[path] = [...array[path], messages]
       return {
         ...state,
         messages: array

@@ -1,7 +1,5 @@
 import { 
-  TAKE_PHOTO, SELECT_PHOTO, STORE_64_LIBRARY, CLARIFAI_TAGS_SUCCESS, 
-  STORE_LIBRARY_CAPTION, STORE_LIBRARY_TITLE, ADD_LIBRARY_MEAL_DATA, 
-  PUSH_LIB_ROUTE, POP_LIB_ROUTE, SEND_FIREBASE_INIT_LIBRARY, SEND_AWS_SUCCESS 
+  TAKE_PHOTO, RESET_LIBRARY, PUSH_LIB_ROUTE, POP_LIB_ROUTE, SEND_AWS_SUCCESS, SEND_FIREBASE_INIT_LIBRARY
 } from '../constants/ActionTypes'
 
 import { NavigationExperimental } from 'react-native'
@@ -11,15 +9,9 @@ const {
 } = NavigationExperimental
 
 const initialState = {
-  selected: '',
-  selected64: '',
-  caption: '',
-  title: '',
   count: 0,
-  mealType: '',
   index: 0,
   key: 'root',
-  tags: '',
   routes: [
     {
       key: 'photos',
@@ -36,36 +28,15 @@ export default function library (state = initialState, action) {
         ...state,
         count: state.count + 1
       }
-    case SELECT_PHOTO:
+    case SEND_FIREBASE_INIT_LIBRARY:
       return {
         ...state,
-        selected: action.selected,
+        inProgress: true
+      }
+    case RESET_LIBRARY:
+      return {
+        ...state,
         inProgress: null
-      }
-    case STORE_64_LIBRARY:
-      return {
-        ...state,
-        selected64: action.selected
-      }
-    case CLARIFAI_TAGS_SUCCESS:
-      return {
-        ...state,
-        tags: action.tags
-      }
-    case STORE_LIBRARY_CAPTION:
-      return {
-        ...state,
-        caption: action.caption
-      }
-    case STORE_LIBRARY_TITLE:
-      return {
-        ...state,
-        title: action.title
-      }
-    case ADD_LIBRARY_MEAL_DATA:
-      return {
-        ...state,
-        mealType: action.mealType
       }
     case PUSH_LIB_ROUTE:
       if (state.routes[state.index].key === (action.route && action.route.key)) {
@@ -80,11 +51,6 @@ export default function library (state = initialState, action) {
       }
       else {
         return NavigationStateUtils.pop(state)
-      }
-    case SEND_FIREBASE_INIT_LIBRARY:
-      return {
-        ...state,
-        inProgress: true
       }
     case SEND_AWS_SUCCESS:
       return {

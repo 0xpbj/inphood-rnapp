@@ -24,7 +24,6 @@ export default class Caption extends Component {
     super(props)
     this.state = {
       animating: false,
-      size: this.props.gallery.photos.length,
       meal: false,
       recipe: false,
       breakfast: false,
@@ -54,7 +53,10 @@ export default class Caption extends Component {
     else if (snack){
       mealType = 'Snack'
     }
-    this.props._storeCaption(this.state.caption)
+    if (this.props._library)
+      this.props.storeLibraryCaption(this.state.caption)
+    else
+      this.props.storeCameraCaption(this.state.caption)
     if (!breakfast && !lunch && !dinner && !snack) {
       alert ('Please pick meal type')
       return
@@ -117,18 +119,14 @@ export default class Caption extends Component {
       })
     }
   }
-  componentWillReceiveProps(nextProps) {
-    // if (nextProps.gallery.photos.length > this.state.size) {
-    //   this.props._transmit()
-    // }
-  }
   render() {
     let whiteSpace = new RegExp(/^\s+$/)
-    const defaultValue = this.props._tags
-    const placeholder = this.props._tags === '' ? "Ingredients, e.g.: Beef, Tomatoes ..." : ''
+    const defaultValue = this.props.vision.tags
+    const placeholder = this.props.vision.tags === '' ? "Ingredients, e.g.: Beef, Tomatoes ..." : ''
     // const placeholderTextColor = this.props._tags === '' ? '' : ''
-    const selectionColor = this.props._tags === '' ? '' : 'blue'
-    const clearButtonMode = this.props._tags === '' ? 'while-editing' : 'always'
+    const selectionColor = this.props.vision.tags === '' ? '' : 'blue'
+    const clearButtonMode = this.props.vision.tags === '' ? 'while-editing' : 'always'
+    const uri = this.props._library ? this.props.selected.library : this.props.selected.photo
     return (
 
       // This view divides the screen into 17 segments.  The bottom 8 segments
@@ -143,7 +141,7 @@ export default class Caption extends Component {
             style={[{flex:1},
                     CommonStyles.universalBorderRadius]}
             resizeMode='cover'
-            source={{uri: this.props._selectedPhoto}}/>
+            source={{uri: uri}}/>
         </TouchableHighlight>
 
         <View>

@@ -1,19 +1,15 @@
 import { CHANGE_TAB } from '../constants/ActionTypes'
-import {userIcon, sampleIcon, homeIcon} from '../components/Icons'
 import {REHYDRATE} from 'redux-persist/constants'
 const tabs = [
-  { key: 'Camera', icon: sampleIcon, title: 'Camera', name: 'ios-camera-outline', iconName: 'ios-camera'},
-  { key: 'Home', icon: homeIcon, title: 'Home', name: 'ios-home-outline', iconName: 'ios-home'},
-  { key: 'Clients', icon: homeIcon, title: 'Clients', name: 'ios-people-outline', iconName: 'ios-people'},
-  { key: 'Extras', icon: sampleIcon, title: 'Extras', name: 'ios-options-outline', iconName: 'ios-options'},
+  { key: 'Camera', title: 'Camera', name: 'ios-camera-outline', iconName: 'ios-camera'},
+  { key: 'Home', title: 'Home', name: 'ios-home-outline', iconName: 'ios-home'},
+  { key: 'Clients', title: 'Clients', name: 'ios-people-outline', iconName: 'ios-people'},
+  { key: 'Extras', title: 'Extras', name: 'ios-options-outline', iconName: 'ios-options'},
 ]
 
 const initialState = {
   index: 0,
-  routes: tabs,
-  mvisible: false,
-  cvisible: false,
-  evisible: false,
+  routes: tabs
 }
 
 function tabsNav (state = initialState, action) {

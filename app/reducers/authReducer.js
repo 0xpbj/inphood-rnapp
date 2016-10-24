@@ -4,6 +4,7 @@ import {
   STORE_TOKEN, STORE_RESULT, STORE_VALUE,
   EM_LOGIN_REQUEST, BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER
 } from '../constants/ActionTypes'
+import {REHYDRATE} from 'redux-persist/constants'
 
 const initialState = {
   token: '',
@@ -21,6 +22,11 @@ const initialState = {
 
 export default function authentication(state = initialState, action) {
   switch (action.type) {
+    // case REHYDRATE:
+    //   console.log(action.payload.authReducer)
+    //   return {
+    //     state: action.payload.authReducer
+    //   }
     case INIT_LOGIN:
       return {
         ...state,

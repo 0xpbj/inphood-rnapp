@@ -195,7 +195,15 @@ export default class CameraRollPicker extends Component {
   }
   _selectImage(image) {
     this.props.selectPhoto(image.uri)
-    NativeModules.ReadImageData.readImage(image.uri, (data) => this.props.store64Library(data))
+    if (Platform.OS === 'ios') {
+      NativeModules.ReadImageData.readImage(image.uri, (data) => this.props.store64Library(data))
+    } else {  // Android
+      // See: https://github.com/xfumihiro/react-native-image-to-base64
+      // (Theoretically this works for iOS too so we might be able to ditch this conditional and use this code,
+      // but something is horrendously slow in it.)
+      NativeModules.RNImageToBase64.getBase64String(image.uri, (err, base64) => this.props.store64Library(base64))
+    }
+
     this.props._handleNavigate(route)
   }
   _nEveryRow(data, n) {

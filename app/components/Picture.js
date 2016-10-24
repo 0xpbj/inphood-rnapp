@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   AppRegistry,
   Dimensions,
+  Platform,
   Text,
   TouchableHighlight,
   View,
@@ -27,7 +28,14 @@ export default class Picture extends Component {
   takePicture() {
     this.camera.capture()
       .then((data) => {
-        NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Camera(image))
+        if (Platform.OS === 'ios') {
+          NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Camera(image))
+        } else {  // Android
+          // See: https://github.com/xfumihiro/react-native-image-to-base64
+          // (Theoretically this works for iOS too so we might be able to ditch this conditional and use this code,
+          // but something is horrendously slow in it.)
+          NativeModules.RNImageToBase64.getBase64String(data.path, (err, base64) => this.props._store64Camera(base64))
+        }
         this.props._takePhoto(data.path)
         this.props._handleNavigate(route)
       })

@@ -25,6 +25,18 @@ const route = {
 
 import Spinner from 'react-native-loading-spinner-overlay'
 
+// TODO: probably can delete loadingMore--doesn't look like it's doing anything.
+// TODO: this code probably sucks--our Nexus 5X gets pretty hot when it's in
+// action and it's either due to this code, sagaMonitor, or something else. Look
+// into a better replacment.
+// TODO: probably need lots of edge case testing in this code:
+//          1. All photos loaded, user switches to phone camera and takes a new picture-
+//             -did we update the CameraRoll?
+//          2. No pictures in CameraRoll?
+//          3. Loaded CameraRoll, user goes to another screen in inPhood, switches
+//             applications, then takes a pic with phone camera, then comes back to
+//             inPhood--did this CameraRollPicker update appropriately?
+//
 export default class CameraRollPicker extends Component {
   constructor(props) {
     super(props)
@@ -91,9 +103,11 @@ export default class CameraRollPicker extends Component {
     }
 
     if (Platform.OS === 'ios') {
+
       if (!data.page_info.has_next_page) {
         newState.noMore = true
       }
+
       if (assets.length > 0) {
         newState.lastCursor = data.page_info.end_cursor
         newState.images = this.state.images.concat(assets)
@@ -101,18 +115,27 @@ export default class CameraRollPicker extends Component {
           this._nEveryRow(newState.images, this.props.imagesPerRow)
         )
       }
-      this.setState(newState)
-    } else {
+
+    } else {  // Platform === Android
+
       // Android: page_info etc. doesn't exist in the data array
-      //
+      // so use the image uri as the last cursor etc.
       if (assets.length > 0) {
+        var lastImage = assets[assets.length-1]
+        newState.lastCursor = lastImage.node.image.uri
         newState.images = this.state.images.concat(assets)
         newState.dataSource = this.state.dataSource.cloneWithRows(
-          this._nEveryRow(newState.images, this.props.imagesPerRow)
-        )
+          this._nEveryRow(newState.images, this.props.imagesPerRow))
+      } else {
+        // If assets.length <= 0 then one of two situations:
+        //  1. no images to begin with
+        //  2. no images after previous newState.lastCursor
+        // Either way, stop the spinner.
+        newState.noMore = true
       }
-      this.setState(newState)
     }
+
+    this.setState(newState)
   }
 
   render() {

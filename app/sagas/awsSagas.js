@@ -37,15 +37,9 @@ const sendToAWS = (image, fileName) => {
   })
 }
 
-function* loadAWSCall(flag, fileName) {
+function* loadAWSCall(fileName) {
   try {
-    let image = ''
-    if (flag) {
-      image = yield select(state => state.selectedReducer.photo)
-    }
-    else {
-      image = yield select(state => state.selectedReducer.library)
-    }
+    const image = yield select(state => state.selectedReducer.photo)
     yield call (sendToAWS, image, fileName)
     yield put ({type: SEND_AWS_SUCCESS})
   }

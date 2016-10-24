@@ -1,5 +1,5 @@
 import { 
-  TAKE_PHOTO, SELECT_PHOTO, STORE_64_PHOTO, STORE_TITLE
+  TAKE_PHOTO, STORE_64_PHOTO, STORE_TITLE
 } from '../constants/ActionTypes'
 
 import { NavigationExperimental } from 'react-native'
@@ -17,11 +17,6 @@ export default function library (state = initialState, action) {
         ...state,
         photo: action.photo
       }
-    case SELECT_PHOTO:
-      return {
-        ...state,
-        library: action.selected
-      }
     case STORE_64_PHOTO:
       return {
         ...state,
@@ -30,7 +25,7 @@ export default function library (state = initialState, action) {
     case STORE_TITLE:
       return {
         ...state,
-        camTitle: action.title
+        title: action.title
       }
     default:
       return state

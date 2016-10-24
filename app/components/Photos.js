@@ -30,7 +30,12 @@ export default class Photos extends Component {
       }
     }
     this._imageSize = (width - (imagesPerRow + 1) * imageMargin) / imagesPerRow
-    var options = { title: '' }
+    var options = { 
+      title: '', 
+      quality: 0.5,
+      maxWidth: 500,
+      maxHeight: 500,
+    }
     return (
       <View style={{flex: 1}}>{
         ImagePicker.launchImageLibrary(options, (response) => {
@@ -46,10 +51,9 @@ export default class Photos extends Component {
   _selectImage(response) {
     this.props._gotoCameraPage()
     this.props._store64Data(response.data)
-    if (Platform.OS === "ios")
-      this.props._storePhoto(response.origURL)
-    else
-      this.props._storePhoto(response.uri)
+    // if (Platform.OS === "ios")
+      // this.props._storePhoto(response.origURL)
+    this.props._storePhoto(response.uri)
     this.props._handleNavigate(route)
   }
 }

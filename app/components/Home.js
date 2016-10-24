@@ -192,7 +192,8 @@ export default class HomeTabs extends Component {
       var ScrollableTabView = require('react-native-scrollable-tab-view')
       return (
         <ScrollableTabView
-          tabBarPosition="bottom">
+          tabBarPosition="bottom"
+          locked={true}>
           {tabs}
         </ScrollableTabView>
       )

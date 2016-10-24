@@ -1,36 +1,23 @@
 import { 
-  STORE_CAMERA_CAPTION, ADD_CAMERA_MEAL_DATA,
-  STORE_LIBRARY_CAPTION, ADD_LIBRARY_MEAL_DATA,
+  STORE_CAPTION, ADD_MEAL_DATA
 } from '../constants/ActionTypes'
 
 const initialState = {
-  camCaption: '',
-  camMealType: '',
-  libCaption: '',
-  libMealType: ''
+  caption: '',
+  mealType: ''
 }
 
 export default function camera (state = initialState, action) {
   switch (action.type) {
-    case STORE_CAMERA_CAPTION:
+    case STORE_CAPTION:
       return {
         ...state,
-        camCaption: action.caption
+        caption: action.caption
       }
-    case STORE_LIBRARY_CAPTION:
+    case ADD_MEAL_DATA:
       return {
         ...state,
-        libCaption: action.caption
-      }
-    case ADD_CAMERA_MEAL_DATA:
-      return {
-        ...state,
-        camMealType: action.mealType
-      }
-    case ADD_LIBRARY_MEAL_DATA:
-      return {
-        ...state,
-        libMealType: action.mealType
+        mealType: action.mealType
       }
     default:
       return state

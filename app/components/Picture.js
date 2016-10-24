@@ -29,14 +29,14 @@ export default class Picture extends Component {
     this.camera.capture()
       .then((data) => {
         if (Platform.OS === 'ios') {
-          NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Camera(image))
+          NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Data(image))
         } else {  // Android
           // The default settings on react-native-camera for android is
           // captureTarget is Camera.constants.captureTarget.disk which defaults to
           // base64  (https://github.com/lwansbrough/react-native-camera)
-          this.props._store64Camera(data)
+          this.props._store64Data(data)
         }
-        this.props._takePhoto(data.path)
+        this.props._storePhoto(data.path)
         this.props._handleNavigate(route)
       })
       .catch(err => console.error(err))

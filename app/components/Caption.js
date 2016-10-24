@@ -53,23 +53,14 @@ export default class Caption extends Component {
     else if (snack){
       mealType = 'Snack'
     }
-    if (this.props._library)
-      this.props.storeLibraryCaption(this.state.caption)
-    else
-      this.props.storeCameraCaption(this.state.caption)
+    this.props.storeCaption(this.state.caption)
     if (!breakfast && !lunch && !dinner && !snack) {
       alert ('Please pick meal type')
       return
     }
     else {
-      if (this.props._library) {
-        this.props.addLibraryMealData(mealType)
-        this.props.sendFirebaseInitLibrary()
-      }
-      else {
-        this.props.addCameraMealData(mealType)
-        this.props.sendFirebaseInitCamera()
-      }
+      this.props.addMealData(mealType)
+      this.props.sendFirebaseInitCamera()
     }
   }
   _pauseBeforeTransition() {
@@ -126,7 +117,6 @@ export default class Caption extends Component {
     // const placeholderTextColor = this.props._tags === '' ? '' : ''
     const selectionColor = this.props.vision.tags === '' ? '' : 'blue'
     const clearButtonMode = this.props.vision.tags === '' ? 'while-editing' : 'always'
-    const uri = this.props._library ? this.props.selected.library : this.props.selected.photo
     return (
 
       // This view divides the screen into 17 segments.  The bottom 8 segments
@@ -141,7 +131,7 @@ export default class Caption extends Component {
             style={[{flex:1},
                     CommonStyles.universalBorderRadius]}
             resizeMode='cover'
-            source={{uri: uri}}/>
+            source={{uri: this.props.selected.photo}}/>
         </TouchableHighlight>
 
         <View>

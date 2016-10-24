@@ -18,7 +18,7 @@ const initialState = {
   inProgress: null
 }
 
-export default function camera (state = initialState, action) {
+export default function media (state = initialState, action) {
   switch (action.type) {
     case SEND_FIREBASE_INIT_CAMERA:
       return {

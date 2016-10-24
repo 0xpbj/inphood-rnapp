@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Photos from '../components/Photos'
-import * as actionCreators from '../actions/Actions';
+import Media from '../components/Media'
+import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps (state) {
   return {
-    library: state.libReducer
+    media: state.mediaReducer
   }
 }
 
@@ -16,4 +16,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Photos)
+)(Media)

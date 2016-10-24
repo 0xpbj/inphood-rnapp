@@ -15,7 +15,7 @@ const {
 } = NavigationExperimental
 
 import Icon from 'react-native-vector-icons/Ionicons'
-import Media from './Media'
+import Media from '../containers/MediaContainer'
 import Home from '../containers/GalleryContainer'
 import Clients from '../containers/ExpertContainer'
 import Extras from '../containers/ExtrasContainer'

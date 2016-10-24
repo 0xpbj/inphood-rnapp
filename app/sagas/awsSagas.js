@@ -66,7 +66,7 @@ const prepFirebase = (state) => {
   return data
 }
 
-const sendToFirebase = (state, flag, fileTail, fileName) => {
+const sendToFirebase = (state, fileTail, fileName) => {
   let uid = state.authReducer.token
   if (!uid) {
     uid = firebase.auth().currentUser.uid
@@ -88,18 +88,10 @@ const sendToFirebase = (state, flag, fileTail, fileName) => {
   const notifyTrainer = true
   const notifyClient = false
   const visible = true
-  if (flag) {
-    caption = state.captionReducer.camCaption
-    title = state.selectedReducer.camTitle
-    mealType = state.captionReducer.camMealType
-    localFile = state.selectedReducer.photo
-  }
-  else {
-    caption = state.captionReducer.libCaption
-    title = state.selectedReducer.libTitle
-    mealType = state.captionReducer.libMealType
-    localFile = state.selectedReducer.library
-  }
+  caption = state.captionReducer.caption
+  title = state.selectedReducer.title
+  mealType = state.captionReducer.mealType
+  localFile = state.selectedReducer.photo
   const databasePath = '/global/' + uid + '/photoData/' + fileTail
   firebase.database().ref(databasePath).update({
     uid,
@@ -117,22 +109,15 @@ const sendToFirebase = (state, flag, fileTail, fileName) => {
   })
 }
 
-function* loadFirebaseCall(flag) {
+function* loadFirebaseCall() {
   try {
     const state = yield select()
     const {fileTail, fileName} = yield call (prepFirebase, state)
-    if (flag) {
-      yield put ({type: SEND_FIREBASE_CAMERA_SUCCESS})
-      yield call(loadAWSCall, true, fileName)
-    }
-    else {
-      yield put ({type: SEND_FIREBASE_LIBRARY_SUCCESS})
-      yield call(loadAWSCall, false, fileName)
-    }
-    yield call (sendToFirebase, state, flag, fileTail, fileName)
+    yield put ({type: SEND_FIREBASE_CAMERA_SUCCESS})
+    yield call(loadAWSCall, fileName)
+    yield call (sendToFirebase, state, fileTail, fileName)
   }
   catch(error) {
-    console.log(error)
     yield put ({type: SEND_FIREBASE_ERROR, error})
   }
 }
@@ -161,22 +146,7 @@ function* watchUserDataCall() {
   }
 }
 
-function* watchFirebaseCameraCall() {
-  while(true) {
-    yield take(SEND_FIREBASE_INIT_CAMERA)
-    yield call(loadFirebaseCall, true)
-  }
-}
-
-function* watchFirebaseLibraryCall() {
-  while(true) {
-    yield take(SEND_FIREBASE_INIT_LIBRARY)
-    yield call(loadFirebaseCall, false)
-  }
-}
-
 export default function* rootSaga() {
-  yield fork(takeLatest, LOGIN_SUCCESS, watchFirebaseLibraryCall)
-  yield fork(takeLatest, LOGIN_SUCCESS, watchFirebaseCameraCall)
+  yield fork(takeLatest, SEND_FIREBASE_INIT_CAMERA, loadFirebaseCall)
   yield fork(takeLatest, LOGIN_SUCCESS, watchUserDataCall)
 }

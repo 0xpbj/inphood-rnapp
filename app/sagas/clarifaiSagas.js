@@ -1,7 +1,6 @@
 import { 
   LOGIN_SUCCESS, CLARIFAI_AUTH_SUCCESS, CLARIFAI_AUTH_ERROR,
-  CLARIFAI_TAGS_SUCCESS, CLARIFAI_TAGS_ERROR,
-  STORE_64_PHOTO, STORE_64_LIBRARY,
+  CLARIFAI_TAGS_SUCCESS, CLARIFAI_TAGS_ERROR, STORE_64_PHOTO
 } from '../constants/ActionTypes'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
@@ -64,25 +63,6 @@ function* getCameraData() {
   }
 }
 
-function* getLibraryData() {
-  while(true) {
-    try {
-      yield take(STORE_64_LIBRARY)
-      const data = yield select(state => state.selectedReducer.library64)
-      const response = yield call(getCVData, data)
-      if (response) {
-        const tags = yield call(getTags, response)
-        yield put({type: CLARIFAI_TAGS_SUCCESS, tags})
-      }
-    }
-    catch (error) {
-      console.log(error)
-      yield put({type: CLARIFAI_TAGS_ERROR})
-    }
-  }
-}
-
 export default function* rootSaga() {
   yield fork(takeLatest, LOGIN_SUCCESS, getCameraData)
-  yield fork(takeLatest, LOGIN_SUCCESS, getLibraryData)
 }

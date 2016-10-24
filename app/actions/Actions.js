@@ -5,15 +5,12 @@ import {
   PUSH_GAL_ROUTE,
   POP_CAM_ROUTE,
   PUSH_CAM_ROUTE,
-  POP_LIB_ROUTE,
-  PUSH_LIB_ROUTE,
   PUSH_EXT_ROUTE,
   POP_EXT_ROUTE,
   CHANGE_TAB,
   TAKE_PHOTO,
   SELECT_PHOTO,
   STORE_64_PHOTO,
-  STORE_64_LIBRARY,
   FEEDBACK_PHOTO,
   LOAD_PHOTOS_INIT,
   LOAD_PHOTOS_SUCCESS,
@@ -22,19 +19,14 @@ import {
   LOAD_PICTURE,
   RESET_CAMERA,
   RESET_LIBRARY,
-  SEND_FIREBASE_LIBRARY_SUCCESS,
   SEND_FIREBASE_CAMERA_SUCCESS,
   SEND_FIREBASE_ERROR,
   SEND_FIREBASE_INIT_CAMERA,
-  SEND_FIREBASE_INIT_LIBRARY,
   STORE_TOKEN,
   STORE_RESULT,
-  STORE_CAMERA_CAPTION,
-  STORE_LIBRARY_CAPTION,
-  STORE_CAMERA_TITLE,
-  STORE_LIBRARY_TITLE,
-  ADD_CAMERA_MEAL_DATA,
-  ADD_LIBRARY_MEAL_DATA,
+  STORE_CAPTION,
+  STORE_TITLE,
+  ADD_MEAL_DATA,
   STORE_MESSAGES,
   REMOVE_CLIENT_PHOTO,
   MARK_PHOTO_READ,
@@ -105,19 +97,6 @@ export function popCam () {
   }
 }
 
-export function pushLib (route) {
-  return {
-    type: PUSH_LIB_ROUTE,
-    route,
-  }
-}
-
-export function popLib () {
-  return {
-    type: POP_LIB_ROUTE
-  }
-}
-
 export function pushExt (route) {
   return {
     type: PUSH_EXT_ROUTE,
@@ -152,17 +131,10 @@ export function selectPhoto (selected) {
   }
 }
 
-export function store64Camera (photo) {
+export function store64Data (photo) {
   return {
     type: STORE_64_PHOTO,
     photo
-  }
-}
-
-export function store64Library (selected) {
-  return {
-    type: STORE_64_LIBRARY,
-    selected
   }
 }
 
@@ -200,52 +172,23 @@ export function sendFirebaseInitCamera() {
   }
 }
 
-export function sendFirebaseInitLibrary() {
+export function storeCaption(caption) {
   return {
-    type: SEND_FIREBASE_INIT_LIBRARY,
-  }
-}
-
-export function storeCameraCaption(caption) {
-  return {
-    type: STORE_CAMERA_CAPTION,
+    type: STORE_CAPTION,
     caption
   }
 }
 
-
-export function storeLibraryCaption(caption) {
+export function storeTitle(title) {
   return {
-    type: STORE_LIBRARY_CAPTION,
-    caption
-  }
-}
-
-export function storeCameraTitle(title) {
-  return {
-    type: STORE_CAMERA_TITLE,
+    type: STORE_TITLE,
     title
   }
 }
 
-
-export function storeLibraryTitle(title) {
+export function addMealData(mealType) {
   return {
-    type: STORE_LIBRARY_TITLE,
-    title
-  }
-}
-
-export function addCameraMealData(mealType) {
-  return {
-    type: ADD_CAMERA_MEAL_DATA,
-    mealType
-  }
-}
-
-export function addLibraryMealData(mealType) {
-  return {
-    type: ADD_LIBRARY_MEAL_DATA,
+    type: ADD_MEAL_DATA,
     mealType
   }
 }
@@ -459,11 +402,5 @@ export function initLogin(flag) {
 export function resetCameraProgress() {
   return {
     type: RESET_CAMERA
-  }
-}
-
-export function resetLibraryProgress() {
-  return {
-    type: RESET_LIBRARY
   }
 }

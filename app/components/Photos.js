@@ -139,22 +139,54 @@ export default class CameraRollPicker extends Component {
   }
 
   render() {
-    var {imageMargin, backgroundColor} = this.props
-    return (
-      <View
-        style={[CommonStyles.photoWrapper, {padding: imageMargin, paddingRight: 0, backgroundColor: backgroundColor},]}>
-        <Spinner
-          visible={this.state.images === 0}
-          color='black'
-        />
-        <ListView
-          renderFooter={this._renderFooterSpinner.bind(this)}
-          onEndReached={this._onEndReached.bind(this)}
-          dataSource={this.state.dataSource}
-          renderRow={rowData => this._renderRow(rowData)} />
-      </View>
-    )
+    if (Platform.OS === "ios") {
+      var {imageMargin, backgroundColor} = this.props
+      return (
+        <View
+          style={[CommonStyles.photoWrapper, {padding: imageMargin, paddingRight: 0, backgroundColor: backgroundColor},]}>
+          <Spinner
+            visible={this.state.images === 0}
+            color='black'
+          />
+          <ListView
+            renderFooter={this._renderFooterSpinner.bind(this)}
+            onEndReached={this._onEndReached.bind(this)}
+            dataSource={this.state.dataSource}
+            renderRow={rowData => this._renderRow(rowData)} />
+        </View>
+      )
+    } else { // Android
+      // base64 conversion at the time this is being written is hella slow on Android,
+      // so I've given up and decided to use react-native-image-picker instead:
+      var ImagePicker = require('react-native-image-picker')
+
+      var options = {
+        title: '',
+      }
+
+      return (
+        <View>{
+          ImagePicker.launchImageLibrary(options, (response) => {
+            console.log('Response = ', response)
+
+            if (response.didCancel) {
+              console.log('User cancelled image picker')
+            } else if (response.error) {
+              console.log('ImagePicker Error: ', response.error)
+            } else {
+              // You can display the image using either data...
+              const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true}
+              //
+              // this.setState({
+              //   avatarSource: source
+              // })
+              this._selectImage(source)
+            }
+          })
+        }</View>);
+    }
   }
+
   _renderImage(item) {
     var {imageMargin} = this.props
     return (

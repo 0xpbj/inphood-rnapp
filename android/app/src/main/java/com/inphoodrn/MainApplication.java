@@ -9,6 +9,8 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
 import com.facebook.react.ReactApplication;
+import com.imagepicker.ImagePickerPackage;
+import com.github.xfumihiro.react_native_image_to_base64.ImageToBase64Package;
 import fr.bamlab.rncameraroll.CameraRollPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -49,6 +51,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ImagePickerPackage(),
+            new ImageToBase64Package(),
           new FBSDKPackage(mCallbackManager),
           new RNBranchPackage(),
           new RNFetchBlobPackage(),

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   AppRegistry,
   Dimensions,
+  Platform,
   Text,
   TouchableHighlight,
   View,
@@ -27,7 +28,14 @@ export default class Picture extends Component {
   takePicture() {
     this.camera.capture()
       .then((data) => {
-        NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Camera(image))
+        if (Platform.OS === 'ios') {
+          NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Camera(image))
+        } else {  // Android
+          // The default settings on react-native-camera for android is
+          // captureTarget is Camera.constants.captureTarget.disk which defaults to
+          // base64  (https://github.com/lwansbrough/react-native-camera)
+          this.props._store64Camera(data)
+        }
         this.props._takePhoto(data.path)
         this.props._handleNavigate(route)
       })

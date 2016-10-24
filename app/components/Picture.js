@@ -31,10 +31,10 @@ export default class Picture extends Component {
         if (Platform.OS === 'ios') {
           NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Camera(image))
         } else {  // Android
-          // See: https://github.com/xfumihiro/react-native-image-to-base64
-          // (Theoretically this works for iOS too so we might be able to ditch this conditional and use this code,
-          // but something is horrendously slow in it.)
-          NativeModules.RNImageToBase64.getBase64String(data.path, (err, base64) => this.props._store64Camera(base64))
+          // The default settings on react-native-camera for android is
+          // captureTarget is Camera.constants.captureTarget.disk which defaults to
+          // base64  (https://github.com/lwansbrough/react-native-camera)
+          this.props._store64Camera(data)
         }
         this.props._takePhoto(data.path)
         this.props._handleNavigate(route)

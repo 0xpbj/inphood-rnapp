@@ -41,6 +41,7 @@ export default class CameraRollPicker extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      androidNoMorePicker: false,
       images: [],
       lastCursor: null,
       loadingMore: false,
@@ -50,6 +51,10 @@ export default class CameraRollPicker extends Component {
     }
   }
   componentWillMount() {
+    if (Platform.OS === "android") {
+      return
+    }
+
     var {width} = Dimensions.get('window')
     var {imageMargin, imagesPerRow, containerWidth} = this.props
     if(typeof containerWidth != "undefined") {
@@ -59,6 +64,10 @@ export default class CameraRollPicker extends Component {
     this.fetch()
   }
   componentWillReceiveProps(nextProps) {
+    if (Platform.OS === "android") {
+      return
+    }
+
     if (nextProps.library.count > this.state.count) {
       this.setState ({
         images: [],
@@ -156,34 +165,44 @@ export default class CameraRollPicker extends Component {
         </View>
       )
     } else { // Android
-      // base64 conversion at the time this is being written is hella slow on Android,
-      // so I've given up and decided to use react-native-image-picker instead:
-      var ImagePicker = require('react-native-image-picker')
 
-      var options = {
-        title: '',
+      if (this.state.androidNoMorePicker) {
+        // Feeble attempt to not see the picker after the first selection
+        return (<View style={{flex: 1, backgroundColor: 'blue'}}/>)
       }
+      else {
+        // base64 conversion at the time this is being written is hella slow on Android,
+        // so I've given up and decided to use react-native-image-picker instead:
+        var ImagePicker = require('react-native-image-picker')
 
-      return (
-        <View>{
-          ImagePicker.launchImageLibrary(options, (response) => {
-            console.log('Response = ', response)
+        var options = {
+          title: '',
+        }
 
-            if (response.didCancel) {
-              console.log('User cancelled image picker')
-            } else if (response.error) {
-              console.log('ImagePicker Error: ', response.error)
-            } else {
-              // You can display the image using either data...
-              const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true}
-              //
-              // this.setState({
-              //   avatarSource: source
-              // })
-              this._selectImage(source)
-            }
-          })
-        }</View>);
+        this.setState({androidNoMorePicker: true})
+        return (
+          <View style={{flex: 1}}>{
+            ImagePicker.launchImageLibrary(options, (response) => {
+              console.log('Response = ', response)
+
+              if (response.didCancel) {
+                console.log('User cancelled image picker')
+              } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error)
+              } else {
+                // You can display the image using either data...
+                const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true}
+                //
+                // this.setState({
+                //   avatarSource: source
+                // })
+                // this._selectImage(source)
+                // this.setState({androidNoMorePicker: true})
+                this._megaFuckery(response)
+              }
+            })
+          }</View>);
+      }
     }
   }
 
@@ -221,6 +240,10 @@ export default class CameraRollPicker extends Component {
     return null
   }
   _onEndReached() {
+    if (Platform.OS === "android") {
+      return
+    }
+
     if (!this.state.noMore) {
       this.fetch()
     }
@@ -229,15 +252,25 @@ export default class CameraRollPicker extends Component {
     this.props.selectPhoto(image.uri)
     if (Platform.OS === 'ios') {
       NativeModules.ReadImageData.readImage(image.uri, (data) => this.props.store64Library(data))
-    } else {  // Android
-      // See: https://github.com/xfumihiro/react-native-image-to-base64
-      // (Theoretically this works for iOS too so we might be able to ditch this conditional and use this code,
-      // but something is horrendously slow in it.)
-      NativeModules.RNImageToBase64.getBase64String(image.uri, (err, base64) => this.props.store64Library(base64))
     }
+    // else {  // Android
+    //   // See: https://github.com/xfumihiro/react-native-image-to-base64
+    //   // (Theoretically this works for iOS too so we might be able to ditch this conditional and use this code,
+    //   // but something is horrendously slow in it.)
+    //   // NativeModules.RNImageToBase64.getBase64String(image.uri, (err, base64) => this.props.store64Library(base64))
+    //   this.props.store64Library(image)
+    // }
 
     this.props._handleNavigate(route)
   }
+
+  _megaFuckery(response) {
+    console.log('In _megaFuckery ANDROID -------------------------------------')
+    this.props.selectPhoto(response.uri)
+    this.props.store64Library(response.data)
+    this.props._handleNavigate(route)
+  }
+
   _nEveryRow(data, n) {
     var result = [],
         temp = [];

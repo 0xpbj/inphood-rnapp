@@ -25,7 +25,7 @@ export default class NetworkImage extends Component {
       <View style={CommonStyles.networkImageProgress}>
         <Text>{this.state.progress}%</Text>
         <ActivityIndicator/>
-      </View> : null;
+      </View> : null
     return this.state.error ?
       <Text>{this.state.error}</Text> :
       <Image
@@ -36,6 +36,6 @@ export default class NetworkImage extends Component {
         onProgress={(e) => this.setState({progress: Math.round(100 * e.nativeEvent.loaded / e.nativeEvent.total)})}
         onLoad={() => this.setState({loading: false, error: false})}>
         {loader}
-      </Image>;
+      </Image>
   }
 }

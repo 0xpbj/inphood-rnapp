@@ -8,9 +8,8 @@ import {
   Modal,
   Picker,
   ListView,
-  AlertIOS,
+  Alert,
   Platform,
-  Dimensions,
   TouchableOpacity,
   ActivityIndicator,
   TouchableHighlight,
@@ -187,7 +186,7 @@ export default class GalleryListView extends Component{
   }
   _pressRow(databasePath: string, cdnPath: string) {
     if (this.props.auth.authTrainer === 'pending' && this.props.auth.referralType === 'client') {
-      AlertIOS.alert(
+      Alert.alert(
        'Share data with your trainer: ' + this.props.auth.trainerName + '?',
        '',
        [
@@ -219,7 +218,7 @@ export default class GalleryListView extends Component{
     )
   }
   _removeClientPhoto(databasePath, tail) {
-    AlertIOS.alert(
+    Alert.alert(
      'Confirm Delete?',
      '',
      [

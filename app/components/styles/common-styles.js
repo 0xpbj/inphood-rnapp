@@ -1,8 +1,9 @@
 'use strict'
-import {StyleSheet, Platform} from "react-native"
+import {StyleSheet, Platform, Dimensions} from "react-native"
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
 const SHUTTER_BOTTOM_MARGIN = Platform.OS === 'ios' ? 70 : 90
+const {width, height} = Dimensions.get('window')
 
 module.exports = StyleSheet.create({
   button: {
@@ -220,9 +221,13 @@ module.exports = StyleSheet.create({
     fontWeight: 'bold'
   },
   galleryListViewThumb: {
-    width: 300,
-    height: 330,
+    width: width - 20,
+    height: height/2.5,
     flex: 1
+  },
+  networkImageBase: {
+    width: width - 20,
+    height: height/2.5,
   },
   galleryListViewButton: {
     borderRadius: 5,
@@ -264,10 +269,6 @@ module.exports = StyleSheet.create({
   },
   italicFont: {
     fontStyle: 'italic'
-  },
-  networkImageBase: {
-    width: 300,
-    height: 330,
   },
   networkImageProgress: {
     flex: 1,

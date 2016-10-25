@@ -1,10 +1,10 @@
 import { 
   INIT_PHOTOS,
   IS_NEW_USER,
+  SEND_AWS_SUCCESS,
   LOAD_PHOTOS_SUCCESS,
   LOAD_PHOTOS_FAILURE,
   SEND_FIREBASE_CAMERA_SUCCESS,
-  SEND_FIREBASE_LIBRARY_SUCCESS,
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -14,6 +14,7 @@ const initialState = {
   filter: '',
   newUser: false,
   isLoading: true,
+  pictureLoading: null,
 }
 
 export default function gallery(state = initialState, action) {
@@ -41,11 +42,16 @@ export default function gallery(state = initialState, action) {
         error: action.error,
         isLoading: false
       }
-    case SEND_FIREBASE_LIBRARY_SUCCESS:
     case SEND_FIREBASE_CAMERA_SUCCESS:
       return {
         ...state,
         count: state.count + 1,
+        pictureLoading: true
+      }
+    case SEND_AWS_SUCCESS:
+      return {
+        ...state,
+        pictureLoading: false
       }
     default:
       return state

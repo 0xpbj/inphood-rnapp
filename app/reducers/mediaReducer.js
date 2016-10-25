@@ -1,5 +1,5 @@
 import { 
-  RESET_CAMERA, SEND_AWS_SUCCESS, PUSH_CAM_ROUTE, POP_CAM_ROUTE, SEND_FIREBASE_INIT_CAMERA
+  RESET_CAMERA, SEND_FIREBASE_CAMERA_SUCCESS, PUSH_CAM_ROUTE, POP_CAM_ROUTE, SEND_FIREBASE_INIT_CAMERA
 } from '../constants/ActionTypes'
 import { NavigationExperimental } from 'react-native'
 const {
@@ -22,8 +22,7 @@ export default function media (state = initialState, action) {
   switch (action.type) {
     case SEND_FIREBASE_INIT_CAMERA:
       return {
-        ...state,
-        inProgress: true
+        ...state
       }
     case RESET_CAMERA:
       return {
@@ -44,7 +43,7 @@ export default function media (state = initialState, action) {
       else {
         return NavigationStateUtils.pop(state)
       }
-    case SEND_AWS_SUCCESS:
+    case SEND_FIREBASE_CAMERA_SUCCESS:
       return {
         ...state,
         inProgress: false

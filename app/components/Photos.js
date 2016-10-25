@@ -7,7 +7,6 @@ import {
   Dimensions,
   TouchableOpacity,
   ListView,
-  NativeModules,
   ActivityIndicator,
 } from 'react-native'
 
@@ -51,9 +50,10 @@ export default class Photos extends Component {
   _selectImage(response) {
     this.props._gotoCameraPage()
     this.props._store64Data(response.data)
-    // if (Platform.OS === "ios")
-      // this.props._storePhoto(response.origURL)
-    this.props._storePhoto(response.uri)
+    if (Platform.OS === "ios")
+      this.props._storePhoto(response.origURL)
+    else
+      this.props._storePhoto(response.uri)
     this.props._handleNavigate(route)
   }
 }

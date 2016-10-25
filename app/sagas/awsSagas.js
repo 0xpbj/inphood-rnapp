@@ -107,9 +107,9 @@ function* loadFirebaseCall() {
   try {
     const state = yield select()
     const {fileTail, fileName} = yield call (prepFirebase, state)
+    yield call(sendToFirebase, state, fileTail, fileName)
     yield put ({type: SEND_FIREBASE_CAMERA_SUCCESS})
     yield call(loadAWSCall, fileName)
-    yield call (sendToFirebase, state, fileTail, fileName)
   }
   catch(error) {
     yield put ({type: SEND_FIREBASE_ERROR, error})

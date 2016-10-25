@@ -222,6 +222,7 @@ module.exports = StyleSheet.create({
   galleryListViewThumb: {
     width: 300,
     height: 330,
+    flex: 1
   },
   galleryListViewButton: {
     borderRadius: 5,

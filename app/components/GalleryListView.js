@@ -12,6 +12,7 @@ import {
   Platform,
   Dimensions,
   TouchableOpacity,
+  ActivityIndicator,
   TouchableHighlight,
   RecyclerViewBackedScrollView
 } from 'react-native'
@@ -116,12 +117,32 @@ export default class GalleryListView extends Component{
   _renderRow(rowData, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     const {databasePath, mealType, localFile, title, caption, time, fileTail, fileName} = rowData
     const cdnPath = turlHead+fileName
-    let imgBlock = <Image style={CommonStyles.galleryListViewThumb} source={{uri: localFile}}/>
+    let imgBlock = ''
     if ((Date.now() - time) > 60000) {
       imgBlock = (
         <NetworkImage source={{uri: cdnPath}}></NetworkImage>
       )
     }
+    else if (rowID === "0") {
+      imgBlock = (<Image style={CommonStyles.galleryListViewThumb} source={{uri: localFile}}>
+        <View style={{flex: 1}}/>
+          <ActivityIndicator
+            animating={this.props.galleryView.pictureLoading}
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              justifyContent: 'space-around',
+              flexDirection: 'column',
+              flex: 1
+            }}
+            color='black'
+            size="large"
+          />
+        <View style={{flex: 1}}/>
+      </Image>)
+    }
+    else
+      imgBlock = <Image style={CommonStyles.galleryListViewThumb} source={{uri: localFile}}/>
     const mealTime = new Date(time).toDateString()
     const flag = this.props.notification.galleryPhotos[databasePath]
     const notificationBlock = (

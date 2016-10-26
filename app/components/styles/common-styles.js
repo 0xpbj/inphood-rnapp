@@ -172,7 +172,7 @@ module.exports = StyleSheet.create({
   libraryView: {
     flex: 1,
     position: 'absolute',
-    backgroundColor: 'black',
+    backgroundColor: 'transparent',
     bottom: 70,
     right: 20,
   },

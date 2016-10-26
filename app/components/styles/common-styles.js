@@ -334,13 +334,13 @@ module.exports = StyleSheet.create({
     flex: 1,
   },
   deviceKeyboardView: {
-    flex: 8,
+    flex: Platform.OS === 'ios' ? 8 : 7,
   },
   singleSegmentView: {
     flex: 1,
   },
   selectedImage: {
-    flex: 7,
+    flex: Platform.OS === 'ios' ? 7 : 6,
     margin: 1,
   },
   // Universal input styling
@@ -349,8 +349,8 @@ module.exports = StyleSheet.create({
   //        text input.
   //
   universalInputView: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'black',
+    borderBottomWidth: Platform.OS === 'ios' ? 1 : 0,
+    borderBottomColor: Platform.OS === 'ios' ? 'black' : 'transparent',
   },
   // Univeral font size
   //

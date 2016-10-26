@@ -152,7 +152,7 @@ export default class Caption extends Component {
             autoFocus={true}
             clearButtonMode={clearButtonMode}
             returnKeyType="done"
-            onEndEditing={
+            onSubmitEditing={
               (event) => {
                 let text = event.nativeEvent.text
                 if (text === '') {

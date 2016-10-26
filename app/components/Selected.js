@@ -65,7 +65,7 @@ export default class Selected extends Component {
             returnKeyType="done"
             clearButtonMode='while-editing'
             autoFocus={true}
-            onEndEditing={
+            onSubmitEditing={
               (event) => {
                 let text = event.nativeEvent.text
                 let whiteSpace = new RegExp(/^\s+$/)

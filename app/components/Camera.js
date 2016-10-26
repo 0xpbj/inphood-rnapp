@@ -34,8 +34,8 @@ export default class AppCamera extends Component {
       }
     }
     this._imageSize = (width - (imagesPerRow + 1) * imageMargin) / imagesPerRow
-    var options = { 
-      title: '', 
+    var options = {
+      title: '',
       quality: 0.5,
       maxWidth: 500,
       maxHeight: 500,
@@ -59,9 +59,13 @@ export default class AppCamera extends Component {
           NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Data(image))
         }
         else {  // Android
-          // The default settings on react-native-camera for android is
-          // captureTarget is Camera.constants.captureTarget.disk which defaults to
-          // base64  (https://github.com/lwansbrough/react-native-camera)
+          // The next line doesn't work ...
+          // None of the settings (disk or memory) for captureTarget in
+          // react-native-camera seem to be returning 64 bit data--there's just
+          // a path so we need to find a fast way to read the image b64 data to
+          // send to clarifai; the read should be of a smaller / compressed image
+          // if possible (for speed):
+          // (https://github.com/lwansbrough/react-native-camera)
           this.props._store64Data(data)
         }
         this.props._storePhoto(data.path)

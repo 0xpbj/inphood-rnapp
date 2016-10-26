@@ -48,7 +48,6 @@ export default class Media extends Component {
     if (scene.key === prefix + 'picture') {
       return (
         <Camera
-          changeTab={this.props.changeTab}
           _handleNavigate={this._handleNavigate.bind(this)}
           _store64Data={(action) => this.props.store64Data(action)}
           _storePhoto={(action) => this.props.takePhoto(action)}/>

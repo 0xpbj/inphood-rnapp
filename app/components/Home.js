@@ -13,6 +13,8 @@ const {
   Header: NavigationHeader,
 } = NavigationExperimental
 
+import ScrollableTabView from 'react-native-scrollable-tab-view'
+
 import Icon from 'react-native-vector-icons/Ionicons'
 import Media from '../containers/MediaContainer'
 import Home from '../containers/GalleryContainer'
@@ -26,6 +28,7 @@ export default class HomeTabs extends Component {
       clientNotification: '',
       trainerNotification: ''
     }
+    // this.gotoHomePage = this.gotoHomePage.bind(this)
   }
   componentWillMount() {
     if (Platform.OS === 'ios') {
@@ -33,6 +36,9 @@ export default class HomeTabs extends Component {
       PushNotificationIOS.requestPermissions()
     }
   }
+//   gotoHomePage() {
+//     this.refs.scrollableTabView.goToPage(1).bind(this)
+//   }
   _renderTabContent (key) {
     switch (key) {
       case 'Media':
@@ -126,11 +132,11 @@ export default class HomeTabs extends Component {
       )
     } else {
       // TODO: Something better for Android
-      var ScrollableTabView = require('react-native-scrollable-tab-view')
+      // var ScrollableTabView = require('react-native-scrollable-tab-view')
       return (
         <ScrollableTabView
-          tabBarPosition="bottom"
-          locked={true}>
+          ref="scrollableTabView"
+          tabBarPosition="bottom">
           {tabs}
         </ScrollableTabView>
       )

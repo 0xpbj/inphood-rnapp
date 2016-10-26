@@ -90,12 +90,12 @@ export default class AppCamera extends Component {
               <View/>
             </TouchableHighlight>
           </View>
+          <TouchableOpacity
+            style={CommonStyles.libraryView}
+            onPress={this.selectImage.bind(this)}>
+            <Icon name="ios-images-outline" size={60} color='green'/>
+          </TouchableOpacity>
         </Camera>
-        <TouchableOpacity
-          style={CommonStyles.libraryView}
-          onPress={this.selectImage.bind(this)}>
-          <Icon name="ios-images-outline" size={50} color='green'/>
-        </TouchableOpacity>
       </View>
     )
   }

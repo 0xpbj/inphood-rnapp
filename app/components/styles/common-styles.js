@@ -173,7 +173,7 @@ module.exports = StyleSheet.create({
     flex: 1,
     position: 'absolute',
     backgroundColor: 'transparent',
-    bottom: 70,
+    bottom: SHUTTER_BOTTOM_MARGIN,
     right: 20,
   },
   trashView: {

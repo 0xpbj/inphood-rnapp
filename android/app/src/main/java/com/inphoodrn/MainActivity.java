@@ -5,7 +5,6 @@ import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import io.branch.rnbranch.RNBranchPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.chirag.RNMail.RNMail;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
 // From: https://dev.branch.io/getting-started/sdk-integration-guide/guide/react/#android-configure-manifest

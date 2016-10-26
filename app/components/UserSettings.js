@@ -4,6 +4,7 @@ import {
   ScrollView,
   Text,
   View,
+  Platform,
   TextInput,
   TouchableHighlight
 } from 'react-native'
@@ -334,26 +335,33 @@ export default class UserProfile extends Component {
       diet: this.dietStrToDietEnum(this.props.settings.diet),
       picture: this.props.settings.picture,
     }
+    const scrollViewSegments = 8.2
+    const buttonSegment = 0.8
+    const spacerSegement = 1
     return (
       <View style={{flex: 1}}>
-        <ScrollView
-          style={{flex: 8.2}}
-          contentContainerStyle={CommonStyles.universalFormScrollingContainer}>
-            <Form
-              ref="form"
-              value={value}
-              type={UserProfileForm}
-              options={options}/>
-            <View style={CommonStyles.flexContainer}/>
-        </ScrollView>
-        <View style={{flex: 0.8, backgroundColor: 'white'}}>
+
+        <View style={{flex: scrollViewSegments}}>
+          <ScrollView
+            contentContainerStyle={CommonStyles.universalFormScrollingContainer}>
+              <Form
+                ref="form"
+                value={value}
+                type={UserProfileForm}
+                options={options}/>
+              <View style={CommonStyles.flexContainer}/>
+          </ScrollView>
+        </View>
+
+        <View style={{flex: buttonSegment, backgroundColor: 'white'}}>
           <Button
             onPress={this.storeFormData.bind(this)}
             label='Submit'
             color='#006400'
           />
         </View>
-        <View style={{flex: 1, backgroundColor: 'white'}}/>
+
+        <View style={{flex: spacerSegement, backgroundColor: 'white'}}/>
       </View>
     )
   }

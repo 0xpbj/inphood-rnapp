@@ -3,3 +3,4 @@ node_modules
 android/.gradle
 android/.idea
 android/app/build
+local.properties

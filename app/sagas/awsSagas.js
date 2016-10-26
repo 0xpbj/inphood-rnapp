@@ -3,6 +3,7 @@ LOGIN_SUCCESS, SEND_AWS_SUCCESS, SEND_AWS_ERROR, STORE_SETTINGS_FORM,
 SEND_FIREBASE_INIT_CAMERA, SEND_FIREBASE_INIT_LIBRARY,
 SEND_FIREBASE_LIBRARY_SUCCESS, SEND_FIREBASE_CAMERA_SUCCESS, SEND_FIREBASE_ERROR,
 } from '../constants/ActionTypes'
+import {REHYDRATE} from 'redux-persist/constants'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
@@ -142,5 +143,5 @@ function* watchUserDataCall() {
 
 export default function* rootSaga() {
   yield fork(takeLatest, SEND_FIREBASE_INIT_CAMERA, loadFirebaseCall)
-  yield fork(takeLatest, LOGIN_SUCCESS, watchUserDataCall)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], watchUserDataCall)
 }

@@ -9,6 +9,7 @@ import {
   ADD_MESSAGES, INIT_CHAT_SAGA, MARK_PHOTO_READ,
   INCREMENT_CLIENT_PHOTO_NOTIFICATION, DECREMENT_CLIENT_PHOTO_NOTIFICATION, 
 } from '../constants/ActionTypes'
+import {REHYDRATE} from 'redux-persist/constants'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest, takeEvery } from 'redux-saga'
@@ -136,27 +137,31 @@ function* syncChatData() {
 
 function* isNewUser() {
   let uid = yield select(state => state.authReducer.token)
-  if (!uid) {
+  if (uid === '' && firebase.auth().currentUser) {
     uid = firebase.auth().currentUser.uid
   }
-  const path = '/global/' + uid + '/photoData'
-  const flag = (yield call(db.getPath, path)).exists()
-  if (flag) {
-    yield put({type: IS_NEW_USER, flag: false})
-  }
-  else {
-    yield put({type: IS_NEW_USER, flag: true})
+  if (uid !== '') {
+    const path = '/global/' + uid + '/photoData'
+    const flag = (yield call(db.getPath, path)).exists()
+    if (flag) {
+      yield put({type: IS_NEW_USER, flag: false})
+    }
+    else {
+      yield put({type: IS_NEW_USER, flag: true})
+    }
   }
 }
 
 function* triggerGetGalleryChild() {
+  const {databasePaths} = yield select(state => state.galReducer)
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_GALLERY_CHILD)
     if (data.val().visible) {
       const photo = data.val()
       const cdnPath = turlHead+photo.fileName
       const databasePath = photo.databasePath
-      yield put ({type: LOAD_PHOTOS_SUCCESS, photo})
+      if (databasePaths.includes(databasePath) === false)
+        yield put ({type: LOAD_PHOTOS_SUCCESS, photo})
       if (photo.notifyClient) {
         yield put({type: INCREMENT_CLIENT_PHOTO_NOTIFICATION, databasePath})
       }
@@ -180,25 +185,27 @@ function* triggerRemGalleryChild() {
 
 function* syncPhotoData() {
   let uid = yield select(state => state.authReducer.token)
-  if (!uid) {
+  if (uid === '' && firebase.auth().currentUser) {
     uid = firebase.auth().currentUser.uid
   }
-  const path = '/global/' + uid + '/photoData'
-  yield fork(db.sync, path, {
-    child_added: syncAddedGalleryChild,
-    child_removed: syncRemovedGalleryChild,
-  })
+  if (uid !== '') {
+    const path = '/global/' + uid + '/photoData'
+    yield fork(db.sync, path, {
+      child_added: syncAddedGalleryChild,
+      child_removed: syncRemovedGalleryChild,
+    })
+  }
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, LOGIN_SUCCESS, isNewUser)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], isNewUser)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], syncChatData)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], syncPhotoData)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], readPhotoFlow)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], updateDataVisibility)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerGetGalleryChild)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerRemGalleryChild)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerGetMessagesChild)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerRemMessagesChild)
   yield fork(takeEvery, INIT_CHAT_SAGA, sendChatData)
-  yield fork(takeLatest, LOGIN_SUCCESS, syncChatData)
-  yield fork(takeLatest, LOGIN_SUCCESS, syncPhotoData)
-  yield fork(takeLatest, LOGIN_SUCCESS, readPhotoFlow)
-  yield fork(takeLatest, LOGIN_SUCCESS, updateDataVisibility)
-  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetGalleryChild)
-  yield fork(takeLatest, LOGIN_SUCCESS, triggerRemGalleryChild)
-  yield fork(takeLatest, LOGIN_SUCCESS, triggerGetMessagesChild)
-  yield fork(takeLatest, LOGIN_SUCCESS, triggerRemMessagesChild)
 }

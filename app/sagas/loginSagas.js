@@ -232,7 +232,7 @@ function* initializeLogin() {
 
 export default function* rootSaga() {
   yield fork(watchEMCreateFlow)
-  yield fork(takeLatest, [REHYDRATE, LOGIN_REQUEST], initializeLogin)
+  yield fork(takeLatest, LOGIN_REQUEST, initializeLogin)
   yield fork(takeLatest, RESET_PASSWORD, resetPassword)
   yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)
 }

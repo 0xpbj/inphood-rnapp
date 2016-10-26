@@ -1,11 +1,8 @@
 import { 
-  ADD_PHOTOS, ADD_MESSAGES, FEEDBACK_PHOTO,
-  SET_CLIENT_ID, SET_CLIENT_PHOTO, SET_CLIENT_NAME,
+  FEEDBACK_PHOTO, SET_CLIENT_ID, SET_CLIENT_PHOTO, SET_CLIENT_NAME,
 } from '../constants/ActionTypes'
 
 const initialState = {
-  photos: [],
-  messages: [],
   clientId: '',
   clientName: '',
   clientPhoto: '',
@@ -14,16 +11,6 @@ const initialState = {
 
 export default function trainerData (state = initialState, action) {
   switch (action.type) {
-    case ADD_PHOTOS:
-      return {
-        ...state,
-        photos: [...state.photos, action.child]
-      }
-    case ADD_MESSAGES:
-      return {
-        ...state,
-        messages: [...state.messages, action.child]
-      }
     case SET_CLIENT_ID:
       return {
         ...state,

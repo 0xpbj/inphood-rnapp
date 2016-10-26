@@ -10,7 +10,7 @@ import chatReducer from './chatReducer'
 import visionReducer from './visionReducer'
 import selectedReducer from './selectedReducer'
 import trainerReducer from './trainerReducer'
-import trainerDataReducer from './trainerDataReducer'
+import clientDataReducer from './clientDataReducer'
 import trainerNavReducer from './trainerNavReducer'
 import notificationReducer from './notificationReducer'
 import { LOGOUT_SUCCESS }from '../constants/ActionTypes'
@@ -20,13 +20,13 @@ const appReducer = combineReducers({
     authReducer,
     mediaReducer,
     captionReducer,
+    clientDataReducer,
     extReducer,
     galReducer,
     galNavReducer,
     chatReducer,
     selectedReducer,
     trainerReducer,
-    trainerDataReducer,
     trainerNavReducer,
     notificationReducer,
     visionReducer

@@ -8,6 +8,7 @@ import {
   SYNC_ADDED_INFO_CHILD, SYNC_REMOVED_INFO_CHILD, MARK_CLIENT_PHOTO_READ,
   INCREMENT_TRAINER_PHOTO_NOTIFICATION, DECREMENT_TRAINER_PHOTO_NOTIFICATION,
 } from '../constants/ActionTypes'
+import {REHYDRATE} from 'redux-persist/constants'
 
 import * as db from './firebaseCommands'
 import { Image } from "react-native"
@@ -75,6 +76,8 @@ function* syncClientChatData() {
 }
 
 function* triggerGetPhotoChild() {
+  const {databasePaths} = yield select(state => state.trainerReducer)
+  console.log(databasePaths)
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_PHOTO_CHILD)
     if (data.val().visible) {
@@ -91,7 +94,8 @@ function* triggerGetPhotoChild() {
       if (file.notifyTrainer) {
         yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath, client: uid})
       }
-      yield put({type: ADD_PHOTOS, child})
+      if (databasePaths.includes(databasePath) === false)
+        yield put({type: ADD_PHOTOS, child, databasePath})
       const messageData = file.messages
       const path = file.databasePath
       for (var keys in messageData) {
@@ -111,6 +115,7 @@ function* triggerRemPhotoChild() {
 }
 
 function* triggerGetInfoChild() {
+  const {infoIds} = yield select(state => state.trainerReducer)
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_INFO_CHILD)
     const name = data.val().name
@@ -118,7 +123,8 @@ function* triggerGetInfoChild() {
     const child = {name, picture}
     const id = data.ref.parent.path.o[1]
     const info = {id, child}
-    yield put({type: ADD_INFOS, child: info})
+    if (infoIds.includes(id) === false)
+      yield put({type: ADD_INFOS, child: info})
   }
 }
 
@@ -148,13 +154,13 @@ function* syncData() {
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, INIT_DATA, syncData)
-  yield fork(takeLatest, INIT_DATA, syncClientChatData)
-  yield fork(takeLatest, INIT_DATA, readClientPhotoFlow)
-  yield fork(takeLatest, INIT_DATA, triggerGetInfoChild)
-  yield fork(takeLatest, INIT_DATA, triggerRemInfoChild)
-  yield fork(takeLatest, INIT_DATA, triggerGetPhotoChild)
-  yield fork(takeLatest, INIT_DATA, triggerRemPhotoChild)
-  yield fork(takeLatest, INIT_DATA, triggerGetMessagesClientChild)
-  yield fork(takeLatest, INIT_DATA, triggerRemMessagesClientChild)
+  yield fork(takeLatest, [REHYDRATE, INIT_DATA], syncData)
+  yield fork(takeLatest, [REHYDRATE, INIT_DATA], syncClientChatData)
+  yield fork(takeLatest, [REHYDRATE, INIT_DATA], readClientPhotoFlow)
+  yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerGetInfoChild)
+  yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerRemInfoChild)
+  yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerGetPhotoChild)
+  yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerRemPhotoChild)
+  yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerGetMessagesClientChild)
+  yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerRemMessagesClientChild)
 }

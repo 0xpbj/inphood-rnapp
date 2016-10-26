@@ -2,6 +2,7 @@ import {
   LOGIN_SUCCESS, CLARIFAI_AUTH_SUCCESS, CLARIFAI_AUTH_ERROR,
   CLARIFAI_TAGS_SUCCESS, CLARIFAI_TAGS_ERROR, STORE_64_PHOTO
 } from '../constants/ActionTypes'
+import {REHYDRATE} from 'redux-persist/constants'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
@@ -64,5 +65,5 @@ function* getCameraData() {
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, LOGIN_SUCCESS, getCameraData)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], getCameraData)
 }

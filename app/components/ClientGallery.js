@@ -34,8 +34,8 @@ export default class ClientGallery extends Component{
     this.state = {dataSource: this._createDataSource([])}
   }
   componentWillMount() {
-    const id = this.props.trainerData.clientId
-    const vals = this.props.trainerData.photos
+    const id = this.props.clientData.clientId
+    const vals = this.props.trainer.photos
     var data = []
     for (var key in vals) {
       if (vals[key][id])
@@ -46,8 +46,8 @@ export default class ClientGallery extends Component{
     })
   }
   componentWillReceiveProps(nextProps) {
-    const id = nextProps.trainerData.clientId
-    const vals = nextProps.trainerData.photos
+    const id = nextProps.clientData.clientId
+    const vals = nextProps.trainer.photos
     var data = []
     for (var key in vals) {
       if (vals[key][id])
@@ -58,7 +58,7 @@ export default class ClientGallery extends Component{
     })
   }
   render() {
-    let name = this.props.trainerData.clientName.split(' ')
+    let name = this.props.clientData.clientName.split(' ')
     let content = <View />
     if (this.state.dataSource.getRowCount() !== 0) {
       content = <ListView
@@ -78,7 +78,7 @@ export default class ClientGallery extends Component{
       <View style={CommonStyles.clientGalleryContainer}>
         <View style={CommonStyles.flexRowMarginBottom10}>
           <Image
-            source={{uri: this.props.trainerData.clientPhoto}}
+            source={{uri: this.props.clientData.clientPhoto}}
             style={CommonStyles.clientGalleryProfileImage}
           />
           <Text style={CommonStyles.clientGalleryProfileNameText}>{name[0]}'s InPhood</Text>

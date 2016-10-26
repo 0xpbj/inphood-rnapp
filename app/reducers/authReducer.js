@@ -1,7 +1,7 @@
 import {
   LOGIN_SUCCESS, LOGIN_ERROR, INIT_LOGIN,
   LOGOUT_SUCCESS, LOGOUT_ERROR, USER_SETTINGS,
-  STORE_TOKEN, STORE_RESULT, STORE_VALUE, IS_NEW_USER,
+  STORE_TOKEN, STORE_RESULT, STORE_VALUE,
   EM_LOGIN_REQUEST, BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER
 } from '../constants/ActionTypes'
 import {REHYDRATE} from 'redux-persist/constants'
@@ -18,25 +18,14 @@ const initialState = {
   referralId: '',
   authTrainer: 'pending',
   trainerName: '',
-  userSet: false
 }
 
 export default function authentication(state = initialState, action) {
   switch (action.type) {
-    // case REHYDRATE:
-    //   console.log(action.payload.authReducer)
-    //   return {
-    //     state: action.payload.authReducer
-    //   }
     case INIT_LOGIN:
       return {
         ...state,
         inProgress: action.flag
-      }
-    case IS_NEW_USER:
-      return {
-        ...state,
-        userSet: true
       }
     case LOGOUT_SUCCESS:
       return initialState

@@ -11,6 +11,7 @@ const initialState = {
   count: 0,
   error: '',
   photos: [],
+  databasePaths: [],
   filter: '',
   newUser: false,
   isLoading: true,
@@ -34,6 +35,7 @@ export default function gallery(state = initialState, action) {
       return {
         ...state,
         photos: [action.photo, ...state.photos],
+        databasePaths: [...state.databasePaths, action.photo.databasePath],
         isLoading: false
       }
     case LOAD_PHOTOS_FAILURE:

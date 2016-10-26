@@ -130,7 +130,7 @@ function* branchInvite() {
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, LOGIN_SUCCESS, branchInvite)
-  yield fork(takeLatest, LOGIN_SUCCESS, setupClient)
-  yield fork(takeLatest, LOGIN_SUCCESS, setupTrainer)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], branchInvite)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], setupClient)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], setupTrainer)
 }

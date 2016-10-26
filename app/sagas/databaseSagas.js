@@ -2,8 +2,9 @@ import {
   LOGIN_SUCCESS, REMOVE_CLIENT_PHOTO, IS_NEW_USER,
   LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_ERROR,
   INIT_MESSAGES, STORE_CHAT_SUCCESS, STORE_CHAT_ERROR,
-  syncAddedGalleryChild, SYNC_ADDED_GALLERY_CHILD,
-  syncAddedMessagesChild, SYNC_ADDED_MESSAGES_CHILD, 
+  syncAddedGalleryChild, syncRemovedGalleryChild,
+  SYNC_ADDED_GALLERY_CHILD, SYNC_REMOVED_GALLERY_CHILD,
+  syncAddedMessagesChild, SYNC_ADDED_MESSAGES_CHILD,
   ADD_MESSAGES, INIT_CHAT_SAGA, MARK_PHOTO_READ,
   INCREMENT_CLIENT_PHOTO_NOTIFICATION, DECREMENT_CLIENT_PHOTO_NOTIFICATION, 
 } from '../constants/ActionTypes'
@@ -20,23 +21,23 @@ import RNFetchBlob from 'react-native-fetch-blob'
 
 const turlHead = Config.AWS_CDN_THU_URL
 
-function* updateDataVisibility() {
-  while (true) {
-    const data = yield take(REMOVE_CLIENT_PHOTO)
-    firebase.database().ref(data.path).update({'visible': false})
-  }
-}
-
-const prefetchData = (cdnPath) => {
-  return Image.prefetch(cdnPath)
-    .then(() => {console.log('Data fetched: ', cdnPath)})
-    .catch(error => {console.log(error + ' - ' + cdnPath)})
-}
-
 const isLocalFile = (localFile) => {
   return RNFetchBlob.fs.exists(localFile)
     .then(flag => ({ flag }))
     .catch(error => ({ error }))
+}
+
+const prefetchData = (cdnPath) => {
+  return Image.prefetch(cdnPath)
+    .then(() => {console.log('Data prefetch: ', cdnPath)})
+    .catch(error => {console.log(error + ' - ' + cdnPath)})
+}
+
+function* startDataPrefetch() {
+  const {cdnPaths} = yield select(state => state.galReducer)
+  for (let path in cdnPaths) {
+    yield fork(prefetchData, cdnPaths[path])
+  }
 }
 
 function* readPhotoFlow() {
@@ -146,27 +147,36 @@ function* triggerGetGalleryChild() {
   const {databasePaths} = yield select(state => state.galReducer)
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_GALLERY_CHILD)
-    if (data.val().visible) {
-      const photo = data.val()
-      const cdnPath = turlHead+photo.fileName
-      const time = photo.time
-      if ((Date.now() - time) > 60000) {
-        yield fork(prefetchData, cdnPath)
-      }
-      const databasePath = photo.databasePath
-      if (databasePaths.includes(databasePath) === false)
-        yield put ({type: LOAD_PHOTOS_SUCCESS, photo})
-      if (photo.notifyClient) {
-        yield put({type: INCREMENT_CLIENT_PHOTO_NOTIFICATION, databasePath})
-      }
-      const messageData = photo.messages
-      const path = photo.databasePath
-      for (var keys in messageData) {
-        const messages = messageData[keys]
-        yield put ({type: ADD_MESSAGES, messages, path})
-      }
-      yield put ({type: INIT_MESSAGES, path})
+    const photo = data.val()
+    const cdnPath = turlHead+photo.fileName
+    const time = photo.time
+    const databasePath = photo.databasePath
+    if (databasePaths.includes(databasePath) === false)
+      yield put ({type: LOAD_PHOTOS_SUCCESS, photo})
+    if (photo.notifyClient) {
+      yield put({type: INCREMENT_CLIENT_PHOTO_NOTIFICATION, databasePath})
     }
+    const messageData = photo.messages
+    const path = photo.databasePath
+    for (var keys in messageData) {
+      const messages = messageData[keys]
+      yield put ({type: ADD_MESSAGES, messages, path})
+    }
+    yield put ({type: INIT_MESSAGES, path})
+  }
+}
+
+function* updateDataVisibility() {
+  while (true) {
+    const data = yield take(REMOVE_CLIENT_PHOTO)
+    firebase.database().ref(data.path).remove()
+  }
+}
+
+function* triggerRemGalleryChild() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_REMOVED_GALLERY_CHILD)
+    firebase.database().ref('global/anonymous/photoData/').push(data.val())
   }
 }
 
@@ -178,7 +188,8 @@ function* syncPhotoData() {
   if (uid !== '') {
     const path = '/global/' + uid + '/photoData'
     yield fork(db.sync, path, {
-      child_added: syncAddedGalleryChild
+      child_added: syncAddedGalleryChild,
+      child_removed: syncRemovedGalleryChild,
     })
   }
 }
@@ -188,8 +199,10 @@ export default function* rootSaga() {
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], syncChatData)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], syncPhotoData)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], readPhotoFlow)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], startDataPrefetch)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], updateDataVisibility)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerGetGalleryChild)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerRemGalleryChild)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerGetMessagesChild)
   yield fork(takeEvery, INIT_CHAT_SAGA, sendChatData)
 }

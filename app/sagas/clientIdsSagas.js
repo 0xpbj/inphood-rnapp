@@ -22,8 +22,6 @@ function* triggerGetClientIdCount() {
         yield put({type: INIT_DATA})
       }
     }
-    // else
-    //   yield put({type: INIT_DATA})
   }
 }
 

@@ -1,7 +1,7 @@
 import {
-  ADD_PHOTOS, ADD_INFOS, ADD_MESSAGES, ADD_CLIENTS, INIT_DATA,
-  syncCountPhotoChild, syncAddedPhotoChild,
-  SYNC_COUNT_PHOTO_CHILD, SYNC_ADDED_PHOTO_CHILD,
+  ADD_PHOTOS, ADD_INFOS, ADD_MESSAGES, ADD_CLIENTS, INIT_DATA, REMOVE_PHOTO,
+  syncCountPhotoChild, syncAddedPhotoChild, syncRemovedPhotoChild,
+  SYNC_COUNT_PHOTO_CHILD, SYNC_ADDED_PHOTO_CHILD, SYNC_REMOVED_PHOTO_CHILD,
   syncAddedMessagesClientChild, SYNC_ADDED_MESSAGES_CLIENT_CHILD, 
   INIT_CLIENT_MESSAGES, syncAddedInfoChild, syncRemovedInfoChild,
   SYNC_ADDED_INFO_CHILD, SYNC_REMOVED_INFO_CHILD, MARK_CLIENT_PHOTO_READ,
@@ -22,8 +22,15 @@ const urlHead = Config.AWS_CDN_IMG_URL
 
 const prefetchData = (cdnPath) => {
   return Image.prefetch(cdnPath)
-    .then(() => {console.log('Data fetched: ', cdnPath)})
+    .then(() => {console.log('Client data prefetch: ', cdnPath)})
     .catch(error => {console.log(error + ' - ' + cdnPath)})
+}
+
+function* startClientDataPrefetch() {
+  const {cdnPaths} = yield select(state => state.trainerReducer)
+  for (let path in cdnPaths) {
+    yield fork(prefetchData, cdnPaths[path])
+  }
 }
 
 function* readClientPhotoFlow() {
@@ -61,7 +68,7 @@ function* syncClientChatData() {
     const data = yield take (INIT_CLIENT_MESSAGES)
     const msgPath = data.path + '/messages'
     yield fork(db.sync, msgPath, {
-      child_added: syncAddedMessagesClientChild,
+      child_added: syncAddedMessagesClientChild
     })
   }
 }
@@ -76,16 +83,13 @@ function* triggerGetPhotoChild() {
       const cdnPath = turlHead+file.fileName
       const databasePath = file.databasePath
       const time = file.time
-      if ((Date.now() - time) > 60000) {
-        yield fork(prefetchData, cdnPath)
-      }
       var child = {}
       child[uid] = file
       if (file.notifyTrainer) {
         yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath, client: uid})
       }
       if (databasePaths.includes(databasePath) === false)
-        yield put({type: ADD_PHOTOS, child, databasePath})
+        yield put({type: ADD_PHOTOS, child, databasePath, fileName: file.fileName})
       const messageData = file.messages
       const path = file.databasePath
       for (var keys in messageData) {
@@ -94,6 +98,13 @@ function* triggerGetPhotoChild() {
       }
       yield put ({type: INIT_CLIENT_MESSAGES, path})
     }
+  }
+}
+
+function* triggerRemPhotoChild() {
+  while (true) {
+    const { payload: { data } } = yield take(SYNC_REMOVED_PHOTO_CHILD)
+    yield put({type: REMOVE_PHOTO, databasePath: data.val().databasePath})
   }
 }
 
@@ -127,6 +138,7 @@ function* syncData() {
     })
     yield fork(db.sync, path + '/photoData', {
       child_added: syncAddedPhotoChild,
+      child_removed: syncRemovedPhotoChild,
     })
     yield fork(db.sync, path + '/userInfo', {
       child_added: syncAddedInfoChild,
@@ -142,5 +154,7 @@ export default function* rootSaga() {
   yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerGetInfoChild)
   yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerRemInfoChild)
   yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerGetPhotoChild)
+  yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerRemPhotoChild)
+  yield fork(takeLatest, [REHYDRATE, INIT_DATA], startClientDataPrefetch)
   yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerGetMessagesClientChild)
 }

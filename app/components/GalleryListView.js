@@ -44,14 +44,12 @@ export default class GalleryListView extends Component{
     }
   }
   componentWillReceiveProps(nextProps) {
-    if (this.state.mediaList.length !== nextProps.galleryView.photos.length) {
-      const mediaList = nextProps.galleryView.photos
-      this.setState({
-        mediaList: mediaList,
-        result: nextProps.result,
-        dataSource: this._createDataSource(mediaList),
-      })
-    }
+    const mediaList = nextProps.galleryView.photos
+    this.setState({
+      mediaList: mediaList,
+      result: nextProps.result,
+      dataSource: this._createDataSource(mediaList),
+    })
   }
   _createDataSource(list) {
     const dataSource = new ListView.DataSource({
@@ -223,21 +221,6 @@ export default class GalleryListView extends Component{
         {text: 'Delete',
         onPress: () => {
           this.props.removeClientPhoto(databasePath)
-          let mediaList = this.state.mediaList
-          let index = -1
-          for (let id in mediaList) {
-            if (tail === mediaList[id].fileTail) {
-              index = id
-              break
-            }
-          }
-          if (index > -1) {
-            mediaList.splice(index, 1);
-          }
-          this.setState({
-            mediaList: mediaList,
-            dataSource: this._createDataSource(mediaList),
-          })
         }, style: 'destructive'}
      ],
     )

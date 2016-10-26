@@ -129,7 +129,6 @@ export default class GalleryListView extends Component{
             animating={this.props.galleryView.pictureLoading}
             style={{
               alignItems: 'center',
-              justifyContent: 'center',
               justifyContent: 'space-around',
               flexDirection: 'column',
               flex: 1
@@ -194,7 +193,7 @@ export default class GalleryListView extends Component{
           onPress: () => {
             this.props.setBranchAuthTrainer('accept')
           }, style: 'default'},
-          {text: 'Decline', 
+          {text: 'Decline',
           onPress: () => {
             this.props.setBranchAuthTrainer('decline')
           }, style: 'destructive'}
@@ -210,8 +209,8 @@ export default class GalleryListView extends Component{
       <View
         key={`${sectionID}-${rowID}`}
         style={
-          adjacentRowHighlighted ? 
-            CommonStyles.adjacentRowHighlightedSeparator : 
+          adjacentRowHighlighted ?
+            CommonStyles.adjacentRowHighlightedSeparator :
             CommonStyles.adjacentRowNotHighlightedSeparator
         }
       />
@@ -223,7 +222,7 @@ export default class GalleryListView extends Component{
      '',
      [
         {text: 'Cancel'},
-        {text: 'Delete', 
+        {text: 'Delete',
         onPress: () => {
           this.props.removeClientPhoto(databasePath)
           let mediaList = this.state.mediaList

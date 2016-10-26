@@ -1,50 +1,98 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
+import {
+  View,
+  Text,
+  Platform,
+  Dimensions,
+  AppRegistry,
+  NativeModules,
+  TouchableOpacity,
+  TouchableHighlight,
+} from 'react-native'
 
-import {View} from "react-native"
+import Camera from 'react-native-camera'
+import Icon from 'react-native-vector-icons/Ionicons'
+import ImagePicker from 'react-native-image-picker'
 
-import Picture  from './Picture'
-import Photos  from './Photos'
+import CommonStyles from './styles/common-styles'
 
-import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view'
-
-export default class Camera extends Component {
-  constructor(props) {
-    super(props)
-    this.gotoCameraPage = this.gotoCameraPage.bind(this)
+const route = {
+  type: 'push',
+  route: {
+    key: 'selected',
+    title: 'Meal Title'
   }
-  gotoCameraPage() {
-    this.refs.scrollableTabView.goToPage(0)
-  }
-  render() {
-    // TODO: fix this properly
-    // hack sets the height of the tab bar to zero to prevent it from rendering
-    const horribleHack = 0
+}
 
+export default class AppCamera extends Component {
+  selectImage() {
+    if (Platform.OS === "ios") {
+      var {width} = Dimensions.get('window')
+      var {imageMargin, imagesPerRow, containerWidth} = this.props
+      if(typeof containerWidth != "undefined") {
+        width = containerWidth
+      }
+    }
+    this._imageSize = (width - (imagesPerRow + 1) * imageMargin) / imagesPerRow
+    var options = { 
+      title: '', 
+      quality: 0.5,
+      maxWidth: 500,
+      maxHeight: 500,
+      takePhotoButtonTitle: null,
+    }
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.data) {
+        this.props._store64Data(response.data)
+        if (Platform.OS === "ios")
+          this.props._storePhoto(response.origURL)
+        else
+          this.props._storePhoto(response.uri)
+        this.props._handleNavigate(route)
+      }
+    })
+  }
+  takePicture() {
+    this.camera.capture()
+      .then((data) => {
+        if (Platform.OS === 'ios') {
+          NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Data(image))
+        }
+        else {  // Android
+          // The default settings on react-native-camera for android is
+          // captureTarget is Camera.constants.captureTarget.disk which defaults to
+          // base64  (https://github.com/lwansbrough/react-native-camera)
+          this.props._store64Data(data)
+        }
+        this.props._storePhoto(data.path)
+        this.props._handleNavigate(route)
+      })
+      .catch(err => console.error(err))
+  }
+  render () {
     return (
-      <ScrollableTabView
-        tabBarUnderlineColor="#006400"
-        tabBarActiveTextColor="#006400"
-        tabBarPosition="bottom"
-        ref="scrollableTabView"
-        renderTabBar={() => <ScrollableTabBar
-                              style={{height:horribleHack}} />}
-      >
-        <Picture
-          tabLabel="Picture"
-          changeTab={this.props.changeTab}
-          _storePhoto={this.props._storePhoto}
-          _store64Data={this.props._store64Data}
-          _handleNavigate={this.props._handleNavigate}
-        />
-        <Photos
-          tabLabel="Photos"
-          changeTab={this.props.changeTab}
-          _gotoCameraPage={this.gotoCameraPage}
-          _storePhoto={this.props._storePhoto}
-          _store64Data={this.props._store64Data}
-          _handleNavigate={this.props._handleNavigate}
-        />
-      </ScrollableTabView>
+      <View style={CommonStyles.flexContainer}>
+        <Camera
+          ref={(cam) => {
+            this.camera = cam
+          }}
+          style={[CommonStyles.picturePreview,
+                  {height: Dimensions.get('window').height,
+                   width: Dimensions.get('window').width}]}>
+          <View style={CommonStyles.shutterOuterViewStyle}>
+            <TouchableHighlight
+              style={CommonStyles.shutterInnerViewStyle}
+              onPress={this.takePicture.bind(this)}>
+              <View/>
+            </TouchableHighlight>
+          </View>
+        </Camera>
+        <TouchableOpacity
+          style={CommonStyles.libraryView}
+          onPress={this.selectImage.bind(this)}>
+          <Icon name="ios-images-outline" size={50} color='green'/>
+        </TouchableOpacity>
+      </View>
     )
   }
 }

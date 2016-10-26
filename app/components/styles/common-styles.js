@@ -169,6 +169,13 @@ module.exports = StyleSheet.create({
     height: 24,
     borderRadius: 12,
   },
+  libraryView: {
+    flex: 1,
+    position: 'absolute',
+    backgroundColor: 'black',
+    bottom: 70,
+    right: 20,
+  },
   trashView: {
     flex: 1,
     position: 'absolute',

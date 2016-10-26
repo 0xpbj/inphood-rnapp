@@ -119,21 +119,26 @@ export default class GalleryListView extends Component{
       )
     }
     else if (rowID === "0") {
-      imgBlock = (<Image style={CommonStyles.galleryListViewThumb} source={{uri: localFile}}>
-        <View style={{flex: 1}}/>
-          <ActivityIndicator
-            animating={this.props.galleryView.pictureLoading}
-            style={{
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              flexDirection: 'column',
-              flex: 1
-            }}
-            color='black'
-            size="large"
-          />
-        <View style={{flex: 1}}/>
-      </Image>)
+      const backgroundColor = this.props.galleryView.pictureLoading ? 'rgba(255, 255, 255, 0.40)' : 'transparent'
+      imgBlock = (
+        <Image style={CommonStyles.galleryListViewThumb} source={{uri: localFile}}>
+          <View style={{backgroundColor: backgroundColor, flex: 1}}>
+            <View style={{flex: 1, backgroundColor: 'transparent'}}/>
+            <ActivityIndicator
+              animating={this.props.galleryView.pictureLoading}
+              style={{
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                flexDirection: 'column',
+                flex: 1
+              }}
+              color='black'
+              size="large"
+            />
+            <View style={{flex: 1, backgroundColor: 'transparent'}}/>
+          </View>
+        </Image>
+      )
     }
     else
       imgBlock = <Image style={CommonStyles.galleryListViewThumb} source={{uri: localFile}}/>

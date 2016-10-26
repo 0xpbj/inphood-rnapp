@@ -38,17 +38,16 @@ export default class Photos extends Component {
     return (
       <View style={{flex: 1}}>{
         ImagePicker.launchImageLibrary(options, (response) => {
-          if (response.didCancel)
-            this.props._gotoCameraPage()
-          else if (response.data) {
+          this.props._gotoCameraPage()
+          if (response.data) {
             this._selectImage(response)
           }
-      })}
+        }
+      )}
       </View>
     )
   }
   _selectImage(response) {
-    this.props._gotoCameraPage()
     this.props._store64Data(response.data)
     if (Platform.OS === "ios")
       this.props._storePhoto(response.origURL)

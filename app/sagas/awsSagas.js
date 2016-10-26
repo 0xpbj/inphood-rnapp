@@ -118,7 +118,6 @@ function* loadFirebaseCall() {
 }
 
 const sendUserDataToFirebase = (form, state) => {
-  console.log(form)
   let uid = state.authReducer.token
   if (!uid) {
     uid = firebase.auth().currentUser.uid

@@ -77,7 +77,6 @@ function* syncClientChatData() {
 
 function* triggerGetPhotoChild() {
   const {databasePaths} = yield select(state => state.trainerReducer)
-  console.log(databasePaths)
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_PHOTO_CHILD)
     if (data.val().visible) {

@@ -8,6 +8,7 @@ import {REHYDRATE} from 'redux-persist/constants'
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 
+import { Image } from "react-native"
 import { RNS3 } from 'react-native-aws3'
 import Config from '../constants/config-vars'
 
@@ -21,6 +22,17 @@ let options = {
   secretKey: Config.AWS_SECRET_KEY,
   successActionStatus: 201
 }
+const turlHead = Config.AWS_CDN_THU_URL
+
+const prefetchData = (cdnPath) => {
+  const delay = Date.now() + 5000
+  while (Date.now() < delay) {
+    console.log('waiting...')
+  }
+  return Image.prefetch(cdnPath)
+    .then(() => {console.log('Data fetched: ', cdnPath)})
+    .catch(error => {console.log(error + ' - ' + cdnPath)})
+}
 
 const sendToAWS = (image, fileName) => {
   let imgfile = {
@@ -33,9 +45,6 @@ const sendToAWS = (image, fileName) => {
     if (response.status !== 201)
       throw new Error("Failed to upload image to S3")
   })
-  .catch(err => {
-    console.log('Errors uploading: ' + err)
-  })
 }
 
 function* loadAWSCall(fileName) {
@@ -43,6 +52,8 @@ function* loadAWSCall(fileName) {
     const image = yield select(state => state.selectedReducer.photo)
     yield call (sendToAWS, image, fileName)
     yield put ({type: SEND_AWS_SUCCESS})
+    const cdnPath = turlHead+fileName
+    yield call (prefetchData, cdnPath)
   }
   catch(error) {
     yield put ({type: SEND_AWS_ERROR, error})
@@ -110,7 +121,7 @@ function* loadFirebaseCall() {
     const {fileTail, fileName} = yield call (prepFirebase, state)
     yield call(sendToFirebase, state, fileTail, fileName)
     yield put ({type: SEND_FIREBASE_CAMERA_SUCCESS})
-    yield call(loadAWSCall, fileName)
+    yield fork(loadAWSCall, fileName)
   }
   catch(error) {
     yield put ({type: SEND_FIREBASE_ERROR, error})

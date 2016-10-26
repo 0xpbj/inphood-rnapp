@@ -44,10 +44,8 @@ export default class GalleryListView extends Component{
     }
   }
   componentWillReceiveProps(nextProps) {
-    const mediaList = nextProps.galleryView.photos
-    const nextLength = mediaList.length
-    const length = this.state.mediaList
-    if (nextLength > length || mediaList[nextLength-1] !== this.state.mediaList[length-1] || this.state.result !== nextProps.result) {
+    if (this.state.mediaList.length !== nextProps.galleryView.photos.length) {
+      const mediaList = nextProps.galleryView.photos
       this.setState({
         mediaList: mediaList,
         result: nextProps.result,

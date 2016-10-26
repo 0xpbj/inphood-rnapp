@@ -137,13 +137,9 @@ export const INIT_CLIENT_MESSAGES = 'INIT_CLIENT_MESSAGES'
 export const SYNC_ADDED_GALLERY_CHILD = 'SYNC_ADDED_GALLERY_CHILD'
 export const SYNC_COUNT_GALLERY_CHILD = 'SYNC_COUNT_GALLERY_CHILD'
 export const SYNC_ADDED_MESSAGES_CHILD = 'SYNC_ADDED_MESSAGES_CHILD'
-export const SYNC_REMOVED_GALLERY_CHILD = 'SYNC_REMOVED_GALLERY_CHILD'
-export const SYNC_REMOVED_MESSAGES_CHILD = 'SYNC_REMOVED_MESSAGES_CHILD'
 export const syncAddedGalleryChild = createAction(SYNC_ADDED_GALLERY_CHILD)
 export const syncGalleryChildCount = createAction(SYNC_COUNT_GALLERY_CHILD)
 export const syncAddedMessagesChild = createAction(SYNC_ADDED_MESSAGES_CHILD)
-export const syncRemovedGalleryChild = createAction(SYNC_REMOVED_GALLERY_CHILD)
-export const syncRemovedMessagesChild = createAction(SYNC_REMOVED_MESSAGES_CHILD)
 
 export const SYNC_COUNT_CLIENTID_CHILD = 'SYNC_COUNT_CLIENTID_CHILD'
 export const SYNC_ADDED_CLIENTID_CHILD = 'SYNC_ADDED_CLIENTID_CHILD'
@@ -159,17 +155,7 @@ export const syncRemovedInfoChild = createAction(SYNC_REMOVED_INFO_CHILD)
 
 export const SYNC_COUNT_PHOTO_CHILD = 'SYNC_COUNT_PHOTO_CHILD'
 export const SYNC_ADDED_PHOTO_CHILD = 'SYNC_ADDED_PHOTO_CHILD'
-export const SYNC_REMOVED_PHOTO_CHILD = 'SYNC_REMOVED_PHOTO_CHILD'
 export const syncCountPhotoChild = createAction(SYNC_COUNT_PHOTO_CHILD)
 export const syncAddedPhotoChild = createAction(SYNC_ADDED_PHOTO_CHILD)
-export const syncRemovedPhotoChild = createAction(SYNC_REMOVED_PHOTO_CHILD)
-
 export const SYNC_ADDED_MESSAGES_CLIENT_CHILD = 'SYNC_ADDED_MESSAGES_CLIENT_CHILD'
-export const SYNC_REMOVED_MESSAGES_CLIENT_CHILD = 'SYNC_REMOVED_MESSAGES_CLIENT_CHILD'
 export const syncAddedMessagesClientChild = createAction(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
-export const syncRemovedMessagesClientChild = createAction(SYNC_REMOVED_MESSAGES_CLIENT_CHILD)
-
-export const SYNC_ADDED_MESSAGES = 'SYNC_ADDED_MESSAGES'
-export const SYNC_REMOVED_MESSAGES = 'SYNC_REMOVED_MESSAGES'
-export const syncAddedMessages = createAction(SYNC_ADDED_MESSAGES)
-export const syncRemovedMessages = createAction(SYNC_REMOVED_MESSAGES)

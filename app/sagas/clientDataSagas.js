@@ -1,9 +1,8 @@
 import {
   ADD_PHOTOS, ADD_INFOS, ADD_MESSAGES, ADD_CLIENTS, INIT_DATA,
-  syncCountPhotoChild, syncAddedPhotoChild, syncRemovedPhotoChild,
-  SYNC_COUNT_PHOTO_CHILD, SYNC_ADDED_PHOTO_CHILD, SYNC_REMOVED_PHOTO_CHILD,
-  syncAddedMessagesClientChild, syncRemovedMessagesClientChild,
-  SYNC_ADDED_MESSAGES_CLIENT_CHILD, SYNC_REMOVED_MESSAGES_CLIENT_CHILD,
+  syncCountPhotoChild, syncAddedPhotoChild,
+  SYNC_COUNT_PHOTO_CHILD, SYNC_ADDED_PHOTO_CHILD,
+  syncAddedMessagesClientChild, SYNC_ADDED_MESSAGES_CLIENT_CHILD, 
   INIT_CLIENT_MESSAGES, syncAddedInfoChild, syncRemovedInfoChild,
   SYNC_ADDED_INFO_CHILD, SYNC_REMOVED_INFO_CHILD, MARK_CLIENT_PHOTO_READ,
   INCREMENT_TRAINER_PHOTO_NOTIFICATION, DECREMENT_TRAINER_PHOTO_NOTIFICATION,
@@ -23,7 +22,7 @@ const urlHead = Config.AWS_CDN_IMG_URL
 
 const prefetchData = (cdnPath) => {
   return Image.prefetch(cdnPath)
-    .then(() => {})
+    .then(() => {console.log('Data fetched: ', cdnPath)})
     .catch(error => {console.log(error + ' - ' + cdnPath)})
 }
 
@@ -57,20 +56,12 @@ function* triggerGetMessagesClientChild() {
   }
 }
 
-function* triggerRemMessagesClientChild() {
-  while (true) {
-    const { payload: { data } } = yield take(SYNC_REMOVED_MESSAGES_CLIENT_CHILD)
-    const child = data
-  }
-}
-
 function* syncClientChatData() {
   while (true) {
     const data = yield take (INIT_CLIENT_MESSAGES)
     const msgPath = data.path + '/messages'
     yield fork(db.sync, msgPath, {
       child_added: syncAddedMessagesClientChild,
-      child_removed: syncRemovedMessagesClientChild,
     })
   }
 }
@@ -106,13 +97,6 @@ function* triggerGetPhotoChild() {
   }
 }
 
-function* triggerRemPhotoChild() {
-  while (true) {
-    const { payload: { data } } = yield take(SYNC_REMOVED_PHOTO_CHILD)
-    const child = data
-  }
-}
-
 function* triggerGetInfoChild() {
   const {infoIds} = yield select(state => state.trainerReducer)
   while (true) {
@@ -143,7 +127,6 @@ function* syncData() {
     })
     yield fork(db.sync, path + '/photoData', {
       child_added: syncAddedPhotoChild,
-      child_removed: syncRemovedPhotoChild,
     })
     yield fork(db.sync, path + '/userInfo', {
       child_added: syncAddedInfoChild,
@@ -159,7 +142,5 @@ export default function* rootSaga() {
   yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerGetInfoChild)
   yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerRemInfoChild)
   yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerGetPhotoChild)
-  yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerRemPhotoChild)
   yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerGetMessagesClientChild)
-  yield fork(takeLatest, [REHYDRATE, INIT_DATA], triggerRemMessagesClientChild)
 }

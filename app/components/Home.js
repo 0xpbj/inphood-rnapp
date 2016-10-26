@@ -35,7 +35,7 @@ export default class HomeTabs extends Component {
   }
   _renderTabContent (key) {
     switch (key) {
-      case 'Camera':
+      case 'Media':
         return (
           <Media
             changeTab={(i)=>this.props.changeTab(i)}

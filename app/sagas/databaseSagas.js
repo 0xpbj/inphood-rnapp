@@ -2,10 +2,8 @@ import {
   LOGIN_SUCCESS, REMOVE_CLIENT_PHOTO, IS_NEW_USER,
   LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_ERROR,
   INIT_MESSAGES, STORE_CHAT_SUCCESS, STORE_CHAT_ERROR,
-  syncAddedGalleryChild, syncRemovedGalleryChild,
-  SYNC_ADDED_GALLERY_CHILD, SYNC_REMOVED_GALLERY_CHILD,
-  syncAddedMessagesChild, syncRemovedMessagesChild,
-  SYNC_ADDED_MESSAGES_CHILD, SYNC_REMOVED_MESSAGES_CHILD,
+  syncAddedGalleryChild, SYNC_ADDED_GALLERY_CHILD,
+  syncAddedMessagesChild, SYNC_ADDED_MESSAGES_CHILD, 
   ADD_MESSAGES, INIT_CHAT_SAGA, MARK_PHOTO_READ,
   INCREMENT_CLIENT_PHOTO_NOTIFICATION, DECREMENT_CLIENT_PHOTO_NOTIFICATION, 
 } from '../constants/ActionTypes'
@@ -31,7 +29,7 @@ function* updateDataVisibility() {
 
 const prefetchData = (cdnPath) => {
   return Image.prefetch(cdnPath)
-    .then(() => {})
+    .then(() => {console.log('Data fetched: ', cdnPath)})
     .catch(error => {console.log(error + ' - ' + cdnPath)})
 }
 
@@ -117,20 +115,12 @@ function* triggerGetMessagesChild() {
   }
 }
 
-function* triggerRemMessagesChild() {
-  while (true) {
-    const { payload: { data } } = yield take(SYNC_REMOVED_MESSAGES_CHILD)
-    const child = data
-  }
-}
-
 function* syncChatData() {
   while (true) {
     const data = yield take (INIT_MESSAGES)
     const msgPath = data.path + '/messages'
     yield fork(db.sync, msgPath, {
       child_added: syncAddedMessagesChild,
-      child_removed: syncRemovedMessagesChild,
     })
   }
 }
@@ -159,6 +149,10 @@ function* triggerGetGalleryChild() {
     if (data.val().visible) {
       const photo = data.val()
       const cdnPath = turlHead+photo.fileName
+      const time = photo.time
+      if ((Date.now() - time) > 60000) {
+        yield fork(prefetchData, cdnPath)
+      }
       const databasePath = photo.databasePath
       if (databasePaths.includes(databasePath) === false)
         yield put ({type: LOAD_PHOTOS_SUCCESS, photo})
@@ -176,13 +170,6 @@ function* triggerGetGalleryChild() {
   }
 }
 
-function* triggerRemGalleryChild() {
-  while (true) {
-    const { payload: { data } } = yield take(SYNC_REMOVED_GALLERY_CHILD)
-    const child = data
-  }
-}
-
 function* syncPhotoData() {
   let uid = yield select(state => state.authReducer.token)
   if (uid === '' && firebase.auth().currentUser) {
@@ -191,8 +178,7 @@ function* syncPhotoData() {
   if (uid !== '') {
     const path = '/global/' + uid + '/photoData'
     yield fork(db.sync, path, {
-      child_added: syncAddedGalleryChild,
-      child_removed: syncRemovedGalleryChild,
+      child_added: syncAddedGalleryChild
     })
   }
 }
@@ -204,8 +190,6 @@ export default function* rootSaga() {
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], readPhotoFlow)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], updateDataVisibility)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerGetGalleryChild)
-  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerRemGalleryChild)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerGetMessagesChild)
-  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerRemMessagesChild)
   yield fork(takeEvery, INIT_CHAT_SAGA, sendChatData)
 }

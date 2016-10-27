@@ -33,13 +33,10 @@ export default class Caption extends Component {
       caption: '',
       color: 'grey',
     }
+    this._workBeforeTransition = this._workBeforeTransition.bind(this)
   }
-  _workBeforeTransition() {
+  _workBeforeTransition(text) {
     const {meal, recipe, breakfast, lunch, dinner, snack} = this.state
-    // if (!meal && !recipe) {
-    //   alert ('Please pick meal category')
-    //   return
-    // }
     let mealType = ''
     if (breakfast) {
       mealType = 'Breakfast'
@@ -53,27 +50,9 @@ export default class Caption extends Component {
     else if (snack){
       mealType = 'Snack'
     }
-    this.props.storeCaption(this.state.caption)
-    if (!breakfast && !lunch && !dinner && !snack) {
-      alert ('Please pick meal type')
-      return
-    }
-    else {
-      this.props.addMealData(mealType)
-      this.props.sendFirebaseInitCamera()
-    }
-  }
-  _pauseBeforeTransition() {
-    let whiteSpace = new RegExp(/^\s+$/)
-    if (this.state.caption === '') {
-      alert ('Please enter ingredients')
-      return
-    }
-    else if (whiteSpace.test(this.state.caption)) {
-      alert ('Please enter ingredients')
-      return
-    }
-    this._workBeforeTransition()
+    this.props.storeCaption(text)
+    this.props.addMealData(mealType)
+    this.props.sendFirebaseInitCamera()
   }
   componentWillMount() {
     const time = new Date().getHours()
@@ -114,15 +93,12 @@ export default class Caption extends Component {
     let whiteSpace = new RegExp(/^\s+$/)
     const defaultValue = this.props.vision.tags
     const placeholder = this.props.vision.tags === '' ? "Ingredients, e.g.: Beef, Tomatoes ..." : ''
-    // const placeholderTextColor = this.props._tags === '' ? '' : ''
     const selectionColor = this.props.vision.tags === '' ? '' : 'blue'
     const clearButtonMode = this.props.vision.tags === '' ? 'while-editing' : 'always'
     return (
-
       // This view divides the screen into 17 segments.  The bottom 8 segments
       // are left blank for the keyboard.
       <View style={CommonStyles.flexContainer}>
-
         <TouchableHighlight
           onPress={this.props._handleBackAction}
           style={[CommonStyles.selectedImage,
@@ -133,7 +109,6 @@ export default class Caption extends Component {
             resizeMode='cover'
             source={{uri: this.props.selected.photo}}/>
         </TouchableHighlight>
-
         <View>
           <Spinner color='black' overlayColor='rgba(0, 0, 0, 0)' visible={this.props._inProgress} />
         </View>
@@ -156,118 +131,21 @@ export default class Caption extends Component {
               (event) => {
                 let text = event.nativeEvent.text
                 if (text === '') {
-                  this.setState({caption: '', color: 'grey'})
                   alert ('Please enter ingredients')
                 }
                 else if (whiteSpace.test(text)) {
-                  this.setState({caption: '', color: 'grey'})
                   alert ('Please enter proper ingredients')
                 }
                 else {
-                  this.setState({caption: text, color: '#006400'})
+                  this._workBeforeTransition(text)
                 }
               }
             }
           />
         </View>
-
-        <Button
-          onPress={this._pauseBeforeTransition.bind(this)}
-          label='Share'
-          color={this.state.color}
-        />
-
         <View style={[CommonStyles.deviceKeyboardView,
                      {marginTop: 5}]}>
-
-          <View style={CommonStyles.captionSwitchGroup}>
-            <Switch
-              onValueChange={(value) => {
-                if (value) {
-                  this.setState({
-                    breakfast: value,
-                    lunch: !value,
-                    dinner: !value,
-                    snack: !value,
-                  })
-                } else {
-                  this.setState({breakfast: value})
-                }
-              }}
-              value={this.state.breakfast} />
-
-              <Text style={CommonStyles.universalSwitchFontSize}>
-                Breakfast
-              </Text>
-          </View>
-
-          <View style={CommonStyles.captionSwitchGroup}>
-            <Switch
-            onValueChange={(value) => {
-              if (value) {
-                this.setState({
-                  breakfast: !value,
-                  lunch: value,
-                  dinner: !value,
-                  snack: !value,
-                })
-              }
-              else {
-                this.setState({lunch: value})
-              }
-            }}
-            value={this.state.lunch} />
-
-            <Text style={CommonStyles.universalSwitchFontSize}>
-              Lunch
-            </Text>
-          </View>
-
-          <View style={CommonStyles.captionSwitchGroup}>
-            <Switch
-            onValueChange={(value) => {
-              if (value) {
-                this.setState({
-                  breakfast: !value,
-                  lunch: !value,
-                  dinner: value,
-                  snack: !value,
-                })
-              }
-              else {
-                this.setState({dinner: value})
-              }
-            }}
-            value={this.state.dinner} />
-
-            <Text style={CommonStyles.universalSwitchFontSize}>
-              Dinner
-            </Text>
-          </View>
-
-          <View style={CommonStyles.captionSwitchGroup}>
-            <Switch
-            onValueChange={(value) => {
-              if (value) {
-                this.setState({
-                  breakfast: !value,
-                  lunch: !value,
-                  dinner: !value,
-                  snack: value,
-                })
-              }
-              else {
-                this.setState({snack: value})
-              }
-            }}
-            value={this.state.snack} />
-
-            <Text style={CommonStyles.universalSwitchFontSize}>
-              Snack
-            </Text>
-          </View>
         </View>
-
       </View>
     )
   }

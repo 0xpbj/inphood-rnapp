@@ -8,6 +8,7 @@ import {
   PUSH_EXT_ROUTE,
   POP_EXT_ROUTE,
   CHANGE_TAB,
+  CHANGE_PAGE,
   TAKE_PHOTO,
   SELECT_PHOTO,
   STORE_64_PHOTO,
@@ -113,6 +114,13 @@ export function popExt () {
 export function changeTab (index) {
   return {
     type: CHANGE_TAB,
+    index
+  }
+}
+
+export function changePage (index) {
+  return {
+    type: CHANGE_PAGE,
     index
   }
 }

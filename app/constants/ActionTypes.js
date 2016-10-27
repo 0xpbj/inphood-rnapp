@@ -33,8 +33,7 @@ export const POP_GAL_ROUTE = 'POP_GAL_ROUTE'
 export const PUSH_EXT_ROUTE = 'PUSH_EXT_ROUTE'
 export const POP_EXT_ROUTE = 'POP_EXT_ROUTE'
 export const CHANGE_TAB = 'CHANGE_TAB'
-export const HOLD_CHANGE_TAB = 'HOLD_CHANGE_TAB'
-
+export const CHANGE_PAGE = 'CHANGE_PAGE'
 
 
 //Media Actions

@@ -33,6 +33,7 @@ const persistConfig = {
     'galNavReducer',
     'mediaReducer',
     'notificationReducer',
+    'pageReducer',
     'selectedReducer',
     'tabReducer',
     'trainerNavReducer',

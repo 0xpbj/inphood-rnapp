@@ -48,7 +48,7 @@ export default class Media extends Component {
     if (scene.key === prefix + 'picture') {
       return (
         <Camera
-          // changeTab={this.props.changeTab}
+          _changePage={(index) => this.props.changePage(index)}
           _handleNavigate={this._handleNavigate.bind(this)}
           _store64Data={(action) => this.props.store64Data(action)}
           _storePhoto={(action) => this.props.takePhoto(action)}/>
@@ -107,7 +107,7 @@ export default class Media extends Component {
     this._handleBackAction()
     this._handleBackAction()
     this.props.resetCameraProgress()
-    // this.props.changeTab(1)
+    this.props.changePage(1)
     return true
   }
   _handleNavigate (action) {
@@ -123,6 +123,7 @@ export default class Media extends Component {
     }
   }
   render () {
+    console.log('Media Props: ', this.props)
     return (
       <NavigationCardStack
         navigationState={this.props.media}

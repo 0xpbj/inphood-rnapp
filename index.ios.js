@@ -12,12 +12,12 @@ import {AppRegistry} from "react-native";
 import configureStore from './app/store/configureStore'
 const store = configureStore()
 
-import HomeContainer from './app/containers/HomeContainer'
+import AppContainer from './app/containers/AppContainer'
 import { Provider } from 'react-redux'
 
 const App = () => (
   <Provider store={store}>
-    <HomeContainer />
+    <AppContainer />
   </Provider>
 )
 

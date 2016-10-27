@@ -2,7 +2,8 @@
 import {StyleSheet, Platform, Dimensions} from "react-native"
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
-const SHUTTER_BOTTOM_MARGIN = Platform.OS === 'ios' ? 70 : 90
+// const SHUTTER_BOTTOM_MARGIN = Platform.OS === 'ios' ? 70 : 90
+const SHUTTER_BOTTOM_MARGIN = 40
 const {width, height} = Dimensions.get('window')
 
 module.exports = StyleSheet.create({
@@ -168,6 +169,13 @@ module.exports = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 12,
+  },
+  homeView: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    bottom: SHUTTER_BOTTOM_MARGIN,
+    top: 20,
+    left: 160,
   },
   libraryView: {
     flex: 1,

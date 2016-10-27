@@ -16,8 +16,7 @@ const {
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 import Icon from 'react-native-vector-icons/Ionicons'
-import Media from '../containers/MediaContainer'
-import Home from '../containers/GalleryContainer'
+import Gallery from '../containers/GalleryContainer'
 import Clients from '../containers/ExpertContainer'
 import Extras from '../containers/ExtrasContainer'
 
@@ -28,28 +27,12 @@ export default class HomeTabs extends Component {
       clientNotification: '',
       trainerNotification: ''
     }
-    // this.gotoHomePage = this.gotoHomePage.bind(this)
   }
-  componentWillMount() {
-    if (Platform.OS === 'ios') {
-      var {PushNotificationIOS} = require('react-native')
-      PushNotificationIOS.requestPermissions()
-    }
-  }
-//   gotoHomePage() {
-//     this.refs.scrollableTabView.goToPage(1).bind(this)
-//   }
   _renderTabContent (key) {
     switch (key) {
-      case 'Media':
-        return (
-          <Media
-            changeTab={(i)=>this.props.changeTab(i)}
-          />
-        )
       case 'Home':
         return (
-          <Home
+          <Gallery
             result={this.props.auth.result}
           />
         )
@@ -68,10 +51,6 @@ export default class HomeTabs extends Component {
     }
   }
   render () {
-    console.disableYellowBox = true
-    if (this.props.auth.result === null) {
-      return <Extras />
-    }
     const notificationCount = this.props.notification.client + this.props.notification.trainer
     const notification = notificationCount > 0 ? notificationCount : 0
     if (Platform.OS === 'ios') {

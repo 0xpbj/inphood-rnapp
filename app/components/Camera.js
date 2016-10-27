@@ -83,6 +83,12 @@ export default class AppCamera extends Component {
           style={[CommonStyles.picturePreview,
                   {height: Dimensions.get('window').height,
                    width: Dimensions.get('window').width}]}>
+          <TouchableOpacity
+            style={CommonStyles.homeView}
+            onPress={() => this.props.changeTab(1)}
+          >
+            <Icon name="ios-arrow-forward-outline" size={60} color='green'/>
+          </TouchableOpacity>
           <View style={CommonStyles.shutterOuterViewStyle}>
             <TouchableHighlight
               style={CommonStyles.shutterInnerViewStyle}

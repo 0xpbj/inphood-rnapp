@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import tabReducer from './tabReducer'
+import pageReducer from './pageReducer'
 import authReducer from './authReducer'
 import mediaReducer from './mediaReducer'
 import captionReducer from './captionReducer'
@@ -17,6 +18,7 @@ import { LOGOUT_SUCCESS }from '../constants/ActionTypes'
 
 const appReducer = combineReducers({
     tabReducer,
+    pageReducer,
     authReducer,
     mediaReducer,
     captionReducer,

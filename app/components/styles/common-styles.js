@@ -174,8 +174,8 @@ module.exports = StyleSheet.create({
     flex: 1,
     backgroundColor: 'transparent',
     bottom: SHUTTER_BOTTOM_MARGIN,
-    top: 20,
-    left: 160,
+    top: 30,
+    left: 175,
   },
   libraryView: {
     flex: 1,
@@ -363,7 +363,7 @@ module.exports = StyleSheet.create({
   // Univeral font size
   //
   universalFontSize: {
-    fontSize: 14
+    fontSize: 20
   },
   universalSwitchFontSize: {
     fontSize: 24

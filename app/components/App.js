@@ -13,7 +13,7 @@ const {
   Header: NavigationHeader,
 } = NavigationExperimental
 
-import ScrollableTabView from 'react-native-scrollable-tab-view'
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
 
 import Media from '../containers/MediaContainer'
 import Home from '../containers/HomeContainer'
@@ -34,11 +34,12 @@ export default class App extends Component {
     if (this.props.auth.result === null) {
       return <Extras />
     }
+    const bottomColor = this.props.page.index === 0 ? 'black' : 'white'
     return (
       <ScrollableTabView
         tabBarPosition="bottom"
-        initialPage={0}
-        renderTabBar={() => <View />}
+        page={this.props.page.index}
+        renderTabBar={() => <ScrollableTabBar style={{height: 0}}/>}
       >
         <Media />
         <Home />

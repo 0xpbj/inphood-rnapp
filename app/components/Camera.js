@@ -25,6 +25,9 @@ const route = {
 }
 
 export default class AppCamera extends Component {
+  goHome() {
+    this.props._changePage(1)
+  }
   selectImage() {
     if (Platform.OS === "ios") {
       var {width} = Dimensions.get('window')
@@ -100,7 +103,7 @@ export default class AppCamera extends Component {
                    width: Dimensions.get('window').width}]}>
           <TouchableOpacity
             style={CommonStyles.homeView}
-            onPress={() => this.props.changeTab(1)}
+            onPress={this.goHome.bind(this)}
           >
             <Icon name="ios-arrow-forward-outline" size={60} color='green'/>
           </TouchableOpacity>
@@ -113,7 +116,8 @@ export default class AppCamera extends Component {
           </View>
           <TouchableOpacity
             style={CommonStyles.libraryView}
-            onPress={this.selectImage.bind(this)}>
+            onPress={this.selectImage.bind(this)}
+          >
             <Icon name="ios-images-outline" size={60} color='green'/>
           </TouchableOpacity>
         </Camera>

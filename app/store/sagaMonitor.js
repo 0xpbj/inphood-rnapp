@@ -16,7 +16,7 @@ const IS_BROWSER = (typeof window !== 'undefined' && window.document)
 // `VERBOSE` can be made a setting configured from the outside.
 let VERBOSE = false
 if (__DEV__)
-  VERBOSE = false
+  VERBOSE = true
 
 const time = () => {
   if(typeof performance !== 'undefined' && performance.now)

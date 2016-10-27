@@ -123,7 +123,6 @@ export default class Media extends Component {
     }
   }
   render () {
-    console.log('Media Props: ', this.props)
     return (
       <NavigationCardStack
         navigationState={this.props.media}

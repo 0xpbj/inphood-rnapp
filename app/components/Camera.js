@@ -57,39 +57,17 @@ export default class AppCamera extends Component {
   }
   takePicture() {
     this.camera.capture()
-      .then((data) => {
-        if (Platform.OS === 'ios') {
-          NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Data(image))
-        }
-        else {  // Android
-          // The next line doesn't work ...
-          // None of the settings (disk or memory) for captureTarget in
-          // react-native-camera seem to be returning 64 bit data--there's just
-          // a path so we need to find a fast way to read the image b64 data to
-          // send to clarifai; the read should be of a smaller / compressed image
-          // if possible (for speed):
-          // (https://github.com/lwansbrough/react-native-camera)
-          // this.props._store64Data(data)
-
-          // Proposed solution from https://github.com/lwansbrough/react-native-camera/issues/278
-          //
-          var RNFS = require('react-native-fs')
-          console.log('react-native-fs reading from ' + data.path.substring(7))
-          RNFS.readFile(data.path.substring(7), 'base64')
-                .then(res => {
-                  console.log('react-native-fs read ok!! ------------------')
-                  console.log('res')
-                  this.props._store64Data(res)
-                })
-                .catch(err => {
-                  console.log('react-native-fs read fail!!! ---------------')
-                  console.log(err)
-                })
-        }
-        this.props._storePhoto(data.path)
-        this.props._handleNavigate(route)
-      })
-      .catch(err => console.error(err))
+    .then((data) => {
+      this.props._storePhoto(data.path)
+      if (Platform.OS === 'ios') {
+        NativeModules.ReadImageData.readImage(data.path, (image) => this.props._store64Data(image))
+      }
+      else {
+        this.props._store64Data('')
+      }
+      this.props._handleNavigate(route)
+    })
+    .catch(err => console.error(err))
   }
   render () {
     return (

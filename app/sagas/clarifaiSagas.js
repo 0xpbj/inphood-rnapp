@@ -6,9 +6,7 @@ import {REHYDRATE} from 'redux-persist/constants'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
-import * as db from './firebaseCommands'
 import config from '../constants/config-vars'
-import firebase from 'firebase'
 import RNFetchBlob from 'react-native-fetch-blob'
 
 const clarifaiClientId = config.CLARIFAI_CLIENT_ID
@@ -24,11 +22,6 @@ const turlHead = config.AWS_CDN_THU_URL
 const testCV = () => {
   vision.models.predict(clarifai.FOOD_MODEL, 'https://samples.clarifai.com/cookies.jpeg')
   .then(response => console.log(response))
-}
-
-const getCVData = (data) => {
-  return vision.models.predict(clarifai.FOOD_MODEL, {base64: data})
-  .then(response => ({ response }))
 }
 
 const getTags = (response) => {
@@ -47,12 +40,44 @@ const getTags = (response) => {
   return tags
 }
 
+const getCVData = (data) => {
+  return vision.models.predict(clarifai.FOOD_MODEL, {base64: data})
+  .then(response => ({ response }))
+}
+
+const get64Data = (file) => {
+  return RNFetchBlob.fs.readStream('base64', file, 4095)
+  .then((ifstream) => {
+      ifstream.open()
+      ifstream.onData((chunk) => {
+        // when encoding is `ascii`, chunk will be an array contains numbers
+        // otherwise it will be a string
+        console.log('chunkin...')
+        data += chunk
+      })
+      ifstream.onError((err) => {
+        console.log('oops', err)
+      })
+      ifstream.onEnd(() => {  
+        // <Image source={{ uri : 'data:image/png,base64' + data }}
+        return getCVData(data)
+      })
+  })
+}
+
 function* getCameraData() {
   while(true) {
     try {
+      let response = ''
       yield take(STORE_64_PHOTO)
       const data = yield select(state => state.selectedReducer.photo64)
-      const response = yield call(getCVData, data)
+      if (data === '') {
+        const file = yield select(state => state.selectedReducer.photo)
+        response = yield call(get64Data, file)
+      }
+      else {
+        response = yield call(getCVData, data)
+      }
       if (response) {
         const tags = yield call(getTags, response)
         yield put({type: CLARIFAI_TAGS_SUCCESS, tags})

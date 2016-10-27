@@ -10,7 +10,6 @@ import {
   CHANGE_TAB,
   CHANGE_PAGE,
   TAKE_PHOTO,
-  SELECT_PHOTO,
   STORE_64_PHOTO,
   FEEDBACK_PHOTO,
   LOAD_PHOTOS_INIT,
@@ -129,13 +128,6 @@ export function takePhoto (photo) {
   return {
     type: TAKE_PHOTO,
     photo
-  }
-}
-
-export function selectPhoto (selected) {
-  return {
-    type: SELECT_PHOTO,
-    selected
   }
 }
 

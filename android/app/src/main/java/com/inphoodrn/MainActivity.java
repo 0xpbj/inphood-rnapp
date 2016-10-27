@@ -11,9 +11,6 @@ import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import io.branch.rnbranch.*;
 import android.content.Intent;
 
-// Needed to do this to get compilation/deployment to work (comment out ReactCamera)--remains to be
-// seen if the component will actually work
-//import com.lwansbrough.ReactCamera.ReactCamera;
 
 public class MainActivity extends ReactActivity {
 

@@ -10,7 +10,6 @@ import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
 import com.facebook.react.ReactApplication;
 import com.imagepicker.ImagePickerPackage;
-import com.github.xfumihiro.react_native_image_to_base64.ImageToBase64Package;
 import fr.bamlab.rncameraroll.CameraRollPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -33,6 +32,9 @@ import com.lwansbrough.RCTCamera.*;
 // import React Native Vector Icons
 import com.oblador.vectoricons.*;
 
+// import React Native FS (FileSystem)
+import com.rnfs.RNFSPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
@@ -51,8 +53,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ImagePickerPackage(),
-            new ImageToBase64Package(),
+          new ImagePickerPackage(),
+          new RNFSPackage(),
           new FBSDKPackage(mCallbackManager),
           new RNBranchPackage(),
           new RNFetchBlobPackage(),

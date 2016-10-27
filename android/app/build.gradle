@@ -127,7 +127,7 @@ android {
 
 dependencies {
     compile project(':react-native-image-picker')
-    compile project(':react-native-image-to-base64')
+    compile project(':react-native-fs')
     compile project(':rn-camera-roll')
     compile project(':react-native-push-notification')
     compile project(':react-native-fetch-blob')

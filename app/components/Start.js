@@ -162,44 +162,76 @@ export default class Start extends Component {
     )
   }
   flipBoard() {
-    const pageOneCaptionLocation = {top: 15, left: 20}
+    const pageOneCaptionLocation = Platform.OS === "ios" ?
+                                   {top: 15, left: 20} :
+                                   {top: 20, left: 20}
     const pageOneCaptionText = '1. Take a photo of a meal.'
-    const pageTwoCaptionLocation = {top: 60, left: 20}
+    const pageTwoCaptionLocation = Platform.OS === "ios" ?
+                                   {top: 60, left: 20} :
+                                   {top: 55, left: 20}
     const pageTwoCaptionText = '2. Give it a title.'
-    const pageThreeCaptionLocation = {top: 60, left: 35}
+    const pageThreeCaptionLocation = Platform.OS === "ios" ?
+                                     {top: 60, left: 35} :
+                                     {top: 55, left:35}
     const pageThreeCaptionText = '3. Describe it\'s ingredients.'
-    const pageFourCaptionLocation = {top: 43, left: 20}
+    const pageFourCaptionLocation = Platform.OS === "ios" ?
+                                    {top: 43, left: 20} :
+                                    {top: 48, left: 20}
     const pageFourCaptionText = '4. Your trainer sees the photo & description.'
-    const pageFiveCaptionLocation = {top: 60, left: 20}
+    const pageFiveCaptionLocation = Platform.OS === "ios" ?
+                                    {top: 60, left: 20} :
+                                    {top: 45, left: 20}
     const pageFiveCaptionText = '5. Discuss the meal with your trainer.'
 
+    // Conditional style below for require done this way b/c require doesn't
+    // permit variable or const var input.
     return (
       <View style={{flex: 1, backgroundColor: 'transparent'}}>
         <Swiper
           autoplay={true}
           autoplaytimeout={3.5}>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f1.png')}>
+            <Image resizeMode={sliderImageResizeMode}
+                   style={sliderImageSize}
+                   source={ (Platform.OS === "ios" ?
+                             require('./img/f1.png') :
+                             require('./img/ae1.png')) }>
             {this.flipBoardCaption(pageOneCaptionLocation, pageOneCaptionText)}
             </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f2.png')}>
+          <Image resizeMode={sliderImageResizeMode}
+                 style={sliderImageSize}
+                 source={ (Platform.OS === "ios" ?
+                           require('./img/f2.png') :
+                           require('./img/ae2.png')) }>
             {this.flipBoardCaption(pageTwoCaptionLocation, pageTwoCaptionText)}
             </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f3.png')}>
+          <Image resizeMode={sliderImageResizeMode}
+                 style={sliderImageSize}
+                 source={ (Platform.OS === "ios" ?
+                           require('./img/f3.png') :
+                           require('./img/ae3.png')) }>
             {this.flipBoardCaption(pageThreeCaptionLocation, pageThreeCaptionText)}
             </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f4.png')}>
+          <Image resizeMode={sliderImageResizeMode}
+                 style={sliderImageSize}
+                 source={ (Platform.OS === "ios" ?
+                           require('./img/f4.png') :
+                           require('./img/ae4.png')) }>
             {this.flipBoardCaption(pageFourCaptionLocation, pageFourCaptionText)}
             </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-            <Image resizeMode={sliderImageResizeMode} style={sliderImageSize} source={require('./img/f5.png')}>
+          <Image resizeMode={sliderImageResizeMode}
+                 style={sliderImageSize}
+                 source={ (Platform.OS === "ios" ?
+                           require('./img/f5.png') :
+                           require('./img/ae5.png')) }>
             {this.flipBoardCaption(pageFiveCaptionLocation, pageFiveCaptionText)}
             </Image>
           </View>

@@ -3,7 +3,7 @@ import {StyleSheet, Platform, Dimensions} from "react-native"
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
 // const SHUTTER_BOTTOM_MARGIN = Platform.OS === 'ios' ? 70 : 90
-const SHUTTER_BOTTOM_MARGIN = 40
+const SHUTTER_BOTTOM_MARGIN = Platform.OS === 'ios' ? 15 : 40
 const {width, height} = Dimensions.get('window')
 
 module.exports = StyleSheet.create({
@@ -170,20 +170,6 @@ module.exports = StyleSheet.create({
     height: 24,
     borderRadius: 12,
   },
-  homeView: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    bottom: SHUTTER_BOTTOM_MARGIN,
-    top: 30,
-    left: 175,
-  },
-  libraryView: {
-    flex: 1,
-    position: 'absolute',
-    backgroundColor: 'transparent',
-    bottom: SHUTTER_BOTTOM_MARGIN,
-    right: 20,
-  },
   trashView: {
     flex: 1,
     position: 'absolute',
@@ -308,26 +294,25 @@ module.exports = StyleSheet.create({
   },
   picturePreview: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  shutterInnerViewStyle: {
-    marginTop: 5,
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: 'white',
+    flexDirection: 'column',
   },
   shutterOuterViewStyle: {
-    marginTop: 5,
     marginBottom: SHUTTER_BOTTOM_MARGIN,
-    marginRight: 35,
-    marginLeft: 35,
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#006400',
+    backgroundColor: 'transparent',
+    borderColor: 'green',
+    borderWidth: 5,
     alignItems: 'center',
+  },
+  homeViewButton: {
+    backgroundColor: 'transparent',
+    marginBottom: SHUTTER_BOTTOM_MARGIN,
+  },
+  libraryViewButton: {
+    backgroundColor: 'transparent',
+    marginBottom: SHUTTER_BOTTOM_MARGIN,
   },
   // Seventeen segment layout styles:
   //

@@ -73,31 +73,54 @@ export default class AppCamera extends Component {
     return (
       <View style={CommonStyles.flexContainer}>
         <Camera
-          ref={(cam) => {
-            this.camera = cam
-          }}
+          ref={(cam) => {this.camera = cam}}
           style={[CommonStyles.picturePreview,
                   {height: Dimensions.get('window').height,
                    width: Dimensions.get('window').width}]}>
-          <TouchableOpacity
-            style={CommonStyles.homeView}
-            onPress={this.goHome.bind(this)}
-          >
-            <Icon name="ios-arrow-forward-outline" size={60} color='green'/>
-          </TouchableOpacity>
-          <View style={CommonStyles.shutterOuterViewStyle}>
-            <TouchableHighlight
-              style={CommonStyles.shutterInnerViewStyle}
-              onPress={this.takePicture.bind(this)}>
-              <View/>
-            </TouchableHighlight>
+
+          <View style={{flex: 1}}/>
+
+          <View style={{flexDirection: 'row',
+                        justifyContent: 'center'}}>
+
+            <View style={{flex: 1,
+                          flexDirection: 'row',
+                          justifyContent: 'center'}}>
+              <TouchableOpacity
+                style={CommonStyles.libraryViewButton}
+                onPress={this.selectImage.bind(this)}>
+                <Icon name="ios-images-outline" size={60} color='green'/>
+              </TouchableOpacity>
+            </View>
+
+            <View style={{flex: 1}}/>
+
+            <View style={{flex: 1,
+                          flexDirection: 'row',
+                          justifyContent: 'center'}}>
+              <TouchableHighlight
+                style={CommonStyles.shutterOuterViewStyle}
+                onPress={this.takePicture.bind(this)}>
+                <View/>
+              </TouchableHighlight>
+            </View>
+
+            <View style={{flex: 1}}/>
+
+            <View style={{flex: 1,
+                          flexDirection: 'row',
+                          justifyContent: 'center'}}>
+              <TouchableOpacity
+                style={CommonStyles.homeViewButton}
+                onPress={this.goHome.bind(this)}>
+
+                <Icon name="ios-arrow-forward-outline"
+                      size={60} color='green'/>
+              </TouchableOpacity>
+            </View>
+
           </View>
-          <TouchableOpacity
-            style={CommonStyles.libraryView}
-            onPress={this.selectImage.bind(this)}
-          >
-            <Icon name="ios-images-outline" size={60} color='green'/>
-          </TouchableOpacity>
+
         </Camera>
       </View>
     )

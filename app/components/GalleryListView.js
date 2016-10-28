@@ -82,7 +82,7 @@ export default class GalleryListView extends Component{
     else if (!size) {
       return (
         <View style={CommonStyles.addPhotosMessage}>
-          <Text>Go to Camera tab to add photos...</Text>
+          <Text>Swipe left to add photos...</Text>
         </View>
       )
     }

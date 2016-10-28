@@ -30,13 +30,11 @@ export default class App extends Component {
     }
   }
   handleChangeTab({i, ref, from}) {
-    this.props.changePage(i, false)
+    this.props.changePage(i)
   }
   render () {
     console.disableYellowBox = true
     let locked = false
-    const {index, notify} = this.props.page
-    let page = this.props.page.index
     if (this.props.tabs.index > 0 || this.props.gallery.index > 0 || this.props.media.index > 0) {
       locked = true
     }
@@ -46,7 +44,7 @@ export default class App extends Component {
     return (
       <ScrollableTabView
         tabBarPosition="bottom"
-        page={page}
+        page={this.props.page.index}
         locked={locked}
         onChangeTab={this.handleChangeTab.bind(this)}
         prerenderingSiblingsNumber={1}

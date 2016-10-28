@@ -4,3 +4,4 @@ android/.gradle
 android/.idea
 android/app/build
 local.properties
+*.keystore

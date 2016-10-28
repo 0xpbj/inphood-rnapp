@@ -17,15 +17,8 @@ import Config from '../constants/config-vars'
 import * as db from './firebaseCommands'
 
 import firebase from 'firebase'
-import RNFetchBlob from 'react-native-fetch-blob'
 
 const turlHead = Config.AWS_CDN_THU_URL
-
-const isLocalFile = (localFile) => {
-  return RNFetchBlob.fs.exists(localFile)
-    .then(flag => ({ flag }))
-    .catch(error => ({ error }))
-}
 
 const prefetchData = (cdnPath) => {
   return Image.prefetch(cdnPath)

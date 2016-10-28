@@ -6,8 +6,9 @@ import React, { Component } from "react"
 import {
   View,
   Text,
-  Image,
+  Alert,
   Modal,
+  Image,
   Platform,
   Dimensions,
   StyleSheet,
@@ -22,7 +23,6 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import FacebookLogin from './FacebookLogin'
 import EmailLogin from './EmailLogin'
 import Spinner from 'react-native-loading-spinner-overlay'
-// var Mailer = require('NativeModules').RNMail
 import Communications from 'react-native-communications'
 
 import CommonStyles from './styles/common-styles'
@@ -67,7 +67,7 @@ export default class Start extends Component {
     this.props._handleNavigate(settingsRoute)
   }
   sendEmail() {
-    if (this.props.auth.result !== null && (Platform.OS === 'ios')) {
+    if (Platform.OS === 'ios') {
       // Not supported on Android, need to find alternate. #PBJOCD: this is a require
       // and not an import b/c there is no way to conditionally import on ES6 and it
       // breaks our Android run-time as soon as import is run.
@@ -75,17 +75,9 @@ export default class Start extends Component {
       const Device = require('react-native-device')
       let deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
       Communications.email(['support@inphood.com'],null,null,'Need Help',deviceInfo)
-      // Mailer.mail({
-      //   subject: 'Need Help',
-      //   recipients: ['support@inphood.com'],
-      //   body: deviceInfo,
-      //   // isHTML: true, // iOS only, exclude if false
-      // }, (error, event) => {
-      //     if(error) {
-      //       console.log(error)
-      //       alert('Could not send mail. Please send a mail to support@inphood.com')
-      //     }
-      // })
+    }
+    else {
+      Alert.alert('Error', 'Could not send mail. Please send a mail to support@inphood.com')
     }
   }
   render() {

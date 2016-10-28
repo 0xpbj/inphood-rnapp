@@ -6,7 +6,10 @@ import * as actionCreators from '../actions/Actions'
 function mapStateToProps (state) {
   return {
     auth: state.authReducer,
-    page: state.pageReducer
+    page: state.pageReducer,
+    tabs: state.tabReducer,
+    media: state.mediaReducer,
+    gallery: state.galNavReducer
   }
 }
 

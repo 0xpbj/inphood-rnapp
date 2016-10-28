@@ -29,17 +29,33 @@ export default class App extends Component {
       PushNotificationIOS.requestPermissions()
     }
   }
+  handleChangeTab({i, ref, from}) {
+    this.props.changePage(i, false)
+  }
   render () {
     console.disableYellowBox = true
+    let locked = false
+    const {index, notify} = this.props.page
+    let page = this.props.page.index
+    if (this.props.tabs.index > 0 || this.props.gallery.index > 0 || this.props.media.index > 0) {
+      locked = true
+    }
     if (this.props.auth.result === null) {
       return <Extras />
     }
     return (
       <ScrollableTabView
         tabBarPosition="bottom"
-        page={this.props.page.index}
+        page={page}
+        locked={locked}
+        onChangeTab={this.handleChangeTab.bind(this)}
         prerenderingSiblingsNumber={1}
-        renderTabBar={() => <ScrollableTabBar backgroundColor='black' style={{height: 0}}/>}
+        renderTabBar={() => 
+          <ScrollableTabBar 
+            backgroundColor='black' 
+            style={{height: 0}}
+          />
+        }
       >
         <Media />
         <Home />

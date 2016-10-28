@@ -23,6 +23,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import FacebookLogin from './FacebookLogin'
 import EmailLogin from './EmailLogin'
 import Spinner from 'react-native-loading-spinner-overlay'
+import Communications from 'react-native-communications'
 
 import CommonStyles from './styles/common-styles'
 
@@ -72,18 +73,8 @@ export default class Start extends Component {
       // breaks our Android run-time as soon as import is run.
       //
       const Device = require('react-native-device')
-      var Mailer = require('NativeModules').RNMail
       let deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
-      Mailer.mail({
-      subject: 'need help',
-      recipients: ['support@inphood.com'],
-      body: deviceInfo,
-      isHTML: true, // iOS only, exclude if false
-      }, (error, event) => {
-          if(error) {
-            Alert.alert('Error', 'Could not send mail. Please send a mail to support@inphood.com')
-          }
-      })
+      Communications.email(['support@inphood.com'],null,null,'Need Help',deviceInfo)
     }
     else {
       Alert.alert('Error', 'Could not send mail. Please send a mail to support@inphood.com')

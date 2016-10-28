@@ -10,9 +10,7 @@ import {
 } from 'react-native'
 
 const {
-  Reducer: NavigationTabsReducer,
   CardStack: NavigationCardStack,
-  AnimatedView: NavigationAnimatedView,
   Header: NavigationHeader,
 } = NavigationExperimental
 

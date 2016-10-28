@@ -17,9 +17,7 @@ const route = {
 }
 
 const {
-  Reducer: NavigationTabsReducer,
   CardStack: NavigationCardStack,
-  AnimatedView: NavigationAnimatedView,
   Header: NavigationHeader,
 } = NavigationExperimental
 

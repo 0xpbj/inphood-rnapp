@@ -6,7 +6,7 @@ import * as actionCreators from '../actions/Actions'
 function mapStateToProps (state) {
   return {
     auth: state.authReducer,
-    page: state.pageReducer,
+    page: state.pageReducer
   }
 }
 

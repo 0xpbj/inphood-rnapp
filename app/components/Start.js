@@ -67,18 +67,19 @@ export default class Start extends Component {
     this.props._handleNavigate(settingsRoute)
   }
   sendEmail() {
+    let deviceInfo = ''
     if (Platform.OS === 'ios') {
       // Not supported on Android, need to find alternate. #PBJOCD: this is a require
       // and not an import b/c there is no way to conditionally import on ES6 and it
       // breaks our Android run-time as soon as import is run.
       //
       const Device = require('react-native-device')
-      let deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
-      Communications.email(['support@inphood.com'],null,null,'Need Help',deviceInfo)
+      deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
     }
     else {
-      Alert.alert('Error', 'Could not send mail. Please send a mail to support@inphood.com')
+      deviceInfo = '\n\nPlease fill out the below information.\n\n\nDevice Type: ' + '\nOS Version: ' 
     }
+    Communications.email(['support@inphood.com'],null,null,'Need Help',deviceInfo)
   }
   render() {
     if (this.props.auth.inProgress) {

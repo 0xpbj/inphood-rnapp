@@ -11,6 +11,7 @@ import {REHYDRATE} from 'redux-persist/constants'
 
 import {race, call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
+import { Image } from "react-native"
 import * as db from './firebaseCommands'
 import Config from '../constants/config-vars'
 import firebase from 'firebase'
@@ -20,6 +21,13 @@ const defaultPicture = Config.AWS_CDN_IMG_URL + 'banana.jpg'
 
 const FBSDK = require('react-native-fbsdk')
 const { AccessToken } = FBSDK
+
+function* userDataPrefetch() {
+  const {picture} = yield select(state => state.authReducer.settings)
+  Image.prefetch(picture)
+    .then(() => {})
+    .catch(error => {console.log(error + ' - ' + cdnPath)})
+}
 
 const facebookLogin = () => {
   return AccessToken.getCurrentAccessToken()
@@ -232,6 +240,7 @@ function* initializeLogin() {
 
 export default function* rootSaga() {
   yield fork(watchEMCreateFlow)
+  yield fork(takeLatest, REHYDRATE, userDataPrefetch)
   yield fork(takeLatest, LOGIN_REQUEST, initializeLogin)
   yield fork(takeLatest, RESET_PASSWORD, resetPassword)
   yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)

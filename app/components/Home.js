@@ -2,16 +2,7 @@ import React, { Component } from 'react'
 import {
   View,
   Platform,
-  BackAndroid,
-  NavigationExperimental
 } from 'react-native'
-
-const {
-  Reducer: NavigationTabsReducer,
-  CardStack: NavigationCardStack,
-  AnimatedView: NavigationAnimatedView,
-  Header: NavigationHeader,
-} = NavigationExperimental
 
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 

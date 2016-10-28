@@ -98,11 +98,11 @@ export default class AppCamera extends Component {
             <View style={{flex: 1,
                           flexDirection: 'row',
                           justifyContent: 'center'}}>
-              <TouchableHighlight
+              <TouchableOpacity
                 style={CommonStyles.shutterOuterViewStyle}
                 onPress={this.takePicture.bind(this)}>
                 <View/>
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
 
             <View style={{flex: 1}}/>

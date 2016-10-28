@@ -22,7 +22,7 @@ const turlHead = Config.AWS_CDN_THU_URL
 
 const prefetchData = (cdnPath) => {
   return Image.prefetch(cdnPath)
-    .then(() => {console.log('Data prefetch: ', cdnPath)})
+    .then(() => {})
     .catch(error => {console.log(error + ' - ' + cdnPath)})
 }
 

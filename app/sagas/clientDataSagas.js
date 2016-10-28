@@ -22,7 +22,7 @@ const urlHead = Config.AWS_CDN_IMG_URL
 
 const prefetchData = (cdnPath) => {
   return Image.prefetch(cdnPath)
-    .then(() => {console.log('Client data prefetch: ', cdnPath)})
+    .then(() => {})
     .catch(error => {console.log(error + ' - ' + cdnPath)})
 }
 

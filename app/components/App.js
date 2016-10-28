@@ -34,12 +34,12 @@ export default class App extends Component {
     if (this.props.auth.result === null) {
       return <Extras />
     }
-    const bottomColor = this.props.page.index === 0 ? 'black' : 'white'
     return (
       <ScrollableTabView
         tabBarPosition="bottom"
         page={this.props.page.index}
-        renderTabBar={() => <ScrollableTabBar style={{height: 0}}/>}
+        prerenderingSiblingsNumber={1}
+        renderTabBar={() => <ScrollableTabBar backgroundColor='black' style={{height: 0}}/>}
       >
         <Media />
         <Home />

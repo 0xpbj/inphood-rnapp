@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
+  BackAndroid,
   TouchableOpacity,
 } from 'react-native'
 
@@ -37,6 +38,16 @@ export default class HomeTabs extends Component {
   constructor(props) {
     super(props)
   }
+  componentDidMount () {
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction.bind(this))
+  }
+  componentWillUnmount () {
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction.bind(this))
+  }
+  _handleBackAction () {
+    // TODO: PBJAC fix in 1.2
+    return true
+  }
   _renderTabContent (key) {
     switch (key) {
       case 'ios-home':
@@ -62,7 +73,9 @@ export default class HomeTabs extends Component {
   render () {
     const notificationCount = this.props.notification.client + this.props.notification.trainer
     const notification = notificationCount > 0 ? notificationCount : 0
-    PushNotification.setApplicationIconBadgeNumber(notification)
+    // TODO:
+    // PBJ reads:  does not work for all android devices (https://github.com/leolin310148/ShortcutBadger)
+    // PushNotification.setApplicationIconBadgeNumber(notification)
     const trainer = this.props.trainer.clients.length > 0
     const trainerNotificationCount = this.props.notification.trainer > 0 ? this.props.notification.trainer : undefined
     const clientNotificationCount = this.props.notification.client > 0 ? this.props.notification.client : undefined

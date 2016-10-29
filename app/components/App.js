@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Platform} from 'react-native'
 
 import PushNotification from 'react-native-push-notification'
 
@@ -22,7 +23,7 @@ export default class App extends Component {
       onNotification: function(notification) {
           console.log( 'NOTIFICATION:', notification );
       },
-      // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications) 
+      // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
       // senderID: "YOUR GCM SENDER ID",
       // IOS ONLY (optional): default: all - Permissions to register.
       permissions: {
@@ -53,16 +54,19 @@ export default class App extends Component {
     if (this.props.auth.result === null) {
       return <Extras />
     }
+    // TODO:  PBJOC, get rid of platform everywhere and bug with
+    //        prerender failing for home screen.
+    const prerenderSetting = Platform.OS === "ios" ? 1 : 0
     return (
       <ScrollableTabView
         tabBarPosition="bottom"
         page={this.props.page.index}
         locked={locked}
         onChangeTab={this.handleChangeTab.bind(this)}
-        prerenderingSiblingsNumber={1}
-        renderTabBar={() => 
-          <ScrollableTabBar 
-            backgroundColor='black' 
+        prerenderingSiblingsNumber={prerenderSetting}
+        renderTabBar={() =>
+          <ScrollableTabBar
+            backgroundColor='black'
             style={{height: 0}}
           />
         }

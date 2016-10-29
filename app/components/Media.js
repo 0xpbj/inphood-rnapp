@@ -31,10 +31,10 @@ export default class Media extends Component {
     super(props)
   }
   componentDidMount () {
-    BackAndroid.addEventListener('hardwareBackPress', this._handleNavigate.bind(this))
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction.bind(this))
   }
   componentWillUnmount () {
-    BackAndroid.removeEventListener('hardwareBackPress', this._handleNavigate.bind(this))
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction.bind(this))
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.media.inProgress === false)

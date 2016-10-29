@@ -28,10 +28,10 @@ export default class Expert extends Component {
     this._handleNavigate = this._handleNavigate.bind(this)
   }
   componentDidMount () {
-    BackAndroid.addEventListener('hardwareBackPress', this._handleNavigate.bind(this))
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction.bind(this))
   }
   componentWillUnmount () {
-    BackAndroid.removeEventListener('hardwareBackPress', this._handleNavigate.bind(this))
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction.bind(this))
   }
   _renderScene (props) {
     const prefix = 'scene_'

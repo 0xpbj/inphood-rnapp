@@ -17,6 +17,23 @@ import Extras from '../containers/ExtrasContainer'
 const HomeTabBar = React.createClass({
   tabIcons: ['ios-home-outline', 'ios-people-outline', 'ios-options-outline'],
   tabTitle: ['Home', 'Clients', 'Extras'],
+  setAnimationValue({ value, }) {
+    this.tabIcons.forEach((icon, i) => {
+      const progress = (value - i >= 0 && value - i <= 1) ? value - i : 1;
+      icon.setNativeProps({
+        style: {
+          color: this.iconColor(progress),
+        },
+      });
+    });
+  },
+  //color between rgb(59,89,152) and rgb(204,204,204)
+  iconColor(progress) {
+    const red = 59 + (204 - 59) * progress;
+    const green = 89 + (204 - 89) * progress;
+    const blue = 152 + (204 - 152) * progress;
+    return `rgb(${red}, ${green}, ${blue})`;
+  },
   render() {
     return <View style={CommonStyles.tabs}>
       {this.props.tabs.map((tab, i) => {

@@ -119,6 +119,22 @@ export default class GalleryListView extends Component{
       )
     }
     else if (rowID === "0") {
+      if (this.props.auth.authTrainer === 'pending' && this.props.auth.referralType === 'client') {
+        Alert.alert(
+         'Share data with your trainer: ' + this.props.auth.trainerName + '?',
+         '',
+         [
+            {text: 'Accept',
+            onPress: () => {
+              this.props.setBranchAuthTrainer('accept')
+            }, style: 'default'},
+            {text: 'Decline',
+            onPress: () => {
+              this.props.setBranchAuthTrainer('decline')
+            }, style: 'destructive'}
+         ],
+        )
+      }
       const backgroundColor = this.props.galleryView.pictureLoading ? 'rgba(255, 255, 255, 0.40)' : 'transparent'
       imgBlock = (
         <Image style={CommonStyles.galleryListViewThumb} source={{uri: localFile}}>

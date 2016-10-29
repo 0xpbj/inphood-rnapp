@@ -9,6 +9,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
 import com.facebook.react.ReactApplication;
+import com.chirag.RNMail.RNMail;
 import com.imagepicker.ImagePickerPackage;
 import fr.bamlab.rncameraroll.CameraRollPackage;
 import com.facebook.react.ReactInstanceManager;
@@ -35,6 +36,9 @@ import com.oblador.vectoricons.*;
 // import React Native FS (FileSystem)
 import com.rnfs.RNFSPackage;
 
+// import React Native Push Notifications
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
@@ -53,6 +57,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new RNMail(),
+          new ReactNativePushNotificationPackage(),
           new ImagePickerPackage(),
           new RNFSPackage(),
           new FBSDKPackage(mCallbackManager),

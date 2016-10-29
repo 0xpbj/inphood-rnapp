@@ -4,6 +4,7 @@ import {
   Platform,
 } from 'react-native'
 
+import PushNotification from 'react-native-push-notification'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -14,10 +15,6 @@ import Extras from '../containers/ExtrasContainer'
 export default class HomeTabs extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      clientNotification: '',
-      trainerNotification: ''
-    }
   }
   _renderTabContent (key) {
     switch (key) {
@@ -44,10 +41,7 @@ export default class HomeTabs extends Component {
   render () {
     const notificationCount = this.props.notification.client + this.props.notification.trainer
     const notification = notificationCount > 0 ? notificationCount : 0
-    if (Platform.OS === 'ios') {
-      var {PushNotificationIOS} = require('react-native')
-      PushNotificationIOS.setApplicationIconBadgeNumber(notification)
-    }
+    PushNotification.setApplicationIconBadgeNumber(notification)
     const trainer = this.props.trainer.clients.length > 0
     const trainerNotificationCount = this.props.notification.trainer > 0 ? this.props.notification.trainer : undefined
     const clientNotificationCount = this.props.notification.client > 0 ? this.props.notification.client : undefined

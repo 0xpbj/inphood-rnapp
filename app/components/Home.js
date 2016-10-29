@@ -1,16 +1,37 @@
 import React, { Component } from 'react'
 import {
   View,
-  Platform,
+  Text,
+  TouchableOpacity,
 } from 'react-native'
 
 import PushNotification from 'react-native-push-notification'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
-
 import Icon from 'react-native-vector-icons/Ionicons'
+
+import CommonStyles from './styles/common-styles'
 import Gallery from '../containers/GalleryContainer'
 import Clients from '../containers/ExpertContainer'
 import Extras from '../containers/ExtrasContainer'
+
+const HomeTabBar = React.createClass({
+  tabIcons: ['ios-home-outline', 'ios-people-outline', 'ios-options-outline'],
+  tabTitle: ['Home', 'Clients', 'Extras'],
+  render() {
+    return <View style={CommonStyles.tabs}>
+      {this.props.tabs.map((tab, i) => {
+        return <TouchableOpacity key={tab} onPress={() => this.props.goToPage(i)} style={CommonStyles.tab}>
+          <Icon
+            name={tab}
+            size={40}
+            color={this.props.activeTab === i ? '#006400' : 'rgb(204,204,204)'}
+            ref={(icon) => { this.tabIcons[i] = icon }}
+          />
+        </TouchableOpacity>
+      })}
+    </View>
+  },
+})
 
 export default class HomeTabs extends Component {
   constructor(props) {
@@ -18,19 +39,19 @@ export default class HomeTabs extends Component {
   }
   _renderTabContent (key) {
     switch (key) {
-      case 'Home':
+      case 'ios-home':
         return (
           <Gallery
             result={this.props.auth.result}
           />
         )
-      case 'Clients':
+      case 'ios-people':
         return (
           <Clients
             result={this.props.auth.result}
           />
         )
-      case 'Extras':
+      case 'ios-options':
         return (
           <Extras />
         )
@@ -54,56 +75,23 @@ export default class HomeTabs extends Component {
       }
       if ( (tab.title !== 'Clients') ||
            (tab.title === 'Clients' && trainer)) {
-        if (Platform.OS === 'ios') {
-          return (
-            <Icon.TabBarItemIOS
-              key={tab.name}
-              title={tab.title}
-              iconName={tab.name}
-              selectedIconName={tab.iconName}
-              iconSize={40}
-              badge={badgeValue}
-              onPress={() => {
-                this.props.changeTab(i)
-              }}
-              selected={this.props.tabs.index === i}>
-              {this._renderTabContent(tab.key)}
-            </Icon.TabBarItemIOS>
-          )
-        }
-        else {
-          // Android
-          return(
-            <View
-              tabLabel={tab.title}
-              style={{flex: 1}}>
-              {this._renderTabContent(tab.key)}
-            </View>)
-        }
+        return(
+          <View
+            tabLabel={tab.key}
+            style={{flex: 1}}>
+            {this._renderTabContent(tab.key)}
+          </View>)
       }
     })
-    if (Platform.OS === 'ios') {
-      var {TabBarIOS} = require('react-native')
-      return (
-        <TabBarIOS
-          unselectedTintColor="black"
-          tintColor="#006400"
-          barTintColor="white"
-          translucent={true}
-        >
-          {tabs}
-        </TabBarIOS>
-      )
-    } else {
-      // TODO: Something better for Android
-      // var ScrollableTabView = require('react-native-scrollable-tab-view')
-      return (
-        <ScrollableTabView
-          ref="scrollableTabView"
-          tabBarPosition="bottom">
-          {tabs}
-        </ScrollableTabView>
-      )
-    }
+    return (
+      <ScrollableTabView
+        ref="scrollableTabView"
+        tabBarPosition="bottom"
+        prerenderingSiblingsNumber={3}
+        renderTabBar={() => <HomeTabBar />}
+      >
+        {tabs}
+      </ScrollableTabView>
+    )
   }
 }

@@ -1,8 +1,8 @@
 import { CHANGE_TAB } from '../constants/ActionTypes'
 const tabs = [
-  { key: 'Home', title: 'Home', name: 'ios-home-outline', iconName: 'ios-home'},
-  { key: 'Clients', title: 'Clients', name: 'ios-people-outline', iconName: 'ios-people'},
-  { key: 'Extras', title: 'Extras', name: 'ios-options-outline', iconName: 'ios-options'},
+  { key: 'ios-home', title: 'Home', label: 'ios-home', iconName: 'ios-home'},
+  { key: 'ios-people', title: 'Clients', label: 'ios-people', iconName: 'ios-people'},
+  { key: 'ios-options', title: 'Extras', label: 'ios-options', iconName: 'ios-options'},
 ]
 
 const initialState = {

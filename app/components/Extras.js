@@ -26,10 +26,10 @@ export default class Extras extends Component {
     super(props)
   }
   componentDidMount () {
-    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
+    BackAndroid.addEventListener('hardwareBackPress', this._handleNavigate.bind(this))
   }
   componentWillUnmount () {
-    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleNavigate.bind(this))
   }
   _renderScene (props) {
     const prefix = 'scene_'

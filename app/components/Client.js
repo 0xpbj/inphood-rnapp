@@ -8,9 +8,7 @@ import {
   ListView,
   Platform,
   StyleSheet,
-  BackAndroid,
   TouchableHighlight,
-  NavigationExperimental,
   RecyclerViewBackedScrollView,
 } from 'react-native'
 

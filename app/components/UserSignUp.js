@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import {
   Text,
   View,
+  Alert,
   TextInput,
   StyleSheet,
   TouchableHighlight
@@ -13,15 +14,26 @@ import CommonStyles from './styles/common-styles'
 import Login from './EmailLogin'
 import Comb from 'tcomb-form-native'
 
+var AgeLimit = Comb.refinement(Comb.Number, function (n) {
+  return n >= 14
+})
+
+var PassLimit = Comb.refinement(Comb.String, function (n) {
+  return n.length >= 6
+})
+
 var Form = Comb.form.Form
+
 var EmailSignUp = Comb.struct({
   firstname: Comb.String,
   lastname: Comb.String,
-  age: Comb.Number,
+  age: AgeLimit,
   email: Comb.String,
-  password: Comb.String,
+  password: PassLimit,
+  repeat_password: Comb.String,
   pictureURL: Comb.maybe(Comb.String),
 })
+
 var options = {
   fields: {
     email: {
@@ -30,9 +42,18 @@ var options = {
       autoCorrect: false,
     },
     password: {
+      error: 'Password has to be at least 6 characters',
       autoCapitalize: 'none',
       autoCorrect: false,
       secureTextEntry: true
+    },
+    repeat_password: {
+      autoCapitalize: 'none',
+      autoCorrect: false,
+      secureTextEntry: true
+    },
+    age: {
+      error: 'User has to be older than 14'
     }
   },
   auto: 'placeholders'
@@ -42,12 +63,24 @@ export default class UserSignUp extends Component {
   constructor(props) {
     super(props)
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.result) {
+      this.props.goBack()
+      this.props.goBack()
+    }
+  }
   signup() {
     const value = this.refs.form.getValue()
-    if (value) {
+    if (value && value.password !== value.repeat_password) {
+      Alert.alert(
+        'Password Mismatch',
+        'Password\'s need to match'
+      )
+    }
+    else if (value) {
       this.props.emailCreateUser(value)
-      this.props.goBack()
-      this.props.goBack()
+      // this.props.goBack()
+      // this.props.goBack()
     }
   }
   render() {

@@ -63,11 +63,9 @@ export default class UserSignUp extends Component {
   constructor(props) {
     super(props)
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.result) {
-      this.props.goBack()
-      this.props.goBack()
-    }
+  componentWillUnmount() {
+    this.props.goBack()
+    this.props.goBack()
   }
   signup() {
     const value = this.refs.form.getValue()

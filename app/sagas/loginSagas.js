@@ -89,40 +89,41 @@ function* fbloginFlow() {
 
 const emailCreate = (value) => {
   return firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-    .catch(error => {
-      alert(error.message)
-    }
-  )
+    .catch(error => ({ error }))
 }
 
 function* emailCreateFlow(value) {
   try {
     let value = yield select(state => state.authReducer.data)
     if (value) {
-      yield call(emailCreate, value)
-      const user = firebase.auth().currentUser
-      if (user) {
-        yield put ({type: INIT_LOGIN, flag: true})
-        const id = user.providerData[0].uid
-        branch.setIdentity(id)
-        const first_name = value.firstname
-        const last_name = value.lastname
-        const name = value.firstname + ' ' + value.lastname
-        const picture = value.pictureURL ? value.pictureURL : defaultPicture
-        const provider = user.providerData[0].providerId
-        const token = user.uid
-        const result = {id, name, picture, first_name, last_name, provider}
-        yield put ({type: STORE_RESULT, result})
-        yield put ({type: STORE_TOKEN, token})
-        yield put ({type: LOGIN_SUCCESS})
-        yield put ({type: EM_LOGIN_SUCCESS})
-        firebase.database().ref('/global/' + token + '/userInfo/public').update({
-          id,
-          name,
-          picture,
-        })
-        yield put ({type: INIT_LOGIN, flag: false})
-        yield put ({type: STORE_VALUE, value})
+      const {error} = yield call(emailCreate, value)
+      if (error)
+        Alert.alert(error.message)
+      else {
+        const user = firebase.auth().currentUser
+        if (user) {
+          yield put ({type: INIT_LOGIN, flag: true})
+          const id = user.providerData[0].uid
+          branch.setIdentity(id)
+          const first_name = value.firstname
+          const last_name = value.lastname
+          const name = value.firstname + ' ' + value.lastname
+          const picture = value.pictureURL ? value.pictureURL : defaultPicture
+          const provider = user.providerData[0].providerId
+          const token = user.uid
+          const result = {id, name, picture, first_name, last_name, provider}
+          yield put ({type: STORE_RESULT, result})
+          yield put ({type: STORE_TOKEN, token})
+          yield put ({type: LOGIN_SUCCESS})
+          yield put ({type: EM_LOGIN_SUCCESS})
+          firebase.database().ref('/global/' + token + '/userInfo/public').update({
+            id,
+            name,
+            picture,
+          })
+          yield put ({type: INIT_LOGIN, flag: false})
+          yield put ({type: STORE_VALUE, value})
+        }
       }
     }
   }
@@ -134,48 +135,49 @@ function* emailCreateFlow(value) {
 
 const emailLogin = (value) => {
   return firebase.auth().signInWithEmailAndPassword(value.email, value.password)
-    .catch(error => {
-      alert(error.message)
-    }
-  )
+    .catch(error => ({ error }))
 }
 
 function* emloginFlow(value) {
   try {
-    yield call(emailLogin, value)
-    const user = firebase.auth().currentUser
-    if (user) {
-      yield put ({type: INIT_LOGIN, flag: true})
-      const token = user.uid
-      branch.setIdentity(token)
-      const path = '/global/' + token + '/userInfo/public'
-      const id = (yield call(db.getPath, path + '/id')).val()
-      const name = (yield call(db.getPath, path + '/name')).val()
-      const picture = (yield call(db.getPath, path + '/picture')).val()
-      const birthday = (yield call(db.getPath, path + '/birthday')).val()
-      const email = (yield call(db.getPath, path + '/email')).val()
-      const diet = (yield call(db.getPath, path + '/diet')).val()
-      const height = (yield call(db.getPath, path + '/height')).val()
-      const trainerId = (yield call(db.getPath, path + '/trainerId')).val()
-      const referralSetup = (yield call(db.getPath, path + '/referralSetup')).val()
-      const referralType = (yield call(db.getPath, path + '/referralType')).val()
-      const referralId = (yield call(db.getPath, path + '/referralId')).val()
-      const authTrainer = (yield call(db.getPath, path + '/authTrainer')).val()
-      const trainerName = (yield call(db.getPath, path + '/trainerName')).val()
-      yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralId, trainerName})
-      yield put({type: BRANCH_AUTH_TRAINER, response: authTrainer})
-      const provider = user.providerData[0].providerId
-      const values = name.split(" ")
-      const first_name = values[0]
-      const last_name = values[1]
-      const result = {id, name, picture, first_name, last_name, provider, trainerId}
-      const userSettings = {first_name, last_name, birthday, height, diet, email, picture}
-      yield put ({type: USER_SETTINGS, settings: userSettings})
-      yield put ({type: STORE_RESULT, result})
-      yield put ({type: STORE_TOKEN, token})
-      yield put ({type: LOGIN_SUCCESS})
-      yield put ({type: EM_LOGIN_SUCCESS})
-      yield put ({type: INIT_LOGIN, flag: false})
+    const {error} = yield call(emailLogin, value)
+    if (error)
+      Alert.alert(error.message)
+    else {
+      const user = firebase.auth().currentUser
+      if (user) {
+        yield put ({type: INIT_LOGIN, flag: true})
+        const token = user.uid
+        branch.setIdentity(token)
+        const path = '/global/' + token + '/userInfo/public'
+        const id = (yield call(db.getPath, path + '/id')).val()
+        const name = (yield call(db.getPath, path + '/name')).val()
+        const picture = (yield call(db.getPath, path + '/picture')).val()
+        const birthday = (yield call(db.getPath, path + '/birthday')).val()
+        const email = (yield call(db.getPath, path + '/email')).val()
+        const diet = (yield call(db.getPath, path + '/diet')).val()
+        const height = (yield call(db.getPath, path + '/height')).val()
+        const trainerId = (yield call(db.getPath, path + '/trainerId')).val()
+        const referralSetup = (yield call(db.getPath, path + '/referralSetup')).val()
+        const referralType = (yield call(db.getPath, path + '/referralType')).val()
+        const referralId = (yield call(db.getPath, path + '/referralId')).val()
+        const authTrainer = (yield call(db.getPath, path + '/authTrainer')).val()
+        const trainerName = (yield call(db.getPath, path + '/trainerName')).val()
+        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralId, trainerName})
+        yield put({type: BRANCH_AUTH_TRAINER, response: authTrainer})
+        const provider = user.providerData[0].providerId
+        const values = name.split(" ")
+        const first_name = values[0]
+        const last_name = values[1]
+        const result = {id, name, picture, first_name, last_name, provider, trainerId}
+        const userSettings = {first_name, last_name, birthday, height, diet, email, picture}
+        yield put ({type: USER_SETTINGS, settings: userSettings})
+        yield put ({type: STORE_RESULT, result})
+        yield put ({type: STORE_TOKEN, token})
+        yield put ({type: LOGIN_SUCCESS})
+        yield put ({type: EM_LOGIN_SUCCESS})
+        yield put ({type: INIT_LOGIN, flag: false})
+      }
     }
   }
   catch(error) {

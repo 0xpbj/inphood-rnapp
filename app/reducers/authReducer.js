@@ -40,6 +40,7 @@ export default function authentication(state = initialState, action) {
     case LOGIN_ERROR:
       return {
         ...initialState,
+        value: null,
         error: error
       }
     case LOGOUT_ERROR:

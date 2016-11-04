@@ -58,6 +58,7 @@ export default class GalleryListView extends Component{
     return dataSource.cloneWithRows(list);
   }
   _renderProfileInformation(uri) {
+    const name = this.state.result.first_name ? this.state.result.first_name : 'Anon'
     return (
       <View style={CommonStyles.flexRowMarginBottom10}>
         <Image
@@ -65,7 +66,7 @@ export default class GalleryListView extends Component{
           style={CommonStyles.galleryListViewProfileImage}/>
         {/*TODO: make inPhood below match our Logo*/}
         <Text style={CommonStyles.galleryListViewProfileName}>
-          {this.state.result.first_name}'s inPhood
+          {name}'s inPhood
         </Text>
       </View>
     )

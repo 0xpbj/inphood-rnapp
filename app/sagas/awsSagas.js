@@ -76,16 +76,18 @@ const sendToFirebase = (state, fileTail, fileName) => {
   if (!uid) {
     uid = firebase.auth().currentUser.uid
   }
-  let result = state.authReducer.result
-  let name = result.name
-  let id = result.id
-  let picture = result.picture
+  if (!state.authReducer.anonymous) {
+    let result = state.authReducer.result
+    let name = result.name
+    let id = result.id
+    let picture = result.picture
+    firebase.database().ref('/global/' + uid + '/userInfo/public').update({
+      id,
+      name,
+      picture,
+    })
+  }
   let time = Date.now()
-  firebase.database().ref('/global/' + uid + '/userInfo/public').update({
-    id,
-    name,
-    picture,
-  })
   let caption = ''
   let mealType = ''
   let title = ''

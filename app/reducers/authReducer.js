@@ -2,7 +2,8 @@ import {
   LOGIN_SUCCESS, LOGIN_ERROR, INIT_LOGIN,
   LOGOUT_SUCCESS, LOGOUT_ERROR, USER_SETTINGS,
   STORE_TOKEN, STORE_RESULT, STORE_VALUE, EM_CREATE_USER,
-  EM_LOGIN_REQUEST, BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER
+  EM_LOGIN_REQUEST, BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER,
+  ANONYMOUS_LOGIN_SUCCESS,
 } from '../constants/ActionTypes'
 import {REHYDRATE} from 'redux-persist/constants'
 
@@ -19,6 +20,7 @@ const initialState = {
   authTrainer: 'pending',
   trainerName: '',
   data: null,
+  anonymous: false
 }
 
 export default function authentication(state = initialState, action) {
@@ -90,6 +92,11 @@ export default function authentication(state = initialState, action) {
       return {
         ...state,
         error: ''
+      }
+    case ANONYMOUS_LOGIN_SUCCESS:
+      return {
+        ...state,
+        anonymous: true
       }
     default:
       return state

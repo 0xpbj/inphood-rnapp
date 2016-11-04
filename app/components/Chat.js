@@ -83,6 +83,8 @@ export default class ChatThread extends Component {
     return null;
   }
   render() {
+    const name = this.props.result ? this.props.result.first_name : 'Anon'
+    const picture = this.props.result ? this.props.result.picture : ''
     return (
       <View style={{flex: 1}}>
         <View style={{flex: 10}}/>
@@ -93,8 +95,8 @@ export default class ChatThread extends Component {
             loadEarlier={this.state.loadEarlier}
             user={{
               _id: this.state.id,
-              name: this.props.result.first_name,
-              avatar: this.props.result.picture,
+              name: name,
+              avatar: picture,
             }}
             renderBubble={this.renderBubble.bind(this)}
             renderFooter={this.renderFooter.bind(this)}

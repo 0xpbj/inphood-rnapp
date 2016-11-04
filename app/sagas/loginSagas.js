@@ -5,6 +5,7 @@ import {
   LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_VALUE,
   STORE_RESULT, STORE_TOKEN, INIT_LOGIN, USER_SETTINGS,
   BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER, CREATE_GROUP_ERROR,
+  ANONYMOUS_LOGIN, ANONYMOUS_LOGIN_SUCCESS
 } from '../constants/ActionTypes'
 
 import {REHYDRATE} from 'redux-persist/constants'
@@ -246,6 +247,31 @@ function* resetPassword() {
   }
 }
 
+const anonymousLogin = () => {
+  return firebase.auth().signInAnonymously()
+  .then(user => ({ user }))
+  .catch(error => ({ error }))
+}
+
+function* anonymousLoginFlow() {
+  try {
+    const {user, error} = yield call (anonymousLogin)
+    if (user) {
+      yield put ({type: INIT_LOGIN, flag: true})
+      const token = user.uid
+      branch.setIdentity(token)
+      yield put ({type: STORE_RESULT, result: {}})
+      yield put ({type: STORE_TOKEN, token})
+      yield put ({type: LOGIN_SUCCESS})
+      yield put ({type: ANONYMOUS_LOGIN_SUCCESS})
+      yield put ({type: INIT_LOGIN, flag: false})
+    }
+  }
+  catch(error) {
+    yield put ({type: LOGOUT_ERROR, error})
+  }
+}
+
 export default function* rootSaga() {
   yield fork(takeLatest, EM_CREATE_USER, emailCreateFlow)
   yield fork(takeLatest, CREATE_GROUP, groupCreateFlow)
@@ -254,4 +280,5 @@ export default function* rootSaga() {
   yield fork(takeLatest, LOGIN_REQUEST, fbloginFlow)
   yield fork(takeLatest, RESET_PASSWORD, resetPassword)
   yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)
+  yield fork(takeLatest, ANONYMOUS_LOGIN, anonymousLoginFlow)
 }

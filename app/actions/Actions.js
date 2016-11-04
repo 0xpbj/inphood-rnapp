@@ -62,7 +62,8 @@ import {
   CLEAR_CLIENT_ALERT,
   CLEAR_TRAINER_ALERT,
   BRANCH_AUTH_TRAINER,
-  INIT_LOGIN
+  INIT_LOGIN,
+  ANONYMOUS_LOGIN
 } from '../constants/ActionTypes'
 
 export function pushExp (route) {
@@ -440,6 +441,11 @@ export function setBranchAuthTrainer(response) {
   }
 }
 
+export function anonymousLogin() {
+  return {
+    type: ANONYMOUS_LOGIN
+  }
+}
 
 export function initLogin(flag) {
   return {

@@ -33,7 +33,8 @@ module.exports = StyleSheet.create({
   buttonText: {
     fontSize: 15,
     color: 'white',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    textAlign: 'center'
   },
   tab: {
     flex: 1,

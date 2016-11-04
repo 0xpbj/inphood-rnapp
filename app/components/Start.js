@@ -108,6 +108,7 @@ export default class Start extends Component {
       return (
         <View style={{flex: 1}}>
           {this.flipBoard()}
+          {this.anonymousButton()}
           {this.loginOutButton()}
           {this.modalLoginOutDialog()}
         </View>
@@ -139,6 +140,9 @@ export default class Start extends Component {
   }
   _setModalVisible(visible) {
     this.setState({modalVisible: visible})
+  }
+  _initAnonymousLogin() {
+    this.props.anonymousLogin()
   }
   launchScreen() {
     return (
@@ -263,6 +267,28 @@ export default class Start extends Component {
       </View>
     )
   }
+  anonymousButton() {
+    const buttonText =  this.props.auth.result ? 'Log Out' : 'Try App'
+    const offsetFromBottom = windowSize.height / 10
+    return (
+      <View style={{alignItems: 'center'}}>
+        <View style={{bottom: offsetFromBottom,
+                      width: 200,
+                      backgroundColor: 'rgba(127, 127, 127, 0.4)',
+                      alignItems: 'center',
+                      paddingRight: 10,
+                      paddingLeft: 10,
+                      borderRadius: 4,}}>
+          <TouchableHighlight
+            style={CommonStyles.cancelButton}
+            underlayColor='#99d9f4'
+            onPress={this._initAnonymousLogin.bind(this)}>
+            <Text style={CommonStyles.buttonText}>{buttonText}</Text>
+          </TouchableHighlight>
+        </View>
+      </View>
+    )
+  }
   loginOutButton() {
     const buttonText =  this.props.auth.result ? 'Log Out' : 'Log In'
     const offsetFromBottom = windowSize.height / 10
@@ -354,6 +380,7 @@ export default class Start extends Component {
       return (
         <View style={{marginTop: 10}}>{this.modalFacebookLoginButton()}</View>)
     } else {
+      const buttonText = this.props.auth.anonymous ? 'Anon Log Out' : 'Email Log Out'
       return (
         <TouchableHighlight
           style={CommonStyles.button}
@@ -363,8 +390,8 @@ export default class Start extends Component {
             <Icon
               name="ios-exit-outline"
               size={26} color='white'
-              style={{marginLeft: 10, marginRight: 30}}/>
-            <Text style={CommonStyles.buttonText}>Email Log Out</Text>
+              style={{marginLeft: 10, marginRight: 20}}/>
+            <Text style={CommonStyles.buttonText}>{buttonText}</Text>
           </View>
         </TouchableHighlight>)
     }

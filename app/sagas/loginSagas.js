@@ -1,10 +1,10 @@
 import {
-  EM_LOGIN_INIT, EM_LOGIN_REQUEST, EM_CREATE_USER, NEW_EM_LOGIN_ERROR,
-  FB_LOGIN_SUCCESS, FB_LOGIN_ERROR, EM_LOGIN_SUCCESS, EM_LOGIN_ERROR,
+  EM_LOGIN_INIT, EM_LOGIN_REQUEST, EM_CREATE_USER,
+  FB_LOGIN_SUCCESS, EM_LOGIN_SUCCESS, CREATE_GROUP,
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, RESET_PASSWORD,
   LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, STORE_VALUE,
   STORE_RESULT, STORE_TOKEN, INIT_LOGIN, USER_SETTINGS,
-  BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER,
+  BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER, CREATE_GROUP_ERROR,
 } from '../constants/ActionTypes'
 
 import {REHYDRATE} from 'redux-persist/constants'
@@ -83,7 +83,29 @@ function* fbloginFlow() {
   }
   catch(error) {
     yield put ({type: LOGIN_ERROR})
-    yield put ({type: FB_LOGIN_ERROR})
+  }
+}
+
+function* groupCreateFlow(value) {
+  try {
+    const auth = yield select(state => state.authReducer)
+    const {groups} = yield select(state => state.groupsReducer)
+    const email = auth.settings.email
+    const token = auth.token
+    if (token && groups.length > 0) {
+      const name = groups[0].groupname
+      const picture = groups[0].pictureURL ? groups[0].pictureURL : defaultPicture
+      firebase.database().ref('/global/' + token + '/groupData/' + name + '/info/').update({
+        name,
+        picture
+      })
+      firebase.database().ref('/global/' + token + '/userInfo/public/groups/' + name).update({
+        invitee: token
+      })
+    }
+  }
+  catch(error) {
+    yield put ({type: CREATE_GROUP_ERROR})
   }
 }
 
@@ -128,7 +150,6 @@ function* emailCreateFlow(value) {
     }
   }
   catch(error) {
-    yield put ({type: NEW_EM_LOGIN_ERROR})
     yield put ({type: LOGIN_ERROR})
   }
 }
@@ -182,7 +203,6 @@ function* emloginFlow(value) {
   }
   catch(error) {
     yield put ({type: LOGIN_ERROR})
-    yield put ({type: EM_LOGIN_ERROR})
   }
 }
 
@@ -228,6 +248,7 @@ function* resetPassword() {
 
 export default function* rootSaga() {
   yield fork(takeLatest, EM_CREATE_USER, emailCreateFlow)
+  yield fork(takeLatest, CREATE_GROUP, groupCreateFlow)
   yield fork(takeLatest, REHYDRATE, userDataPrefetch)
   yield fork(takeLatest, EM_LOGIN_INIT, watchEMLoginFlow)
   yield fork(takeLatest, LOGIN_REQUEST, fbloginFlow)

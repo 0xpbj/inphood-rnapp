@@ -18,6 +18,17 @@ module.exports = StyleSheet.create({
     marginBottom: 10,
     justifyContent: 'center'
   },
+  cancelButton: {
+    marginTop: 10,
+    height: 30,
+    width: 180,
+    backgroundColor: 'red',
+    borderColor: 'red',
+    borderWidth: 1,
+    borderRadius: 4,
+    marginBottom: 10,
+    justifyContent: 'center'
+  },
   // TODO: unify this with other styles (i.e. 14 is our default font)
   buttonText: {
     fontSize: 15,
@@ -108,6 +119,25 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     backgroundColor: '#F6F6F6',
+  },
+  groupProfileName: {
+    justifyContent: 'center',
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 20,
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  groupProfileImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 2,
+    marginBottom: 10,
+  },
+  groupNameText: {
+    fontWeight: '600',
+    fontSize: 18
   },
   clientProfileName: {
     justifyContent: 'center',
@@ -212,7 +242,7 @@ module.exports = StyleSheet.create({
     height: 1,
     backgroundColor: '#CCCCCC'
   },
-  prabhaavButton: {
+  formButton: {
     backgroundColor: '#006400',
     borderColor: '#006400',
     borderWidth: 1,
@@ -274,7 +304,6 @@ module.exports = StyleSheet.create({
   clientGalleryAddPhotosMessage: {
     justifyContent: 'center',
     marginTop: 150,
-    marginLeft: 60,
   },
   flexRow: {
     flexDirection: 'row'

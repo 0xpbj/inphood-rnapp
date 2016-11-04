@@ -7,6 +7,8 @@ import {
   PUSH_CAM_ROUTE,
   PUSH_EXT_ROUTE,
   POP_EXT_ROUTE,
+  PUSH_GRP_ROUTE,
+  POP_GRP_ROUTE,
   CHANGE_TAB,
   CHANGE_PAGE,
   TAKE_PHOTO,
@@ -32,12 +34,15 @@ import {
   MARK_PHOTO_READ,
   MARK_CLIENT_PHOTO_READ,
   LOAD_ID,
+  LOAD_GROUP,
   INIT_CHAT_SAGA,
   INIT_TRAINER_CHAT_SAGA,
   LOGIN_REQUEST,
   EM_LOGIN_INIT,
   EM_LOGIN_REQUEST,
   EM_CREATE_USER,
+  CREATE_GROUP,
+  ADD_GROUPS,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT_REQUEST,
@@ -47,7 +52,9 @@ import {
   SET_CLIENT_ID,
   SET_CLIENT_PHOTO,
   SET_CLIENT_NAME,
+  SET_GROUP_NAME,
   STORE_SETTINGS_FORM,
+  STORE_GROUP_FORM,
   USER_SETTINGS,
   RESET_PASSWORD,
   CLIENT_APP_INVITE,
@@ -107,6 +114,19 @@ export function pushExt (route) {
 export function popExt () {
   return {
     type: POP_EXT_ROUTE
+  }
+}
+
+export function pushGrp (route) {
+  return {
+    type: PUSH_GRP_ROUTE,
+    route,
+  }
+}
+
+export function popGrp () {
+  return {
+    type: POP_GRP_ROUTE
   }
 }
 
@@ -231,6 +251,13 @@ export function storeId(id) {
   }
 }
 
+export function storeGroup(group) {
+  return {
+    type: LOAD_GROUP,
+    group
+  }
+}
+
 export function initChatSaga() {
   return {
     type: INIT_CHAT_SAGA,
@@ -266,6 +293,13 @@ export function emailLoginInit(){
 export function emailLoginRequest(value){
   return {
     type: EM_LOGIN_REQUEST,
+    value
+  }
+}
+
+export function createGroup(value){
+  return {
+    type: CREATE_GROUP,
     value
   }
 }
@@ -338,9 +372,24 @@ export function setClientName(name) {
   }
 }
 
+export function setGroupName(name, photo) {
+  return {
+    type: SET_GROUP_NAME,
+    name,
+    photo
+  }
+}
+
 export function storeSettingsForm(form) {
   return {
     type: STORE_SETTINGS_FORM,
+    form: form
+  }
+}
+
+export function storeGroupForm(form) {
+  return {
+    type: STORE_GROUP_FORM,
     form: form
   }
 }

@@ -52,6 +52,9 @@ export default class ChatThread extends Component {
     else if (this.props.caller === "client") {
       this.props.storeId(this.state.id)
     }
+    // else if (this.props.caller === "group") {
+    //   this.props.storeGroup('')
+    // }
     this.props.storeMessages(messages)
     this.props.initChatSaga()
   }

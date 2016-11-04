@@ -1,13 +1,11 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Extras from '../components/Extras'
+import Groups from '../components/Groups'
 import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps (state) {
   return {
-    auth: state.authReducer,
-    // groups: state.groupsReducer,
-    extras: state.extReducer
+    groupsNav: state.groupsNavReducer
   }
 }
 
@@ -18,4 +16,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Extras)
+)(Groups)

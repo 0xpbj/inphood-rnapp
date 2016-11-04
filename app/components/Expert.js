@@ -22,16 +22,14 @@ import ChatView from '../containers/ChatContainer'
 
 export default class Expert extends Component {
   constructor(props) {
-    super(props);
-    this._renderScene = this._renderScene.bind(this)
+    super(props)
     this._handleBackAction = this._handleBackAction.bind(this)
-    this._handleNavigate = this._handleNavigate.bind(this)
   }
-  componentDidMount () {
-    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction.bind(this))
+  componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
   }
-  componentWillUnmount () {
-    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction.bind(this))
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
   }
   _renderScene (props) {
     const prefix = 'scene_'

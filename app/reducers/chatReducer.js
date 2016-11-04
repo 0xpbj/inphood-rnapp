@@ -1,18 +1,20 @@
 import { 
   LOAD_ID,
   MSG_COUNT,
+  LOAD_GROUP,
   ADD_MESSAGES,
   FEEDBACK_PHOTO, 
   STORE_MESSAGES,
 } from '../constants/ActionTypes'
 
 const initialState = {
-  client: '',
   count: 0,
-  databasePath: '',
+  group: '',
+  client: '',
   cdnPath: '',
   messages: [],
-  chatMessages: []
+  chatMessages: [],
+  databasePath: '',
 }
 
 export default function chat(state = initialState, action) {
@@ -37,6 +39,11 @@ export default function chat(state = initialState, action) {
       return {
         ...state,
         client: action.id
+      }
+    case LOAD_GROUP:
+      return {
+        ...state,
+        group: action.group
       }
     case ADD_MESSAGES:
       const {path, messages} = action

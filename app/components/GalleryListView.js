@@ -75,14 +75,14 @@ export default class GalleryListView extends Component{
       return (
         <View style={CommonStyles.addPhotosMessage}>
           <Spinner visible={flag} color='black'/>
-          <Text>Loading photos...</Text>
+          <Text style={{textAlign: 'center'}}>Loading photos...</Text>
         </View>
       )
     }
     else if (!size) {
       return (
         <View style={CommonStyles.addPhotosMessage}>
-          <Text>Swipe left to add photos...</Text>
+          <Text style={{textAlign: 'center'}}>Swipe left to add photos...</Text>
         </View>
       )
     }

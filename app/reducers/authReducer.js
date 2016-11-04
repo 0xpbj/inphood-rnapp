@@ -18,7 +18,7 @@ const initialState = {
   referralId: '',
   authTrainer: 'pending',
   trainerName: '',
-  data: null
+  data: null,
 }
 
 export default function authentication(state = initialState, action) {

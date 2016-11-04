@@ -35,6 +35,14 @@ const loginRoute = {
   }
 }
 
+const signUpRoute = {
+  type: 'push',
+  route: {
+    key: 'signup',
+    title: 'User Signup'
+  }
+}
+
 const settingsRoute = {
   type: 'push',
   route: {
@@ -42,6 +50,14 @@ const settingsRoute = {
     title: 'User Settings'
   }
 }
+
+// const groupRoute = {
+//   type: 'push',
+//   route: {
+//     key: 'creategroup',
+//     title: 'Create a group'
+//   }
+// }
 
 const windowSize = Dimensions.get('window')
 const launchImageSize = {width: windowSize.width, height: windowSize.height}
@@ -66,6 +82,9 @@ export default class Start extends Component {
   userSettings() {
     this.props._handleNavigate(settingsRoute)
   }
+  // createGroup() {
+  //   this.props._handleNavigate(groupRoute)
+  // }
   sendEmail() {
     let deviceInfo = ''
     if (Platform.OS === 'ios') {
@@ -110,6 +129,10 @@ export default class Start extends Component {
   _emailLogin() {
     this._setModalVisible(false)
     this.props._handleNavigate(loginRoute)
+  }
+  _signUp() {
+    this._setModalVisible(false)
+    this.props._handleNavigate(signUpRoute)
   }
   _emailLogout() {
     this.props.logoutRequest()
@@ -285,11 +308,21 @@ export default class Start extends Component {
       </TouchableHighlight>
     )
   }
+  modalSignUpButton() {
+    return (
+      <TouchableHighlight
+        style={CommonStyles.button}
+        underlayColor='#99d9f4'
+        onPress={this._signUp.bind(this)}>
+        <Text style={CommonStyles.buttonText}>Sign Up</Text>
+      </TouchableHighlight>
+    )
+  }
   modalCancelLoginButton() {
     return (
       <TouchableHighlight
         onPress={this._setModalVisible.bind(this, false)}
-        style={CommonStyles.button}>
+        style={CommonStyles.cancelButton}>
         <Text style={CommonStyles.buttonText}>Cancel</Text>
       </TouchableHighlight>
     )
@@ -309,6 +342,7 @@ export default class Start extends Component {
               {this.modalFacebookLoginButton()}
             </View>
             {this.modalEmailLoginButton()}
+            {this.modalSignUpButton()}
             {this.modalCancelLoginButton()}
           </View>
         </View>
@@ -374,6 +408,21 @@ export default class Start extends Component {
       </TouchableHighlight>
     )
   }
+  // createGroupButton() {
+  //   return (
+  //     <TouchableHighlight
+  //       onPress={this.createGroup.bind(this)}
+  //       style={CommonStyles.button}>
+  //       <View style={{flexDirection: 'row'}}>
+  //         <Icon
+  //           name="ios-school-outline"
+  //           size={26} color='white'
+  //           style={{marginLeft: 10, marginRight: 15}}/>
+  //         <Text style={CommonStyles.buttonText}>Create Group</Text>
+  //       </View>
+  //     </TouchableHighlight>
+  //   )
+  // }
   clientAppInviteButton() {
     return (
       <TouchableHighlight

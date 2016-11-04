@@ -34,14 +34,6 @@ var options = {
   auto: 'placeholders'
 }
 
-const route = {
-  type: 'push',
-  route: {
-    key: 'signup',
-    title: 'User Signup'
-  }
-}
-
 export default class EmailLogin extends Component {
   constructor(props) {
     super(props)
@@ -52,31 +44,20 @@ export default class EmailLogin extends Component {
   render() {
     return (
       <View style={CommonStyles.universalFormContainer}>
-
         <Form
           ref="form"
           type={EmailLoginForm}
           options={options}
         />
-
         <TouchableHighlight
-          style={[CommonStyles.prabhaavButton,
+          style={[CommonStyles.formButton,
                   {marginBottom: 15}]}
           onPress={this.login.bind(this)}
           underlayColor='#99d9f4'>
           <Text style={CommonStyles.universalButtonTextStyling}>Login</Text>
         </TouchableHighlight>
-
-        <TouchableHighlight
-          style={CommonStyles.prabhaavButton}
-          onPress={this.goToSignup.bind(this)}
-          underlayColor='#99d9f4'>
-          <Text style={CommonStyles.universalButtonTextStyling}>Sign Up</Text>
-        </TouchableHighlight>
-
         {/*Placeholder view to consume the remaining bottom of the scene.*/}
         <View style={CommonStyles.flexContainer}/>
-
       </View>
     )
   }
@@ -86,8 +67,5 @@ export default class EmailLogin extends Component {
     if (value) {
       this.props.emailLoginRequest(value)
     }
-  }
-  goToSignup() {
-    this.props._handleNavigate(route)
   }
 }

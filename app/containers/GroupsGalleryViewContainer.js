@@ -1,21 +1,20 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Extras from '../components/Extras'
+import GroupsGalleryView from '../components/GroupsGalleryView'
 import * as actionCreators from '../actions/Actions'
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
-    auth: state.authReducer,
-    // groups: state.groupsReducer,
-    extras: state.extReducer
+    groups: state.groupsReducer,
+    notification: state.notificationReducer
   }
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch)
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Extras)
+)(GroupsGalleryView)

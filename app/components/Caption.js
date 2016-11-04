@@ -89,6 +89,20 @@ export default class Caption extends Component {
       })
     }
   }
+  // groupSwitches(groupName) {
+  //   return (
+  //     <View style={CommonStyles.captionSwitchGroup}>
+  //       <Switch
+  //         onValueChange={(value) => {
+  //           if (value) {}
+  //         }}
+  //         value={this.state.breakfast} />
+  //         <Text style={CommonStyles.universalSwitchFontSize}>
+  //           {groupName}
+  //         </Text>
+  //     </View>
+  //   )
+  // }
   render() {
     let whiteSpace = new RegExp(/^\s+$/)
     const defaultValue = this.props.vision.tags

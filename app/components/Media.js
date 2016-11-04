@@ -29,12 +29,13 @@ import Icon from 'react-native-vector-icons/Ionicons'
 export default class Media extends Component {
   constructor(props) {
     super(props)
+    this._handleBackAction = this._handleBackAction.bind(this)
   }
-  componentDidMount () {
-    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction.bind(this))
+  componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
   }
-  componentWillUnmount () {
-    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction.bind(this))
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.media.inProgress === false)

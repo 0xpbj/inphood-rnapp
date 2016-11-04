@@ -37,7 +37,7 @@ export default class FacebookLogin extends Component {
          }
        }}
        onLogoutFinished={() => this.props.logoutRequest()}
-       readPermissions={["email", "user_friends", "user_birthday", "user_photos", "public_profile"]}
+       readPermissions={["email", "user_birthday", "user_photos", "public_profile"]}
      />
     )
     // TODO: we used to set the following attribute/property in LoginButton above,

@@ -18,8 +18,8 @@ import CommonStyles from './styles/common-styles'
 const route = {
   type: 'push',
   route: {
-    key: 'tchat',
-    title: 'Feedback'
+    key: 'gchat',
+    title: 'Group Feedback'
   }
 }
 
@@ -28,14 +28,14 @@ import Spinner from 'react-native-loading-spinner-overlay'
 import Config from '../constants/config-vars'
 const turlHead = Config.AWS_CDN_THU_URL
 
-export default class ClientGallery extends Component{
+export default class GroupsGalleryView extends Component{
   constructor(props) {
     super(props)
     this.state = {dataSource: this._createDataSource([])}
   }
   componentWillMount() {
-    const id = this.props.clientData.clientId
-    const vals = this.props.trainer.photos
+    const id = this.props.groups.id
+    const vals = this.props.groups.photos[id]
     var data = []
     for (var key in vals) {
       if (vals[key][id])
@@ -46,8 +46,8 @@ export default class ClientGallery extends Component{
     })
   }
   componentWillReceiveProps(nextProps) {
-    const id = nextProps.clientData.clientId
-    const vals = nextProps.trainer.photos
+    const id = nextProps.groups.id
+    const vals = nextProps.groups.photos[id]
     var data = []
     for (var key in vals) {
       if (vals[key][id])
@@ -58,7 +58,7 @@ export default class ClientGallery extends Component{
     })
   }
   render() {
-    let name = this.props.clientData.clientName.split(' ')
+    let name = this.props.groups.name
     let content = <View />
     if (this.state.dataSource.getRowCount() !== 0) {
       content = <ListView
@@ -71,18 +71,11 @@ export default class ClientGallery extends Component{
     }
     else {
       content = <View style={CommonStyles.clientGalleryAddPhotosMessage}>
-            <Text style={{textAlign: 'center'}}>Client has not added new photos</Text>
+            <Text style={{textAlign: 'center'}}>Group does not have any photos</Text>
           </View>
     }
     return (
       <View style={CommonStyles.clientGalleryContainer}>
-        <View style={CommonStyles.flexRowMarginBottom10}>
-          <Image
-            source={{uri: this.props.clientData.clientPhoto}}
-            style={CommonStyles.clientGalleryProfileImage}
-          />
-          <Text style={CommonStyles.clientGalleryProfileNameText}>{name[0]}'s InPhood</Text>
-        </View>
         {content}
       </View>
     )
@@ -98,7 +91,7 @@ export default class ClientGallery extends Component{
     const photo = turlHead + fileName
     const imgBlock = <NetworkImage source={{uri: photo}}/>
     const mealTime = new Date(time).toDateString()
-    const flag = this.props.notification.clientPhotos[databasePath] 
+    const flag = this.props.notification.groupPhotos[databasePath] 
     const notificationBlock = ( 
       <View style={CommonStyles.notificationView}>
         <Text style={CommonStyles.notificationText}>{flag}</Text>
@@ -135,9 +128,9 @@ export default class ClientGallery extends Component{
     )
   }
   _pressRow(photo: string, path: string, uid: string) {
-    this.props.markClientPhotoRead(path, photo, uid)
-    this.props._handleNavigate(route)
-    this.props.feedbackPhoto(path, photo)
+    // this.props.markGroupPhotoRead(path, photo, uid)
+    // this.props._handleNavigate(route)
+    // this.props.feedbackPhoto(path, photo)
   }
   _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
     return (

@@ -14,10 +14,11 @@ const {
   Header: NavigationHeader,
 } = NavigationExperimental
 
-import GalleryView  from '../containers/GalleryViewContainer'
+import GroupsView  from '../containers/GroupsViewContainer'
+import GroupsGalleryView  from '../containers/GroupsGalleryViewContainer'
 import ChatView from '../containers/ChatContainer'
 
-export default class Gallery extends Component {
+export default class Groups extends Component {
   constructor(props) {
     super(props)
     this._handleBackAction = this._handleBackAction.bind(this)
@@ -31,26 +32,34 @@ export default class Gallery extends Component {
   _renderScene (props) {
     const prefix = 'scene_'
     const { scene } = props
-    if (scene.key === prefix + 'gallery') {
+    if (scene.key === prefix + 'groups') {
       return (
-        <GalleryView
+        <GroupsView
            result={this.props.result}
           _handleNavigate={this._handleNavigate.bind(this)}
         />
       )
     }
-    else if (scene.key === prefix + 'chat') {
+    else if (scene.key === prefix + 'photos') {
+      return (
+        <GroupsGalleryView
+           result={this.props.result}
+          _handleNavigate={this._handleNavigate.bind(this)}
+        />
+      )
+    }
+    else if (scene.key === prefix + 'gchat') {
       return (
         <ChatView
           result={this.props.result}
          _handleNavigate={this._handleNavigate.bind(this)}
-          caller="client"
+          caller="group"
         />
       )
     }
   }
   _renderOverlay(props) {
-    if (this.props.galleryNav.index !== 0) {
+    if (this.props.groupsNav.index !== 0) {
       return (
         <NavigationHeader
           {...props}
@@ -75,16 +84,16 @@ export default class Gallery extends Component {
     )
   }
   _handleBackAction () {
-    if (this.props.galleryNav.index === 0) {
+    if (this.props.groupsNav.index === 0) {
       return false
     }
-    this.props.popGal()
+    this.props.popGrp()
     return true
   }
   _handleNavigate (action) {
     switch (action && action.type) {
       case 'push':
-        this.props.pushGal(action.route)
+        this.props.pushGrp(action.route)
         return true
       case 'back':
       case 'pop':
@@ -96,7 +105,7 @@ export default class Gallery extends Component {
   render () {
     return (
       <NavigationCardStack
-        navigationState={this.props.galleryNav}
+        navigationState={this.props.groupsNav}
         onNavigate={this._handleNavigate.bind(this)}
         onNavigateBack={this._handleBackAction.bind(this)}
         renderScene={this._renderScene.bind(this)}

@@ -20,16 +20,18 @@ import Start from '../containers/StartContainer'
 import Login from './EmailLogin'
 import Signup from './UserSignUp'
 import Settings from './UserSettings'
+import CreateGroup from './CreateGroup'
 
 export default class Extras extends Component {
   constructor(props) {
     super(props)
+    this._handleBackAction = this._handleBackAction.bind(this)
   }
-  componentDidMount () {
-    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction.bind(this))
+  componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
   }
-  componentWillUnmount () {
-    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction.bind(this))
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
   }
   _renderScene (props) {
     const prefix = 'scene_'
@@ -44,7 +46,6 @@ export default class Extras extends Component {
     else if (scene.key === prefix + 'login') {
       return (
         <Login
-          _handleNavigate={this._handleNavigate.bind(this)}
           emailLoginRequest={(action)=>this.props.emailLoginRequest(action)}
           loginRequest={this.props.emailLoginInit}
           goBack={this._handleBackAction.bind(this)}
@@ -54,7 +55,6 @@ export default class Extras extends Component {
     else if (scene.key === prefix + 'signup') {
       return (
         <Signup
-          _handleNavigate={this._handleBackAction.bind(this)}
           emailCreateUser={(action)=>this.props.emailCreateUser(action)}
           goBack={this._handleBackAction.bind(this)}
           result={this.props.auth.result}
@@ -70,6 +70,16 @@ export default class Extras extends Component {
           goBack={this._handleBackAction.bind(this)}
           _storeForm={(form) => this.props.storeSettingsForm(form)}
           _storeSettings={(settings) => this.props.storeUserSettings(settings)}
+        />
+      )
+    }
+    else if (scene.key === prefix + 'creategroup') {
+      return (
+        <CreateGroup
+          groups={this.props.groups.groupNames}
+          goBack={this._handleBackAction.bind(this)}
+          createGroup={(action)=>this.props.createGroup(action)}
+          storeForm={(form) => this.props.storeGroupForm(form)}
         />
       )
     }

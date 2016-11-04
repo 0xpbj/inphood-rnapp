@@ -2,6 +2,7 @@ import { CHANGE_TAB } from '../constants/ActionTypes'
 const tabs = [
   { key: 'ios-home', title: 'Home', label: 'ios-home', iconName: 'ios-home'},
   { key: 'ios-people', title: 'Clients', label: 'ios-people', iconName: 'ios-people'},
+  { key: 'ios-school', title: 'Groups', label: 'ios-school', iconName: 'ios-school'},
   { key: 'ios-options', title: 'Extras', label: 'ios-options', iconName: 'ios-options'},
 ]
 

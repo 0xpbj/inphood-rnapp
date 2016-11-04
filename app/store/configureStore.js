@@ -39,6 +39,8 @@ const persistConfig = {
     'tabReducer',
     'trainerNavReducer',
     'visionReducer',
+    // 'groupsReducer',
+    // 'groupsNavReducer',
   ],
   storage: AsyncStorage,
 }

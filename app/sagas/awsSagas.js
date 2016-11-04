@@ -65,8 +65,7 @@ const prepFirebase = (state) => {
   if (!uid) {
     uid = firebase.auth().currentUser.uid
   }
-  const key = firebase.database().ref('/global/' + uid + '/photoData').push()
-  const fileTail = key.path.o[3]
+  const fileTail = firebase.database().ref('/global/' + uid + '/photoData').push().key
   const fileName = uid + '/' + fileTail + '.jpg'
   const data = {fileTail, fileName}
   return data

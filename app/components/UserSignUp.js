@@ -65,7 +65,6 @@ export default class UserSignUp extends Component {
   }
   componentWillUnmount() {
     this.props.goBack()
-    this.props.goBack()
   }
   signup() {
     const value = this.refs.form.getValue()
@@ -77,8 +76,6 @@ export default class UserSignUp extends Component {
     }
     else if (value) {
       this.props.emailCreateUser(value)
-      // this.props.goBack()
-      // this.props.goBack()
     }
   }
   render() {
@@ -91,7 +88,7 @@ export default class UserSignUp extends Component {
           options={options}/>
 
         <TouchableHighlight
-          style={CommonStyles.prabhaavButton}
+          style={CommonStyles.formButton}
           onPress={this.signup.bind(this)}
           underlayColor='#99d9f4'>
           <Text style={CommonStyles.universalButtonTextStyling}>Sign Up</Text>

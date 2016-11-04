@@ -1,7 +1,7 @@
 import {
   ADD_PHOTOS, ADD_INFOS, ADD_MESSAGES, ADD_CLIENTS, INIT_DATA, REMOVE_PHOTO,
-  syncCountPhotoChild, syncAddedPhotoChild, syncRemovedPhotoChild,
-  SYNC_COUNT_PHOTO_CHILD, SYNC_ADDED_PHOTO_CHILD, SYNC_REMOVED_PHOTO_CHILD,
+  syncAddedPhotoChild, syncRemovedPhotoChild,
+  SYNC_ADDED_PHOTO_CHILD, SYNC_REMOVED_PHOTO_CHILD,
   syncAddedMessagesClientChild, SYNC_ADDED_MESSAGES_CLIENT_CHILD, 
   INIT_CLIENT_MESSAGES, syncAddedInfoChild, syncRemovedInfoChild,
   SYNC_ADDED_INFO_CHILD, SYNC_REMOVED_INFO_CHILD, MARK_CLIENT_PHOTO_READ,
@@ -133,9 +133,6 @@ function* syncData() {
   let clients = yield select(state => state.trainerReducer.clients)
   for (let i = 0; i < clients.length; i++) {
     let path = '/global/' + clients[i]
-    yield fork(db.sync, path, {
-      child_added: syncCountPhotoChild,
-    })
     yield fork(db.sync, path + '/photoData', {
       child_added: syncAddedPhotoChild,
       child_removed: syncRemovedPhotoChild,

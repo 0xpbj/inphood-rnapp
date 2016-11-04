@@ -69,17 +69,30 @@ export default class GalleryListView extends Component{
     }
     return name
   }
+  _getColoredLogo() {
+    return (
+      <Text style={{color: 'black', fontWeight: 'bold'}}>
+        i
+        <Text style={{color: 'green'}}>n</Text>
+        <Text style={{color: 'blue'}}>P</Text>
+        <Text style={{color: 'red'}}>h</Text>
+        <Text style={{color: 'green'}}>o</Text>
+        <Text style={{color: 'blue'}}>o</Text>
+        <Text style={{color: 'red'}}>d</Text>
+      </Text>
+    )
+  }
   _renderProfileInformation(uri) {
     const name = this._getUserShortName()
 
     return (
-      <View style={CommonStyles.flexRowMarginBottom10}>
+      <View style={CommonStyles.galleryListViewTitleRow}>
         <Image
           source={{uri: uri}}
           style={CommonStyles.galleryListViewProfileImage}/>
         {/*TODO: make inPhood below match our Logo*/}
         <Text style={CommonStyles.galleryListViewProfileName}>
-          {name} inPhood
+          {name} {this._getColoredLogo()}
         </Text>
       </View>
     )

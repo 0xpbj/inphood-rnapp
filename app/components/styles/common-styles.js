@@ -283,9 +283,14 @@ module.exports = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
+  galleryListViewTitleRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
   galleryListViewProfileImage: {
-    marginLeft: 20,
-    marginTop: 22,
+    margin: 10,
+    padding: 10,
     width: 60,
     height: 60,
     borderRadius: 30,
@@ -293,10 +298,9 @@ module.exports = StyleSheet.create({
     borderColor: '#006400',
   },
   galleryListViewProfileName: {
-    marginLeft: 40,
-    marginTop: 42,
-    fontSize: 18,
-    fontWeight: 'bold'
+    // Consider making this dynamic based on the name used
+    // for the user (i.e. two initials, vs. first name etc.)
+    fontSize: 28,
   },
   galleryListViewThumb: {
     width: width - 20,

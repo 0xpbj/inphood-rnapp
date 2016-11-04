@@ -90,7 +90,6 @@ export default class GalleryListView extends Component{
         <Image
           source={{uri: uri}}
           style={CommonStyles.galleryListViewProfileImage}/>
-        {/*TODO: make inPhood below match our Logo*/}
         <Text style={CommonStyles.galleryListViewProfileName}>
           {name} {this._getColoredLogo()}
         </Text>

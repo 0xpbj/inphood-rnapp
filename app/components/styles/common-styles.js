@@ -143,8 +143,8 @@ module.exports = StyleSheet.create({
   },
   commonContainer: {
     flex: 1,
-    marginTop: 20,
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
+    marginTop: Platform.OS === 'ios' ? 20 : 0,
+    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : 'white',
   },
   commonRow: {
     flexDirection: 'row',
@@ -257,7 +257,7 @@ module.exports = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     padding: 10,
-    backgroundColor: '#F6F6F6',
+    backgroundColor: Platform.OS === 'ios' ? '#F6F6F6' : 'white',
   },
   galleryText: {
     flex: 1,
@@ -287,6 +287,10 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: 'black',
+    paddingTop: 20,
+    paddingBottom: 2,
   },
   galleryListViewProfileImage: {
     margin: 10,

@@ -23,9 +23,6 @@ import java.util.List;
 import io.branch.rnbranch.*;
 import io.branch.referral.Branch;
 
-// import react-native-fetch-blob
-import com.RNFetchBlob.*;
-
 // import react-native-camera
 import com.lwansbrough.RCTCamera.*;
 
@@ -61,7 +58,6 @@ public class MainApplication extends Application implements ReactApplication {
           new RNFSPackage(),
           new FBSDKPackage(mCallbackManager),
           new RNBranchPackage(),
-          new RNFetchBlobPackage(),
           new RCTCameraPackage(),
           new VectorIconsPackage(),
           new CameraRollPackage()

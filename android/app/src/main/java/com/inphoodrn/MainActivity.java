@@ -2,7 +2,6 @@ package com.inphoodrn;
 
 import com.facebook.react.ReactActivity;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
-import com.RNFetchBlob.RNFetchBlobPackage;
 import io.branch.rnbranch.RNBranchPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;

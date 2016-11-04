@@ -9,8 +9,6 @@ include ':rn-camera-roll'
 project(':rn-camera-roll').projectDir = new File(rootProject.projectDir, '../node_modules/rn-camera-roll/android')
 include ':react-native-push-notification'
 project(':react-native-push-notification').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-push-notification/android')
-include ':react-native-fetch-blob'
-project(':react-native-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fetch-blob/android')
 include ':react-native-branch', ':app'
 project(':react-native-branch').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-branch/android')
 include ':react-native-vector-icons'
@@ -19,5 +17,3 @@ include ':react-native-fbsdk'
 project(':react-native-fbsdk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fbsdk/android')
 include ':react-native-camera'
 project(':react-native-camera').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-camera/android')
-include ':react-native-push-notification'
-project(':react-native-push-notification').projectDir = file('../node_modules/react-native-push-notification/android')

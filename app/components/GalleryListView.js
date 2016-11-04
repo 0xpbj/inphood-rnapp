@@ -57,8 +57,21 @@ export default class GalleryListView extends Component{
     });
     return dataSource.cloneWithRows(list);
   }
+  _getUserShortName() {
+    var name = "Your"
+    if (this.state.result.first_name) {
+      if (this.state.result.last_name) {
+        name = this.state.result.first_name.charAt(0) +
+               this.state.result.last_name.charAt(0) + "'s"
+      } else {
+        name = this.state.result.first_name + "'s"
+      }
+    }
+    return name
+  }
   _renderProfileInformation(uri) {
-    const name = this.state.result.first_name ? this.state.result.first_name : 'Anon'
+    const name = this._getUserShortName()
+
     return (
       <View style={CommonStyles.flexRowMarginBottom10}>
         <Image
@@ -66,7 +79,7 @@ export default class GalleryListView extends Component{
           style={CommonStyles.galleryListViewProfileImage}/>
         {/*TODO: make inPhood below match our Logo*/}
         <Text style={CommonStyles.galleryListViewProfileName}>
-          {name}'s inPhood
+          {name} inPhood
         </Text>
       </View>
     )

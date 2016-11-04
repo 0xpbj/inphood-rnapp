@@ -43,7 +43,7 @@ export default function authentication(state = initialState, action) {
       return {
         ...initialState,
         value: null,
-        error: error
+        error: action.error
       }
     case LOGOUT_ERROR:
       return {

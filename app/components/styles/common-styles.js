@@ -8,14 +8,14 @@ const {width, height} = Dimensions.get('window')
 
 module.exports = StyleSheet.create({
   button: {
-    marginTop: 10,
+    padding: 5,
+    margin: 5,
     height: 30,
     width: 180,
     backgroundColor: '#006400',
     borderColor: '#006400',
     borderWidth: 1,
     borderRadius: 4,
-    marginBottom: 10,
     justifyContent: 'center'
   },
   cancelButton: {
@@ -82,12 +82,12 @@ module.exports = StyleSheet.create({
     marginBottom: 10,
     alignSelf: 'center'
   },
-  container: {
+  extrasButtonContainer: {
     flex: 1,
-    marginTop: 150,
-    alignSelf: 'center'
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-
   captionContainer: {
     flex: 1,
     zIndex: 3,

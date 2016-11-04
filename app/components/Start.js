@@ -96,7 +96,7 @@ export default class Start extends Component {
       deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
     }
     else {
-      deviceInfo = '\n\nPlease fill out the below information.\n\n\nDevice Type: ' + '\nOS Version: ' 
+      deviceInfo = '\n\nPlease fill out the below information.\n\n\nDevice Type: ' + '\nOS Version: '
     }
     Communications.email(['support@inphood.com'],null,null,'Need Help',deviceInfo)
   }
@@ -116,7 +116,7 @@ export default class Start extends Component {
     }
     else {
       return (
-        <View style={CommonStyles.container}>
+        <View style={CommonStyles.extrasButtonContainer}>
           {this.profileImageButton()}
           {this.helpEmailButton()}
           {this.userSettingsButton()}

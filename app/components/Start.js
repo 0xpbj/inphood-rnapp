@@ -115,14 +115,30 @@ export default class Start extends Component {
       )
     }
     else {
+      // The layout here starts with a View (extrasButtonContainer),
+      // containing 3 columns of 1/4, 1/2, and 1/4 width.  The 1/2
+      // width button contains the buttons (and determines their width).
+      // Alignment is performed with justifyContent and alignItems. The only
+      // absolute values are the height of the buttons and the margin, padding,
+      // and border values.
+      //
+      // Each button is comprised of a spacer, an icon, and button text. The
+      // weight of these elements for flex are 1:1:4, this achieves left
+      // justification of button text with reasonable icon to left-edge spacing
+      // within the button.
+      //
       return (
         <View style={CommonStyles.extrasButtonContainer}>
-          {this.profileImageButton()}
-          {this.helpEmailButton()}
-          {this.userSettingsButton()}
-          {this.clientAppInviteButton()}
-          {this.friendAppInviteButton()}
-          {this.logOutButton()}
+            {this.flexOneSpacerView()}
+            <View style={{flex: 2}}>
+              {this.profileImageButton()}
+              {this.helpEmailButton()}
+              {this.userSettingsButton()}
+              {this.clientAppInviteButton()}
+              {this.friendAppInviteButton()}
+              {this.logOutButton()}
+            </View>
+            {this.flexOneSpacerView()}
         </View>
       )
     }
@@ -383,16 +399,9 @@ export default class Start extends Component {
       const buttonText = this.props.auth.anonymous ? 'Anon Log Out' : 'Email Log Out'
       return (
         <TouchableHighlight
-          style={CommonStyles.button}
-          underlayColor='#99d9f4'
+          style={CommonStyles.iconTextButton}
           onPress={this._emailLogout.bind(this)}>
-          <View style={{flexDirection: 'row'}}>
-            <Icon
-              name="ios-exit-outline"
-              size={26} color='white'
-              style={{marginLeft: 10, marginRight: 20}}/>
-            <Text style={CommonStyles.buttonText}>{buttonText}</Text>
-          </View>
+          {this.iconTextButton("ios-exit-outline", buttonText)}
         </TouchableHighlight>)
     }
   }
@@ -405,18 +414,29 @@ export default class Start extends Component {
           style={[CommonStyles.profileImage, {borderColor: buttonColor}]}/>
     )
   }
+  flexOneSpacerView() {
+    return(<View style={{flex: 1}}/>)
+  }
+  iconTextButton(iconName, buttonText) {
+    return(
+      <View style={CommonStyles.iconTextButtonRow}>
+        {this.flexOneSpacerView()}
+        <Icon
+          name={iconName}
+          size={26}
+          style={CommonStyles.iconTextButtonIcon}/>
+        <Text style={CommonStyles.iconTextButtonText}>
+          {buttonText}
+        </Text>
+      </View>
+    )
+  }
   helpEmailButton() {
     return (
       <TouchableHighlight
         onPress={this.sendEmail.bind(this)}
-        style={CommonStyles.button}>
-        <View style={{flexDirection: 'row'}}>
-          <Icon
-            name="ios-mail-outline"
-            size={26} color='white'
-            style={{marginLeft: 10, marginRight: 25}}/>
-          <Text style={CommonStyles.buttonText}>Help Email</Text>
-        </View>
+        style={CommonStyles.iconTextButton}>
+        {this.iconTextButton("ios-mail-outline", "Help Email")}
       </TouchableHighlight>
     )
   }
@@ -424,14 +444,8 @@ export default class Start extends Component {
     return (
       <TouchableHighlight
         onPress={this.userSettings.bind(this)}
-        style={CommonStyles.button}>
-        <View style={{flexDirection: 'row'}}>
-          <Icon
-            name="ios-settings-outline"
-            size={26} color='white'
-            style={{marginLeft: 10, marginRight: 15}}/>
-          <Text style={CommonStyles.buttonText}>User Settings</Text>
-        </View>
+        style={CommonStyles.iconTextButton}>
+        {this.iconTextButton("ios-settings-outline", "User Settings")}
       </TouchableHighlight>
     )
   }
@@ -439,14 +453,8 @@ export default class Start extends Component {
   //   return (
   //     <TouchableHighlight
   //       onPress={this.createGroup.bind(this)}
-  //       style={CommonStyles.button}>
-  //       <View style={{flexDirection: 'row'}}>
-  //         <Icon
-  //           name="ios-school-outline"
-  //           size={26} color='white'
-  //           style={{marginLeft: 10, marginRight: 15}}/>
-  //         <Text style={CommonStyles.buttonText}>Create Group</Text>
-  //       </View>
+  //       style={CommonStyles.iconTextButton}>
+  //       {this.iconTextButton("ios-school-outline", "Create Group")}
   //     </TouchableHighlight>
   //   )
   // }
@@ -454,14 +462,8 @@ export default class Start extends Component {
     return (
       <TouchableHighlight
         onPress={this.clientAppInvite.bind(this)}
-        style={CommonStyles.button}>
-        <View style={{flexDirection: 'row'}}>
-          <Icon
-            name="ios-clipboard-outline"
-            size={26} color='white'
-            style={{marginLeft: 10, marginRight: 25}}/>
-          <Text style={CommonStyles.buttonText}>Invite Client</Text>
-        </View>
+        style={CommonStyles.iconTextButton}>
+        {this.iconTextButton("ios-clipboard-outline", "Invite Client")}
       </TouchableHighlight>
     )
   }
@@ -469,14 +471,8 @@ export default class Start extends Component {
     return (
       <TouchableHighlight
         onPress={this.friendAppInvite.bind(this)}
-        style={CommonStyles.button}>
-        <View style={{flexDirection: 'row'}}>
-          <Icon
-            name="ios-contacts-outline"
-            size={26} color='white'
-            style={{marginLeft: 10, marginRight: 15}}/>
-          <Text style={CommonStyles.buttonText}>Refer Friend</Text>
-        </View>
+        style={CommonStyles.iconTextButton}>
+        {this.iconTextButton("ios-contacts-outline", "Refer Friend")}
       </TouchableHighlight>
     )
   }

@@ -7,16 +7,53 @@ const SHUTTER_BOTTOM_MARGIN = Platform.OS === 'ios' ? 15 : 40
 const {width, height} = Dimensions.get('window')
 
 module.exports = StyleSheet.create({
+  iconTextButton: {
+    padding: 5,
+    margin: 5,
+    height: 30,
+    backgroundColor: 'green',
+    borderColor: 'green',
+    borderWidth: 1,
+    borderRadius: 4,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  iconTextButtonRow: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  iconTextButtonIcon: {
+    flex: 1,
+    color: 'white',
+  },
+  iconTextButtonText: {
+    flex: 5,
+    fontSize: 15,
+    color: 'white',
+  },
   button: {
     padding: 5,
     margin: 5,
     height: 30,
     width: 180,
-    backgroundColor: '#006400',
-    borderColor: '#006400',
+    backgroundColor: 'green',
+    borderColor: 'green',
     borderWidth: 1,
     borderRadius: 4,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  buttonIcon: {
+    marginLeft: 10,
+    marginRight: 25,
+  },
+  buttonText: {
+    fontSize: 15,
+    color: 'white',
+    alignSelf: 'center',
+    textAlign: 'center'
   },
   cancelButton: {
     marginTop: 10,
@@ -30,12 +67,6 @@ module.exports = StyleSheet.create({
     justifyContent: 'center'
   },
   // TODO: unify this with other styles (i.e. 14 is our default font)
-  buttonText: {
-    fontSize: 15,
-    color: 'white',
-    alignSelf: 'center',
-    textAlign: 'center'
-  },
   tab: {
     flex: 1,
     alignItems: 'center',
@@ -84,7 +115,7 @@ module.exports = StyleSheet.create({
   },
   extrasButtonContainer: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },

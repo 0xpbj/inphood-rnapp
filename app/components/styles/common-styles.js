@@ -2,7 +2,6 @@
 import {StyleSheet, Platform, Dimensions} from "react-native"
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
-// const SHUTTER_BOTTOM_MARGIN = Platform.OS === 'ios' ? 70 : 90
 const SHUTTER_BOTTOM_MARGIN = Platform.OS === 'ios' ? 15 : 40
 const {width, height} = Dimensions.get('window')
 
@@ -119,11 +118,6 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  captionContainer: {
-    flex: 1,
-    zIndex: 3,
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
-  },
   captionSwitchGroup: {
     flexDirection: 'row',
     flex: 1,
@@ -143,8 +137,8 @@ module.exports = StyleSheet.create({
   },
   commonContainer: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' ? 20 : 0,
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : 'white',
+    marginTop: STATUSBAR_HEIGHT,
+    backgroundColor: 'white',
   },
   commonRow: {
     flexDirection: 'row',
@@ -257,7 +251,7 @@ module.exports = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     padding: 10,
-    backgroundColor: Platform.OS === 'ios' ? '#F6F6F6' : 'white',
+    backgroundColor: 'white',
   },
   galleryText: {
     flex: 1,

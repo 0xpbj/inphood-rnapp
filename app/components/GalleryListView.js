@@ -30,6 +30,7 @@ import NetworkImage from './NetworkImage'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Config from '../constants/config-vars'
+import PushNotification from 'react-native-push-notification'
 
 const turlHead = Config.AWS_CDN_THU_URL
 
@@ -145,6 +146,33 @@ export default class GalleryListView extends Component{
       )
     }
     else if (rowID === "0") {
+      PushNotification.configure({
+        // (optional) Called when Token is generated (iOS and Android)
+        // onRegister: function(token) {
+        //     console.log( 'TOKEN:', token );
+        // },
+        // (required) Called when a remote or local notification is opened or received
+        onNotification: function(notification) {
+            console.log( 'NOTIFICATION:', notification );
+        },
+        // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
+        // senderID: "YOUR GCM SENDER ID",
+        // IOS ONLY (optional): default: all - Permissions to register.
+        permissions: {
+            alert: true,
+            badge: true,
+            sound: true
+        },
+        // Should the initial notification be popped automatically
+        // default: true
+        popInitialNotification: true,
+        /**
+          * (optional) default: true
+          * - Specified if permissions (ios) and token (android and ios) will requested or not,
+          * - if not, you must call PushNotificationsHandler.requestPermissions() later
+          */
+        requestPermissions: true,
+      })
       if (this.props.auth.authTrainer === 'pending' && this.props.auth.referralType === 'client') {
         Alert.alert(
          'Share data with your trainer: ' + this.props.auth.trainerName + '?',

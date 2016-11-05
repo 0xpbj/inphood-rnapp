@@ -65,8 +65,9 @@ const prepFirebase = (state) => {
   if (!uid) {
     uid = firebase.auth().currentUser.uid
   }
-  const fileTail = firebase.database().ref('/global/' + uid + '/photoData').push().key
-  const fileName = uid + '/' + fileTail + '.jpg'
+  const prefix = state.authReducer.anonymous === true ? 'anonymous/' : ''
+  const fileTail = firebase.database().ref('/global/' + prefix + uid + '/photoData').push().key
+  const fileName = prefix + uid + '/' + fileTail + '.jpg'
   const data = {fileTail, fileName}
   return data
 }
@@ -87,6 +88,7 @@ const sendToFirebase = (state, fileTail, fileName) => {
       picture,
     })
   }
+  const userPrefix = state.authReducer.anonymous === true? 'anonymous/' : ''
   let time = Date.now()
   let caption = ''
   let mealType = ''
@@ -99,7 +101,7 @@ const sendToFirebase = (state, fileTail, fileName) => {
   title = state.selectedReducer.title
   mealType = state.captionReducer.mealType
   localFile = state.selectedReducer.photo
-  const databasePath = '/global/' + uid + '/photoData/' + fileTail
+  const databasePath = '/global/' + userPrefix + uid + '/photoData/' + fileTail
   firebase.database().ref(databasePath).update({
     uid,
     fileName,
@@ -130,18 +132,20 @@ function* loadFirebaseCall() {
 }
 
 const sendUserDataToFirebase = (form, state) => {
-  let uid = state.authReducer.token
-  if (!uid) {
-    uid = firebase.auth().currentUser.uid
+  if (state.authReducer.anonymous !== true) {
+    let uid = state.authReducer.token
+    if (!uid) {
+      uid = firebase.auth().currentUser.uid
+    }
+    const {birthday, height, diet, email, picture} = form
+    firebase.database().ref('/global/' + uid + '/userInfo/public').update({
+      birthday,
+      height,
+      diet,
+      email,
+      picture
+    })
   }
-  const {birthday, height, diet, email, picture} = form
-  firebase.database().ref('/global/' + uid + '/userInfo/public').update({
-    birthday,
-    height,
-    diet,
-    email,
-    picture
-  })
 }
 
 function* watchUserDataCall() {

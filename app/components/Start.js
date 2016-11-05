@@ -24,7 +24,7 @@ import FacebookLogin from './FacebookLogin'
 import EmailLogin from './EmailLogin'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Communications from 'react-native-communications'
-
+import DeviceInfo from 'react-native-device-info'
 import CommonStyles from './styles/common-styles'
 
 const loginRoute = {
@@ -86,21 +86,27 @@ export default class Start extends Component {
   //   this.props._handleNavigate(groupRoute)
   // }
   sendEmail() {
-    let deviceInfo = ''
-    if (Platform.OS === 'ios') {
-      // Not supported on Android, need to find alternate. #PBJOCD: this is a require
-      // and not an import b/c there is no way to conditionally import on ES6 and it
-      // breaks our Android run-time as soon as import is run.
-      //
-      const Device = require('react-native-device')
-      deviceInfo = '\n\n\n\n\nDevice Type: ' + Device.deviceName + '\nOS Information: ' + Device.systemName + ' ' + Device.systemVersion
-    }
-    else {
-      deviceInfo = '\n\nPlease fill out the below information.\n\n\nDevice Type: ' + '\nOS Version: '
-    }
-    Communications.email(['support@inphood.com'],null,null,'Need Help',deviceInfo)
+    const deviceData = '\n\n\n\n\n\n'
+                     + '\nDevice Manufacturer: ' + DeviceInfo.getManufacturer()
+                     + '\nDevice Brand: ' + DeviceInfo.getBrand() 
+                     + '\nDevice Model: ' + DeviceInfo.getModel()
+                     + '\nDevice ID: ' + DeviceInfo.getDeviceId()
+                     + '\nSystem Name: ' + DeviceInfo.getSystemName()
+                     + '\nSystem Version: ' + DeviceInfo.getSystemVersion()
+                     + '\nBundle ID: ' + DeviceInfo.getBundleId()
+                     + '\nBuild Number: ' + DeviceInfo.getBuildNumber()
+                     + '\nApp Version: ' + DeviceInfo.getVersion()
+                     + '\nApp Version (Readable): ' + DeviceInfo.getReadableVersion()
+                     + '\nUser Agent: ' + DeviceInfo.getUserAgent()
+                     + '\nDevice Locale: ' + DeviceInfo.getDeviceLocale()
+                     + '\nDevice Country: ' + DeviceInfo.getDeviceCountry()
+                     + '\nApp Instance ID: ' + DeviceInfo.getInstanceID()
+    // console.log(deviceData)
+    Communications.email(['support@inphood.com'],null,null,'Need Help',deviceData)
   }
   render() {
+    console.log("Device Unique ID", DeviceInfo.getUniqueID())
+
     if (this.props.auth.inProgress) {
       return this.launchScreen()
     }
@@ -108,9 +114,9 @@ export default class Start extends Component {
       return (
         <View style={{flex: 1}}>
           {this.flipBoard()}
-          {this.anonymousButton()}
+          {/*{this.anonymousButton()}
           {this.loginOutButton()}
-          {this.modalLoginOutDialog()}
+          {this.modalLoginOutDialog()}*/}
         </View>
       )
     }
@@ -233,7 +239,8 @@ export default class Start extends Component {
       <View style={{flex: 1, backgroundColor: 'transparent'}}>
         <Swiper
           autoplay={true}
-          autoplaytimeout={3.5}>
+          loop={false}
+          autoplaytimeout={4.5}>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
             <Image resizeMode={sliderImageResizeMode}
                    style={sliderImageSize}
@@ -244,7 +251,7 @@ export default class Start extends Component {
             </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-          <Image resizeMode={sliderImageResizeMode}
+            <Image resizeMode={sliderImageResizeMode}
                  style={sliderImageSize}
                  source={ (Platform.OS === "ios" ?
                            require('./img/f2.png') :
@@ -253,7 +260,7 @@ export default class Start extends Component {
             </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-          <Image resizeMode={sliderImageResizeMode}
+            <Image resizeMode={sliderImageResizeMode}
                  style={sliderImageSize}
                  source={ (Platform.OS === "ios" ?
                            require('./img/f3.png') :
@@ -262,7 +269,7 @@ export default class Start extends Component {
             </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-          <Image resizeMode={sliderImageResizeMode}
+            <Image resizeMode={sliderImageResizeMode}
                  style={sliderImageSize}
                  source={ (Platform.OS === "ios" ?
                            require('./img/f4.png') :
@@ -271,13 +278,16 @@ export default class Start extends Component {
             </Image>
           </View>
           <View style={{flex: 1, backgroundColor: 'transparent'}}>
-          <Image resizeMode={sliderImageResizeMode}
+            <View style ={{flex: 8}}>
+            <Image resizeMode={sliderImageResizeMode}
                  style={sliderImageSize}
                  source={ (Platform.OS === "ios" ?
                            require('./img/f5.png') :
                            require('./img/ae5.png')) }>
             {this.flipBoardCaption(pageFiveCaptionLocation, pageFiveCaptionText)}
             </Image>
+            </View>
+            {this.anonymousButton()}
           </View>
         </Swiper>
       </View>

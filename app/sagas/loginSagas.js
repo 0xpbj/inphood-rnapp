@@ -259,7 +259,6 @@ function* anonymousLoginFlow() {
     if (user) {
       yield put ({type: INIT_LOGIN, flag: true})
       const token = user.uid
-      branch.setIdentity(token)
       yield put ({type: STORE_RESULT, result: {}})
       yield put ({type: STORE_TOKEN, token})
       yield put ({type: LOGIN_SUCCESS})

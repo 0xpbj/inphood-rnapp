@@ -12,8 +12,6 @@ import CommonStyles from './styles/common-styles'
 import firebase from 'firebase'
 import Config from '../constants/config-vars'
 
-const turlHead = Config.AWS_CDN_THU_URL
-
 export default class ChatThread extends Component {
   constructor(props) {
     super(props)

@@ -125,7 +125,8 @@ function* isNewUser() {
     uid = firebase.auth().currentUser.uid
   }
   if (uid !== '') {
-    const path = '/global/' + uid + '/photoData'
+    const prefix = yield select(state => state.authReducer.anonymous) === true ? 'anonymous/' : ''
+    const path = '/global/' + prefix + uid + '/photoData'
     const flag = (yield call(db.getPath, path)).exists()
     if (flag) {
       yield put({type: IS_NEW_USER, flag: false})
@@ -134,6 +135,8 @@ function* isNewUser() {
       yield put({type: IS_NEW_USER, flag: true})
     }
   }
+  else
+    yield put({type: IS_NEW_USER, flag: true})
 }
 
 function* triggerGetGalleryChild() {
@@ -169,7 +172,7 @@ function* updateDataVisibility() {
 function* triggerRemGalleryChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_REMOVED_GALLERY_CHILD)
-    firebase.database().ref('global/anonymous/photoData/').push(data.val())
+    firebase.database().ref('global/deleted/photoData/').push(data.val())
   }
 }
 
@@ -179,7 +182,8 @@ function* syncPhotoData() {
     uid = firebase.auth().currentUser.uid
   }
   if (uid !== '') {
-    const path = '/global/' + uid + '/photoData'
+    const prefix = yield select(state => state.authReducer.anonymous) === true ? 'anonymous/' : ''
+    const path = '/global/' + prefix + uid + '/photoData'
     yield fork(db.sync, path, {
       child_added: syncAddedGalleryChild,
       child_removed: syncRemovedGalleryChild,

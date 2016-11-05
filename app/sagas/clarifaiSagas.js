@@ -17,8 +17,6 @@ const vision = new clarifai.App(
   clarifaiClientSecret
 )
 
-const turlHead = config.AWS_CDN_THU_URL
-
 const testCV = () => {
   vision.models.predict(clarifai.FOOD_MODEL, 'https://samples.clarifai.com/cookies.jpeg')
   .then(response => console.log(response))

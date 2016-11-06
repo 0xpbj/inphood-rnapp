@@ -40,7 +40,6 @@ export default class GalleryListView extends Component{
     const mediaList = props.galleryView.photos
     this.state = {
       mediaList: mediaList,
-      result: this.props.result,
       dataSource: this._createDataSource(mediaList),
     }
   }
@@ -48,7 +47,6 @@ export default class GalleryListView extends Component{
     const mediaList = nextProps.galleryView.photos
     this.setState({
       mediaList: mediaList,
-      result: nextProps.result,
       dataSource: this._createDataSource(mediaList),
     })
   }
@@ -60,12 +58,12 @@ export default class GalleryListView extends Component{
   }
   _getUserShortName() {
     var name = "Your"
-    if (this.state.result.first_name) {
-      if (this.state.result.last_name) {
-        name = this.state.result.first_name.charAt(0) +
-               this.state.result.last_name.charAt(0) + "'s"
+    if (this.props.auth.settings.first_name) {
+      if (this.props.auth.settings.last_name) {
+        name = this.props.auth.settings.first_name.charAt(0) +
+               this.props.auth.settings.last_name.charAt(0) + "'s"
       } else {
-        name = this.state.result.first_name + "'s"
+        name = this.props.auth.settings.first_name + "'s"
       }
     }
     return name
@@ -126,7 +124,7 @@ export default class GalleryListView extends Component{
     }
   }
   render() {
-    let uri = this.state.result ? this.state.result.picture : ' '
+    let uri = this.props.auth.cdnProfilePicture ? this.props.auth.cdnProfilePicture : this.props.auth.localProfilePicture
     let size = this.props.galleryView.photos.length || this.props.galleryView.error !== ''
     let flag = this.props.galleryView.isLoading
     return (

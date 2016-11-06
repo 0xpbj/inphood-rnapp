@@ -1,25 +1,19 @@
 import { createAction } from 'redux-actions'
 
 //AUTH Actions
-export const STORE_TOKEN = 'STORE_TOKEN'
-export const STORE_RESULT = 'STORE_RESULT'
-export const STORE_VALUE = 'STORE_VALUE'
+export const STORE_DEVICE_ID = 'STORE_DEVICE_ID'
+export const STORE_UID = 'STORE_UID'
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
-export const EM_LOGIN_INIT = 'EM_LOGIN_INIT'
-export const EM_LOGIN_REQUEST = 'EM_LOGIN_REQUEST'
-export const EM_CREATE_USER = 'EM_CREATE_USER'
-export const INIT_LOGIN = 'INIT_LOGIN'
-export const ANONYMOUS_LOGIN = 'ANONYMOUS_LOGIN'
-export const ANONYMOUS_LOGIN_SUCCESS = 'ANONYMOUS_LOGIN_SUCCESS'
+export const LOGIN_IN_PROGRESS = 'LOGIN_IN_PROGRESS'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 export const LOGOUT_REQUEST = 'LOGOUT'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_ERROR = 'LOGOUT_ERROR'
 export const IS_NEW_USER = 'IS_NEW_USER'
-export const RESET_PASSWORD = 'RESET_PASSWORD'
-export const EM_LOGIN_SUCCESS = 'EM_LOGIN_SUCCESS'
-export const FB_LOGIN_SUCCESS = 'FB_LOGIN_SUCCESS'
+export const STORE_PROFILE_PICTURE = 'STORE_PROFILE_PICTURE'
+export const STORE_CDN_PICTURE = 'STORE_CDN_PICTURE'
+export const STORE_TRAINER_ID = 'STORE_TRAINER_ID'
 
 
 

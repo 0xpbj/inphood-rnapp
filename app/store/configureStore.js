@@ -24,9 +24,9 @@ const persistConfig = {
   whitelist: [
     'authReducer',
     'galReducer',
-    'trainerReducer',
   ],
   blacklist: [
+    'trainerReducer',
     'captionReducer',
     'chatReducer',
     'clientDataReducer',
@@ -39,8 +39,6 @@ const persistConfig = {
     'tabReducer',
     'trainerNavReducer',
     'visionReducer',
-    // 'groupsReducer',
-    // 'groupsNavReducer',
   ],
   storage: AsyncStorage,
 }

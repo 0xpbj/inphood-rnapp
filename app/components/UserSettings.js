@@ -88,14 +88,12 @@ var Height = Comb.enums({
 // TODO: A confirm password entry that makes you enter it twice, matchinglike
 //
 var UserProfileForm = Comb.struct({
-  first_name: Comb.String,
-  last_name: Comb.String,
-  email: Comb.String,
-  birthday: Comb.Date,
-  diet: Diet,
-  height: Height,
-  password: Comb.maybe(Comb.String),
-  picture: Comb.maybe(Comb.String),
+  first_name: Comb.maybe(Comb.String),
+  last_name: Comb.maybe(Comb.String),
+  email: Comb.maybe(Comb.String),
+  birthday: Comb.maybe(Comb.Date),
+  diet: Comb.maybe(Diet),
+  height: Comb.maybe(Height),
 })
 
 export default class UserProfile extends Component {
@@ -235,96 +233,46 @@ export default class UserProfile extends Component {
     //                             60 sec/min * 1000ms/sec
     let millisecondsFor13Years = 13 * 365.25 * 24 * 60 * 60 * 1000
     let maximumDate = new Date(Date.now() - millisecondsFor13Years)
-
-    if (this.props.auth.result.provider === "facebook.com") {
-      let emailStr = this.props.settings.email
-      let getEmail = ((emailStr === null) || (emailStr.trim() === ''))
-      let hideEmail = !getEmail
-
-      // User Profile form for FACEBOOK AUTHENTICATED USERS:
-      //
-      var options = {
-        fields: {
-          first_name: {
-            editable: false,
-          },
-          last_name: {
-            editable: false,
-          },
-          birthday: {
-            mode: 'date',
-            maximumDate: maximumDate,
-            config: {
-              format: this.birthdayDateFormat,
-            }
-          },
-          diet: {
-            error: 'Please select a diet ...',
-            nullOption: {value: '', text: 'Choose a diet ...'},
-          },
-          height: {
-            error: 'Please select your height ...',
-            nullOption: {value: '', text: 'Select your height ...'},
-          },
-          email: {
-            error: 'Please provide a valid email address ...',
-            autoCapitalize: 'none',
-            autoCorrect: false,
-            editable: getEmail,
-            hidden: hideEmail,
-          },
-          password: {
-            editable: false,
-            hidden: true,
-          },
-          picture: {
-            editable: false,
-            hidden: true,
-          },
+    // User Profile form for EMAIL AUTHENTICATED USERS:
+    //
+    var options = {
+      fields: {
+        first_name: {
+          error: 'Please enter your first name'
         },
-      };
-    } else {
-      // User Profile form for EMAIL AUTHENTICATED USERS:
-      //
-      var options = {
-        fields: {
-          first_name: {
-            error: 'Please enter your first name'
-          },
-          birthday: {
-            mode: 'date',
-            maximumDate: maximumDate,
-            config: {
-              format: this.birthdayDateFormat,
-            }
-          },
-          diet: {
-            error: 'Please select a diet ...',
-            nullOption: {value: '', text: 'Choose a diet ...'},
-          },
-          height: {
-            error: 'Please select your height ...',
-            nullOption: {value: '', text: 'Select your height ...'},
-          },
-          email: {
-            error: 'Please provide a valid email address ...',
-            autoCapitalize: 'none',
-            autoCorrect: false,
-            hidden: true,
-          },
-          password: {
-            autoCapitalize: 'none',
-            autoCorrect: false,
-            secureTextEntry: true,
-            hidden: true,
-          },
-          picture: {
-            editable: false,
-            hidden: true,
-          },
+        birthday: {
+          mode: 'date',
+          maximumDate: maximumDate,
+          config: {
+            format: this.birthdayDateFormat,
+          }
         },
+        diet: {
+          error: 'Please select a diet ...',
+          nullOption: {value: '', text: 'Choose a diet ...'},
+        },
+        height: {
+          error: 'Please select your height ...',
+          nullOption: {value: '', text: 'Select your height ...'},
+        },
+        email: {
+          error: 'Please provide a valid email address ...',
+          autoCapitalize: 'none',
+          autoCorrect: false,
+          hidden: true,
+        },
+        password: {
+          autoCapitalize: 'none',
+          autoCorrect: false,
+          secureTextEntry: true,
+          hidden: true,
+        },
+        picture: {
+          editable: false,
+          hidden: true,
+        },
+      },
       }
-    }
 
     let value = {
       first_name: this.props.settings.first_name,

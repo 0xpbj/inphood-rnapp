@@ -1,39 +1,36 @@
 import {
-  LOGIN_SUCCESS, LOGIN_ERROR, INIT_LOGIN,
-  LOGOUT_SUCCESS, LOGOUT_ERROR, USER_SETTINGS,
-  STORE_TOKEN, STORE_RESULT, STORE_VALUE, EM_CREATE_USER,
-  EM_LOGIN_REQUEST, BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER,
-  ANONYMOUS_LOGIN_SUCCESS,
+  LOGIN_SUCCESS, LOGIN_ERROR,
+  LOGOUT_SUCCESS, LOGOUT_ERROR,
+  USER_SETTINGS, LOGIN_IN_PROGRESS,
+  STORE_DEVICE_ID, STORE_UID,
+  BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER,
+  STORE_PROFILE_PICTURE, STORE_CDN_PICTURE,
+  STORE_TRAINER_ID
 } from '../constants/ActionTypes'
 import {REHYDRATE} from 'redux-persist/constants'
 
 const initialState = {
-  token: '',
-  result: null,
+  uid: '',
+  deviceId: '',
   error: null,
   inProgress: false,
-  value: null,
   settings: {},
   referralSetup: false,
   referralType: '',
   referralId: '',
   authTrainer: 'pending',
   trainerName: '',
-  data: null,
-  anonymous: false
+  trainerId: '',
+  localProfilePicture: '',
+  cdnProfilePicture: '',
 }
 
 export default function authentication(state = initialState, action) {
   switch (action.type) {
-    case INIT_LOGIN:
+    case LOGIN_IN_PROGRESS:
       return {
         ...state,
         inProgress: action.flag
-      }
-    case EM_CREATE_USER:
-      return {
-        ...state,
-        data: action.value
       }
     case LOGOUT_SUCCESS:
       return {
@@ -50,30 +47,25 @@ export default function authentication(state = initialState, action) {
         ...state,
         error: action.error,
       }
-    case STORE_TOKEN:
+    case STORE_DEVICE_ID:
       return {
         ...state,
-        token: action.token
+        deviceId: action.deviceId
       }
-    case STORE_RESULT:
+    case STORE_UID:
       return {
         ...state,
-        result: action.result
-      }
-    case STORE_VALUE:
-      return {
-        ...state,
-        value: action.value
+        uid: action.uid
       }
     case USER_SETTINGS:
       return {
         ...state,
         settings: action.settings
       }
-    case EM_LOGIN_REQUEST:
+    case STORE_TRAINER_ID:
       return {
         ...state,
-        value: action.value
+        trainerId: action.trainerId
       }
     case BRANCH_REFERRAL_INFO:
       return {
@@ -93,10 +85,17 @@ export default function authentication(state = initialState, action) {
         ...state,
         error: ''
       }
-    case ANONYMOUS_LOGIN_SUCCESS:
+    case STORE_PROFILE_PICTURE:
       return {
         ...state,
-        anonymous: true
+        cdnProfilePicture: '',
+        localProfilePicture: action.image
+      }
+    case STORE_CDN_PICTURE:
+      return {
+        ...state,
+        cdnProfilePicture: action.picture,
+        localProfilePicture: ''
       }
     default:
       return state

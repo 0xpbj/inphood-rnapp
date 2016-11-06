@@ -17,8 +17,10 @@ import Config from '../constants/config-vars'
 import * as db from './firebaseCommands'
 
 import firebase from 'firebase'
+import DeviceInfo from 'react-native-device-info'
 
 const turlHead = Config.AWS_CDN_THU_URL
+const deviceId = DeviceInfo.getUniqueID()
 
 const prefetchData = (cdnPath) => {
   return Image.prefetch(cdnPath)
@@ -44,44 +46,47 @@ function* readPhotoFlow() {
 
 function* sendChatData() {
   try {
-    let uid = yield select(state => state.authReducer.token)
-    if (!uid) {
-      uid = firebase.auth().currentUser.uid
+    let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
+    if (uid) {
+      const {trainerId} = yield select(state => state.authReducer)
+      const {client} = yield select(state => state.chatReducer)
+      const {chatMessages, databasePath, cdnPath} = yield select(state => state.chatReducer)
+      const photo = databasePath.substring(databasePath.lastIndexOf('/')+1)
+      const createdAt = Date.now()
+      let clientRead = false
+      let trainerRead = false
+      if (trainerId) {
+        clientRead = true
+        firebase.database().ref(databasePath).update({'notifyTrainer': true})
+        firebase.database().ref(databasePath + '/messages').push({
+          uid,
+          deviceId,
+          trainerId,
+          photo,
+          createdAt,
+          clientRead,
+          trainerRead,
+          "message": chatMessages[0]
+        })
+      }
+      else {
+        trainerRead = true
+        firebase.database().ref(databasePath).update({'notifyClient': true})
+        firebase.database().ref(databasePath + '/messages').push({
+          uid: client,
+          trainerId: uid,
+          deviceId,
+          photo,
+          createdAt,
+          clientRead,
+          trainerRead,
+          "message": chatMessages[0]
+        })
+      }
+      yield put ({type: STORE_CHAT_SUCCESS})
     }
-    const trainer = (yield select(state => state.authReducer.result)).trainerId
-    const client = yield select(state => state.chatReducer.client)
-    const {chatMessages, databasePath, cdnPath} = yield select(state => state.chatReducer)
-    const photo = databasePath.substring(databasePath.lastIndexOf('/')+1)
-    const createdAt = Date.now()
-    let clientRead = false
-    let trainerRead = false
-    if (trainer) {
-      clientRead = true
-      firebase.database().ref(databasePath).update({'notifyTrainer': true})
-      firebase.database().ref(databasePath + '/messages').push({
-        uid,
-        trainer,
-        photo,
-        createdAt,
-        clientRead,
-        trainerRead,
-        "message": chatMessages[0]
-      })
-    }
-    else {
-      trainerRead = true
-      firebase.database().ref(databasePath).update({'notifyClient': true})
-      firebase.database().ref(databasePath + '/messages').push({
-        uid: client,
-        trainer: uid,
-        photo,
-        createdAt,
-        clientRead,
-        trainerRead,
-        "message": chatMessages[0]
-      })
-    }
-    yield put ({type: STORE_CHAT_SUCCESS})
+    else
+      throw 'User not authenticated'
   }
   catch(error) {
     yield put ({type: STORE_CHAT_ERROR, error})
@@ -92,15 +97,11 @@ function* triggerGetMessagesChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CHILD)
     const messages = data.val()
-    let id = yield select(state => state.authReducer.token)
-    if (!id) {
-      id = firebase.auth().currentUser.uid
-    }
     const uid  = messages.uid
-    const trainer = messages.trainer
+    const trainerId = messages.trainerId
     const flag = messages.trainerRead
-    const path = '/global/' + uid + '/photoData/' + messages.photo
-    const file = turlHead + uid + '/' + messages.photo + '.jpg'
+    const path = '/global/' + deviceId + '/photoData/' + messages.photo
+    const file = turlHead + deviceId + '/' + messages.photo + '.jpg'
     yield put ({type: ADD_MESSAGES, messages, path})
     if (flag)
       yield put({type: INCREMENT_CLIENT_PHOTO_NOTIFICATION, databasePath: path})
@@ -120,13 +121,9 @@ function* syncChatData() {
 }
 
 function* isNewUser() {
-  let uid = yield select(state => state.authReducer.token)
-  if (uid === '' && firebase.auth().currentUser) {
-    uid = firebase.auth().currentUser.uid
-  }
-  if (uid !== '') {
-    const prefix = yield select(state => state.authReducer.anonymous) === true ? 'anonymous/' : ''
-    const path = '/global/' + prefix + uid + '/photoData'
+  let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
+  if (uid) {
+    const path = '/global/' + deviceId + '/photoData'
     const flag = (yield call(db.getPath, path)).exists()
     if (flag) {
       yield put({type: IS_NEW_USER, flag: false})
@@ -137,6 +134,13 @@ function* isNewUser() {
   }
   else
     yield put({type: IS_NEW_USER, flag: true})
+}
+
+function* updateDataVisibility() {
+  while (true) {
+    const data = yield take(REMOVE_CLIENT_PHOTO)
+    firebase.database().ref(data.path).remove()
+  }
 }
 
 function* triggerGetGalleryChild() {
@@ -162,13 +166,6 @@ function* triggerGetGalleryChild() {
   }
 }
 
-function* updateDataVisibility() {
-  while (true) {
-    const data = yield take(REMOVE_CLIENT_PHOTO)
-    firebase.database().ref(data.path).remove()
-  }
-}
-
 function* triggerRemGalleryChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_REMOVED_GALLERY_CHILD)
@@ -177,18 +174,11 @@ function* triggerRemGalleryChild() {
 }
 
 function* syncPhotoData() {
-  let uid = yield select(state => state.authReducer.token)
-  if (uid === '' && firebase.auth().currentUser) {
-    uid = firebase.auth().currentUser.uid
-  }
-  if (uid !== '') {
-    const prefix = yield select(state => state.authReducer.anonymous) === true ? 'anonymous/' : ''
-    const path = '/global/' + prefix + uid + '/photoData'
-    yield fork(db.sync, path, {
-      child_added: syncAddedGalleryChild,
-      child_removed: syncRemovedGalleryChild,
-    })
-  }
+  const path = '/global/' + deviceId + '/photoData'
+  yield fork(db.sync, path, {
+    child_added: syncAddedGalleryChild,
+    child_removed: syncRemovedGalleryChild,
+  })
 }
 
 export default function* rootSaga() {

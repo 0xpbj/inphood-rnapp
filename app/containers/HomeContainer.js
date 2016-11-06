@@ -7,7 +7,6 @@ function mapStateToProps (state) {
   return {
     tabs: state.tabReducer,
     auth: state.authReducer,
-    // groups: state.groupsReducer,
     trainer: state.trainerReducer,
     notification: state.notificationReducer
   }

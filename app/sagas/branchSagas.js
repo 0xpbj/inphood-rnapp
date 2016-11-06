@@ -9,10 +9,12 @@ import {
 import {REHYDRATE} from 'redux-persist/constants'
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
+import { Alert } from "react-native"
 import * as db from './firebaseCommands'
 import Config from '../constants/config-vars'
 import firebase from 'firebase'
 import branch from 'react-native-branch'
+import DeviceInfo from 'react-native-device-info'
 
 const getLastParams = () => {
   return branch.getLatestReferringParams()
@@ -36,14 +38,14 @@ const getUrl = (branchUniversalObject, linkProperties, controlParams) => {
 
 function* setupClient() {
   try {
-    const {authTrainer, referralType, token, referralId} = yield select(state => state.authReducer)
+    const {authTrainer, referralType, uid, referralId} = yield select(state => state.authReducer)
     if (authTrainer === 'pending' && referralType === 'client') {
       const data = yield take(BRANCH_AUTH_TRAINER)
       const {response} = data
-      firebase.database().ref('/global/' + token + '/userInfo/public').update({authTrainer: response})
+      firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({authTrainer: response})
       if (response === 'accept') {
         const path = '/global/' + referralId + '/trainerInfo/clientId'
-        firebase.database().ref(path).push({token})
+        firebase.database().ref(path).push({uid})
       }
     }
   }
@@ -58,31 +60,31 @@ function* setupTrainer() {
     const lastParams = (yield call(getLastParams)).lastParams
     const installParams = (yield call(getInstallParams)).installParams
     if (referralId === '' || referralId === null || lastParams !== installParams) {
-      const {id, referral, trainer} = lastParams
-      const {token} = yield select(state => state.authReducer)
-      if (id && id.token !== token && referral && referral.referralType === 'client') {
-        let referralType = referral.referralType
-        const trainerId = id.token
-        const trainerName = trainer.name
-        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralId: trainerId, trainerName})
-        firebase.database().ref('/global/' + token + '/userInfo/public').update({
+      const {referralType, trainerId, trainerName, trainerDeviceId} = lastParams
+      const {uid} = yield select(state => state.authReducer)
+      if (uid && trainerId !== uid && referralType === 'client') {
+        const referralDeviceId = trainerDeviceId
+        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralId: trainerId, referralDeviceId, trainerName})
+        firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
           trainerId,
+          trainerDeviceId,
           referralSetup: true,
           referralType,
           trainerName,
           authTrainer: 'pending',
-          referralId: trainerId
+          referralId: trainerId,
+          referralDeviceId,
         })
       }
-      else if (id && id.token !== token && referral && referral.referralType === 'friend') {
-        let referralType = referral.referralType
-        let friendId = id.token
-        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralId: friendId, trainerName: ''})
-        firebase.database().ref('/global/' + token + '/userInfo/public').update({
+      else if (trainerId !== uid && referralType === 'friend') {
+        let friendId = trainerId
+        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralId: trainerId, trainerName: ''})
+        firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
           referralSetup: true,
           referralType,
           authTrainer: 'decline',
-          referralId: id.token
+          referralId: trainerId,
+          referralDeviceId,
         })
       }
     }
@@ -95,33 +97,42 @@ function* setupTrainer() {
 function* branchInvite() {
   while (true) {
     try {
-      const {referralType} = yield take([CLIENT_APP_INVITE, FRIEND_APP_INVITE, GROUP_APP_INVITE])
-      const {token, settings} = yield select(state => state.authReducer)
+      const {referralType} = yield take([CLIENT_APP_INVITE, FRIEND_APP_INVITE])
+      const {uid, settings, deviceId} = yield select(state => state.authReducer)
       const name = settings.first_name
-      const branchUniversalObject = branch.createBranchUniversalObject
-      (
-        'canonicalIdentifier', 
-        {
-          metadata: 
+      if (name === undefined) {
+        Alert.alert(
+          'Invite Error',
+          'Add your name in User Settings',
+        )
+      }
+      else {
+        const branchUniversalObject = branch.createBranchUniversalObject
+        (
+          'canonicalIdentifier', 
           {
-            id: {token},
-            trainer: {name},
-            referral: {referralType}
-          }, 
-          contentTitle: 'inPhood Invite', 
-          contentDescription: 'Sending invite for inPhood'
+            metadata: 
+            {
+              trainerId: uid,
+              trainerName: name,
+              trainerDeviceId: deviceId,
+              referralType
+            }, 
+            contentTitle: 'inPhood Invite', 
+            contentDescription: 'Sending invite for inPhood'
+          }
+        )
+        const shareOptions = { 
+          messageHeader: 'inPhood App Invite', 
+          messageBody: 'Computer Vision enhanced food journaling' 
         }
-      )
-      const shareOptions = { 
-        messageHeader: 'inPhood App Invite', 
-        messageBody: 'Computer Vision enhanced food journaling' 
+        const linkProperties = { 
+          feature: 'share', 
+          channel: 'ios' 
+        }
+        const {channel, completed} = yield call(showShareSheet, branchUniversalObject, shareOptions, linkProperties)
+        yield put({type: APP_INVITE_SUCCESS})
       }
-      const linkProperties = { 
-        feature: 'share', 
-        channel: 'ios' 
-      }
-      const {channel, completed} = yield call(showShareSheet, branchUniversalObject, shareOptions, linkProperties)
-      yield put({type: APP_INVITE_SUCCESS})
     }
     catch (error) {
       yield put({type: APP_INVITE_ERROR})

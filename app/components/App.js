@@ -22,7 +22,7 @@ export default class App extends Component {
     if (this.props.tabs.index > 0 || this.props.gallery.index > 0 || this.props.media.index > 0) {
       locked = true
     }
-    if (this.props.auth.result === null) {
+    if (this.props.auth.uid === '') {
       return <Extras />
     }
     // TODO:  PBJOC, get rid of platform everywhere and bug with

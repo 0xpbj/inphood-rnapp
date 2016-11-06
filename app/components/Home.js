@@ -71,13 +71,13 @@ export default class HomeTabs extends Component {
       case 'Home':
         return (
           <Gallery
-            result={this.props.auth.result}
+            auth={this.props.auth}
           />
         )
       case 'Clients':
         return (
           <Clients
-            result={this.props.auth.result}
+            auth={this.props.auth}
           />
         )
       // case 'Groups':
@@ -97,31 +97,25 @@ export default class HomeTabs extends Component {
     const notification = notificationCount > 0 ? notificationCount : 0
     // TODO:
     // PBJ reads:  does not work for all android devices (https://github.com/leolin310148/ShortcutBadger)
-    // PushNotification.setApplicationIconBadgeNumber(notification)
-    // const groups = this.props.groups.infos.length > 0
+    PushNotification.setApplicationIconBadgeNumber(notification)
     const trainer = this.props.trainer.clients.length > 0
     const trainerNotificationCount = this.props.notification.trainer > 0 ? this.props.notification.trainer : undefined
     const clientNotificationCount = this.props.notification.client > 0 ? this.props.notification.client : undefined
-    // const groupsNotificationCount = this.props.notification.groups > 0 ? this.props.notification.groups : undefined
     const tabs = this.props.tabs.routes.map((tab, i) => {
+      let badgeValue = undefined
       if (tab.title === 'Home')
         badgeValue = clientNotificationCount
       else if (tab.title === 'Clients')
         badgeValue = trainerNotificationCount
-      // else if (tab.title === 'Groups')
-      //   badgeValue = groupsNotificationCount
-      else
-        badgeValue = undefined
-
       if ( (tab.title === 'Home' || tab.title === 'Extras') ||
-           (tab.title === 'Clients' && trainer) /*||
-           (tab.title === 'Groups' && groups)  */){
+           (tab.title === 'Clients' && trainer) ) {
         return(
           <View
             tabLabel={tab.key}
             style={{flex: 1}}>
             {this._renderTabContent(tab.title)}
-          </View>)
+          </View>
+        )
       }
     })
     return (

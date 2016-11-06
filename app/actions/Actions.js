@@ -25,7 +25,6 @@ import {
   SEND_FIREBASE_ERROR,
   SEND_FIREBASE_INIT_CAMERA,
   STORE_TOKEN,
-  STORE_RESULT,
   STORE_CAPTION,
   STORE_TITLE,
   ADD_MEAL_DATA,
@@ -38,9 +37,6 @@ import {
   INIT_CHAT_SAGA,
   INIT_TRAINER_CHAT_SAGA,
   LOGIN_REQUEST,
-  EM_LOGIN_INIT,
-  EM_LOGIN_REQUEST,
-  EM_CREATE_USER,
   CREATE_GROUP,
   ADD_GROUPS,
   LOGIN_SUCCESS,
@@ -62,8 +58,7 @@ import {
   CLEAR_CLIENT_ALERT,
   CLEAR_TRAINER_ALERT,
   BRANCH_AUTH_TRAINER,
-  INIT_LOGIN,
-  ANONYMOUS_LOGIN
+  STORE_PROFILE_PICTURE,
 } from '../constants/ActionTypes'
 
 export function pushExp (route) {
@@ -272,42 +267,15 @@ export function storeToken(token) {
   }
 }
 
-export function storeResult(result) {
-  return {
-    type: STORE_RESULT,
-    result
-  }
-}
-
 export function loginRequest(){
   return {
     type: LOGIN_REQUEST
   };
 }
 
-export function emailLoginInit(){
-  return {
-    type: EM_LOGIN_INIT
-  }
-}
-
-export function emailLoginRequest(value){
-  return {
-    type: EM_LOGIN_REQUEST,
-    value
-  }
-}
-
 export function createGroup(value){
   return {
     type: CREATE_GROUP,
-    value
-  }
-}
-
-export function emailCreateUser(value){
-  return {
-    type: EM_CREATE_USER,
     value
   }
 }
@@ -441,21 +409,15 @@ export function setBranchAuthTrainer(response) {
   }
 }
 
-export function anonymousLogin() {
-  return {
-    type: ANONYMOUS_LOGIN
-  }
-}
-
-export function initLogin(flag) {
-  return {
-    type: INIT_LOGIN,
-    flag
-  }
-}
-
 export function resetCameraProgress() {
   return {
     type: RESET_CAMERA
+  }
+}
+
+export function storeProfilePicture(image) {
+  return {
+    type: STORE_PROFILE_PICTURE,
+    image
   }
 }

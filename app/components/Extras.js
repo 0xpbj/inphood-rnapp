@@ -17,10 +17,7 @@ const {
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0
 
 import Start from '../containers/StartContainer'
-import Login from './EmailLogin'
-import Signup from './UserSignUp'
 import Settings from './UserSettings'
-import CreateGroup from './CreateGroup'
 
 export default class Extras extends Component {
   constructor(props) {
@@ -43,24 +40,6 @@ export default class Extras extends Component {
         />
       )
     }
-    else if (scene.key === prefix + 'login') {
-      return (
-        <Login
-          emailLoginRequest={(action)=>this.props.emailLoginRequest(action)}
-          loginRequest={this.props.emailLoginInit}
-          goBack={this._handleBackAction.bind(this)}
-        />
-      )
-    }
-    else if (scene.key === prefix + 'signup') {
-      return (
-        <Signup
-          emailCreateUser={(action)=>this.props.emailCreateUser(action)}
-          goBack={this._handleBackAction.bind(this)}
-          result={this.props.auth.result}
-        />
-      )
-    }
     else if (scene.key === prefix + 'settings') {
       return (
         <Settings
@@ -70,16 +49,6 @@ export default class Extras extends Component {
           goBack={this._handleBackAction.bind(this)}
           _storeForm={(form) => this.props.storeSettingsForm(form)}
           _storeSettings={(settings) => this.props.storeUserSettings(settings)}
-        />
-      )
-    }
-    else if (scene.key === prefix + 'creategroup') {
-      return (
-        <CreateGroup
-          groups={this.props.groups.groupNames}
-          goBack={this._handleBackAction.bind(this)}
-          createGroup={(action)=>this.props.createGroup(action)}
-          storeForm={(form) => this.props.storeGroupForm(form)}
         />
       )
     }

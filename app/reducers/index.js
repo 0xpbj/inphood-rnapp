@@ -7,8 +7,6 @@ import captionReducer from './captionReducer'
 import extReducer from './extReducer'
 import galReducer from './galReducer'
 import galNavReducer from './galNavReducer'
-// import groupsReducer from './groupsReducer'
-// import groupsNavReducer from './groupsNavReducer'
 import chatReducer from './chatReducer'
 import visionReducer from './visionReducer'
 import selectedReducer from './selectedReducer'
@@ -28,8 +26,6 @@ const appReducer = combineReducers({
     extReducer,
     galReducer,
     galNavReducer,
-    // groupsReducer,
-    // groupsNavReducer,
     chatReducer,
     selectedReducer,
     trainerReducer,

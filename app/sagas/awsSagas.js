@@ -2,6 +2,7 @@ import {
 LOGIN_SUCCESS, SEND_AWS_SUCCESS, SEND_AWS_ERROR, STORE_SETTINGS_FORM,
 SEND_FIREBASE_INIT_CAMERA, SEND_FIREBASE_INIT_LIBRARY,
 SEND_FIREBASE_LIBRARY_SUCCESS, SEND_FIREBASE_CAMERA_SUCCESS, SEND_FIREBASE_ERROR,
+STORE_PROFILE_PICTURE, STORE_CDN_PICTURE
 } from '../constants/ActionTypes'
 import {REHYDRATE} from 'redux-persist/constants'
 
@@ -12,6 +13,7 @@ import { Image } from "react-native"
 import { RNS3 } from 'react-native-aws3'
 import Config from '../constants/config-vars'
 
+import DeviceInfo from 'react-native-device-info'
 import firebase from 'firebase'
 
 let options = {
@@ -23,14 +25,32 @@ let options = {
   successActionStatus: 201
 }
 const turlHead = Config.AWS_CDN_THU_URL
+const deviceId = DeviceInfo.getUniqueID()
+
+function* watchProfilePicCall() {
+  try {
+    const localPicture = yield select(state => state.authReducer.localProfilePicture)
+    const fileName = deviceId + '/profile/' + Date.now() + '/image.jpg'
+    yield call (sendToAWS, localPicture, fileName)
+    const picture = turlHead+fileName
+    firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
+      localPicture,
+      picture,
+    })
+    yield put({type: STORE_CDN_PICTURE, picture})
+  }
+  catch(error) {
+    yield put ({type: SEND_FIREBASE_ERROR, error})
+  }
+}
 
 const prefetchData = (cdnPath) => {
   const delay = Date.now() + 5000
   while (Date.now() < delay) {
-    // console.log('waiting...')
+    console.log('waiting...')
   }
   return Image.prefetch(cdnPath)
-    .then(() => {})
+    .then(() => {console.log('Data fetched: ', cdnPath)})
     .catch(error => {console.log(error + ' - ' + cdnPath)})
 }
 
@@ -60,69 +80,61 @@ function* loadAWSCall(fileName) {
   }
 }
 
-const prepFirebase = (state) => {
-  let uid = state.authReducer.token
-  if (!uid) {
-    uid = firebase.auth().currentUser.uid
+const prepFirebase = (uid) => {
+  if (uid) {
+    const fileTail = firebase.database().ref('/global/' + deviceId + '/photoData').push().key
+    const fileName = deviceId + '/' + fileTail + '.jpg'
+    const data = {fileTail, fileName}
+    return data
   }
-  const prefix = state.authReducer.anonymous === true ? 'anonymous/' : ''
-  const fileTail = firebase.database().ref('/global/' + prefix + uid + '/photoData').push().key
-  const fileName = prefix + uid + '/' + fileTail + '.jpg'
-  const data = {fileTail, fileName}
-  return data
+  else
+    throw 'User not authenticated'
 }
 
-const sendToFirebase = (state, fileTail, fileName) => {
-  let uid = state.authReducer.token
-  if (!uid) {
-    uid = firebase.auth().currentUser.uid
-  }
-  if (!state.authReducer.anonymous) {
-    let result = state.authReducer.result
-    let name = result.name
-    let id = result.id
-    let picture = result.picture
-    firebase.database().ref('/global/' + uid + '/userInfo/public').update({
-      id,
-      name,
-      picture,
+const sendToFirebase = (uid, cReducer, sReducer, fileTail, fileName) => {
+  if (uid) {
+    let time = Date.now()
+    let caption = ''
+    let mealType = ''
+    let title = ''
+    let localFile = ''
+    const notifyTrainer = true
+    const notifyClient = false
+    const visible = true
+    caption = cReducer.caption
+    title = sReducer.title
+    mealType = cReducer.mealType
+    localFile = sReducer.photo
+    const databasePath = '/global/' + deviceId + '/photoData/' + fileTail
+    firebase.database().ref(databasePath).update({
+      uid,
+      fileName,
+      fileTail,
+      title,
+      caption,
+      mealType,
+      localFile,
+      time,
+      notifyTrainer,
+      visible,
+      notifyClient,
+      databasePath,
+      deviceId
     })
   }
-  const userPrefix = state.authReducer.anonymous === true? 'anonymous/' : ''
-  let time = Date.now()
-  let caption = ''
-  let mealType = ''
-  let title = ''
-  let localFile = ''
-  const notifyTrainer = true
-  const notifyClient = false
-  const visible = true
-  caption = state.captionReducer.caption
-  title = state.selectedReducer.title
-  mealType = state.captionReducer.mealType
-  localFile = state.selectedReducer.photo
-  const databasePath = '/global/' + userPrefix + uid + '/photoData/' + fileTail
-  firebase.database().ref(databasePath).update({
-    uid,
-    fileName,
-    fileTail,
-    title,
-    caption,
-    mealType,
-    localFile,
-    time,
-    notifyTrainer,
-    visible,
-    notifyClient,
-    databasePath
-  })
+  else
+    throw 'User not authenticated'
 }
 
 function* loadFirebaseCall() {
   try {
-    const state = yield select()
-    const {fileTail, fileName} = yield call (prepFirebase, state)
-    yield call(sendToFirebase, state, fileTail, fileName)
+    let {uid} = yield select(state => state.authReducer)
+    if (!uid)
+      uid = firebase.auth().currentUser.uid
+    const cReducer = yield select(state => state.captionReducer)
+    const sReducer = yield select(state => state.selectedReducer)
+    const {fileTail, fileName} = yield call (prepFirebase, uid)
+    yield call(sendToFirebase, uid, cReducer, sReducer, fileTail, fileName)
     yield put ({type: SEND_FIREBASE_CAMERA_SUCCESS})
     yield fork(loadAWSCall, fileName)
   }
@@ -131,32 +143,7 @@ function* loadFirebaseCall() {
   }
 }
 
-const sendUserDataToFirebase = (form, state) => {
-  if (state.authReducer.anonymous !== true) {
-    let uid = state.authReducer.token
-    if (!uid) {
-      uid = firebase.auth().currentUser.uid
-    }
-    const {birthday, height, diet, email, picture} = form
-    firebase.database().ref('/global/' + uid + '/userInfo/public').update({
-      birthday,
-      height,
-      diet,
-      email,
-      picture
-    })
-  }
-}
-
-function* watchUserDataCall() {
-  while(true) {
-    const data = yield take(STORE_SETTINGS_FORM)
-    const state = yield select()
-    yield call(sendUserDataToFirebase, data.form, state)
-  }
-}
-
 export default function* rootSaga() {
   yield fork(takeLatest, SEND_FIREBASE_INIT_CAMERA, loadFirebaseCall)
-  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], watchUserDataCall)
+  yield fork(takeLatest, STORE_PROFILE_PICTURE, watchProfilePicCall)
 }

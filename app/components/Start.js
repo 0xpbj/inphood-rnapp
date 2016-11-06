@@ -14,34 +14,18 @@ import {
   StyleSheet,
   ScrollView,
   NativeModules,
+  TouchableOpacity,
   TouchableHighlight,
 } from "react-native"
 
 import Swiper from 'react-native-swiper'
 
 import Icon from 'react-native-vector-icons/Ionicons'
-import FacebookLogin from './FacebookLogin'
-import EmailLogin from './EmailLogin'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Communications from 'react-native-communications'
 import DeviceInfo from 'react-native-device-info'
 import CommonStyles from './styles/common-styles'
-
-const loginRoute = {
-  type: 'push',
-  route: {
-    key: 'login',
-    title: 'Email Login'
-  }
-}
-
-const signUpRoute = {
-  type: 'push',
-  route: {
-    key: 'signup',
-    title: 'User Signup'
-  }
-}
+import ImagePicker from 'react-native-image-picker'
 
 const settingsRoute = {
   type: 'push',
@@ -50,14 +34,6 @@ const settingsRoute = {
     title: 'User Settings'
   }
 }
-
-// const groupRoute = {
-//   type: 'push',
-//   route: {
-//     key: 'creategroup',
-//     title: 'Create a group'
-//   }
-// }
 
 const windowSize = Dimensions.get('window')
 const launchImageSize = {width: windowSize.width, height: windowSize.height}
@@ -82,9 +58,6 @@ export default class Start extends Component {
   userSettings() {
     this.props._handleNavigate(settingsRoute)
   }
-  // createGroup() {
-  //   this.props._handleNavigate(groupRoute)
-  // }
   sendEmail() {
     const deviceData = '\n\n\n\n\n\n'
                      + '\nDevice Manufacturer: ' + DeviceInfo.getManufacturer()
@@ -105,18 +78,13 @@ export default class Start extends Component {
     Communications.email(['support@inphood.com'],null,null,'Need Help',deviceData)
   }
   render() {
-    console.log("Device Unique ID", DeviceInfo.getUniqueID())
-
     if (this.props.auth.inProgress) {
       return this.launchScreen()
     }
-    else if (this.props.auth.result === null) {
+    else if (this.props.auth.uid === '') {
       return (
         <View style={{flex: 1}}>
           {this.flipBoard()}
-          {/*{this.anonymousButton()}
-          {this.loginOutButton()}
-          {this.modalLoginOutDialog()}*/}
         </View>
       )
     }
@@ -148,23 +116,6 @@ export default class Start extends Component {
         </View>
       )
     }
-  }
-  _emailLogin() {
-    this._setModalVisible(false)
-    this.props._handleNavigate(loginRoute)
-  }
-  _signUp() {
-    this._setModalVisible(false)
-    this.props._handleNavigate(signUpRoute)
-  }
-  _emailLogout() {
-    this.props.logoutRequest()
-  }
-  _setModalVisible(visible) {
-    this.setState({modalVisible: visible})
-  }
-  _initAnonymousLogin() {
-    this.props.anonymousLogin()
   }
   launchScreen() {
     return (
@@ -287,14 +238,13 @@ export default class Start extends Component {
             {this.flipBoardCaption(pageFiveCaptionLocation, pageFiveCaptionText)}
             </Image>
             </View>
-            {this.anonymousButton()}
+            {this.loginButton()}
           </View>
         </Swiper>
       </View>
     )
   }
-  anonymousButton() {
-    const buttonText =  this.props.auth.result ? 'Log Out' : 'Try App'
+  loginButton() {
     const offsetFromBottom = windowSize.height / 10
     return (
       <View style={{alignItems: 'center'}}>
@@ -308,120 +258,54 @@ export default class Start extends Component {
           <TouchableHighlight
             style={CommonStyles.cancelButton}
             underlayColor='#99d9f4'
-            onPress={this._initAnonymousLogin.bind(this)}>
-            <Text style={CommonStyles.buttonText}>{buttonText}</Text>
+            onPress={() => this.props.loginRequest()}>
+            <Text style={CommonStyles.buttonText}>Try App</Text>
           </TouchableHighlight>
         </View>
       </View>
-    )
-  }
-  loginOutButton() {
-    const buttonText =  this.props.auth.result ? 'Log Out' : 'Log In'
-    const offsetFromBottom = windowSize.height / 10
-    return (
-      <View style={{alignItems: 'center'}}>
-        <View style={{bottom: offsetFromBottom,
-                      width: 200,
-                      backgroundColor: 'rgba(127, 127, 127, 0.4)',
-                      alignItems: 'center',
-                      paddingRight: 10,
-                      paddingLeft: 10,
-                      borderRadius: 4,}}>
-          <TouchableHighlight
-            style={CommonStyles.button}
-            underlayColor='#99d9f4'
-            onPress={this._setModalVisible.bind(this,true)}>
-            <Text style={CommonStyles.buttonText}>{buttonText}</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
-    )
-  }
-  modalFacebookLoginButton() {
-    return (
-      <FacebookLogin
-        auth={this.props.auth}
-        storeResult={this.props.storeResult}
-        storeError={this.props.storeError}
-        loginRequest={this.props.loginRequest}
-        logoutRequest={this.props.logoutRequest}
-        loginError={this.props.loginError}
-        storeToken={this.props.storeToken}
-        _setModalVisible={this._setModalVisible.bind(this)}/>
-    )
-  }
-  modalEmailLoginButton() {
-    return (
-      <TouchableHighlight
-        style={CommonStyles.button}
-        underlayColor='#99d9f4'
-        onPress={this._emailLogin.bind(this)}>
-        <Text style={CommonStyles.buttonText}>Log in with Email</Text>
-      </TouchableHighlight>
-    )
-  }
-  modalSignUpButton() {
-    return (
-      <TouchableHighlight
-        style={CommonStyles.button}
-        underlayColor='#99d9f4'
-        onPress={this._signUp.bind(this)}>
-        <Text style={CommonStyles.buttonText}>Sign Up</Text>
-      </TouchableHighlight>
-    )
-  }
-  modalCancelLoginButton() {
-    return (
-      <TouchableHighlight
-        onPress={this._setModalVisible.bind(this, false)}
-        style={CommonStyles.cancelButton}>
-        <Text style={CommonStyles.buttonText}>Cancel</Text>
-      </TouchableHighlight>
-    )
-  }
-  modalLoginOutDialog() {
-    return (
-      <Modal
-        animationType='none'
-        transparent={true}
-        visible={this.state.modalVisible}
-        onRequestClose={() => {this._setModalVisible(false)}}>
-        <View style={CommonStyles.modalContainer}>
-          <View style={[{backgroundColor: '#fff', padding: 10},
-                        CommonStyles.innerContainer]}>
-            <View style={{marginTop: 10,
-                          marginBottom: 10}}>
-              {this.modalFacebookLoginButton()}
-            </View>
-            {this.modalEmailLoginButton()}
-            {this.modalSignUpButton()}
-            {this.modalCancelLoginButton()}
-          </View>
-        </View>
-      </Modal>
     )
   }
   logOutButton() {
-    if (this.props.auth.result.provider === "facebook.com") {
-      return (
-        <View style={{marginTop: 10}}>{this.modalFacebookLoginButton()}</View>)
-    } else {
-      const buttonText = this.props.auth.anonymous ? 'Anon Log Out' : 'Email Log Out'
-      return (
-        <TouchableHighlight
-          style={CommonStyles.iconTextButton}
-          onPress={this._emailLogout.bind(this)}>
-          {this.iconTextButton("ios-exit-outline", buttonText)}
-        </TouchableHighlight>)
+    return (
+      <TouchableHighlight
+        style={CommonStyles.iconTextButton}
+        onPress={() => this.props.logoutRequest()}>
+        {this.iconTextButton("ios-exit-outline", 'Log Out')}
+      </TouchableHighlight>
+    )
+  }
+  selectImage() {
+    if (Platform.OS === "ios") {
+      var {width} = Dimensions.get('window')
+      var {imageMargin, imagesPerRow, containerWidth} = this.props
+      if(typeof containerWidth != "undefined") {
+        width = containerWidth
+      }
     }
+    this._imageSize = (width - (imagesPerRow + 1) * imageMargin) / imagesPerRow
+    var options = {
+      title: '',
+      quality: 1,
+      maxWidth: 250,
+      maxHeight: 250,
+    }
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.data) {
+        this.props.storeProfilePicture(response.uri)
+      }
+    })
   }
   profileImageButton() {
-    const uri = this.props.auth.result.picture
-    const buttonColor = this.props.auth.result ? '#006400' : 'white'
+    let uri = this.props.auth.cdnProfilePicture ? this.props.auth.cdnProfilePicture : this.props.auth.localProfilePicture
+    const buttonColor = this.props.auth.uid ? '#006400' : 'white'
     return (
+      <TouchableOpacity
+        onPress={this.selectImage.bind(this)}>
         <Image
           source={{uri: uri}}
-          style={[CommonStyles.profileImage, {borderColor: buttonColor}]}/>
+          style={[CommonStyles.profileImage, {borderColor: buttonColor}]}
+        />
+      </TouchableOpacity>
     )
   }
   flexOneSpacerView() {
@@ -459,15 +343,6 @@ export default class Start extends Component {
       </TouchableHighlight>
     )
   }
-  // createGroupButton() {
-  //   return (
-  //     <TouchableHighlight
-  //       onPress={this.createGroup.bind(this)}
-  //       style={CommonStyles.iconTextButton}>
-  //       {this.iconTextButton("ios-school-outline", "Create Group")}
-  //     </TouchableHighlight>
-  //   )
-  // }
   clientAppInviteButton() {
     return (
       <TouchableHighlight

@@ -81,8 +81,8 @@ export default class ChatThread extends Component {
     return null;
   }
   render() {
-    const name = this.props.result ? this.props.result.first_name : 'Anon'
-    const picture = this.props.result ? this.props.result.picture : ''
+    const name = this.props.auth.settings.first_name ? this.props.auth.settings.first_name : 'Anon'
+    const picture = this.props.auth ? this.props.auth.cdnProfilePicture : ''
     return (
       <View style={{flex: 1}}>
         <View style={{flex: 10}}/>

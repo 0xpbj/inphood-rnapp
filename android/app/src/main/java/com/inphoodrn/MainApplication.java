@@ -9,6 +9,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.imagepicker.ImagePickerPackage;
 import fr.bamlab.rncameraroll.CameraRollPackage;
 import com.facebook.react.ReactInstanceManager;
@@ -53,6 +54,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNDeviceInfo(),
           new ReactNativePushNotificationPackage(),
           new ImagePickerPackage(),
           new RNFSPackage(),

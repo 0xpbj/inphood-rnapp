@@ -11,6 +11,7 @@ import {
   POP_GRP_ROUTE,
   CHANGE_TAB,
   CHANGE_PAGE,
+  SETTINGS_VIEW,
   TAKE_PHOTO,
   STORE_64_PHOTO,
   FEEDBACK_PHOTO,
@@ -57,8 +58,9 @@ import {
   FRIEND_APP_INVITE,
   CLEAR_CLIENT_ALERT,
   CLEAR_TRAINER_ALERT,
-  BRANCH_AUTH_TRAINER,
+  BRANCH_AUTH_SETUP,
   STORE_PROFILE_PICTURE,
+  STORE_USER_NAME,
 } from '../constants/ActionTypes'
 
 export function pushExp (route) {
@@ -133,6 +135,12 @@ export function changeTab (index) {
   }
 }
 
+export function goToSettings (flag) {
+  return {
+    type: SETTINGS_VIEW,
+    flag
+  }
+}
 export function changePage (index) {
   return {
     type: CHANGE_PAGE,
@@ -376,17 +384,19 @@ export function callResetPassword() {
   }
 }
 
-export function sendClientAppInvite() {
+export function sendClientAppInvite(name) {
   return {
     type: CLIENT_APP_INVITE,
-    referralType: 'client'
+    referralType: 'client',
+    name
   }
 }
 
-export function sendFriendAppInvite() {
+export function sendFriendAppInvite(name) {
   return {
     type: FRIEND_APP_INVITE,
-    referralType: 'friend' 
+    referralType: 'friend',
+    name
   }
 }
 
@@ -402,9 +412,9 @@ export function clearTrainerAlert() {
   }
 }
 
-export function setBranchAuthTrainer(response) {
+export function setBranchAuthSetup(response) {
   return {
-    type: BRANCH_AUTH_TRAINER,
+    type: BRANCH_AUTH_SETUP,
     response
   }
 }
@@ -419,5 +429,12 @@ export function storeProfilePicture(image) {
   return {
     type: STORE_PROFILE_PICTURE,
     image
+  }
+}
+
+export function storeUserName(name) {
+  return {
+    type: STORE_USER_NAME,
+    name
   }
 }

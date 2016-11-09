@@ -43,7 +43,7 @@ export default class Gallery extends Component {
       return (
         <ChatView
           auth={this.props.auth}
-         _handleNavigate={this._handleNavigate.bind(this)}
+          goBack={this._handleBackAction.bind(this)}
           caller="client"
         />
       )

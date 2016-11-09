@@ -1,8 +1,8 @@
 import {
-  LOGIN_SUCCESS, BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER, 
+  LOGIN_SUCCESS, BRANCH_REFERRAL_INFO, BRANCH_AUTH_SETUP, 
   CLIENT_APP_INVITE, FRIEND_APP_INVITE, GROUP_APP_INVITE, 
   APP_INVITE_ERROR, APP_INVITE_SUCCESS, SEND_AWS_SUCCESS, 
-  SETUP_CLIENT_ERROR, SETUP_TRAINER_ERROR, SETUP_GROUP_ERROR,
+  SETUP_CLIENT_ERROR, SETUP_REFERRAL_ERROR, SETUP_GROUP_ERROR,
   RESET_BRANCH_INFO,
 } from '../constants/ActionTypes'
 
@@ -15,6 +15,8 @@ import Config from '../constants/config-vars'
 import firebase from 'firebase'
 import branch from 'react-native-branch'
 import DeviceInfo from 'react-native-device-info'
+
+const deviceId = DeviceInfo.getUniqueID()
 
 const getLastParams = () => {
   return branch.getLatestReferringParams()
@@ -38,14 +40,15 @@ const getUrl = (branchUniversalObject, linkProperties, controlParams) => {
 
 function* setupClient() {
   try {
-    const {authTrainer, referralType, uid, referralId} = yield select(state => state.authReducer)
-    if (authTrainer === 'pending' && referralType === 'client') {
-      const data = yield take(BRANCH_AUTH_TRAINER)
+    const {authSetup, referralType, referralDeviceId, uid} = yield select(state => state.authReducer)
+    if (authSetup === 'pending' && referralType === 'client') {
+      const data = yield take(BRANCH_AUTH_SETUP)
       const {response} = data
-      firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({authTrainer: response})
+      firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({authSetup: response})
       if (response === 'accept') {
-        const path = '/global/' + referralId + '/trainerInfo/clientId'
-        firebase.database().ref(path).push({uid})
+        firebase.database().ref('/global/deviceIdMap/' + uid + '/' + referralDeviceId).set(referralType)
+        const path = '/global/' + referralDeviceId + '/trainerInfo/clientId/' + deviceId
+        firebase.database().ref(path).set('client')
       }
     }
   }
@@ -56,83 +59,60 @@ function* setupClient() {
 
 function* setupTrainer() {
   try {
-    const {referralId} = yield select(state => state.authReducer)
     const lastParams = (yield call(getLastParams)).lastParams
     const installParams = (yield call(getInstallParams)).installParams
-    if (referralId === '' || referralId === null || lastParams !== installParams) {
-      const {referralType, trainerId, trainerName, trainerDeviceId} = lastParams
+    const {referralType, referralName, referralDeviceId} = lastParams
+    console.log(lastParams, installParams)
+    if (lastParams && (referralDeviceId !== deviceId || lastParams !== installParams)) {
       const {uid} = yield select(state => state.authReducer)
-      if (uid && trainerId !== uid && referralType === 'client') {
-        const referralDeviceId = trainerDeviceId
-        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralId: trainerId, referralDeviceId, trainerName})
-        firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
-          trainerId,
-          trainerDeviceId,
-          referralSetup: true,
-          referralType,
-          trainerName,
-          authTrainer: 'pending',
-          referralId: trainerId,
-          referralDeviceId,
-        })
-      }
-      else if (trainerId !== uid && referralType === 'friend') {
-        let friendId = trainerId
-        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralId: trainerId, trainerName: ''})
-        firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
-          referralSetup: true,
-          referralType,
-          authTrainer: 'decline',
-          referralId: trainerId,
-          referralDeviceId,
-        })
-      }
+      yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralDeviceId, referralName})
+      firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
+        referralSetup: true,
+        referralType,
+        referralName,
+        authSetup: (referralType === 'client') ? 'pending' : 'decline',
+        referralDeviceId,
+        uid
+      })
     }
   }
   catch (error) {
-    yield put({type: SETUP_TRAINER_ERROR})
+    console.log(error)
+    yield put({type: SETUP_REFERRAL_ERROR})
   }
 }
 
 function* branchInvite() {
   while (true) {
     try {
-      const {referralType} = yield take([CLIENT_APP_INVITE, FRIEND_APP_INVITE])
+      const {referralType, name} = yield take([CLIENT_APP_INVITE, FRIEND_APP_INVITE])
       const {uid, settings, deviceId} = yield select(state => state.authReducer)
-      const name = settings.first_name
-      if (name === undefined) {
-        Alert.alert(
-          'Invite Error',
-          'Add your name in User Settings',
-        )
-      }
-      else {
-        const branchUniversalObject = branch.createBranchUniversalObject
-        (
-          'canonicalIdentifier', 
+      const referralName = settings.first_name
+      const branchUniversalObject = branch.createBranchUniversalObject
+      (
+        'canonicalIdentifier', 
+        {
+          metadata: 
           {
-            metadata: 
-            {
-              trainerId: uid,
-              trainerName: name,
-              trainerDeviceId: deviceId,
-              referralType
-            }, 
-            contentTitle: 'inPhood Invite', 
-            contentDescription: 'Sending invite for inPhood'
-          }
-        )
-        const shareOptions = { 
-          messageHeader: 'inPhood App Invite', 
-          messageBody: 'Computer Vision enhanced food journaling' 
+            referralName,
+            referralDeviceId: deviceId,
+            referralType,
+            referralName,
+          }, 
+          contentTitle: 'inPhood Invite', 
+          contentDescription: 'Sending invite for inPhood'
         }
-        const linkProperties = { 
-          feature: 'share', 
-          channel: 'ios' 
-        }
-        const {channel, completed} = yield call(showShareSheet, branchUniversalObject, shareOptions, linkProperties)
-        yield put({type: APP_INVITE_SUCCESS})
+      )
+      const shareOptions = { 
+        messageHeader: 'inPhood App Invite', 
+        messageBody: 'Computer Vision enhanced food journaling' 
       }
+      const linkProperties = { 
+        feature: 'share', 
+        channel: 'ios' 
+      }
+      const {channel, completed} = yield call(showShareSheet, branchUniversalObject, shareOptions, linkProperties)
+      yield put({type: APP_INVITE_SUCCESS})
     }
     catch (error) {
       yield put({type: APP_INVITE_ERROR})

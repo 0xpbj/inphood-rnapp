@@ -10,6 +10,7 @@ import {
   ListView,
   Alert,
   Platform,
+  Dimensions,
   TouchableOpacity,
   ActivityIndicator,
   TouchableHighlight,
@@ -30,7 +31,7 @@ import NetworkImage from './NetworkImage'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Config from '../constants/config-vars'
-import PushNotification from 'react-native-push-notification'
+import ImagePicker from 'react-native-image-picker'
 
 const turlHead = Config.AWS_CDN_THU_URL
 
@@ -81,14 +82,38 @@ export default class GalleryListView extends Component{
       </Text>
     )
   }
+  selectImage() {
+    if (Platform.OS === "ios") {
+      var {width} = Dimensions.get('window')
+      var {imageMargin, imagesPerRow, containerWidth} = this.props
+      if(typeof containerWidth != "undefined") {
+        width = containerWidth
+      }
+    }
+    this._imageSize = (width - (imagesPerRow + 1) * imageMargin) / imagesPerRow
+    var options = {
+      title: '',
+      quality: 1,
+      maxWidth: 250,
+      maxHeight: 250,
+    }
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.data) {
+        this.props.storeProfilePicture(response.uri)
+      }
+    })
+  }
   _renderProfileInformation(uri) {
     const name = this._getUserShortName()
-
     return (
       <View style={CommonStyles.galleryListViewTitleRow}>
-        <Image
-          source={{uri: uri}}
-          style={CommonStyles.galleryListViewProfileImage}/>
+        <TouchableOpacity
+          onPress={this.selectImage.bind(this)}>
+          <Image
+            source={{uri: uri}}
+            style={CommonStyles.galleryListViewProfileImage}
+          />
+        </TouchableOpacity>
         <Text style={CommonStyles.galleryListViewProfileName}>
           {name} {this._getColoredLogo()}
         </Text>
@@ -144,45 +169,18 @@ export default class GalleryListView extends Component{
       )
     }
     else if (rowID === "0") {
-      PushNotification.configure({
-        // (optional) Called when Token is generated (iOS and Android)
-        // onRegister: function(token) {
-        //     console.log( 'TOKEN:', token );
-        // },
-        // (required) Called when a remote or local notification is opened or received
-        onNotification: function(notification) {
-            console.log( 'NOTIFICATION:', notification );
-        },
-        // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
-        // senderID: "YOUR GCM SENDER ID",
-        // IOS ONLY (optional): default: all - Permissions to register.
-        permissions: {
-            alert: true,
-            badge: true,
-            sound: true
-        },
-        // Should the initial notification be popped automatically
-        // default: true
-        popInitialNotification: true,
-        /**
-          * (optional) default: true
-          * - Specified if permissions (ios) and token (android and ios) will requested or not,
-          * - if not, you must call PushNotificationsHandler.requestPermissions() later
-          */
-        requestPermissions: true,
-      })
-      if (this.props.auth.authTrainer === 'pending' && this.props.auth.referralType === 'client') {
+      if (this.props.auth.authSetup === 'pending' && this.props.auth.referralType === 'client') {
         Alert.alert(
-         'Share data with your trainer: ' + this.props.auth.trainerName + '?',
+         'Share data with your trainer: ' + this.props.auth.referralName + '?',
          '',
          [
             {text: 'Accept',
             onPress: () => {
-              this.props.setBranchAuthTrainer('accept')
+              this.props.setBranchAuthSetup('accept')
             }, style: 'default'},
             {text: 'Decline',
             onPress: () => {
-              this.props.setBranchAuthTrainer('decline')
+              this.props.setBranchAuthSetup('decline')
             }, style: 'destructive'}
          ],
         )
@@ -252,26 +250,43 @@ export default class GalleryListView extends Component{
       </View>
     )
   }
+  _goToSettings() {
+    this.props.goToSettings(true)
+    this.props.changeTab(1)
+  }
   _pressRow(databasePath: string, cdnPath: string) {
-    if (this.props.auth.authTrainer === 'pending' && this.props.auth.referralType === 'client') {
+    if (this.props.auth.settings.first_name) {
+      if (this.props.auth.authSetup === 'pending' && this.props.auth.referralType === 'client') {
+        Alert.alert(
+         'Share data with your trainer: ' + this.props.auth.referralName + '?',
+         '',
+         [
+            {text: 'Accept',
+            onPress: () => {
+              this.props.setBranchAuthSetup('accept')
+            }, style: 'default'},
+            {text: 'Decline',
+            onPress: () => {
+              this.props.setBranchAuthSetup('decline')
+            }, style: 'destructive'}
+         ]
+        )
+      }
+      this.props.markPhotoRead(databasePath, cdnPath)
+      this.props._handleNavigate(route)
+      this.props.feedbackPhoto(databasePath, cdnPath)
+    }
+    else {
       Alert.alert(
-       'Share data with your trainer: ' + this.props.auth.trainerName + '?',
-       '',
-       [
-          {text: 'Accept',
-          onPress: () => {
-            this.props.setBranchAuthTrainer('accept')
-          }, style: 'default'},
-          {text: 'Decline',
-          onPress: () => {
-            this.props.setBranchAuthTrainer('decline')
-          }, style: 'destructive'}
-       ],
+        'Chat Error',
+        'Your name is required for chat',
+        [
+          {text: 'OK', 
+          onPress: () => {this._goToSettings.bind(this)}, style: 'default'},
+          {text: 'Cancel', onPress: () => {}, style: 'destructive'}
+        ]
       )
     }
-    this.props.markPhotoRead(databasePath, cdnPath)
-    this.props._handleNavigate(route)
-    this.props.feedbackPhoto(databasePath, cdnPath)
   }
   _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
     return (

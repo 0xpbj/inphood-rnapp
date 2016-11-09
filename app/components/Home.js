@@ -92,6 +92,9 @@ export default class HomeTabs extends Component {
         return <View />
     }
   }
+  handleChangeTab({i, ref, from}) {
+    this.props.changeTab(i)
+  }
   render () {
     const notificationCount = this.props.notification.client + this.props.notification.trainer + this.props.notification.groups
     const notification = notificationCount > 0 ? notificationCount : 0
@@ -123,6 +126,8 @@ export default class HomeTabs extends Component {
         ref="scrollableTabView"
         tabBarPosition="bottom"
         prerenderingSiblingsNumber={3}
+        page={this.props.tabs.index}
+        onChangeTab={this.handleChangeTab.bind(this)}
         renderTabBar={() => <HomeTabBar />}
       >
         {tabs}

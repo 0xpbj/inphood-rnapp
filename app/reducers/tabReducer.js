@@ -1,4 +1,4 @@
-import { CHANGE_TAB } from '../constants/ActionTypes'
+import { CHANGE_TAB, SETTINGS_VIEW } from '../constants/ActionTypes'
 const tabs = [
   { key: 'ios-home', title: 'Home', label: 'ios-home', iconName: 'ios-home'},
   { key: 'ios-people', title: 'Clients', label: 'ios-people', iconName: 'ios-people'},
@@ -8,7 +8,8 @@ const tabs = [
 
 const initialState = {
   index: 0,
-  routes: tabs
+  routes: tabs,
+  settings: false
 }
 
 function tabsNav (state = initialState, action) {
@@ -18,6 +19,11 @@ function tabsNav (state = initialState, action) {
       return {
         ...state,
         index: action.index
+      }
+    case SETTINGS_VIEW:
+      return {
+        ...state,
+        settings: action.flag
       }
     default:
       return state

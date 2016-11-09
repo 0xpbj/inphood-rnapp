@@ -45,15 +45,44 @@ export default class Start extends Component {
     super(props)
     this.state = {
       width: null,
-      height: null,
-      modalVisible: false,
+      height: null
+    }
+  }
+  componentWillMount() {
+    if (this.props.tabs.settings) {
+      this.props.goToSettings(false)
+      this.props._handleNavigate(settingsRoute)
     }
   }
   clientAppInvite() {
-    this.props.sendClientAppInvite()
+    if (!this.props.auth.settings.first_name) {
+      Alert.alert(
+        'Invite Error',
+        'Your name is required for invite',
+        [
+          {text: 'OK', onPress: () => this.props._handleNavigate(settingsRoute)},
+          {text: 'Cancel', onPress: () => {}, style: 'destructive'}
+        ]
+      )
+    }
+    else {
+      this.props.sendClientAppInvite()
+    }
   }
   friendAppInvite() {
-    this.props.sendFriendAppInvite()
+    if (!this.props.auth.settings.first_name) {
+      Alert.alert(
+        'Invite Error',
+        'Your name is required for invite',
+        [
+          {text: 'OK', onPress: () => this.props._handleNavigate(settingsRoute)},
+          {text: 'Cancel', onPress: () => {}, style: 'destructive'}
+        ]
+      )
+    }
+    else {
+      this.props.sendFriendAppInvite(value)
+    }
   }
   userSettings() {
     this.props._handleNavigate(settingsRoute)

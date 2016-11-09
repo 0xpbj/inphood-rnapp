@@ -2,8 +2,8 @@ import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR,
   LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR,
   STORE_UID, STORE_DEVICE_ID, LOGIN_IN_PROGRESS,
-  BRANCH_REFERRAL_INFO, BRANCH_AUTH_TRAINER, USER_SETTINGS,
-  STORE_CDN_PICTURE, STORE_TRAINER_ID,
+  BRANCH_REFERRAL_INFO, BRANCH_AUTH_SETUP, USER_SETTINGS,
+  STORE_CDN_PICTURE, STORE_TRAINER_ID, STORE_REFERRAL_ID,
   SEND_FIREBASE_ERROR, STORE_SETTINGS_FORM,
 } from '../constants/ActionTypes'
 
@@ -18,7 +18,7 @@ import firebase from 'firebase'
 import branch from 'react-native-branch'
 import DeviceInfo from 'react-native-device-info'
 
-const defaultPicture = Config.AWS_CDN_IMG_URL + 'banana.jpg'
+const defaultPicture = Config.AWS_CDN_THU_URL + 'default-profile.png'
 const deviceId = DeviceInfo.getUniqueID()
 
 const sendUserDataToFirebase = (form, uid) => {
@@ -96,7 +96,7 @@ const firebaseLogin = () => {
 }
 
 const updateFirebaseMap = (uid) => {
-  firebase.database().ref('/global/deviceIdMap/' + uid + '/' + deviceId).set('User')
+  firebase.database().ref('/global/deviceIdMap/' + uid + '/' + deviceId).set('user')
 }
 
 function* loginFlow() {
@@ -108,38 +108,48 @@ function* loginFlow() {
       const uid = user.uid
       branch.setIdentity(deviceId)
       const path = '/global/' + deviceId + '/userInfo/public'
-      const data = null
       yield put ({type: STORE_UID, uid})
       yield put ({type: STORE_DEVICE_ID, deviceId})
-      console.log("Data: ", data)
+      const data = (yield call(db.getPath, path)).val()
       if (data) {
-        const trainerId = data.trainerId ? data.trainerId : ''
+        const referralDeviceId = data.referralDeviceId ? data.referralDeviceId : ''
         const birthday = data.birthday ? data.birthday : ''
         const email = data.email ? data.email : ''
         const diet = data.diet ? data.diet : ''
         const height = data.height ? data.height : ''
         const name = data.name ? data.name : ''
-        const picture = data.picture ? data.picture : ''
+        let picture = data.picture ? data.picture : ''
         const referralSetup = data.referralSetup ? data.referralSetup : ''
         const referralType = data.referralType ? data.referralType : ''
         const referralId = data.referralId ? data.referralId : ''
-        const authTrainer = data.authTrainer ? data.authTrainer : ''
-        const trainerName = data.trainerName ? data.trainerName : ''
-        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralId, trainerName})
-        yield put({type: BRANCH_AUTH_TRAINER, response: authTrainer})
+        const authSetup = data.authSetup ? data.authSetup : ''
+        const referralName = data.referralName ? data.referralName : ''
+        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralId, referralDeviceId, referralName})
+        yield put({type: BRANCH_AUTH_SETUP, response: authSetup})
         const values = name ? name.split(" ") : null
         const first_name = name ? values[0] : ''
         const last_name = name ? values[1] : ''
         const userSettings = {first_name, last_name, birthday, height, diet, email}
         yield put ({type: USER_SETTINGS, settings: userSettings})
-        if (picture)
+        if (picture === '') {
+          picture = defaultPicture
           yield put ({type: STORE_CDN_PICTURE, picture})
-        if (trainerId)
-          yield put ({type: STORE_TRAINER_ID, trainerId})
+        }
+        else
+          yield put ({type: STORE_CDN_PICTURE, picture})
         firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
           uid,
           name,
           picture,
+          deviceId
+        })
+      }
+      else {
+        yield put ({type: STORE_CDN_PICTURE, picture: defaultPicture})
+        firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
+          uid,
+          name: '',
+          picture: defaultPicture,
           deviceId
         })
       }

@@ -279,10 +279,10 @@ export default class GalleryListView extends Component{
     else {
       Alert.alert(
         'Chat Error',
-        'Your name is required for chat',
+        'Your name is required for chat. \nEnter your name in User Settings',
         [
           {text: 'OK', 
-          onPress: () => {this._goToSettings.bind(this)}, style: 'default'},
+          onPress: () => {this.props.changeTab(1)}, style: 'default'},
           {text: 'Cancel', onPress: () => {}, style: 'destructive'}
         ]
       )

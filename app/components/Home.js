@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+import DeviceInfo from 'react-native-device-info'
+
 import PushNotification from 'react-native-push-notification'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -95,12 +97,33 @@ export default class HomeTabs extends Component {
   handleChangeTab({i, ref, from}) {
     this.props.changeTab(i)
   }
+  isBadgeNumberingSupported() {
+    // Support:  Does not work for all android devices (https://github.com/leolin310148/ShortcutBadger)
+    //
+    // From: https://github.com/leolin310148/ShortcutBadger/issues/128
+    // Motorola and Google Nexus do not seem to support badging, therefore
+    // exclude them with this method.
+    //
+    //    On a Nexus 5X, the following values are returned ...
+    //      DeviceInfo.getBrand():      google
+    //      DeviceInfo.getModel():      Nexus 5X
+    //      DeviceInfo.getUserAgent():  Dalvik/2.1.0 (Linux; U; Android 7.0; Nexus 5X Build/NBD90W)
+    //
+    const brandStrLC = DeviceInfo.getBrand().toLowerCase()
+
+    if ((brandStrLC === 'google') || (brandStrLC === 'motorola')) {
+      console.log('Badge numbering not supported for brand: ' + brandStrLC)
+      return false
+    }
+
+    return true
+  }
   render () {
     const notificationCount = this.props.notification.client + this.props.notification.trainer + this.props.notification.groups
     const notification = notificationCount > 0 ? notificationCount : 0
-    // TODO:
-    // PBJ reads:  does not work for all android devices (https://github.com/leolin310148/ShortcutBadger)
-    PushNotification.setApplicationIconBadgeNumber(notification)
+    if (this.isBadgeNumberingSupported()) {
+      PushNotification.setApplicationIconBadgeNumber(notification)
+    }
     const trainer = this.props.trainer.clients.length > 0
     const trainerNotificationCount = this.props.notification.trainer > 0 ? this.props.notification.trainer : undefined
     const clientNotificationCount = this.props.notification.client > 0 ? this.props.notification.client : undefined

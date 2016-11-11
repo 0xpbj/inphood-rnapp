@@ -148,6 +148,24 @@ export default class GalleryListView extends Component{
       )
     }
   }
+  _trainerAlert() {
+    if (this.props.auth.referralSetup === 'pending' && this.props.auth.referralType === 'client') {
+      Alert.alert(
+       'Share data with your trainer: ' + this.props.auth.referralName + '?',
+       '',
+       [
+          {text: 'Accept',
+          onPress: () => {
+            this.props.setBranchAuthSetup('accept')
+          }, style: 'default'},
+          {text: 'Decline',
+          onPress: () => {
+            this.props.setBranchAuthSetup('decline')
+          }, style: 'destructive'}
+       ],
+      )
+    }
+  }
   render() {
     let uri = this.props.auth.cdnProfilePicture ? this.props.auth.cdnProfilePicture : this.props.auth.localProfilePicture
     let size = this.props.galleryView.photos.length || this.props.galleryView.error !== ''
@@ -156,6 +174,7 @@ export default class GalleryListView extends Component{
       <View style={CommonStyles.commonContainer}>
         {this._renderProfileInformation(uri)}
         {this._renderListViewContent(flag, size)}
+        {this._trainerAlert()}
       </View>
     )
   }
@@ -169,22 +188,6 @@ export default class GalleryListView extends Component{
       )
     }
     else if (rowID === "0") {
-      if (this.props.auth.referralSetup === 'pending' && this.props.auth.referralType === 'client') {
-        Alert.alert(
-         'Share data with your trainer: ' + this.props.auth.referralName + '?',
-         '',
-         [
-            {text: 'Accept',
-            onPress: () => {
-              this.props.setBranchAuthSetup('accept')
-            }, style: 'default'},
-            {text: 'Decline',
-            onPress: () => {
-              this.props.setBranchAuthSetup('decline')
-            }, style: 'destructive'}
-         ],
-        )
-      }
       const backgroundColor = this.props.galleryView.pictureLoading ? 'rgba(255, 255, 255, 0.40)' : 'transparent'
       imgBlock = (
         <Image style={CommonStyles.galleryListViewThumb} source={{uri: localFile}}>

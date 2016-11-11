@@ -62,7 +62,7 @@ function* setupTrainer() {
     const lastParams = (yield call(getLastParams)).lastParams
     const installParams = (yield call(getInstallParams)).installParams
     const {referralType, referralName, referralDeviceId} = lastParams
-    if (referralType === 'client' && referralSetup === 'pending' && (referralDeviceId !== deviceId || lastParams !== installParams)) {
+    if (referralType === 'client' && (referralDeviceId !== deviceId || lastParams !== installParams)) {
       const {uid} = yield select(state => state.authReducer)
       if (uid) {
         yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: 'pending', referralDeviceId, referralName})

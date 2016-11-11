@@ -11,8 +11,8 @@ export default function* rootSaga() {
   yield fork(aws)
   yield fork(login)
   yield fork(database)
-  // yield fork(clients)
-  // yield fork(data)
+  yield fork(clients)
+  yield fork(data)
   yield fork(vision)
   yield fork(branch)
 }

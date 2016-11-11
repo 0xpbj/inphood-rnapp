@@ -44,7 +44,7 @@ function* setupClient() {
     if (authSetup === 'pending' && referralType === 'client') {
       const data = yield take(BRANCH_AUTH_SETUP)
       const {response} = data
-      firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({authSetup: response})
+      firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({referralSetup: response})
       if (response === 'accept') {
         firebase.database().ref('/global/deviceIdMap/' + uid + '/' + referralDeviceId).set(referralType)
         const path = '/global/' + referralDeviceId + '/trainerInfo/clientId/' + deviceId
@@ -62,18 +62,33 @@ function* setupTrainer() {
     const lastParams = (yield call(getLastParams)).lastParams
     const installParams = (yield call(getInstallParams)).installParams
     const {referralType, referralName, referralDeviceId} = lastParams
-    console.log(lastParams, installParams)
-    if (lastParams && (referralDeviceId !== deviceId || lastParams !== installParams)) {
+    if (referralType && (referralDeviceId !== deviceId || lastParams !== installParams)) {
       const {uid} = yield select(state => state.authReducer)
-      yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralDeviceId, referralName})
-      firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
-        referralSetup: true,
-        referralType,
-        referralName,
-        authSetup: (referralType === 'client') ? 'pending' : 'decline',
-        referralDeviceId,
-        uid
-      })
+      if (uid) {
+        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: true, referralDeviceId, referralName})
+        firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
+          referralSetup: true,
+          referralType,
+          referralName,
+          authSetup: (referralType === 'client') ? 'pending' : 'decline',
+          referralDeviceId,
+          uid
+        })
+      }
+    }
+    else {
+      const {uid} = yield select(state => state.authReducer)
+      if (uid) {
+        yield put({type: BRANCH_REFERRAL_INFO, referralType: '', referralSetup: true, referralDeviceId: deviceId, referralName: ''})
+        firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
+          referralSetup: false,
+          referralType: '',
+          referralName: '',
+          authSetup: 'decline',
+          referralDeviceId: deviceId,
+          uid
+        })
+      }
     }
   }
   catch (error) {

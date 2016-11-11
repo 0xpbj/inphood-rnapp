@@ -11,6 +11,9 @@ import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat'
 import CommonStyles from './styles/common-styles'
 import firebase from 'firebase'
 import Config from '../constants/config-vars'
+import DeviceInfo from 'react-native-device-info'
+
+const deviceId = DeviceInfo.getUniqueID()
 
 export default class ChatThread extends Component {
   constructor(props) {
@@ -18,7 +21,6 @@ export default class ChatThread extends Component {
     this.state = {
       messages: props.messages,
       isTyping: null,
-      id: firebase.auth().currentUser.uid,
       oldMessages: [],
       loadEarlier: false,
     }
@@ -48,11 +50,8 @@ export default class ChatThread extends Component {
       this.props.storeId(this.props.data.clientId)
     }
     else if (this.props.caller === "client") {
-      this.props.storeId(this.state.id)
+      this.props.storeId(deviceId)
     }
-    // else if (this.props.caller === "group") {
-    //   this.props.storeGroup('')
-    // }
     this.props.storeMessages(messages)
     this.props.initChatSaga()
   }
@@ -92,7 +91,7 @@ export default class ChatThread extends Component {
             onSend={this.onSend.bind(this)}
             loadEarlier={this.state.loadEarlier}
             user={{
-              _id: this.state.id,
+              _id: deviceId,
               name: name,
               avatar: picture,
             }}

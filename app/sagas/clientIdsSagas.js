@@ -6,9 +6,12 @@ import {
 import {REHYDRATE} from 'redux-persist/constants'
 
 import * as db from './firebaseCommands'
-import {fork, put, select, take} from 'redux-saga/effects'
+import {call, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 import firebase from 'firebase'
+import DeviceInfo from 'react-native-device-info'
+
+const deviceId = DeviceInfo.getUniqueID()
 
 function* triggerGetClientIdCount() {
   const {numClients} = yield select(state => state.trainerReducer)
@@ -25,30 +28,33 @@ function* triggerGetClientIdCount() {
   }
 }
 
+const updateFirebaseMap = (uid, cDeviceId) => {
+  firebase.database().ref('/global/deviceIdMap/' + uid + '/' + cDeviceId).set('client')
+}
+
 function* triggerGetClientIdChild() {
   const {clients} = yield select(state => state.trainerReducer)
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_CLIENTID_CHILD)
-    const child = data.val().token
-    if (clients.includes(child) === false)
+    const uid = firebase.auth().currentUser.uid
+    const child = data.key
+    if (clients.includes(child) === false) {
       yield put({type: ADD_CLIENTS, child})
+      yield call(updateFirebaseMap, uid, data.key)
+    }
   }
 }
 
 function* triggerRemClientIdChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_REMOVED_CLIENTID_CHILD)
-    const child = data
   }
 }
 
 function* syncClientId() {
-  let uid = yield select(state => state.authReducer.token)
-  if (uid === '' && firebase.auth().currentUser) {
-    uid = firebase.auth().currentUser.uid
-  }
+  let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
   if (uid !== '') {
-    let path = '/global/' + uid + '/trainerInfo'
+    let path = '/global/' + deviceId + '/trainerInfo'
     yield fork(db.sync, path, {
       child_added: syncCountClientIdChild,
     })

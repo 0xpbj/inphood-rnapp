@@ -17,8 +17,11 @@ import Config from '../constants/config-vars'
 
 import firebase from 'firebase'
 
+import DeviceInfo from 'react-native-device-info'
+
 const turlHead = Config.AWS_CDN_THU_URL
 const urlHead = Config.AWS_CDN_IMG_URL
+const deviceId = DeviceInfo.getUniqueID()
 
 const prefetchData = (cdnPath) => {
   return Image.prefetch(cdnPath)
@@ -36,9 +39,9 @@ function* startClientDataPrefetch() {
 function* readClientPhotoFlow() {
   while (true) {
     const data = yield take(MARK_CLIENT_PHOTO_READ)
-    const {path, uid} = data
+    const {path, rDeviceId} = data
     firebase.database().ref(path).update({'notifyTrainer': false})
-    yield put({type: DECREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath: path, client: uid})
+    yield put({type: DECREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath: path, client: rDeviceId})
   }
 }
 
@@ -46,18 +49,14 @@ function* triggerGetMessagesClientChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
     const messages = data.val()
-    let id = yield select(state => state.authReducer.token)
-    if (!id) {
-      id = firebase.auth().currentUser.uid
-    }
-    const uid  = messages.uid
+    const mDeviceId  = messages.deviceId
     const trainer = messages.trainer
     const flag = messages.clientRead
-    const path = '/global/' + uid + '/photoData/' + messages.photo
-    const file = turlHead + uid + '/' + messages.photo + '.jpg'
+    const path = '/global/' + deviceId + '/photoData/' + messages.photo
+    const file = turlHead + mDeviceId + '/' + messages.photo + '.jpg'
     yield put ({type: ADD_MESSAGES, messages, path})
     if (flag)
-      yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath: path, client: uid})
+      yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath: path, client: mDeviceId})
     const prevMessages = yield select(state => state.chatReducer.messages)
     const count = yield select(state => state.chatReducer.count)
   }
@@ -79,14 +78,14 @@ function* triggerGetPhotoChild() {
     const { payload: { data } } = yield take(SYNC_ADDED_PHOTO_CHILD)
     if (data.val().visible) {
       const file = data.val()
-      const uid = file.uid
+      const fDeviceId = file.deviceId
       const cdnPath = turlHead+file.fileName
       const databasePath = file.databasePath
       const time = file.time
       var child = {}
-      child[uid] = file
+      child[fDeviceId] = file
       if (file.notifyTrainer) {
-        yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath, client: uid})
+        yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath, client: fDeviceId})
       }
       if (databasePaths.includes(databasePath) === false)
         yield put({type: ADD_PHOTOS, child, databasePath, fileName: file.fileName})
@@ -115,7 +114,7 @@ function* triggerGetInfoChild() {
     const name = data.val().name
     const picture = data.val().picture
     const child = {name, picture}
-    const id = data.ref.parent.path.o[1]
+    const id = data.val().deviceId
     const info = {id, child}
     if (infoIds.includes(id) === false)
       yield put({type: ADD_INFOS, child: info})
@@ -131,6 +130,7 @@ function* triggerRemInfoChild() {
 
 function* syncData() {
   let clients = yield select(state => state.trainerReducer.clients)
+  console.log('Clients: ', clients)
   for (let i = 0; i < clients.length; i++) {
     let path = '/global/' + clients[i]
     yield fork(db.sync, path + '/photoData', {

@@ -48,41 +48,22 @@ function* sendChatData() {
   try {
     let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
     if (uid) {
-      const {trainerId} = yield select(state => state.authReducer)
-      const {client} = yield select(state => state.chatReducer)
-      const {chatMessages, databasePath, cdnPath} = yield select(state => state.chatReducer)
+      const {referralDeviceId, referralSetup} = yield select(state => state.authReducer)
+      const {chatMessages, databasePath} = yield select(state => state.chatReducer)
       const photo = databasePath.substring(databasePath.lastIndexOf('/')+1)
       const createdAt = Date.now()
-      let clientRead = false
-      let trainerRead = false
-      if (trainerId) {
-        clientRead = true
+      if (referralSetup === 'accept')
         firebase.database().ref(databasePath).update({'notifyTrainer': true})
-        firebase.database().ref(databasePath + '/messages').push({
-          uid,
-          deviceId,
-          trainerId,
-          photo,
-          createdAt,
-          clientRead,
-          trainerRead,
-          "message": chatMessages[0]
-        })
-      }
-      else {
-        trainerRead = true
-        firebase.database().ref(databasePath).update({'notifyClient': true})
-        firebase.database().ref(databasePath + '/messages').push({
-          uid: client,
-          trainerId: uid,
-          deviceId,
-          photo,
-          createdAt,
-          clientRead,
-          trainerRead,
-          "message": chatMessages[0]
-        })
-      }
+      firebase.database().ref(databasePath + '/messages').push({
+        uid,
+        deviceId,
+        referralDeviceId,
+        photo,
+        createdAt,
+        clientRead: true,
+        trainerRead: false,
+        "message": chatMessages[0]
+      })
       yield put ({type: STORE_CHAT_SUCCESS})
     }
     else
@@ -97,11 +78,8 @@ function* triggerGetMessagesChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CHILD)
     const messages = data.val()
-    const uid  = messages.uid
-    const trainerId = messages.trainerId
     const flag = messages.trainerRead
     const path = '/global/' + deviceId + '/photoData/' + messages.photo
-    const file = turlHead + deviceId + '/' + messages.photo + '.jpg'
     yield put ({type: ADD_MESSAGES, messages, path})
     if (flag)
       yield put({type: INCREMENT_CLIENT_PHOTO_NOTIFICATION, databasePath: path})

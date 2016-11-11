@@ -190,8 +190,9 @@ export default class GalleryListView extends Component{
         </Image>
       )
     }
-    else
+    else {
       imgBlock = <Image style={CommonStyles.galleryListViewThumb} source={{uri: localFile}}/>
+    }
     const mealTime = new Date(time).toDateString()
     const flag = this.props.notification.galleryPhotos[databasePath]
     const notificationBlock = (
@@ -239,28 +240,7 @@ export default class GalleryListView extends Component{
     this.props.changeTab(1)
   }
   _pressRow(databasePath: string, cdnPath: string) {
-    if (this.props.auth.settings.first_name) {
-      if (this.props.auth.referralSetup === 'pending' && this.props.auth.referralType === 'client') {
-        Alert.alert(
-         'Share data with your trainer: ' + this.props.auth.referralName + '?',
-         '',
-         [
-            {text: 'Accept',
-            onPress: () => {
-              this.props.setBranchAuthSetup('accept')
-            }, style: 'default'},
-            {text: 'Decline',
-            onPress: () => {
-              this.props.setBranchAuthSetup('decline')
-            }, style: 'destructive'}
-         ]
-        )
-      }
-      this.props.markPhotoRead(databasePath, cdnPath)
-      this.props._handleNavigate(route)
-      this.props.feedbackPhoto(databasePath, cdnPath)
-    }
-    else {
+    if (!this.props.auth.settings.first_name) {
       Alert.alert(
         'Chat Error',
         'Your name is required for chat. \nEnter your name in User Settings',
@@ -271,6 +251,9 @@ export default class GalleryListView extends Component{
         ]
       )
     }
+    this.props.feedbackPhoto(databasePath, cdnPath)
+    this.props.markPhotoRead(databasePath, cdnPath)
+    this.props._handleNavigate(route)
   }
   _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
     return (

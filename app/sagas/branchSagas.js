@@ -46,10 +46,11 @@ function* setupClient() {
       const {response} = data
       firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({referralSetup: response})
       if (response === 'accept') {
-        // firebase.database().ref('/global/deviceIdMap/' + uid + '/' + referralDeviceId).set(referralType)
+        firebase.database().ref('/global/deviceIdMap/' + uid + '/' + referralDeviceId).set('trainer')
         const path = '/global/' + referralDeviceId + '/trainerInfo/clientId/' + deviceId
         firebase.database().ref(path).set('accept')
       }
+      yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: response, referralDeviceId, referralName})
     }
   }
   catch (error) {
@@ -78,7 +79,7 @@ function* setupTrainer() {
         })
       }
     }
-    else {
+    else if (referralSetup !== 'accept') {
       const {uid} = yield select(state => state.authReducer)
       if (uid) {
         yield put({type: BRANCH_REFERRAL_INFO, referralType: '', referralSetup: 'pending', referralDeviceId: deviceId, referralName: ''})

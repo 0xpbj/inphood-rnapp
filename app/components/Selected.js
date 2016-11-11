@@ -4,6 +4,7 @@ import React, {Component} from 'react'
 import {
   View,
   Text,
+  Alert,
   Image,
   TextInput,
   Picker,
@@ -19,8 +20,30 @@ export default class Selected extends Component {
     this._workBeforeTransition = this._workBeforeTransition.bind(this)
   }
   _workBeforeTransition(text) {
-    this.props.storeTitle(text)
-    this.props._handleNavigate(this.props._nextRoute)
+    if (this.props.auth.referralSetup === 'pending' && this.props.auth.referralType === 'client') {
+      Alert.alert(
+       'Share data with your trainer: ' + this.props.auth.referralName + '?',
+       '',
+       [
+          {text: 'Accept',
+          onPress: () => {
+            this.props.setBranchAuthSetup('accept')
+            this.props.storeTitle(text)
+            this.props._handleNavigate(this.props._nextRoute)
+          }, style: 'default'},
+          {text: 'Decline',
+          onPress: () => {
+            this.props.setBranchAuthSetup('decline')
+            this.props.storeTitle(text)
+            this.props._handleNavigate(this.props._nextRoute)
+          }, style: 'destructive'}
+       ],
+      )
+    }
+    else {
+      this.props.storeTitle(text)
+      this.props._handleNavigate(this.props._nextRoute)
+    }
   }
   render() {
     return (

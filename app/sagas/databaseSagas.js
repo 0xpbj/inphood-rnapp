@@ -52,16 +52,20 @@ function* sendChatData() {
       const {client, chatMessages, databasePath} = yield select(state => state.chatReducer)
       const photo = databasePath.substring(databasePath.lastIndexOf('/')+1)
       const createdAt = Date.now()
-      if (referralSetup === 'accept')
+      const clientRead = (deviceId === client)
+      const trainerRead = (referralDeviceId === client)
+      if (deviceId === client)
         firebase.database().ref(databasePath).update({'notifyTrainer': true})
+      else if (referralDeviceId === client)
+        firebase.database().ref(databasePath).update({'notifyClient': true})
       firebase.database().ref(databasePath + '/messages').push({
         uid,
         deviceId,
         messageDeviceId: client,
         photo,
         createdAt,
-        clientRead: true,
-        trainerRead: false,
+        clientRead: clientRead,
+        trainerRead: trainerRead,
         "message": chatMessages[0]
       })
       yield put ({type: STORE_CHAT_SUCCESS})
@@ -79,7 +83,8 @@ function* triggerGetMessagesChild() {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CHILD)
     const messages = data.val()
     const flag = messages.trainerRead
-    const path = '/global/' + deviceId + '/photoData/' + messages.photo
+    const mDeviceId  = messages.messageDeviceId
+    const path = '/global/' + mDeviceId + '/photoData/' + messages.photo
     yield put ({type: ADD_MESSAGES, messages, path})
     if (flag)
       yield put({type: INCREMENT_CLIENT_PHOTO_NOTIFICATION, databasePath: path})

@@ -5,7 +5,6 @@ import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps (state) {
   return {
-    auth: state.authReducer,
     media: state.mediaReducer
   }
 }

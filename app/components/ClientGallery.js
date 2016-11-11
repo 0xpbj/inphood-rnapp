@@ -136,8 +136,8 @@ export default class ClientGallery extends Component{
   }
   _pressRow(photo: string, path: string, uid: string) {
     this.props.markClientPhotoRead(path, photo, uid)
-    this.props._handleNavigate(route)
     this.props.feedbackPhoto(path, photo)
+    this.props._handleNavigate(route)
   }
   _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
     return (

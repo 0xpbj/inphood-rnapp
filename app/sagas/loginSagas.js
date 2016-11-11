@@ -140,7 +140,7 @@ function* loginFlow() {
           uid,
           name,
           picture,
-          deviceId
+          deviceId,
         })
       }
       else {

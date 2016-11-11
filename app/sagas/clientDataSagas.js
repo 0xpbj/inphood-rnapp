@@ -82,6 +82,10 @@ function* triggerGetPhotoChild() {
       const cdnPath = turlHead+file.fileName
       const databasePath = file.databasePath
       const time = file.time
+      // const delay = Date.now()
+      // while (time < delay + 5000) {
+      //   console.log('waiting...')
+      // }
       var child = {}
       child[fDeviceId] = file
       if (file.notifyTrainer) {

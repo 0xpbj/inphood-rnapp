@@ -1,7 +1,7 @@
 import {
-  LOGIN_SUCCESS, BRANCH_REFERRAL_INFO, BRANCH_AUTH_SETUP, 
-  CLIENT_APP_INVITE, FRIEND_APP_INVITE, GROUP_APP_INVITE, 
-  APP_INVITE_ERROR, APP_INVITE_SUCCESS, SEND_AWS_SUCCESS, 
+  LOGIN_SUCCESS, BRANCH_REFERRAL_INFO, BRANCH_AUTH_SETUP,
+  CLIENT_APP_INVITE, FRIEND_APP_INVITE, GROUP_APP_INVITE,
+  APP_INVITE_ERROR, APP_INVITE_SUCCESS, SEND_AWS_SUCCESS,
   SETUP_CLIENT_ERROR, SETUP_REFERRAL_ERROR, SETUP_GROUP_ERROR,
   RESET_BRANCH_INFO,
 } from '../constants/ActionTypes'
@@ -62,7 +62,10 @@ function* setupTrainer() {
     const lastParams = (yield call(getLastParams)).lastParams
     const installParams = (yield call(getInstallParams)).installParams
     const {referralType, referralName, referralDeviceId} = lastParams
-    if (referralType === 'client' && (referralDeviceId !== deviceId || lastParams !== installParams)) {
+    const {referralSetup} = yield select(state => state.authReducer)
+    if (referralType === 'client' &&
+        referralSetup === 'pending' &&
+        (referralDeviceId !== deviceId || lastParams !== installParams)) {
       const {uid} = yield select(state => state.authReducer)
       if (uid) {
         yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: 'pending', referralDeviceId, referralName})
@@ -103,26 +106,26 @@ function* branchInvite() {
       const referralName = settings.first_name
       const branchUniversalObject = branch.createBranchUniversalObject
       (
-        'canonicalIdentifier', 
+        'canonicalIdentifier',
         {
-          metadata: 
+          metadata:
           {
             referralName,
             referralDeviceId: deviceId,
             referralType,
             referralName,
-          }, 
-          contentTitle: 'inPhood Invite', 
+          },
+          contentTitle: 'inPhood Invite',
           contentDescription: 'Sending invite for inPhood'
         }
       )
-      const shareOptions = { 
-        messageHeader: 'inPhood App Invite', 
-        messageBody: 'Computer Vision enhanced food journaling' 
+      const shareOptions = {
+        messageHeader: 'inPhood App Invite',
+        messageBody: 'Computer Vision enhanced food journaling'
       }
-      const linkProperties = { 
-        feature: 'share', 
-        channel: 'ios' 
+      const linkProperties = {
+        feature: 'share',
+        channel: 'ios'
       }
       const {channel, completed} = yield call(showShareSheet, branchUniversalObject, shareOptions, linkProperties)
       yield put({type: APP_INVITE_SUCCESS})

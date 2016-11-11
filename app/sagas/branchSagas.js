@@ -46,9 +46,9 @@ function* setupClient() {
       const {response} = data
       firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({referralSetup: response})
       if (response === 'accept') {
-        firebase.database().ref('/global/deviceIdMap/' + uid + '/' + referralDeviceId).set(referralType)
+        // firebase.database().ref('/global/deviceIdMap/' + uid + '/' + referralDeviceId).set(referralType)
         const path = '/global/' + referralDeviceId + '/trainerInfo/clientId/' + deviceId
-        firebase.database().ref(path).set('client')
+        firebase.database().ref(path).set('accept')
       }
     }
   }

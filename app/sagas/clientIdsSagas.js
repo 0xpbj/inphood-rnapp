@@ -37,10 +37,13 @@ function* triggerGetClientIdChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_CLIENTID_CHILD)
     const uid = firebase.auth().currentUser.uid
-    const child = data.key
-    if (clients.includes(child) === false) {
-      yield put({type: ADD_CLIENTS, child})
-      yield call(updateFirebaseMap, uid, data.key)
+    const response = data.val()
+    if (response === 'accept') {
+      const child = data.key
+      if (clients.includes(child) === false) {
+        yield put({type: ADD_CLIENTS, child})
+        yield call(updateFirebaseMap, uid, data.key)
+      }
     }
   }
 }

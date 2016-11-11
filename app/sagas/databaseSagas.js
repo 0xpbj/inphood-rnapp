@@ -49,7 +49,7 @@ function* sendChatData() {
     let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
     if (uid) {
       const {referralDeviceId, referralSetup} = yield select(state => state.authReducer)
-      const {chatMessages, databasePath} = yield select(state => state.chatReducer)
+      const {client, chatMessages, databasePath} = yield select(state => state.chatReducer)
       const photo = databasePath.substring(databasePath.lastIndexOf('/')+1)
       const createdAt = Date.now()
       if (referralSetup === 'accept')
@@ -57,7 +57,7 @@ function* sendChatData() {
       firebase.database().ref(databasePath + '/messages').push({
         uid,
         deviceId,
-        referralDeviceId,
+        messageDeviceId: client,
         photo,
         createdAt,
         clientRead: true,

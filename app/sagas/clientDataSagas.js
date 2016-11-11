@@ -49,10 +49,10 @@ function* triggerGetMessagesClientChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_MESSAGES_CLIENT_CHILD)
     const messages = data.val()
-    const mDeviceId  = messages.deviceId
+    const mDeviceId  = messages.messageDeviceId
     const trainer = messages.trainer
     const flag = messages.clientRead
-    const path = '/global/' + deviceId + '/photoData/' + messages.photo
+    const path = '/global/' + mDeviceId + '/photoData/' + messages.photo
     const file = turlHead + mDeviceId + '/' + messages.photo + '.jpg'
     yield put ({type: ADD_MESSAGES, messages, path})
     if (flag)

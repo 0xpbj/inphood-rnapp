@@ -169,7 +169,7 @@ export default class GalleryListView extends Component{
       )
     }
     else if (rowID === "0") {
-      if (this.props.auth.authSetup === 'pending' && this.props.auth.referralType === 'client') {
+      if (this.props.auth.referralSetup === 'pending' && this.props.auth.referralType === 'client') {
         Alert.alert(
          'Share data with your trainer: ' + this.props.auth.referralName + '?',
          '',
@@ -256,7 +256,7 @@ export default class GalleryListView extends Component{
   }
   _pressRow(databasePath: string, cdnPath: string) {
     if (this.props.auth.settings.first_name) {
-      if (this.props.auth.authSetup === 'pending' && this.props.auth.referralType === 'client') {
+      if (this.props.auth.referralSetup === 'pending' && this.props.auth.referralType === 'client') {
         Alert.alert(
          'Share data with your trainer: ' + this.props.auth.referralName + '?',
          '',

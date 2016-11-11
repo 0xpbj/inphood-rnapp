@@ -40,8 +40,8 @@ const getUrl = (branchUniversalObject, linkProperties, controlParams) => {
 
 function* setupClient() {
   try {
-    const {authSetup, referralType, referralDeviceId, uid} = yield select(state => state.authReducer)
-    if (authSetup === 'pending' && referralType === 'client') {
+    const {referralSetup, referralType, referralDeviceId, uid} = yield select(state => state.authReducer)
+    if (referralSetup === 'pending' && referralType === 'client') {
       const data = yield take(BRANCH_AUTH_SETUP)
       const {response} = data
       firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({referralSetup: response})
@@ -70,7 +70,7 @@ function* setupTrainer() {
           referralSetup: true,
           referralType,
           referralName,
-          authSetup: (referralType === 'client') ? 'pending' : 'decline',
+          referralSetup: 'pending',
           referralDeviceId,
           uid
         })
@@ -84,7 +84,7 @@ function* setupTrainer() {
           referralSetup: false,
           referralType: '',
           referralName: '',
-          authSetup: 'decline',
+          referralSetup: 'pending',
           referralDeviceId: deviceId,
           uid
         })

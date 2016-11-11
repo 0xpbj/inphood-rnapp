@@ -18,7 +18,7 @@ const initialState = {
   referralSetup: false,
   referralType: '',
   referralId: '',
-  authSetup: 'pending',
+  referralSetup: 'pending',
   referralName: '',
   referralId: '',
   referralDeviceId: '',
@@ -75,7 +75,7 @@ export default function authentication(state = initialState, action) {
     case BRANCH_AUTH_SETUP:
       return {
         ...state,
-        authSetup: action.response
+        referralSetup: action.response
       }
     case LOGIN_SUCCESS:
       return {

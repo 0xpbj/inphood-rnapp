@@ -122,10 +122,9 @@ function* loginFlow() {
         const referralSetup = data.referralSetup ? data.referralSetup : ''
         const referralType = data.referralType ? data.referralType : ''
         const referralId = data.referralId ? data.referralId : ''
-        const authSetup = data.authSetup ? data.authSetup : ''
         const referralName = data.referralName ? data.referralName : ''
         yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralId, referralDeviceId, referralName})
-        yield put({type: BRANCH_AUTH_SETUP, response: authSetup})
+        yield put({type: BRANCH_AUTH_SETUP, response: referralSetup})
         const values = name ? name.split(" ") : null
         const first_name = name ? values[0] : ''
         const last_name = name ? values[1] : ''

@@ -53,10 +53,10 @@ function* sendChatData() {
       const photo = databasePath.substring(databasePath.lastIndexOf('/')+1)
       const createdAt = Date.now()
       const clientRead = (deviceId === client)
-      const trainerRead = (referralDeviceId === client)
-      if (deviceId === client)
+      const trainerRead = !clientRead
+      if (clientRead)
         firebase.database().ref(databasePath).update({'notifyTrainer': true})
-      else if (referralDeviceId === client)
+      else
         firebase.database().ref(databasePath).update({'notifyClient': true})
       firebase.database().ref(databasePath + '/messages').push({
         uid,

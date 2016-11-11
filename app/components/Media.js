@@ -38,8 +38,26 @@ export default class Media extends Component {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.media.inProgress === false)
-      this._handleCaptionAction()
+    if (nextProps.media.inProgress === false) {
+      if (this.props.auth.referralSetup === 'pending' && this.props.auth.referralType === 'client') {
+        Alert.alert(
+         'Share data with your trainer: ' + this.props.auth.referralName + '?',
+         '',
+         [
+            {text: 'Accept',
+            onPress: () => {
+              this.props.setBranchAuthSetup('accept')
+              this._handleCaptionAction()
+            }, style: 'default'},
+            {text: 'Decline',
+            onPress: () => {
+              this.props.setBranchAuthSetup('decline')
+              this._handleCaptionAction()
+            }, style: 'destructive'}
+         ],
+        )
+      }
+    }
   }
   _renderScene (props) {
     const prefix = 'scene_'

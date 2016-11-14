@@ -130,12 +130,9 @@ function* loginFlow() {
         const last_name = name ? values[1] : ''
         const userSettings = {first_name, last_name, birthday, height, diet, email}
         yield put ({type: USER_SETTINGS, settings: userSettings})
-        if (picture === '') {
+        if (picture === '')
           picture = defaultPicture
-          yield put ({type: STORE_CDN_PICTURE, picture})
-        }
-        else
-          yield put ({type: STORE_CDN_PICTURE, picture})
+        yield put ({type: STORE_CDN_PICTURE, picture})
         firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
           uid,
           name,
@@ -165,8 +162,7 @@ function* loginFlow() {
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, STORE_CDN_PICTURE, userDataPrefetch)
-  yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)
   yield fork(takeLatest, LOGIN_REQUEST, loginFlow)
+  yield fork(takeLatest, LOGOUT_REQUEST, logoutFlow)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], watchUserDataCall)
 }

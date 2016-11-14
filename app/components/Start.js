@@ -60,8 +60,8 @@ export default class Start extends Component {
         'Invite Error',
         'Your name is required for invite',
         [
-          {text: 'OK', onPress: () => this.props._handleNavigate(settingsRoute)},
-          {text: 'Cancel', onPress: () => {}, style: 'destructive'}
+          {text: 'Cancel', onPress: () => {}, style: 'destructive'},
+          {text: 'OK', onPress: () => this.props._handleNavigate(settingsRoute)}
         ]
       )
     }
@@ -75,8 +75,8 @@ export default class Start extends Component {
         'Invite Error',
         'Your name is required for invite',
         [
-          {text: 'OK', onPress: () => this.props._handleNavigate(settingsRoute)},
-          {text: 'Cancel', onPress: () => {}, style: 'destructive'}
+          {text: 'Cancel', onPress: () => {}, style: 'destructive'},
+          {text: 'OK', onPress: () => this.props._handleNavigate(settingsRoute)}
         ]
       )
     }

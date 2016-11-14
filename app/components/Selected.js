@@ -25,18 +25,18 @@ export default class Selected extends Component {
        'Share data with your trainer: ' + this.props.auth.referralName + '?',
        '',
        [
-          {text: 'Accept',
-          onPress: () => {
-            this.props.setBranchAuthSetup('accept')
-            this.props.storeTitle(text)
-            this.props._handleNavigate(this.props._nextRoute)
-          }, style: 'default'},
           {text: 'Decline',
           onPress: () => {
             this.props.setBranchAuthSetup('decline')
             this.props.storeTitle(text)
             this.props._handleNavigate(this.props._nextRoute)
-          }, style: 'destructive'}
+          }, style: 'destructive'},
+          {text: 'Accept',
+          onPress: () => {
+            this.props.setBranchAuthSetup('accept')
+            this.props.storeTitle(text)
+            this.props._handleNavigate(this.props._nextRoute)
+          }, style: 'default'}
        ],
       )
     }

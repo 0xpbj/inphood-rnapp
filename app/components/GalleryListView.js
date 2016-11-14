@@ -245,15 +245,16 @@ export default class GalleryListView extends Component{
         'Chat Error',
         'Your name is required for chat. \nEnter your name in User Settings',
         [
-          {text: 'OK', 
-          onPress: () => {this.props.changeTab(1)}, style: 'default'},
-          {text: 'Cancel', onPress: () => {}, style: 'destructive'}
+          {text: 'Cancel', onPress: () => {}, style: 'destructive'},
+          {text: 'OK', onPress: () => {this.props.changeTab(1)}, style: 'default'}
         ]
       )
     }
-    this.props.feedbackPhoto(databasePath, cdnPath)
-    this.props.markPhotoRead(databasePath, cdnPath)
-    this.props._handleNavigate(route)
+    else {
+      this.props.feedbackPhoto(databasePath, cdnPath)
+      this.props.markPhotoRead(databasePath, cdnPath)
+      this.props._handleNavigate(route)
+    }
   }
   _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
     return (
@@ -272,12 +273,12 @@ export default class GalleryListView extends Component{
      'Confirm Delete?',
      '',
      [
-        {text: 'Cancel'},
         {text: 'Delete',
         onPress: () => {
           this.props.removeClientPhoto(databasePath)
-        }, style: 'destructive'}
-     ],
+        }, style: 'destructive'},
+        {text: 'Cancel'}
+     ]
     )
   }
 }

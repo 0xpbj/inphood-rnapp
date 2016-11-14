@@ -10,7 +10,7 @@ import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat'
 
 import CommonStyles from './styles/common-styles'
 import firebase from 'firebase'
-import Config from '../constants/config-vars'
+import Config from 'react-native-config'
 import DeviceInfo from 'react-native-device-info'
 
 const deviceId = DeviceInfo.getUniqueID()

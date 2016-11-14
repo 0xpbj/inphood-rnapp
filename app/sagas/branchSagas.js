@@ -11,7 +11,7 @@ import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 import { Alert } from "react-native"
 import * as db from './firebaseCommands'
-import Config from '../constants/config-vars'
+import Config from 'react-native-config'
 import firebase from 'firebase'
 import branch from 'react-native-branch'
 import DeviceInfo from 'react-native-device-info'

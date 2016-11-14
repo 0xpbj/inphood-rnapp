@@ -13,7 +13,7 @@ import * as db from './firebaseCommands'
 import { Image } from "react-native"
 import {call, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
-import Config from '../constants/config-vars'
+import Config from 'react-native-config'
 
 import firebase from 'firebase'
 

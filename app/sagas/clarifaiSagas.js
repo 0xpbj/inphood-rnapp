@@ -6,7 +6,7 @@ import {REHYDRATE} from 'redux-persist/constants'
 
 import {call, cancel, cps, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
-import config from '../constants/config-vars'
+import config from 'react-native-config'
 import RNFS from 'react-native-fs'
 
 const clarifaiClientId = config.CLARIFAI_CLIENT_ID

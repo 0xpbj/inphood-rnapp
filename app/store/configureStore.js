@@ -3,7 +3,7 @@ import { persistStore, autoRehydrate } from 'redux-persist'
 import rootReducer from '../reducers'
 import rootSaga from '../sagas/index'
 import createSagaMiddleware from 'redux-saga'
-import config from '../constants/config-vars'
+import config from 'react-native-config'
 import firebase from 'firebase'
 require("firebase/app")
 require("firebase/auth")
@@ -16,9 +16,9 @@ const fbConfig = {
 }
 var { AsyncStorage } = require('react-native')
 
-import sagaMonitor from './sagaMonitor'
-const sagaMiddleware = createSagaMiddleware({sagaMonitor})
-// const sagaMiddleware = createSagaMiddleware()
+// import sagaMonitor from './sagaMonitor'
+// const sagaMiddleware = createSagaMiddleware({sagaMonitor})
+const sagaMiddleware = createSagaMiddleware()
 
 const persistConfig = {
   whitelist: [

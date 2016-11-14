@@ -4,7 +4,7 @@ import {
   LOGOUT_SUCCESS, REMOVE_PHOTO,
 } from '../constants/ActionTypes'
 
-import Config from '../constants/config-vars'
+import Config from 'react-native-config'
 const turlHead = Config.AWS_CDN_THU_URL
 
 const initialState = {

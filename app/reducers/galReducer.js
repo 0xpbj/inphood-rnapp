@@ -8,7 +8,7 @@ import {
   SEND_FIREBASE_CAMERA_SUCCESS,
 } from '../constants/ActionTypes'
 
-import Config from '../constants/config-vars'
+import Config from 'react-native-config'
 const turlHead = Config.AWS_CDN_THU_URL
 
 const initialState = {

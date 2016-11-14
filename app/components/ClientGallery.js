@@ -25,7 +25,7 @@ const route = {
 
 import NetworkImage from './NetworkImage'
 import Spinner from 'react-native-loading-spinner-overlay'
-import Config from '../constants/config-vars'
+import Config from 'react-native-config'
 const turlHead = Config.AWS_CDN_THU_URL
 
 export default class ClientGallery extends Component{

@@ -12,7 +12,7 @@ import {REHYDRATE} from 'redux-persist/constants'
 import {race, call, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 import { Image } from "react-native"
-import Config from '../constants/config-vars'
+import Config from 'react-native-config'
 import * as db from './firebaseCommands'
 import firebase from 'firebase'
 import branch from 'react-native-branch'

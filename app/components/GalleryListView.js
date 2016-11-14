@@ -30,7 +30,7 @@ const route = {
 import NetworkImage from './NetworkImage'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Icon from 'react-native-vector-icons/Ionicons'
-import Config from '../constants/config-vars'
+import Config from 'react-native-config'
 import ImagePicker from 'react-native-image-picker'
 
 const turlHead = Config.AWS_CDN_THU_URL

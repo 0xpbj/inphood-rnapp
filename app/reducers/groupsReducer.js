@@ -5,7 +5,7 @@ import {
   CREATE_GROUP, FEEDBACK_PHOTO, SET_GROUP_NAME,
 } from '../constants/ActionTypes'
 
-import Config from '../constants/config-vars'
+import Config from 'react-native-config'
 const turlHead = Config.AWS_CDN_THU_URL
 
 const initialState = {

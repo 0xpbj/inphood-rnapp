@@ -11,7 +11,7 @@ import { takeLatest } from 'redux-saga'
 
 import { Image } from "react-native"
 import { RNS3 } from 'react-native-aws3'
-import Config from '../constants/config-vars'
+import Config from 'react-native-config'
 
 import DeviceInfo from 'react-native-device-info'
 import firebase from 'firebase'

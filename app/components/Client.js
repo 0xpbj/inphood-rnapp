@@ -47,7 +47,7 @@ export default class Client extends Component {
     }
     return (
       <View style={CommonStyles.commonContainer}>
-        <Text style={CommonStyles.clientProfileName}>Client's InPhood</Text>
+        <Text style={CommonStyles.clientProfileName}>Client's inPhood</Text>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow.bind(this)}

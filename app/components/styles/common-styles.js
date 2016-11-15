@@ -204,7 +204,6 @@ module.exports = StyleSheet.create({
   },
   clientGalleryContainer: {
     flex: 1,
-    paddingBottom: 50,
     backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
   },
   clientGalleryProfileImage: {

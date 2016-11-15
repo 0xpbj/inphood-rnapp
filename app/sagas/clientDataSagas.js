@@ -88,9 +88,9 @@ function* triggerGetPhotoChild() {
       // }
       var child = {}
       child[fDeviceId] = file
-      if (file.notifyTrainer) {
-        yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath, client: fDeviceId})
-      }
+      // if (file.notifyTrainer) {
+      //   yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath, client: fDeviceId})
+      // }
       if (databasePaths.includes(databasePath) === false)
         yield put({type: ADD_PHOTOS, child, databasePath, fileName: file.fileName})
       const messageData = file.messages

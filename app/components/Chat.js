@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import {
-  Platform,
-  StyleSheet,
   Text,
   View,
+  Image,
+  Platform,
+  StyleSheet
 } from 'react-native'
 
 import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat'
@@ -65,7 +66,7 @@ export default class ChatThread extends Component {
           }
         }}
       />
-    );
+    )
   }
   renderFooter(props) {
     if (this.state.isTyping) {
@@ -75,32 +76,26 @@ export default class ChatThread extends Component {
             {this.state.isTyping}
           </Text>
         </View>
-      );
+      )
     }
-    return null;
+    return null
   }
   render() {
     const name = this.props.auth.settings.first_name ? this.props.auth.settings.first_name : 'Anon'
     const picture = this.props.auth ? this.props.auth.cdnProfilePicture : ''
     return (
-      <View style={{flex: 1}}>
-        <View style={{flex: 10}}/>
-        <View style={{flex: 83}}>
-          <GiftedChat
-            messages={this.state.messages}
-            onSend={this.onSend.bind(this)}
-            loadEarlier={this.state.loadEarlier}
-            user={{
-              _id: deviceId,
-              name: name,
-              avatar: picture,
-            }}
-            renderBubble={this.renderBubble.bind(this)}
-            renderFooter={this.renderFooter.bind(this)}
-          />
-        </View>
-        <View style={{flex: 7}}/>
-      </View>
+      <GiftedChat
+        messages={this.state.messages}
+        onSend={this.onSend.bind(this)}
+        loadEarlier={this.state.loadEarlier}
+        user={{
+          _id: deviceId,
+          name: name,
+          avatar: picture,
+        }}
+        renderBubble={this.renderBubble.bind(this)}
+        renderFooter={this.renderFooter.bind(this)}
+      />
     )
   }
 }

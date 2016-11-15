@@ -8,7 +8,8 @@ import {
   Image,
   TextInput,
   Picker,
-  TouchableHighlight
+  TouchableHighlight,
+  KeyboardAvoidingView
 } from 'react-native'
 import Button from './Button'
 
@@ -49,7 +50,7 @@ export default class Selected extends Component {
     return (
       // This view divides the screen into 17 segments.  The bottom 8 segments
       // are left blank for the keyboard.
-      <View style={CommonStyles.flexContainer}>
+      <KeyboardAvoidingView behavior='padding' style={CommonStyles.flexContainer}>
         <Image
           style={[CommonStyles.selectedImage,
                   CommonStyles.universalBorderRadius,
@@ -59,7 +60,7 @@ export default class Selected extends Component {
 
         {/*Need this View wrapping TextInput to support single sided border
           text input line.*/}
-        <View
+        <KeyboardAvoidingView behavior='padding' 
           style={[CommonStyles.singleSegmentView,
                   CommonStyles.universalInputView,
                   CommonStyles.universalMargin]}>
@@ -87,9 +88,8 @@ export default class Selected extends Component {
               }
             }
           />
-        </View>
-        <View style={CommonStyles.deviceKeyboardView}/>
-      </View>
+        </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
     )
   }
 }

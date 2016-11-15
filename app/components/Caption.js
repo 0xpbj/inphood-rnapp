@@ -9,7 +9,8 @@ import {
   TextInput,
   Picker,
   Dimensions,
-  TouchableHighlight
+  TouchableHighlight,
+  KeyboardAvoidingView,
 } from 'react-native'
 
 import Button from './Button'
@@ -112,9 +113,8 @@ export default class Caption extends Component {
     return (
       // This view divides the screen into 17 segments.  The bottom 8 segments
       // are left blank for the keyboard.
-      <View style={CommonStyles.flexContainer}>
-        <TouchableHighlight
-          onPress={this.props._handleBackAction}
+      <KeyboardAvoidingView behavior='padding' style={CommonStyles.flexContainer}>
+        <View
           style={[CommonStyles.selectedImage,
                   CommonStyles.universalMargin]}>
           <Image
@@ -122,13 +122,13 @@ export default class Caption extends Component {
                     CommonStyles.universalBorderRadius]}
             resizeMode='cover'
             source={{uri: this.props.selected.photo}}/>
-        </TouchableHighlight>
+        </View>
         <View>
           <Spinner color='black' overlayColor='rgba(0, 0, 0, 0)' visible={this.props._inProgress} />
         </View>
         {/*Need this View wrapping TextInput to support single sided border
           text input line.*/}
-        <View
+        <KeyboardAvoidingView behavior='padding' 
           style={[CommonStyles.singleSegmentView,
                   CommonStyles.universalInputView,
                   CommonStyles.universalMargin]}>
@@ -156,11 +156,8 @@ export default class Caption extends Component {
               }
             }
           />
-        </View>
-        <View style={[CommonStyles.deviceKeyboardView,
-                     {marginTop: 5}]}>
-        </View>
-      </View>
+        </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
     )
   }
 }

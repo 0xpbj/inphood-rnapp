@@ -6,7 +6,8 @@ import {
   View,
   Platform,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  KeyboardAvoidingView
 } from 'react-native'
 
 import CommonStyles from './styles/common-styles'
@@ -283,13 +284,11 @@ export default class UserProfile extends Component {
       diet: this.dietStrToDietEnum(this.props.settings.diet),
       picture: this.props.settings.picture,
     }
-    const scrollViewSegments = 8.2
-    const buttonSegment = 0.8
-    const spacerSegement = 1
+    const scrollViewSegments = 9
+    const buttonSegment = 1
     return (
-      <View style={{flex: 1}}>
-
-        <View style={{flex: scrollViewSegments}}>
+      <KeyboardAvoidingView behavior='padding' style={{flex: 1}}>
+        <KeyboardAvoidingView behavior='padding' style={{flex: scrollViewSegments}}>
           <ScrollView
             contentContainerStyle={CommonStyles.universalFormScrollingContainer}>
               <Form
@@ -297,20 +296,16 @@ export default class UserProfile extends Component {
                 value={value}
                 type={UserProfileForm}
                 options={options}/>
-              <View style={CommonStyles.flexContainer}/>
           </ScrollView>
-        </View>
-
-        <View style={{flex: buttonSegment, backgroundColor: 'white'}}>
+        </KeyboardAvoidingView>
+        <KeyboardAvoidingView behavior='padding' style={{flex: buttonSegment, backgroundColor: 'white'}}>
           <Button
             onPress={this.storeFormData.bind(this)}
             label='Submit'
             color='#006400'
           />
-        </View>
-
-        <View style={{flex: spacerSegement, backgroundColor: 'white'}}/>
-      </View>
+        </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
     )
   }
 }

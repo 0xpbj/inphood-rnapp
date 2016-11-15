@@ -414,6 +414,10 @@ module.exports = StyleSheet.create({
     flex: Platform.OS === 'ios' ? 7 : 6,
     margin: 1,
   },
+  chatImage: {
+    flex: Platform.OS === 'ios' ? 3 : 2,
+    margin: 1,
+  },
   // Universal input styling
   //
   //  TODO: this probably needs to become a class since it's a view wrapping

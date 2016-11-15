@@ -2,7 +2,7 @@ import {
 LOGIN_SUCCESS, SEND_AWS_SUCCESS, SEND_AWS_ERROR, STORE_SETTINGS_FORM,
 SEND_FIREBASE_INIT_CAMERA, SEND_FIREBASE_INIT_LIBRARY,
 SEND_FIREBASE_LIBRARY_SUCCESS, SEND_FIREBASE_CAMERA_SUCCESS, SEND_FIREBASE_ERROR,
-STORE_PROFILE_PICTURE, STORE_CDN_PICTURE
+STORE_PROFILE_PICTURE, STORE_CDN_PICTURE, STORE_CHAT_SUCCESS, STORE_CHAT_ERROR,
 } from '../constants/ActionTypes'
 import {REHYDRATE} from 'redux-persist/constants'
 
@@ -52,6 +52,52 @@ const prefetchData = (cdnPath) => {
   return Image.prefetch(cdnPath)
     .then(() => {/*console.log('Data fetched: ', cdnPath)*/})
     .catch(error => {console.log(error + ' - ' + cdnPath)})
+}
+
+function* sendImageToChat(databasePath, cdnPath, info) {
+  try {
+    let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
+    if (uid) {
+      const {settings, cdnProfilePicture} = yield select(state => state.authReducer)
+      const photo = databasePath.substring(databasePath.lastIndexOf('/')+1)
+      const createdAt = Date.now()
+      const tempId = 'temp_id_' + createdAt
+      const name = settings.first_name
+      let text = ''
+      if (name !== '')
+        text = name + '\'s ' + info
+      else
+        text = 'My ' + info
+      let message = { 
+        _id: tempId,
+        text,
+        createdAt: createdAt,
+        user: {
+          _id: deviceId,
+          name,
+          avatar: cdnProfilePicture
+        },
+        image: cdnPath
+      }
+      firebase.database().ref(databasePath).update({'notifyTrainer': true})
+      firebase.database().ref(databasePath + '/messages').push({
+        uid,
+        deviceId,
+        messageDeviceId: deviceId,
+        photo,
+        createdAt,
+        clientRead: true,
+        trainerRead: false,
+        message
+      })
+      yield put ({type: STORE_CHAT_SUCCESS})
+    }
+    else
+      throw 'User not authenticated'
+  }
+  catch(error) {
+    yield put ({type: STORE_CHAT_ERROR, error})
+  }
 }
 
 const sendToAWS = (image, fileName) => {
@@ -135,8 +181,12 @@ function* loadFirebaseCall() {
     const sReducer = yield select(state => state.selectedReducer)
     const {fileTail, fileName} = yield call (prepFirebase, uid)
     yield call(sendToFirebase, uid, cReducer, sReducer, fileTail, fileName)
-    yield put ({type: SEND_FIREBASE_CAMERA_SUCCESS})
+    yield put({type: SEND_FIREBASE_CAMERA_SUCCESS})
     yield fork(loadAWSCall, fileName)
+    yield take(SEND_AWS_SUCCESS)
+    const databasePath = '/global/' + deviceId + '/photoData/' + fileTail
+    const cdnPath = turlHead+fileName
+    yield fork(sendImageToChat, databasePath, cdnPath, cReducer.mealType)
   }
   catch(error) {
     yield put ({type: SEND_FIREBASE_ERROR, error})

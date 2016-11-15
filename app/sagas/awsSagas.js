@@ -62,12 +62,8 @@ function* sendImageToChat(databasePath, cdnPath, info) {
       const photo = databasePath.substring(databasePath.lastIndexOf('/')+1)
       const createdAt = Date.now()
       const tempId = 'temp_id_' + createdAt
-      const name = settings.first_name
-      let text = ''
-      if (name !== '')
-        text = name + '\'s ' + info
-      else
-        text = 'My ' + info
+      const name = settings.first_name ? settings.first_name : ''
+      const text = 'My ' + info
       let message = { 
         _id: tempId,
         text,

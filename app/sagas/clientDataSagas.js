@@ -134,7 +134,6 @@ function* triggerRemInfoChild() {
 
 function* syncData() {
   let clients = yield select(state => state.trainerReducer.clients)
-  console.log('Clients: ', clients)
   for (let i = 0; i < clients.length; i++) {
     let path = '/global/' + clients[i]
     yield fork(db.sync, path + '/photoData', {

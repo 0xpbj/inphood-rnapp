@@ -3,7 +3,7 @@ import {
   CLIENT_APP_INVITE, FRIEND_APP_INVITE, GROUP_APP_INVITE,
   APP_INVITE_ERROR, APP_INVITE_SUCCESS, SEND_AWS_SUCCESS,
   SETUP_CLIENT_ERROR, SETUP_REFERRAL_ERROR, SETUP_GROUP_ERROR,
-  RESET_BRANCH_INFO,
+  RESET_BRANCH_INFO, REMOVE_TRAINER, REMOVE_TRAINER_ERROR
 } from '../constants/ActionTypes'
 
 import {REHYDRATE} from 'redux-persist/constants'
@@ -38,9 +38,30 @@ const getUrl = (branchUniversalObject, linkProperties, controlParams) => {
   .then(shareUrl => ({shareUrl}))
 }
 
-function* setupClient() {
+function* removeTrainer() {
   try {
     const {referralSetup, referralType, referralDeviceId, uid} = yield select(state => state.authReducer)
+    if (referralSetup === 'accept' && referralType === 'client') {
+      firebase.database().ref('/global/' + deviceId + '/userInfo/public')
+      .update({
+        referralSetup: 'pending',
+        referralName: '',
+        referralDeviceId: '',
+        referralType: '',
+      })
+      firebase.database().ref('/global/' + referralDeviceId + '/trainerInfo/clientId/' + deviceId).remove()
+      firebase.database().ref('/global/deviceIdMap/' + uid + '/' + referralDeviceId).remove()
+      yield put({type: BRANCH_REFERRAL_INFO, referralType: '', referralSetup: '', referralDeviceId: '', referralName: ''})
+    }
+  }
+  catch (error) {
+    yield put({type: REMOVE_TRAINER_ERROR})
+  }
+}
+
+function* setupClient() {
+  try {
+    const {referralSetup, referralType, referralDeviceId, uid, referralName} = yield select(state => state.authReducer)
     if (referralSetup === 'pending' && referralType === 'client') {
       const data = yield take(BRANCH_AUTH_SETUP)
       const {response} = data
@@ -54,6 +75,7 @@ function* setupClient() {
     }
   }
   catch (error) {
+    console.log('Client Setup: ', error)
     yield put({type: SETUP_CLIENT_ERROR})
   }
 }
@@ -94,7 +116,7 @@ function* setupTrainer() {
     }
   }
   catch (error) {
-    console.log(error)
+    console.log('Referral Error: ', error)
     yield put({type: SETUP_REFERRAL_ERROR})
   }
 }
@@ -141,4 +163,5 @@ export default function* rootSaga() {
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], branchInvite)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], setupClient)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], setupTrainer)
+  yield fork(takeLatest, [REMOVE_TRAINER], removeTrainer)
 }

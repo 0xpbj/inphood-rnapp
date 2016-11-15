@@ -103,7 +103,6 @@ export default class Start extends Component {
                      + '\nDevice Locale: ' + DeviceInfo.getDeviceLocale()
                      + '\nDevice Country: ' + DeviceInfo.getDeviceCountry()
                      + '\nApp Instance ID: ' + DeviceInfo.getInstanceID()
-    // console.log(deviceData)
     Communications.email(['support@inphood.com'],null,null,'Need Help',deviceData)
   }
   render() {
@@ -139,6 +138,7 @@ export default class Start extends Component {
               {this.userSettingsButton()}
               {this.clientAppInviteButton()}
               {this.friendAppInviteButton()}
+              {this.removeTrainer()}
               {this.logOutButton()}
             </View>
             {this.flexOneSpacerView()}
@@ -288,11 +288,25 @@ export default class Start extends Component {
             style={CommonStyles.cancelButton}
             underlayColor='#99d9f4'
             onPress={() => this.props.loginRequest()}>
-            <Text style={CommonStyles.buttonText}>Try App</Text>
+            <Text 
+              style={[CommonStyles.buttonText, {fontWeight: 'bold', fontSize: 16}]}>
+              Try App
+            </Text>
           </TouchableHighlight>
         </View>
       </View>
     )
+  }
+  removeTrainer() {
+    if (this.props.auth.referralSetup === 'accept') {
+      return (
+        <TouchableHighlight
+          style={[CommonStyles.iconTextButton, {backgroundColor: 'red', borderColor: 'red'}]}
+          onPress={() => this.props.removeTrainer()}>
+          {this.iconTextButton("ios-remove-circle-outline", 'Remove Trainer')}
+        </TouchableHighlight>
+      )
+    }
   }
   logOutButton() {
     return (

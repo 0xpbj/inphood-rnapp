@@ -17,11 +17,6 @@ const vision = new clarifai.App(
   clarifaiClientSecret
 )
 
-const testCV = () => {
-  vision.models.predict(clarifai.FOOD_MODEL, 'https://samples.clarifai.com/cookies.jpeg')
-  .then(response => console.log(response))
-}
-
 const get64Data = (file) => {
   RNFS.readFile(file.substring(7), 'base64')
   .then((data) => {

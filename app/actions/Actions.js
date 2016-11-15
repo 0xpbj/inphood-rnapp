@@ -61,6 +61,7 @@ import {
   BRANCH_AUTH_SETUP,
   STORE_PROFILE_PICTURE,
   STORE_USER_NAME,
+  REMOVE_TRAINER,
 } from '../constants/ActionTypes'
 
 export function pushExp (route) {
@@ -436,5 +437,11 @@ export function storeUserName(name) {
   return {
     type: STORE_USER_NAME,
     name
+  }
+}
+
+export function removeTrainer() {
+  return {
+    type: REMOVE_TRAINER
   }
 }

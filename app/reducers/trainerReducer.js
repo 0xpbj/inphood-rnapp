@@ -1,7 +1,7 @@
 import { 
   ADD_CLIENTS, NUMBER_OF_CLIENTS,
   ADD_INFOS, ADD_PHOTOS, ADD_MESSAGES, 
-  LOGOUT_SUCCESS, REMOVE_PHOTO,
+  LOGOUT_SUCCESS, REMOVE_PHOTO, REMOVE_CLIENT
 } from '../constants/ActionTypes'
 
 import Config from 'react-native-config'
@@ -19,11 +19,26 @@ const initialState = {
 }
 
 export default function trainer (state = initialState, action) {
+  let index = 0
   switch (action.type) {
     case ADD_CLIENTS:
       return {
         ...state,
         clients: [...state.clients, action.child]
+      }
+    case REMOVE_CLIENT:
+      index = state.clients.indexOf(action.child)
+      if (index > -1) {
+        let clients = state.clients
+        clients.splice(index, 1)
+        return {
+          ...state,
+          clients: clients,
+          numClients: state.numClients - 1
+        }
+      }
+      else {
+        return state
       }
     case ADD_INFOS:
       return {
@@ -49,7 +64,7 @@ export default function trainer (state = initialState, action) {
         numClients: action.count
       }
     case REMOVE_PHOTO:
-      const index = state.databasePaths.indexOf(action.databasePath)
+      index = state.databasePaths.indexOf(action.databasePath)
       if (index > -1) {
         let databasePaths = state.databasePaths
         databasePaths.splice(index, 1)

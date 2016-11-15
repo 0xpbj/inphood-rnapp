@@ -132,7 +132,7 @@ export default class GalleryListView extends Component{
     else if (!size) {
       return (
         <View style={CommonStyles.addPhotosMessage}>
-          <Text style={{textAlign: 'center'}}>Swipe left to add photos...</Text>
+          <Text style={{textAlign: 'center'}}>Swipe right to add photos...</Text>
         </View>
       )
     }
@@ -234,10 +234,6 @@ export default class GalleryListView extends Component{
         {showNotification}
       </View>
     )
-  }
-  _goToSettings() {
-    this.props.goToSettings(true)
-    this.props.changeTab(1)
   }
   _pressRow(databasePath: string, cdnPath: string) {
     if (!this.props.auth.settings.first_name) {

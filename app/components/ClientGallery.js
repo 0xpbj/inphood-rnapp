@@ -81,7 +81,7 @@ export default class ClientGallery extends Component{
             source={{uri: this.props.clientData.clientPhoto}}
             style={CommonStyles.clientGalleryProfileImage}
           />
-          <Text style={CommonStyles.clientGalleryProfileNameText}>{name[0]}'s InPhood</Text>
+          <Text style={CommonStyles.clientGalleryProfileNameText}>{name[0]}'s inPhood</Text>
         </View>
         {content}
       </View>

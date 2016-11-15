@@ -47,10 +47,10 @@ function* watchProfilePicCall() {
 const prefetchData = (cdnPath) => {
   const delay = Date.now() + 5000
   while (Date.now() < delay) {
-    console.log('waiting...')
+    // console.log('waiting...')
   }
   return Image.prefetch(cdnPath)
-    .then(() => {console.log('Data fetched: ', cdnPath)})
+    .then(() => {/*console.log('Data fetched: ', cdnPath)*/})
     .catch(error => {console.log(error + ' - ' + cdnPath)})
 }
 

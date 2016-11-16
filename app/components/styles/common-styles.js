@@ -235,7 +235,7 @@ module.exports = StyleSheet.create({
     backgroundColor: 'red',
     top: 0,
     bottom: 0,
-    right: 0,
+    right: 7,
     width: 24,
     height: 24,
     borderRadius: 12,
@@ -243,7 +243,8 @@ module.exports = StyleSheet.create({
   trashView: {
     flex: 1,
     position: 'absolute',
-    bottom: 10,
+    backgroundColor: 'transparent',
+    bottom: 0,
     right: 10,
   },
   galleryRow: {

@@ -2,7 +2,7 @@ import {
   LOGIN_SUCCESS, ADD_CLIENTS, INIT_DATA, NUMBER_OF_CLIENTS,
   syncCountClientIdChild, syncAddedClientIdChild, syncRemovedClientIdChild,
   SYNC_COUNT_CLIENTID_CHILD, SYNC_ADDED_CLIENTID_CHILD, SYNC_REMOVED_CLIENTID_CHILD,
-  REMOVE_CLIENT, REMOVE_CLIENT_ERROR
+  REMOVE_CLIENT, REMOVE_CLIENT_ERROR, REMOVE_TRAINER_CLIENT
 } from '../constants/ActionTypes'
 import {REHYDRATE} from 'redux-persist/constants'
 
@@ -83,16 +83,32 @@ function* removeClient() {
   while (true) {
     const {child} = yield take(REMOVE_CLIENT)
     try {
-      firebase.database().ref('/global/' + child + '/userInfo/public')
+      firebase.database().ref('/global/' + child + '/referralInfo')
       .update({
-        referralSetup: 'pending',
+        referralSetup: '',
         referralName: '',
         referralDeviceId: '',
         referralType: '',
       })
       yield call(updateFirebaseMap, uid, child, true)
+      yield put({type: BRANCH_REFERRAL_INFO, referralType: '', referralSetup: '', referralDeviceId: deviceId, referralName: ''})
     }
     catch (error) {
+      yield put({type: REMOVE_CLIENT_ERROR})
+    }
+  }
+}
+
+function* removeTrainerClient() {
+  while (true) {
+    const {clientId} = yield take(REMOVE_TRAINER_CLIENT)
+    let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
+    try {
+      firebase.database().ref('/global/' + deviceId + '/trainerInfo/clientId/' + clientId).remove()
+      yield call(updateFirebaseMap, uid, clientId, true)
+    }
+    catch (error) {
+      console.log(error)
       yield put({type: REMOVE_CLIENT_ERROR})
     }
   }
@@ -103,5 +119,6 @@ export default function* rootSaga() {
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerGetClientIdChild)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerRemClientIdChild)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], triggerGetClientIdCount)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], removeTrainerClient)
   yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], removeClient)
 }

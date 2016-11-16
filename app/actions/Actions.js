@@ -62,6 +62,7 @@ import {
   STORE_PROFILE_PICTURE,
   STORE_USER_NAME,
   REMOVE_TRAINER,
+  REMOVE_TRAINER_CLIENT,
 } from '../constants/ActionTypes'
 
 export function pushExp (route) {
@@ -246,6 +247,13 @@ export function removeClientPhoto(path) {
   return {
     type: REMOVE_CLIENT_PHOTO,
     path
+  }
+}
+
+export function removeTrainerClient(clientId) {
+  return {
+    type: REMOVE_TRAINER_CLIENT,
+    clientId
   }
 }
 

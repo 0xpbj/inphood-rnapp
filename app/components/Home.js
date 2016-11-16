@@ -13,7 +13,6 @@ import ScrollableTabView from 'react-native-scrollable-tab-view'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import CommonStyles from './styles/common-styles'
-// import Groups from '../containers/GroupsContainer'
 import Gallery from '../containers/GalleryContainer'
 import Clients from '../containers/ExpertContainer'
 import Extras from '../containers/ExtrasContainer'
@@ -23,20 +22,20 @@ const HomeTabBar = React.createClass({
   tabTitle: ['Home', 'Clients', 'Extras'],
   setAnimationValue({ value, }) {
     this.tabIcons.forEach((icon, i) => {
-      const progress = (value - i >= 0 && value - i <= 1) ? value - i : 1;
+      const progress = (value - i >= 0 && value - i <= 1) ? value - i : 1
       icon.setNativeProps({
         style: {
           color: this.iconColor(progress),
         },
-      });
-    });
+      })
+    })
   },
   //color between rgb(59,89,152) and rgb(204,204,204)
   iconColor(progress) {
-    const red = 59 + (204 - 59) * progress;
-    const green = 89 + (204 - 89) * progress;
-    const blue = 152 + (204 - 152) * progress;
-    return `rgb(${red}, ${green}, ${blue})`;
+    const red = 59 + (204 - 59) * progress
+    const green = 89 + (204 - 89) * progress
+    const blue = 152 + (204 - 152) * progress
+    return `rgb(${red}, ${green}, ${blue})`
   },
   render() {
     return <View style={CommonStyles.tabs}>
@@ -82,10 +81,6 @@ export default class HomeTabs extends Component {
             auth={this.props.auth}
           />
         )
-      // case 'Groups':
-      //   return (
-      //     <Groups />
-      //   )
       case 'Extras':
         return (
           <Extras />
@@ -107,7 +102,7 @@ export default class HomeTabs extends Component {
     //    On a Nexus 5X, the following values are returned ...
     //      DeviceInfo.getBrand():      google
     //      DeviceInfo.getModel():      Nexus 5X
-    //      DeviceInfo.getUserAgent():  Dalvik/2.1.0 (Linux; U; Android 7.0; Nexus 5X Build/NBD90W)
+    //      DeviceInfo.getUserAgent():  Dalvik/2.1.0 (Linux U Android 7.0 Nexus 5X Build/NBD90W)
     //
     const brandStrLC = DeviceInfo.getBrand().toLowerCase()
 

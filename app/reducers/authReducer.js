@@ -17,10 +17,8 @@ const initialState = {
   settings: {},
   referralSetup: false,
   referralType: '',
-  referralId: '',
   referralSetup: 'pending',
   referralName: '',
-  referralId: '',
   referralDeviceId: '',
   localProfilePicture: '',
   cdnProfilePicture: '',
@@ -68,7 +66,6 @@ export default function authentication(state = initialState, action) {
         ...state,
         referralSetup: action.referralSetup,
         referralType: action.referralType,
-        referralId: action.referralId,
         referralName: action.referralName,
         referralDeviceId: action.referralDeviceId
       }

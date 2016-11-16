@@ -112,19 +112,12 @@ function* loginFlow() {
       yield put ({type: STORE_DEVICE_ID, deviceId})
       const data = (yield call(db.getPath, path)).val()
       if (data) {
-        const referralDeviceId = data.referralDeviceId ? data.referralDeviceId : ''
         const birthday = data.birthday ? data.birthday : ''
         const email = data.email ? data.email : ''
         const diet = data.diet ? data.diet : ''
         const height = data.height ? data.height : ''
         const name = data.name ? data.name : ''
         let picture = data.picture ? data.picture : ''
-        const referralSetup = data.referralSetup ? data.referralSetup : ''
-        const referralType = data.referralType ? data.referralType : ''
-        const referralId = data.referralId ? data.referralId : ''
-        const referralName = data.referralName ? data.referralName : ''
-        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralId, referralDeviceId, referralName})
-        yield put({type: BRANCH_AUTH_SETUP, response: referralSetup})
         const values = name ? name.split(" ") : null
         const first_name = name ? values[0] : ''
         const last_name = name ? values[1] : ''
@@ -148,6 +141,16 @@ function* loginFlow() {
           picture: defaultPicture,
           deviceId
         })
+      }
+      const refPath = '/global/' + deviceId + '/referralInfo'
+      const refData = (yield call(db.getPath, refPath)).val()
+      if (refData) {
+        const referralDeviceId = refData.referralDeviceId ? refData.referralDeviceId : ''
+        const referralSetup = refData.referralSetup ? refData.referralSetup : ''
+        const referralType = refData.referralType ? refData.referralType : ''
+        const referralName = refData.referralName ? refData.referralName : ''
+        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralDeviceId, referralName})
+        yield put({type: BRANCH_AUTH_SETUP, response: referralSetup})
       }
       yield put ({type: LOGIN_IN_PROGRESS, flag: false})
       yield put ({type: LOGIN_SUCCESS})

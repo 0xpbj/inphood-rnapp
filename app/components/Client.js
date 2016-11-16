@@ -2,18 +2,21 @@ import React, {
   Component
 } from "react";
 import {
-  Image,
   View,
   Text,
+  Alert,
+  Image,
   ListView,
   Platform,
   StyleSheet,
+  TouchableOpacity,
   TouchableHighlight,
   RecyclerViewBackedScrollView,
 } from 'react-native'
 
 import CommonStyles from './styles/common-styles'
 import Spinner from 'react-native-loading-spinner-overlay'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const route = {
   type: 'push',
@@ -84,6 +87,11 @@ export default class Client extends Component {
             </View>
           </View>
         </TouchableHighlight>
+        <TouchableOpacity
+          style={CommonStyles.trashView}
+          onPress={this._removeClient.bind(this, clientId)}>
+          <Icon name="ios-trash-outline" size={30} color='red'/>
+        </TouchableOpacity>
         {showNotification}
       </View>
     )
@@ -103,6 +111,19 @@ export default class Client extends Component {
           backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
         }}
       />
+    )
+  }
+  _removeClient(clientId) {
+    Alert.alert(
+     'Delete Client?',
+     '',
+     [
+        {text: 'Delete',
+        onPress: () => {
+          this.props.removeTrainerClient(clientId)
+        }, style: 'destructive'},
+        {text: 'Cancel'}
+     ]
     )
   }
 }

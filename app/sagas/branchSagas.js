@@ -62,12 +62,9 @@ function* removeTrainer() {
 
 function* setupClient() {
   try {
-    console.log("INSIDE SETUPCLIENT CALL")
     const {referralSetup, referralType, referralDeviceId, uid, referralName} = yield select(state => state.authReducer)
     if (referralSetup === 'pending' && referralType === 'client') {
-      console.log("WAITING FOR AUTH CALL")
       const data = yield take(BRANCH_AUTH_SETUP)
-      console.log("RECIEVED AUTH CALL")
       const {response} = data
       if (response === 'accept') {
         firebase.database().ref('/global/deviceIdMap/' + uid + '/' + referralDeviceId).set('trainer')

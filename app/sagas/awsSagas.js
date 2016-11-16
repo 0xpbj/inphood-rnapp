@@ -84,7 +84,9 @@ function* sendImageToChat(databasePath, cdnPath, info) {
         createdAt,
         clientRead: true,
         trainerRead: false,
-        message
+        message,
+        cdnPath,
+        databasePath
       })
       yield put ({type: STORE_CHAT_SUCCESS})
     }
@@ -113,9 +115,9 @@ function* loadAWSCall(fileName) {
   try {
     const image = yield select(state => state.selectedReducer.photo)
     yield call (sendToAWS, image, fileName)
-    yield put ({type: SEND_AWS_SUCCESS})
     const cdnPath = turlHead+fileName
     yield call (prefetchData, cdnPath)
+    yield put ({type: SEND_AWS_SUCCESS})
   }
   catch(error) {
     yield put ({type: SEND_AWS_ERROR, error})

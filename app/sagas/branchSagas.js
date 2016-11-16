@@ -3,7 +3,8 @@ import {
   CLIENT_APP_INVITE, FRIEND_APP_INVITE, GROUP_APP_INVITE,
   APP_INVITE_ERROR, APP_INVITE_SUCCESS, SEND_AWS_SUCCESS,
   SETUP_CLIENT_ERROR, SETUP_REFERRAL_ERROR, SETUP_GROUP_ERROR,
-  RESET_BRANCH_INFO, REMOVE_TRAINER, REMOVE_TRAINER_ERROR
+  RESET_BRANCH_INFO, REMOVE_TRAINER, REMOVE_TRAINER_ERROR,
+  SETUP_REFERRAL_SUCCESS
 } from '../constants/ActionTypes'
 
 import {REHYDRATE} from 'redux-persist/constants'
@@ -61,16 +62,18 @@ function* removeTrainer() {
 
 function* setupClient() {
   try {
+    console.log("INSIDE SETUPCLIENT CALL")
     const {referralSetup, referralType, referralDeviceId, uid, referralName} = yield select(state => state.authReducer)
     if (referralSetup === 'pending' && referralType === 'client') {
+      console.log("WAITING FOR AUTH CALL")
       const data = yield take(BRANCH_AUTH_SETUP)
+      console.log("RECIEVED AUTH CALL")
       const {response} = data
-      firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({referralSetup: response})
       if (response === 'accept') {
         firebase.database().ref('/global/deviceIdMap/' + uid + '/' + referralDeviceId).set('trainer')
-        const path = '/global/' + referralDeviceId + '/trainerInfo/clientId/' + deviceId
-        firebase.database().ref(path).set('accept')
+        firebase.database().ref('/global/' + referralDeviceId + '/trainerInfo/clientId/' + deviceId).set('accept')
       }
+      firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({referralSetup: response})
       yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup: response, referralDeviceId, referralName})
     }
   }
@@ -114,6 +117,7 @@ function* setupTrainer() {
         })
       }
     }
+    yield put({type: SETUP_REFERRAL_SUCCESS})
   }
   catch (error) {
     console.log('Referral Error: ', error)
@@ -160,8 +164,8 @@ function* branchInvite() {
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], branchInvite)
-  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], setupClient)
-  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], setupTrainer)
+  yield fork(takeLatest, [LOGIN_SUCCESS], branchInvite)
+  yield fork(takeLatest, [LOGIN_SUCCESS], setupTrainer)
+  yield fork(takeLatest, [SETUP_REFERRAL_SUCCESS], setupClient)
   yield fork(takeLatest, [REMOVE_TRAINER], removeTrainer)
 }

@@ -79,18 +79,9 @@ function* triggerGetPhotoChild() {
     if (data.val().visible) {
       const file = data.val()
       const fDeviceId = file.deviceId
-      const cdnPath = turlHead+file.fileName
       const databasePath = file.databasePath
-      const time = file.time
-      // const delay = Date.now()
-      // while (time < delay + 5000) {
-      //   console.log('waiting...')
-      // }
       var child = {}
       child[fDeviceId] = file
-      // if (file.notifyTrainer) {
-      //   yield put({type: INCREMENT_TRAINER_PHOTO_NOTIFICATION, databasePath, client: fDeviceId})
-      // }
       if (databasePaths.includes(databasePath) === false)
         yield put({type: ADD_PHOTOS, child, databasePath, fileName: file.fileName})
       const messageData = file.messages

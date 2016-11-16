@@ -9,6 +9,7 @@ import {
   ListView,
   Platform,
   Dimensions,
+  ActivityIndicator,
   TouchableHighlight,
   RecyclerViewBackedScrollView,
 } from 'react-native'
@@ -95,8 +96,31 @@ export default class ClientGallery extends Component{
   }
   _renderRow(data: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     const {fileName, mealType, time, uid, fileTail, caption, title, databasePath} = data
-    const photo = turlHead + fileName
-    const imgBlock = <NetworkImage source={{uri: photo}}/>
+    let imgBlock = ''
+    if (Date.now() < time + 5000) {
+      imgBlock = (
+        <Image style={CommonStyles.galleryListViewThumb} source={{uri:  turlHead + 'placeholder.png'}}>
+          <View style={{backgroundColor: 'rgba(255, 255, 255, 0.40)', flex: 1}}>
+            <View style={{flex: 1, backgroundColor: 'transparent'}}/>
+            <ActivityIndicator
+              animating={true}
+              style={{
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                flexDirection: 'column',
+                flex: 1
+              }}
+              color='black'
+              size="large"
+            />
+            <View style={{flex: 1, backgroundColor: 'transparent'}}/>
+          </View>
+        </Image>
+      )
+    }
+    else {
+      imgBlock = <NetworkImage source={{uri: turlHead + fileName}}/>
+    }
     const mealTime = new Date(time).toDateString()
     const flag = this.props.notification.clientPhotos[databasePath] 
     const notificationBlock = ( 

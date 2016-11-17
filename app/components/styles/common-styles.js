@@ -254,7 +254,7 @@ module.exports = StyleSheet.create({
     backgroundColor: 'red',
     top: 0,
     bottom: 0,
-    right: 0,
+    right: 35,
     width: 16,
     height: 16,
     borderRadius: 8,

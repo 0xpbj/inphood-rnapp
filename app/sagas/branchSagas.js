@@ -45,14 +45,14 @@ function* removeTrainer() {
     if (referralSetup === 'accept' && referralType === 'client') {
       firebase.database().ref('/global/' + deviceId + '/referralInfo')
       .update({
-        referralSetup: '',
+        referralSetup: 'pending',
         referralName: '',
         referralDeviceId: deviceId,
         referralType: '',
       })
       firebase.database().ref('/global/' + referralDeviceId + '/trainerInfo/clientId/' + deviceId).remove()
       firebase.database().ref('/global/deviceIdMap/' + uid + '/' + referralDeviceId).remove()
-      yield put({type: BRANCH_REFERRAL_INFO, referralType: '', referralSetup: '', referralDeviceId: deviceId, referralName: ''})
+      yield put({type: BRANCH_REFERRAL_INFO, referralType: '', referralSetup: 'pending', referralDeviceId: deviceId, referralName: ''})
     }
   }
   catch (error) {
@@ -103,11 +103,11 @@ function* setupTrainer() {
     else if (referralSetup === 'decline') {
       const {uid} = yield select(state => state.authReducer)
       if (uid) {
-        yield put({type: BRANCH_REFERRAL_INFO, referralType: '', referralSetup: '', referralDeviceId: deviceId, referralName: ''})
+        yield put({type: BRANCH_REFERRAL_INFO, referralType: '', referralSetup: 'pending', referralDeviceId: deviceId, referralName: ''})
         firebase.database().ref('/global/' + deviceId + '/referralInfo').update({
           referralType: '',
           referralName: '',
-          referralSetup: '',
+          referralSetup: 'pending',
           referralDeviceId: deviceId,
         })
       }
@@ -123,8 +123,8 @@ function* setupTrainer() {
 function* branchInvite() {
   while (true) {
     try {
-      const {referralType, name} = yield take([CLIENT_APP_INVITE, FRIEND_APP_INVITE])
-      const {uid, settings, deviceId} = yield select(state => state.authReducer)
+      const {referralType} = yield take([CLIENT_APP_INVITE, FRIEND_APP_INVITE])
+      const {settings} = yield select(state => state.authReducer)
       const referralName = settings.first_name
       const branchUniversalObject = branch.createBranchUniversalObject
       (
@@ -135,7 +135,6 @@ function* branchInvite() {
             referralName,
             referralDeviceId: deviceId,
             referralType,
-            referralName,
           },
           contentTitle: 'inPhood Invite',
           contentDescription: 'Sending invite for inPhood'

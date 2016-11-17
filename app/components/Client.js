@@ -65,7 +65,7 @@ export default class Client extends Component {
     const clientId = rowData.id
     const clientImage = <Image style={CommonStyles.clientProfileImage} source={{uri: data.picture}}/>
     const clientName = data.name
-    const flag = this.props.notification.clientUID[clientId]
+    const flag = this.props.notification.clientID[clientId]
     const notificationBlock = ( 
       <View style={CommonStyles.notificationView}>
         <Text style={CommonStyles.notificationText}>{flag}</Text>

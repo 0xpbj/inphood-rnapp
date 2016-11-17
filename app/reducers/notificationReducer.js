@@ -9,16 +9,16 @@ const initialState = {
   client: 0,
   trainer: 0,
   groups: 0,
-  clientUID: [],
+  clientID: [],
   clientPhotos: [],
   galleryPhotos: [],
 }
 
 export default function notification (state = initialState, action) {
-  let uid = ''
+  let id = ''
   let count = 0
   let name = ''
-  let uidData = []
+  let idData = []
   let photoData = []
   let databasePath = ''
   switch (action.type) {
@@ -44,12 +44,12 @@ export default function notification (state = initialState, action) {
         galleryPhotos: photoData
       }
     case INCREMENT_TRAINER_PHOTO_NOTIFICATION:
-      uid = action.client
+      id = action.client
       databasePath = action.databasePath
-      uidData = state.clientUID
-      if(!uidData[uid])
-        uidData[uid] = 0
-      uidData[uid] = uidData[uid] + 1
+      idData = state.clientID
+      if(!idData[id])
+        idData[id] = 0
+      idData[id] = idData[id] + 1
       photoData = state.clientPhotos
       if(!photoData[databasePath])
         photoData[databasePath] = 0
@@ -58,15 +58,15 @@ export default function notification (state = initialState, action) {
         ...state,
         trainer: state.trainer + 1,
         clientPhotos: photoData,
-        clientUID: uidData
+        clientID: idData
       }
     case DECREMENT_TRAINER_PHOTO_NOTIFICATION:
-      uid = action.client
+      id = action.client
       databasePath = action.databasePath
-      uidData = state.clientUID
-      if(!uidData[uid])
-        uidData[uid] = 0
-      uidData[uid] = 0
+      idData = state.clientID
+      if(!idData[id])
+        idData[id] = 0
+      idData[id] = 0
       photoData = state.clientPhotos
       count = photoData[databasePath]
       photoData[databasePath] = 0
@@ -74,7 +74,7 @@ export default function notification (state = initialState, action) {
         ...state,
         trainer: state.trainer - count,
         clientPhotos: photoData,
-        clientUID: uidData
+        clientID: idData
       }
     default:
       return state

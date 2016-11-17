@@ -85,13 +85,13 @@ function* removeClient() {
     try {
       firebase.database().ref('/global/' + child + '/referralInfo')
       .update({
-        referralSetup: '',
+        referralSetup: 'pending',
         referralName: '',
-        referralDeviceId: '',
+        referralDeviceId: deviceId,
         referralType: '',
       })
       yield call(updateFirebaseMap, uid, child, true)
-      yield put({type: BRANCH_REFERRAL_INFO, referralType: '', referralSetup: '', referralDeviceId: deviceId, referralName: ''})
+      yield put({type: BRANCH_REFERRAL_INFO, referralType: '', referralSetup: 'pending', referralDeviceId: deviceId, referralName: ''})
     }
     catch (error) {
       yield put({type: REMOVE_CLIENT_ERROR})
@@ -105,6 +105,13 @@ function* removeTrainerClient() {
     let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
     try {
       firebase.database().ref('/global/' + deviceId + '/trainerInfo/clientId/' + clientId).remove()
+      firebase.database().ref('/global/' + clientId + '/referralInfo')
+      .update({
+        referralSetup: 'pending',
+        referralName: '',
+        referralDeviceId: clientId,
+        referralType: '',
+      })
       yield call(updateFirebaseMap, uid, clientId, true)
     }
     catch (error) {

@@ -95,7 +95,7 @@ export default class ClientGallery extends Component{
     return dataSource.cloneWithRows(list);
   }
   _renderRow(data: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
-    const {fileName, mealType, time, uid, fileTail, caption, title, databasePath} = data
+    const {fileName, mealType, time, deviceId, fileTail, caption, title, databasePath} = data
     let imgBlock = ''
     if (Date.now() < time + 5000) {
       imgBlock = (
@@ -134,7 +134,7 @@ export default class ClientGallery extends Component{
     return (
       <View>
         <TouchableHighlight onPress={() => {
-            this._pressRow(data, databasePath, uid)
+            this._pressRow(data, databasePath, deviceId)
             highlightRow(sectionID, rowID)
           }}>
           <View style={CommonStyles.galleryRow}>
@@ -158,8 +158,8 @@ export default class ClientGallery extends Component{
       </View>
     )
   }
-  _pressRow(photo: string, path: string, uid: string) {
-    this.props.markClientPhotoRead(path, photo, uid)
+  _pressRow(photo: string, path: string, id: string) {
+    this.props.markClientPhotoRead(path, photo, id)
     this.props.feedbackPhoto(path, photo)
     this.props._handleNavigate(route)
   }

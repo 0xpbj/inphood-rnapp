@@ -234,12 +234,12 @@ export function markPhotoRead(path, photo) {
   }
 }
 
-export function markClientPhotoRead(path, photo, uid) {
+export function markClientPhotoRead(path, photo, id) {
   return {
     type: MARK_CLIENT_PHOTO_READ,
     path,
     photo,
-    uid
+    id
   }
 }
 

@@ -73,6 +73,7 @@ export default class AppCamera extends Component {
     return (
       <View style={CommonStyles.flexContainer}>
         <Camera
+          captureAudio={false}
           ref={(cam) => {this.camera = cam}}
           style={[CommonStyles.picturePreview,
                   {height: Dimensions.get('window').height,

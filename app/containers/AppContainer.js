@@ -9,7 +9,8 @@ function mapStateToProps (state) {
     page: state.pageReducer,
     tabs: state.tabReducer,
     media: state.mediaReducer,
-    gallery: state.galNavReducer
+    gallery: state.galNavReducer,
+    notification: state.notificationReducer
   }
 }
 

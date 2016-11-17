@@ -40,7 +40,7 @@ export default class App extends Component {
           />
         }
       >
-        <Media />
+        {/*<Media />*/}
         <Home />
       </ScrollableTabView>
     )

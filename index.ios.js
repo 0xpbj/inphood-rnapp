@@ -1,7 +1,7 @@
 'use strict'
 
 import React, { Component } from "react"
-import {AppRegistry} from "react-native"
+import {Alert, AppRegistry} from "react-native"
 
 import configureStore from './app/store/configureStore'
 const store = configureStore()
@@ -13,12 +13,20 @@ import PushNotification from 'react-native-push-notification'
 
 PushNotification.configure({
   // (optional) Called when Token is generated (iOS and Android)
-  // onRegister: function(token) {
-  //     console.log( 'TOKEN:', token );
-  // },
+  onRegister: function(token) {
+    console.log( 'TOKEN:', token )
+  },
   // (required) Called when a remote or local notification is opened or received
   onNotification: function(notification) {
-      console.log( 'NOTIFICATION:', notification );
+    Alert.alert(
+      'inPhood Message',
+      notification.message,
+      [{
+        text: 'Dismiss',
+        onPress: null,
+      }]
+    )
+    // console.log( 'NOTIFICATION:', notification )
   },
   // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
   // senderID: "YOUR GCM SENDER ID",

@@ -81,7 +81,7 @@ export default class Start extends Component {
       )
     }
     else {
-      this.props.sendFriendAppInvite(value)
+      this.props.sendFriendAppInvite()
     }
   }
   userSettings() {

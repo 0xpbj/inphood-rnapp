@@ -16,9 +16,9 @@ const fbConfig = {
 }
 var { AsyncStorage } = require('react-native')
 
-import sagaMonitor from './sagaMonitor'
-const sagaMiddleware = createSagaMiddleware({sagaMonitor})
-// const sagaMiddleware = createSagaMiddleware()
+// import sagaMonitor from './sagaMonitor'
+// const sagaMiddleware = createSagaMiddleware({sagaMonitor})
+const sagaMiddleware = createSagaMiddleware()
 
 const persistConfig = {
   whitelist: [

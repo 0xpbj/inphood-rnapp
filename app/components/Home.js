@@ -130,7 +130,7 @@ export default class HomeTabs extends Component {
         prerenderingSiblingsNumber={3}
         page={this.props.tabs.index}
         onChangeTab={this.handleChangeTab.bind(this)}
-        renderTabBar={() => <HomeTabBar clientsCount={trainerNotificationCount} homeCount={clientNotificationCount}/>}
+        renderTabBar={() => <HomeTabBar clientCount={trainerNotificationCount} homeCount={clientNotificationCount}/>}
       >
         {tabs}
       </ScrollableTabView>

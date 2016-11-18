@@ -90,60 +90,108 @@ export default class Caption extends Component {
       })
     }
   }
-  render() {
+  _renderImage() {
+    return (
+      <View
+        style={[CommonStyles.selectedImage,
+                CommonStyles.universalMargin]}>
+        <Image
+          style={[{flex:1},
+                  CommonStyles.universalBorderRadius]}
+          resizeMode='cover'
+          source={{uri: this.props.selected.photo}}/>
+      </View>
+    )
+  }
+  _renderSpinner() {
+    return (
+      <View>
+        <Spinner color='black' overlayColor='rgba(0, 0, 0, 0)' visible={this.props._inProgress} />
+      </View>
+    )
+  }
+  _renderTextInput(textInputAutoFocus) {
     let whiteSpace = new RegExp(/^\s+$/)
     const defaultValue = this.props.vision.tags
     const placeholder = this.props.vision.tags === '' ? "Ingredients, e.g.: Beef, Tomatoes ..." : ''
     const selectionColor = this.props.vision.tags === '' ? '' : 'blue'
     const clearButtonMode = this.props.vision.tags === '' ? 'while-editing' : 'always'
+
+    return (
+      <TextInput
+        style={[CommonStyles.singleSegmentView,
+                CommonStyles.universalFontSize]}
+        autoCapitalize="none"
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+        autoFocus={textInputAutoFocus}
+        clearButtonMode={clearButtonMode}
+        returnKeyType="done"
+        onSubmitEditing={
+          (event) => {
+            let text = event.nativeEvent.text
+            if (text === '') {
+              alert ('Please enter ingredients')
+            }
+            else if (whiteSpace.test(text)) {
+              alert ('Please enter proper ingredients')
+            }
+            else {
+              this._workBeforeTransition(text)
+            }
+          }
+        }
+      />
+    )
+  }
+  _renderIOS() {
     return (
       // This view divides the screen into 17 segments.  The bottom 8 segments
       // are left blank for the keyboard.
       <KeyboardAvoidingView behavior='padding' style={CommonStyles.flexContainer}>
-        <View
-          style={[CommonStyles.selectedImage,
-                  CommonStyles.universalMargin]}>
-          <Image
-            style={[{flex:1},
-                    CommonStyles.universalBorderRadius]}
-            resizeMode='cover'
-            source={{uri: this.props.selected.photo}}/>
-        </View>
-        <View>
-          <Spinner color='black' overlayColor='rgba(0, 0, 0, 0)' visible={this.props._inProgress} />
-        </View>
+        {this._renderImage()}
+        {this._renderSpinner()}
         {/*Need this View wrapping TextInput to support single sided border
           text input line.*/}
-        <KeyboardAvoidingView behavior='padding' 
+        <KeyboardAvoidingView behavior='padding'
           style={[CommonStyles.singleSegmentView,
                   CommonStyles.universalInputView,
                   CommonStyles.universalMargin]}>
-          <TextInput
-            style={[CommonStyles.singleSegmentView,
-                    CommonStyles.universalFontSize]}
-            autoCapitalize="none"
-            defaultValue={defaultValue}
-            placeholder={placeholder}
-            autoFocus={true}
-            clearButtonMode={clearButtonMode}
-            returnKeyType="done"
-            onSubmitEditing={
-              (event) => {
-                let text = event.nativeEvent.text
-                if (text === '') {
-                  alert ('Please enter ingredients')
-                }
-                else if (whiteSpace.test(text)) {
-                  alert ('Please enter proper ingredients')
-                }
-                else {
-                  this._workBeforeTransition(text)
-                }
-              }
-            }
-          />
+          {this._renderTextInput(true)}
         </KeyboardAvoidingView>
       </KeyboardAvoidingView>
     )
+  }
+  _renderAndroid() {
+    return (
+      // This view divides the screen into 17 segments.  The bottom 8 segments
+      // are left blank for the keyboard.
+      <View style={CommonStyles.flexContainer}>
+        {this._renderImage()}
+        {/*Need this View wrapping TextInput to support single sided border
+          text input line.*/}
+        <View
+          style={[CommonStyles.singleSegmentView,
+                  CommonStyles.universalInputView,
+                  CommonStyles.universalMargin]}>
+          {this._renderTextInput(false)}
+        </View>
+      </View>
+    )
+  }
+  render() {
+    // Same issue and code as in Selected.js (TODO: less c+p)
+    //
+    // TODO: This is really a hack/workaround for 1.5 Android, but there are a number of
+    //       problems:
+    //         - Android's keyboard doesn't lose focus when you click on the picture
+    //           which usually causes the keyboard to drop down and the picture
+    //           to become larger.
+    //         - There are nested KeyboardAvoidingViews below--not sure if this is
+    //           recommended or causes flicker. A fix is not straightforward either
+    //           as there are issues with the text bar disappearing etc.
+    //       When time permits this needs to be restyled.
+    return (Platform.OS === 'ios' ? this._renderIOS() : this._renderAndroid())
+
   }
 }

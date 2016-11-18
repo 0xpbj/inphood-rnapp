@@ -180,53 +180,76 @@ export default class UserProfile extends Component {
     }
   }
   birthdayDateFormat(date) {
-    if (date) {
-      let monthString = ''
-      switch(date.getMonth()) {
-        case 0:
-          monthString = 'January'
-          break;
-        case 1:
-          monthString = 'February'
-          break;
-        case 2:
-          monthString = 'March'
-          break;
-        case 3:
-          monthString = 'April'
-          break;
-        case 4:
-          monthString = 'May'
-          break;
-        case 5:
-          monthString = 'June'
-          break;
-        case 6:
-          monthString = 'July'
-          break;
-        case 7:
-          monthString = 'August'
-          break;
-        case 8:
-          monthString = 'September'
-          break;
-        case 9:
-          monthString = 'October'
-          break;
-        case 10:
-          monthString = 'November'
-          break;
-        default:
-          // error will always be December b/c it's a great month!
-          monthString = 'December'
-          break;
-      }
-      let newDateString = monthString + ' ' + String(date.getDate()) + ', ' + String(date.getFullYear())
+    // Checking for valid date.
+    // Adapted from: http://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript
+    if (Object.prototype.toString.call(date) === "[object Date]") {
+      if (isNaN(date.valueOf())) {
+        // Same as this._getMaximumDate, but can't use that here b/c this
+        // is a callback fn and for whatever reason, functions are not defined
+        // yet.
 
-      return (newDateString)
+        // Minimum user age is 13 for our product (California Law)
+        //
+        //    millisecondsFor13Years = 13 yrs * 365.25 d/yr * 24 hr/d * 60 min/hr *
+        //                             60 sec/min * 1000ms/sec
+        let millisecondsFor13Years = 13 * 365.25 * 24 * 60 * 60 * 1000
+        date = new Date(Date.now() - millisecondsFor13Years)
+      }
     }
+
+    let monthString = ''
+    switch(date.getMonth()) {
+      case 0:
+        monthString = 'January'
+        break;
+      case 1:
+        monthString = 'February'
+        break;
+      case 2:
+        monthString = 'March'
+        break;
+      case 3:
+        monthString = 'April'
+        break;
+      case 4:
+        monthString = 'May'
+        break;
+      case 5:
+        monthString = 'June'
+        break;
+      case 6:
+        monthString = 'July'
+        break;
+      case 7:
+        monthString = 'August'
+        break;
+      case 8:
+        monthString = 'September'
+        break;
+      case 9:
+        monthString = 'October'
+        break;
+      case 10:
+        monthString = 'November'
+        break;
+      default:
+        monthString = 'December'
+        break;
+    }
+
+    let newDateString = monthString + ' ' +
+                        String(date.getDate()) + ', ' +
+                        String(date.getFullYear())
+    return newDateString
   }
-  render() {
+  // Without this iOS now starts at year 0--#FML / Good grief!
+  _getMinimumDate() {
+    // Lets shoot for 100 years--I can't imagine too many 100+ year olds are
+    // interested in our App:
+    let millisecondsFor100Years = 100 * 365.25 * 24 * 60 * 60 * 1000
+    return (new Date(Date.now() - millisecondsFor100Years))
+  }
+  _getMaximumDate() {
     // Minimum user age is 13 for our product (California Law)
     // TODO: Need warning somewhere about this and parental consent
     //
@@ -234,6 +257,10 @@ export default class UserProfile extends Component {
     //                             60 sec/min * 1000ms/sec
     let millisecondsFor13Years = 13 * 365.25 * 24 * 60 * 60 * 1000
     let maximumDate = new Date(Date.now() - millisecondsFor13Years)
+
+    return maximumDate
+  }
+  render() {
     // User Profile form for EMAIL AUTHENTICATED USERS:
     //
     var options = {
@@ -243,7 +270,8 @@ export default class UserProfile extends Component {
         },
         birthday: {
           mode: 'date',
-          maximumDate: maximumDate,
+          minimumDate: this._getMinimumDate(),
+          maximumDate: this._getMaximumDate(),
           config: {
             format: this.birthdayDateFormat,
           }
@@ -273,7 +301,7 @@ export default class UserProfile extends Component {
           hidden: true,
         },
       },
-      }
+    }
 
     let value = {
       first_name: this.props.settings.first_name,

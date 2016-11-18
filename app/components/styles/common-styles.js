@@ -508,7 +508,10 @@ module.exports = StyleSheet.create({
   // Omits flex to permit inifinite size for scrolling:
   universalFormScrollingContainer: {
     justifyContent: 'center',
-    padding: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 20,
+    paddingLeft: 20,
     backgroundColor: 'white',
   },
   //

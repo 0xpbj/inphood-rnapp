@@ -260,7 +260,7 @@ export default class UserProfile extends Component {
 
     return maximumDate
   }
-  render() {
+  _renderScrollView() {
     // User Profile form for EMAIL AUTHENTICATED USERS:
     //
     var options = {
@@ -312,28 +312,63 @@ export default class UserProfile extends Component {
       diet: this.dietStrToDietEnum(this.props.settings.diet),
       picture: this.props.settings.picture,
     }
+
+    return (
+      <ScrollView
+        contentContainerStyle={CommonStyles.universalFormScrollingContainer}>
+          <Form
+            ref="form"
+            value={value}
+            type={UserProfileForm}
+            options={options}/>
+      </ScrollView>
+    )
+  }
+  _renderButton() {
+    return (
+      <Button
+        onPress={this.storeFormData.bind(this)}
+        label='Submit Changes'
+        color='green'
+      />
+    )
+  }
+  _renderKeyboardAvoidingView() {
     const scrollViewSegments = 9
     const buttonSegment = 1
-    return (
+
+    return(
       <KeyboardAvoidingView behavior='padding' style={{flex: 1}}>
         <KeyboardAvoidingView behavior='padding' style={{flex: scrollViewSegments}}>
-          <ScrollView
-            contentContainerStyle={CommonStyles.universalFormScrollingContainer}>
-              <Form
-                ref="form"
-                value={value}
-                type={UserProfileForm}
-                options={options}/>
-          </ScrollView>
+          {this._renderScrollView()}
         </KeyboardAvoidingView>
         <KeyboardAvoidingView behavior='padding' style={{flex: buttonSegment, backgroundColor: 'white'}}>
-          <Button
-            onPress={this.storeFormData.bind(this)}
-            label='Submit'
-            color='#006400'
-          />
+          {this._renderButton()}
         </KeyboardAvoidingView>
       </KeyboardAvoidingView>
     )
+  }
+  _renderRegularView() {
+    const scrollViewSegments = 10
+    const buttonSegment = 1
+
+    return (
+      <View style={{flex: 1}}>
+        <View style={{flex: buttonSegment, backgroundColor: 'white', paddingTop: 10}}>
+          {this._renderButton()}
+        </View>
+        <View style={{flex: scrollViewSegments, backgroundColor: 'white'}}>
+          {this._renderScrollView()}
+        </View>
+      </View>
+    )
+  }
+  render() {
+    // Anrdoid / iOS keyboards behave differently. In this scene, using KeyboardAvoidingView
+    // introduces large grey bars into bht Android and iOS. The issue PBJ was probably trying
+    // to address was the submit changes button being obscured by the keyboard. I've fixed that
+    // by moving it to the top and confirming it works on both the 5SE and our 5X
+
+    return this._renderRegularView()
   }
 }

@@ -90,7 +90,7 @@ export default class Start extends Component {
   sendEmail() {
     const deviceData = '\n\n\n\n\n\n'
                      + '\nDevice Manufacturer: ' + DeviceInfo.getManufacturer()
-                     + '\nDevice Brand: ' + DeviceInfo.getBrand() 
+                     + '\nDevice Brand: ' + DeviceInfo.getBrand()
                      + '\nDevice Model: ' + DeviceInfo.getModel()
                      + '\nDevice ID: ' + DeviceInfo.getDeviceId()
                      + '\nSystem Name: ' + DeviceInfo.getSystemName()
@@ -132,7 +132,7 @@ export default class Start extends Component {
       return (
         <View style={CommonStyles.extrasButtonContainer}>
             {this.flexOneSpacerView()}
-            <View style={{flex: 2}}>
+            <View style={{flex: 3}}>
               {this.profileImageButton()}
               {this.helpEmailButton()}
               {this.userSettingsButton()}
@@ -288,7 +288,7 @@ export default class Start extends Component {
             style={CommonStyles.cancelButton}
             underlayColor='#99d9f4'
             onPress={() => this.props.loginRequest()}>
-            <Text 
+            <Text
               style={[CommonStyles.buttonText, {fontWeight: 'bold', fontSize: 16}]}>
               Try App
             </Text>

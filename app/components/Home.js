@@ -54,13 +54,15 @@ const HomeTabBar = React.createClass({
         }
         return (
           <TouchableOpacity key={tab} onPress={() => this.props.goToPage(i)} style={CommonStyles.tab}>
-            <Icon
-              name={tab}
-              size={40}
-              color={this.props.activeTab === i ? '#006400' : 'rgb(204,204,204)'}
-              ref={(icon) => { this.tabIcons[i] = icon }}
-            />
-            {showNotification}
+            <View>
+              <Icon
+                name={tab}
+                size={40}
+                color={this.props.activeTab === i ? '#006400' : 'rgb(204,204,204)'}
+                ref={(icon) => { this.tabIcons[i] = icon }}
+              />
+              {showNotification}
+            </View>
           </TouchableOpacity>
         )
       })}

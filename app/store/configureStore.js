@@ -26,6 +26,7 @@ const persistConfig = {
   blacklist: [
     'authReducer',
     'galReducer',
+    'infoReducer',
     'trainerReducer',
     'captionReducer',
     'chatReducer',

@@ -88,15 +88,11 @@ export default class HomeTabs extends Component {
     switch (key) {
       case 'Home':
         return (
-          <Gallery
-            auth={this.props.auth}
-          />
+          <Gallery />
         )
       case 'Clients':
         return (
-          <Clients
-            auth={this.props.auth}
-          />
+          <Clients />
         )
       case 'Extras':
         return (

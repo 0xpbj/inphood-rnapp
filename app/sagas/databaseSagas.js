@@ -47,9 +47,9 @@ function* readPhotoFlow() {
 
 function* sendChatData() {
   try {
-    let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
+    let {uid} = yield select(state => state.authReducer)
     if (uid) {
-      const {referralDeviceId, referralSetup} = yield select(state => state.authReducer)
+      const {referralDeviceId, referralSetup} = yield select(state => state.infoReducer)
       const {client, chatMessages, databasePath} = yield select(state => state.chatReducer)
       const photo = databasePath.substring(databasePath.lastIndexOf('/')+1)
       const createdAt = Date.now()
@@ -136,7 +136,7 @@ function* syncChatData() {
 }
 
 function* isNewUser() {
-  let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
+  const {uid} = yield select(state => state.authReducer)
   if (uid) {
     const path = '/global/' + deviceId + '/photoData'
     const flag = (yield call(db.getPath, path)).exists()

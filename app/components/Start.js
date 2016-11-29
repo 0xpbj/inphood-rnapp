@@ -55,7 +55,7 @@ export default class Start extends Component {
     }
   }
   clientAppInvite() {
-    if (!this.props.auth.settings.first_name) {
+    if (!this.props.info.settings.first_name) {
       Alert.alert(
         'Invite Error',
         'Your name is required for invite',
@@ -70,7 +70,7 @@ export default class Start extends Component {
     }
   }
   friendAppInvite() {
-    if (!this.props.auth.settings.first_name) {
+    if (!this.props.info.settings.first_name) {
       Alert.alert(
         'Invite Error',
         'Your name is required for invite',
@@ -106,7 +106,7 @@ export default class Start extends Component {
     Communications.email(['support@inphood.com'],null,null,'Need Help',deviceData)
   }
   render() {
-    if (this.props.auth.inProgress) {
+    if (this.props.info.inProgress) {
       return this.launchScreen()
     }
     else if (this.props.auth.uid === '') {
@@ -298,7 +298,7 @@ export default class Start extends Component {
     )
   }
   removeTrainer() {
-    if (this.props.auth.referralSetup === 'accept') {
+    if (this.props.info.referralSetup === 'accept') {
       return (
         <TouchableHighlight
           style={[CommonStyles.iconTextButton, {backgroundColor: 'red', borderColor: 'red'}]}
@@ -339,7 +339,7 @@ export default class Start extends Component {
     })
   }
   profileImageButton() {
-    let uri = this.props.auth.cdnProfilePicture ? this.props.auth.cdnProfilePicture : this.props.auth.localProfilePicture
+    let uri = this.props.info.cdnProfilePicture ? this.props.info.cdnProfilePicture : this.props.info.localProfilePicture
     const buttonColor = this.props.auth.uid ? '#006400' : 'white'
     return (
       <TouchableOpacity

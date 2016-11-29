@@ -22,9 +22,9 @@ export default class Selected extends Component {
     this._workBeforeTransition = this._workBeforeTransition.bind(this)
   }
   _workBeforeTransition(text) {
-    if (this.props.auth.referralSetup === 'pending' && this.props.auth.referralType === 'client') {
+    if (this.props.info.referralSetup === 'pending' && this.props.info.referralType === 'client') {
       Alert.alert(
-       'Share data with your trainer: ' + this.props.auth.referralName + '?',
+       'Share data with your trainer: ' + this.props.info.referralName + '?',
        '',
        [
           {text: 'Decline',

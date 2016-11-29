@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import tabReducer from './tabReducer'
 import pageReducer from './pageReducer'
 import authReducer from './authReducer'
+import infoReducer from './infoReducer'
 import mediaReducer from './mediaReducer'
 import captionReducer from './captionReducer'
 import extReducer from './extReducer'
@@ -20,6 +21,7 @@ const appReducer = combineReducers({
     tabReducer,
     pageReducer,
     authReducer,
+    infoReducer,
     mediaReducer,
     captionReducer,
     clientDataReducer,

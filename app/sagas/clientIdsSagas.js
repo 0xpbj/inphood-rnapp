@@ -40,7 +40,7 @@ function* triggerGetClientIdChild() {
   const {clients} = yield select(state => state.trainerReducer)
   while (true) {
     const { payload: { data } } = yield take(SYNC_ADDED_CLIENTID_CHILD)
-    const uid = firebase.auth().currentUser.uid
+    const {uid} = yield select(state => state.authReducer)
     const response = data.val()
     if (response === 'accept') {
       const child = data.key
@@ -55,7 +55,7 @@ function* triggerGetClientIdChild() {
 function* triggerRemClientIdChild() {
   while (true) {
     const { payload: { data } } = yield take(SYNC_REMOVED_CLIENTID_CHILD)
-    const uid = firebase.auth().currentUser.uid
+    const {uid} = yield select(state => state.authReducer)
     const child = data.key
     const {clients} = yield select(state => state.trainerReducer)
     if (clients.includes(child)) {
@@ -66,8 +66,8 @@ function* triggerRemClientIdChild() {
 }
 
 function* syncClientId() {
-  let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
-  if (uid !== '') {
+  const {uid} = yield select(state => state.authReducer)
+  if (uid) {
     let path = '/global/' + deviceId + '/trainerInfo'
     yield fork(db.sync, path, {
       child_added: syncCountClientIdChild,
@@ -102,7 +102,7 @@ function* removeClient() {
 function* removeTrainerClient() {
   while (true) {
     const {clientId} = yield take(REMOVE_TRAINER_CLIENT)
-    let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
+    const {uid} = yield select(state => state.authReducer)
     try {
       firebase.database().ref('/global/' + deviceId + '/trainerInfo/clientId/' + clientId).remove()
       firebase.database().ref('/global/' + clientId + '/referralInfo')
@@ -115,7 +115,6 @@ function* removeTrainerClient() {
       yield call(updateFirebaseMap, uid, clientId, true)
     }
     catch (error) {
-      console.log(error)
       yield put({type: REMOVE_CLIENT_ERROR})
     }
   }

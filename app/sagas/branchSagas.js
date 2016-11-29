@@ -41,7 +41,8 @@ const getUrl = (branchUniversalObject, linkProperties, controlParams) => {
 
 function* removeTrainer() {
   try {
-    const {referralSetup, referralType, referralDeviceId, uid} = yield select(state => state.authReducer)
+    const {referralSetup, referralType, referralDeviceId} = yield select(state => state.infoReducer)
+    const {uid} = yield select(state => state.authReducer)
     if (referralSetup === 'accept' && referralType === 'client') {
       firebase.database().ref('/global/' + deviceId + '/referralInfo')
       .update({
@@ -62,7 +63,8 @@ function* removeTrainer() {
 
 function* setupClient() {
   try {
-    const {referralSetup, referralType, referralDeviceId, uid, referralName} = yield select(state => state.authReducer)
+    const {referralSetup, referralType, referralDeviceId, referralName} = yield select(state => state.infoReducer)
+    const {uid} = yield select(state => state.authReducer)
     if (referralSetup === 'pending' && referralType === 'client') {
       const data = yield take(BRANCH_AUTH_SETUP)
       const {response} = data
@@ -75,7 +77,6 @@ function* setupClient() {
     }
   }
   catch (error) {
-    console.log('Client Setup: ', error)
     yield put({type: SETUP_CLIENT_ERROR})
   }
 }
@@ -85,7 +86,7 @@ function* setupTrainer() {
     const lastParams = (yield call(getLastParams)).lastParams
     const installParams = (yield call(getInstallParams)).installParams
     const {referralType, referralName, referralDeviceId} = lastParams
-    const {referralSetup} = yield select(state => state.authReducer)
+    const {referralSetup} = yield select(state => state.infoReducer)
     if (referralType === 'client' &&
         referralSetup === 'pending' &&
         (referralDeviceId !== deviceId || lastParams !== installParams)) {
@@ -115,7 +116,6 @@ function* setupTrainer() {
     yield put({type: SETUP_REFERRAL_SUCCESS})
   }
   catch (error) {
-    console.log('Referral Error: ', error)
     yield put({type: SETUP_REFERRAL_ERROR})
   }
 }
@@ -124,7 +124,10 @@ function* branchInvite() {
   while (true) {
     try {
       const {referralType} = yield take([CLIENT_APP_INVITE, FRIEND_APP_INVITE])
-      const {settings} = yield select(state => state.authReducer)
+      const {uid} = yield select(state => state.authReducer)
+      if (!uid)
+        throw 'User not authenticated'
+      const {settings} = yield select(state => state.infoReducer)
       const referralName = settings.first_name
       const branchUniversalObject = branch.createBranchUniversalObject
       (
@@ -158,7 +161,7 @@ function* branchInvite() {
 }
 
 export default function* rootSaga() {
-  yield fork(takeLatest, [LOGIN_SUCCESS], branchInvite)
+  yield fork(takeLatest, [REHYDRATE, LOGIN_SUCCESS], branchInvite)
   yield fork(takeLatest, [LOGIN_SUCCESS], setupTrainer)
   yield fork(takeLatest, [SETUP_REFERRAL_SUCCESS], setupClient)
   yield fork(takeLatest, [REMOVE_TRAINER], removeTrainer)

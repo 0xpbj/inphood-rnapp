@@ -51,7 +51,6 @@ export default class Expert extends Component {
     else if (scene.key === prefix + 'tchat') {
       return (
         <ChatView
-          auth={this.props.auth}
           goBack={this._handleBackAction.bind(this)}
           caller="trainer"
         />

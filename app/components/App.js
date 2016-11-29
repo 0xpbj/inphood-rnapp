@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import {Platform} from 'react-native'
+import React, {Component} from 'react'
+import {NetInfo, Platform} from 'react-native'
+import {CONNECTION_INACTIVE} from '../constants/ActionTypes'
 
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
 import PushNotification from 'react-native-push-notification'
@@ -12,6 +13,15 @@ export default class App extends Component {
   constructor(props) {
     super(props)
   }
+  // componentDidMount() {
+    // const dispatchConnected = isConnected => {
+    //   if (!isConnected)
+    //     this.props.dispatch({type: CONNECTION_INACTIVE})
+    // }
+    // NetInfo.isConnected.fetch().done(() => {
+    //   NetInfo.isConnected.addEventListener('change', dispatchConnected)
+    // })
+  // }
   isBadgeNumberingSupported() {
     // Support:  Does not work for all android devices (https://github.com/leolin310148/ShortcutBadger)
     //
@@ -37,6 +47,8 @@ export default class App extends Component {
     this.props.changePage(i)
   }
   render () {
+    console.log('Build number: ', DeviceInfo.getBuildNumber())
+    console.log('App version: ', DeviceInfo.getVersion())
     console.disableYellowBox = true
     const notificationCount = this.props.notification.client + this.props.notification.trainer
     const notification = notificationCount > 0 ? notificationCount : 0

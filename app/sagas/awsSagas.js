@@ -29,7 +29,7 @@ const deviceId = DeviceInfo.getUniqueID()
 
 function* watchProfilePicCall() {
   try {
-    const localPicture = yield select(state => state.authReducer.localProfilePicture)
+    const localPicture = yield select(state => state.infoReducer.localProfilePicture)
     const fileName = deviceId + '/profile/' + Date.now() + '/image.jpg'
     yield call (sendToAWS, localPicture, fileName)
     const picture = turlHead+fileName
@@ -56,9 +56,9 @@ const prefetchData = (cdnPath) => {
 
 function* sendImageToChat(databasePath, cdnPath, info) {
   try {
-    let uid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : ''
+    const {uid} = yield select(state => state.authReducer)
     if (uid) {
-      const {settings, cdnProfilePicture} = yield select(state => state.authReducer)
+      const {settings, cdnProfilePicture} = yield select(state => state.infoReducer)
       const photo = databasePath.substring(databasePath.lastIndexOf('/')+1)
       const createdAt = Date.now()
       const tempId = 'temp_id_' + createdAt
@@ -172,19 +172,21 @@ const sendToFirebase = (uid, cReducer, sReducer, fileTail, fileName) => {
 
 function* loadFirebaseCall() {
   try {
-    let {uid} = yield select(state => state.authReducer)
-    if (!uid)
-      uid = firebase.auth().currentUser.uid
-    const cReducer = yield select(state => state.captionReducer)
-    const sReducer = yield select(state => state.selectedReducer)
-    const {fileTail, fileName} = yield call (prepFirebase, uid)
-    yield call(sendToFirebase, uid, cReducer, sReducer, fileTail, fileName)
-    yield put({type: SEND_FIREBASE_CAMERA_SUCCESS})
-    yield fork(loadAWSCall, fileName)
-    yield take(SEND_AWS_SUCCESS)
-    const databasePath = '/global/' + deviceId + '/photoData/' + fileTail
-    const cdnPath = turlHead+fileName
-    yield fork(sendImageToChat, databasePath, cdnPath, cReducer.mealType)
+    const {uid} = yield select(state => state.authReducer)
+    if (uid) {
+      const cReducer = yield select(state => state.captionReducer)
+      const sReducer = yield select(state => state.selectedReducer)
+      const {fileTail, fileName} = yield call (prepFirebase, uid)
+      yield call(sendToFirebase, uid, cReducer, sReducer, fileTail, fileName)
+      yield put({type: SEND_FIREBASE_CAMERA_SUCCESS})
+      yield fork(loadAWSCall, fileName)
+      yield take(SEND_AWS_SUCCESS)
+      const databasePath = '/global/' + deviceId + '/photoData/' + fileTail
+      const cdnPath = turlHead+fileName
+      yield fork(sendImageToChat, databasePath, cdnPath, cReducer.mealType)
+    }
+    else
+      throw 'User not authenticated'
   }
   catch(error) {
     yield put ({type: SEND_FIREBASE_ERROR, error})

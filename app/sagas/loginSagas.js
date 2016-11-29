@@ -45,9 +45,9 @@ function* watchUserDataCall() {
   while (true) {
     try {
       const data = yield take(STORE_SETTINGS_FORM)
-      let {uid} = yield select(state => state.authReducer)
+      const {uid} = yield select(state => state.authReducer)
       if (!uid)
-        uid = firebase.auth().currentUser.uid
+        throw 'User not authenticated'
       yield call(sendUserDataToFirebase, data.form, uid)
       let {first_name, last_name, birthday, height, diet, email} = data.form
       first_name = first_name ? first_name : ''
@@ -62,7 +62,7 @@ function* watchUserDataCall() {
 }
 
 function* userDataPrefetch() {
-  const picture = (yield select(state => state.authReducer)).cdnProfilePicture
+  const picture = (yield select(state => state.infoReducer)).cdnProfilePicture
   Image.prefetch(picture)
     .then(() => {})
     .catch(error => {console.log(error + ' - ' + cdnPath)})

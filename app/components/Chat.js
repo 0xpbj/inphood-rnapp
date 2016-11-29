@@ -81,8 +81,8 @@ export default class ChatThread extends Component {
     return null
   }
   render() {
-    const name = this.props.auth.settings.first_name ? this.props.auth.settings.first_name : 'Anon'
-    const picture = this.props.auth ? this.props.auth.cdnProfilePicture : ''
+    const name = this.props.info.settings.first_name ? this.props.info.settings.first_name : 'Anon'
+    const picture = this.props.info ? this.props.info.cdnProfilePicture : ''
     return (
       <GiftedChat
         messages={this.state.messages}

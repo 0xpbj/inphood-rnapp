@@ -59,12 +59,12 @@ export default class GalleryListView extends Component{
   }
   _getUserShortName() {
     var name = "Your"
-    if (this.props.auth.settings.first_name) {
-      if (this.props.auth.settings.last_name) {
-        name = this.props.auth.settings.first_name.charAt(0) +
-               this.props.auth.settings.last_name.charAt(0) + "'s"
+    if (this.props.info.settings.first_name) {
+      if (this.props.info.settings.last_name) {
+        name = this.props.info.settings.first_name.charAt(0) +
+               this.props.info.settings.last_name.charAt(0) + "'s"
       } else {
-        name = this.props.auth.settings.first_name + "'s"
+        name = this.props.info.settings.first_name + "'s"
       }
     }
     return name
@@ -149,7 +149,7 @@ export default class GalleryListView extends Component{
     }
   }
   render() {
-    let uri = this.props.auth.cdnProfilePicture ? this.props.auth.cdnProfilePicture : this.props.auth.localProfilePicture
+    let uri = this.props.info.cdnProfilePicture ? this.props.info.cdnProfilePicture : this.props.info.localProfilePicture
     let size = this.props.galleryView.photos.length || this.props.galleryView.error !== ''
     let flag = this.props.galleryView.isLoading
     return (
@@ -236,7 +236,7 @@ export default class GalleryListView extends Component{
     )
   }
   _pressRow(databasePath: string, cdnPath: string) {
-    if (!this.props.auth.settings.first_name) {
+    if (!this.props.info.settings.first_name) {
       Alert.alert(
         'Chat Error',
         'Your name is required for chat. \nEnter your name in User Settings',

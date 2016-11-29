@@ -34,7 +34,6 @@ export default class Gallery extends Component {
     if (scene.key === prefix + 'gallery') {
       return (
         <GalleryView
-           auth={this.props.auth}
           _handleNavigate={this._handleNavigate.bind(this)}
         />
       )
@@ -42,7 +41,6 @@ export default class Gallery extends Component {
     else if (scene.key === prefix + 'chat') {
       return (
         <ChatView
-          auth={this.props.auth}
           goBack={this._handleBackAction.bind(this)}
           caller="client"
         />

@@ -5,7 +5,7 @@ import * as actionCreators from '../actions/Actions'
 
 function mapStateToProps (state) {
   return {
-    auth: state.authReducer,
+    info: state.infoReducer,
     data: state.clientDataReducer,
     chat: state.chatReducer,
     gallery: state.galReducer

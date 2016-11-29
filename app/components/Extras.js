@@ -44,8 +44,7 @@ export default class Extras extends Component {
       return (
         <Settings
           clientAppInvite={() => this.props.sendClientAppInvite()}
-          auth={this.props.auth}
-          settings={this.props.auth.settings}
+          settings={this.props.info.settings}
           goBack={this._handleBackAction.bind(this)}
           _storeForm={(form) => this.props.storeSettingsForm(form)}
           _storeSettings={(settings) => this.props.storeUserSettings(settings)}

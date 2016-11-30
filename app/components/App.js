@@ -47,8 +47,6 @@ export default class App extends Component {
     this.props.changePage(i)
   }
   render () {
-    console.log('Build number: ', DeviceInfo.getBuildNumber())
-    console.log('App version: ', DeviceInfo.getVersion())
     console.disableYellowBox = true
     const notificationCount = this.props.notification.client + this.props.notification.trainer
     const notification = notificationCount > 0 ? notificationCount : 0

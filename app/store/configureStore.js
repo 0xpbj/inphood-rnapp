@@ -22,9 +22,9 @@ const sagaMiddleware = createSagaMiddleware()
 
 const persistConfig = {
   whitelist: [
+    'authReducer',
   ],
   blacklist: [
-    'authReducer',
     'galReducer',
     'infoReducer',
     'trainerReducer',

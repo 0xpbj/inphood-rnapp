@@ -1,14 +1,21 @@
 import {
-  STORE_DEVICE_ID, STORE_UID, CONNECTION_INACTIVE
+  STORE_DEVICE_ID, STORE_UID, APP_UPDATED,
+  STORE_APP_VERSION, CONNECTION_INACTIVE
 } from '../constants/ActionTypes'
 
 const initialState = {
   uid: '',
   deviceId: '',
+  appVersion: '',
 }
 
 export default function authentication(state = initialState, action) {
   switch (action.type) {
+    case APP_UPDATED:
+      return {
+        ...state,
+        uid: ''
+      }
     case STORE_DEVICE_ID:
       return {
         ...state,
@@ -18,6 +25,11 @@ export default function authentication(state = initialState, action) {
       return {
         ...state,
         uid: action.uid
+      }
+    case STORE_APP_VERSION:
+      return {
+        ...state,
+        appVersion: action.appVersion
       }
     case CONNECTION_INACTIVE:
       return {

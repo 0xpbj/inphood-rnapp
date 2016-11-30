@@ -3,6 +3,13 @@ import { createAction } from 'redux-actions'
 //AUTH Actions
 export const STORE_DEVICE_ID = 'STORE_DEVICE_ID'
 export const STORE_UID = 'STORE_UID'
+export const CONNECTION_INACTIVE = 'CONNECTION_INACTIVE'
+export const STORE_APP_VERSION = 'STORE_APP_VERSION'
+export const APP_UPDATED = 'APP_UPDATED'
+
+
+
+//INFO Actions
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_IN_PROGRESS = 'LOGIN_IN_PROGRESS'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -15,7 +22,6 @@ export const STORE_PROFILE_PICTURE = 'STORE_PROFILE_PICTURE'
 export const STORE_USER_NAME = 'STORE_USER_NAME'
 export const STORE_CDN_PICTURE = 'STORE_CDN_PICTURE'
 export const STORE_REFERRAL_ID = 'STORE_REFERRAL_ID'
-export const CONNECTION_INACTIVE = 'CONNECTION_INACTIVE'
 
 
 

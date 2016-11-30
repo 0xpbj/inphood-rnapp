@@ -37,6 +37,7 @@ function* watchProfilePicCall() {
       localPicture,
       picture,
     })
+    yield call (prefetchData, picture)
     yield put({type: STORE_CDN_PICTURE, picture})
   }
   catch(error) {

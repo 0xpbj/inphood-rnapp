@@ -10,8 +10,8 @@
 #import "AppDelegate.h"
 #import "RNBranch.h"
 #import "RCTRootView.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+//#import <FBSDKCoreKit/FBSDKCoreKit.h>
+//#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "RCTPushNotificationManager.h"
 @import UIKit;
 //@import Firebase;

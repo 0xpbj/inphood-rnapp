@@ -63,15 +63,15 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [[FBSDKApplicationDelegate sharedInstance] application:application
-                           didFinishLaunchingWithOptions:launchOptions];
+  //[[FBSDKApplicationDelegate sharedInstance] application:application
+  //                         didFinishLaunchingWithOptions:launchOptions];
   //[FIRApp configure];
 
   return YES;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-  [FBSDKAppEvents activateApp];
+  //[FBSDKAppEvents activateApp];
 }
 
 // Respond to URI scheme links
@@ -79,12 +79,12 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-  if (![RNBranch handleDeepLink:url]) {
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                        openURL:url
-                                              sourceApplication:sourceApplication
-                                                     annotation:annotation];
-  }
+  //if (![RNBranch handleDeepLink:url]) {
+    //return [[FBSDKApplicationDelegate sharedInstance] application:application
+    //                                                    openURL:url
+    //                                          sourceApplication:sourceApplication
+    //                                                 annotation:annotation];
+  //}
   return YES;
 }
 

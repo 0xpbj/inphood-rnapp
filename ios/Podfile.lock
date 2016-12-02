@@ -1,5 +1,4 @@
 PODS:
-  - AGEmojiKeyboard (0.2.0)
   - Branch (0.12.3):
     - Branch/Core (= 0.12.3)
     - Branch/without-IDFA (= 0.12.3)
@@ -7,13 +6,11 @@ PODS:
   - Branch/without-IDFA (0.12.3)
 
 DEPENDENCIES:
-  - AGEmojiKeyboard
   - Branch
 
 SPEC CHECKSUMS:
-  AGEmojiKeyboard: 8b0ad1a1a3c473c9d5464cf661a7bdddda59feed
   Branch: eced5b5201554811ecb039c74f9913b72caf6cc5
 
-PODFILE CHECKSUM: 9b7d3f29c8c6a0c692de01b67828f8dd959a991f
+PODFILE CHECKSUM: bbc0cd967c2ccf47be3091b29ab3b79c75fa0802
 
 COCOAPODS: 1.0.1

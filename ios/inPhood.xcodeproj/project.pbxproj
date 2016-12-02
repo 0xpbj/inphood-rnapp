@@ -1,2989 +1,1267 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>00C302A71ABCB8CE00DB3ED1</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTActionSheet.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C302A81ABCB8CE00DB3ED1</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00C302AC1ABCB8CE00DB3ED1</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C302AB1ABCB8CE00DB3ED1</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>00C302A71ABCB8CE00DB3ED1</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>134814201AA4EA6300B7C361</string>
-			<key>remoteInfo</key>
-			<string>RCTActionSheet</string>
-		</dict>
-		<key>00C302AC1ABCB8CE00DB3ED1</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTActionSheet.a</string>
-			<key>remoteRef</key>
-			<string>00C302AB1ABCB8CE00DB3ED1</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>00C302B51ABCB90400DB3ED1</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTGeolocation.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C302B61ABCB90400DB3ED1</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00C302BA1ABCB90400DB3ED1</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C302B91ABCB90400DB3ED1</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>00C302B51ABCB90400DB3ED1</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>134814201AA4EA6300B7C361</string>
-			<key>remoteInfo</key>
-			<string>RCTGeolocation</string>
-		</dict>
-		<key>00C302BA1ABCB90400DB3ED1</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTGeolocation.a</string>
-			<key>remoteRef</key>
-			<string>00C302B91ABCB90400DB3ED1</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>00C302BB1ABCB91800DB3ED1</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTImage.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C302BC1ABCB91800DB3ED1</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00C302C01ABCB91800DB3ED1</string>
-				<string>75D797FD1DC031FE0091E378</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C302BF1ABCB91800DB3ED1</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>00C302BB1ABCB91800DB3ED1</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>58B5115D1A9E6B3D00147676</string>
-			<key>remoteInfo</key>
-			<string>RCTImage</string>
-		</dict>
-		<key>00C302C01ABCB91800DB3ED1</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTImage.a</string>
-			<key>remoteRef</key>
-			<string>00C302BF1ABCB91800DB3ED1</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>00C302D31ABCB9D200DB3ED1</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTNetwork.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/Libraries/Network/RCTNetwork.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C302D41ABCB9D200DB3ED1</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00C302DC1ABCB9D200DB3ED1</string>
-				<string>75D798051DC031FE0091E378</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C302DB1ABCB9D200DB3ED1</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>00C302D31ABCB9D200DB3ED1</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>58B511DB1A9E6C8500147676</string>
-			<key>remoteInfo</key>
-			<string>RCTNetwork</string>
-		</dict>
-		<key>00C302DC1ABCB9D200DB3ED1</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTNetwork.a</string>
-			<key>remoteRef</key>
-			<string>00C302DB1ABCB9D200DB3ED1</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>00C302DF1ABCB9EE00DB3ED1</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTVibration.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C302E01ABCB9EE00DB3ED1</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00C302E41ABCB9EE00DB3ED1</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C302E31ABCB9EE00DB3ED1</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>00C302DF1ABCB9EE00DB3ED1</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>832C81801AAF6DEF007FA2F7</string>
-			<key>remoteInfo</key>
-			<string>RCTVibration</string>
-		</dict>
-		<key>00C302E41ABCB9EE00DB3ED1</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTVibration.a</string>
-			<key>remoteRef</key>
-			<string>00C302E31ABCB9EE00DB3ED1</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>00C302E51ABCBA2D00DB3ED1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C302AC1ABCB8CE00DB3ED1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C302E71ABCBA2D00DB3ED1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C302BA1ABCB90400DB3ED1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C302E81ABCBA2D00DB3ED1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C302C01ABCB91800DB3ED1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C302E91ABCBA2D00DB3ED1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C302DC1ABCB9D200DB3ED1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C302EA1ABCBA2D00DB3ED1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C302E41ABCB9EE00DB3ED1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00DD1BFF1BD5951E006B06BC</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Bundle React Native code and images</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>export NODE_BINARY=node
-../node_modules/react-native/packager/react-native-xcode.sh</string>
-		</dict>
-		<key>00E356EF1AD99517003FC87E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00E356F21AD99517003FC87E</string>
-				<string>00E356F01AD99517003FC87E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>inPhoodTests</string>
-			<key>path</key>
-			<string>inPhoodRNTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00E356F01AD99517003FC87E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00E356F11AD99517003FC87E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00E356F11AD99517003FC87E</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00E356F21AD99517003FC87E</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>inPhoodRNTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>05003A83E8D64700943F7F3E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D548150BFCE8455781113CFF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>06C1B499C4E74A35918C9016</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>archive.ar</string>
-			<key>path</key>
-			<string>libRNDeviceInfo.a</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0728B54D15EB4C03BF2BF258</key>
-		<dict>
-			<key>fileRef</key>
-			<string>06C1B499C4E74A35918C9016</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0E7EBD6458734A06B285C23A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>967B55463FEF4FF0BEC82263</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>1078FEF01E3D472E885C22C2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F711100E3834491B848868BC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>133E29F31AD74F7200F7D852</key>
-		<dict>
-			<key>fileRef</key>
-			<string>78C398B91ACF4ADC00677621</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>139105B61AF99BAD00B5F7CC</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTSettings.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>139105B71AF99BAD00B5F7CC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>139105C11AF99BAD00B5F7CC</string>
-				<string>75D7980A1DC031FE0091E378</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>139105C01AF99BAD00B5F7CC</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>139105B61AF99BAD00B5F7CC</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>134814201AA4EA6300B7C361</string>
-			<key>remoteInfo</key>
-			<string>RCTSettings</string>
-		</dict>
-		<key>139105C11AF99BAD00B5F7CC</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTSettings.a</string>
-			<key>remoteRef</key>
-			<string>139105C01AF99BAD00B5F7CC</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>139105C61AF99C1200B5F7CC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>139105C11AF99BAD00B5F7CC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>139FDEE61B06529A00C62182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTWebSocket.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>139FDEE71B06529A00C62182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>139FDEF41B06529B00C62182</string>
-				<string>75D798131DC031FE0091E378</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>139FDEF31B06529B00C62182</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>139FDEE61B06529A00C62182</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>3C86DF461ADF2C930047B81A</string>
-			<key>remoteInfo</key>
-			<string>RCTWebSocket</string>
-		</dict>
-		<key>139FDEF41B06529B00C62182</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTWebSocket.a</string>
-			<key>remoteRef</key>
-			<string>139FDEF31B06529B00C62182</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>139FDEF61B0652A700C62182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>139FDEF41B06529B00C62182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>13B07F861A680F5B00A75B9A</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>13B07F931A680F5B00A75B9A</string>
-			<key>buildPhases</key>
-			<array>
-				<string>29989B3F4CDF3B548C422B84</string>
-				<string>13B07F871A680F5B00A75B9A</string>
-				<string>13B07F8C1A680F5B00A75B9A</string>
-				<string>13B07F8E1A680F5B00A75B9A</string>
-				<string>00DD1BFF1BD5951E006B06BC</string>
-				<string>1FF8EEF28B9854BDD17F1ED4</string>
-				<string>47C5970A7D72FC467E6CD763</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>inPhood</string>
-			<key>productName</key>
-			<string>Hello World</string>
-			<key>productReference</key>
-			<string>13B07F961A680F5B00A75B9A</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>13B07F871A680F5B00A75B9A</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>13B07FBC1A68108700A75B9A</string>
-				<string>13B07FC11A68108700A75B9A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>13B07F8C1A680F5B00A75B9A</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>757238F91D7B656C0099EE39</string>
-				<string>757238FA1D7B656C0099EE39</string>
-				<string>752F475E1D79EF67000F8EE6</string>
-				<string>7512D6C81D2C5AEA00210FCE</string>
-				<string>00C302E51ABCBA2D00DB3ED1</string>
-				<string>75FF69AF1D9D5A2F007408F7</string>
-				<string>00C302E71ABCBA2D00DB3ED1</string>
-				<string>00C302E81ABCBA2D00DB3ED1</string>
-				<string>133E29F31AD74F7200F7D852</string>
-				<string>00C302E91ABCBA2D00DB3ED1</string>
-				<string>75FF69B71D9DA885007408F7</string>
-				<string>139105C61AF99C1200B5F7CC</string>
-				<string>832341BD1AAA6AB300B99B32</string>
-				<string>75FF69B61D9DA885007408F7</string>
-				<string>00C302EA1ABCBA2D00DB3ED1</string>
-				<string>139FDEF61B0652A700C62182</string>
-				<string>4B9C5813B7924CC7B531CCAE</string>
-				<string>75FF69B41D9DA885007408F7</string>
-				<string>75FF69B51D9DA885007408F7</string>
-				<string>ACCAD5875B4B4214930719B8</string>
-				<string>36AA411AD18249C1956A3FCB</string>
-				<string>05003A83E8D64700943F7F3E</string>
-				<string>0728B54D15EB4C03BF2BF258</string>
-				<string>87952ABD8C5A426F959B1152</string>
-				<string>5E1B7209DF4BB6D4289ACE78</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>13B07F8E1A680F5B00A75B9A</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>13B07FBF1A68108700A75B9A</string>
-				<string>469A1D46226845D0A52FE5B5</string>
-				<string>DB82C22C748A4E1AB74EE0B4</string>
-				<string>1078FEF01E3D472E885C22C2</string>
-				<string>895223FA91584065ADF4D9D2</string>
-				<string>96C4CCE2B958490687C186EF</string>
-				<string>75FF69AB1D9CCA3A007408F7</string>
-				<string>46F77B56F92C4D1DA38B24E0</string>
-				<string>752FA9B61D94A8DF00D9DF20</string>
-				<string>A0AE0E2861414F33A00559D0</string>
-				<string>0E7EBD6458734A06B285C23A</string>
-				<string>8B2091D34DBC421185F90983</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>13B07F931A680F5B00A75B9A</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>13B07F941A680F5B00A75B9A</string>
-				<string>13B07F951A680F5B00A75B9A</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>13B07F941A680F5B00A75B9A</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>6E7F50E3B40AECCABA2CD167</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>CODE_SIGN_ENTITLEMENTS</key>
-				<string>inPhood.entitlements</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>DEAD_CODE_STRIPPING</key>
-				<string>NO</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>2V3Y873W24</string>
-				<key>ENABLE_BITCODE</key>
-				<string>NO</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(PROJECT_DIR)/Branch-iOS-SDK</string>
-					<string>$(PROJECT_DIR)/FacebookSDK</string>
-				</array>
-				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include</string>
-					<string>$(SRCROOT)/../node_modules/react-native/React/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager</string>
-					<string>$(SRCROOT)/../node_modules/react-native-lock/ios/A0RNLock/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-camera/ios</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fs/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-mail/RNMail</string>
-					<string>$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig</string>
-					<string>$(SRCROOT)/../node_modules/react-native/React/Base</string>
-					<string>$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-branch/ios/**</string>
-					<string>"$(SRCROOT)/../../node_modules/react-native-fbsdk/ios"/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-image-to-base64/ios</string>
-					<string>$(SRCROOT)/../node_modules/react-native-image-picker/ios/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fs/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo</string>
-					<string>$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>inPhoodRN/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>LIBRARY_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-				</array>
-				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>-ObjC</string>
-					<string>-lc++</string>
-				</array>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>inPhood</string>
-				<key>PRODUCT_NAME</key>
-				<string>inPhood</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>13B07F951A680F5B00A75B9A</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>EBCEC3EF394B7D871BCCA875</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>CODE_SIGN_ENTITLEMENTS</key>
-				<string>inPhood.entitlements</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>2V3Y873W24</string>
-				<key>ENABLE_BITCODE</key>
-				<string>NO</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(PROJECT_DIR)/Branch-iOS-SDK</string>
-					<string>$(PROJECT_DIR)/FacebookSDK</string>
-				</array>
-				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include</string>
-					<string>$(SRCROOT)/../node_modules/react-native/React/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager</string>
-					<string>$(SRCROOT)/../node_modules/react-native-lock/ios/A0RNLock/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-camera/ios</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fs/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-mail/RNMail</string>
-					<string>$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig</string>
-					<string>$(SRCROOT)/../node_modules/react-native/React/Base</string>
-					<string>$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-branch/ios/**</string>
-					<string>"$(SRCROOT)/../../node_modules/react-native-fbsdk/ios"/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-image-to-base64/ios</string>
-					<string>$(SRCROOT)/../node_modules/react-native-image-picker/ios/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fs/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo</string>
-					<string>$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>inPhoodRN/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>LIBRARY_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-					<string>"$(SRCROOT)/inPhood"</string>
-				</array>
-				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>-ObjC</string>
-					<string>-lc++</string>
-				</array>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>inPhood</string>
-				<key>PRODUCT_NAME</key>
-				<string>inPhood</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>13B07F961A680F5B00A75B9A</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>inPhood.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>13B07FAE1A68108700A75B9A</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>752308161D9C790A00A80087</string>
-				<string>752FA9B51D94A8DF00D9DF20</string>
-				<string>13B07FAF1A68108700A75B9A</string>
-				<string>13B07FB01A68108700A75B9A</string>
-				<string>13B07FB51A68108700A75B9A</string>
-				<string>13B07FB61A68108700A75B9A</string>
-				<string>13B07FB71A68108700A75B9A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>inPhood</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>13B07FAF1A68108700A75B9A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>AppDelegate.h</string>
-			<key>path</key>
-			<string>inPhoodRN/AppDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>13B07FB01A68108700A75B9A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>AppDelegate.m</string>
-			<key>path</key>
-			<string>inPhoodRN/AppDelegate.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>13B07FB51A68108700A75B9A</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>name</key>
-			<string>Images.xcassets</string>
-			<key>path</key>
-			<string>inPhoodRN/Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>13B07FB61A68108700A75B9A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>name</key>
-			<string>Info.plist</string>
-			<key>path</key>
-			<string>inPhoodRN/Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>13B07FB71A68108700A75B9A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>main.m</string>
-			<key>path</key>
-			<string>inPhoodRN/main.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>13B07FBC1A68108700A75B9A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>13B07FB01A68108700A75B9A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>13B07FBF1A68108700A75B9A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>13B07FB51A68108700A75B9A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>13B07FC11A68108700A75B9A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>13B07FB71A68108700A75B9A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>1FF8EEF28B9854BDD17F1ED4</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-inPhood/Pods-inPhood-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>1FFA6EF45B0C42D397F1E251</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>archive.ar</string>
-			<key>path</key>
-			<string>libReactNativeConfig.a</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>221F3249DE0E405D8B50A295</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>unknown</string>
-			<key>name</key>
-			<string>Entypo.ttf</string>
-			<key>path</key>
-			<string>../node_modules/react-native-vector-icons/Fonts/Entypo.ttf</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>25B8015C0ABF4587AB1399F3</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>unknown</string>
-			<key>name</key>
-			<string>SimpleLineIcons.ttf</string>
-			<key>path</key>
-			<string>../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>29989B3F4CDF3B548C422B84</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>2CE0E8A8148E43D59480DCCE</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RNVectorIcons.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3450F66AC5B84AF79EA7B870</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>unknown</string>
-			<key>name</key>
-			<string>EvilIcons.ttf</string>
-			<key>path</key>
-			<string>../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>36AA411AD18249C1956A3FCB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BD1CE212530640A1812402DF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>3DD7FCC0084C468EBC9F7766</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RNFS.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native-fs/RNFS.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>469A1D46226845D0A52FE5B5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>221F3249DE0E405D8B50A295</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>46F77B56F92C4D1DA38B24E0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>63675BAC90914873A9A4162B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>47C5970A7D72FC467E6CD763</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-inPhood/Pods-inPhood-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>4B9C5813B7924CC7B531CCAE</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D7593193415E4F15ABEFB83E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4CAD52C3DE514835972AA696</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>unknown</string>
-			<key>name</key>
-			<string>Octicons.ttf</string>
-			<key>path</key>
-			<string>../node_modules/react-native-vector-icons/Fonts/Octicons.ttf</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5E1B7209DF4BB6D4289ACE78</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D856A2B98DD0C8266F1A75B8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>604CCBC30FC497E58F9F0787</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6E7F50E3B40AECCABA2CD167</string>
-				<string>EBCEC3EF394B7D871BCCA875</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>63675BAC90914873A9A4162B</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>unknown</string>
-			<key>name</key>
-			<string>MaterialIcons.ttf</string>
-			<key>path</key>
-			<string>../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6D49B063EAC4415E964E5EAF</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>unknown</string>
-			<key>name</key>
-			<string>Foundation.ttf</string>
-			<key>path</key>
-			<string>../node_modules/react-native-vector-icons/Fonts/Foundation.ttf</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6E7F50E3B40AECCABA2CD167</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-inPhood.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-inPhood/Pods-inPhood.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>750C063B1CC9D56C0054AA98</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>75FF69B01D9DA885007408F7</string>
-				<string>75FF69B11D9DA885007408F7</string>
-				<string>75FF69B21D9DA885007408F7</string>
-				<string>75FF69B31D9DA885007408F7</string>
-				<string>75FF69AE1D9D5A2F007408F7</string>
-				<string>D856A2B98DD0C8266F1A75B8</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7511EA811DDA3D4300B112E3</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>7511EA991DDA3D4300B112E3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7511EA981DDA3D4300B112E3</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>BAA65D5B1358429FAA2D0F7F</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>EB2648DF1C7BE17A00B8F155</string>
-			<key>remoteInfo</key>
-			<string>ReactNativeConfig</string>
-		</dict>
-		<key>7511EA991DDA3D4300B112E3</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libReactNativeConfig.a</string>
-			<key>remoteRef</key>
-			<string>7511EA981DDA3D4300B112E3</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>7512D6B51D2C5AC700210FCE</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>React.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/React/React.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7512D6B61D2C5AC700210FCE</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>7512D6C61D2C5AC800210FCE</string>
-				<string>75D798171DC031FE0091E378</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7512D6C51D2C5AC800210FCE</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>7512D6B51D2C5AC700210FCE</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>83CBBA2E1A601D0E00E9B192</string>
-			<key>remoteInfo</key>
-			<string>React</string>
-		</dict>
-		<key>7512D6C61D2C5AC800210FCE</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libReact.a</string>
-			<key>remoteRef</key>
-			<string>7512D6C51D2C5AC800210FCE</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>7512D6C81D2C5AEA00210FCE</key>
-		<dict>
-			<key>fileRef</key>
-			<string>7512D6C61D2C5AC800210FCE</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>752308161D9C790A00A80087</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.entitlements</string>
-			<key>path</key>
-			<string>inPhood.entitlements</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>752716D11D4D28B000EC95E2</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>752716D51D4D28B000EC95E2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>752716D41D4D28B000EC95E2</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>2CE0E8A8148E43D59480DCCE</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>5DBEB1501B18CEA900B34395</string>
-			<key>remoteInfo</key>
-			<string>RNVectorIcons</string>
-		</dict>
-		<key>752716D51D4D28B000EC95E2</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRNVectorIcons.a</string>
-			<key>remoteRef</key>
-			<string>752716D41D4D28B000EC95E2</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>752F47451D79EF5D000F8EE6</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTPushNotification.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>752F47461D79EF5D000F8EE6</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>752F47531D79EF5D000F8EE6</string>
-				<string>75AE102A1DEE6CD700A156E7</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>752F47521D79EF5D000F8EE6</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>752F47451D79EF5D000F8EE6</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>134814201AA4EA6300B7C361</string>
-			<key>remoteInfo</key>
-			<string>RCTPushNotification</string>
-		</dict>
-		<key>752F47531D79EF5D000F8EE6</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTPushNotification.a</string>
-			<key>remoteRef</key>
-			<string>752F47521D79EF5D000F8EE6</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>752F475E1D79EF67000F8EE6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>752F47531D79EF5D000F8EE6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>752FA9B51D94A8DF00D9DF20</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>name</key>
-			<string>GoogleService-Info.plist</string>
-			<key>path</key>
-			<string>inPhoodRN/GoogleService-Info.plist</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>752FA9B61D94A8DF00D9DF20</key>
-		<dict>
-			<key>fileRef</key>
-			<string>752FA9B51D94A8DF00D9DF20</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>757238ED1D7B63B80099EE39</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTCamera.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native-camera/ios/RCTCamera.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>757238EE1D7B63B80099EE39</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>757238F21D7B63B80099EE39</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>757238F11D7B63B80099EE39</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>757238ED1D7B63B80099EE39</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>4107012F1ACB723B00C6AA39</string>
-			<key>remoteInfo</key>
-			<string>RCTCamera</string>
-		</dict>
-		<key>757238F21D7B63B80099EE39</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTCamera.a</string>
-			<key>remoteRef</key>
-			<string>757238F11D7B63B80099EE39</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>757238F31D7B63C90099EE39</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTCameraRoll.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>757238F41D7B63C90099EE39</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>757238F81D7B63CA0099EE39</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>757238F71D7B63CA0099EE39</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>757238F31D7B63C90099EE39</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>58B5115D1A9E6B3D00147676</string>
-			<key>remoteInfo</key>
-			<string>RCTCameraRoll</string>
-		</dict>
-		<key>757238F81D7B63CA0099EE39</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTCameraRoll.a</string>
-			<key>remoteRef</key>
-			<string>757238F71D7B63CA0099EE39</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>757238F91D7B656C0099EE39</key>
-		<dict>
-			<key>fileRef</key>
-			<string>757238F21D7B63B80099EE39</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>757238FA1D7B656C0099EE39</key>
-		<dict>
-			<key>fileRef</key>
-			<string>757238F81D7B63CA0099EE39</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>75AA28481DCE5B720041182E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>75AA28621DCE5B720041182E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>75AA28611DCE5B720041182E</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>CC696D0DD39E47D68CFD0B45</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>DA5891D81BA9A9FC002B4DB2</string>
-			<key>remoteInfo</key>
-			<string>RNDeviceInfo</string>
-		</dict>
-		<key>75AA28621DCE5B720041182E</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRNDeviceInfo.a</string>
-			<key>remoteRef</key>
-			<string>75AA28611DCE5B720041182E</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>75AE10291DEE6CD700A156E7</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>752F47451D79EF5D000F8EE6</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>2DD0EFE61DA8533A00B0C975</string>
-			<key>remoteInfo</key>
-			<string>RCTPushNotification-tvOS</string>
-		</dict>
-		<key>75AE102A1DEE6CD700A156E7</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTPushNotification-tvOS.a</string>
-			<key>remoteRef</key>
-			<string>75AE10291DEE6CD700A156E7</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>75D797A01DBE56230091E378</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>75D797B41DBE56230091E378</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>75D797B31DBE56230091E378</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>BFAA74C532FA4875960DB836</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>014A3B5C1C6CF33500B6D375</string>
-			<key>remoteInfo</key>
-			<string>RNImagePicker</string>
-		</dict>
-		<key>75D797B41DBE56230091E378</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRNImagePicker.a</string>
-			<key>remoteRef</key>
-			<string>75D797B31DBE56230091E378</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>75D797FC1DC031FE0091E378</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>00C302BB1ABCB91800DB3ED1</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>2D2A283A1D9B042B00D4039D</string>
-			<key>remoteInfo</key>
-			<string>RCTImage-tvOS</string>
-		</dict>
-		<key>75D797FD1DC031FE0091E378</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTImage-tvOS.a</string>
-			<key>remoteRef</key>
-			<string>75D797FC1DC031FE0091E378</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>75D798001DC031FE0091E378</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>78C398B01ACF4ADC00677621</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>2D2A28471D9B043800D4039D</string>
-			<key>remoteInfo</key>
-			<string>RCTLinking-tvOS</string>
-		</dict>
-		<key>75D798011DC031FE0091E378</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTLinking-tvOS.a</string>
-			<key>remoteRef</key>
-			<string>75D798001DC031FE0091E378</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>75D798041DC031FE0091E378</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>00C302D31ABCB9D200DB3ED1</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>2D2A28541D9B044C00D4039D</string>
-			<key>remoteInfo</key>
-			<string>RCTNetwork-tvOS</string>
-		</dict>
-		<key>75D798051DC031FE0091E378</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTNetwork-tvOS.a</string>
-			<key>remoteRef</key>
-			<string>75D798041DC031FE0091E378</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>75D798091DC031FE0091E378</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>139105B61AF99BAD00B5F7CC</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>2D2A28611D9B046600D4039D</string>
-			<key>remoteInfo</key>
-			<string>RCTSettings-tvOS</string>
-		</dict>
-		<key>75D7980A1DC031FE0091E378</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTSettings-tvOS.a</string>
-			<key>remoteRef</key>
-			<string>75D798091DC031FE0091E378</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>75D7980D1DC031FE0091E378</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>832341B01AAA6A8300B99B32</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>2D2A287B1D9B048500D4039D</string>
-			<key>remoteInfo</key>
-			<string>RCTText-tvOS</string>
-		</dict>
-		<key>75D7980E1DC031FE0091E378</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTText-tvOS.a</string>
-			<key>remoteRef</key>
-			<string>75D7980D1DC031FE0091E378</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>75D798121DC031FE0091E378</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>139FDEE61B06529A00C62182</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>2D2A28881D9B049200D4039D</string>
-			<key>remoteInfo</key>
-			<string>RCTWebSocket-tvOS</string>
-		</dict>
-		<key>75D798131DC031FE0091E378</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTWebSocket-tvOS.a</string>
-			<key>remoteRef</key>
-			<string>75D798121DC031FE0091E378</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>75D798161DC031FE0091E378</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>7512D6B51D2C5AC700210FCE</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>2D2A28131D9B038B00D4039D</string>
-			<key>remoteInfo</key>
-			<string>React-tvOS</string>
-		</dict>
-		<key>75D798171DC031FE0091E378</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libReact-tvOS.a</string>
-			<key>remoteRef</key>
-			<string>75D798161DC031FE0091E378</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>75FF69921D9CC38A007408F7</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>75FF69A61D9CC38B007408F7</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>75FF69A51D9CC38B007408F7</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>BF3DE7855CA441ADA78EE576</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>B3A3CC361C5B0A070016AC52</string>
-			<key>remoteInfo</key>
-			<string>RNBranch</string>
-		</dict>
-		<key>75FF69A61D9CC38B007408F7</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRNBranch.a</string>
-			<key>remoteRef</key>
-			<string>75FF69A51D9CC38B007408F7</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>75FF69AB1D9CCA3A007408F7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>752308161D9C790A00A80087</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>75FF69AE1D9D5A2F007408F7</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Branch.framework</string>
-			<key>path</key>
-			<string>Branch-iOS-SDK/Branch.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>75FF69AF1D9D5A2F007408F7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>75FF69AE1D9D5A2F007408F7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>75FF69B01D9DA885007408F7</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Bolts.framework</string>
-			<key>path</key>
-			<string>FacebookSDK/Bolts.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>75FF69B11D9DA885007408F7</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>FBSDKCoreKit.framework</string>
-			<key>path</key>
-			<string>FacebookSDK/FBSDKCoreKit.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>75FF69B21D9DA885007408F7</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>FBSDKLoginKit.framework</string>
-			<key>path</key>
-			<string>FacebookSDK/FBSDKLoginKit.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>75FF69B31D9DA885007408F7</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>FBSDKShareKit.framework</string>
-			<key>path</key>
-			<string>FacebookSDK/FBSDKShareKit.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>75FF69B41D9DA885007408F7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>75FF69B01D9DA885007408F7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>75FF69B51D9DA885007408F7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>75FF69B11D9DA885007408F7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>75FF69B61D9DA885007408F7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>75FF69B21D9DA885007408F7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>75FF69B71D9DA885007408F7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>75FF69B31D9DA885007408F7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>78C398B01ACF4ADC00677621</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTLinking.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>78C398B11ACF4ADC00677621</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>78C398B91ACF4ADC00677621</string>
-				<string>75D798011DC031FE0091E378</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>78C398B81ACF4ADC00677621</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>78C398B01ACF4ADC00677621</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>134814201AA4EA6300B7C361</string>
-			<key>remoteInfo</key>
-			<string>RCTLinking</string>
-		</dict>
-		<key>78C398B91ACF4ADC00677621</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTLinking.a</string>
-			<key>remoteRef</key>
-			<string>78C398B81ACF4ADC00677621</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>7981C5641DC2C4CF007E7ECB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>7981C57F1DC2C4CF007E7ECB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7981C57E1DC2C4CF007E7ECB</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>3DD7FCC0084C468EBC9F7766</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>F12AFB9B1ADAF8F800E0535D</string>
-			<key>remoteInfo</key>
-			<string>RNFS</string>
-		</dict>
-		<key>7981C57F1DC2C4CF007E7ECB</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRNFS.a</string>
-			<key>remoteRef</key>
-			<string>7981C57E1DC2C4CF007E7ECB</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>832341AE1AAA6A7D00B99B32</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>757238F31D7B63C90099EE39</string>
-				<string>757238ED1D7B63B80099EE39</string>
-				<string>752F47451D79EF5D000F8EE6</string>
-				<string>7512D6B51D2C5AC700210FCE</string>
-				<string>00C302A71ABCB8CE00DB3ED1</string>
-				<string>00C302B51ABCB90400DB3ED1</string>
-				<string>00C302BB1ABCB91800DB3ED1</string>
-				<string>78C398B01ACF4ADC00677621</string>
-				<string>00C302D31ABCB9D200DB3ED1</string>
-				<string>139105B61AF99BAD00B5F7CC</string>
-				<string>832341B01AAA6A8300B99B32</string>
-				<string>00C302DF1ABCB9EE00DB3ED1</string>
-				<string>139FDEE61B06529A00C62182</string>
-				<string>2CE0E8A8148E43D59480DCCE</string>
-				<string>BF3DE7855CA441ADA78EE576</string>
-				<string>BFAA74C532FA4875960DB836</string>
-				<string>3DD7FCC0084C468EBC9F7766</string>
-				<string>CC696D0DD39E47D68CFD0B45</string>
-				<string>BAA65D5B1358429FAA2D0F7F</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Libraries</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>832341B01AAA6A8300B99B32</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RCTText.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native/Libraries/Text/RCTText.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>832341B11AAA6A8300B99B32</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>832341B51AAA6A8300B99B32</string>
-				<string>75D7980E1DC031FE0091E378</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>832341B41AAA6A8300B99B32</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>832341B01AAA6A8300B99B32</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>58B5119B1A9E6C1200147676</string>
-			<key>remoteInfo</key>
-			<string>RCTText</string>
-		</dict>
-		<key>832341B51AAA6A8300B99B32</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>libRCTText.a</string>
-			<key>remoteRef</key>
-			<string>832341B41AAA6A8300B99B32</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>832341BD1AAA6AB300B99B32</key>
-		<dict>
-			<key>fileRef</key>
-			<string>832341B51AAA6A8300B99B32</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>83CBB9F61A601CBA00E9B192</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>750C063B1CC9D56C0054AA98</string>
-				<string>13B07FAE1A68108700A75B9A</string>
-				<string>832341AE1AAA6A7D00B99B32</string>
-				<string>00E356EF1AD99517003FC87E</string>
-				<string>83CBBA001A601CBA00E9B192</string>
-				<string>E5A3F943D394459998A11F68</string>
-				<string>604CCBC30FC497E58F9F0787</string>
-			</array>
-			<key>indentWidth</key>
-			<string>2</string>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-			<key>tabWidth</key>
-			<string>2</string>
-		</dict>
-		<key>83CBB9F71A601CBA00E9B192</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>800</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>inPhood</string>
-				<key>TargetAttributes</key>
-				<dict>
-					<key>13B07F861A680F5B00A75B9A</key>
-					<dict>
-						<key>DevelopmentTeam</key>
-						<string>2V3Y873W24</string>
-						<key>SystemCapabilities</key>
-						<dict>
-							<key>com.apple.Keychain</key>
-							<dict>
-								<key>enabled</key>
-								<string>1</string>
-							</dict>
-							<key>com.apple.Push</key>
-							<dict>
-								<key>enabled</key>
-								<string>1</string>
-							</dict>
-							<key>com.apple.SafariKeychain</key>
-							<dict>
-								<key>enabled</key>
-								<string>1</string>
-							</dict>
-						</dict>
-					</dict>
-				</dict>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>83CBB9FA1A601CBA00E9B192</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-				<string>Base</string>
-			</array>
-			<key>mainGroup</key>
-			<string>83CBB9F61A601CBA00E9B192</string>
-			<key>productRefGroup</key>
-			<string>83CBBA001A601CBA00E9B192</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array>
-				<dict>
-					<key>ProductGroup</key>
-					<string>00C302A81ABCB8CE00DB3ED1</string>
-					<key>ProjectRef</key>
-					<string>00C302A71ABCB8CE00DB3ED1</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>757238EE1D7B63B80099EE39</string>
-					<key>ProjectRef</key>
-					<string>757238ED1D7B63B80099EE39</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>757238F41D7B63C90099EE39</string>
-					<key>ProjectRef</key>
-					<string>757238F31D7B63C90099EE39</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>00C302B61ABCB90400DB3ED1</string>
-					<key>ProjectRef</key>
-					<string>00C302B51ABCB90400DB3ED1</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>00C302BC1ABCB91800DB3ED1</string>
-					<key>ProjectRef</key>
-					<string>00C302BB1ABCB91800DB3ED1</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>78C398B11ACF4ADC00677621</string>
-					<key>ProjectRef</key>
-					<string>78C398B01ACF4ADC00677621</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>00C302D41ABCB9D200DB3ED1</string>
-					<key>ProjectRef</key>
-					<string>00C302D31ABCB9D200DB3ED1</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>752F47461D79EF5D000F8EE6</string>
-					<key>ProjectRef</key>
-					<string>752F47451D79EF5D000F8EE6</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>139105B71AF99BAD00B5F7CC</string>
-					<key>ProjectRef</key>
-					<string>139105B61AF99BAD00B5F7CC</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>832341B11AAA6A8300B99B32</string>
-					<key>ProjectRef</key>
-					<string>832341B01AAA6A8300B99B32</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>00C302E01ABCB9EE00DB3ED1</string>
-					<key>ProjectRef</key>
-					<string>00C302DF1ABCB9EE00DB3ED1</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>139FDEE71B06529A00C62182</string>
-					<key>ProjectRef</key>
-					<string>139FDEE61B06529A00C62182</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>7512D6B61D2C5AC700210FCE</string>
-					<key>ProjectRef</key>
-					<string>7512D6B51D2C5AC700210FCE</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>7511EA811DDA3D4300B112E3</string>
-					<key>ProjectRef</key>
-					<string>BAA65D5B1358429FAA2D0F7F</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>75FF69921D9CC38A007408F7</string>
-					<key>ProjectRef</key>
-					<string>BF3DE7855CA441ADA78EE576</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>75AA28481DCE5B720041182E</string>
-					<key>ProjectRef</key>
-					<string>CC696D0DD39E47D68CFD0B45</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>7981C5641DC2C4CF007E7ECB</string>
-					<key>ProjectRef</key>
-					<string>3DD7FCC0084C468EBC9F7766</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>75D797A01DBE56230091E378</string>
-					<key>ProjectRef</key>
-					<string>BFAA74C532FA4875960DB836</string>
-				</dict>
-				<dict>
-					<key>ProductGroup</key>
-					<string>752716D11D4D28B000EC95E2</string>
-					<key>ProjectRef</key>
-					<string>2CE0E8A8148E43D59480DCCE</string>
-				</dict>
-			</array>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>13B07F861A680F5B00A75B9A</string>
-			</array>
-		</dict>
-		<key>83CBB9FA1A601CBA00E9B192</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>83CBBA201A601CBA00E9B192</string>
-				<string>83CBBA211A601CBA00E9B192</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>83CBBA001A601CBA00E9B192</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>13B07F961A680F5B00A75B9A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>83CBBA201A601CBA00E9B192</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INFINITE_RECURSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>ENABLE_TESTABILITY</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fs/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native/React/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-mail/RNMail</string>
-					<string>$(SRCROOT)/../node_modules/react-native-branch/ios</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-lock/ios/A0RNLock/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig</string>
-					<string>$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager</string>
-					<string>$(SRCROOT)/../node_modules/react-native-image-to-base64/ios</string>
-					<string>$(SRCROOT)/../node_modules/react-native-image-picker/ios/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fs/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo</string>
-					<string>$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig</string>
-				</array>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>83CBBA211A601CBA00E9B192</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INFINITE_RECURSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include</string>
-					<string>$(SRCROOT)/../node_modules/react-native/React/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-lock/ios/A0RNLock/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager</string>
-					<string>$(SRCROOT)/../node_modules/react-native-camera/ios</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fs/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-mail/RNMail</string>
-					<string>$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig</string>
-					<string>$(SRCROOT)/../node_modules/react-native-branch/ios</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-image-to-base64/ios</string>
-					<string>$(SRCROOT)/../node_modules/react-native-image-picker/ios/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-fs/**</string>
-					<string>$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo</string>
-					<string>$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig</string>
-				</array>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>87952ABD8C5A426F959B1152</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1FFA6EF45B0C42D397F1E251</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>895223FA91584065ADF4D9D2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6D49B063EAC4415E964E5EAF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8B2091D34DBC421185F90983</key>
-		<dict>
-			<key>fileRef</key>
-			<string>25B8015C0ABF4587AB1399F3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>967B55463FEF4FF0BEC82263</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>unknown</string>
-			<key>name</key>
-			<string>Zocial.ttf</string>
-			<key>path</key>
-			<string>../node_modules/react-native-vector-icons/Fonts/Zocial.ttf</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>96C4CCE2B958490687C186EF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EBCEB82D4979486EAB4DEB83</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>A0AE0E2861414F33A00559D0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4CAD52C3DE514835972AA696</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>ACCAD5875B4B4214930719B8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F8966DEA4B644D7FB172E04D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BAA65D5B1358429FAA2D0F7F</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>ReactNativeConfig.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BD1CE212530640A1812402DF</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>archive.ar</string>
-			<key>path</key>
-			<string>libRNImagePicker.a</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BF3DE7855CA441ADA78EE576</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RNBranch.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native-branch/ios/RNBranch.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BFAA74C532FA4875960DB836</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RNImagePicker.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CC696D0DD39E47D68CFD0B45</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>RNDeviceInfo.xcodeproj</string>
-			<key>path</key>
-			<string>../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D548150BFCE8455781113CFF</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>archive.ar</string>
-			<key>path</key>
-			<string>libRNFS.a</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D7593193415E4F15ABEFB83E</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>archive.ar</string>
-			<key>path</key>
-			<string>libRNVectorIcons.a</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D856A2B98DD0C8266F1A75B8</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-inPhood.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>DB82C22C748A4E1AB74EE0B4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3450F66AC5B84AF79EA7B870</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E5A3F943D394459998A11F68</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>221F3249DE0E405D8B50A295</string>
-				<string>3450F66AC5B84AF79EA7B870</string>
-				<string>F711100E3834491B848868BC</string>
-				<string>6D49B063EAC4415E964E5EAF</string>
-				<string>EBCEB82D4979486EAB4DEB83</string>
-				<string>63675BAC90914873A9A4162B</string>
-				<string>4CAD52C3DE514835972AA696</string>
-				<string>967B55463FEF4FF0BEC82263</string>
-				<string>25B8015C0ABF4587AB1399F3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EBCEB82D4979486EAB4DEB83</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>unknown</string>
-			<key>name</key>
-			<string>Ionicons.ttf</string>
-			<key>path</key>
-			<string>../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EBCEC3EF394B7D871BCCA875</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-inPhood.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-inPhood/Pods-inPhood.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F711100E3834491B848868BC</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>unknown</string>
-			<key>name</key>
-			<string>FontAwesome.ttf</string>
-			<key>path</key>
-			<string>../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F8966DEA4B644D7FB172E04D</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>undefined</string>
-			<key>fileEncoding</key>
-			<string>9</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>archive.ar</string>
-			<key>path</key>
-			<string>libRNBranch.a</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>83CBB9F71A601CBA00E9B192</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
+		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
+		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
+		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
+		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
+		05003A83E8D64700943F7F3E /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D548150BFCE8455781113CFF /* libRNFS.a */; };
+		0728B54D15EB4C03BF2BF258 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C1B499C4E74A35918C9016 /* libRNDeviceInfo.a */; };
+		0E7EBD6458734A06B285C23A /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 967B55463FEF4FF0BEC82263 /* Zocial.ttf */; };
+		1078FEF01E3D472E885C22C2 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F711100E3834491B848868BC /* FontAwesome.ttf */; };
+		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
+		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
+		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
+		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		36AA411AD18249C1956A3FCB /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1CE212530640A1812402DF /* libRNImagePicker.a */; };
+		469A1D46226845D0A52FE5B5 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 221F3249DE0E405D8B50A295 /* Entypo.ttf */; };
+		46F77B56F92C4D1DA38B24E0 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63675BAC90914873A9A4162B /* MaterialIcons.ttf */; };
+		4B9C5813B7924CC7B531CCAE /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7593193415E4F15ABEFB83E /* libRNVectorIcons.a */; };
+		5E1B7209DF4BB6D4289ACE78 /* libPods-inPhood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D856A2B98DD0C8266F1A75B8 /* libPods-inPhood.a */; };
+		7512D6C81D2C5AEA00210FCE /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7512D6C61D2C5AC800210FCE /* libReact.a */; };
+		752F475E1D79EF67000F8EE6 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 752F47531D79EF5D000F8EE6 /* libRCTPushNotification.a */; };
+		752FA9B61D94A8DF00D9DF20 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 752FA9B51D94A8DF00D9DF20 /* GoogleService-Info.plist */; };
+		757238F91D7B656C0099EE39 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 757238F21D7B63B80099EE39 /* libRCTCamera.a */; };
+		757238FA1D7B656C0099EE39 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 757238F81D7B63CA0099EE39 /* libRCTCameraRoll.a */; };
+		75AE11981DF10C5100A156E7 /* libBranch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75AE11971DF10C5100A156E7 /* libBranch.a */; };
+		75AE11991DF10C7600A156E7 /* libRNBranch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75FF69A61D9CC38B007408F7 /* libRNBranch.a */; };
+		75FF69AB1D9CCA3A007408F7 /* inPhood.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 752308161D9C790A00A80087 /* inPhood.entitlements */; };
+		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		87952ABD8C5A426F959B1152 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FFA6EF45B0C42D397F1E251 /* libReactNativeConfig.a */; };
+		895223FA91584065ADF4D9D2 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D49B063EAC4415E964E5EAF /* Foundation.ttf */; };
+		8B2091D34DBC421185F90983 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25B8015C0ABF4587AB1399F3 /* SimpleLineIcons.ttf */; };
+		96C4CCE2B958490687C186EF /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBCEB82D4979486EAB4DEB83 /* Ionicons.ttf */; };
+		A0AE0E2861414F33A00559D0 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CAD52C3DE514835972AA696 /* Octicons.ttf */; };
+		DB82C22C748A4E1AB74EE0B4 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3450F66AC5B84AF79EA7B870 /* EvilIcons.ttf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		00C302AB1ABCB8CE00DB3ED1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTActionSheet;
+		};
+		00C302B91ABCB90400DB3ED1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTGeolocation;
+		};
+		00C302BF1ABCB91800DB3ED1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
+			remoteInfo = RCTImage;
+		};
+		00C302DB1ABCB9D200DB3ED1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 58B511DB1A9E6C8500147676;
+			remoteInfo = RCTNetwork;
+		};
+		00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 832C81801AAF6DEF007FA2F7;
+			remoteInfo = RCTVibration;
+		};
+		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTSettings;
+		};
+		139FDEF31B06529B00C62182 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3C86DF461ADF2C930047B81A;
+			remoteInfo = RCTWebSocket;
+		};
+		7511EA981DDA3D4300B112E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAA65D5B1358429FAA2D0F7F /* ReactNativeConfig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
+			remoteInfo = ReactNativeConfig;
+		};
+		7512D6C51D2C5AC800210FCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7512D6B51D2C5AC700210FCE /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
+			remoteInfo = React;
+		};
+		752716D41D4D28B000EC95E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CE0E8A8148E43D59480DCCE /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
+			remoteInfo = RNVectorIcons;
+		};
+		752F47521D79EF5D000F8EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 752F47451D79EF5D000F8EE6 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
+		757238F11D7B63B80099EE39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 757238ED1D7B63B80099EE39 /* RCTCamera.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4107012F1ACB723B00C6AA39;
+			remoteInfo = RCTCamera;
+		};
+		757238F71D7B63CA0099EE39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 757238F31D7B63C90099EE39 /* RCTCameraRoll.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
+			remoteInfo = RCTCameraRoll;
+		};
+		75AA28611DCE5B720041182E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC696D0DD39E47D68CFD0B45 /* RNDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
+			remoteInfo = RNDeviceInfo;
+		};
+		75AE10291DEE6CD700A156E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 752F47451D79EF5D000F8EE6 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2DD0EFE61DA8533A00B0C975;
+			remoteInfo = "RCTPushNotification-tvOS";
+		};
+		75D797B31DBE56230091E378 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFAA74C532FA4875960DB836 /* RNImagePicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = RNImagePicker;
+		};
+		75D797FC1DC031FE0091E378 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A283A1D9B042B00D4039D;
+			remoteInfo = "RCTImage-tvOS";
+		};
+		75D798001DC031FE0091E378 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28471D9B043800D4039D;
+			remoteInfo = "RCTLinking-tvOS";
+		};
+		75D798041DC031FE0091E378 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28541D9B044C00D4039D;
+			remoteInfo = "RCTNetwork-tvOS";
+		};
+		75D798091DC031FE0091E378 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28611D9B046600D4039D;
+			remoteInfo = "RCTSettings-tvOS";
+		};
+		75D7980D1DC031FE0091E378 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A287B1D9B048500D4039D;
+			remoteInfo = "RCTText-tvOS";
+		};
+		75D798121DC031FE0091E378 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28881D9B049200D4039D;
+			remoteInfo = "RCTWebSocket-tvOS";
+		};
+		75D798161DC031FE0091E378 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7512D6B51D2C5AC700210FCE /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28131D9B038B00D4039D;
+			remoteInfo = "React-tvOS";
+		};
+		75FF69A51D9CC38B007408F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF3DE7855CA441ADA78EE576 /* RNBranch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B3A3CC361C5B0A070016AC52;
+			remoteInfo = RNBranch;
+		};
+		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTLinking;
+		};
+		7981C57E1DC2C4CF007E7ECB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3DD7FCC0084C468EBC9F7766 /* RNFS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F12AFB9B1ADAF8F800E0535D;
+			remoteInfo = RNFS;
+		};
+		832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
+			remoteInfo = RCTText;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
+		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
+		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
+		00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTNetwork.xcodeproj; path = "../node_modules/react-native/Libraries/Network/RCTNetwork.xcodeproj"; sourceTree = "<group>"; };
+		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
+		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* inPhoodRNTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = inPhoodRNTests.m; sourceTree = "<group>"; };
+		06C1B499C4E74A35918C9016 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
+		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
+		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* inPhood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inPhood.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = inPhoodRN/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = inPhoodRN/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = inPhoodRN/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = inPhoodRN/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = inPhoodRN/main.m; sourceTree = "<group>"; };
+		1FFA6EF45B0C42D397F1E251 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
+		221F3249DE0E405D8B50A295 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		25B8015C0ABF4587AB1399F3 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		2CE0E8A8148E43D59480DCCE /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		3450F66AC5B84AF79EA7B870 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		3DD7FCC0084C468EBC9F7766 /* RNFS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
+		4CAD52C3DE514835972AA696 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		63675BAC90914873A9A4162B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		6D49B063EAC4415E964E5EAF /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		6E7F50E3B40AECCABA2CD167 /* Pods-inPhood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inPhood.debug.xcconfig"; path = "Pods/Target Support Files/Pods-inPhood/Pods-inPhood.debug.xcconfig"; sourceTree = "<group>"; };
+		7512D6B51D2C5AC700210FCE /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		752308161D9C790A00A80087 /* inPhood.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = inPhood.entitlements; sourceTree = "<group>"; };
+		752F47451D79EF5D000F8EE6 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
+		752FA9B51D94A8DF00D9DF20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "inPhoodRN/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		757238ED1D7B63B80099EE39 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
+		757238F31D7B63C90099EE39 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
+		75AE11971DF10C5100A156E7 /* libBranch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBranch.a; path = "../../../Library/Developer/Xcode/DerivedData/inPhood-eokytllkiolgiwcapfgdfzxovkji/Build/Products/Debug-iphonesimulator/Branch/libBranch.a"; sourceTree = "<group>"; };
+		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		967B55463FEF4FF0BEC82263 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		BAA65D5B1358429FAA2D0F7F /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
+		BD1CE212530640A1812402DF /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
+		BF3DE7855CA441ADA78EE576 /* RNBranch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBranch.xcodeproj; path = "../node_modules/react-native-branch/ios/RNBranch.xcodeproj"; sourceTree = "<group>"; };
+		BFAA74C532FA4875960DB836 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
+		CC696D0DD39E47D68CFD0B45 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
+		D548150BFCE8455781113CFF /* libRNFS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFS.a; sourceTree = "<group>"; };
+		D7593193415E4F15ABEFB83E /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
+		D856A2B98DD0C8266F1A75B8 /* libPods-inPhood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-inPhood.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBCEB82D4979486EAB4DEB83 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		EBCEC3EF394B7D871BCCA875 /* Pods-inPhood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inPhood.release.xcconfig"; path = "Pods/Target Support Files/Pods-inPhood/Pods-inPhood.release.xcconfig"; sourceTree = "<group>"; };
+		F711100E3834491B848868BC /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75AE11991DF10C7600A156E7 /* libRNBranch.a in Frameworks */,
+				75AE11981DF10C5100A156E7 /* libBranch.a in Frameworks */,
+				757238F91D7B656C0099EE39 /* libRCTCamera.a in Frameworks */,
+				757238FA1D7B656C0099EE39 /* libRCTCameraRoll.a in Frameworks */,
+				752F475E1D79EF67000F8EE6 /* libRCTPushNotification.a in Frameworks */,
+				7512D6C81D2C5AEA00210FCE /* libReact.a in Frameworks */,
+				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
+				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
+				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
+				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
+				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
+				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
+				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
+				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
+				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				4B9C5813B7924CC7B531CCAE /* libRNVectorIcons.a in Frameworks */,
+				36AA411AD18249C1956A3FCB /* libRNImagePicker.a in Frameworks */,
+				05003A83E8D64700943F7F3E /* libRNFS.a in Frameworks */,
+				0728B54D15EB4C03BF2BF258 /* libRNDeviceInfo.a in Frameworks */,
+				87952ABD8C5A426F959B1152 /* libReactNativeConfig.a in Frameworks */,
+				5E1B7209DF4BB6D4289ACE78 /* libPods-inPhood.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00C302A81ABCB8CE00DB3ED1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		00C302B61ABCB90400DB3ED1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		00C302BC1ABCB91800DB3ED1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00C302C01ABCB91800DB3ED1 /* libRCTImage.a */,
+				75D797FD1DC031FE0091E378 /* libRCTImage-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		00C302D41ABCB9D200DB3ED1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */,
+				75D798051DC031FE0091E378 /* libRCTNetwork-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		00C302E01ABCB9EE00DB3ED1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		00E356EF1AD99517003FC87E /* inPhoodTests */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F21AD99517003FC87E /* inPhoodRNTests.m */,
+				00E356F01AD99517003FC87E /* Supporting Files */,
+			);
+			name = inPhoodTests;
+			path = inPhoodRNTests;
+			sourceTree = "<group>";
+		};
+		00E356F01AD99517003FC87E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F11AD99517003FC87E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		139105B71AF99BAD00B5F7CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				139105C11AF99BAD00B5F7CC /* libRCTSettings.a */,
+				75D7980A1DC031FE0091E378 /* libRCTSettings-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		139FDEE71B06529A00C62182 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				139FDEF41B06529B00C62182 /* libRCTWebSocket.a */,
+				75D798131DC031FE0091E378 /* libRCTWebSocket-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		13B07FAE1A68108700A75B9A /* inPhood */ = {
+			isa = PBXGroup;
+			children = (
+				752308161D9C790A00A80087 /* inPhood.entitlements */,
+				752FA9B51D94A8DF00D9DF20 /* GoogleService-Info.plist */,
+				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				13B07FB61A68108700A75B9A /* Info.plist */,
+				13B07FB71A68108700A75B9A /* main.m */,
+			);
+			name = inPhood;
+			sourceTree = "<group>";
+		};
+		604CCBC30FC497E58F9F0787 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6E7F50E3B40AECCABA2CD167 /* Pods-inPhood.debug.xcconfig */,
+				EBCEC3EF394B7D871BCCA875 /* Pods-inPhood.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		750C063B1CC9D56C0054AA98 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75AE11971DF10C5100A156E7 /* libBranch.a */,
+				D856A2B98DD0C8266F1A75B8 /* libPods-inPhood.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7511EA811DDA3D4300B112E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7511EA991DDA3D4300B112E3 /* libReactNativeConfig.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7512D6B61D2C5AC700210FCE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7512D6C61D2C5AC800210FCE /* libReact.a */,
+				75D798171DC031FE0091E378 /* libReact-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		752716D11D4D28B000EC95E2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				752716D51D4D28B000EC95E2 /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		752F47461D79EF5D000F8EE6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				752F47531D79EF5D000F8EE6 /* libRCTPushNotification.a */,
+				75AE102A1DEE6CD700A156E7 /* libRCTPushNotification-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		757238EE1D7B63B80099EE39 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				757238F21D7B63B80099EE39 /* libRCTCamera.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		757238F41D7B63C90099EE39 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				757238F81D7B63CA0099EE39 /* libRCTCameraRoll.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		75AA28481DCE5B720041182E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75AA28621DCE5B720041182E /* libRNDeviceInfo.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		75D797A01DBE56230091E378 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75D797B41DBE56230091E378 /* libRNImagePicker.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		75FF69921D9CC38A007408F7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75FF69A61D9CC38B007408F7 /* libRNBranch.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		78C398B11ACF4ADC00677621 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78C398B91ACF4ADC00677621 /* libRCTLinking.a */,
+				75D798011DC031FE0091E378 /* libRCTLinking-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7981C5641DC2C4CF007E7ECB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7981C57F1DC2C4CF007E7ECB /* libRNFS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				757238F31D7B63C90099EE39 /* RCTCameraRoll.xcodeproj */,
+				757238ED1D7B63B80099EE39 /* RCTCamera.xcodeproj */,
+				752F47451D79EF5D000F8EE6 /* RCTPushNotification.xcodeproj */,
+				7512D6B51D2C5AC700210FCE /* React.xcodeproj */,
+				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
+				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
+				00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */,
+				78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */,
+				00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */,
+				139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */,
+				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
+				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
+				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				2CE0E8A8148E43D59480DCCE /* RNVectorIcons.xcodeproj */,
+				BF3DE7855CA441ADA78EE576 /* RNBranch.xcodeproj */,
+				BFAA74C532FA4875960DB836 /* RNImagePicker.xcodeproj */,
+				3DD7FCC0084C468EBC9F7766 /* RNFS.xcodeproj */,
+				CC696D0DD39E47D68CFD0B45 /* RNDeviceInfo.xcodeproj */,
+				BAA65D5B1358429FAA2D0F7F /* ReactNativeConfig.xcodeproj */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		832341B11AAA6A8300B99B32 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				832341B51AAA6A8300B99B32 /* libRCTText.a */,
+				75D7980E1DC031FE0091E378 /* libRCTText-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		83CBB9F61A601CBA00E9B192 = {
+			isa = PBXGroup;
+			children = (
+				750C063B1CC9D56C0054AA98 /* Frameworks */,
+				13B07FAE1A68108700A75B9A /* inPhood */,
+				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				00E356EF1AD99517003FC87E /* inPhoodTests */,
+				83CBBA001A601CBA00E9B192 /* Products */,
+				E5A3F943D394459998A11F68 /* Resources */,
+				604CCBC30FC497E58F9F0787 /* Pods */,
+			);
+			indentWidth = 2;
+			sourceTree = "<group>";
+			tabWidth = 2;
+		};
+		83CBBA001A601CBA00E9B192 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13B07F961A680F5B00A75B9A /* inPhood.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E5A3F943D394459998A11F68 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				221F3249DE0E405D8B50A295 /* Entypo.ttf */,
+				3450F66AC5B84AF79EA7B870 /* EvilIcons.ttf */,
+				F711100E3834491B848868BC /* FontAwesome.ttf */,
+				6D49B063EAC4415E964E5EAF /* Foundation.ttf */,
+				EBCEB82D4979486EAB4DEB83 /* Ionicons.ttf */,
+				63675BAC90914873A9A4162B /* MaterialIcons.ttf */,
+				4CAD52C3DE514835972AA696 /* Octicons.ttf */,
+				967B55463FEF4FF0BEC82263 /* Zocial.ttf */,
+				25B8015C0ABF4587AB1399F3 /* SimpleLineIcons.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		13B07F861A680F5B00A75B9A /* inPhood */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "inPhood" */;
+			buildPhases = (
+				29989B3F4CDF3B548C422B84 /* [CP] Check Pods Manifest.lock */,
+				13B07F871A680F5B00A75B9A /* Sources */,
+				13B07F8C1A680F5B00A75B9A /* Frameworks */,
+				13B07F8E1A680F5B00A75B9A /* Resources */,
+				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				1FF8EEF28B9854BDD17F1ED4 /* [CP] Embed Pods Frameworks */,
+				47C5970A7D72FC467E6CD763 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = inPhood;
+			productName = "Hello World";
+			productReference = 13B07F961A680F5B00A75B9A /* inPhood.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83CBB9F71A601CBA00E9B192 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 800;
+				ORGANIZATIONNAME = inPhood;
+				TargetAttributes = {
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 2V3Y873W24;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "inPhood" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 83CBB9F61A601CBA00E9B192;
+			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
+					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
+				},
+				{
+					ProductGroup = 757238EE1D7B63B80099EE39 /* Products */;
+					ProjectRef = 757238ED1D7B63B80099EE39 /* RCTCamera.xcodeproj */;
+				},
+				{
+					ProductGroup = 757238F41D7B63C90099EE39 /* Products */;
+					ProjectRef = 757238F31D7B63C90099EE39 /* RCTCameraRoll.xcodeproj */;
+				},
+				{
+					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
+					ProjectRef = 00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */;
+				},
+				{
+					ProductGroup = 00C302BC1ABCB91800DB3ED1 /* Products */;
+					ProjectRef = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
+				},
+				{
+					ProductGroup = 78C398B11ACF4ADC00677621 /* Products */;
+					ProjectRef = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
+				},
+				{
+					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
+					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 752F47461D79EF5D000F8EE6 /* Products */;
+					ProjectRef = 752F47451D79EF5D000F8EE6 /* RCTPushNotification.xcodeproj */;
+				},
+				{
+					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
+					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
+				},
+				{
+					ProductGroup = 832341B11AAA6A8300B99B32 /* Products */;
+					ProjectRef = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
+				},
+				{
+					ProductGroup = 00C302E01ABCB9EE00DB3ED1 /* Products */;
+					ProjectRef = 00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */;
+				},
+				{
+					ProductGroup = 139FDEE71B06529A00C62182 /* Products */;
+					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+				},
+				{
+					ProductGroup = 7512D6B61D2C5AC700210FCE /* Products */;
+					ProjectRef = 7512D6B51D2C5AC700210FCE /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = 7511EA811DDA3D4300B112E3 /* Products */;
+					ProjectRef = BAA65D5B1358429FAA2D0F7F /* ReactNativeConfig.xcodeproj */;
+				},
+				{
+					ProductGroup = 75FF69921D9CC38A007408F7 /* Products */;
+					ProjectRef = BF3DE7855CA441ADA78EE576 /* RNBranch.xcodeproj */;
+				},
+				{
+					ProductGroup = 75AA28481DCE5B720041182E /* Products */;
+					ProjectRef = CC696D0DD39E47D68CFD0B45 /* RNDeviceInfo.xcodeproj */;
+				},
+				{
+					ProductGroup = 7981C5641DC2C4CF007E7ECB /* Products */;
+					ProjectRef = 3DD7FCC0084C468EBC9F7766 /* RNFS.xcodeproj */;
+				},
+				{
+					ProductGroup = 75D797A01DBE56230091E378 /* Products */;
+					ProjectRef = BFAA74C532FA4875960DB836 /* RNImagePicker.xcodeproj */;
+				},
+				{
+					ProductGroup = 752716D11D4D28B000EC95E2 /* Products */;
+					ProjectRef = 2CE0E8A8148E43D59480DCCE /* RNVectorIcons.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				13B07F861A680F5B00A75B9A /* inPhood */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTActionSheet.a;
+			remoteRef = 00C302AB1ABCB8CE00DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTGeolocation.a;
+			remoteRef = 00C302B91ABCB90400DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		00C302C01ABCB91800DB3ED1 /* libRCTImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTImage.a;
+			remoteRef = 00C302BF1ABCB91800DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTNetwork.a;
+			remoteRef = 00C302DB1ABCB9D200DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTVibration.a;
+			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTSettings.a;
+			remoteRef = 139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		139FDEF41B06529B00C62182 /* libRCTWebSocket.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTWebSocket.a;
+			remoteRef = 139FDEF31B06529B00C62182 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7511EA991DDA3D4300B112E3 /* libReactNativeConfig.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeConfig.a;
+			remoteRef = 7511EA981DDA3D4300B112E3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7512D6C61D2C5AC800210FCE /* libReact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReact.a;
+			remoteRef = 7512D6C51D2C5AC800210FCE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		752716D51D4D28B000EC95E2 /* libRNVectorIcons.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNVectorIcons.a;
+			remoteRef = 752716D41D4D28B000EC95E2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		752F47531D79EF5D000F8EE6 /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = 752F47521D79EF5D000F8EE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		757238F21D7B63B80099EE39 /* libRCTCamera.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTCamera.a;
+			remoteRef = 757238F11D7B63B80099EE39 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		757238F81D7B63CA0099EE39 /* libRCTCameraRoll.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTCameraRoll.a;
+			remoteRef = 757238F71D7B63CA0099EE39 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75AA28621DCE5B720041182E /* libRNDeviceInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNDeviceInfo.a;
+			remoteRef = 75AA28611DCE5B720041182E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75AE102A1DEE6CD700A156E7 /* libRCTPushNotification-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTPushNotification-tvOS.a";
+			remoteRef = 75AE10291DEE6CD700A156E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75D797B41DBE56230091E378 /* libRNImagePicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNImagePicker.a;
+			remoteRef = 75D797B31DBE56230091E378 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75D797FD1DC031FE0091E378 /* libRCTImage-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTImage-tvOS.a";
+			remoteRef = 75D797FC1DC031FE0091E378 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75D798011DC031FE0091E378 /* libRCTLinking-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTLinking-tvOS.a";
+			remoteRef = 75D798001DC031FE0091E378 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75D798051DC031FE0091E378 /* libRCTNetwork-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTNetwork-tvOS.a";
+			remoteRef = 75D798041DC031FE0091E378 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75D7980A1DC031FE0091E378 /* libRCTSettings-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTSettings-tvOS.a";
+			remoteRef = 75D798091DC031FE0091E378 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75D7980E1DC031FE0091E378 /* libRCTText-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTText-tvOS.a";
+			remoteRef = 75D7980D1DC031FE0091E378 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75D798131DC031FE0091E378 /* libRCTWebSocket-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTWebSocket-tvOS.a";
+			remoteRef = 75D798121DC031FE0091E378 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75D798171DC031FE0091E378 /* libReact-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libReact-tvOS.a";
+			remoteRef = 75D798161DC031FE0091E378 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75FF69A61D9CC38B007408F7 /* libRNBranch.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNBranch.a;
+			remoteRef = 75FF69A51D9CC38B007408F7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTLinking.a;
+			remoteRef = 78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7981C57F1DC2C4CF007E7ECB /* libRNFS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFS.a;
+			remoteRef = 7981C57E1DC2C4CF007E7ECB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		832341B51AAA6A8300B99B32 /* libRCTText.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTText.a;
+			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		13B07F8E1A680F5B00A75B9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				469A1D46226845D0A52FE5B5 /* Entypo.ttf in Resources */,
+				DB82C22C748A4E1AB74EE0B4 /* EvilIcons.ttf in Resources */,
+				1078FEF01E3D472E885C22C2 /* FontAwesome.ttf in Resources */,
+				895223FA91584065ADF4D9D2 /* Foundation.ttf in Resources */,
+				96C4CCE2B958490687C186EF /* Ionicons.ttf in Resources */,
+				75FF69AB1D9CCA3A007408F7 /* inPhood.entitlements in Resources */,
+				46F77B56F92C4D1DA38B24E0 /* MaterialIcons.ttf in Resources */,
+				752FA9B61D94A8DF00D9DF20 /* GoogleService-Info.plist in Resources */,
+				A0AE0E2861414F33A00559D0 /* Octicons.ttf in Resources */,
+				0E7EBD6458734A06B285C23A /* Zocial.ttf in Resources */,
+				8B2091D34DBC421185F90983 /* SimpleLineIcons.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		1FF8EEF28B9854BDD17F1ED4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-inPhood/Pods-inPhood-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		29989B3F4CDF3B548C422B84 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		47C5970A7D72FC467E6CD763 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-inPhood/Pods-inPhood-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		13B07F871A680F5B00A75B9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				13B07FC11A68108700A75B9A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		13B07F941A680F5B00A75B9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E7F50E3B40AECCABA2CD167 /* Pods-inPhood.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = inPhood.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 2V3Y873W24;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-lock/ios/A0RNLock/**",
+					"$(SRCROOT)/../node_modules/react-native-camera/ios",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native/React/Base",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
+					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-image-to-base64/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+				);
+				INFOPLIST_FILE = inPhoodRN/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = inPhood;
+				PRODUCT_NAME = inPhood;
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		13B07F951A680F5B00A75B9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBCEC3EF394B7D871BCCA875 /* Pods-inPhood.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = inPhood.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2V3Y873W24;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-lock/ios/A0RNLock/**",
+					"$(SRCROOT)/../node_modules/react-native-camera/ios",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native/React/Base",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
+					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-image-to-base64/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+				);
+				INFOPLIST_FILE = inPhoodRN/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = inPhood;
+				PRODUCT_NAME = inPhood;
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		83CBBA201A601CBA00E9B192 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
+					"$(SRCROOT)/../node_modules/react-native-branch/ios",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-lock/ios/A0RNLock/**",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-image-to-base64/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		83CBBA211A601CBA00E9B192 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-lock/ios/A0RNLock/**",
+					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-camera/ios",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-branch/ios",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-image-to-base64/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "inPhood" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13B07F941A680F5B00A75B9A /* Debug */,
+				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "inPhood" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CBBA201A601CBA00E9B192 /* Debug */,
+				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
+}

@@ -7,6 +7,5 @@ target 'inPhood' do
 
   # Pods for inPhood
   pod 'Branch'
-  pod 'AGEmojiKeyboard'
 
 end

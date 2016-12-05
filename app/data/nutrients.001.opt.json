@@ -1,0 +1,2948 @@
+{
+  "Amaranth leaves, cooked, boiled, drained, without salt": {
+    "NDB": "11004", 
+    "Protein": "2.11", 
+    "Carbohydrate": "4.11", 
+    "Fat": "0.18"
+  }, 
+  "Apples, frozen, unsweetened, unheated": {
+    "NDB": "09014", 
+    "Protein": "0.28", 
+    "Carbohydrate": "12.31", 
+    "Fat": "0.32"
+  }, 
+  "Apples, raw, without skin": {
+    "NDB": "09004", 
+    "Protein": "0.27", 
+    "Carbohydrate": "12.76", 
+    "Fat": "0.13"
+  }, 
+  "Applesauce, canned, sweetened, without salt (includes USDA commodity)": {
+    "NDB": "09020", 
+    "Protein": "0.16", 
+    "Carbohydrate": "17.49", 
+    "Fat": "0.17"
+  }, 
+  "Apricots, canned, heavy syrup pack, with skin, solids and liquids": {
+    "NDB": "09027", 
+    "Protein": "0.53", 
+    "Carbohydrate": "21.47", 
+    "Fat": "0.08"
+  }, 
+  "Apricots, canned, heavy syrup, drained": {
+    "NDB": "09357", 
+    "Protein": "0.64", 
+    "Carbohydrate": "21.31", 
+    "Fat": "0.11"
+  }, 
+  "Apricots, dehydrated (low-moisture), sulfured, uncooked": {
+    "NDB": "09030", 
+    "Protein": "4.9", 
+    "Carbohydrate": "82.89", 
+    "Fat": "0.62"
+  }, 
+  "Apricots, dried, sulfured, stewed, without added sugar": {
+    "NDB": "09033", 
+    "Protein": "1.2", 
+    "Carbohydrate": "22.15", 
+    "Fat": "0.18"
+  }, 
+  "ARCHWAY Home Style Cookies, Date Filled Oatmeal": {
+    "NDB": "18527", 
+    "Protein": "4.67", 
+    "Carbohydrate": "68.16", 
+    "Fat": "12.05"
+  }, 
+  "ARCHWAY Home Style Cookies, Iced Molasses": {
+    "NDB": "18532", 
+    "Protein": "3.5", 
+    "Carbohydrate": "69.12", 
+    "Fat": "14.43"
+  }, 
+  "ARCHWAY Home Style Cookies, Iced Oatmeal": {
+    "NDB": "18533", 
+    "Protein": "4.89", 
+    "Carbohydrate": "66.76", 
+    "Fat": "16.53"
+  }, 
+  "ARCHWAY Home Style Cookies, Molasses": {
+    "NDB": "18535", 
+    "Protein": "4.25", 
+    "Carbohydrate": "69.41", 
+    "Fat": "12.06"
+  }, 
+  "ARCHWAY Home Style Cookies, Raspberry Filled": {
+    "NDB": "18544", 
+    "Protein": "4.35", 
+    "Carbohydrate": "65.92", 
+    "Fat": "13.26"
+  }, 
+  "Arrowhead, cooked, boiled, drained, without salt": {
+    "NDB": "11006", 
+    "Protein": "4.49", 
+    "Carbohydrate": "16.14", 
+    "Fat": "0.1"
+  }, 
+  "Artificial Blueberry Muffin Mix, dry": {
+    "NDB": "18566", 
+    "Protein": "4.7", 
+    "Carbohydrate": "77.45", 
+    "Fat": "8.7"
+  }, 
+  "Arugula, raw": {
+    "NDB": "11959", 
+    "Protein": "2.58", 
+    "Carbohydrate": "3.65", 
+    "Fat": "0.66"
+  }, 
+  "Asparagus, canned, drained solids": {
+    "NDB": "11015", 
+    "Protein": "2.14", 
+    "Carbohydrate": "2.46", 
+    "Fat": "0.65"
+  }, 
+  "Asparagus, canned, regular pack, solids and liquids": {
+    "NDB": "11013", 
+    "Protein": "1.8", 
+    "Carbohydrate": "2.48", 
+    "Fat": "0.18"
+  }, 
+  "Asparagus, cooked, boiled, drained": {
+    "NDB": "11012", 
+    "Protein": "2.4", 
+    "Carbohydrate": "4.11", 
+    "Fat": "0.22"
+  }, 
+  "Asparagus, frozen, cooked, boiled, drained, without salt": {
+    "NDB": "11019", 
+    "Protein": "2.95", 
+    "Carbohydrate": "1.92", 
+    "Fat": "0.42"
+  }, 
+  "AUSTIN, Grilled Cheese on Wafer Crackers, sandwich-type": {
+    "NDB": "18986", 
+    "Protein": "7.9", 
+    "Carbohydrate": "62.0", 
+    "Fat": "23.8"
+  }, 
+  "AUSTIN, Peanut Butter on Toasty Crackers, sandwich-type, reduced fat": {
+    "NDB": "18989", 
+    "Protein": "9.5", 
+    "Carbohydrate": "67.2", 
+    "Fat": "18.0"
+  }, 
+  "Bagels, oat bran": {
+    "NDB": "18007", 
+    "Protein": "10.7", 
+    "Carbohydrate": "53.3", 
+    "Fat": "1.2"
+  }, 
+  "Bagels, plain, enriched, with calcium propionate (includes onion, poppy, sesame)": {
+    "NDB": "18001", 
+    "Protein": "10.56", 
+    "Carbohydrate": "52.38", 
+    "Fat": "1.32"
+  }, 
+  "Bagels, plain, enriched, with calcium propionate (includes onion, poppy, sesame), toasted": {
+    "NDB": "18002", 
+    "Protein": "11.14", 
+    "Carbohydrate": "57.39", 
+    "Fat": "1.43"
+  }, 
+  "Balsam-pear (bitter gourd), pods, raw": {
+    "NDB": "11024", 
+    "Protein": "1.0", 
+    "Carbohydrate": "3.7", 
+    "Fat": "0.17"
+  }, 
+  "Bamboo shoots, raw": {
+    "NDB": "11026", 
+    "Protein": "2.6", 
+    "Carbohydrate": "5.2", 
+    "Fat": "0.3"
+  }, 
+  "Barley flour or meal": {
+    "NDB": "20130", 
+    "Protein": "10.5", 
+    "Carbohydrate": "74.52", 
+    "Fat": "1.6"
+  }, 
+  "Beans, adzuki, mature seeds, raw": {
+    "NDB": "16001", 
+    "Protein": "19.87", 
+    "Carbohydrate": "62.9", 
+    "Fat": "0.53"
+  }, 
+  "Beans, baked, canned, with pork": {
+    "NDB": "16009", 
+    "Protein": "5.19", 
+    "Carbohydrate": "19.99", 
+    "Fat": "1.55"
+  }, 
+  "Beans, black turtle, mature seeds, canned": {
+    "NDB": "16018", 
+    "Protein": "6.03", 
+    "Carbohydrate": "16.55", 
+    "Fat": "0.29"
+  }, 
+  "Beans, black turtle, mature seeds, cooked, boiled, without salt": {
+    "NDB": "16017", 
+    "Protein": "8.18", 
+    "Carbohydrate": "24.35", 
+    "Fat": "0.35"
+  }, 
+  "Beans, black, mature seeds, raw": {
+    "NDB": "16014", 
+    "Protein": "21.6", 
+    "Carbohydrate": "62.36", 
+    "Fat": "1.42"
+  }, 
+  "Beans, kidney, mature seeds, sprouted, raw": {
+    "NDB": "11029", 
+    "Protein": "4.2", 
+    "Carbohydrate": "4.1", 
+    "Fat": "0.5"
+  }, 
+  "Beans, pink, mature seeds, raw": {
+    "NDB": "16040", 
+    "Protein": "20.96", 
+    "Carbohydrate": "64.19", 
+    "Fat": "1.13"
+  }, 
+  "Beans, pinto, immature seeds, frozen, unprepared": {
+    "NDB": "11048", 
+    "Protein": "9.8", 
+    "Carbohydrate": "32.5", 
+    "Fat": "0.5"
+  }, 
+  "Beans, snap, green, frozen, cooked, boiled, drained without salt": {
+    "NDB": "11061", 
+    "Protein": "1.49", 
+    "Carbohydrate": "6.45", 
+    "Fat": "0.17"
+  }, 
+  "BEAR NAKED, Double Chocolate Cookies": {
+    "NDB": "18993", 
+    "Protein": "6.6", 
+    "Carbohydrate": "66.9", 
+    "Fat": "16.9"
+  }, 
+  "BEAR NAKED, Fruit  &  Nut Cookies": {
+    "NDB": "18994", 
+    "Protein": "7.5", 
+    "Carbohydrate": "61.6", 
+    "Fat": "21.4"
+  }, 
+  "Beet greens, raw": {
+    "NDB": "11086", 
+    "Protein": "2.2", 
+    "Carbohydrate": "4.33", 
+    "Fat": "0.13"
+  }, 
+  "Beets, canned, regular pack, solids and liquids": {
+    "NDB": "11082", 
+    "Protein": "0.73", 
+    "Carbohydrate": "7.14", 
+    "Fat": "0.09"
+  }, 
+  "Beets, raw": {
+    "NDB": "11080", 
+    "Protein": "1.61", 
+    "Carbohydrate": "9.56", 
+    "Fat": "0.17"
+  }, 
+  "Biscuits, mixed grain, refrigerated dough": {
+    "NDB": "18017", 
+    "Protein": "6.1", 
+    "Carbohydrate": "47.4", 
+    "Fat": "5.6"
+  }, 
+  "Biscuits, plain or buttermilk, dry mix": {
+    "NDB": "18010", 
+    "Protein": "8.0", 
+    "Carbohydrate": "63.4", 
+    "Fat": "15.4"
+  }, 
+  "Biscuits, plain or buttermilk, frozen, baked": {
+    "NDB": "18009", 
+    "Protein": "6.2", 
+    "Carbohydrate": "53.87", 
+    "Fat": "11.03"
+  }, 
+  "Biscuits, plain or buttermilk, refrigerated dough, higher fat": {
+    "NDB": "18014", 
+    "Protein": "6.66", 
+    "Carbohydrate": "46.32", 
+    "Fat": "10.58"
+  }, 
+  "Blackberries, frozen, unsweetened": {
+    "NDB": "09048", 
+    "Protein": "1.18", 
+    "Carbohydrate": "15.67", 
+    "Fat": "0.43"
+  }, 
+  "Blackberry juice, canned": {
+    "NDB": "09043", 
+    "Protein": "0.3", 
+    "Carbohydrate": "7.8", 
+    "Fat": "0.6"
+  }, 
+  "Blueberries, frozen, sweetened": {
+    "NDB": "09055", 
+    "Protein": "0.4", 
+    "Carbohydrate": "21.95", 
+    "Fat": "0.13"
+  }, 
+  "Blueberries, wild, canned, heavy syrup, drained": {
+    "NDB": "09353", 
+    "Protein": "0.56", 
+    "Carbohydrate": "28.32", 
+    "Fat": "0.34"
+  }, 
+  "Boysenberries, canned, heavy syrup": {
+    "NDB": "09056", 
+    "Protein": "0.99", 
+    "Carbohydrate": "22.31", 
+    "Fat": "0.12"
+  }, 
+  "Boysenberries, frozen, unsweetened": {
+    "NDB": "09057", 
+    "Protein": "1.1", 
+    "Carbohydrate": "12.19", 
+    "Fat": "0.26"
+  }, 
+  "Bread stuffing, bread, dry mix": {
+    "NDB": "18081", 
+    "Protein": "11.0", 
+    "Carbohydrate": "76.2", 
+    "Fat": "3.4"
+  }, 
+  "Bread stuffing, cornbread, dry mix": {
+    "NDB": "18084", 
+    "Protein": "10.0", 
+    "Carbohydrate": "76.7", 
+    "Fat": "4.2"
+  }, 
+  "Bread stuffing, cornbread, dry mix, prepared": {
+    "NDB": "18085", 
+    "Protein": "2.9", 
+    "Carbohydrate": "21.9", 
+    "Fat": "8.8"
+  }, 
+  "Bread, cheese": {
+    "NDB": "18972", 
+    "Protein": "10.42", 
+    "Carbohydrate": "44.83", 
+    "Fat": "20.83"
+  }, 
+  "Bread, cornbread, dry mix, prepared with 2% milk, 80% margarine, and eggs": {
+    "NDB": "18023", 
+    "Protein": "6.59", 
+    "Carbohydrate": "54.46", 
+    "Fat": "9.58"
+  }, 
+  "Bread, cornbread, prepared from recipe, made with low fat (2%) milk": {
+    "NDB": "18024", 
+    "Protein": "6.7", 
+    "Carbohydrate": "43.5", 
+    "Fat": "7.1"
+  }, 
+  "Bread, cracked-wheat": {
+    "NDB": "18025", 
+    "Protein": "8.7", 
+    "Carbohydrate": "49.5", 
+    "Fat": "3.9"
+  }, 
+  "Bread, french or vienna, toasted (includes sourdough)": {
+    "NDB": "18030", 
+    "Protein": "13.0", 
+    "Carbohydrate": "61.93", 
+    "Fat": "2.14"
+  }, 
+  "Bread, irish soda, prepared from recipe": {
+    "NDB": "18032", 
+    "Protein": "6.6", 
+    "Carbohydrate": "56.0", 
+    "Fat": "5.0"
+  }, 
+  "Bread, oat bran": {
+    "NDB": "18037", 
+    "Protein": "10.4", 
+    "Carbohydrate": "39.8", 
+    "Fat": "4.4"
+  }, 
+  "Bread, oatmeal, toasted": {
+    "NDB": "18040", 
+    "Protein": "9.2", 
+    "Carbohydrate": "52.7", 
+    "Fat": "4.8"
+  }, 
+  "Bread, pan dulce, sweet yeast bread": {
+    "NDB": "18955", 
+    "Protein": "9.42", 
+    "Carbohydrate": "56.38", 
+    "Fat": "11.58"
+  }, 
+  "Bread, pita, white, enriched": {
+    "NDB": "18041", 
+    "Protein": "9.1", 
+    "Carbohydrate": "55.7", 
+    "Fat": "1.2"
+  }, 
+  "Bread, pound cake type, pan de torta salvadoran": {
+    "NDB": "18954", 
+    "Protein": "7.06", 
+    "Carbohydrate": "51.29", 
+    "Fat": "17.45"
+  }, 
+  "Bread, protein (includes gluten)": {
+    "NDB": "18043", 
+    "Protein": "12.1", 
+    "Carbohydrate": "43.8", 
+    "Fat": "2.2"
+  }, 
+  "Bread, reduced-calorie, oatmeal": {
+    "NDB": "18051", 
+    "Protein": "7.6", 
+    "Carbohydrate": "43.3", 
+    "Fat": "3.5"
+  }, 
+  "Bread, reduced-calorie, wheat": {
+    "NDB": "18055", 
+    "Protein": "13.32", 
+    "Carbohydrate": "42.47", 
+    "Fat": "2.92"
+  }, 
+  "Bread, reduced-calorie, white": {
+    "NDB": "18057", 
+    "Protein": "8.7", 
+    "Carbohydrate": "44.3", 
+    "Fat": "2.5"
+  }, 
+  "Bread, rye": {
+    "NDB": "18060", 
+    "Protein": "8.5", 
+    "Carbohydrate": "48.3", 
+    "Fat": "3.3"
+  }, 
+  "Bread, salvadoran sweet cheese (quesadilla salvadorena)": {
+    "NDB": "18953", 
+    "Protein": "7.12", 
+    "Carbohydrate": "47.84", 
+    "Fat": "17.12"
+  }, 
+  "Bread, wheat": {
+    "NDB": "18064", 
+    "Protein": "10.67", 
+    "Carbohydrate": "47.54", 
+    "Fat": "4.53"
+  }, 
+  "Bread, wheat bran": {
+    "NDB": "18066", 
+    "Protein": "8.8", 
+    "Carbohydrate": "47.8", 
+    "Fat": "3.4"
+  }, 
+  "Bread, wheat germ, toasted": {
+    "NDB": "18385", 
+    "Protein": "10.7", 
+    "Carbohydrate": "54.3", 
+    "Fat": "3.3"
+  }, 
+  "Bread, white wheat": {
+    "NDB": "18967", 
+    "Protein": "10.66", 
+    "Carbohydrate": "43.91", 
+    "Fat": "2.15"
+  }, 
+  "Bread, white, commercially prepared, toasted": {
+    "NDB": "18070", 
+    "Protein": "9.0", 
+    "Carbohydrate": "54.5", 
+    "Fat": "4.0"
+  }, 
+  "Bread, whole-wheat, commercially prepared": {
+    "NDB": "18075", 
+    "Protein": "12.45", 
+    "Carbohydrate": "42.71", 
+    "Fat": "3.5"
+  }, 
+  "Breadfruit, raw": {
+    "NDB": "09059", 
+    "Protein": "1.07", 
+    "Carbohydrate": "27.12", 
+    "Fat": "0.23"
+  }, 
+  "Broccoli raab, raw": {
+    "NDB": "11096", 
+    "Protein": "3.17", 
+    "Carbohydrate": "2.85", 
+    "Fat": "0.49"
+  }, 
+  "Broccoli, frozen, chopped, cooked, boiled, drained, without salt": {
+    "NDB": "11093", 
+    "Protein": "3.1", 
+    "Carbohydrate": "5.35", 
+    "Fat": "0.12"
+  }, 
+  "Broccoli, frozen, chopped, unprepared": {
+    "NDB": "11092", 
+    "Protein": "2.81", 
+    "Carbohydrate": "4.78", 
+    "Fat": "0.29"
+  }, 
+  "Brussels sprouts, raw": {
+    "NDB": "11098", 
+    "Protein": "3.38", 
+    "Carbohydrate": "8.95", 
+    "Fat": "0.3"
+  }, 
+  "Burdock root, cooked, boiled, drained, without salt": {
+    "NDB": "11105", 
+    "Protein": "2.09", 
+    "Carbohydrate": "21.15", 
+    "Fat": "0.14"
+  }, 
+  "Cabbage, chinese (pak-choi), cooked, boiled, drained, with salt": {
+    "NDB": "11754", 
+    "Protein": "1.56", 
+    "Carbohydrate": "1.78", 
+    "Fat": "0.16"
+  }, 
+  "Cabbage, chinese (pak-choi), cooked, boiled, drained, without salt": {
+    "NDB": "11117", 
+    "Protein": "1.56", 
+    "Carbohydrate": "1.78", 
+    "Fat": "0.16"
+  }, 
+  "Cabbage, chinese (pe-tsai), raw": {
+    "NDB": "11119", 
+    "Protein": "1.2", 
+    "Carbohydrate": "3.23", 
+    "Fat": "0.2"
+  }, 
+  "Cake, angelfood, commercially prepared": {
+    "NDB": "18086", 
+    "Protein": "5.9", 
+    "Carbohydrate": "57.8", 
+    "Fat": "0.8"
+  }, 
+  "Cake, angelfood, dry mix, prepared": {
+    "NDB": "18088", 
+    "Protein": "6.1", 
+    "Carbohydrate": "58.7", 
+    "Fat": "0.3"
+  }, 
+  "Cake, cherry fudge with chocolate frosting": {
+    "NDB": "18095", 
+    "Protein": "2.4", 
+    "Carbohydrate": "38.0", 
+    "Fat": "12.5"
+  }, 
+  "Cake, chocolate, prepared from recipe without frosting": {
+    "NDB": "18101", 
+    "Protein": "5.3", 
+    "Carbohydrate": "53.4", 
+    "Fat": "15.1"
+  }, 
+  "Cake, pudding-type, german chocolate, dry mix": {
+    "NDB": "18112", 
+    "Protein": "4.17", 
+    "Carbohydrate": "81.25", 
+    "Fat": "3.24"
+  }, 
+  "Cake, shortcake, biscuit-type, prepared from recipe": {
+    "NDB": "18126", 
+    "Protein": "6.1", 
+    "Carbohydrate": "48.5", 
+    "Fat": "14.2"
+  }, 
+  "Cake, snack cakes, creme-filled, sponge": {
+    "NDB": "18128", 
+    "Protein": "3.47", 
+    "Carbohydrate": "64.03", 
+    "Fat": "11.54"
+  }, 
+  "Cake, sponge, commercially prepared": {
+    "NDB": "18133", 
+    "Protein": "5.4", 
+    "Carbohydrate": "61.0", 
+    "Fat": "2.7"
+  }, 
+  "Cake, white, dry mix, special dietary (includes lemon-flavored)": {
+    "NDB": "18131", 
+    "Protein": "3.0", 
+    "Carbohydrate": "79.6", 
+    "Fat": "8.4"
+  }, 
+  "Cake, yellow, prepared from recipe without frosting": {
+    "NDB": "18146", 
+    "Protein": "5.3", 
+    "Carbohydrate": "53.0", 
+    "Fat": "14.6"
+  }, 
+  "Carambola, (starfruit), raw": {
+    "NDB": "09060", 
+    "Protein": "1.04", 
+    "Carbohydrate": "6.73", 
+    "Fat": "0.33"
+  }, 
+  "Cardoon, raw": {
+    "NDB": "11122", 
+    "Protein": "0.7", 
+    "Carbohydrate": "4.07", 
+    "Fat": "0.1"
+  }, 
+  "Carissa, (natal-plum), raw": {
+    "NDB": "09061", 
+    "Protein": "0.5", 
+    "Carbohydrate": "13.63", 
+    "Fat": "1.3"
+  }, 
+  "Carrots, canned, no salt added, solids and liquids": {
+    "NDB": "11758", 
+    "Protein": "0.59", 
+    "Carbohydrate": "5.36", 
+    "Fat": "0.14"
+  }, 
+  "Carrots, canned, regular pack, drained solids": {
+    "NDB": "11128", 
+    "Protein": "0.64", 
+    "Carbohydrate": "5.54", 
+    "Fat": "0.19"
+  }, 
+  "Carrots, frozen, unprepared": {
+    "NDB": "11130", 
+    "Protein": "0.78", 
+    "Carbohydrate": "7.9", 
+    "Fat": "0.46"
+  }, 
+  "Carrots, raw": {
+    "NDB": "11124", 
+    "Protein": "0.93", 
+    "Carbohydrate": "9.58", 
+    "Fat": "0.24"
+  }, 
+  "Cauliflower, green, raw": {
+    "NDB": "11965", 
+    "Protein": "2.95", 
+    "Carbohydrate": "6.09", 
+    "Fat": "0.3"
+  }, 
+  "Celery, cooked, boiled, drained, without salt": {
+    "NDB": "11144", 
+    "Protein": "0.83", 
+    "Carbohydrate": "4.0", 
+    "Fat": "0.16"
+  }, 
+  "Cereals ready-to-eat, BARBARA'S PUFFINS, original": {
+    "NDB": "08657", 
+    "Protein": "7.41", 
+    "Carbohydrate": "84.0", 
+    "Fat": "3.7"
+  }, 
+  "Cereals ready-to-eat, GENERAL MILLS, COCOA PUFFS, 25% Reduced Sugar": {
+    "NDB": "08635", 
+    "Protein": "6.5", 
+    "Carbohydrate": "82.69", 
+    "Fat": "5.19"
+  }, 
+  "Cereals ready-to-eat, GENERAL MILLS, FIBER ONE 80 Calories, Chocolate Squares": {
+    "NDB": "08669", 
+    "Protein": "3.29", 
+    "Carbohydrate": "84.0", 
+    "Fat": "2.9"
+  }, 
+  "Cereals ready-to-eat, GENERAL MILLS, Honey KIX": {
+    "NDB": "08643", 
+    "Protein": "6.4", 
+    "Carbohydrate": "83.0", 
+    "Fat": "3.9"
+  }, 
+  "Cereals ready-to-eat, GENERAL MILLS, LUCKY CHARMS": {
+    "NDB": "08050", 
+    "Protein": "7.67", 
+    "Carbohydrate": "80.89", 
+    "Fat": "5.02"
+  }, 
+  "Cereals ready-to-eat, GENERAL MILLS, Rice CHEX": {
+    "NDB": "08064", 
+    "Protein": "6.4", 
+    "Carbohydrate": "85.09", 
+    "Fat": "1.89"
+  }, 
+  "Cereals ready-to-eat, granola, homemade": {
+    "NDB": "08037", 
+    "Protein": "13.67", 
+    "Carbohydrate": "53.88", 
+    "Fat": "24.31"
+  }, 
+  "Cereals ready-to-eat, KASHI GOLEAN CRISP Cinnamon Crumble": {
+    "NDB": "08649", 
+    "Protein": "22.1", 
+    "Carbohydrate": "62.59", 
+    "Fat": "8.19"
+  }, 
+  "Cereals ready-to-eat, KASHI Honey Sunshine": {
+    "NDB": "08610", 
+    "Protein": "7.8", 
+    "Carbohydrate": "82.0", 
+    "Fat": "4.09"
+  }, 
+  "Cereals ready-to-eat, KELLOGG'S APPLE JACKS with marshmallows": {
+    "NDB": "08660", 
+    "Protein": "4.3", 
+    "Carbohydrate": "89.6", 
+    "Fat": "2.8"
+  }, 
+  "Cereals ready-to-eat, KELLOGG's FROSTED MINI-WHEATS Bite Size Blueberry Muffin": {
+    "NDB": "08617", 
+    "Protein": "8.6", 
+    "Carbohydrate": "84.8", 
+    "Fat": "1.6"
+  }, 
+  "Cereals ready-to-eat, KELLOGG'S FROSTED MINI-WHEATS Touch of Fruit in the Middle, Raspberry": {
+    "NDB": "08677", 
+    "Protein": "8.8", 
+    "Carbohydrate": "82.1", 
+    "Fat": "1.8"
+  }, 
+  "Cereals ready-to-eat, KELLOGG'S KRAVE double chocolate cereal": {
+    "NDB": "08658", 
+    "Protein": "7.1", 
+    "Carbohydrate": "75.9", 
+    "Fat": "11.2"
+  }, 
+  "Cereals ready-to-eat, NATURE'S PATH, Organic FLAX PLUS flakes": {
+    "NDB": "08656", 
+    "Protein": "11.91", 
+    "Carbohydrate": "75.27", 
+    "Fat": "5.46"
+  }, 
+  "Cereals ready-to-eat, POST HONEY BUNCHES OF OATS with cinnamon bunches": {
+    "NDB": "08665", 
+    "Protein": "7.1", 
+    "Carbohydrate": "82.8", 
+    "Fat": "5.0"
+  }, 
+  "Cereals ready-to-eat, POST, COCOA PEBBLES": {
+    "NDB": "08015", 
+    "Protein": "4.8", 
+    "Carbohydrate": "85.7", 
+    "Fat": "4.1"
+  }, 
+  "Cereals ready-to-eat, POST, HONEY BUNCHES OF OATS with vanilla bunches": {
+    "NDB": "08633", 
+    "Protein": "7.9", 
+    "Carbohydrate": "81.8", 
+    "Fat": "5.1"
+  }, 
+  "Cereals ready-to-eat, POST, Honeycomb Cereal": {
+    "NDB": "08046", 
+    "Protein": "6.01", 
+    "Carbohydrate": "86.63", 
+    "Fat": "2.93"
+  }, 
+  "Cereals ready-to-eat, POST, Shredded Wheat, original big biscuit": {
+    "NDB": "08147", 
+    "Protein": "11.37", 
+    "Carbohydrate": "78.96", 
+    "Fat": "2.01"
+  }, 
+  "Cereals ready-to-eat, POST, Shredded Wheat, original spoon-size": {
+    "NDB": "08148", 
+    "Protein": "11.8", 
+    "Carbohydrate": "81.4", 
+    "Fat": "2.1"
+  }, 
+  "Cereals ready-to-eat, QUAKER Oatmeal Squares, Golden Maple": {
+    "NDB": "08632", 
+    "Protein": "11.3", 
+    "Carbohydrate": "78.04", 
+    "Fat": "4.83"
+  }, 
+  "Cereals ready-to-eat, QUAKER, Maple Brown Sugar LIFE Cereal": {
+    "NDB": "08628", 
+    "Protein": "9.17", 
+    "Carbohydrate": "78.86", 
+    "Fat": "4.06"
+  }, 
+  "Cereals ready-to-eat, QUAKER, QUAKER CRUNCHY BRAN": {
+    "NDB": "08018", 
+    "Protein": "6.37", 
+    "Carbohydrate": "83.68", 
+    "Fat": "4.06"
+  }, 
+  "Cereals ready-to-eat, QUAKER, QUAKER OAT LIFE, plain": {
+    "NDB": "08049", 
+    "Protein": "9.98", 
+    "Carbohydrate": "77.74", 
+    "Fat": "4.43"
+  }, 
+  "Cereals ready-to-eat, QUAKER, QUAKER Puffed Wheat": {
+    "NDB": "08146", 
+    "Protein": "16.26", 
+    "Carbohydrate": "76.39", 
+    "Fat": "2.15"
+  }, 
+  "Cereals ready-to-eat, rice, puffed, fortified": {
+    "NDB": "08156", 
+    "Protein": "6.3", 
+    "Carbohydrate": "89.8", 
+    "Fat": "0.5"
+  }, 
+  "Cereals, corn grits, white, regular and quick, enriched, cooked with water, with salt": {
+    "NDB": "08161", 
+    "Protein": "1.71", 
+    "Carbohydrate": "14.76", 
+    "Fat": "0.46"
+  }, 
+  "Cereals, corn grits, white, regular and quick, enriched, cooked with water, without salt": {
+    "NDB": "08091", 
+    "Protein": "1.71", 
+    "Carbohydrate": "14.76", 
+    "Fat": "0.46"
+  }, 
+  "Cereals, corn grits, yellow, regular and quick, enriched, cooked with water, without salt": {
+    "NDB": "08164", 
+    "Protein": "1.23", 
+    "Carbohydrate": "13.86", 
+    "Fat": "0.39"
+  }, 
+  "Cereals, CREAM OF RICE, cooked with water, with salt": {
+    "NDB": "08168", 
+    "Protein": "0.9", 
+    "Carbohydrate": "11.5", 
+    "Fat": "0.1"
+  }, 
+  "Cereals, CREAM OF RICE, dry": {
+    "NDB": "08100", 
+    "Protein": "6.3", 
+    "Carbohydrate": "82.4", 
+    "Fat": "0.5"
+  }, 
+  "Cereals, CREAM OF WHEAT, instant, dry": {
+    "NDB": "08106", 
+    "Protein": "10.6", 
+    "Carbohydrate": "75.5", 
+    "Fat": "1.4"
+  }, 
+  "Cereals, CREAM OF WHEAT, instant, prepared with water, without salt": {
+    "NDB": "08107", 
+    "Protein": "1.84", 
+    "Carbohydrate": "13.08", 
+    "Fat": "0.24"
+  }, 
+  "Cereals, MALT-O-MEAL, chocolate, dry": {
+    "NDB": "08177", 
+    "Protein": "10.6", 
+    "Carbohydrate": "79.55", 
+    "Fat": "0.82"
+  }, 
+  "Cereals, oats, instant, fortified, with raisins and spice, prepared with water": {
+    "NDB": "08133", 
+    "Protein": "1.98", 
+    "Carbohydrate": "17.91", 
+    "Fat": "0.95"
+  }, 
+  "Cereals, QUAKER, Instant Oatmeal Organic, Regular": {
+    "NDB": "08640", 
+    "Protein": "16.0", 
+    "Carbohydrate": "67.0", 
+    "Fat": "6.3"
+  }, 
+  "Cereals, QUAKER, QUAKER MultiGrain Oatmeal, dry": {
+    "NDB": "08200", 
+    "Protein": "12.64", 
+    "Carbohydrate": "72.62", 
+    "Fat": "2.73"
+  }, 
+  "Cereals, ready-to-eat, MALT-O-MEAL, Blueberry Mini SPOONERS": {
+    "NDB": "08673", 
+    "Protein": "8.81", 
+    "Carbohydrate": "79.4", 
+    "Fat": "1.92"
+  }, 
+  "Cereals, WHEATENA, cooked with water": {
+    "NDB": "08143", 
+    "Protein": "2.0", 
+    "Carbohydrate": "11.8", 
+    "Fat": "0.5"
+  }, 
+  "Cheesecake commercially prepared": {
+    "NDB": "18147", 
+    "Protein": "5.5", 
+    "Carbohydrate": "25.5", 
+    "Fat": "22.5"
+  }, 
+  "Cherries, sour, red, canned, light syrup pack, solids and liquids": {
+    "NDB": "09065", 
+    "Protein": "0.74", 
+    "Carbohydrate": "19.3", 
+    "Fat": "0.1"
+  }, 
+  "Cherries, sour, red, frozen, unsweetened": {
+    "NDB": "09068", 
+    "Protein": "0.92", 
+    "Carbohydrate": "11.02", 
+    "Fat": "0.44"
+  }, 
+  "Cherries, sweet, canned, water pack, solids and liquids": {
+    "NDB": "09071", 
+    "Protein": "0.77", 
+    "Carbohydrate": "11.76", 
+    "Fat": "0.13"
+  }, 
+  "Cherries, sweet, raw": {
+    "NDB": "09070", 
+    "Protein": "1.06", 
+    "Carbohydrate": "16.01", 
+    "Fat": "0.2"
+  }, 
+  "Chicory roots, raw": {
+    "NDB": "11154", 
+    "Protein": "1.4", 
+    "Carbohydrate": "17.51", 
+    "Fat": "0.2"
+  }, 
+  "Chicory, witloof, raw": {
+    "NDB": "11151", 
+    "Protein": "0.9", 
+    "Carbohydrate": "4.0", 
+    "Fat": "0.1"
+  }, 
+  "Coffeecake, cinnamon with crumb topping, dry mix": {
+    "NDB": "18107", 
+    "Protein": "4.8", 
+    "Carbohydrate": "77.7", 
+    "Fat": "12.0"
+  }, 
+  "Coffeecake, cinnamon with crumb topping, dry mix, prepared": {
+    "NDB": "18108", 
+    "Protein": "5.5", 
+    "Carbohydrate": "52.8", 
+    "Fat": "9.6"
+  }, 
+  "Coffeecake, creme-filled with chocolate frosting": {
+    "NDB": "18105", 
+    "Protein": "5.0", 
+    "Carbohydrate": "53.8", 
+    "Fat": "10.8"
+  }, 
+  "Collards, frozen, chopped, unprepared": {
+    "NDB": "11163", 
+    "Protein": "2.69", 
+    "Carbohydrate": "6.46", 
+    "Fat": "0.37"
+  }, 
+  "CONTINENTAL MILLS, KRUSTEAZ Almond Poppyseed Muffin Mix, Artificially Flavored, dry": {
+    "NDB": "18610", 
+    "Protein": "5.6", 
+    "Carbohydrate": "75.6", 
+    "Fat": "10.3"
+  }, 
+  "Cookies, brownies, dry mix, sugar free": {
+    "NDB": "18196", 
+    "Protein": "2.9", 
+    "Carbohydrate": "80.4", 
+    "Fat": "12.5"
+  }, 
+  "Cookies, brownies, prepared from recipe": {
+    "NDB": "18154", 
+    "Protein": "6.2", 
+    "Carbohydrate": "50.2", 
+    "Fat": "29.1"
+  }, 
+  "Cookies, chocolate chip, commercially prepared, regular, higher fat, enriched": {
+    "NDB": "18159", 
+    "Protein": "5.1", 
+    "Carbohydrate": "65.36", 
+    "Fat": "24.72"
+  }, 
+  "Cookies, chocolate chip, commercially prepared, regular, lower fat": {
+    "NDB": "18158", 
+    "Protein": "5.97", 
+    "Carbohydrate": "67.49", 
+    "Fat": "17.91"
+  }, 
+  "Cookies, chocolate chip, refrigerated dough": {
+    "NDB": "18163", 
+    "Protein": "3.98", 
+    "Carbohydrate": "61.02", 
+    "Fat": "21.33"
+  }, 
+  "Cookies, chocolate sandwich, with creme filling, regular": {
+    "NDB": "18166", 
+    "Protein": "5.21", 
+    "Carbohydrate": "71.0", 
+    "Fat": "19.14"
+  }, 
+  "Cookies, chocolate sandwich, with creme filling, special dietary": {
+    "NDB": "18199", 
+    "Protein": "4.5", 
+    "Carbohydrate": "68.0", 
+    "Fat": "22.1"
+  }, 
+  "Cookies, chocolate sandwich, with extra creme filling": {
+    "NDB": "18168", 
+    "Protein": "4.33", 
+    "Carbohydrate": "68.2", 
+    "Fat": "24.52"
+  }, 
+  "Cookies, chocolate wafers": {
+    "NDB": "18157", 
+    "Protein": "6.6", 
+    "Carbohydrate": "72.7", 
+    "Fat": "14.2"
+  }, 
+  "Cookies, fig bars": {
+    "NDB": "18170", 
+    "Protein": "3.7", 
+    "Carbohydrate": "70.9", 
+    "Fat": "7.3"
+  }, 
+  "Cookies, molasses": {
+    "NDB": "18177", 
+    "Protein": "5.6", 
+    "Carbohydrate": "73.8", 
+    "Fat": "12.8"
+  }, 
+  "Cookies, oatmeal, commercially prepared, regular": {
+    "NDB": "18178", 
+    "Protein": "6.2", 
+    "Carbohydrate": "68.7", 
+    "Fat": "18.1"
+  }, 
+  "Cookies, oatmeal, commercially prepared, special dietary": {
+    "NDB": "18200", 
+    "Protein": "4.8", 
+    "Carbohydrate": "69.9", 
+    "Fat": "18.0"
+  }, 
+  "Cookies, oatmeal, prepared from recipe, with raisins": {
+    "NDB": "18184", 
+    "Protein": "6.5", 
+    "Carbohydrate": "68.4", 
+    "Fat": "16.2"
+  }, 
+  "Cookies, oatmeal, refrigerated dough": {
+    "NDB": "18182", 
+    "Protein": "5.4", 
+    "Carbohydrate": "59.1", 
+    "Fat": "18.9"
+  }, 
+  "Cookies, oatmeal, refrigerated dough, baked": {
+    "NDB": "18183", 
+    "Protein": "6.0", 
+    "Carbohydrate": "65.7", 
+    "Fat": "21.0"
+  }, 
+  "Cookies, peanut butter sandwich, regular": {
+    "NDB": "18190", 
+    "Protein": "8.8", 
+    "Carbohydrate": "65.6", 
+    "Fat": "21.1"
+  }, 
+  "Cookies, peanut butter sandwich, special dietary": {
+    "NDB": "18201", 
+    "Protein": "10.0", 
+    "Carbohydrate": "50.8", 
+    "Fat": "34.0"
+  }, 
+  "Cookies, peanut butter, commercially prepared, regular": {
+    "NDB": "18185", 
+    "Protein": "8.92", 
+    "Carbohydrate": "58.15", 
+    "Fat": "23.82"
+  }, 
+  "Cookies, peanut butter, commercially prepared, soft-type": {
+    "NDB": "18186", 
+    "Protein": "5.3", 
+    "Carbohydrate": "57.7", 
+    "Fat": "24.4"
+  }, 
+  "Cookies, shortbread, commercially prepared, pecan": {
+    "NDB": "18193", 
+    "Protein": "4.9", 
+    "Carbohydrate": "58.3", 
+    "Fat": "32.5"
+  }, 
+  "Cookies, shortbread, commercially prepared, plain": {
+    "NDB": "18192", 
+    "Protein": "5.37", 
+    "Carbohydrate": "63.78", 
+    "Fat": "26.22"
+  }, 
+  "Cookies, sugar wafer, with creme filling, sugar free": {
+    "NDB": "18202", 
+    "Protein": "3.57", 
+    "Carbohydrate": "66.26", 
+    "Fat": "28.57"
+  }, 
+  "Cookies, sugar wafers with creme filling, regular": {
+    "NDB": "18209", 
+    "Protein": "3.84", 
+    "Carbohydrate": "70.64", 
+    "Fat": "23.24"
+  }, 
+  "Cookies, sugar, commercially prepared, regular (includes vanilla)": {
+    "NDB": "18204", 
+    "Protein": "5.35", 
+    "Carbohydrate": "67.34", 
+    "Fat": "19.55"
+  }, 
+  "Cookies, vanilla sandwich with creme filling": {
+    "NDB": "18210", 
+    "Protein": "4.5", 
+    "Carbohydrate": "72.1", 
+    "Fat": "20.0"
+  }, 
+  "Corn flour, yellow, masa, enriched": {
+    "NDB": "20317", 
+    "Protein": "8.46", 
+    "Carbohydrate": "76.59", 
+    "Fat": "3.69"
+  }, 
+  "Corn grain, white": {
+    "NDB": "20314", 
+    "Protein": "9.42", 
+    "Carbohydrate": "74.26", 
+    "Fat": "4.74"
+  }, 
+  "Corn, sweet, yellow, canned, brine pack, regular pack, solids and liquids": {
+    "NDB": "11170", 
+    "Protein": "1.95", 
+    "Carbohydrate": "13.86", 
+    "Fat": "0.77"
+  }, 
+  "Corn, sweet, yellow, canned, drained solids, rinsed with tap water": {
+    "NDB": "11177", 
+    "Protein": "2.18", 
+    "Carbohydrate": "13.02", 
+    "Fat": "1.43"
+  }, 
+  "Corn, sweet, yellow, canned, vacuum pack, regular pack": {
+    "NDB": "11176", 
+    "Protein": "2.41", 
+    "Carbohydrate": "19.44", 
+    "Fat": "0.5"
+  }, 
+  "Corn, sweet, yellow, frozen, kernels cut off cob, boiled, drained, without salt": {
+    "NDB": "11179", 
+    "Protein": "2.55", 
+    "Carbohydrate": "19.3", 
+    "Fat": "0.67"
+  }, 
+  "Corn, sweet, yellow, frozen, kernels cut off cob, unprepared": {
+    "NDB": "11178", 
+    "Protein": "3.02", 
+    "Carbohydrate": "20.71", 
+    "Fat": "0.78"
+  }, 
+  "Cornmeal, white, self-rising, bolted, with wheat flour added, enriched": {
+    "NDB": "20324", 
+    "Protein": "8.41", 
+    "Carbohydrate": "73.43", 
+    "Fat": "2.85"
+  }, 
+  "Cornmeal, white, self-rising, degermed, enriched": {
+    "NDB": "20325", 
+    "Protein": "8.41", 
+    "Carbohydrate": "74.79", 
+    "Fat": "1.72"
+  }, 
+  "Cornmeal, whole-grain, white": {
+    "NDB": "20320", 
+    "Protein": "8.12", 
+    "Carbohydrate": "76.89", 
+    "Fat": "3.59"
+  }, 
+  "Cowpeas (blackeyes), immature seeds, cooked, boiled, drained, without salt": {
+    "NDB": "11192", 
+    "Protein": "3.17", 
+    "Carbohydrate": "20.32", 
+    "Fat": "0.38"
+  }, 
+  "Cowpeas (blackeyes), immature seeds, frozen, cooked, boiled, drained, without salt": {
+    "NDB": "11196", 
+    "Protein": "8.49", 
+    "Carbohydrate": "23.76", 
+    "Fat": "0.66"
+  }, 
+  "Cowpeas (blackeyes), immature seeds, raw": {
+    "NDB": "11191", 
+    "Protein": "2.95", 
+    "Carbohydrate": "18.83", 
+    "Fat": "0.35"
+  }, 
+  "Cowpeas, leafy tips, raw": {
+    "NDB": "11201", 
+    "Protein": "4.1", 
+    "Carbohydrate": "4.82", 
+    "Fat": "0.25"
+  }, 
+  "Cracker meal": {
+    "NDB": "18236", 
+    "Protein": "9.3", 
+    "Carbohydrate": "80.9", 
+    "Fat": "1.7"
+  }, 
+  "Crackers, cheese, regular": {
+    "NDB": "18214", 
+    "Protein": "10.93", 
+    "Carbohydrate": "59.42", 
+    "Fat": "22.74"
+  }, 
+  "Crackers, cheese, sandwich-type with cheese filling": {
+    "NDB": "18927", 
+    "Protein": "8.92", 
+    "Carbohydrate": "58.76", 
+    "Fat": "24.41"
+  }, 
+  "Crackers, cream, GAMESA SABROSAS": {
+    "NDB": "18961", 
+    "Protein": "7.01", 
+    "Carbohydrate": "64.55", 
+    "Fat": "20.37"
+  }, 
+  "Crackers, melba toast, rye (includes pumpernickel)": {
+    "NDB": "18221", 
+    "Protein": "11.6", 
+    "Carbohydrate": "77.3", 
+    "Fat": "3.4"
+  }, 
+  "Crackers, rusk toast": {
+    "NDB": "18224", 
+    "Protein": "13.5", 
+    "Carbohydrate": "72.3", 
+    "Fat": "7.2"
+  }, 
+  "Crackers, rye, wafers, seasoned": {
+    "NDB": "18227", 
+    "Protein": "9.0", 
+    "Carbohydrate": "73.8", 
+    "Fat": "9.2"
+  }, 
+  "Crackers, saltines, whole wheat (includes multi-grain)": {
+    "NDB": "18966", 
+    "Protein": "7.14", 
+    "Carbohydrate": "68.25", 
+    "Fat": "10.71"
+  }, 
+  "Crackers, standard snack-type, regular": {
+    "NDB": "18229", 
+    "Protein": "6.64", 
+    "Carbohydrate": "61.3", 
+    "Fat": "26.43"
+  }, 
+  "Crackers, standard snack-type, sandwich, with cheese filling": {
+    "NDB": "18230", 
+    "Protein": "9.3", 
+    "Carbohydrate": "61.7", 
+    "Fat": "21.1"
+  }, 
+  "Crackers, standard snack-type, sandwich, with peanut butter filling": {
+    "NDB": "18231", 
+    "Protein": "11.47", 
+    "Carbohydrate": "58.38", 
+    "Fat": "24.54"
+  }, 
+  "Crackers, wheat, regular": {
+    "NDB": "18232", 
+    "Protein": "7.3", 
+    "Carbohydrate": "70.73", 
+    "Fat": "16.4"
+  }, 
+  "Crackers, wheat, sandwich, with cheese filling": {
+    "NDB": "18233", 
+    "Protein": "9.8", 
+    "Carbohydrate": "58.2", 
+    "Fat": "25.0"
+  }, 
+  "Crackers, wheat, sandwich, with peanut butter filling": {
+    "NDB": "18234", 
+    "Protein": "13.5", 
+    "Carbohydrate": "53.8", 
+    "Fat": "26.7"
+  }, 
+  "Cranberry sauce, canned, sweetened": {
+    "NDB": "09081", 
+    "Protein": "0.9", 
+    "Carbohydrate": "40.4", 
+    "Fat": "0.15"
+  }, 
+  "Cream puff, eclair, custard or cream filled, iced": {
+    "NDB": "18969", 
+    "Protein": "4.41", 
+    "Carbohydrate": "37.43", 
+    "Fat": "18.52"
+  }, 
+  "Cress, garden, raw": {
+    "NDB": "11203", 
+    "Protein": "2.6", 
+    "Carbohydrate": "5.5", 
+    "Fat": "0.7"
+  }, 
+  "Croissants, apple": {
+    "NDB": "18240", 
+    "Protein": "7.4", 
+    "Carbohydrate": "37.1", 
+    "Fat": "8.7"
+  }, 
+  "Croissants, butter": {
+    "NDB": "18239", 
+    "Protein": "8.2", 
+    "Carbohydrate": "45.8", 
+    "Fat": "21.0"
+  }, 
+  "Croissants, cheese": {
+    "NDB": "18241", 
+    "Protein": "9.2", 
+    "Carbohydrate": "47.0", 
+    "Fat": "20.9"
+  }, 
+  "Croutons, plain": {
+    "NDB": "18242", 
+    "Protein": "11.9", 
+    "Carbohydrate": "73.5", 
+    "Fat": "6.6"
+  }, 
+  "Croutons, seasoned": {
+    "NDB": "18243", 
+    "Protein": "10.8", 
+    "Carbohydrate": "63.5", 
+    "Fat": "18.3"
+  }, 
+  "Currants, european black, raw": {
+    "NDB": "09083", 
+    "Protein": "1.4", 
+    "Carbohydrate": "15.38", 
+    "Fat": "0.41"
+  }, 
+  "Currants, red and white, raw": {
+    "NDB": "09084", 
+    "Protein": "1.4", 
+    "Carbohydrate": "13.8", 
+    "Fat": "0.2"
+  }, 
+  "Currants, zante, dried": {
+    "NDB": "09085", 
+    "Protein": "4.08", 
+    "Carbohydrate": "74.08", 
+    "Fat": "0.27"
+  }, 
+  "Danish pastry, cheese": {
+    "NDB": "18245", 
+    "Protein": "8.0", 
+    "Carbohydrate": "37.2", 
+    "Fat": "21.9"
+  }, 
+  "Danish pastry, cinnamon, enriched": {
+    "NDB": "18244", 
+    "Protein": "7.0", 
+    "Carbohydrate": "44.6", 
+    "Fat": "22.4"
+  }, 
+  "Dill weed, fresh": {
+    "NDB": "02045", 
+    "Protein": "3.46", 
+    "Carbohydrate": "7.02", 
+    "Fat": "1.12"
+  }, 
+  "Drumstick pods, raw": {
+    "NDB": "11620", 
+    "Protein": "2.1", 
+    "Carbohydrate": "8.53", 
+    "Fat": "0.2"
+  }, 
+  "Edamame, frozen, unprepared": {
+    "NDB": "11211", 
+    "Protein": "11.22", 
+    "Carbohydrate": "7.61", 
+    "Fat": "4.73"
+  }, 
+  "Endive, raw": {
+    "NDB": "11213", 
+    "Protein": "1.25", 
+    "Carbohydrate": "3.35", 
+    "Fat": "0.2"
+  }, 
+  "English muffins, mixed-grain (includes granola)": {
+    "NDB": "18260", 
+    "Protein": "9.1", 
+    "Carbohydrate": "46.3", 
+    "Fat": "1.8"
+  }, 
+  "Fat, beef tallow": {
+    "NDB": "04001", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Figs, canned, water pack, solids and liquids": {
+    "NDB": "09090", 
+    "Protein": "0.4", 
+    "Carbohydrate": "13.99", 
+    "Fat": "0.1"
+  }, 
+  "Figs, raw": {
+    "NDB": "09089", 
+    "Protein": "0.75", 
+    "Carbohydrate": "19.18", 
+    "Fat": "0.3"
+  }, 
+  "Focaccia, Italian flatbread, plain": {
+    "NDB": "18973", 
+    "Protein": "8.77", 
+    "Carbohydrate": "35.82", 
+    "Fat": "7.89"
+  }, 
+  "Fruit cocktail, (peach and pineapple and pear and grape and cherry), canned, extra light syrup, solids and liquids": {
+    "NDB": "09098", 
+    "Protein": "0.4", 
+    "Carbohydrate": "11.63", 
+    "Fat": "0.07"
+  }, 
+  "Fruit cocktail, (peach and pineapple and pear and grape and cherry), canned, heavy syrup, solids and liquids": {
+    "NDB": "09100", 
+    "Protein": "0.39", 
+    "Carbohydrate": "18.91", 
+    "Fat": "0.07"
+  }, 
+  "Fruit salad, (peach and pear and apricot and pineapple and cherry), canned, heavy syrup, solids and liquids": {
+    "NDB": "09105", 
+    "Protein": "0.34", 
+    "Carbohydrate": "19.11", 
+    "Fat": "0.07"
+  }, 
+  "Fruit salad, (peach and pear and apricot and pineapple and cherry), canned, water pack, solids and liquids": {
+    "NDB": "09102", 
+    "Protein": "0.35", 
+    "Carbohydrate": "7.87", 
+    "Fat": "0.07"
+  }, 
+  "Garlic bread, frozen": {
+    "NDB": "18963", 
+    "Protein": "8.36", 
+    "Carbohydrate": "41.72", 
+    "Fat": "16.61"
+  }, 
+  "Garlic, raw": {
+    "NDB": "11215", 
+    "Protein": "6.36", 
+    "Carbohydrate": "33.06", 
+    "Fat": "0.5"
+  }, 
+  "GEORGE WESTON BAKERIES, Brownberry Sage and Onion Stuffing Mix, dry": {
+    "NDB": "18603", 
+    "Protein": "13.3", 
+    "Carbohydrate": "72.7", 
+    "Fat": "5.1"
+  }, 
+  "Ginger root, raw": {
+    "NDB": "11216", 
+    "Protein": "1.82", 
+    "Carbohydrate": "17.77", 
+    "Fat": "0.75"
+  }, 
+  "Gooseberries, raw": {
+    "NDB": "09107", 
+    "Protein": "0.88", 
+    "Carbohydrate": "10.18", 
+    "Fat": "0.58"
+  }, 
+  "Gourd, white-flowered (calabash), raw": {
+    "NDB": "11218", 
+    "Protein": "0.62", 
+    "Carbohydrate": "3.39", 
+    "Fat": "0.02"
+  }, 
+  "Grapefruit juice, white, canned, sweetened": {
+    "NDB": "09124", 
+    "Protein": "0.58", 
+    "Carbohydrate": "11.13", 
+    "Fat": "0.09"
+  }, 
+  "Grapefruit juice, white, frozen concentrate, unsweetened, undiluted": {
+    "NDB": "09125", 
+    "Protein": "1.97", 
+    "Carbohydrate": "34.56", 
+    "Fat": "0.48"
+  }, 
+  "Grapefruit, raw, pink and red, all areas": {
+    "NDB": "09112", 
+    "Protein": "0.77", 
+    "Carbohydrate": "10.66", 
+    "Fat": "0.14"
+  }, 
+  "Grapefruit, raw, white, Florida": {
+    "NDB": "09118", 
+    "Protein": "0.63", 
+    "Carbohydrate": "8.19", 
+    "Fat": "0.1"
+  }, 
+  "Grapefruit, sections, canned, juice pack, solids and liquids": {
+    "NDB": "09120", 
+    "Protein": "0.7", 
+    "Carbohydrate": "9.21", 
+    "Fat": "0.09"
+  }, 
+  "Grapefruit, sections, canned, water pack, solids and liquids": {
+    "NDB": "09119", 
+    "Protein": "0.58", 
+    "Carbohydrate": "9.15", 
+    "Fat": "0.1"
+  }, 
+  "Grapes, american type (slip skin), raw": {
+    "NDB": "09131", 
+    "Protein": "0.63", 
+    "Carbohydrate": "17.15", 
+    "Fat": "0.35"
+  }, 
+  "Grapes, canned, thompson seedless, water pack, solids and liquids": {
+    "NDB": "09133", 
+    "Protein": "0.5", 
+    "Carbohydrate": "10.3", 
+    "Fat": "0.11"
+  }, 
+  "Grapes, muscadine, raw": {
+    "NDB": "09129", 
+    "Protein": "0.81", 
+    "Carbohydrate": "13.93", 
+    "Fat": "0.47"
+  }, 
+  "Groundcherries, (cape-gooseberries or poha), raw": {
+    "NDB": "09138", 
+    "Protein": "1.9", 
+    "Carbohydrate": "11.2", 
+    "Fat": "0.7"
+  }, 
+  "HEINZ, WEIGHT WATCHER, Chocolate Eclair, frozen": {
+    "NDB": "18640", 
+    "Protein": "4.4", 
+    "Carbohydrate": "40.3", 
+    "Fat": "6.9"
+  }, 
+  "Hyacinth-beans, immature seeds, cooked, boiled, drained, without salt": {
+    "NDB": "11225", 
+    "Protein": "2.95", 
+    "Carbohydrate": "9.2", 
+    "Fat": "0.27"
+  }, 
+  "Jute, potherb, cooked, boiled, drained, without salt": {
+    "NDB": "11232", 
+    "Protein": "3.68", 
+    "Carbohydrate": "7.29", 
+    "Fat": "0.2"
+  }, 
+  "Kale, frozen, unprepared": {
+    "NDB": "11235", 
+    "Protein": "2.66", 
+    "Carbohydrate": "4.9", 
+    "Fat": "0.46"
+  }, 
+  "Kale, raw": {
+    "NDB": "11233", 
+    "Protein": "4.28", 
+    "Carbohydrate": "8.75", 
+    "Fat": "0.93"
+  }, 
+  "Kanpyo, (dried gourd strips)": {
+    "NDB": "11237", 
+    "Protein": "8.58", 
+    "Carbohydrate": "65.03", 
+    "Fat": "0.56"
+  }, 
+  "KASHI, H2H Woven Wheat Cracker, Roasted Garlic": {
+    "NDB": "18982", 
+    "Protein": "10.5", 
+    "Carbohydrate": "73.2", 
+    "Fat": "11.7"
+  }, 
+  "KASHI, TLC, Honey Sesame Crackers": {
+    "NDB": "18974", 
+    "Protein": "8.7", 
+    "Carbohydrate": "72.2", 
+    "Fat": "10.4"
+  }, 
+  "KASHI, TLC, Original 7-Grain Crackers": {
+    "NDB": "18975", 
+    "Protein": "13.9", 
+    "Carbohydrate": "63.2", 
+    "Fat": "11.9"
+  }, 
+  "KEEBLER, KEEBLER Chocolate Graham SELECTS": {
+    "NDB": "18608", 
+    "Protein": "7.1", 
+    "Carbohydrate": "71.8", 
+    "Fat": "16.6"
+  }, 
+  "KEEBLER, Vanilla Wafers": {
+    "NDB": "18609", 
+    "Protein": "4.0", 
+    "Carbohydrate": "73.1", 
+    "Fat": "17.4"
+  }, 
+  "Keikitos (muffins), Latino bakery item": {
+    "NDB": "18956", 
+    "Protein": "6.81", 
+    "Carbohydrate": "53.16", 
+    "Fat": "25.24"
+  }, 
+  "KELLOGG'S EGGO Lowfat Blueberry Nutri-Grain Waffles": {
+    "NDB": "18507", 
+    "Protein": "5.95", 
+    "Carbohydrate": "42.71", 
+    "Fat": "2.83"
+  }, 
+  "KELLOGG'S, BEANATURAL, Original 3-Bean Chips": {
+    "NDB": "18992", 
+    "Protein": "22.9", 
+    "Carbohydrate": "46.5", 
+    "Fat": "25.3"
+  }, 
+  "KELLOGG'S, EGGO, Biscuit Scramblers, Bacon, Egg  &  Cheese": {
+    "NDB": "18995", 
+    "Protein": "8.8", 
+    "Carbohydrate": "38.3", 
+    "Fat": "7.9"
+  }, 
+  "KELLOGG'S, EGGO, French Toaster Sticks, Cinnamon": {
+    "NDB": "18997", 
+    "Protein": "4.8", 
+    "Carbohydrate": "42.6", 
+    "Fat": "6.9"
+  }, 
+  "KELLOGG'S, EGGO, Mini Muffin Tops, Blueberry": {
+    "NDB": "18999", 
+    "Protein": "5.0", 
+    "Carbohydrate": "45.8", 
+    "Fat": "10.2"
+  }, 
+  "KELLOGG'S, EGGO, NUTRI-GRAIN, Waffles, Low Fat": {
+    "NDB": "18506", 
+    "Protein": "6.5", 
+    "Carbohydrate": "39.0", 
+    "Fat": "3.5"
+  }, 
+  "KELLOGG'S, EGGO, Waffles, Homestyle, Low Fat": {
+    "NDB": "18505", 
+    "Protein": "6.3", 
+    "Carbohydrate": "44.9", 
+    "Fat": "3.5"
+  }, 
+  "Kiwifruit, green, raw": {
+    "NDB": "09148", 
+    "Protein": "1.14", 
+    "Carbohydrate": "14.66", 
+    "Fat": "0.52"
+  }, 
+  "Leeks, (bulb and lower leaf-portion), cooked, boiled, drained, without salt": {
+    "NDB": "11247", 
+    "Protein": "0.81", 
+    "Carbohydrate": "7.62", 
+    "Fat": "0.2"
+  }, 
+  "Lemon juice, raw": {
+    "NDB": "09152", 
+    "Protein": "0.35", 
+    "Carbohydrate": "6.9", 
+    "Fat": "0.24"
+  }, 
+  "Lima beans, immature seeds, cooked, boiled, drained, without salt": {
+    "NDB": "11032", 
+    "Protein": "6.81", 
+    "Carbohydrate": "23.64", 
+    "Fat": "0.32"
+  }, 
+  "Lima beans, immature seeds, frozen, baby, cooked, boiled, drained, without salt": {
+    "NDB": "11040", 
+    "Protein": "6.65", 
+    "Carbohydrate": "19.45", 
+    "Fat": "0.3"
+  }, 
+  "Lima beans, immature seeds, frozen, baby, unprepared": {
+    "NDB": "11039", 
+    "Protein": "7.59", 
+    "Carbohydrate": "25.14", 
+    "Fat": "0.44"
+  }, 
+  "Lima beans, immature seeds, frozen, fordhook, unprepared": {
+    "NDB": "11037", 
+    "Protein": "6.4", 
+    "Carbohydrate": "19.83", 
+    "Fat": "0.35"
+  }, 
+  "Lime juice, raw": {
+    "NDB": "09160", 
+    "Protein": "0.42", 
+    "Carbohydrate": "8.42", 
+    "Fat": "0.07"
+  }, 
+  "Litchis, raw": {
+    "NDB": "09164", 
+    "Protein": "0.83", 
+    "Carbohydrate": "16.53", 
+    "Fat": "0.44"
+  }, 
+  "Loganberries, frozen": {
+    "NDB": "09167", 
+    "Protein": "1.52", 
+    "Carbohydrate": "13.02", 
+    "Fat": "0.31"
+  }, 
+  "LOMA LINDA Linketts, canned, unprepared": {
+    "NDB": "16509", 
+    "Protein": "21.3", 
+    "Carbohydrate": "4.4", 
+    "Fat": "11.8"
+  }, 
+  "LOMA LINDA Swiss Stake with Gravy, canned, unprepared": {
+    "NDB": "16505", 
+    "Protein": "10.2", 
+    "Carbohydrate": "10.4", 
+    "Fat": "6.2"
+  }, 
+  "Longans, dried": {
+    "NDB": "09173", 
+    "Protein": "4.9", 
+    "Carbohydrate": "74.0", 
+    "Fat": "0.4"
+  }, 
+  "Macaroni, vegetable, enriched, cooked": {
+    "NDB": "20106", 
+    "Protein": "4.53", 
+    "Carbohydrate": "26.61", 
+    "Fat": "0.11"
+  }, 
+  "Macaroni, vegetable, enriched, dry": {
+    "NDB": "20105", 
+    "Protein": "13.14", 
+    "Carbohydrate": "74.88", 
+    "Fat": "1.04"
+  }, 
+  "Mangos, raw": {
+    "NDB": "09176", 
+    "Protein": "0.82", 
+    "Carbohydrate": "14.98", 
+    "Fat": "0.38"
+  }, 
+  "Margarine-like, margarine-butter blend, soybean oil and butter": {
+    "NDB": "04585", 
+    "Protein": "0.31", 
+    "Carbohydrate": "0.77", 
+    "Fat": "80.32"
+  }, 
+  "MARTHA WHITE FOODS, Martha White's Buttermilk Biscuit Mix, dry": {
+    "NDB": "18615", 
+    "Protein": "7.81", 
+    "Carbohydrate": "59.41", 
+    "Fat": "13.23"
+  }, 
+  "MARTHA WHITE FOODS, Martha White's Chewy Fudge Brownie Mix, dry": {
+    "NDB": "18614", 
+    "Protein": "4.42", 
+    "Carbohydrate": "83.58", 
+    "Fat": "6.16"
+  }, 
+  "MCKEE BAKING, LITTLE DEBBIE NUTTY BARS, Wafers with Peanut Butter, Chocolate Covered": {
+    "NDB": "18612", 
+    "Protein": "8.0", 
+    "Carbohydrate": "55.2", 
+    "Fat": "32.8"
+  }, 
+  "MISSION FOODS, MISSION Flour Tortillas, Soft Taco, 8 inch": {
+    "NDB": "18616", 
+    "Protein": "8.7", 
+    "Carbohydrate": "49.6", 
+    "Fat": "6.0"
+  }, 
+  "MORI-NU, Tofu, silken, firm": {
+    "NDB": "16162", 
+    "Protein": "6.9", 
+    "Carbohydrate": "2.4", 
+    "Fat": "2.7"
+  }, 
+  "MORNINGSTAR FARMS Buffalo Chik Patties, frozen, unprepared": {
+    "NDB": "16607", 
+    "Protein": "12.1", 
+    "Carbohydrate": "25.2", 
+    "Fat": "12.8"
+  }, 
+  "Mountain yam, hawaii, cooked, steamed, without salt": {
+    "NDB": "11259", 
+    "Protein": "1.73", 
+    "Carbohydrate": "20.0", 
+    "Fat": "0.08"
+  }, 
+  "Mountain yam, hawaii, raw": {
+    "NDB": "11258", 
+    "Protein": "1.34", 
+    "Carbohydrate": "16.3", 
+    "Fat": "0.1"
+  }, 
+  "Muffin, blueberry, commercially prepared, low-fat": {
+    "NDB": "18940", 
+    "Protein": "4.23", 
+    "Carbohydrate": "50.05", 
+    "Fat": "4.22"
+  }, 
+  "Mung beans, mature seeds, sprouted, cooked, boiled, drained, without salt": {
+    "NDB": "11044", 
+    "Protein": "2.03", 
+    "Carbohydrate": "4.19", 
+    "Fat": "0.09"
+  }, 
+  "Mushrooms, Chanterelle, raw": {
+    "NDB": "11239", 
+    "Protein": "1.49", 
+    "Carbohydrate": "6.86", 
+    "Fat": "0.53"
+  }, 
+  "Mushrooms, portabella, grilled": {
+    "NDB": "11243", 
+    "Protein": "3.28", 
+    "Carbohydrate": "4.44", 
+    "Fat": "0.58"
+  }, 
+  "NABISCO, NABISCO GRAHAMS Crackers": {
+    "NDB": "18617", 
+    "Protein": "6.99", 
+    "Carbohydrate": "76.2", 
+    "Fat": "10.0"
+  }, 
+  "NABISCO, NABISCO OREO CRUNCHIES, Cookie Crumb Topping": {
+    "NDB": "18619", 
+    "Protein": "4.78", 
+    "Carbohydrate": "70.23", 
+    "Fat": "21.5"
+  }, 
+  "NABISCO, NABISCO RITZ Crackers": {
+    "NDB": "18621", 
+    "Protein": "7.23", 
+    "Carbohydrate": "63.51", 
+    "Fat": "23.21"
+  }, 
+  "Noodles, egg, dry, unenriched": {
+    "NDB": "20409", 
+    "Protein": "14.16", 
+    "Carbohydrate": "71.27", 
+    "Fat": "4.44"
+  }, 
+  "Noodles, egg, spinach, enriched, cooked": {
+    "NDB": "20112", 
+    "Protein": "5.04", 
+    "Carbohydrate": "24.25", 
+    "Fat": "1.57"
+  }, 
+  "Noodles, egg, unenriched, cooked, without added salt": {
+    "NDB": "20410", 
+    "Protein": "4.54", 
+    "Carbohydrate": "25.16", 
+    "Fat": "2.07"
+  }, 
+  "Noodles, japanese, somen, cooked": {
+    "NDB": "20117", 
+    "Protein": "4.0", 
+    "Carbohydrate": "27.54", 
+    "Fat": "0.18"
+  }, 
+  "Noodles, japanese, somen, dry": {
+    "NDB": "20116", 
+    "Protein": "11.35", 
+    "Carbohydrate": "74.1", 
+    "Fat": "0.81"
+  }, 
+  "Nuts, almond butter, plain, with salt added": {
+    "NDB": "12695", 
+    "Protein": "20.96", 
+    "Carbohydrate": "18.82", 
+    "Fat": "55.5"
+  }, 
+  "Nuts, almonds, dry roasted, without salt added": {
+    "NDB": "12063", 
+    "Protein": "20.96", 
+    "Carbohydrate": "21.01", 
+    "Fat": "52.54"
+  }, 
+  "Nuts, butternuts, dried": {
+    "NDB": "12084", 
+    "Protein": "24.9", 
+    "Carbohydrate": "12.05", 
+    "Fat": "56.98"
+  }, 
+  "Nuts, chestnuts, chinese, boiled and steamed": {
+    "NDB": "12095", 
+    "Protein": "2.88", 
+    "Carbohydrate": "33.64", 
+    "Fat": "0.76"
+  }, 
+  "Nuts, chestnuts, european, raw, unpeeled": {
+    "NDB": "12097", 
+    "Protein": "2.42", 
+    "Carbohydrate": "45.54", 
+    "Fat": "2.26"
+  }, 
+  "Nuts, coconut cream, canned, sweetened": {
+    "NDB": "12116", 
+    "Protein": "1.17", 
+    "Carbohydrate": "53.21", 
+    "Fat": "16.31"
+  }, 
+  "Nuts, coconut cream, raw (liquid expressed from grated meat)": {
+    "NDB": "12115", 
+    "Protein": "3.63", 
+    "Carbohydrate": "6.65", 
+    "Fat": "34.68"
+  }, 
+  "Nuts, coconut meat, dried (desiccated), not sweetened": {
+    "NDB": "12108", 
+    "Protein": "6.88", 
+    "Carbohydrate": "23.65", 
+    "Fat": "64.53"
+  }, 
+  "Nuts, coconut meat, dried (desiccated), sweetened, flaked, packaged": {
+    "NDB": "12109", 
+    "Protein": "3.13", 
+    "Carbohydrate": "51.85", 
+    "Fat": "27.99"
+  }, 
+  "Nuts, coconut meat, dried (desiccated), toasted": {
+    "NDB": "12114", 
+    "Protein": "5.3", 
+    "Carbohydrate": "44.4", 
+    "Fat": "47.0"
+  }, 
+  "Nuts, hazelnuts or filberts": {
+    "NDB": "12120", 
+    "Protein": "14.95", 
+    "Carbohydrate": "16.7", 
+    "Fat": "60.75"
+  }, 
+  "Nuts, mixed nuts, oil roasted, with peanuts, lightly salted": {
+    "NDB": "12737", 
+    "Protein": "20.04", 
+    "Carbohydrate": "21.05", 
+    "Fat": "53.95"
+  }, 
+  "Oat flour, partially debranned": {
+    "NDB": "20132", 
+    "Protein": "14.66", 
+    "Carbohydrate": "65.7", 
+    "Fat": "9.12"
+  }, 
+  "Oil, canola": {
+    "NDB": "04582", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, cocoa butter": {
+    "NDB": "04501", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, mustard": {
+    "NDB": "04583", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, olive, salad or cooking": {
+    "NDB": "04053", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, safflower, salad or cooking, linoleic, (over 70%)": {
+    "NDB": "04510", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, sesame, salad or cooking": {
+    "NDB": "04058", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, soybean, salad or cooking, (partially hydrogenated) and cottonseed": {
+    "NDB": "04543", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, sunflower, high oleic (70% and over)": {
+    "NDB": "04584", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Okra, frozen, cooked, boiled, drained, without salt": {
+    "NDB": "11281", 
+    "Protein": "1.63", 
+    "Carbohydrate": "6.41", 
+    "Fat": "0.24"
+  }, 
+  "Okra, frozen, unprepared": {
+    "NDB": "11280", 
+    "Protein": "1.69", 
+    "Carbohydrate": "6.63", 
+    "Fat": "0.25"
+  }, 
+  "Olives, pickled, canned or bottled, green": {
+    "NDB": "09195", 
+    "Protein": "1.03", 
+    "Carbohydrate": "3.84", 
+    "Fat": "15.32"
+  }, 
+  "Olives, ripe, canned (small-extra large)": {
+    "NDB": "09193", 
+    "Protein": "0.84", 
+    "Carbohydrate": "6.26", 
+    "Fat": "10.68"
+  }, 
+  "Onions, dehydrated flakes": {
+    "NDB": "11284", 
+    "Protein": "8.95", 
+    "Carbohydrate": "83.28", 
+    "Fat": "0.46"
+  }, 
+  "Onions, frozen, chopped, cooked, boiled, drained, without salt": {
+    "NDB": "11288", 
+    "Protein": "0.77", 
+    "Carbohydrate": "6.59", 
+    "Fat": "0.1"
+  }, 
+  "Onions, frozen, chopped, unprepared": {
+    "NDB": "11287", 
+    "Protein": "0.79", 
+    "Carbohydrate": "6.82", 
+    "Fat": "0.1"
+  }, 
+  "Onions, frozen, whole, cooked, boiled, drained, without salt": {
+    "NDB": "11290", 
+    "Protein": "0.71", 
+    "Carbohydrate": "6.7", 
+    "Fat": "0.05"
+  }, 
+  "Onions, frozen, whole, unprepared": {
+    "NDB": "11289", 
+    "Protein": "0.89", 
+    "Carbohydrate": "8.45", 
+    "Fat": "0.06"
+  }, 
+  "Onions, raw": {
+    "NDB": "11282", 
+    "Protein": "1.1", 
+    "Carbohydrate": "9.34", 
+    "Fat": "0.1"
+  }, 
+  "Onions, sweet, raw": {
+    "NDB": "11294", 
+    "Protein": "0.8", 
+    "Carbohydrate": "7.55", 
+    "Fat": "0.08"
+  }, 
+  "Orange juice, chilled, includes from concentrate, with added calcium": {
+    "NDB": "09211", 
+    "Protein": "0.68", 
+    "Carbohydrate": "11.27", 
+    "Fat": "0.12"
+  }, 
+  "Orange juice, chilled, includes from concentrate, with added calcium and vitamin D": {
+    "NDB": "09210", 
+    "Protein": "0.68", 
+    "Carbohydrate": "11.27", 
+    "Fat": "0.12"
+  }, 
+  "Orange juice, frozen concentrate, unsweetened, undiluted": {
+    "NDB": "09214", 
+    "Protein": "2.4", 
+    "Carbohydrate": "35.19", 
+    "Fat": "0.25"
+  }, 
+  "Orange peel, raw": {
+    "NDB": "09216", 
+    "Protein": "1.5", 
+    "Carbohydrate": "25.0", 
+    "Fat": "0.2"
+  }, 
+  "Oranges, raw, California, valencias": {
+    "NDB": "09201", 
+    "Protein": "1.04", 
+    "Carbohydrate": "11.89", 
+    "Fat": "0.3"
+  }, 
+  "Oranges, raw, with peel": {
+    "NDB": "09205", 
+    "Protein": "1.3", 
+    "Carbohydrate": "15.5", 
+    "Fat": "0.3"
+  }, 
+  "Pancakes, buckwheat, dry mix, incomplete": {
+    "NDB": "18295", 
+    "Protein": "10.9", 
+    "Carbohydrate": "71.3", 
+    "Fat": "2.7"
+  }, 
+  "Pancakes, plain, frozen, ready-to-heat, microwave (includes buttermilk)": {
+    "NDB": "18936", 
+    "Protein": "5.88", 
+    "Carbohydrate": "43.33", 
+    "Fat": "4.73"
+  }, 
+  "Papaya, canned, heavy syrup, drained": {
+    "NDB": "09228", 
+    "Protein": "0.14", 
+    "Carbohydrate": "55.83", 
+    "Fat": "0.55"
+  }, 
+  "Papayas, raw": {
+    "NDB": "09226", 
+    "Protein": "0.47", 
+    "Carbohydrate": "10.82", 
+    "Fat": "0.26"
+  }, 
+  "Passion-fruit, (granadilla), purple, raw": {
+    "NDB": "09231", 
+    "Protein": "2.2", 
+    "Carbohydrate": "23.38", 
+    "Fat": "0.7"
+  }, 
+  "Pasta, dry, enriched": {
+    "NDB": "20120", 
+    "Protein": "13.04", 
+    "Carbohydrate": "74.67", 
+    "Fat": "1.51"
+  }, 
+  "Pasta, dry, unenriched": {
+    "NDB": "20420", 
+    "Protein": "13.04", 
+    "Carbohydrate": "74.67", 
+    "Fat": "1.51"
+  }, 
+  "Pasta, fresh-refrigerated, plain, as purchased": {
+    "NDB": "20093", 
+    "Protein": "11.31", 
+    "Carbohydrate": "54.73", 
+    "Fat": "2.3"
+  }, 
+  "Pasta, fresh-refrigerated, spinach, as purchased": {
+    "NDB": "20095", 
+    "Protein": "11.26", 
+    "Carbohydrate": "55.72", 
+    "Fat": "2.1"
+  }, 
+  "Pasta, whole-wheat, dry": {
+    "NDB": "20124", 
+    "Protein": "13.87", 
+    "Carbohydrate": "73.37", 
+    "Fat": "2.93"
+  }, 
+  "Peaches, canned, extra heavy syrup pack, solids and liquids": {
+    "NDB": "09242", 
+    "Protein": "0.47", 
+    "Carbohydrate": "26.06", 
+    "Fat": "0.03"
+  }, 
+  "Peaches, canned, light syrup pack, solids and liquids": {
+    "NDB": "09240", 
+    "Protein": "0.45", 
+    "Carbohydrate": "14.55", 
+    "Fat": "0.03"
+  }, 
+  "Peaches, canned, water pack, solids and liquids": {
+    "NDB": "09237", 
+    "Protein": "0.44", 
+    "Carbohydrate": "6.11", 
+    "Fat": "0.06"
+  }, 
+  "Peaches, dehydrated (low-moisture), sulfured, stewed": {
+    "NDB": "09245", 
+    "Protein": "2.01", 
+    "Carbohydrate": "34.14", 
+    "Fat": "0.42"
+  }, 
+  "Peanuts, all types, dry-roasted, without salt": {
+    "NDB": "16390", 
+    "Protein": "24.35", 
+    "Carbohydrate": "21.26", 
+    "Fat": "49.66"
+  }, 
+  "Peanuts, valencia, oil-roasted, without salt": {
+    "NDB": "16394", 
+    "Protein": "27.04", 
+    "Carbohydrate": "16.3", 
+    "Fat": "51.24"
+  }, 
+  "Pears, canned, light syrup pack, solids and liquids": {
+    "NDB": "09256", 
+    "Protein": "0.19", 
+    "Carbohydrate": "15.17", 
+    "Fat": "0.03"
+  }, 
+  "Pears, dried, sulfured, stewed, without added sugar": {
+    "NDB": "09260", 
+    "Protein": "0.91", 
+    "Carbohydrate": "33.81", 
+    "Fat": "0.31"
+  }, 
+  "Pears, raw": {
+    "NDB": "09252", 
+    "Protein": "0.36", 
+    "Carbohydrate": "15.23", 
+    "Fat": "0.14"
+  }, 
+  "Peas and carrots, frozen, cooked, boiled, drained, without salt": {
+    "NDB": "11323", 
+    "Protein": "3.09", 
+    "Carbohydrate": "10.12", 
+    "Fat": "0.42"
+  }, 
+  "Peas, edible-podded, frozen, unprepared": {
+    "NDB": "11302", 
+    "Protein": "2.8", 
+    "Carbohydrate": "7.2", 
+    "Fat": "0.3"
+  }, 
+  "Peas, edible-podded, raw": {
+    "NDB": "11300", 
+    "Protein": "2.8", 
+    "Carbohydrate": "7.55", 
+    "Fat": "0.2"
+  }, 
+  "Peas, green, raw": {
+    "NDB": "11304", 
+    "Protein": "5.42", 
+    "Carbohydrate": "14.45", 
+    "Fat": "0.4"
+  }, 
+  "Peas, mature seeds, sprouted, raw": {
+    "NDB": "11316", 
+    "Protein": "8.8", 
+    "Carbohydrate": "27.11", 
+    "Fat": "0.68"
+  }, 
+  "Peppers, pasilla, dried": {
+    "NDB": "11982", 
+    "Protein": "12.35", 
+    "Carbohydrate": "51.13", 
+    "Fat": "15.85"
+  }, 
+  "Peppers, sweet, green, freeze-dried": {
+    "NDB": "11634", 
+    "Protein": "17.9", 
+    "Carbohydrate": "68.7", 
+    "Fat": "3.0"
+  }, 
+  "Persimmons, japanese, raw": {
+    "NDB": "09263", 
+    "Protein": "0.58", 
+    "Carbohydrate": "18.59", 
+    "Fat": "0.19"
+  }, 
+  "Pie Crust, Cookie-type, Chocolate, Ready Crust": {
+    "NDB": "18943", 
+    "Protein": "6.08", 
+    "Carbohydrate": "64.48", 
+    "Fat": "22.42"
+  }, 
+  "Pie crust, deep dish, frozen, baked, made with enriched flour": {
+    "NDB": "18947", 
+    "Protein": "6.1", 
+    "Carbohydrate": "52.47", 
+    "Fat": "31.84"
+  }, 
+  "Pie crust, deep dish, frozen, unbaked, made with enriched flour": {
+    "NDB": "18945", 
+    "Protein": "5.52", 
+    "Carbohydrate": "46.79", 
+    "Fat": "28.74"
+  }, 
+  "Pie, banana cream, prepared from recipe": {
+    "NDB": "18304", 
+    "Protein": "4.4", 
+    "Carbohydrate": "32.9", 
+    "Fat": "13.6"
+  }, 
+  "Pie, blueberry, commercially prepared": {
+    "NDB": "18305", 
+    "Protein": "1.8", 
+    "Carbohydrate": "34.9", 
+    "Fat": "10.0"
+  }, 
+  "Pie, cherry, commercially prepared": {
+    "NDB": "18308", 
+    "Protein": "2.0", 
+    "Carbohydrate": "39.8", 
+    "Fat": "11.0"
+  }, 
+  "Pie, Dutch Apple, Commercially Prepared": {
+    "NDB": "18944", 
+    "Protein": "2.17", 
+    "Carbohydrate": "44.54", 
+    "Fat": "11.5"
+  }, 
+  "Pie, fried pies, fruit": {
+    "NDB": "18319", 
+    "Protein": "3.0", 
+    "Carbohydrate": "42.6", 
+    "Fat": "16.1"
+  }, 
+  "PILLSBURY, Buttermilk Biscuits, Artificial Flavor, refrigerated dough": {
+    "NDB": "18629", 
+    "Protein": "6.4", 
+    "Carbohydrate": "47.07", 
+    "Fat": "2.79"
+  }, 
+  "PILLSBURY, Chocolate Chip Cookies, refrigerated dough": {
+    "NDB": "18630", 
+    "Protein": "3.82", 
+    "Carbohydrate": "60.75", 
+    "Fat": "21.26"
+  }, 
+  "PILLSBURY, Cinnamon Rolls with Icing, refrigerated dough": {
+    "NDB": "18635", 
+    "Protein": "4.34", 
+    "Carbohydrate": "53.42", 
+    "Fat": "11.27"
+  }, 
+  "PILLSBURY, Crusty French Loaf, refrigerated dough": {
+    "NDB": "18631", 
+    "Protein": "8.59", 
+    "Carbohydrate": "46.35", 
+    "Fat": "2.88"
+  }, 
+  "Plantains, cooked": {
+    "NDB": "09278", 
+    "Protein": "0.79", 
+    "Carbohydrate": "31.15", 
+    "Fat": "0.18"
+  }, 
+  "Plantains, raw": {
+    "NDB": "09277", 
+    "Protein": "1.3", 
+    "Carbohydrate": "31.89", 
+    "Fat": "0.37"
+  }, 
+  "Pokeberry shoots, (poke), cooked, boiled, drained, without salt": {
+    "NDB": "11351", 
+    "Protein": "2.3", 
+    "Carbohydrate": "3.1", 
+    "Fat": "0.4"
+  }, 
+  "Pomegranate juice, bottled": {
+    "NDB": "09442", 
+    "Protein": "0.15", 
+    "Carbohydrate": "13.13", 
+    "Fat": "0.29"
+  }, 
+  "Potatoes, baked, skin, without salt": {
+    "NDB": "11364", 
+    "Protein": "4.29", 
+    "Carbohydrate": "46.06", 
+    "Fat": "0.1"
+  }, 
+  "Potatoes, boiled, cooked without skin, flesh, with salt": {
+    "NDB": "11833", 
+    "Protein": "1.71", 
+    "Carbohydrate": "20.01", 
+    "Fat": "0.1"
+  }, 
+  "Potatoes, boiled, cooked without skin, flesh, without salt": {
+    "NDB": "11367", 
+    "Protein": "1.71", 
+    "Carbohydrate": "20.01", 
+    "Fat": "0.1"
+  }, 
+  "Potatoes, flesh and skin, raw": {
+    "NDB": "11352", 
+    "Protein": "2.05", 
+    "Carbohydrate": "17.49", 
+    "Fat": "0.09"
+  }, 
+  "Potatoes, french fried, cottage-cut, salt not added in processing, frozen, as purchased": {
+    "NDB": "11406", 
+    "Protein": "2.42", 
+    "Carbohydrate": "23.98", 
+    "Fat": "5.78"
+  }, 
+  "Potatoes, mashed, dehydrated, flakes without milk, dry form": {
+    "NDB": "11378", 
+    "Protein": "8.34", 
+    "Carbohydrate": "81.17", 
+    "Fat": "0.41"
+  }, 
+  "Potatoes, mashed, dehydrated, prepared from flakes without milk, whole milk and butter added": {
+    "NDB": "11379", 
+    "Protein": "1.77", 
+    "Carbohydrate": "10.87", 
+    "Fat": "5.13"
+  }, 
+  "Potatoes, mashed, dehydrated, prepared from granules with milk, water and margarine added": {
+    "NDB": "11383", 
+    "Protein": "2.13", 
+    "Carbohydrate": "16.13", 
+    "Fat": "4.8"
+  }, 
+  "Potatoes, mashed, dehydrated, prepared from granules without milk, whole milk and butter added": {
+    "NDB": "11381", 
+    "Protein": "2.05", 
+    "Carbohydrate": "14.36", 
+    "Fat": "4.96"
+  }, 
+  "Potatoes, roasted, salt added in processing, frozen, unprepared": {
+    "NDB": "11361", 
+    "Protein": "2.22", 
+    "Carbohydrate": "26.15", 
+    "Fat": "1.81"
+  }, 
+  "Potatoes, Russet, flesh and skin, baked": {
+    "NDB": "11356", 
+    "Protein": "2.63", 
+    "Carbohydrate": "21.44", 
+    "Fat": "0.13"
+  }, 
+  "Potatoes, scalloped, home-prepared with butter": {
+    "NDB": "11372", 
+    "Protein": "2.87", 
+    "Carbohydrate": "10.78", 
+    "Fat": "3.68"
+  }, 
+  "Purslane, cooked, boiled, drained, without salt": {
+    "NDB": "11428", 
+    "Protein": "1.49", 
+    "Carbohydrate": "3.55", 
+    "Fat": "0.19"
+  }, 
+  "Purslane, raw": {
+    "NDB": "11427", 
+    "Protein": "2.03", 
+    "Carbohydrate": "3.39", 
+    "Fat": "0.36"
+  }, 
+  "Radishes, raw": {
+    "NDB": "11429", 
+    "Protein": "0.68", 
+    "Carbohydrate": "3.4", 
+    "Fat": "0.1"
+  }, 
+  "Rice flour, brown": {
+    "NDB": "20090", 
+    "Protein": "7.23", 
+    "Carbohydrate": "76.48", 
+    "Fat": "2.78"
+  }, 
+  "Rice noodles, cooked": {
+    "NDB": "20134", 
+    "Protein": "1.79", 
+    "Carbohydrate": "24.01", 
+    "Fat": "0.2"
+  }, 
+  "Rice, white, long-grain, regular, cooked, unenriched, with salt": {
+    "NDB": "20545", 
+    "Protein": "2.69", 
+    "Carbohydrate": "28.17", 
+    "Fat": "0.28"
+  }, 
+  "Rice, white, long-grain, regular, raw, unenriched": {
+    "NDB": "20444", 
+    "Protein": "7.13", 
+    "Carbohydrate": "79.95", 
+    "Fat": "0.66"
+  }, 
+  "Rice, white, medium-grain, cooked, unenriched": {
+    "NDB": "20451", 
+    "Protein": "2.38", 
+    "Carbohydrate": "28.59", 
+    "Fat": "0.21"
+  }, 
+  "Rowal, raw": {
+    "NDB": "09428", 
+    "Protein": "2.3", 
+    "Carbohydrate": "23.9", 
+    "Fat": "2.0"
+  }, 
+  "Salad dressing, french, home recipe": {
+    "NDB": "04133", 
+    "Protein": "0.1", 
+    "Carbohydrate": "3.4", 
+    "Fat": "70.2"
+  }, 
+  "Salad dressing, KRAFT Mayo Fat Free Mayonnaise Dressing": {
+    "NDB": "04013", 
+    "Protein": "0.2", 
+    "Carbohydrate": "15.8", 
+    "Fat": "0.0"
+  }, 
+  "Salad dressing, mayonnaise type, regular, with salt": {
+    "NDB": "04018", 
+    "Protein": "0.65", 
+    "Carbohydrate": "14.78", 
+    "Fat": "21.6"
+  }, 
+  "Salad dressing, mayonnaise, imitation, milk cream": {
+    "NDB": "04028", 
+    "Protein": "2.1", 
+    "Carbohydrate": "11.1", 
+    "Fat": "5.1"
+  }, 
+  "Salad dressing, mayonnaise, imitation, soybean": {
+    "NDB": "04027", 
+    "Protein": "0.3", 
+    "Carbohydrate": "16.0", 
+    "Fat": "19.2"
+  }, 
+  "Salad dressing, mayonnaise, regular": {
+    "NDB": "04025", 
+    "Protein": "0.96", 
+    "Carbohydrate": "0.57", 
+    "Fat": "74.85"
+  }, 
+  "Salad dressing, mayonnaise, soybean and safflower oil, with salt": {
+    "NDB": "04026", 
+    "Protein": "1.1", 
+    "Carbohydrate": "2.7", 
+    "Fat": "79.4"
+  }, 
+  "Salad dressing, russian dressing, low calorie": {
+    "NDB": "04022", 
+    "Protein": "0.5", 
+    "Carbohydrate": "27.6", 
+    "Fat": "4.0"
+  }, 
+  "Salad dressing, sesame seed dressing, regular": {
+    "NDB": "04016", 
+    "Protein": "3.1", 
+    "Carbohydrate": "8.6", 
+    "Fat": "45.2"
+  }, 
+  "Salad dressing, thousand island dressing, reduced fat": {
+    "NDB": "04023", 
+    "Protein": "0.83", 
+    "Carbohydrate": "24.06", 
+    "Fat": "11.32"
+  }, 
+  "Seeds, lotus seeds, dried": {
+    "NDB": "12013", 
+    "Protein": "15.41", 
+    "Carbohydrate": "64.47", 
+    "Fat": "1.97"
+  }, 
+  "Seeds, pumpkin and squash seed kernels, roasted, with salt added": {
+    "NDB": "12516", 
+    "Protein": "29.84", 
+    "Carbohydrate": "14.71", 
+    "Fat": "49.05"
+  }, 
+  "Seeds, safflower seed meal, partially defatted": {
+    "NDB": "12022", 
+    "Protein": "35.62", 
+    "Carbohydrate": "48.73", 
+    "Fat": "2.39"
+  }, 
+  "Seeds, sesame flour, low-fat": {
+    "NDB": "12033", 
+    "Protein": "50.14", 
+    "Carbohydrate": "35.51", 
+    "Fat": "1.75"
+  }, 
+  "Seeds, sunflower seed kernels, oil roasted, without salt": {
+    "NDB": "12038", 
+    "Protein": "20.06", 
+    "Carbohydrate": "22.89", 
+    "Fat": "51.3"
+  }, 
+  "Seeds, sunflower seed kernels, toasted, without salt": {
+    "NDB": "12039", 
+    "Protein": "17.21", 
+    "Carbohydrate": "20.59", 
+    "Fat": "56.8"
+  }, 
+  "Sesbania flower, raw": {
+    "NDB": "11447", 
+    "Protein": "1.28", 
+    "Carbohydrate": "6.73", 
+    "Fat": "0.04"
+  }, 
+  "Shortening bread, soybean (hydrogenated) and cottonseed": {
+    "NDB": "04546", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Sorghum flour, whole-grain": {
+    "NDB": "20648", 
+    "Protein": "8.43", 
+    "Carbohydrate": "76.64", 
+    "Fat": "3.34"
+  }, 
+  "Soybeans, green, cooked, boiled, drained, without salt": {
+    "NDB": "11451", 
+    "Protein": "12.35", 
+    "Carbohydrate": "11.05", 
+    "Fat": "6.4"
+  }, 
+  "Soybeans, green, raw": {
+    "NDB": "11450", 
+    "Protein": "12.95", 
+    "Carbohydrate": "11.05", 
+    "Fat": "6.8"
+  }, 
+  "Soybeans, mature seeds, sprouted, cooked, steamed": {
+    "NDB": "11453", 
+    "Protein": "8.47", 
+    "Carbohydrate": "6.53", 
+    "Fat": "4.45"
+  }, 
+  "Spices, anise seed": {
+    "NDB": "02002", 
+    "Protein": "17.6", 
+    "Carbohydrate": "50.02", 
+    "Fat": "15.9"
+  }, 
+  "Spices, bay leaf": {
+    "NDB": "02004", 
+    "Protein": "7.61", 
+    "Carbohydrate": "74.97", 
+    "Fat": "8.36"
+  }, 
+  "Spices, caraway seed": {
+    "NDB": "02005", 
+    "Protein": "19.77", 
+    "Carbohydrate": "49.9", 
+    "Fat": "14.59"
+  }, 
+  "Spices, cinnamon, ground": {
+    "NDB": "02010", 
+    "Protein": "3.99", 
+    "Carbohydrate": "80.59", 
+    "Fat": "1.24"
+  }, 
+  "Spices, curry powder": {
+    "NDB": "02015", 
+    "Protein": "14.29", 
+    "Carbohydrate": "55.83", 
+    "Fat": "14.01"
+  }, 
+  "Spices, ginger, ground": {
+    "NDB": "02021", 
+    "Protein": "8.98", 
+    "Carbohydrate": "71.62", 
+    "Fat": "4.24"
+  }, 
+  "Spices, mace, ground": {
+    "NDB": "02022", 
+    "Protein": "6.71", 
+    "Carbohydrate": "50.5", 
+    "Fat": "32.38"
+  }, 
+  "Spices, marjoram, dried": {
+    "NDB": "02023", 
+    "Protein": "12.66", 
+    "Carbohydrate": "60.56", 
+    "Fat": "7.04"
+  }, 
+  "Spices, mustard seed, ground": {
+    "NDB": "02024", 
+    "Protein": "26.08", 
+    "Carbohydrate": "28.09", 
+    "Fat": "36.24"
+  }, 
+  "Spices, nutmeg, ground": {
+    "NDB": "02025", 
+    "Protein": "5.84", 
+    "Carbohydrate": "49.29", 
+    "Fat": "36.31"
+  }, 
+  "Spices, savory, ground": {
+    "NDB": "02039", 
+    "Protein": "6.73", 
+    "Carbohydrate": "68.73", 
+    "Fat": "5.91"
+  }, 
+  "Spices, tarragon, dried": {
+    "NDB": "02041", 
+    "Protein": "22.77", 
+    "Carbohydrate": "50.22", 
+    "Fat": "7.24"
+  }, 
+  "Spices, thyme, dried": {
+    "NDB": "02042", 
+    "Protein": "9.11", 
+    "Carbohydrate": "63.94", 
+    "Fat": "7.43"
+  }, 
+  "Spices, turmeric, ground": {
+    "NDB": "02043", 
+    "Protein": "9.68", 
+    "Carbohydrate": "67.14", 
+    "Fat": "3.25"
+  }, 
+  "Spinach, canned, regular pack, solids and liquids": {
+    "NDB": "11459", 
+    "Protein": "2.11", 
+    "Carbohydrate": "2.92", 
+    "Fat": "0.37"
+  }, 
+  "Spinach, raw": {
+    "NDB": "11457", 
+    "Protein": "2.86", 
+    "Carbohydrate": "3.63", 
+    "Fat": "0.39"
+  }, 
+  "Squash, summer, crookneck and straightneck, frozen, cooked, boiled, drained, without salt": {
+    "NDB": "11474", 
+    "Protein": "1.28", 
+    "Carbohydrate": "5.54", 
+    "Fat": "0.2"
+  }, 
+  "Squash, summer, zucchini, includes skin, cooked, boiled, drained, without salt": {
+    "NDB": "11478", 
+    "Protein": "1.14", 
+    "Carbohydrate": "2.69", 
+    "Fat": "0.36"
+  }, 
+  "Squash, summer, zucchini, italian style, canned": {
+    "NDB": "11481", 
+    "Protein": "1.03", 
+    "Carbohydrate": "6.85", 
+    "Fat": "0.11"
+  }, 
+  "Squash, winter, acorn, cooked, boiled, mashed, with salt": {
+    "NDB": "11865", 
+    "Protein": "0.67", 
+    "Carbohydrate": "8.79", 
+    "Fat": "0.08"
+  }, 
+  "Squash, winter, acorn, cooked, boiled, mashed, without salt": {
+    "NDB": "11484", 
+    "Protein": "0.67", 
+    "Carbohydrate": "8.79", 
+    "Fat": "0.08"
+  }, 
+  "Squash, winter, butternut, cooked, baked, without salt": {
+    "NDB": "11486", 
+    "Protein": "0.9", 
+    "Carbohydrate": "10.49", 
+    "Fat": "0.09"
+  }, 
+  "Squash, winter, butternut, frozen, cooked, boiled, without salt": {
+    "NDB": "11488", 
+    "Protein": "1.23", 
+    "Carbohydrate": "10.05", 
+    "Fat": "0.07"
+  }, 
+  "Squash, winter, hubbard, baked, with salt": {
+    "NDB": "11868", 
+    "Protein": "2.48", 
+    "Carbohydrate": "10.81", 
+    "Fat": "0.62"
+  }, 
+  "Squash, winter, hubbard, cooked, boiled, mashed, with salt": {
+    "NDB": "11869", 
+    "Protein": "1.48", 
+    "Carbohydrate": "6.46", 
+    "Fat": "0.37"
+  }, 
+  "Squash, winter, hubbard, cooked, boiled, mashed, without salt": {
+    "NDB": "11491", 
+    "Protein": "1.48", 
+    "Carbohydrate": "6.46", 
+    "Fat": "0.37"
+  }, 
+  "Swamp cabbage (skunk cabbage), cooked, boiled, drained, with salt": {
+    "NDB": "11873", 
+    "Protein": "2.08", 
+    "Carbohydrate": "3.7", 
+    "Fat": "0.24"
+  }, 
+  "Sweet potato, canned, syrup pack, drained solids": {
+    "NDB": "11647", 
+    "Protein": "1.28", 
+    "Carbohydrate": "25.36", 
+    "Fat": "0.32"
+  }, 
+  "Sweet potato, cooked, baked in skin, flesh, with salt": {
+    "NDB": "11875", 
+    "Protein": "2.01", 
+    "Carbohydrate": "20.71", 
+    "Fat": "0.15"
+  }, 
+  "Tamarind nectar, canned": {
+    "NDB": "09437", 
+    "Protein": "0.09", 
+    "Carbohydrate": "14.73", 
+    "Fat": "0.12"
+  }, 
+  "Tangerines, (mandarin oranges), raw": {
+    "NDB": "09218", 
+    "Protein": "0.81", 
+    "Carbohydrate": "13.34", 
+    "Fat": "0.31"
+  }, 
+  "Taro, tahitian, cooked, without salt": {
+    "NDB": "11526", 
+    "Protein": "4.16", 
+    "Carbohydrate": "6.85", 
+    "Fat": "0.68"
+  }, 
+  "Teff, cooked": {
+    "NDB": "20143", 
+    "Protein": "3.87", 
+    "Carbohydrate": "19.86", 
+    "Fat": "0.65"
+  }, 
+  "Toaster pastries, fruit, toasted (include apple, blueberry, cherry, strawberry)": {
+    "NDB": "18939", 
+    "Protein": "4.7", 
+    "Carbohydrate": "72.7", 
+    "Fat": "11.03"
+  }, 
+  "Tofu, raw, firm, prepared with calcium sulfate": {
+    "NDB": "16426", 
+    "Protein": "17.27", 
+    "Carbohydrate": "2.78", 
+    "Fat": "8.72"
+  }, 
+  "Tomato juice, canned, with salt added": {
+    "NDB": "11540", 
+    "Protein": "0.85", 
+    "Carbohydrate": "3.53", 
+    "Fat": "0.29"
+  }, 
+  "Tomato juice, canned, without salt added": {
+    "NDB": "11886", 
+    "Protein": "0.85", 
+    "Carbohydrate": "3.53", 
+    "Fat": "0.29"
+  }, 
+  "Tomato products, canned, puree, with salt added": {
+    "NDB": "11888", 
+    "Protein": "1.65", 
+    "Carbohydrate": "8.98", 
+    "Fat": "0.21"
+  }, 
+  "Tomato products, canned, puree, without salt added": {
+    "NDB": "11547", 
+    "Protein": "1.65", 
+    "Carbohydrate": "8.98", 
+    "Fat": "0.21"
+  }, 
+  "Tomato products, canned, sauce, with onions": {
+    "NDB": "11553", 
+    "Protein": "1.56", 
+    "Carbohydrate": "9.94", 
+    "Fat": "0.19"
+  }, 
+  "Tomato products, canned, sauce, with onions, green peppers, and celery": {
+    "NDB": "11557", 
+    "Protein": "0.94", 
+    "Carbohydrate": "8.77", 
+    "Fat": "0.74"
+  }, 
+  "Tomato products, canned, sauce, with tomato tidbits": {
+    "NDB": "11559", 
+    "Protein": "1.32", 
+    "Carbohydrate": "7.09", 
+    "Fat": "0.39"
+  }, 
+  "Tomatoes, red, ripe, canned, packed in tomato juice": {
+    "NDB": "11531", 
+    "Protein": "0.79", 
+    "Carbohydrate": "3.47", 
+    "Fat": "0.25"
+  }, 
+  "Tomatoes, red, ripe, canned, stewed": {
+    "NDB": "11533", 
+    "Protein": "0.91", 
+    "Carbohydrate": "6.19", 
+    "Fat": "0.19"
+  }, 
+  "Tortillas, ready-to-bake or -fry, flour, shelf stable": {
+    "NDB": "18970", 
+    "Protein": "8.01", 
+    "Carbohydrate": "49.27", 
+    "Fat": "7.58"
+  }, 
+  "Tree fern, cooked, without salt": {
+    "NDB": "11563", 
+    "Protein": "0.29", 
+    "Carbohydrate": "10.98", 
+    "Fat": "0.07"
+  }, 
+  "Turnip greens and turnips, frozen, cooked, boiled, drained, with salt": {
+    "NDB": "11893", 
+    "Protein": "2.99", 
+    "Carbohydrate": "4.74", 
+    "Fat": "0.38"
+  }, 
+  "Turnip greens, cooked, boiled, drained, without salt": {
+    "NDB": "11569", 
+    "Protein": "1.14", 
+    "Carbohydrate": "4.36", 
+    "Fat": "0.23"
+  }, 
+  "Turnip greens, frozen, cooked, boiled, drained, with salt": {
+    "NDB": "11892", 
+    "Protein": "3.35", 
+    "Carbohydrate": "4.98", 
+    "Fat": "0.42"
+  }, 
+  "Turnip greens, frozen, cooked, boiled, drained, without salt": {
+    "NDB": "11575", 
+    "Protein": "3.35", 
+    "Carbohydrate": "4.98", 
+    "Fat": "0.42"
+  }, 
+  "Turnip greens, frozen, unprepared": {
+    "NDB": "11574", 
+    "Protein": "2.47", 
+    "Carbohydrate": "3.67", 
+    "Fat": "0.31"
+  }, 
+  "Turnips, frozen, cooked, boiled, drained, without salt": {
+    "NDB": "11567", 
+    "Protein": "1.53", 
+    "Carbohydrate": "4.35", 
+    "Fat": "0.24"
+  }, 
+  "Vanilla extract": {
+    "NDB": "02050", 
+    "Protein": "0.06", 
+    "Carbohydrate": "12.65", 
+    "Fat": "--"
+  }, 
+  "Vegetable juice cocktail, canned": {
+    "NDB": "11578", 
+    "Protein": "0.93", 
+    "Carbohydrate": "3.87", 
+    "Fat": "0.31"
+  }, 
+  "Wheat flour, white, all-purpose, enriched, calcium-fortified": {
+    "NDB": "20381", 
+    "Protein": "10.33", 
+    "Carbohydrate": "76.31", 
+    "Fat": "0.98"
+  }, 
+  "Wheat flour, white, all-purpose, unenriched": {
+    "NDB": "20481", 
+    "Protein": "10.33", 
+    "Carbohydrate": "76.31", 
+    "Fat": "0.98"
+  }, 
+  "Wheat flour, white, bread, enriched": {
+    "NDB": "20083", 
+    "Protein": "11.98", 
+    "Carbohydrate": "72.53", 
+    "Fat": "1.66"
+  }, 
+  "Yardlong bean, cooked, boiled, drained, without salt": {
+    "NDB": "11200", 
+    "Protein": "2.53", 
+    "Carbohydrate": "9.18", 
+    "Fat": "0.1"
+  }
+}

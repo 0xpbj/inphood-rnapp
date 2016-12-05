@@ -101,47 +101,57 @@ const updateFirebaseMap = (uid) => {
 }
 
 function* getUserInfo() {
-  const path = '/global/' + deviceId + '/userInfo/public'
-  const data = (yield call(db.getPath, path)).val()
-  branch.setIdentity(deviceId)
-  if (data) {
-    const birthday = data.birthday ? data.birthday : ''
-    const email = data.email ? data.email : ''
-    const diet = data.diet ? data.diet : ''
-    const height = data.height ? data.height : ''
-    const name = data.name ? data.name : ''
-    let picture = data.picture ? data.picture : ''
-    const values = name ? name.split(" ") : null
-    const first_name = name ? values[0] : ''
-    const last_name = name ? values[1] : ''
-    const userSettings = {first_name, last_name, birthday, height, diet, email}
-    yield put ({type: USER_SETTINGS, settings: userSettings})
-    if (picture === '')
-      picture = defaultPicture
-    yield put ({type: STORE_CDN_PICTURE, picture})
-    firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
-      name,
-      picture,
-      deviceId,
-    })
+  try {
+    const {uid} = yield select(state => state.authReducer)
+    if (uid) {
+      const path = '/global/' + deviceId + '/userInfo/public'
+      const data = (yield call(db.getPath, path)).val()
+      branch.setIdentity(deviceId)
+      if (data) {
+        const birthday = data.birthday ? data.birthday : ''
+        const email = data.email ? data.email : ''
+        const diet = data.diet ? data.diet : ''
+        const height = data.height ? data.height : ''
+        const name = data.name ? data.name : ''
+        let picture = data.picture ? data.picture : ''
+        const values = name ? name.split(" ") : null
+        const first_name = name ? values[0] : ''
+        const last_name = name ? values[1] : ''
+        const userSettings = {first_name, last_name, birthday, height, diet, email}
+        yield put ({type: USER_SETTINGS, settings: userSettings})
+        if (picture === '')
+          picture = defaultPicture
+        yield put ({type: STORE_CDN_PICTURE, picture})
+        firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
+          name,
+          picture,
+          deviceId,
+        })
+      }
+      else {
+        yield put ({type: STORE_CDN_PICTURE, picture: defaultPicture})
+        firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
+          name: '',
+          picture: defaultPicture,
+          deviceId
+        })
+      }
+      const refPath = '/global/' + deviceId + '/referralInfo'
+      const refData = (yield call(db.getPath, refPath)).val()
+      if (refData) {
+        const referralDeviceId = refData.referralDeviceId ? refData.referralDeviceId : ''
+        const referralSetup = refData.referralSetup ? refData.referralSetup : ''
+        const referralType = refData.referralType ? refData.referralType : ''
+        const referralName = refData.referralName ? refData.referralName : ''
+        yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralDeviceId, referralName})
+        yield put({type: BRANCH_AUTH_SETUP, response: referralSetup})
+      }
+    }
+    else
+      throw 'User not authenticated'
   }
-  else {
-    yield put ({type: STORE_CDN_PICTURE, picture: defaultPicture})
-    firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({
-      name: '',
-      picture: defaultPicture,
-      deviceId
-    })
-  }
-  const refPath = '/global/' + deviceId + '/referralInfo'
-  const refData = (yield call(db.getPath, refPath)).val()
-  if (refData) {
-    const referralDeviceId = refData.referralDeviceId ? refData.referralDeviceId : ''
-    const referralSetup = refData.referralSetup ? refData.referralSetup : ''
-    const referralType = refData.referralType ? refData.referralType : ''
-    const referralName = refData.referralName ? refData.referralName : ''
-    yield put({type: BRANCH_REFERRAL_INFO, referralType, referralSetup, referralDeviceId, referralName})
-    yield put({type: BRANCH_AUTH_SETUP, response: referralSetup})
+  catch(error) {
+    yield put ({type: LOGIN_ERROR, error})
   }
 }
 
@@ -171,7 +181,6 @@ function* loginFlow() {
 function* watchAppUpdate() {
   const {appVersion} = yield select(state => state.authReducer)
   const devVersion = DeviceInfo.getVersion()
-  console.log('App Version: ', appVersion, devVersion)
   if (appVersion !== '' && appVersion !== devVersion)
     yield put ({type: APP_UPDATED})
   yield put ({type: STORE_APP_VERSION, appVersion: devVersion})

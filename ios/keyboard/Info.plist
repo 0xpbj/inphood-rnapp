@@ -35,8 +35,8 @@
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.keyboard-service</string>
-		<key>NSExtensionPrincipalClass</key>
-		<string>KeyboardViewController</string>
+		<key>NSExtensionMainStoryboard</key>
+		<string>keyboardStoryboard</string>
 	</dict>
 </dict>
 </plist>

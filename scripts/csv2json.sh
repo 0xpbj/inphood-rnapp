@@ -8,6 +8,8 @@
 # files prior to converting them to JSON (each header in the csv file gets replicated n-times in
 # the JSON output.
 #
+# The heavy-lifting in this script is done by this tool: http://csvkit.readthedocs.io/en/latest/scripts/csvjson.html
+#
 linesToSkip=8
 spacesToIndent=2
 keyForArrayOfObjects=Description

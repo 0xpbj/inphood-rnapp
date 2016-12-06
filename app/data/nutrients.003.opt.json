@@ -1,0 +1,896 @@
+{
+  "Baking chocolate, MARS SNACKFOOD US, M & M's Milk Chocolate Mini Baking Bits": {
+    "NDB": "19146", 
+    "Protein": "4.78", 
+    "Carbohydrate": "68.4", 
+    "Fat": "23.36"
+  }, 
+  "Baking chocolate, MARS SNACKFOOD US, M & M's Semisweet Chocolate Mini Baking Bits": {
+    "NDB": "19139", 
+    "Protein": "4.44", 
+    "Carbohydrate": "65.96", 
+    "Fat": "26.15"
+  }, 
+  "CAMPBELL'S CHUNKY Soups, Chicken Corn Chowder": {
+    "NDB": "06393", 
+    "Protein": "2.86", 
+    "Carbohydrate": "8.16", 
+    "Fat": "4.08"
+  }, 
+  "CAMPBELL'S CHUNKY, Classic Chicken Noodle Soup": {
+    "NDB": "06395", 
+    "Protein": "3.41", 
+    "Carbohydrate": "5.41", 
+    "Fat": "1.3"
+  }, 
+  "CAMPBELL'S Red and White, Chicken and Dumplings Soup, condensed": {
+    "NDB": "06041", 
+    "Protein": "2.38", 
+    "Carbohydrate": "7.94", 
+    "Fat": "1.98"
+  }, 
+  "CAMPBELL'S Red and White, Cream of Broccoli Soup, condensed": {
+    "NDB": "06333", 
+    "Protein": "1.61", 
+    "Carbohydrate": "9.68", 
+    "Fat": "4.03"
+  }, 
+  "CAMPBELL'S Red and White, Cream of Onion Soup, condensed": {
+    "NDB": "06340", 
+    "Protein": "0.81", 
+    "Carbohydrate": "8.06", 
+    "Fat": "4.84"
+  }, 
+  "CAMPBELL'S Red and White, Fiesta Nacho Cheese Soup, condensed": {
+    "NDB": "06353", 
+    "Protein": "2.42", 
+    "Carbohydrate": "8.06", 
+    "Fat": "6.45"
+  }, 
+  "CAMPBELL'S Red and White, Mega Noodle in Chicken Broth, condensed": {
+    "NDB": "06365", 
+    "Protein": "2.38", 
+    "Carbohydrate": "11.9", 
+    "Fat": "1.59"
+  }, 
+  "CAMPBELL'S, Cream of Chicken with Herbs Soup, condensed": {
+    "NDB": "06337", 
+    "Protein": "1.61", 
+    "Carbohydrate": "7.26", 
+    "Fat": "3.23"
+  }, 
+  "Candies, 5TH AVENUE Candy Bar": {
+    "NDB": "19098", 
+    "Protein": "8.78", 
+    "Carbohydrate": "62.68", 
+    "Fat": "23.98"
+  }, 
+  "Candies, caramels, chocolate-flavor roll": {
+    "NDB": "19076", 
+    "Protein": "1.59", 
+    "Carbohydrate": "87.73", 
+    "Fat": "3.31"
+  }, 
+  "Candies, chocolate, dark, NFS (45-59% cacao solids 90%; 60-69% cacao solids 5%; 70-85% cacao solids 5%)": {
+    "NDB": "19905", 
+    "Protein": "5.09", 
+    "Carbohydrate": "59.97", 
+    "Fat": "32.2"
+  }, 
+  "Candies, confectioner's coating, peanut butter": {
+    "NDB": "19086", 
+    "Protein": "18.3", 
+    "Carbohydrate": "46.88", 
+    "Fat": "29.8"
+  }, 
+  "Candies, dark chocolate coated coffee beans": {
+    "NDB": "19268", 
+    "Protein": "7.5", 
+    "Carbohydrate": "59.95", 
+    "Fat": "30.0"
+  }, 
+  "Candies, fudge, chocolate, with nuts, prepared-from-recipe": {
+    "NDB": "19101", 
+    "Protein": "4.38", 
+    "Carbohydrate": "67.93", 
+    "Fat": "18.93"
+  }, 
+  "Candies, HERSHEY'S, ALMOND JOY BITES": {
+    "NDB": "19248", 
+    "Protein": "5.58", 
+    "Carbohydrate": "57.54", 
+    "Fat": "34.5"
+  }, 
+  "Candies, HERSHEY, KIT KAT BIG KAT Bar": {
+    "NDB": "19250", 
+    "Protein": "6.24", 
+    "Carbohydrate": "63.64", 
+    "Fat": "27.84"
+  }, 
+  "Candies, MARS SNACKFOOD US, 3 MUSKETEERS Bar": {
+    "NDB": "19159", 
+    "Protein": "2.6", 
+    "Carbohydrate": "77.77", 
+    "Fat": "12.75"
+  }, 
+  "Candies, MARS SNACKFOOD US, M & M's Milk Chocolate Candies": {
+    "NDB": "19141", 
+    "Protein": "4.33", 
+    "Carbohydrate": "71.19", 
+    "Fat": "21.13"
+  }, 
+  "Candies, MARS SNACKFOOD US, POP'ABLES SNICKERS Brand Bite Size Candies": {
+    "NDB": "19306", 
+    "Protein": "7.15", 
+    "Carbohydrate": "61.07", 
+    "Fat": "24.32"
+  }, 
+  "Candies, MARS SNACKFOOD US, STARBURST Fruit Chews, Original fruits": {
+    "NDB": "19156", 
+    "Protein": "0.41", 
+    "Carbohydrate": "82.57", 
+    "Fat": "8.21"
+  }, 
+  "Candies, MOUNDS Candy Bar": {
+    "NDB": "19142", 
+    "Protein": "4.6", 
+    "Carbohydrate": "58.59", 
+    "Fat": "26.6"
+  }, 
+  "Candies, NESTLE, 100 GRAND Bar": {
+    "NDB": "19144", 
+    "Protein": "2.5", 
+    "Carbohydrate": "70.97", 
+    "Fat": "19.33"
+  }, 
+  "Candies, NESTLE, BUTTERFINGER Bar": {
+    "NDB": "19069", 
+    "Protein": "5.4", 
+    "Carbohydrate": "72.9", 
+    "Fat": "18.9"
+  }, 
+  "Candies, NESTLE, BUTTERFINGER Crisp": {
+    "NDB": "19913", 
+    "Protein": "6.67", 
+    "Carbohydrate": "68.45", 
+    "Fat": "18.33"
+  }, 
+  "Candies, NESTLE, CRUNCH Bar and Dessert Topping": {
+    "NDB": "19145", 
+    "Protein": "5.0", 
+    "Carbohydrate": "67.0", 
+    "Fat": "26.0"
+  }, 
+  "Candies, truffles, prepared-from-recipe": {
+    "NDB": "19138", 
+    "Protein": "6.21", 
+    "Carbohydrate": "44.88", 
+    "Fat": "33.76"
+  }, 
+  "Candies, TWIZZLERS CHERRY BITES": {
+    "NDB": "19067", 
+    "Protein": "2.97", 
+    "Carbohydrate": "79.38", 
+    "Fat": "1.7"
+  }, 
+  "Candies, YORK BITES": {
+    "NDB": "19181", 
+    "Protein": "1.78", 
+    "Carbohydrate": "81.64", 
+    "Fat": "7.32"
+  }, 
+  "Candies, YORK Peppermint Pattie": {
+    "NDB": "19091", 
+    "Protein": "2.19", 
+    "Carbohydrate": "80.99", 
+    "Fat": "7.17"
+  }, 
+  "Chocolate, dark, 60-69% cacao solids": {
+    "NDB": "19903", 
+    "Protein": "6.12", 
+    "Carbohydrate": "52.42", 
+    "Fat": "38.31"
+  }, 
+  "Chocolate-flavored hazelnut spread": {
+    "NDB": "19125", 
+    "Protein": "5.41", 
+    "Carbohydrate": "62.16", 
+    "Fat": "29.73"
+  }, 
+  "Desserts, mousse, chocolate, prepared-from-recipe": {
+    "NDB": "19182", 
+    "Protein": "4.14", 
+    "Carbohydrate": "16.07", 
+    "Fat": "16.0"
+  }, 
+  "DIGIORNO Pizza, cheese topping, rising crust, frozen, baked": {
+    "NDB": "21474", 
+    "Protein": "12.8", 
+    "Carbohydrate": "31.78", 
+    "Fat": "8.6"
+  }, 
+  "Fast foods, biscuit with egg and steak": {
+    "NDB": "21006", 
+    "Protein": "12.12", 
+    "Carbohydrate": "14.37", 
+    "Fat": "19.21"
+  }, 
+  "Fast foods, biscuit, with egg": {
+    "NDB": "21002", 
+    "Protein": "8.53", 
+    "Carbohydrate": "23.46", 
+    "Fat": "16.23"
+  }, 
+  "Fast foods, biscuit, with egg and bacon": {
+    "NDB": "21003", 
+    "Protein": "11.33", 
+    "Carbohydrate": "19.06", 
+    "Fat": "20.73"
+  }, 
+  "Fast Foods, biscuit, with egg and sausage": {
+    "NDB": "21005", 
+    "Protein": "11.13", 
+    "Carbohydrate": "21.05", 
+    "Fat": "20.77"
+  }, 
+  "Fast foods, croissant, with egg, cheese, and ham": {
+    "NDB": "21013", 
+    "Protein": "12.45", 
+    "Carbohydrate": "18.98", 
+    "Fat": "14.95"
+  }, 
+  "Fast foods, croissant, with egg, cheese, and sausage": {
+    "NDB": "21014", 
+    "Protein": "12.09", 
+    "Carbohydrate": "15.9", 
+    "Fat": "21.78"
+  }, 
+  "Fast foods, english muffin, with egg, cheese, and canadian bacon": {
+    "NDB": "21021", 
+    "Protein": "13.64", 
+    "Carbohydrate": "21.67", 
+    "Fat": "9.66"
+  }, 
+  "Fast foods, french toast with butter": {
+    "NDB": "21023", 
+    "Protein": "7.66", 
+    "Carbohydrate": "26.7", 
+    "Fat": "13.9"
+  }, 
+  "Fast foods, hamburger; double, regular, patty; plain": {
+    "NDB": "21110", 
+    "Protein": "17.08", 
+    "Carbohydrate": "24.1", 
+    "Fat": "14.36"
+  }, 
+  "Fat, beef tallow": {
+    "NDB": "04001", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Flan, caramel custard, dry mix": {
+    "NDB": "19187", 
+    "Protein": "0.0", 
+    "Carbohydrate": "91.6", 
+    "Fat": "--"
+  }, 
+  "Frostings, coconut-nut, ready-to-eat": {
+    "NDB": "19227", 
+    "Protein": "1.5", 
+    "Carbohydrate": "52.7", 
+    "Fat": "24.0"
+  }, 
+  "Frostings, glaze, chocolate, prepared-from-recipe, with butter, NFSMI Recipe No. C-32": {
+    "NDB": "19409", 
+    "Protein": "1.42", 
+    "Carbohydrate": "72.18", 
+    "Fat": "7.17"
+  }, 
+  "Frozen novelties, ice type, sugar free, orange, cherry, and grape POPSICLE pops": {
+    "NDB": "19873", 
+    "Protein": "0.0", 
+    "Carbohydrate": "5.14", 
+    "Fat": "--"
+  }, 
+  "Frozen novelties, KLONDIKE, SLIM-A-BEAR Fudge Bar, 98% fat free, no sugar added": {
+    "NDB": "19874", 
+    "Protein": "4.31", 
+    "Carbohydrate": "30.07", 
+    "Fat": "1.88"
+  }, 
+  "Frozen novelties, No Sugar Added, FUDGSICLE pops": {
+    "NDB": "19871", 
+    "Protein": "3.67", 
+    "Carbohydrate": "23.11", 
+    "Fat": "1.87"
+  }, 
+  "Gelatin desserts, dry mix, with added ascorbic acid, sodium-citrate and salt": {
+    "NDB": "19702", 
+    "Protein": "7.8", 
+    "Carbohydrate": "90.5", 
+    "Fat": "0.0"
+  }, 
+  "Gravy, beef, canned, ready-to-serve": {
+    "NDB": "06116", 
+    "Protein": "3.75", 
+    "Carbohydrate": "4.81", 
+    "Fat": "2.36"
+  }, 
+  "Gravy, brown instant, dry": {
+    "NDB": "06957", 
+    "Protein": "8.53", 
+    "Carbohydrate": "59.78", 
+    "Fat": "11.85"
+  }, 
+  "Gravy, CAMPBELL'S, beef": {
+    "NDB": "06997", 
+    "Protein": "1.69", 
+    "Carbohydrate": "5.08", 
+    "Fat": "--"
+  }, 
+  "Gravy, CAMPBELL'S, mushroom": {
+    "NDB": "06322", 
+    "Protein": "0.0", 
+    "Carbohydrate": "5.08", 
+    "Fat": "1.69"
+  }, 
+  "Gravy, CAMPBELL'S, turkey": {
+    "NDB": "06326", 
+    "Protein": "1.69", 
+    "Carbohydrate": "5.08", 
+    "Fat": "--"
+  }, 
+  "HEALTHY REQUEST, Tomato Soup, condensed": {
+    "NDB": "06991", 
+    "Protein": "1.61", 
+    "Carbohydrate": "13.71", 
+    "Fat": "1.21"
+  }, 
+  "HEALTHY REQUEST, Vegetable Soup, condensed": {
+    "NDB": "06992", 
+    "Protein": "3.17", 
+    "Carbohydrate": "15.87", 
+    "Fat": "0.79"
+  }, 
+  "Ice creams, BREYERS, All Natural Light French Chocolate": {
+    "NDB": "19893", 
+    "Protein": "5.3", 
+    "Carbohydrate": "29.68", 
+    "Fat": "7.28"
+  }, 
+  "Ice creams, BREYERS, All Natural Light Mint Chocolate Chip": {
+    "NDB": "19879", 
+    "Protein": "4.69", 
+    "Carbohydrate": "28.39", 
+    "Fat": "7.09"
+  }, 
+  "Ice creams, BREYERS, All Natural Light Vanilla": {
+    "NDB": "19875", 
+    "Protein": "4.84", 
+    "Carbohydrate": "25.3", 
+    "Fat": "4.59"
+  }, 
+  "Ice creams, vanilla, light, no sugar added": {
+    "NDB": "19260", 
+    "Protein": "3.97", 
+    "Carbohydrate": "21.42", 
+    "Fat": "7.45"
+  }, 
+  "Margarine-like, margarine-butter blend, soybean oil and butter": {
+    "NDB": "04585", 
+    "Protein": "0.31", 
+    "Carbohydrate": "0.77", 
+    "Fat": "80.32"
+  }, 
+  "McDONALD'S, Premium Crispy Chicken Classic Sandwich": {
+    "NDB": "21403", 
+    "Protein": "12.08", 
+    "Carbohydrate": "25.46", 
+    "Fat": "8.68"
+  }, 
+  "McDONALD'S, Premium Grilled Chicken Club Sandwich": {
+    "NDB": "21404", 
+    "Protein": "17.19", 
+    "Carbohydrate": "19.87", 
+    "Fat": "8.05"
+  }, 
+  "Oil, canola": {
+    "NDB": "04582", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, cocoa butter": {
+    "NDB": "04501", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, mustard": {
+    "NDB": "04583", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, olive, salad or cooking": {
+    "NDB": "04053", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, safflower, salad or cooking, linoleic, (over 70%)": {
+    "NDB": "04510", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, sesame, salad or cooking": {
+    "NDB": "04058", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, soybean, salad or cooking, (partially hydrogenated) and cottonseed": {
+    "NDB": "04543", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Oil, sunflower, high oleic (70% and over)": {
+    "NDB": "04584", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Popcorn, sugar syrup/caramel, fat-free": {
+    "NDB": "19436", 
+    "Protein": "2.0", 
+    "Carbohydrate": "90.06", 
+    "Fat": "1.4"
+  }, 
+  "POPEYES, biscuit": {
+    "NDB": "21415", 
+    "Protein": "6.0", 
+    "Carbohydrate": "40.95", 
+    "Fat": "23.71"
+  }, 
+  "POPEYES, Coleslaw": {
+    "NDB": "21416", 
+    "Protein": "0.98", 
+    "Carbohydrate": "14.12", 
+    "Fat": "11.18"
+  }, 
+  "POPEYES, Mild Chicken Strips, analyzed 2006": {
+    "NDB": "21417", 
+    "Protein": "19.2", 
+    "Carbohydrate": "19.31", 
+    "Fat": "13.01"
+  }, 
+  "POPEYES, Spicy Chicken Strips, analyzed 2006": {
+    "NDB": "21418", 
+    "Protein": "19.61", 
+    "Carbohydrate": "18.52", 
+    "Fat": "11.2"
+  }, 
+  "PREGO Pasta, Mushroom and Garlic Italian Sauce, ready-to-serve": {
+    "NDB": "06229", 
+    "Protein": "1.54", 
+    "Carbohydrate": "10.0", 
+    "Fat": "1.92"
+  }, 
+  "Puddings, banana, dry mix, regular, with added oil": {
+    "NDB": "19706", 
+    "Protein": "0.0", 
+    "Carbohydrate": "88.4", 
+    "Fat": "5.0"
+  }, 
+  "Puddings, chocolate, dry mix, regular, prepared with whole milk": {
+    "NDB": "19189", 
+    "Protein": "3.16", 
+    "Carbohydrate": "19.64", 
+    "Fat": "3.15"
+  }, 
+  "Puddings, chocolate, ready-to-eat": {
+    "NDB": "19183", 
+    "Protein": "2.09", 
+    "Carbohydrate": "23.01", 
+    "Fat": "4.6"
+  }, 
+  "Puddings, chocolate, ready-to-eat, fat free": {
+    "NDB": "19235", 
+    "Protein": "1.93", 
+    "Carbohydrate": "20.87", 
+    "Fat": "0.3"
+  }, 
+  "Puddings, lemon, dry mix, regular, with added oil, potassium, sodium": {
+    "NDB": "19708", 
+    "Protein": "0.1", 
+    "Carbohydrate": "90.3", 
+    "Fat": "1.5"
+  }, 
+  "Puddings, rice, ready-to-eat": {
+    "NDB": "19193", 
+    "Protein": "3.23", 
+    "Carbohydrate": "18.39", 
+    "Fat": "2.15"
+  }, 
+  "Puddings, tapioca, dry mix, with no added salt": {
+    "NDB": "19709", 
+    "Protein": "0.1", 
+    "Carbohydrate": "94.3", 
+    "Fat": "--"
+  }, 
+  "Puddings, tapioca, ready-to-eat, fat free": {
+    "NDB": "19234", 
+    "Protein": "1.44", 
+    "Carbohydrate": "21.31", 
+    "Fat": "0.35"
+  }, 
+  "Puddings, vanilla, dry mix, regular, with added oil": {
+    "NDB": "19710", 
+    "Protein": "0.3", 
+    "Carbohydrate": "92.4", 
+    "Fat": "1.1"
+  }, 
+  "Salad dressing, french, home recipe": {
+    "NDB": "04133", 
+    "Protein": "0.1", 
+    "Carbohydrate": "3.4", 
+    "Fat": "70.2"
+  }, 
+  "Salad dressing, KRAFT Mayo Fat Free Mayonnaise Dressing": {
+    "NDB": "04013", 
+    "Protein": "0.2", 
+    "Carbohydrate": "15.8", 
+    "Fat": "0.0"
+  }, 
+  "Salad dressing, mayonnaise type, regular, with salt": {
+    "NDB": "04018", 
+    "Protein": "0.65", 
+    "Carbohydrate": "14.78", 
+    "Fat": "21.6"
+  }, 
+  "Salad dressing, mayonnaise, imitation, milk cream": {
+    "NDB": "04028", 
+    "Protein": "2.1", 
+    "Carbohydrate": "11.1", 
+    "Fat": "5.1"
+  }, 
+  "Salad dressing, mayonnaise, imitation, soybean": {
+    "NDB": "04027", 
+    "Protein": "0.3", 
+    "Carbohydrate": "16.0", 
+    "Fat": "19.2"
+  }, 
+  "Salad dressing, mayonnaise, regular": {
+    "NDB": "04025", 
+    "Protein": "0.96", 
+    "Carbohydrate": "0.57", 
+    "Fat": "74.85"
+  }, 
+  "Salad dressing, mayonnaise, soybean and safflower oil, with salt": {
+    "NDB": "04026", 
+    "Protein": "1.1", 
+    "Carbohydrate": "2.7", 
+    "Fat": "79.4"
+  }, 
+  "Salad dressing, russian dressing, low calorie": {
+    "NDB": "04022", 
+    "Protein": "0.5", 
+    "Carbohydrate": "27.6", 
+    "Fat": "4.0"
+  }, 
+  "Salad dressing, sesame seed dressing, regular": {
+    "NDB": "04016", 
+    "Protein": "3.1", 
+    "Carbohydrate": "8.6", 
+    "Fat": "45.2"
+  }, 
+  "Salad dressing, thousand island dressing, reduced fat": {
+    "NDB": "04023", 
+    "Protein": "0.83", 
+    "Carbohydrate": "24.06", 
+    "Fat": "11.32"
+  }, 
+  "Sauce, cheese, ready-to-serve": {
+    "NDB": "06930", 
+    "Protein": "6.71", 
+    "Carbohydrate": "6.83", 
+    "Fat": "13.29"
+  }, 
+  "Shortening bread, soybean (hydrogenated) and cottonseed": {
+    "NDB": "04546", 
+    "Protein": "0.0", 
+    "Carbohydrate": "--", 
+    "Fat": "100.0"
+  }, 
+  "Snacks, corn-based, extruded, onion-flavor": {
+    "NDB": "19007", 
+    "Protein": "7.7", 
+    "Carbohydrate": "65.1", 
+    "Fat": "22.6"
+  }, 
+  "Snacks, corn-based, extruded, puffs or twists, cheese-flavor": {
+    "NDB": "19008", 
+    "Protein": "5.46", 
+    "Carbohydrate": "54.54", 
+    "Fat": "36.54"
+  }, 
+  "Snacks, crisped rice bar, chocolate chip": {
+    "NDB": "19010", 
+    "Protein": "5.1", 
+    "Carbohydrate": "73.0", 
+    "Fat": "13.5"
+  }, 
+  "Snacks, fruit leather, rolls": {
+    "NDB": "19014", 
+    "Protein": "0.1", 
+    "Carbohydrate": "85.8", 
+    "Fat": "3.0"
+  }, 
+  "Snacks, GENERAL MILLS, CHEX MIX, traditional flavor": {
+    "NDB": "19033", 
+    "Protein": "8.83", 
+    "Carbohydrate": "75.69", 
+    "Fat": "10.0"
+  }, 
+  "Snacks, granola bars, soft, uncoated, peanut butter": {
+    "NDB": "19021", 
+    "Protein": "10.5", 
+    "Carbohydrate": "64.4", 
+    "Fat": "15.8"
+  }, 
+  "Snacks, KELLOGG, KELLOGG'S RICE KRISPIES TREATS Squares": {
+    "NDB": "19438", 
+    "Protein": "3.4", 
+    "Carbohydrate": "80.5", 
+    "Fat": "9.0"
+  }, 
+  "Snacks, oriental mix, rice-based": {
+    "NDB": "19031", 
+    "Protein": "17.31", 
+    "Carbohydrate": "51.62", 
+    "Fat": "25.58"
+  }, 
+  "Snacks, pork skins, barbecue-flavor": {
+    "NDB": "19408", 
+    "Protein": "57.9", 
+    "Carbohydrate": "1.6", 
+    "Fat": "31.8"
+  }, 
+  "Snacks, potato chips, barbecue-flavor": {
+    "NDB": "19042", 
+    "Protein": "6.51", 
+    "Carbohydrate": "55.92", 
+    "Fat": "31.06"
+  }, 
+  "Snacks, potato chips, fat free, salted": {
+    "NDB": "19437", 
+    "Protein": "9.64", 
+    "Carbohydrate": "83.76", 
+    "Fat": "0.6"
+  }, 
+  "Snacks, potato chips, fat-free, made with olestra": {
+    "NDB": "19423", 
+    "Protein": "7.74", 
+    "Carbohydrate": "65.0", 
+    "Fat": "0.7"
+  }, 
+  "Snacks, potato chips, made from dried potatoes, cheese-flavor": {
+    "NDB": "19412", 
+    "Protein": "7.0", 
+    "Carbohydrate": "50.6", 
+    "Fat": "37.0"
+  }, 
+  "Snacks, potato chips, made from dried potatoes, fat-free, made with olestra": {
+    "NDB": "19445", 
+    "Protein": "5.06", 
+    "Carbohydrate": "56.0", 
+    "Fat": "0.93"
+  }, 
+  "Snacks, potato sticks": {
+    "NDB": "19415", 
+    "Protein": "6.7", 
+    "Carbohydrate": "53.3", 
+    "Fat": "34.4"
+  }, 
+  "Snacks, pretzels, hard, whole-wheat including both salted and unsalted": {
+    "NDB": "19050", 
+    "Protein": "11.1", 
+    "Carbohydrate": "81.3", 
+    "Fat": "2.6"
+  }, 
+  "Snacks, rice cakes, brown rice, buckwheat": {
+    "NDB": "19052", 
+    "Protein": "9.0", 
+    "Carbohydrate": "80.1", 
+    "Fat": "3.5"
+  }, 
+  "Snacks, rice cakes, brown rice, corn": {
+    "NDB": "19413", 
+    "Protein": "8.4", 
+    "Carbohydrate": "81.2", 
+    "Fat": "3.2"
+  }, 
+  "Snacks, rice cakes, brown rice, multigrain": {
+    "NDB": "19414", 
+    "Protein": "8.5", 
+    "Carbohydrate": "80.1", 
+    "Fat": "3.5"
+  }, 
+  "Snacks, tortilla chips, low fat, made with olestra, nacho cheese": {
+    "NDB": "19444", 
+    "Protein": "8.44", 
+    "Carbohydrate": "65.22", 
+    "Fat": "3.53"
+  }, 
+  "Snacks, tortilla chips, nacho-flavor, reduced fat": {
+    "NDB": "19424", 
+    "Protein": "8.7", 
+    "Carbohydrate": "71.6", 
+    "Fat": "15.2"
+  }, 
+  "Snacks, tortilla chips, ranch-flavor": {
+    "NDB": "19058", 
+    "Protein": "7.19", 
+    "Carbohydrate": "62.74", 
+    "Fat": "24.63"
+  }, 
+  "Snacks, trail mix, regular, with chocolate chips, unsalted nuts and seeds": {
+    "NDB": "19822", 
+    "Protein": "14.2", 
+    "Carbohydrate": "44.9", 
+    "Fat": "31.9"
+  }, 
+  "Soup, bean with bacon, condensed, single brand": {
+    "NDB": "06731", 
+    "Protein": "6.5", 
+    "Carbohydrate": "18.0", 
+    "Fat": "2.1"
+  }, 
+  "Soup, beef and vegetables, canned, ready-to-serve": {
+    "NDB": "06749", 
+    "Protein": "3.18", 
+    "Carbohydrate": "6.16", 
+    "Fat": "1.16"
+  }, 
+  "Soup, beef broth, bouillon, consomme, prepared with equal volume water": {
+    "NDB": "06432", 
+    "Protein": "2.22", 
+    "Carbohydrate": "0.73", 
+    "Fat": "0.0"
+  }, 
+  "Soup, beef noodle, canned, condensed": {
+    "NDB": "06009", 
+    "Protein": "3.85", 
+    "Carbohydrate": "7.16", 
+    "Fat": "2.46"
+  }, 
+  "Soup, black bean, canned, condensed": {
+    "NDB": "06002", 
+    "Protein": "4.83", 
+    "Carbohydrate": "15.42", 
+    "Fat": "1.32"
+  }, 
+  "Soup, chicken broth or bouillon, dry": {
+    "NDB": "06080", 
+    "Protein": "16.66", 
+    "Carbohydrate": "18.01", 
+    "Fat": "13.88"
+  }, 
+  "Soup, chicken gumbo, canned, condensed": {
+    "NDB": "06017", 
+    "Protein": "2.1", 
+    "Carbohydrate": "6.67", 
+    "Fat": "1.14"
+  }, 
+  "Soup, chicken mushroom chowder, chunky, ready-to-serve, single brand": {
+    "NDB": "06726", 
+    "Protein": "3.0", 
+    "Carbohydrate": "7.1", 
+    "Fat": "4.4"
+  }, 
+  "Soup, chicken noodle, dry, mix": {
+    "NDB": "06128", 
+    "Protein": "15.42", 
+    "Carbohydrate": "62.32", 
+    "Fat": "6.51"
+  }, 
+  "Soup, chicken with rice, canned, condensed": {
+    "NDB": "06023", 
+    "Protein": "1.84", 
+    "Carbohydrate": "11.57", 
+    "Fat": "1.56"
+  }, 
+  "Soup, chicken, canned, chunky, ready-to-serve": {
+    "NDB": "06015", 
+    "Protein": "5.06", 
+    "Carbohydrate": "6.88", 
+    "Fat": "2.64"
+  }, 
+  "Soup, cream of celery, canned, prepared with equal volume water": {
+    "NDB": "06410", 
+    "Protein": "0.68", 
+    "Carbohydrate": "3.62", 
+    "Fat": "2.29"
+  }, 
+  "Soup, cream of chicken, canned, condensed, reduced sodium": {
+    "NDB": "06955", 
+    "Protein": "1.8", 
+    "Carbohydrate": "9.5", 
+    "Fat": "1.3"
+  }, 
+  "Soup, cream of chicken, canned, condensed, single brand": {
+    "NDB": "06736", 
+    "Protein": "2.4", 
+    "Carbohydrate": "7.7", 
+    "Fat": "6.5"
+  }, 
+  "Soup, cream of mushroom, canned, condensed": {
+    "NDB": "06043", 
+    "Protein": "1.35", 
+    "Carbohydrate": "6.8", 
+    "Fat": "5.3"
+  }, 
+  "Soup, cream of shrimp, canned, prepared with equal volume water": {
+    "NDB": "06456", 
+    "Protein": "1.11", 
+    "Carbohydrate": "3.27", 
+    "Fat": "2.07"
+  }, 
+  "Soup, onion, canned, condensed": {
+    "NDB": "06045", 
+    "Protein": "3.06", 
+    "Carbohydrate": "6.68", 
+    "Fat": "1.42"
+  }, 
+  "Soup, pea, green, canned, condensed": {
+    "NDB": "06049", 
+    "Protein": "6.54", 
+    "Carbohydrate": "20.18", 
+    "Fat": "2.23"
+  }, 
+  "Soup, pea, split with ham, canned, chunky, ready-to-serve": {
+    "NDB": "06050", 
+    "Protein": "4.62", 
+    "Carbohydrate": "11.17", 
+    "Fat": "1.66"
+  }, 
+  "Soup, tomato, canned, condensed, reduced sodium": {
+    "NDB": "06956", 
+    "Protein": "1.61", 
+    "Carbohydrate": "13.41", 
+    "Fat": "0.56"
+  }, 
+  "Soup, vegetable beef, microwavable, ready-to-serve, single brand": {
+    "NDB": "06742", 
+    "Protein": "6.2", 
+    "Carbohydrate": "3.3", 
+    "Fat": "0.7"
+  }, 
+  "Sweetener, herbal extract powder from Stevia leaf": {
+    "NDB": "19918", 
+    "Protein": "0.0", 
+    "Carbohydrate": "100.0", 
+    "Fat": "--"
+  }, 
+  "Sweeteners, for baking, brown, contains sugar and sucralose": {
+    "NDB": "19906", 
+    "Protein": "0.0", 
+    "Carbohydrate": "97.11", 
+    "Fat": "--"
+  }, 
+  "Syrups, table blends, pancake": {
+    "NDB": "19129", 
+    "Protein": "0.0", 
+    "Carbohydrate": "61.47", 
+    "Fat": "--"
+  }, 
+  "Syrups, table blends, pancake, with 2% maple, with added potassium": {
+    "NDB": "19720", 
+    "Protein": "0.0", 
+    "Carbohydrate": "69.6", 
+    "Fat": "0.1"
+  }
+}

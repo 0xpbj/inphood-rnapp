@@ -36,7 +36,57 @@ export default class Caption extends Component {
     }
     this._workBeforeTransition = this._workBeforeTransition.bind(this)
   }
+  _searchNutritionLevel1(tag) {
+    // "Abridged (common American) data for Food Groups:
+    //    Baked Products; Breakfast Cereals; Cereal Grains and Pasta;
+    //    Fats and Oils; Fruits and Fruit Juices; Legumes and Legume Products;
+    //    Nut and Seed Products; Spices and Herbs;
+    //    Vegetables and Vegetable Products"
+    const fruitAndVegData = require('../data/nutrients.001.opt.json')
+    console.log('after require ...')
+    // AC TODO:
+    
+    // let data = ''
+    // const filePath = '../data/nutrients.001.csv'
+    //
+    // // encoding, should be one of `base64`, `utf8`, `ascii`
+    // // (optional) buffer size, default to 4096 (4095 for BASE64 encoded data)
+    // // when reading file in BASE64 encoding, buffer size must be multiples of 3.
+    // RNFetchBlob.fs.readStream(filePath, 'utf8', 1023)
+    //   .then((ifstream) => {
+    //       ifstream.open()
+    //       ifstream.onData((chunk) => {data += chunk})
+    //       ifstream.onError((err) => {console.log('oops', err)})
+    //       ifstream.onEnd(() => {
+    //         console.log('success reading ', filePath)
+    //         // You can use the 'data' variable in here ...
+    //       })
+    //   })
+    //
+  }
+  _nutritionFun(text) {
+    console.log('Nutrition Fun!')
+    console.log('-----------------------------------------------------')
+    console.log(text)
+    var tags = text.split(", ");
+    // Aparently Array.forEach is hella slow (https://coderwall.com/p/kvzbpa/don-t-use-array-foreach-use-for-instead)
+    // so use regular for loop:
+    for (var i = 0, lengthTags = tags.length; i < lengthTags; i++) {
+      console.log("Processing: ", tags[i])
+      this._searchNutritionLevel1(tags[i])
+    }
+    // For each item in text ...
+    //  search our nutrition data files
+    //    if match:
+    //      print nutrition data, source file etc.
+    //      sum nutrition values in meal-title nutrition catch all
+    //    if no match:
+    //      print not found
+    //
+  }
   _workBeforeTransition(text) {
+    this._nutritionFun(text)
+
     const {meal, recipe, breakfast, lunch, dinner, snack} = this.state
     let mealType = ''
     if (breakfast) {

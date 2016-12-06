@@ -15,7 +15,8 @@ import {
 
 import Button from './Button'
 import Spinner from 'react-native-loading-spinner-overlay'
-
+import Keyboard from './Keyboard'
+import Icon from 'react-native-vector-icons/Ionicons'
 import CommonStyles from './styles/common-styles'
 
 var { width, height } = Dimensions.get('window');
@@ -33,6 +34,7 @@ export default class Caption extends Component {
       snack: false,
       caption: '',
       color: 'grey',
+      hideKeyboard: false
     }
     this._workBeforeTransition = this._workBeforeTransition.bind(this)
   }
@@ -194,6 +196,25 @@ export default class Caption extends Component {
       />
     )
   }
+  _renderKeyboard() {
+    return (
+      <View style={[CommonStyles.keyboardInputView]}>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <TouchableHighlight
+            onPress={()=>{
+              this.setState({
+                hideKeyboard: !this.state.hideKeyboard
+              })
+            }}>
+            <Icon
+              name={"ios-keypad-outline"}
+              size={26}
+              style={CommonStyles.keyboardIcon}/>
+          </TouchableHighlight>
+        </View>
+      </View>
+    )
+  }
   _renderIOS() {
     return (
       // This view divides the screen into 17 segments.  The bottom 8 segments
@@ -213,18 +234,33 @@ export default class Caption extends Component {
     )
   }
   _renderAndroid() {
+    const keyboard = this.state.hideKeyboard ? (
+      <View
+        style={{flex: 5}}>
+        {this._renderKeyboard()}
+      </View>
+    ) : 
+    (
+      <View
+        style={[CommonStyles.singleSegmentView,
+                CommonStyles.universalInputView,
+                CommonStyles.universalMargin]}>
+        {this._renderTextInput(!this.state.hideKeyboard)}
+      </View>
+    )
     return (
       // This view divides the screen into 17 segments.  The bottom 8 segments
       // are left blank for the keyboard.
       <View style={CommonStyles.flexContainer}>
-        {this._renderImage()}
+        <View style={{flex: 4}}>
+          {this._renderImage()}
+        </View>
+        {this._renderSpinner()}
         {/*Need this View wrapping TextInput to support single sided border
           text input line.*/}
         <View
-          style={[CommonStyles.singleSegmentView,
-                  CommonStyles.universalInputView,
-                  CommonStyles.universalMargin]}>
-          {this._renderTextInput(false)}
+          style={{flex: 5}}>
+          {this._renderKeyboard()}
         </View>
       </View>
     )
@@ -241,7 +277,7 @@ export default class Caption extends Component {
     //           recommended or causes flicker. A fix is not straightforward either
     //           as there are issues with the text bar disappearing etc.
     //       When time permits this needs to be restyled.
-    return (Platform.OS === 'ios' ? this._renderIOS() : this._renderAndroid())
-
+    // return (Platform.OS === 'ios' ? this._renderIOS() : this._renderAndroid())
+    return this._renderAndroid()
   }
 }

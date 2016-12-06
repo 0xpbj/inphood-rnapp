@@ -15,7 +15,6 @@ import {
 
 import Button from './Button'
 import Spinner from 'react-native-loading-spinner-overlay'
-import Keyboard from './Keyboard'
 import Icon from 'react-native-vector-icons/Ionicons'
 import CommonStyles from './styles/common-styles'
 
@@ -47,7 +46,7 @@ export default class Caption extends Component {
     const fruitAndVegData = require('../data/nutrients.001.opt.json')
     console.log('after require ...')
     // AC TODO:
-    
+
     // let data = ''
     // const filePath = '../data/nutrients.001.csv'
     //
@@ -196,6 +195,85 @@ export default class Caption extends Component {
       />
     )
   }
+// Begin AC Keyboard madness example for PBJ:
+//
+  _renderCustomKey(flexSize, textContent) {
+    return (
+      <View style={{flex: flexSize, flexDirection: 'column'}}>
+        <View style={{flex: 1, margin: 10, borderWidth: 1, borderColor: 'black', borderRadius: 4}}>
+          <Text style={{flex: 1, justifyContent: 'center', alignItems: 'center',
+                        textAlign: 'center', textAlignVertical: 'center'}}>
+            {textContent}
+          </Text>
+        </View>
+      </View>
+    )
+  }
+  _renderSpacer(flexSize) {
+    return <View style={{flex: flexSize}}/>
+  }
+  _renderKey() {
+    return(
+      <View style={{flexDirection: 'column', flex: 1,
+                    justifyContent: 'center', alignItems: 'center'}}>
+      {/*If we make the TouchableHighlight flex: 1, the pressable area is bigger
+         vertically--skipping that for now though.*/}
+      <TouchableHighlight style={{justifyContent: 'center', alignItems: 'center',
+                                  borderWidth: 1, borderColor: 'black', borderRadius: 4, padding: 5}}>
+        <Icon
+          size={35}
+          name={"ios-keypad-outline"}/>
+      </TouchableHighlight>
+      </View>
+    )
+  }
+  _renderACBoard() {
+    var row1 = []
+    for (var i = 0; i < 10; i++) {
+      row1.push(this._renderKey())
+    }
+
+    var row2 = []
+    row2.push(this._renderSpacer(0.5))
+    for (var i = 0; i < 9; i++) {
+      row2.push(this._renderKey())
+    }
+    row2.push(this._renderSpacer(0.5))
+
+    var row3 = []
+    row3.push(this._renderSpacer(1))
+    for (var i = 0; i < 8; i++) {
+      row3.push(this._renderKey())
+    }
+    row3.push(this._renderSpacer(1))
+
+    var row4 = []
+    row4.push(this._renderCustomKey(2, 'kbd'))
+    row4.push(this._renderSpacer(1))
+    row4.push(this._renderCustomKey(4, 'space'))
+    row4.push(this._renderSpacer(0.5))
+    row4.push(this._renderCustomKey(2.5, 'return'))
+
+    return(
+      <View style={{flex: 1}}>
+        <TextInput style={{flex: 1}}/>
+        <View style={{flex: 4}}>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            {row1}
+          </View>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            {row2}
+          </View>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            {row3}
+          </View>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            {row4}
+          </View>
+        </View>
+      </View>
+    )
+  }
   _renderKeyboard() {
     return (
       <View style={[CommonStyles.keyboardInputView]}>
@@ -237,9 +315,9 @@ export default class Caption extends Component {
     const keyboard = this.state.hideKeyboard ? (
       <View
         style={{flex: 5}}>
-        {this._renderKeyboard()}
+        {this._renderACBoard()}
       </View>
-    ) : 
+    ) :
     (
       <View
         style={[CommonStyles.singleSegmentView,
@@ -260,7 +338,7 @@ export default class Caption extends Component {
           text input line.*/}
         <View
           style={{flex: 5}}>
-          {this._renderKeyboard()}
+          {this._renderACBoard()}
         </View>
       </View>
     )

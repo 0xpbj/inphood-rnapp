@@ -3,16 +3,16 @@ import { persistStore, autoRehydrate } from 'redux-persist'
 import rootReducer from '../reducers'
 import rootSaga from '../sagas/index'
 import createSagaMiddleware from 'redux-saga'
-import config from 'react-native-config'
+import Config from 'react-native-config'
 import firebase from 'firebase'
 require("firebase/app")
 require("firebase/auth")
 require("firebase/database")
 const fbConfig = {
-  apiKey: config.FIREBASE_API_KEY,
-  authDomain: config.FIREBASE_AUTH_DOMAIN,
-  databaseURL: config.FIREBASE_DATABASE_URL,
-  storageBucket: config.FIREBASE_STORAGE_BUCKET,
+  apiKey: Config.FIREBASE_API_KEY,
+  authDomain: Config.FIREBASE_AUTH_DOMAIN,
+  databaseURL: Config.FIREBASE_DATABASE_URL,
+  storageBucket: Config.FIREBASE_STORAGE_BUCKET,
 }
 var { AsyncStorage } = require('react-native')
 

@@ -18,7 +18,11 @@ import Spinner from 'react-native-loading-spinner-overlay'
 import Icon from 'react-native-vector-icons/Ionicons'
 import CommonStyles from './styles/common-styles'
 
-var { width, height } = Dimensions.get('window');
+var { width, height } = Dimensions.get('window')
+
+var apple = require('./food/apple.png')
+var kiwi = require('./food/kiwi.png')
+var orange = require('./food/orange.png')
 
 export default class Caption extends Component {
   constructor(props) {
@@ -33,7 +37,7 @@ export default class Caption extends Component {
       snack: false,
       caption: '',
       color: 'grey',
-      hideKeyboard: false
+      showFoodKeyBoard: true
     }
     this._workBeforeTransition = this._workBeforeTransition.bind(this)
   }
@@ -167,7 +171,6 @@ export default class Caption extends Component {
     const placeholder = this.props.vision.tags === '' ? "Ingredients, e.g.: Beef, Tomatoes ..." : ''
     const selectionColor = this.props.vision.tags === '' ? '' : 'blue'
     const clearButtonMode = this.props.vision.tags === '' ? 'while-editing' : 'always'
-
     return (
       <TextInput
         style={[CommonStyles.singleSegmentView,
@@ -197,14 +200,39 @@ export default class Caption extends Component {
   }
 // Begin AC Keyboard madness example for PBJ:
 //
+  _renderDefaultKeyboardButton(flexSize, textContent) {
+    return (
+      <View style={{flex: flexSize, flexDirection: 'column'}}>
+        <View style={{flex: 1, margin: 10, borderWidth: 1, borderColor: 'black', borderRadius: 4}}>
+          <TouchableHighlight
+            style={{flex: 1}}
+            onPress={() => {
+              this.setState({
+                showFoodKeyBoard: false
+              })
+            }}
+          >
+            <Text style={{flex: 1, justifyContent: 'center', alignItems: 'center',
+                          textAlign: 'center', textAlignVertical: 'center'}}>
+              {textContent}
+            </Text>
+          </TouchableHighlight>
+        </View>
+      </View>
+    )
+  }
   _renderCustomKey(flexSize, textContent) {
     return (
       <View style={{flex: flexSize, flexDirection: 'column'}}>
         <View style={{flex: 1, margin: 10, borderWidth: 1, borderColor: 'black', borderRadius: 4}}>
-          <Text style={{flex: 1, justifyContent: 'center', alignItems: 'center',
-                        textAlign: 'center', textAlignVertical: 'center'}}>
-            {textContent}
-          </Text>
+          <TouchableHighlight
+            style={{flex: 1}}
+            onPress={() => console.log('Text: ', textContent)}>
+            <Text style={{flex: 1, justifyContent: 'center', alignItems: 'center',
+                          textAlign: 'center', textAlignVertical: 'center'}}>
+              {textContent}
+            </Text>
+          </TouchableHighlight>
         </View>
       </View>
     )
@@ -212,14 +240,39 @@ export default class Caption extends Component {
   _renderSpacer(flexSize) {
     return <View style={{flex: flexSize}}/>
   }
-  _renderKey() {
+  _renderKey(keyName) {
     return(
       <View style={{flexDirection: 'column', flex: 1,
                     justifyContent: 'center', alignItems: 'center'}}>
       {/*If we make the TouchableHighlight flex: 1, the pressable area is bigger
          vertically--skipping that for now though.*/}
-      <TouchableHighlight style={{justifyContent: 'center', alignItems: 'center',
-                                  borderWidth: 1, borderColor: 'black', borderRadius: 4, padding: 5}}>
+      <TouchableHighlight 
+        style={{justifyContent: 'center', alignItems: 'center',
+                borderWidth: 1, borderColor: 'black', borderRadius: 4, padding: 5}}
+        onPress={() => {
+          console.log('Food: ', keyName)
+        }}
+      >
+        <Image source={require('./food/apple.png')}/>
+      </TouchableHighlight>
+      </View>
+    )
+  }
+  showFoodKeyBoardButton() {
+    return(
+      <View style={{flexDirection: 'column', flex: 1,
+                    justifyContent: 'center', alignItems: 'center'}}>
+      {/*If we make the TouchableHighlight flex: 1, the pressable area is bigger
+         vertically--skipping that for now though.*/}
+      <TouchableHighlight 
+        style={{justifyContent: 'center', alignItems: 'center',
+                borderWidth: 1, borderColor: 'black', borderRadius: 4, padding: 5}}
+        onPress={() => {
+          this.setState({
+            showFoodKeyBoard: true
+          })
+        }}
+      >
         <Icon
           size={35}
           name={"ios-keypad-outline"}/>
@@ -227,36 +280,48 @@ export default class Caption extends Component {
       </View>
     )
   }
-  _renderACBoard() {
+  _renderKeyBoard() {
     var row1 = []
-    for (var i = 0; i < 10; i++) {
-      row1.push(this._renderKey())
-    }
-
     var row2 = []
-    row2.push(this._renderSpacer(0.5))
-    for (var i = 0; i < 9; i++) {
-      row2.push(this._renderKey())
-    }
-    row2.push(this._renderSpacer(0.5))
-
     var row3 = []
-    row3.push(this._renderSpacer(1))
-    for (var i = 0; i < 8; i++) {
-      row3.push(this._renderKey())
-    }
-    row3.push(this._renderSpacer(1))
-
     var row4 = []
-    row4.push(this._renderCustomKey(2, 'kbd'))
-    row4.push(this._renderSpacer(1))
-    row4.push(this._renderCustomKey(4, 'space'))
-    row4.push(this._renderSpacer(0.5))
-    row4.push(this._renderCustomKey(2.5, 'return'))
-
+    const text = this.state.showFoodKeyBoard ? 
+    (
+      <Text
+        style={[CommonStyles.singleSegmentView,
+              CommonStyles.universalFontSize,
+              CommonStyles.keyboardInputView]}
+      />
+    ) : 
+    (
+      <View style={{flex: 1, flexDirection: 'row'}}>
+        {this._renderTextInput(true)}
+        {this.showFoodKeyBoardButton()}
+      </View>
+    )
+    if (this.state.showFoodKeyBoard) {
+      for (var i = 0; i < 10; i++) {
+        row1.push(this._renderKey("apple"))
+      }
+      row2.push(this._renderSpacer(0.5))
+      for (var i = 0; i < 9; i++) {
+        row2.push(this._renderKey("kiwi"))
+      }
+      row2.push(this._renderSpacer(0.5))
+      row3.push(this._renderSpacer(1))
+      for (var i = 0; i < 8; i++) {
+        row3.push(this._renderKey("orange"))
+      }
+      row3.push(this._renderSpacer(1))
+      row4.push(this._renderDefaultKeyboardButton(2, 'kbd'))
+      row4.push(this._renderSpacer(1))
+      row4.push(this._renderCustomKey(4, 'space'))
+      row4.push(this._renderSpacer(0.5))
+      row4.push(this._renderCustomKey(2.5, 'done'))
+    }
     return(
       <View style={{flex: 1}}>
-        <TextInput style={{flex: 1}}/>
+        {text}
         <View style={{flex: 4}}>
           <View style={{flex: 1, flexDirection: 'row'}}>
             {row1}
@@ -274,75 +339,6 @@ export default class Caption extends Component {
       </View>
     )
   }
-  _renderKeyboard() {
-    return (
-      <View style={[CommonStyles.keyboardInputView]}>
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <TouchableHighlight
-            onPress={()=>{
-              this.setState({
-                hideKeyboard: !this.state.hideKeyboard
-              })
-            }}>
-            <Icon
-              name={"ios-keypad-outline"}
-              size={26}
-              style={CommonStyles.keyboardIcon}/>
-          </TouchableHighlight>
-        </View>
-      </View>
-    )
-  }
-  _renderIOS() {
-    return (
-      // This view divides the screen into 17 segments.  The bottom 8 segments
-      // are left blank for the keyboard.
-      <KeyboardAvoidingView behavior='padding' style={CommonStyles.flexContainer}>
-        {this._renderImage()}
-        {this._renderSpinner()}
-        {/*Need this View wrapping TextInput to support single sided border
-          text input line.*/}
-        <KeyboardAvoidingView behavior='padding'
-          style={[CommonStyles.singleSegmentView,
-                  CommonStyles.universalInputView,
-                  CommonStyles.universalMargin]}>
-          {this._renderTextInput(true)}
-        </KeyboardAvoidingView>
-      </KeyboardAvoidingView>
-    )
-  }
-  _renderAndroid() {
-    const keyboard = this.state.hideKeyboard ? (
-      <View
-        style={{flex: 5}}>
-        {this._renderACBoard()}
-      </View>
-    ) :
-    (
-      <View
-        style={[CommonStyles.singleSegmentView,
-                CommonStyles.universalInputView,
-                CommonStyles.universalMargin]}>
-        {this._renderTextInput(!this.state.hideKeyboard)}
-      </View>
-    )
-    return (
-      // This view divides the screen into 17 segments.  The bottom 8 segments
-      // are left blank for the keyboard.
-      <View style={CommonStyles.flexContainer}>
-        <View style={{flex: 4}}>
-          {this._renderImage()}
-        </View>
-        {this._renderSpinner()}
-        {/*Need this View wrapping TextInput to support single sided border
-          text input line.*/}
-        <View
-          style={{flex: 5}}>
-          {this._renderACBoard()}
-        </View>
-      </View>
-    )
-  }
   render() {
     // Same issue and code as in Selected.js (TODO: less c+p)
     //
@@ -356,6 +352,21 @@ export default class Caption extends Component {
     //           as there are issues with the text bar disappearing etc.
     //       When time permits this needs to be restyled.
     // return (Platform.OS === 'ios' ? this._renderIOS() : this._renderAndroid())
-    return this._renderAndroid()
+    return (
+      // This view divides the screen into 17 segments.  The bottom 8 segments
+      // are left blank for the keyboard.
+      <View style={CommonStyles.flexContainer}>
+        <View style={{flex: 4}}>
+          {this._renderImage()}
+        </View>
+        {this._renderSpinner()}
+        {/*Need this View wrapping TextInput to support single sided border
+          text input line.*/}
+        <View
+          style={{flex: 5}}>
+          {this._renderKeyBoard()}
+        </View>
+      </View>
+    )
   }
 }

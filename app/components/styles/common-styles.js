@@ -444,6 +444,21 @@ module.exports = StyleSheet.create({
     borderBottomWidth: Platform.OS === 'ios' ? 1 : 0,
     borderBottomColor: Platform.OS === 'ios' ? 'black' : 'transparent',
   },
+  keyboardInputView: {
+    margin: 1,
+    borderTopWidth: Platform.OS === 'ios' ? 1 : 0,
+    borderTopColor: Platform.OS === 'ios' ? 'black' : 'transparent',
+    borderLeftWidth: Platform.OS === 'ios' ? 1 : 0,
+    borderLeftColor: Platform.OS === 'ios' ? 'black' : 'transparent',
+    borderRightWidth: Platform.OS === 'ios' ? 1 : 0,
+    borderRightColor: Platform.OS === 'ios' ? 'black' : 'transparent',
+    borderBottomWidth: Platform.OS === 'ios' ? 1 : 0,
+    borderBottomColor: Platform.OS === 'ios' ? 'black' : 'transparent',
+  },
+  keyboardIcon: {
+    flex: 1,
+    color: 'black',
+  },
   // Univeral font size
   //
   universalFontSize: {
@@ -466,8 +481,6 @@ module.exports = StyleSheet.create({
   universalMargin: {
     marginTop: 1,
     marginBottom: 1,
-    marginLeft: 5,
-    marginRight: 5,
   },
   buttonMargin: {
     marginTop: 5,

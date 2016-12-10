@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {NetInfo, Platform} from 'react-native'
+import {Alert, NetInfo, Platform} from 'react-native'
 import {CONNECTION_INACTIVE} from '../constants/ActionTypes'
 
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
@@ -12,16 +12,38 @@ import Extras from '../containers/ExtrasContainer'
 export default class App extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      isConnected: null,
+    }
   }
-  // componentDidMount() {
-    // const dispatchConnected = isConnected => {
-    //   if (!isConnected)
-    //     this.props.dispatch({type: CONNECTION_INACTIVE})
-    // }
-    // NetInfo.isConnected.fetch().done(() => {
-    //   NetInfo.isConnected.addEventListener('change', dispatchConnected)
-    // })
-  // }
+  componentDidMount() {
+    NetInfo.isConnected.addEventListener(
+      'change',
+      this.handleConnectivityChange
+    )
+    NetInfo.isConnected.fetch().then(
+      isConnected  => { 
+        console.log('Network Status: ', isConnected)
+        this.setState({isConnected}) 
+      }
+    )
+  }
+  componentWillUnmount() {
+    NetInfo.isConnected.removeEventListener(
+      'change',
+      this.handleConnectivityChange
+    )
+  }
+  handleConnectivityChange = (isConnected) => {
+    this.setState({isConnected})
+    if (!isConnected) {
+      Alert.alert(
+        'Network Error',
+        'Unable to connect to the Internet',
+      )
+      this.props.connectionInactive()
+    }
+  }
   isBadgeNumberingSupported() {
     // Support:  Does not work for all android devices (https://github.com/leolin310148/ShortcutBadger)
     //
@@ -57,7 +79,7 @@ export default class App extends Component {
     if (this.props.tabs.index > 0 || this.props.gallery.index > 0 || this.props.media.index > 0) {
       locked = true
     }
-    if (this.props.auth.uid === '') {
+    if (this.props.auth.uid === '' || !this.state.isConnected) {
       return <Extras />
     }
     // TODO:  PBJOC, get rid of platform everywhere and bug with

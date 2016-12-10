@@ -12,7 +12,7 @@ import {REHYDRATE} from 'redux-persist/constants'
 
 import {race, call, fork, put, select, take} from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
-import { Image } from "react-native"
+import { Alert, Image, NetInfo } from "react-native"
 import Config from 'react-native-config'
 import * as db from './firebaseCommands'
 import firebase from 'firebase'
@@ -90,6 +90,11 @@ function* logoutFlow() {
   }
 }
 
+const netInfo = () => {
+  return NetInfo.isConnected.fetch()
+  .then(isConnected  => ({ isConnected }))
+}
+
 const firebaseLogin = () => {
   return firebase.auth().signInAnonymously()
   .then(user => ({ user }))
@@ -157,20 +162,30 @@ function* getUserInfo() {
 
 function* loginFlow() {
   try {
-    yield put ({type: LOGIN_IN_PROGRESS, flag: true})
-    const {user, error} = yield call (firebaseLogin)
-    if (user) {
-      yield call (updateFirebaseMap, user.uid)
-      const uid = user.uid
-      yield put ({type: STORE_UID, uid})
-      yield put ({type: STORE_DEVICE_ID, deviceId})
-      firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({uid})
-      yield call (getUserInfo)
-      yield put ({type: LOGIN_IN_PROGRESS, flag: false})
-      yield put ({type: LOGIN_SUCCESS})
+    const {isConnected} = yield call (netInfo)
+    if (isConnected) {
+      yield put ({type: LOGIN_IN_PROGRESS, flag: true})
+      const {user, error} = yield call (firebaseLogin)
+      if (user) {
+        yield call (updateFirebaseMap, user.uid)
+        const uid = user.uid
+        yield put ({type: STORE_UID, uid})
+        yield put ({type: STORE_DEVICE_ID, deviceId})
+        firebase.database().ref('/global/' + deviceId + '/userInfo/public').update({uid})
+        yield call (getUserInfo)
+        yield put ({type: LOGIN_IN_PROGRESS, flag: false})
+        yield put ({type: LOGIN_SUCCESS})
+      }
+      else
+        yield put ({type: LOGIN_IN_PROGRESS, flag: false})
     }
-    else
-      yield put ({type: LOGIN_IN_PROGRESS, flag: false})
+    else {
+      Alert.alert(
+        'Network Error',
+        'Unable to connect to the Internet',
+      )
+      throw 'No network connection'
+    }
   }
   catch(error) {
     yield put ({type: LOGIN_IN_PROGRESS, flag: false})

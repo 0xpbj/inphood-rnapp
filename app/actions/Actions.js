@@ -63,7 +63,14 @@ import {
   STORE_USER_NAME,
   REMOVE_TRAINER,
   REMOVE_TRAINER_CLIENT,
+  CONNECTION_INACTIVE
 } from '../constants/ActionTypes'
+
+export function connectionInactive() {
+  return {
+    type: CONNECTION_INACTIVE
+  }
+}
 
 export function pushExp (route) {
   return {

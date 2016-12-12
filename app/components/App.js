@@ -21,12 +21,11 @@ export default class App extends Component {
       'change',
       this.handleConnectivityChange
     )
-    NetInfo.isConnected.fetch().then(
-      isConnected  => { 
-        console.log('Network Status: ', isConnected)
-        this.setState({isConnected}) 
-      }
-    )
+    // NetInfo.isConnected.fetch().then(
+    //   isConnected  => { 
+    //     this.setState({isConnected}) 
+    //   }
+    // )
   }
   componentWillUnmount() {
     NetInfo.isConnected.removeEventListener(

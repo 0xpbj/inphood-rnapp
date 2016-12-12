@@ -17,19 +17,31 @@ const fbConfig = {
 var { AsyncStorage } = require('react-native')
 
 import {
-  GoogleAnalyticsTracker,
   GoogleTagManager,
   GoogleAnalyticsSettings
 } from 'react-native-google-analytics-bridge'
 
-// The tracker must be constructed, and you can have multiple:
-const tracker = new GoogleAnalyticsTracker('UA-88850545-1')
-tracker.trackScreenView('Home')
-tracker.trackEvent('Customer', 'New')
-
 // The GoogleAnalyticsSettings is static, and settings are applied across all trackers:
 GoogleAnalyticsSettings.setDispatchInterval(30)
 GoogleAnalyticsSettings.setDryRun(true)
+GoogleTagManager.openContainerWithId("GT-NZT48")
+.then(() => {
+  return GoogleTagManager.stringForKey("pack")
+})
+.then((str) => {
+  console.log("Str: ", str)
+  return GoogleTagManager.boolForKey("wat")
+})
+.then((wat) => {
+  console.log("Wat: ", wat)
+  return GoogleTagManager.doubleForKey("orly")
+})
+.then((orly) => {
+  console.log("Orly: ", orly)
+})
+.catch((err) => {
+  console.log(err)
+})
 
 // import sagaMonitor from './sagaMonitor'
 // const sagaMiddleware = createSagaMiddleware({sagaMonitor})

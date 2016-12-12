@@ -9,6 +9,10 @@ import Media from '../containers/MediaContainer'
 import Home from '../containers/HomeContainer'
 import Extras from '../containers/ExtrasContainer'
 
+import {
+  GoogleAnalyticsTracker
+} from 'react-native-google-analytics-bridge'
+
 export default class App extends Component {
   constructor(props) {
     super(props)
@@ -68,6 +72,20 @@ export default class App extends Component {
     this.props.changePage(i)
   }
   render () {
+    // The tracker must be constructed, and you can have multiple:
+    const tracker = new GoogleAnalyticsTracker('UA-88850545-1')
+    tracker.trackEvent('testcategory', 'Hello iOS')
+    tracker.trackScreenView('Home')
+    tracker.trackEvent('testcategory', 'Hello iOS', { label: "notdry", value: 1 })
+    tracker.trackTiming('testcategory', 13000, { label: 'notdry', name: 'testduration' })
+    tracker.setTrackUncaughtExceptions(true)
+    tracker.trackException("This is an error message", false)
+    tracker.trackSocialInteraction('Twitter', 'Post')
+    tracker.setUser('tester')
+    tracker.allowIDFA(false)
+    tracker.setAnonymizeIp(true)
+    tracker.setAppName('inPhood')
+
     console.disableYellowBox = true
     const notificationCount = this.props.notification.client + this.props.notification.trainer
     const notification = notificationCount > 0 ? notificationCount : 0
